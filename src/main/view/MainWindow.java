@@ -282,11 +282,12 @@ private void writeUsername(String filePath) {
     //setUserInformation.setUsername(username);
     if ("Student".equals(studentOrTeacher)) {
         //usernamePath = "/Users/evy/Documents/GradeTracker-new/src/main/view/UserInfo/studentUsername.txt"; //KEEP
-        usernamePath = "/home/eaguenther/Documents/GradeTracker-new/src/main/view/UserInfo/studentUsername.txt";
+        usernamePath = "~/Documents/GradeTracker-new/src/main/view/UserInfo/studentUsername.txt";
     }
 
     else if ("Teacher".equals(studentOrTeacher)) {
-        usernamePath = "/Users/evy/Documents/GradeTracker-new/src/main/view/UserInfo/teacherUsername.txt";
+        //usernamePath = "/Users/evy/Documents/GradeTracker-new/src/main/view/UserInfo/teacherUsername.txt";
+        usernamePath = "~/Documents/GradeTracker-new/src/main/view/UserInfo/teacherUsername.txt";
     }
 
     checkIfExisting(usernamePath, username);

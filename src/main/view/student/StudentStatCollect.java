@@ -157,26 +157,27 @@ public class StudentStatCollect extends JFrame {
     private void backAction(JButton backButton) {
         backButton.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent e) {
-                System.out.println("1111");
                 if (textBoxPanel.getComponentCount() >= 2) {
                     //goIntoPanel.goIntoPanelReturnTextbox((JPanel) textBoxPanel.getComponent(1), 0);
                 }//TODO maybe bug?
                 actionPriorities.setCurrentClass(currentClass);
-                System.out.println("1111.2");
                 actionPriorities.addClassActionListener(b -> {
                     System.out.println("hfwehofohe filewrite how many placeholders "+fileWrite.howManyPlaceholders());
-                    System.out.println("2222");
                     if(setState.getCanContinue()) {//&& (fileWrite.howManyPlaceholders() == 0)) {
                         System.out.println("classlabelpanel "+classLabelPanel.getComponentCount());
                         //saveButtonAction("backButton"); //8/22
                         create.setTextFieldContainer(setState.getTextFieldPanel());
                         System.out.println("hfwehofohe2 filewrite how many placeholders "+fileWrite.howManyPlaceholders());
                         if (setState.getClassListIndex() == 0 && (fileWrite.howManyPlaceholders() == 0)) { //case for back to classes
+                            System.out.println("1111 placeholders "+fileWrite.howManyPlaceholders());
                             System.out.println("hidewindow1 "+ fileWrite.howManyPlaceholders());
                             hideWindow();
                             StudentClasses studentClasses = new StudentClasses();
-                            studentClasses.studentClassesLaunch();
+                            System.out.println("1111.1 "+fileWrite.howManyPlaceholders());
                             saveButtonAction("backButton");
+                            studentClasses.studentClassesLaunch();
+                            System.out.println("1111.2 "+fileWrite.howManyPlaceholders());
+                            // saveButtonAction("backButton"); //was uncommented before 9/11 7:03pm
                         }
                         else if (setState.getClassListIndex() > 0) {
                             System.out.println("hidewindow111");
@@ -213,9 +214,8 @@ public class StudentStatCollect extends JFrame {
                         }
                     }
                     else if (fileWrite.howManyPlaceholders() > 0) {
-                        System.out.println("3333");
                         Decorator decorate = new Decorator();
-                        System.out.println("up Z how many placeholders? "+fileWrite.howManyPlaceholders()+" current class "+ setList.getFinalClassList().get(setState.getClassListIndex()));
+                        //System.out.println("up Z how many placeholders? "+fileWrite.howManyPlaceholders()+" current class "+ setList.getFinalClassList().get(setState.getClassListIndex()));
                         SetState.getInstance().setStudentStatCollect(currentInstance);
                         SetState.getInstance().setAreYouSureMessageCause("backButton"); //TODO areyousuremessage
                         decorate.areYouSureMessage(null, "studentStatsEmpty", "Remove placeholder(s) to continue?", 230, 90);
@@ -312,12 +312,14 @@ public class StudentStatCollect extends JFrame {
     }
 
     private void saveButtonAction(String actionCause) {
+        System.out.println("2222 placeholders "+fileWrite.howManyPlaceholders());
         SETTEST.getInstance().TESTSETCURRENTINSTANCE(this);
         set.setFilePath(setUserInformation.getPathToClassInformationFileWithIndex());
         create.setTextFieldContainer(setState.getTextFieldPanel());
 
         //setState.setTextFieldPanel(classLabelPanel); //TODO if you see issue with boxes being weird, this prob source of bug //8/30
 
+        System.out.println("3333 placeholders "+fileWrite.howManyPlaceholders());
         fileWrite.writeTextToFile();
 
         if (fileWrite.howManyPlaceholders() > 0) {
