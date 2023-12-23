@@ -4,10 +4,6 @@ import javax.swing.ButtonGroup;
 import javax.swing.JButton;
 import javax.swing.JFrame;
 import javax.swing.JRadioButton;
-import javax.swing.border.Border;
-
-import java.awt.FlowLayout;
-//import javax.swing.BoxLayout;
 import java.awt.BorderLayout;
 import java.awt.Color;
 import java.awt.Font;
@@ -19,20 +15,19 @@ import java.awt.GridBagConstraints;
 
 public class MainWindow {
 private JFrame window;
-JRadioButton teacherButton;
-JRadioButton studentButton;
-ButtonGroup teacherStudentGroup;
-JPanel instructionsPanel;
-JPanel choicesPanel;
-JLabel instructionsWords;
-JButton backButton;
-JButton nextButton;
-JPanel backNextButtonsPanel;
-
-
 
 
 public MainWindow() {
+    windowSetUp();
+
+    instructionsWordsWindow();
+
+    buttonSetUp();
+
+}
+
+
+private void windowSetUp() {
     //window set up
     window = new JFrame();
     window.setTitle("Launcher");
@@ -41,21 +36,34 @@ public MainWindow() {
     window.setLayout(new BorderLayout());
     window.setSize(800, 500);
     window.setLocationRelativeTo(null);
-
+}
+private void instructionsWordsWindow() {
+    JPanel instructionsPanel;
+    JLabel instructionsWords;
     //instructions (north section for borderlayout)
     instructionsWords = new JLabel("Welcome! Are you a student or a teacher?");
     instructionsPanel= new JPanel();
     Color instructionsColor = Color.decode("#7A6D6D");
     instructionsPanel.setBackground(instructionsColor);
-    
+     
     instructionsPanel.add(instructionsWords);
     Color instructionsWordsColor = Color.decode("#edebeb");
     instructionsWords.setForeground(instructionsWordsColor); //color
     window.add(instructionsPanel, BorderLayout.NORTH);
-
+ 
     //set the font for instructions
     Font instructionsFont = new Font("Roboto", Font.PLAIN, 30); // Change the font and size here
     instructionsWords.setFont(instructionsFont);
+}
+
+private void buttonSetUp() {
+    JRadioButton teacherButton;
+    JRadioButton studentButton;
+    ButtonGroup teacherStudentGroup;
+    JPanel choicesPanel;
+    JButton backButton;
+    JButton nextButton;
+    JPanel backNextButtonsPanel;
 
     //teacher and student radiobuttons initialize
     choicesPanel= new JPanel(new GridBagLayout());
@@ -67,20 +75,18 @@ public MainWindow() {
     studentButton.setForeground(Color.WHITE);
     teacherStudentGroup = new ButtonGroup();
 
-    
-
-    //set the font for radio buttons
-    Font buttonFont = new Font("Roboto", Font.PLAIN, 25); // Change the font and size here
-    teacherButton.setFont(buttonFont);
-    studentButton.setFont(buttonFont);
-
-
     //teacher and student radiobuttons add to group and make visible
     teacherStudentGroup.add(teacherButton);
     teacherStudentGroup.add(studentButton);
     choicesPanel.add(teacherButton);
     choicesPanel.add(studentButton);
 
+    //set the font for radio buttons
+    Font buttonFont = new Font("Roboto", Font.PLAIN, 25); // Change the font and size here
+    teacherButton.setFont(buttonFont);
+    studentButton.setFont(buttonFont);
+    
+    //radio buttons distance
     GridBagConstraints gbc = new GridBagConstraints();
     gbc.gridx = 0;
     gbc.gridy = 1;
@@ -98,12 +104,7 @@ public MainWindow() {
     //next
     nextButton = new JButton("Next >");
     backNextButtonsPanel.add(nextButton, BorderLayout.EAST);
-
-
     window.add(backNextButtonsPanel, BorderLayout.SOUTH);
-  
-
-
 
 }
 
