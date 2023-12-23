@@ -69,14 +69,14 @@ public MainWindow() {
     window.add(choicesPanel);
 
     //buttons
-    backNextButtonsPanel = new JPanel();
+    backNextButtonsPanel = new JPanel(new BorderLayout());
     backButton = new JButton("< Back");
     backButton.setEnabled(false);
-    backNextButtonsPanel.add(backButton);
+    backNextButtonsPanel.add(backButton, BorderLayout.WEST);
 
     //next
     nextButton = new JButton("Next >");
-    backNextButtonsPanel.add(nextButton);
+    backNextButtonsPanel.add(nextButton, BorderLayout.EAST);
 
 
     window.add(backNextButtonsPanel, BorderLayout.SOUTH);
