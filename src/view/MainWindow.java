@@ -45,7 +45,7 @@ public MainWindow() {
     //instructions (north section for borderlayout)
     instructionsWords = new JLabel("Welcome! Are you a student or a teacher?");
     instructionsPanel= new JPanel();
-    Color instructionsColor = Color.decode("#D9E0BE");
+    Color instructionsColor = Color.decode("#7A6D6D");
     instructionsPanel.setBackground(instructionsColor);
     
     instructionsPanel.add(instructionsWords);
@@ -54,23 +54,23 @@ public MainWindow() {
     window.add(instructionsPanel, BorderLayout.NORTH);
 
     //set the font for instructions
-    Font instructionsFont = new Font("Arial", Font.PLAIN, 40); // Change the font and size here
+    Font instructionsFont = new Font("Roboto", Font.PLAIN, 30); // Change the font and size here
     instructionsWords.setFont(instructionsFont);
 
     //teacher and student radiobuttons initialize
     choicesPanel= new JPanel(new GridBagLayout());
-    Color backgroundColor = Color.decode("#A7D1BE");
+    Color backgroundColor = Color.decode("#AFA2A2");
     choicesPanel.setBackground(backgroundColor);
     teacherButton = new JRadioButton("Teacher");
-    teacherButton.setForeground(Color.DARK_GRAY);
+    teacherButton.setForeground(Color.WHITE);
     studentButton = new JRadioButton("Student");
-    studentButton.setForeground(Color.DARK_GRAY);
+    studentButton.setForeground(Color.WHITE);
     teacherStudentGroup = new ButtonGroup();
 
     
 
     //set the font for radio buttons
-    Font buttonFont = new Font("Arial", Font.PLAIN, 30); // Change the font and size here
+    Font buttonFont = new Font("Roboto", Font.PLAIN, 25); // Change the font and size here
     teacherButton.setFont(buttonFont);
     studentButton.setFont(buttonFont);
 
