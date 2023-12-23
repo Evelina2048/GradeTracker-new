@@ -24,7 +24,7 @@ JPanel choicesPanel;
 JLabel instructionsWords;
 JButton backButton;
 JButton nextButton;
-JPanel BackNextbuttons;
+JPanel backNextButtonsPanel;
 
 
 
@@ -68,7 +68,15 @@ public MainWindow() {
     choicesPanel.add(studentButton);
     window.add(choicesPanel);
 
-    
+    //buttons
+    backNextButtonsPanel = new JPanel();
+    backButton = new JButton("< Back");
+    backButton.setEnabled(false);
+    backNextButtonsPanel.add(backButton);
+    window.add(backNextButtonsPanel, BorderLayout.SOUTH);
+  
+
+
 
 }
 
