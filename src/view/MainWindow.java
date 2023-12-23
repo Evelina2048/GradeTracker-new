@@ -4,10 +4,10 @@ import javax.swing.ButtonGroup;
 import javax.swing.JFrame;
 import javax.swing.JRadioButton;
 import java.awt.FlowLayout;
+import java.awt.Font;
 
 
 public class MainWindow {
-//initialization
 private JFrame window;
 JRadioButton teacherButton;
 JRadioButton studentButton;
@@ -29,6 +29,12 @@ public MainWindow() {
     teacherButton = new JRadioButton("Teacher");
     studentButton = new JRadioButton("Student");
     teacherStudentGroup = new ButtonGroup();
+
+    //set the font for radio buttons
+    Font buttonFont = new Font("Arial", Font.PLAIN, 30); // Change the font and size here
+    teacherButton.setFont(buttonFont);
+    studentButton.setFont(buttonFont);
+
 
     //teacher and student radiobuttons add to group and make visible
     teacherStudentGroup.add(teacherButton);
