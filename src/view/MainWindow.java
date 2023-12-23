@@ -11,29 +11,30 @@ public class MainWindow {
 private JFrame window;
 JRadioButton teacherButton;
 JRadioButton studentButton;
+ButtonGroup teacherStudentGroup;
 
 
 
 
 public MainWindow() {
+    //window set up
     window = new JFrame();
     window.setTitle("Launcher");
     window.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
     window.setLayout(new FlowLayout());
-
-    teacherButton = new JRadioButton("Teacher");
-    studentButton = new JRadioButton("Student");
-
-    ButtonGroup teacherStudentGroup = new ButtonGroup();
-    teacherStudentGroup.add(teacherButton);
-    teacherStudentGroup.add(studentButton);
-
-    window.add(teacherButton);
-    window.add(studentButton);
-
-
     window.setSize(800, 500);
     window.setLocationRelativeTo(null);
+
+    //teacher and student radiobuttons initialize
+    teacherButton = new JRadioButton("Teacher");
+    studentButton = new JRadioButton("Student");
+    teacherStudentGroup = new ButtonGroup();
+
+    //teacher and student radiobuttons add to group and make visible
+    teacherStudentGroup.add(teacherButton);
+    teacherStudentGroup.add(studentButton);
+    window.add(teacherButton);
+    window.add(studentButton);
 
 }
 
