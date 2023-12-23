@@ -73,6 +73,12 @@ public MainWindow() {
     backButton = new JButton("< Back");
     backButton.setEnabled(false);
     backNextButtonsPanel.add(backButton);
+
+    //next
+    nextButton = new JButton("Next >");
+    backNextButtonsPanel.add(nextButton);
+
+
     window.add(backNextButtonsPanel, BorderLayout.SOUTH);
   
 
