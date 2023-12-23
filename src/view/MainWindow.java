@@ -9,10 +9,13 @@ import javax.swing.border.Border;
 import java.awt.FlowLayout;
 //import javax.swing.BoxLayout;
 import java.awt.BorderLayout;
+import java.awt.Color;
 import java.awt.Font;
 import javax.swing.JPanel;
 import javax.swing.JLabel;
-
+import java.awt.GridBagLayout;
+import java.awt.Insets;
+import java.awt.GridBagConstraints;
 
 public class MainWindow {
 private JFrame window;
@@ -42,7 +45,12 @@ public MainWindow() {
     //instructions (north section for borderlayout)
     instructionsWords = new JLabel("Welcome! Are you a student or a teacher?");
     instructionsPanel= new JPanel();
+    Color instructionsColor = Color.decode("#D9E0BE");
+    instructionsPanel.setBackground(instructionsColor);
+    
     instructionsPanel.add(instructionsWords);
+    Color instructionsWordsColor = Color.decode("#edebeb");
+    instructionsWords.setForeground(instructionsWordsColor); //color
     window.add(instructionsPanel, BorderLayout.NORTH);
 
     //set the font for instructions
@@ -50,10 +58,16 @@ public MainWindow() {
     instructionsWords.setFont(instructionsFont);
 
     //teacher and student radiobuttons initialize
-    choicesPanel= new JPanel();
+    choicesPanel= new JPanel(new GridBagLayout());
+    Color backgroundColor = Color.decode("#A7D1BE");
+    choicesPanel.setBackground(backgroundColor);
     teacherButton = new JRadioButton("Teacher");
+    teacherButton.setForeground(Color.DARK_GRAY);
     studentButton = new JRadioButton("Student");
+    studentButton.setForeground(Color.DARK_GRAY);
     teacherStudentGroup = new ButtonGroup();
+
+    
 
     //set the font for radio buttons
     Font buttonFont = new Font("Arial", Font.PLAIN, 30); // Change the font and size here
@@ -66,6 +80,13 @@ public MainWindow() {
     teacherStudentGroup.add(studentButton);
     choicesPanel.add(teacherButton);
     choicesPanel.add(studentButton);
+
+    GridBagConstraints gbc = new GridBagConstraints();
+    gbc.gridx = 0;
+    gbc.gridy = 1;
+    gbc.insets = new Insets(10, 0, 0, 0); // Increase the horizontal spacing between components
+    choicesPanel.add(teacherButton, gbc);
+
     window.add(choicesPanel);
 
     //buttons
