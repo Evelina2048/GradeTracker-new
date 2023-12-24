@@ -26,7 +26,8 @@ public class NewUser {
 
         backButton.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent e) {
-                System.out.println("Frame2 back hit ");
+                MainWindow main = new MainWindow();
+                main.show();
             }
         });
         
