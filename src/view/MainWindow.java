@@ -18,6 +18,7 @@ import java.awt.event.ActionEvent;
 public class MainWindow {
 private JFrame window;
 private String selected;
+private boolean moveOnPossible = false;
 
 public MainWindow() {
     windowSetUp();
@@ -76,6 +77,7 @@ private void RadiobuttonSetUp() {
     teacherButton.addActionListener(new ActionListener() {
         public void actionPerformed(ActionEvent e) {
            selected = "Teacher";
+           moveOnPossible = true;
         }
     });
 
@@ -84,6 +86,7 @@ private void RadiobuttonSetUp() {
     studentButton.addActionListener(new ActionListener() {
         public void actionPerformed(ActionEvent e) {
             selected = "Student";
+            moveOnPossible = true;
         }
     });
 
@@ -132,8 +135,10 @@ private void backNextButton() {
 
     nextButton.addActionListener(new ActionListener() {
         public void actionPerformed(ActionEvent e) {
+            if (moveOnPossible) {
             NewUser newUser = new NewUser(selected);
             window.setVisible(false);
+            }
         }
 });
 }
