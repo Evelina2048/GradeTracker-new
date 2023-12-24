@@ -27,11 +27,10 @@ public MainWindow() {
     RadiobuttonSetUp();
 
     backNextButton();
-
 }
 
 
-public void windowSetUp() {
+private void windowSetUp() {
     //window set up
     window = new JFrame();
     window.setTitle("Launcher");
