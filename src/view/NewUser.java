@@ -1,5 +1,6 @@
 package src.view;
 import javax.swing.JButton;
+import javax.swing.JRadioButton;
 import javax.swing.JFrame;
 import javax.swing.JPanel;
 import java.awt.event.ActionListener;
@@ -9,13 +10,15 @@ import java.awt.BorderLayout;
 
 public class NewUser {
     JFrame window;
-    public NewUser (String buttonName, int windowX, int windowY){
-        System.out.println("Hello "+ buttonName);
+    JRadioButton selectedButton;
+
+    public NewUser (String selectedButtonText, int windowX, int windowY){
+        //System.out.println("Hello "+ buttonName);
         windowSetUp(windowX, windowY);
-        buttonSetUp();
+        buttonSetUp(selectedButtonText);
         }
     
-    private void buttonSetUp() {
+    private void buttonSetUp(String selectedButtonText) {
         JButton backButton;
         JButton nextButton;
         JPanel backNextButtonsPanel;
@@ -28,6 +31,7 @@ public class NewUser {
             public void actionPerformed(ActionEvent e) {
                 MainWindow main = new MainWindow();
                 main.show(window.getX(),window.getY());
+                main.setButtonSelected(selectedButtonText);
                 hideWindow();
             }
         });

@@ -18,8 +18,10 @@ import javax.swing.JOptionPane;
 
 public class MainWindow {
 private JFrame window;
-private String selected;
+private String selectedText;
 private boolean moveOnPossible = false;
+JRadioButton teacherButton;
+JRadioButton studentButton;
 
 public MainWindow() {
     windowSetUp();
@@ -62,8 +64,6 @@ private void instructionsWordsWindow() {
 }
 
 private void RadiobuttonSetUp() {
-    JRadioButton teacherButton;
-    JRadioButton studentButton;
     ButtonGroup teacherStudentGroup;
     JPanel choicesPanel;
     teacherStudentGroup = new ButtonGroup();
@@ -77,7 +77,7 @@ private void RadiobuttonSetUp() {
     choicesButtonDecorate(teacherButton);
     teacherButton.addActionListener(new ActionListener() {
         public void actionPerformed(ActionEvent e) {
-           selected = "Teacher";
+           selectedText = teacherButton.getText();
            moveOnPossible = true;
         }
     });
@@ -86,7 +86,7 @@ private void RadiobuttonSetUp() {
     choicesButtonDecorate(studentButton);
     studentButton.addActionListener(new ActionListener() {
         public void actionPerformed(ActionEvent e) {
-            selected = "Student";
+            selectedText = studentButton.getText();
             moveOnPossible = true;
         }
     });
@@ -139,7 +139,7 @@ private void backNextButton() {
             if (moveOnPossible) {
                 int windowX = window.getX();
                 int windowY = window.getY();
-                NewUser newUser = new NewUser(selected, windowX, windowY);
+                NewUser newUser = new NewUser(selectedText, windowX, windowY);
                 window.setVisible(false);
             }
             else if (!moveOnPossible) {
@@ -147,6 +147,18 @@ private void backNextButton() {
             }
         }
 });
+}
+
+public void setButtonSelected(String selectedButtonText) {
+    System.out.println("in set button selected");
+    if (selectedButtonText == "Student") {
+        studentButton.setSelected(true);
+    }
+    
+    else if(selectedButtonText == "Teacher") {
+        teacherButton.setSelected(true);
+    }
+    //System.out.println(selectedButton+"selectedbut");
 }
 
 public void show(int windowX, int windowY) {
@@ -157,7 +169,7 @@ public void show(int windowX, int windowY) {
    else {
     window.setLocationRelativeTo(null);
    }
-   
+
    window.setVisible(true);
 }
 
