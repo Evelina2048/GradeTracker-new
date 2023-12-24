@@ -28,6 +28,7 @@ public class NewUser {
             public void actionPerformed(ActionEvent e) {
                 MainWindow main = new MainWindow();
                 main.show();
+                hideWindow();
             }
         });
         
@@ -56,5 +57,9 @@ public class NewUser {
 
     private void showWindow() {
         window.setVisible(true);
+    }
+
+    private void hideWindow() {
+        window.setVisible(false);
     }
 }
