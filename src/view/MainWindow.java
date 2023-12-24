@@ -137,8 +137,10 @@ private void backNextButton() {
     nextButton.addActionListener(new ActionListener() {
         public void actionPerformed(ActionEvent e) {
             if (moveOnPossible) {
-            NewUser newUser = new NewUser(selected);
-            window.setVisible(false);
+                int windowX = window.getX();
+                int windowY = window.getY();
+                NewUser newUser = new NewUser(selected, windowX, windowY);
+                window.setVisible(false);
             }
             else if (!moveOnPossible) {
                 JOptionPane.showMessageDialog(null, "Please choose an option", null, JOptionPane.PLAIN_MESSAGE);

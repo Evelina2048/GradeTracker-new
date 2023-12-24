@@ -9,9 +9,9 @@ import java.awt.BorderLayout;
 
 public class NewUser {
     JFrame window;
-    public NewUser (String buttonName){
+    public NewUser (String buttonName, int windowX, int windowY){
         System.out.println("Hello "+ buttonName);
-        windowSetUp();
+        windowSetUp(windowX, windowY);
         buttonSetUp();
         }
     
@@ -44,14 +44,14 @@ public class NewUser {
         });
     }
 
-    private void windowSetUp() {
+    private void windowSetUp(int windowX, int windowY) {
         //window set up
         window = new JFrame();
         window.setTitle("New User?");
         window.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
         window.setLayout(new BorderLayout());
         window.setSize(800, 500);
-        window.setLocationRelativeTo(null);
+        window.setLocation(windowX, windowY);
         showWindow();
     }
 
