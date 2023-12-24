@@ -10,7 +10,7 @@ public class Launcher {
             @Override
             public void run() {
                 MainWindow main = new MainWindow();
-                main.show();
+                main.show(0,0);
             }
         });
     }

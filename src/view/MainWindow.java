@@ -149,7 +149,15 @@ private void backNextButton() {
 });
 }
 
-public void show() {
+public void show(int windowX, int windowY) {
+   if (windowX != 0 && windowY != 0) {
+       window.setLocation(windowX, windowY);
+   }
+
+   else {
+    window.setLocationRelativeTo(null);
+   }
+   
    window.setVisible(true);
 }
 

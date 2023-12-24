@@ -27,7 +27,7 @@ public class NewUser {
         backButton.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent e) {
                 MainWindow main = new MainWindow();
-                main.show();
+                main.show(window.getX(),window.getY());
                 hideWindow();
             }
         });
