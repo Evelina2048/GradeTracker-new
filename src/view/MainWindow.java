@@ -12,10 +12,12 @@ import javax.swing.JLabel;
 import java.awt.GridBagLayout;
 import java.awt.Insets;
 import java.awt.GridBagConstraints;
+import java.awt.event.ActionListener;
+import java.awt.event.ActionEvent;
 
 public class MainWindow {
 private JFrame window;
-
+private String selected;
 
 public MainWindow() {
     windowSetUp();
@@ -29,7 +31,7 @@ public MainWindow() {
 }
 
 
-private void windowSetUp() {
+public void windowSetUp() {
     //window set up
     window = new JFrame();
     window.setTitle("Launcher");
@@ -72,9 +74,19 @@ private void RadiobuttonSetUp() {
     //initialize buttons with color
     teacherButton = new JRadioButton("Teacher");
     choicesButtonDecorate(teacherButton);
+    teacherButton.addActionListener(new ActionListener() {
+        public void actionPerformed(ActionEvent e) {
+           selected = "Teacher";
+        }
+    });
 
     studentButton = new JRadioButton("Student");
     choicesButtonDecorate(studentButton);
+    studentButton.addActionListener(new ActionListener() {
+        public void actionPerformed(ActionEvent e) {
+            selected = "Student";
+        }
+    });
 
     addToChoicesPanel(teacherStudentGroup, teacherButton, studentButton, choicesPanel);
 
@@ -118,6 +130,13 @@ private void backNextButton() {
     nextButton = new JButton("Next >");
     backNextButtonsPanel.add(nextButton, BorderLayout.EAST);
     window.add(backNextButtonsPanel, BorderLayout.SOUTH);
+
+    nextButton.addActionListener(new ActionListener() {
+        public void actionPerformed(ActionEvent e) {
+            NewUser newUser = new NewUser(selected);
+            //window.setVisible(false);
+        }
+});
 }
 
 public void show() {
