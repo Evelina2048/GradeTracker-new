@@ -14,6 +14,7 @@ import java.awt.Insets;
 import java.awt.GridBagConstraints;
 import java.awt.event.ActionListener;
 import java.awt.event.ActionEvent;
+import javax.swing.JOptionPane;
 
 public class MainWindow {
 private JFrame window;
@@ -138,6 +139,9 @@ private void backNextButton() {
             if (moveOnPossible) {
             NewUser newUser = new NewUser(selected);
             window.setVisible(false);
+            }
+            else if (!moveOnPossible) {
+                JOptionPane.showMessageDialog(null, "Please choose an option", null, JOptionPane.PLAIN_MESSAGE);
             }
         }
 });
