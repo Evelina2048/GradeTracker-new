@@ -1,5 +1,10 @@
 package src.view;
+import javax.swing.JButton;
 import javax.swing.JFrame;
+import javax.swing.JPanel;
+import java.awt.event.ActionListener;
+import java.awt.event.ActionEvent;
+
 import java.awt.BorderLayout;
 
 public class NewUser {
@@ -7,8 +12,36 @@ public class NewUser {
     public NewUser (String buttonName){
         System.out.println("Hello "+ buttonName);
         windowSetUp();
+        buttonSetUp();
         }
     
+    private void buttonSetUp() {
+        JButton backButton;
+        JButton nextButton;
+        JPanel backNextButtonsPanel;
+        //buttons
+        backNextButtonsPanel = new JPanel(new BorderLayout());
+        backButton = new JButton("< Back");
+        backNextButtonsPanel.add(backButton, BorderLayout.WEST);
+
+        backButton.addActionListener(new ActionListener() {
+            public void actionPerformed(ActionEvent e) {
+                System.out.println("Frame2 back hit ");
+            }
+        });
+        
+        //next
+        nextButton = new JButton("Next >");
+        backNextButtonsPanel.add(nextButton, BorderLayout.EAST);
+        window.add(backNextButtonsPanel, BorderLayout.SOUTH);
+        
+        nextButton.addActionListener(new ActionListener() {
+            public void actionPerformed(ActionEvent e) {
+                System.out.println("Frame2 next hit ");
+            }
+        });
+    }
+
     private void windowSetUp() {
         //window set up
         window = new JFrame();
@@ -18,7 +51,7 @@ public class NewUser {
         window.setSize(800, 500);
         window.setLocationRelativeTo(null);
         showWindow();
-        }
+    }
 
     private void showWindow() {
         window.setVisible(true);

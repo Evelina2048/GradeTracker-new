@@ -133,7 +133,7 @@ private void backNextButton() {
     nextButton.addActionListener(new ActionListener() {
         public void actionPerformed(ActionEvent e) {
             NewUser newUser = new NewUser(selected);
-            //window.setVisible(false);
+            window.setVisible(false);
         }
 });
 }
