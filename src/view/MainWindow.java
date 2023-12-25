@@ -28,6 +28,7 @@ private int windowX;
 private int windowY;
 JRadioButton teacherButton;
 JRadioButton studentButton;
+ButtonGroup teacherStudentGroup;
 int windowWidth = 800;
 int windowHeight = 500;
 
@@ -72,7 +73,6 @@ private void instructionsWordsWindow() {
 }
 
 private void RadiobuttonSetUp() {
-    ButtonGroup teacherStudentGroup;
     JPanel choicesPanel;
     teacherStudentGroup = new ButtonGroup();
     Color choicesPanelColor = Color.decode("#AFA2A2");
@@ -153,25 +153,33 @@ private void backNextButton() {
                 window.dispose();
             }
             else if (!moveOnPossible) {
-                JDialog dialog = new JDialog(window, null, true);
-                dialog.setLayout(new FlowLayout());
-                JLabel label = new JLabel("<html><center>Please choose an option");
-                label.setHorizontalAlignment(SwingConstants.CENTER);
-                dialog.add(label);
-                JButton okButton = new JButton("OK");
-                okButton.setVisible(true);
-                dialog.add(okButton);
-                dialog.setSize(200,90);
-                okButton.addActionListener(new ActionListener() {
-                    public void actionPerformed(ActionEvent e) {
-                        dialog.setVisible(false);
-                        dialog.dispose(); 
-                    }
-                });
-                dialog.setVisible(true);
+                errorMessageSetUp();
             }
         }
 });
+}
+
+private void errorMessageSetUp() {
+    JDialog dialog = new JDialog(window, null, true);
+    dialog.setLayout(new FlowLayout());
+    JLabel label = new JLabel("<html><center>Please choose an option");
+    label.setHorizontalAlignment(SwingConstants.CENTER);
+    dialog.add(label);
+    JButton okButton = new JButton("OK");
+    okButton.setVisible(true);
+    dialog.add(okButton);
+    dialog.setSize(200,90);
+    okButton.addActionListener(new ActionListener() {
+        public void actionPerformed(ActionEvent e) {
+            dialog.setVisible(false);
+            dialog.dispose(); 
+        }
+    });
+    
+    dialog.setLocationRelativeTo(studentButton);
+    dialog.setLocation(dialog.getX(), dialog.getY() + 15); 
+    //dialog.setLocation(studentButton.getX(), studentButton.getY());
+    dialog.setVisible(true);
 }
 
 public void setButtonSelected(String selectedButtonText) {
