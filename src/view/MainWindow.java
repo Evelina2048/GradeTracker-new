@@ -2,8 +2,11 @@ package src.view;
 
 import javax.swing.ButtonGroup;
 import javax.swing.JButton;
+import javax.swing.JDialog;
 import javax.swing.JFrame;
 import javax.swing.JRadioButton;
+import javax.swing.SwingConstants;
+
 import java.awt.BorderLayout;
 import java.awt.Color;
 import java.awt.Font;
@@ -15,13 +18,18 @@ import java.awt.GridBagConstraints;
 import java.awt.event.ActionListener;
 import java.awt.event.ActionEvent;
 import javax.swing.JOptionPane;
+import java.awt.FlowLayout;
 
 public class MainWindow {
 private JFrame window;
 private String selectedText;
 private boolean moveOnPossible = false;
+private int windowX;
+private int windowY;
 JRadioButton teacherButton;
 JRadioButton studentButton;
+int windowWidth = 800;
+int windowHeight = 500;
 
 public MainWindow() {
     windowSetUp();
@@ -40,7 +48,7 @@ private void windowSetUp() {
     window.setTitle("Launcher");
     window.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
     window.setLayout(new BorderLayout());
-    window.setSize(800, 500);
+    window.setSize(windowWidth, windowHeight);
     window.setLocationRelativeTo(null);
 }
  
@@ -80,6 +88,7 @@ private void RadiobuttonSetUp() {
            selectedText = teacherButton.getText();
            moveOnPossible = true;
         }
+        
     });
 
     studentButton = new JRadioButton("Student");
@@ -136,14 +145,30 @@ private void backNextButton() {
 
     nextButton.addActionListener(new ActionListener() {
         public void actionPerformed(ActionEvent e) {
+            int windowX = window.getX();
+            int windowY = window.getY();
             if (moveOnPossible) {
-                int windowX = window.getX();
-                int windowY = window.getY();
                 NewUser newUser = new NewUser(selectedText, windowX, windowY);
-                window.setVisible(false);
+                //window.setVisible(false);
+                window.dispose();
             }
             else if (!moveOnPossible) {
-                JOptionPane.showMessageDialog(null, "Please choose an option", null, JOptionPane.PLAIN_MESSAGE);
+                JDialog dialog = new JDialog(window, null, true);
+                dialog.setLayout(new FlowLayout());
+                JLabel label = new JLabel("<html><center>Please choose an option");
+                label.setHorizontalAlignment(SwingConstants.CENTER);
+                dialog.add(label);
+                JButton okButton = new JButton("OK");
+                okButton.setVisible(true);
+                dialog.add(okButton);
+                dialog.setSize(200,90);
+                okButton.addActionListener(new ActionListener() {
+                    public void actionPerformed(ActionEvent e) {
+                        dialog.setVisible(false);
+                        dialog.dispose(); 
+                    }
+                });
+                dialog.setVisible(true);
             }
         }
 });
@@ -153,17 +178,37 @@ public void setButtonSelected(String selectedButtonText) {
     System.out.println("in set button selected");
     if (selectedButtonText == "Student") {
         studentButton.setSelected(true);
+        moveOnPossible = true;
     }
     
     else if(selectedButtonText == "Teacher") {
         teacherButton.setSelected(true);
+        moveOnPossible = true;
     }
-    //System.out.println(selectedButton+"selectedbut");
+}
+
+private void setWindowX(int newWindowX) {
+    windowX = newWindowX;
+}
+
+public int getWindowX() {
+    return windowX;
+}
+
+private void setWindowY(int newWindowY) {
+    windowY = newWindowY;
+}
+
+public int getWindowY() {
+    return windowY;
 }
 
 public void show(int windowX, int windowY) {
    if (windowX != 0 && windowY != 0) {
        window.setLocation(windowX, windowY);
+       setWindowX(windowX);
+       setWindowY(windowY);
+
    }
 
    else {
