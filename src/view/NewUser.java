@@ -50,7 +50,7 @@ public class NewUser {
         window.setLayout(new BorderLayout());
         window.setSize(800, 500);
         window.setLocation(windowX, windowY);
-        showWindow();
+        showWindow(windowX,windowY);
     }
     
     private void instructionsWordsWindow(String selectedButtonText) {
@@ -224,7 +224,7 @@ public class NewUser {
         return windowY;
     }
 
-    public void showWindow() {
+    public void showWindow(int windowX, int windowY) {
     if (windowX != 0 && windowY != 0) {
         window.setLocation(windowX, windowY);
         setWindowX(windowX);

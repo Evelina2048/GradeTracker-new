@@ -10,6 +10,7 @@ import javax.swing.SwingConstants;
 
 import java.awt.BorderLayout;
 import java.awt.Color;
+import java.awt.Dimension;
 import java.awt.Font;
 import javax.swing.JPanel;
 import javax.swing.JLabel;
@@ -58,7 +59,18 @@ public class Gather {
         JPanel instructionsPanel;
         JLabel instructionsWords;
         //instructions (north section for borderlayout)
-        instructionsWords = new JLabel("You are an "+selectedButtonText+" user. What is your user name?");
+        System.out.println(selectedButtonText+"hhhhh");
+        if (selectedButtonText == "New User") {
+            instructionsWords = new JLabel("You are a new user. Create a user name.");
+        }
+        else if (selectedButtonText == "Existing") {
+            instructionsWords = new JLabel("You are an existing user. Type in your user name");
+        }
+
+        else {
+            instructionsWords = new JLabel("Error");
+        }
+
         instructionsPanel= new JPanel();
         Color instructionsColor = Color.decode("#7A6D6D");
         instructionsPanel.setBackground(instructionsColor);
@@ -85,8 +97,9 @@ public class Gather {
 
         ///
         // Create a JTextField
-        JTextField textField = new JTextField(20); // 20 columns wide
-
+        JTextField textField = new JTextField(10); // 20 columns wide
+        textField.setPreferredSize(new Dimension(textField.getPreferredSize().width, 50)); // Set the height to 50 pixels
+        textField.setFont(new Font("Roboto", Font.BOLD, 14));
         // Add the text field to the panel
         choicesPanel.add(textField);
 
@@ -107,9 +120,9 @@ public class Gather {
 
         backButton.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent e) {
-                MainWindow main = new MainWindow();
-                main.show(window.getX(),window.getY());
-                main.setButtonSelected(selectedButtonText);
+                NewUser newUser = new NewUser(selectedText, windowX, windowY);
+                newUser.showWindow(window.getX(), window.getY());
+                newUser.setButtonSelected(selectedButtonText);
                 hideWindow();
             }
         });
@@ -124,7 +137,10 @@ public class Gather {
                 System.out.println("Frame2 next hit ");
                 int windowX = window.getX();
                 int windowY = window.getY();
+
                 if (moveOnPossible) {
+                    ///write to file
+                    ///
                     Gather gatherFrame = new Gather(selectedText, windowX, windowY);
                     System.out.println(selectedText+"selectedstuff");
                     //window.setVisible(false);
@@ -158,19 +174,6 @@ public class Gather {
         dialog.setLocationRelativeTo(studentButton);
         dialog.setLocation(dialog.getX(), dialog.getY() + 15); 
         dialog.setVisible(true);
-    }
-
-    public void setButtonSelected(String selectedButtonText) {
-        selectedText = selectedButtonText;
-        if (selectedButtonText == "New User") {
-            studentButton.setSelected(true);
-            moveOnPossible = true;
-        }
-        
-        else if(selectedButtonText == "Existing") {
-            teacherButton.setSelected(true);
-            moveOnPossible = true;
-        }
     }
 
     private void setWindowX(int newWindowX) {
