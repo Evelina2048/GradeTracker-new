@@ -17,7 +17,6 @@ import java.awt.Insets;
 import java.awt.GridBagConstraints;
 import java.awt.event.ActionListener;
 import java.awt.event.ActionEvent;
-import javax.swing.JOptionPane;
 import java.awt.FlowLayout;
 
 public class MainWindow {
@@ -26,8 +25,8 @@ private String selectedText;
 private boolean moveOnPossible = false;
 private int windowX;
 private int windowY;
-JRadioButton teacherButton;
 JRadioButton studentButton;
+JRadioButton teacherButton;
 ButtonGroup teacherStudentGroup;
 int windowWidth = 800;
 int windowHeight = 500;
@@ -37,7 +36,7 @@ public MainWindow() {
 
     instructionsWordsWindow();
 
-    RadiobuttonSetUp();
+    radioButtonSetUp();
 
     backNextButton();
 }
@@ -72,7 +71,7 @@ private void instructionsWordsWindow() {
     instructionsWords.setFont(instructionsFont);
 }
 
-private void RadiobuttonSetUp() {
+private void radioButtonSetUp() {
     JPanel choicesPanel;
     teacherStudentGroup = new ButtonGroup();
     Color choicesPanelColor = Color.decode("#AFA2A2");
@@ -124,7 +123,9 @@ private GridBagConstraints choiceGbc() {
     GridBagConstraints gbc = new GridBagConstraints();
     gbc.gridx = 0;
     gbc.gridy = 1;
-    gbc.insets = new Insets(10, 0, 0, 0); // Increase the horizontal spacing between components
+    gbc.gridwidth = 2;
+
+    gbc.insets = new Insets(20, 0, 0, 0); // Increase the horizontal spacing between components
     return gbc;
 }
 
@@ -149,6 +150,7 @@ private void backNextButton() {
             int windowY = window.getY();
             if (moveOnPossible) {
                 NewUser newUser = new NewUser(selectedText, windowX, windowY);
+                System.out.println(selectedText+"selectedstuff");
                 //window.setVisible(false);
                 window.dispose();
             }
@@ -178,12 +180,12 @@ private void errorMessageSetUp() {
     
     dialog.setLocationRelativeTo(studentButton);
     dialog.setLocation(dialog.getX(), dialog.getY() + 15); 
-    //dialog.setLocation(studentButton.getX(), studentButton.getY());
     dialog.setVisible(true);
 }
 
 public void setButtonSelected(String selectedButtonText) {
     System.out.println("in set button selected");
+    selectedText = selectedButtonText;
     if (selectedButtonText == "Student") {
         studentButton.setSelected(true);
         moveOnPossible = true;
