@@ -25,8 +25,8 @@ public class NewUser {
     private boolean moveOnPossible = false;
     private int windowX;
     private int windowY;
-    JRadioButton studentButton;
-    JRadioButton teacherButton;
+    JRadioButton newUserButton;
+    JRadioButton existingButton;
     ButtonGroup teacherStudentGroup;
     int windowWidth = 800;
     int windowHeight = 500;
@@ -81,26 +81,26 @@ public class NewUser {
         choicesPanel.setBackground(choicesPanelColor);
 
         //initialize buttons with color
-        teacherButton = new JRadioButton("Existing");
-        choicesButtonDecorate(teacherButton);
-        teacherButton.addActionListener(new ActionListener() {
+        existingButton = new JRadioButton("Existing");
+        choicesButtonDecorate(existingButton);
+        existingButton.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent e) {
-            selectedText = teacherButton.getText();
+            selectedText = existingButton.getText();
             moveOnPossible = true;
             }
             
         });
 
-        studentButton = new JRadioButton("New User");
-        choicesButtonDecorate(studentButton);
-        studentButton.addActionListener(new ActionListener() {
+        newUserButton = new JRadioButton("New User");
+        choicesButtonDecorate(newUserButton);
+        newUserButton.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent e) {
-                selectedText = studentButton.getText();
+                selectedText = newUserButton.getText();
                 moveOnPossible = true;
             }
         });
 
-        addToChoicesPanel(teacherStudentGroup, teacherButton, studentButton, choicesPanel);
+        addToChoicesPanel(teacherStudentGroup, existingButton, newUserButton, choicesPanel);
 
         window.add(choicesPanel);
     }
@@ -111,12 +111,12 @@ public class NewUser {
         button.setFont(buttonFont);
     }
 
-    private void addToChoicesPanel(ButtonGroup teacherStudentGroup, JRadioButton teacherButton, JRadioButton studentButton, JPanel choicesPanel) {
-        teacherStudentGroup.add(teacherButton);
-        teacherStudentGroup.add(studentButton);
-        choicesPanel.add(teacherButton);
-        choicesPanel.add(studentButton);
-        choicesPanel.add(teacherButton, choiceGbc());
+    private void addToChoicesPanel(ButtonGroup teacherStudentGroup, JRadioButton existingButton, JRadioButton newUserButton, JPanel choicesPanel) {
+        teacherStudentGroup.add(existingButton);
+        teacherStudentGroup.add(newUserButton);
+        choicesPanel.add(existingButton);
+        choicesPanel.add(newUserButton);
+        choicesPanel.add(existingButton, choiceGbc());
     }
 
     private GridBagConstraints choiceGbc() {
@@ -127,7 +127,7 @@ public class NewUser {
         gbc.gridwidth = 2;
 
         gbc.anchor = GridBagConstraints.WEST;
-        gbc.insets = new Insets(20, 0, 0, 0); // Increase the horizontal spacing between components
+        gbc.insets = new Insets(10, 0, 0, 0); // Increase the horizontal spacing between components
         return gbc;
     }
 
@@ -160,7 +160,7 @@ public class NewUser {
                 int windowX = window.getX();
                 int windowY = window.getY();
                 if (moveOnPossible) {
-                    Gather gatherFrame = new Gather();
+                    Gather gatherFrame = new Gather(selectedText, windowX, windowY);
                     System.out.println(selectedText+"selectedstuff");
                     //window.setVisible(false);
                     window.dispose();
@@ -190,7 +190,7 @@ public class NewUser {
             }
         });
         
-        dialog.setLocationRelativeTo(studentButton);
+        dialog.setLocationRelativeTo(newUserButton);
         dialog.setLocation(dialog.getX(), dialog.getY() + 15); 
         dialog.setVisible(true);
     }
@@ -198,12 +198,12 @@ public class NewUser {
     public void setButtonSelected(String selectedButtonText) {
         selectedText = selectedButtonText;
         if (selectedButtonText == "New User") {
-            studentButton.setSelected(true);
+            newUserButton.setSelected(true);
             moveOnPossible = true;
         }
         
         else if(selectedButtonText == "Existing") {
-            teacherButton.setSelected(true);
+            existingButton.setSelected(true);
             moveOnPossible = true;
         }
     }
@@ -233,7 +233,8 @@ public class NewUser {
     }
 
     else {
-        window.setLocationRelativeTo(null);
+        //window.setLocationRelativeTo(null);
+        window.setLocation(window.getX(), window.getY());
     }
 
     window.setVisible(true);

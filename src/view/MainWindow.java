@@ -125,7 +125,7 @@ private GridBagConstraints choiceGbc() {
     gbc.gridy = 1;
     gbc.gridwidth = 2;
 
-    gbc.insets = new Insets(20, 0, 0, 0); // Increase the horizontal spacing between components
+    gbc.insets = new Insets(10, 0, 0, 0); // Increase the horizontal spacing between components
     return gbc;
 }
 
