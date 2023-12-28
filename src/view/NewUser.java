@@ -21,7 +21,7 @@ import java.awt.FlowLayout;
 
 public class NewUser {
     private JFrame window;
-    private String selectedText;
+    private String existingOrNew;
     private boolean moveOnPossible = false;
     private int windowX;
     private int windowY;
@@ -31,14 +31,14 @@ public class NewUser {
     int windowWidth = 800;
     int windowHeight = 500;
 
-    public NewUser(String selectedButtonText, int windowX, int windowY) {
+    public NewUser(String studentOrTeacher, int windowX, int windowY) {
         windowSetUp(windowX, windowY);
 
-        instructionsWordsWindow(selectedButtonText);
+        instructionsWordsWindow(studentOrTeacher);
 
         radioButtonSetUp();
 
-        buttonSetUp(selectedButtonText);
+        buttonSetUp(studentOrTeacher);
     }
 
 
@@ -53,11 +53,11 @@ public class NewUser {
         showWindow(windowX,windowY);
     }
     
-    private void instructionsWordsWindow(String selectedButtonText) {
+    private void instructionsWordsWindow(String studentOrTeacher) {
         JPanel instructionsPanel;
         JLabel instructionsWords;
         //instructions (north section for borderlayout)
-        instructionsWords = new JLabel("You are a "+selectedButtonText+". Are you a new user?");
+        instructionsWords = new JLabel("You are a "+studentOrTeacher+". Are you a new user?");
         instructionsPanel= new JPanel();
         Color instructionsColor = Color.decode("#7A6D6D");
         instructionsPanel.setBackground(instructionsColor);
@@ -85,7 +85,7 @@ public class NewUser {
         choicesButtonDecorate(existingButton);
         existingButton.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent e) {
-            selectedText = existingButton.getText();
+            existingOrNew = existingButton.getText();
             moveOnPossible = true;
             }
             
@@ -95,7 +95,7 @@ public class NewUser {
         choicesButtonDecorate(newUserButton);
         newUserButton.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent e) {
-                selectedText = newUserButton.getText();
+                existingOrNew = newUserButton.getText();
                 moveOnPossible = true;
             }
         });
@@ -131,7 +131,7 @@ public class NewUser {
         return gbc;
     }
 
-    private void buttonSetUp(String selectedButtonText) {
+    private void buttonSetUp(String studentOrTeacher) {
         JButton backButton;
         JButton nextButton;
         JPanel backNextButtonsPanel;
@@ -144,7 +144,7 @@ public class NewUser {
             public void actionPerformed(ActionEvent e) {
                 MainWindow main = new MainWindow();
                 main.show(window.getX(),window.getY());
-                main.setButtonSelected(selectedButtonText);
+                main.setButtonSelected(studentOrTeacher);
                 hideWindow();
             }
         });
@@ -159,7 +159,7 @@ public class NewUser {
                 int windowX = window.getX();
                 int windowY = window.getY();
                 if (moveOnPossible) {
-                    Gather gatherFrame = new Gather(selectedText, windowX, windowY);
+                    Gather gatherFrame = new Gather(studentOrTeacher, existingOrNew, windowX, windowY);
                     window.dispose();
                 }
                 else if (!moveOnPossible) {
@@ -192,14 +192,14 @@ public class NewUser {
         dialog.setVisible(true);
     }
 
-    public void setButtonSelected(String selectedButtonText) {
-        selectedText = selectedButtonText;
-        if (selectedButtonText == "New User") {
+    public void setButtonSelected(String studentOrTeacher) {
+        existingOrNew = studentOrTeacher;
+        if (studentOrTeacher == "New User") {
             newUserButton.setSelected(true);
             moveOnPossible = true;
         }
         
-        else if(selectedButtonText == "Existing") {
+        else if(studentOrTeacher == "Existing") {
             existingButton.setSelected(true);
             moveOnPossible = true;
         }

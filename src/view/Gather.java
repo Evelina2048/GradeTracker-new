@@ -37,15 +37,15 @@ public class Gather {
     int windowWidth = 800;
     int windowHeight = 500;
 
-    public Gather(String selectedButtonText, int windowX, int windowY) {
-        System.out.println("in gather frame, the selectedButtonText is"+selectedButtonText);
+    public Gather(String studentOrTeacher, String existingOrNew, int windowX, int windowY) {
+        System.out.println("in gather frame, the existingOrNew is"+existingOrNew);
         windowSetUp(windowX, windowY);
 
-        instructionsWordsWindow(selectedButtonText);
+        instructionsWordsWindow(existingOrNew);
 
         inputName();
 
-        buttonSetUp(selectedButtonText);
+        buttonSetUp(existingOrNew);
     }
 
 
@@ -60,14 +60,14 @@ public class Gather {
         showWindow();
     }
     
-    private void instructionsWordsWindow(String selectedButtonText) {
+    private void instructionsWordsWindow(String existingOrNew) {
         JPanel instructionsPanel;
         JLabel instructionsWords;
         //instructions (north section for borderlayout)
-        if (selectedButtonText == "New User") {
+        if (existingOrNew == "New User") {
             instructionsWords = new JLabel("You are a new user. Create a user name.");
         }
-        else if (selectedButtonText == "Existing") {
+        else if (existingOrNew == "Existing") {
             instructionsWords = new JLabel("You are an existing user. Type in your user name");
         }
 
@@ -146,7 +146,7 @@ public class Gather {
         window.add(choicesPanel);
     }
 
-    private void buttonSetUp(String selectedButtonText) {
+    private void buttonSetUp(String existingOrNew) {
         JButton backButton;
         JButton nextButton;
         JPanel backNextButtonsPanel;
@@ -160,7 +160,7 @@ public class Gather {
                 System.out.println("in new user, selectedText is"+selectedText);
                 NewUser newUser = new NewUser(selectedText, windowX, windowY);
                 newUser.showWindow(window.getX(), window.getY());
-                newUser.setButtonSelected(selectedButtonText);
+                newUser.setButtonSelected(existingOrNew);
                 hideWindow();
             }
         });
@@ -179,7 +179,7 @@ public class Gather {
                     ///write to file
 
                     ///
-                    Gather gatherFrame = new Gather(selectedText, windowX, windowY);
+                    //Gather gatherFrame = new Gather(studentOrTeacher, selectedText, windowX, windowY);
                     //window.setVisible(false);
                     window.dispose();
                 }
