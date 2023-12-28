@@ -21,7 +21,7 @@ import java.awt.FlowLayout;
 
 public class MainWindow {
 private JFrame window;
-private String selectedText;
+private String studentOrTeacher;
 private boolean moveOnPossible = false;
 private int windowX;
 private int windowY;
@@ -84,7 +84,7 @@ private void radioButtonSetUp() {
     choicesButtonDecorate(teacherButton);
     teacherButton.addActionListener(new ActionListener() {
         public void actionPerformed(ActionEvent e) {
-           selectedText = teacherButton.getText();
+           studentOrTeacher = teacherButton.getText();
            moveOnPossible = true;
         }
         
@@ -94,7 +94,7 @@ private void radioButtonSetUp() {
     choicesButtonDecorate(studentButton);
     studentButton.addActionListener(new ActionListener() {
         public void actionPerformed(ActionEvent e) {
-            selectedText = studentButton.getText();
+            studentOrTeacher = studentButton.getText();
             moveOnPossible = true;
         }
     });
@@ -149,8 +149,7 @@ private void backNextButton() {
             int windowX = window.getX();
             int windowY = window.getY();
             if (moveOnPossible) {
-                NewUser newUser = new NewUser(selectedText, windowX, windowY);
-                System.out.println(selectedText+"selectedstuff");
+                NewUser newUser = new NewUser(studentOrTeacher, windowX, windowY);
                 //window.setVisible(false);
                 window.dispose();
             }
@@ -184,8 +183,7 @@ private void errorMessageSetUp() {
 }
 
 public void setButtonSelected(String selectedButtonText) {
-    System.out.println("in set button selected");
-    selectedText = selectedButtonText;
+    studentOrTeacher = selectedButtonText;
     if (selectedButtonText == "Student") {
         studentButton.setSelected(true);
         moveOnPossible = true;

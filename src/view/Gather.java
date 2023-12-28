@@ -38,6 +38,7 @@ public class Gather {
     int windowHeight = 500;
 
     public Gather(String selectedButtonText, int windowX, int windowY) {
+        System.out.println("in gather frame, the selectedButtonText is"+selectedButtonText);
         windowSetUp(windowX, windowY);
 
         instructionsWordsWindow(selectedButtonText);
@@ -156,6 +157,7 @@ public class Gather {
 
         backButton.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent e) {
+                System.out.println("in new user, selectedText is"+selectedText);
                 NewUser newUser = new NewUser(selectedText, windowX, windowY);
                 newUser.showWindow(window.getX(), window.getY());
                 newUser.setButtonSelected(selectedButtonText);

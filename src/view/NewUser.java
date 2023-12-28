@@ -156,13 +156,10 @@ public class NewUser {
         
         nextButton.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent e) {
-                System.out.println("Frame2 next hit ");
                 int windowX = window.getX();
                 int windowY = window.getY();
                 if (moveOnPossible) {
                     Gather gatherFrame = new Gather(selectedText, windowX, windowY);
-                    System.out.println(selectedText+"selectedstuff");
-                    //window.setVisible(false);
                     window.dispose();
                 }
                 else if (!moveOnPossible) {
