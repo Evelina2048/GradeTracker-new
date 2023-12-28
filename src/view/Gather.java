@@ -15,11 +15,15 @@ import java.awt.Font;
 import javax.swing.JPanel;
 import javax.swing.JLabel;
 import java.awt.GridBagLayout;
-import java.awt.Insets;
-import java.awt.GridBagConstraints;
+
 import java.awt.event.ActionListener;
 import java.awt.event.ActionEvent;
 import java.awt.FlowLayout;
+
+import java.awt.event.FocusEvent;
+import java.awt.event.FocusListener;
+import java.awt.event.MouseAdapter;
+import java.awt.event.MouseEvent;
 
 public class Gather {
     private JFrame window;
@@ -47,7 +51,7 @@ public class Gather {
     private void windowSetUp(int windowX, int windowY) {
         //window set up
         window = new JFrame();
-        window.setTitle("New User?");
+        window.setTitle("Input Username");
         window.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
         window.setLayout(new BorderLayout());
         window.setSize(800, 500);
@@ -99,13 +103,47 @@ public class Gather {
         // Create a JTextField
         JTextField textField = new JTextField(10); // 20 columns wide
         textField.setPreferredSize(new Dimension(textField.getPreferredSize().width, 50)); // Set the height to 50 pixels
-        textField.setFont(new Font("Roboto", Font.BOLD, 14));
-        // Add the text field to the panel
+        textField.setFont(new Font("Roboto", Font.PLAIN, 14));
+        textField.setForeground(Color.orange);
+
+        //textField.setSelectionColor(Color.);
+        Color defaultTextColor = Color.decode("#B0B0B0");
+        textField.setSelectedTextColor(defaultTextColor);
+
+        textField.setHorizontalAlignment(JTextField.CENTER);
+        textField.setText("Enter user name");
+
+        //./
+        textField.addMouseListener(new MouseAdapter() {
+            @Override
+            public void mouseClicked(MouseEvent e) {
+                System.out.println("clicked");
+                textField.setText("");
+                textField.setForeground(Color.BLACK);
+            }
+        });
+        
+        
+        textField.addFocusListener(new FocusListener() {
+            @Override
+            public void focusGained(FocusEvent e) {
+            if (textField.getText().equals("Enter username")) {
+                textField.setText("");
+                textField.setForeground(Color.black); // Change the color to black when text is cleared
+            }
+        }
+            @Override
+            public void focusLost(FocusEvent e) {
+                if (textField.getText().isEmpty()) {
+                    textField.setText("Enter username");
+                    textField.setForeground(Color.blue);
+                }
+            }
+
+        });
+
         choicesPanel.add(textField);
-
         window.add(choicesPanel);
-        ///
-
         window.add(choicesPanel);
     }
 
