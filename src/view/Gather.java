@@ -63,7 +63,6 @@ public class Gather {
         JPanel instructionsPanel;
         JLabel instructionsWords;
         //instructions (north section for borderlayout)
-        System.out.println(selectedButtonText+"hhhhh");
         if (selectedButtonText == "New User") {
             instructionsWords = new JLabel("You are a new user. Create a user name.");
         }
@@ -117,7 +116,6 @@ public class Gather {
         textField.addMouseListener(new MouseAdapter() {
             @Override
             public void mouseClicked(MouseEvent e) {
-                System.out.println("clicked");
                 textField.setText("");
                 textField.setForeground(Color.BLACK);
             }
@@ -172,15 +170,14 @@ public class Gather {
         
         nextButton.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent e) {
-                System.out.println("Frame2 next hit ");
                 int windowX = window.getX();
                 int windowY = window.getY();
 
                 if (moveOnPossible) {
                     ///write to file
+
                     ///
                     Gather gatherFrame = new Gather(selectedText, windowX, windowY);
-                    System.out.println(selectedText+"selectedstuff");
                     //window.setVisible(false);
                     window.dispose();
                 }
