@@ -25,6 +25,7 @@ private String studentOrTeacher;
 private boolean moveOnPossible = false;
 private int windowX;
 private int windowY;
+private String existingOrNew;
 JRadioButton studentButton;
 JRadioButton teacherButton;
 ButtonGroup teacherStudentGroup;
@@ -149,7 +150,9 @@ private void backNextButton() {
             int windowX = window.getX();
             int windowY = window.getY();
             if (moveOnPossible) {
-                NewUser newUser = new NewUser(studentOrTeacher, windowX, windowY);
+                System.out.println("hello");
+                NewUser newUser = new NewUser(studentOrTeacher,existingOrNew, windowX, windowY);
+                newUser.setButtonSelected(existingOrNew);
                 //window.setVisible(false);
                 window.dispose();
             }
@@ -193,6 +196,11 @@ public void setButtonSelected(String selectedButtonText) {
         teacherButton.setSelected(true);
         moveOnPossible = true;
     }
+}
+
+public void setExistingOrNew(String existingOrNew2) {
+    System.out.println("setExistingOrNew in Main Window "+existingOrNew2);
+    existingOrNew = existingOrNew2;
 }
 
 private void setWindowX(int newWindowX) {

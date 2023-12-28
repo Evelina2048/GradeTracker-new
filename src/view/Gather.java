@@ -163,7 +163,7 @@ public class Gather {
         backButton.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent e) {
                 System.out.println("in new user, selectedText is"+selectedText);
-                NewUser newUser = new NewUser(studentOrTeacherString, windowX, windowY);
+                NewUser newUser = new NewUser(studentOrTeacherString, existingOrNew,windowX, windowY);
                 newUser.showWindow(window.getX(), window.getY());
                 newUser.setButtonSelected(existingOrNew);
                 hideWindow();

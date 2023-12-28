@@ -31,7 +31,7 @@ public class NewUser {
     int windowWidth = 800;
     int windowHeight = 500;
 
-    public NewUser(String studentOrTeacher, int windowX, int windowY) {
+    public NewUser(String studentOrTeacher, String newOrExisting,int windowX, int windowY) {
         System.out.println("in new user frame, the studentOrTeacher is "+ studentOrTeacher);
 
         windowSetUp(windowX, windowY);
@@ -147,7 +147,11 @@ public class NewUser {
                 MainWindow main = new MainWindow();
                 main.show(window.getX(),window.getY());
                 main.setButtonSelected(studentOrTeacher);
+                //we want our selection in this frame preserved in case the user goes "Next>" again.
+                main.setExistingOrNew(existingOrNew);
+                //
                 hideWindow();
+                
             }
         });
         
@@ -242,5 +246,4 @@ public class NewUser {
     private void hideWindow() {
         window.setVisible(false);
     }
-
 }
