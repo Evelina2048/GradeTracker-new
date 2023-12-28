@@ -32,6 +32,8 @@ public class NewUser {
     int windowHeight = 500;
 
     public NewUser(String studentOrTeacher, int windowX, int windowY) {
+        System.out.println("in new user frame, the studentOrTeacher is "+ studentOrTeacher);
+
         windowSetUp(windowX, windowY);
 
         instructionsWordsWindow(studentOrTeacher);

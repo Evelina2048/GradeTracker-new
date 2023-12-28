@@ -31,6 +31,7 @@ public class Gather {
     private boolean moveOnPossible = false;
     private int windowX;
     private int windowY;
+    private String studentOrTeacherString;
     JRadioButton studentButton;
     JRadioButton teacherButton;
     ButtonGroup teacherStudentGroup;
@@ -38,7 +39,11 @@ public class Gather {
     int windowHeight = 500;
 
     public Gather(String studentOrTeacher, String existingOrNew, int windowX, int windowY) {
-        System.out.println("in gather frame, the existingOrNew is"+existingOrNew);
+        System.out.println("in gather frame, the studentOrTeacher is "+ studentOrTeacher);
+        System.out.println("in gather frame, the existingOrNew is "+existingOrNew);
+
+        studentOrTeacherString = studentOrTeacher;
+        
         windowSetUp(windowX, windowY);
 
         instructionsWordsWindow(existingOrNew);
@@ -158,7 +163,7 @@ public class Gather {
         backButton.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent e) {
                 System.out.println("in new user, selectedText is"+selectedText);
-                NewUser newUser = new NewUser(selectedText, windowX, windowY);
+                NewUser newUser = new NewUser(studentOrTeacherString, windowX, windowY);
                 newUser.showWindow(window.getX(), window.getY());
                 newUser.setButtonSelected(existingOrNew);
                 hideWindow();
