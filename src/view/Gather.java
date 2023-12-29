@@ -38,6 +38,11 @@ public class Gather {
     int windowWidth = 800;
     int windowHeight = 500;
 
+    //panels
+    JPanel instructionsPanel;
+    JPanel choicesPanel;
+    JPanel backNextButtonsPanel;
+
     public Gather(String studentOrTeacher, String existingOrNew, int windowX, int windowY) {
         System.out.println("in gather frame, the studentOrTeacher is "+ studentOrTeacher);
         System.out.println("in gather frame, the existingOrNew is "+existingOrNew);
@@ -56,7 +61,7 @@ public class Gather {
 
     private void windowSetUp(int windowX, int windowY) {
         //window set up
-        //window = new JFrame();
+        window = new JFrame();
         window.setTitle("Input Username");
         window.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
         window.setLayout(new BorderLayout());
@@ -66,7 +71,6 @@ public class Gather {
     }
     
     private void instructionsWordsWindow(String existingOrNew) {
-        JPanel instructionsPanel;
         JLabel instructionsWords;
         //instructions (north section for borderlayout)
         if (existingOrNew == "New User") {
@@ -95,7 +99,6 @@ public class Gather {
     }
 
     private void inputName() {
-        JPanel choicesPanel;
         teacherStudentGroup = new ButtonGroup();
         Color choicesPanelColor = Color.decode("#AFA2A2");
 
@@ -154,7 +157,6 @@ public class Gather {
     private void buttonSetUp(String existingOrNew) {
         JButton backButton;
         JButton nextButton;
-        JPanel backNextButtonsPanel;
         //buttons
         backNextButtonsPanel = new JPanel(new BorderLayout());
         backButton = new JButton("< Back");
@@ -186,7 +188,7 @@ public class Gather {
                     ///
                     //Gather gatherFrame = new Gather(studentOrTeacher, selectedText, windowX, windowY);
                     //window.setVisible(false);
-                    window.dispose();
+                    //window.dispose();
                 }
                 else if (!moveOnPossible) {
                     errorMessageSetUp();
@@ -243,7 +245,10 @@ public class Gather {
     }
 
     private void hideWindow() {
-        window.setVisible(false);
+        instructionsPanel.setVisible(false);
+        choicesPanel.setVisible(false);
+        backNextButtonsPanel.setVisible(false);
+        //window.setVisible(false);
     }
 
 }

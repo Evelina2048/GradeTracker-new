@@ -36,7 +36,6 @@ int windowHeight = 500;
 JPanel instructionsPanel;
 JPanel choicesPanel;
 JPanel backNextButtonsPanel;
-//
 
 public MainWindow() {
     windowSetUp();
@@ -156,8 +155,8 @@ private void backNextButton() {
                 System.out.println("hello");
                 NewUser newUser = new NewUser(window, studentOrTeacher,existingOrNew, windowX, windowY);
                 newUser.setButtonSelected(existingOrNew);
-                hidePanels();
                 //window.setVisible(false);
+                hideWindow();
                 //window.dispose();
             }
             else if (!moveOnPossible) {
@@ -238,10 +237,11 @@ public void show(int windowX, int windowY) {
    window.setVisible(true);
 }
 
-private void hidePanels() {
+private void hideWindow() {
     instructionsPanel.setVisible(false);
     choicesPanel.setVisible(false);
     backNextButtonsPanel.setVisible(false);
+
 }
 
 }
