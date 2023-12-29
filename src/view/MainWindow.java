@@ -32,6 +32,12 @@ ButtonGroup teacherStudentGroup;
 int windowWidth = 800;
 int windowHeight = 500;
 
+//panels
+JPanel instructionsPanel;
+JPanel choicesPanel;
+JPanel backNextButtonsPanel;
+//
+
 public MainWindow() {
     windowSetUp();
 
@@ -54,7 +60,6 @@ private void windowSetUp() {
 }
  
 private void instructionsWordsWindow() {
-    JPanel instructionsPanel;
     JLabel instructionsWords;
     //instructions (north section for borderlayout)
     instructionsWords = new JLabel("Welcome! Are you a student or a teacher?");
@@ -73,7 +78,6 @@ private void instructionsWordsWindow() {
 }
 
 private void radioButtonSetUp() {
-    JPanel choicesPanel;
     teacherStudentGroup = new ButtonGroup();
     Color choicesPanelColor = Color.decode("#AFA2A2");
 
@@ -133,7 +137,6 @@ private GridBagConstraints choiceGbc() {
 private void backNextButton() {
     JButton backButton;
     JButton nextButton;
-    JPanel backNextButtonsPanel;
     //buttons
     backNextButtonsPanel = new JPanel(new BorderLayout());
     backButton = new JButton("< Back");
@@ -151,10 +154,11 @@ private void backNextButton() {
             int windowY = window.getY();
             if (moveOnPossible) {
                 System.out.println("hello");
-                NewUser newUser = new NewUser(studentOrTeacher,existingOrNew, windowX, windowY);
+                NewUser newUser = new NewUser(window, studentOrTeacher,existingOrNew, windowX, windowY);
                 newUser.setButtonSelected(existingOrNew);
+                hidePanels();
                 //window.setVisible(false);
-                window.dispose();
+                //window.dispose();
             }
             else if (!moveOnPossible) {
                 errorMessageSetUp();
@@ -232,6 +236,12 @@ public void show(int windowX, int windowY) {
    }
 
    window.setVisible(true);
+}
+
+private void hidePanels() {
+    instructionsPanel.setVisible(false);
+    choicesPanel.setVisible(false);
+    backNextButtonsPanel.setVisible(false);
 }
 
 }

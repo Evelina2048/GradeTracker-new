@@ -56,7 +56,7 @@ public class Gather {
 
     private void windowSetUp(int windowX, int windowY) {
         //window set up
-        window = new JFrame();
+        //window = new JFrame();
         window.setTitle("Input Username");
         window.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
         window.setLayout(new BorderLayout());
@@ -163,7 +163,7 @@ public class Gather {
         backButton.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent e) {
                 System.out.println("in new user, selectedText is"+selectedText);
-                NewUser newUser = new NewUser(studentOrTeacherString, existingOrNew,windowX, windowY);
+                NewUser newUser = new NewUser(window, studentOrTeacherString, existingOrNew,windowX, windowY);
                 newUser.showWindow(window.getX(), window.getY());
                 newUser.setButtonSelected(existingOrNew);
                 hideWindow();

@@ -31,8 +31,10 @@ public class NewUser {
     int windowWidth = 800;
     int windowHeight = 500;
 
-    public NewUser(String studentOrTeacher, String newOrExisting,int windowX, int windowY) {
+    public NewUser(JFrame window2, String studentOrTeacher, String newOrExisting,int windowX, int windowY) {
         System.out.println("in new user frame, the studentOrTeacher is "+ studentOrTeacher);
+
+        window = window2;
 
         windowSetUp(windowX, windowY);
 
@@ -46,7 +48,7 @@ public class NewUser {
 
     private void windowSetUp(int windowX, int windowY) {
         //window set up
-        window = new JFrame();
+        //window = new JFrame();
         window.setTitle("New User?");
         window.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
         window.setLayout(new BorderLayout());
