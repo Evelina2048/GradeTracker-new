@@ -31,10 +31,13 @@ public class NewUser {
     int windowWidth = 800;
     int windowHeight = 500;
 
-    public NewUser(JFrame window2, String studentOrTeacher, String newOrExisting,int windowX, int windowY) {
-        System.out.println("in new user frame, the studentOrTeacher is "+ studentOrTeacher);
+    //panel
+    JPanel instructionsPanel;
+    JPanel choicesPanel;
+    JPanel backNextButtonsPanel;
 
-        window = window2;
+    public NewUser(String studentOrTeacher, String newOrExisting,int windowX, int windowY) {
+        System.out.println("in new user frame, the studentOrTeacher is "+ studentOrTeacher);
 
         windowSetUp(windowX, windowY);
 
@@ -48,7 +51,7 @@ public class NewUser {
 
     private void windowSetUp(int windowX, int windowY) {
         //window set up
-        //window = new JFrame();
+        window = new JFrame();
         window.setTitle("New User?");
         window.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
         window.setLayout(new BorderLayout());
@@ -58,7 +61,6 @@ public class NewUser {
     }
     
     private void instructionsWordsWindow(String studentOrTeacher) {
-        JPanel instructionsPanel;
         JLabel instructionsWords;
         //instructions (north section for borderlayout)
         instructionsWords = new JLabel("You are a "+studentOrTeacher+". Are you a new user?");
@@ -77,7 +79,6 @@ public class NewUser {
     }
 
     private void radioButtonSetUp() {
-        JPanel choicesPanel;
         teacherStudentGroup = new ButtonGroup();
         Color choicesPanelColor = Color.decode("#AFA2A2");
 
@@ -138,7 +139,6 @@ public class NewUser {
     private void buttonSetUp(String studentOrTeacher) {
         JButton backButton;
         JButton nextButton;
-        JPanel backNextButtonsPanel;
         //buttons
         backNextButtonsPanel = new JPanel(new BorderLayout());
         backButton = new JButton("< Back");
@@ -168,7 +168,8 @@ public class NewUser {
                 int windowY = window.getY();
                 if (moveOnPossible) {
                     Gather gatherFrame = new Gather(studentOrTeacher, existingOrNew, windowX, windowY);
-                    window.dispose();
+                    hideWindow();
+                    //window.dispose();
                 }
                 else if (!moveOnPossible) {
                     errorMessageSetUp();
@@ -246,6 +247,9 @@ public class NewUser {
     }
 
     private void hideWindow() {
-        window.setVisible(false);
+        instructionsPanel.setVisible(false);
+        choicesPanel.setVisible(false);
+        backNextButtonsPanel.setVisible(false);
+        //window.setVisible(false);
     }
 }
