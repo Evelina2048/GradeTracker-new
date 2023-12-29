@@ -39,7 +39,7 @@ JPanel backNextButtonsPanel;
 
 public MainWindow(JFrame window2) {
     window = window2;
-    
+
     windowSetUp();
 
     instructionsWordsWindow();
@@ -58,7 +58,7 @@ private void windowSetUp() {
     window.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
     window.setLayout(new BorderLayout());
     window.setSize(windowWidth, windowHeight);
-    window.setLocationRelativeTo(null);
+    //window.setLocationRelativeTo(null);
 }
  
 private void instructionsWordsWindow() {
