@@ -41,7 +41,7 @@ public class NewUser {
 
         window = window2;
 
-        windowSetUp(windowX, windowY);
+        //windowSetUp(windowX, windowY);
 
         instructionsWordsWindow(studentOrTeacher);
 
