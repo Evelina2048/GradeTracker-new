@@ -43,7 +43,9 @@ public class Gather {
     JPanel choicesPanel;
     JPanel backNextButtonsPanel;
 
-    public Gather(String studentOrTeacher, String existingOrNew, int windowX, int windowY) {
+    public Gather(JFrame window2, String studentOrTeacher, String existingOrNew, int windowX, int windowY) {
+        window = window2;
+        
         System.out.println("in gather frame, the studentOrTeacher is "+ studentOrTeacher);
         System.out.println("in gather frame, the existingOrNew is "+existingOrNew);
 
@@ -61,7 +63,7 @@ public class Gather {
 
     private void windowSetUp(int windowX, int windowY) {
         //window set up
-        window = new JFrame();
+        //window = new JFrame();
         window.setTitle("Input Username");
         window.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
         window.setLayout(new BorderLayout());
