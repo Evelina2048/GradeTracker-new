@@ -37,7 +37,7 @@ JPanel instructionsPanel;
 JPanel choicesPanel;
 JPanel backNextButtonsPanel;
 
-public MainWindow() {
+public MainWindow(JFrame window) {
     windowSetUp();
 
     instructionsWordsWindow();
@@ -51,6 +51,7 @@ public MainWindow() {
 private void windowSetUp() {
     //window set up
     window = new JFrame();
+
     window.setTitle("Launcher");
     window.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
     window.setLayout(new BorderLayout());

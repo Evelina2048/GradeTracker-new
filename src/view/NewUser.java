@@ -40,7 +40,7 @@ public class NewUser {
         System.out.println("in new user frame, the studentOrTeacher is "+ studentOrTeacher);
 
         window = window2;
-        
+
         windowSetUp(windowX, windowY);
 
         instructionsWordsWindow(studentOrTeacher);
@@ -148,7 +148,7 @@ public class NewUser {
 
         backButton.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent e) {
-                MainWindow main = new MainWindow();
+                MainWindow main = new MainWindow(window);
                 main.show(window.getX(),window.getY());
                 main.setButtonSelected(studentOrTeacher);
                 //we want our selection in this frame preserved in case the user goes "Next>" again.
