@@ -160,7 +160,6 @@ private void backNextButton() {
                 newUser.setButtonSelected(existingOrNew);
                 //window.setVisible(false);
                 hideWindow();
-                //window.dispose();
             }
             else if (!moveOnPossible) {
                 errorMessageSetUp();

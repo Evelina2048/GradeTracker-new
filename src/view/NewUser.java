@@ -171,7 +171,6 @@ public class NewUser {
                 if (moveOnPossible) {
                     Gather gatherFrame = new Gather(window, studentOrTeacher, existingOrNew, windowX, windowY);
                     hideWindow();
-                    //window.dispose();
                 }
                 else if (!moveOnPossible) {
                     errorMessageSetUp();

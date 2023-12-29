@@ -24,6 +24,10 @@ import java.awt.event.FocusEvent;
 import java.awt.event.FocusListener;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
+import java.awt.event.KeyListener;
+import java.awt.event.KeyAdapter;
+
+import java.awt.event.KeyEvent;
 
 public class Gather {
     private JFrame window;
@@ -32,11 +36,14 @@ public class Gather {
     private int windowX;
     private int windowY;
     private String studentOrTeacherString;
+    private boolean textFieldEmptied;
     JRadioButton studentButton;
     JRadioButton teacherButton;
     ButtonGroup teacherStudentGroup;
     int windowWidth = 800;
     int windowHeight = 500;
+    // Create a JTextField
+    JTextField textField = new JTextField(10); // 20 columns wide
 
     //panels
     JPanel instructionsPanel;
@@ -110,8 +117,6 @@ public class Gather {
         //need to add move on possible
 
         ///
-        // Create a JTextField
-        JTextField textField = new JTextField(10); // 20 columns wide
         textField.setPreferredSize(new Dimension(textField.getPreferredSize().width, 50)); // Set the height to 50 pixels
         textField.setFont(new Font("Roboto", Font.PLAIN, 14));
         textField.setForeground(Color.orange);
@@ -122,33 +127,26 @@ public class Gather {
 
         textField.setHorizontalAlignment(JTextField.CENTER);
         textField.setText("Enter user name");
+        textFieldEmptied = false;
+
+        KeyListener deleteKeyListener = new KeyAdapter() {
+            @Override
+            public void keyPressed(KeyEvent e) {
+                if (e.getKeyCode() == KeyEvent.VK_DELETE) {
+                    textFieldEmptied = true;
+                    textField.removeKeyListener(this); // Remove the KeyListener
+                }
+            }
+        };
 
         //./
         textField.addMouseListener(new MouseAdapter() {
             @Override
             public void mouseClicked(MouseEvent e) {
                 textField.setText("");
+                textFieldEmptied = true;
                 textField.setForeground(Color.BLACK);
             }
-        });
-        
-        
-        textField.addFocusListener(new FocusListener() {
-            @Override
-            public void focusGained(FocusEvent e) {
-            if (textField.getText().equals("Enter username")) {
-                textField.setText("");
-                textField.setForeground(Color.black); // Change the color to black when text is cleared
-            }
-        }
-            @Override
-            public void focusLost(FocusEvent e) {
-                if (textField.getText().isEmpty()) {
-                    textField.setText("Enter username");
-                    textField.setForeground(Color.blue);
-                }
-            }
-
         });
 
         choicesPanel.add(textField);
@@ -171,6 +169,7 @@ public class Gather {
                 NewUser newUser = new NewUser(window, studentOrTeacherString, existingOrNew,windowX, windowY);
                 //newUser.showWindow(window.getX(), window.getY());
                 newUser.setButtonSelected(existingOrNew);
+
                 
             }
         });
@@ -184,16 +183,37 @@ public class Gather {
             public void actionPerformed(ActionEvent e) {
                 int windowX = window.getX();
                 int windowY = window.getY();
+                System.out.println("textfieldemptied? "+textFieldEmptied+" textField.gettext " + textField.getText());
+                System.out.println("2nd statement " + (textField.getText().trim() == "Enter user name"));
+                System.out.println("3rd statement "+textField.getText().trim()+"Enter user name");
 
-                if (moveOnPossible) {
-                    ///write to file
-
-                    ///
-                    //Gather gatherFrame = new Gather(studentOrTeacher, selectedText, windowX, windowY);
-                    //window.setVisible(false);
-                    //window.dispose();
+                //check if the username is not empty
+                System.out.println("textfield "+textField.getText());
+                if (textField.getText().trim().isEmpty()) {
+                    moveOnPossible = false;
+                    errorMessageSetUp();
                 }
-                else if (!moveOnPossible) {
+
+                else if (textField.getText().equals("Enter user name") && textFieldEmptied == false) {
+                    System.out.println("in special cas");
+                    moveOnPossible = false;
+                    errorMessageSetUp();
+                }
+
+                else if (textField.getText().trim().isEmpty() == false) {
+                    moveOnPossible = true;
+                    //if new user, and username not taken
+                    //write to (teacherOrStudent).csv file with:
+                    //username
+
+                    //if existing, search for if this is truly existing in (teacherOrStudent).csv file
+                    //then dont write
+
+                }
+
+                else {
+                    moveOnPossible = false;
+                    System.out.println("is else");
                     errorMessageSetUp();
                 }
                 
@@ -240,7 +260,6 @@ public class Gather {
     }
 
     else {
-        //window.setLocationRelativeTo(null);
         window.setLocation(window.getX(), window.getY());
     }
 
