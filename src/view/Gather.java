@@ -14,7 +14,9 @@ import java.awt.Dimension;
 import java.awt.Font;
 import javax.swing.JPanel;
 import javax.swing.JLabel;
+
 import java.awt.GridBagLayout;
+import java.awt.GridBagConstraints;
 
 import java.awt.event.ActionListener;
 import java.awt.event.ActionEvent;
@@ -149,7 +151,13 @@ public class Gather {
             }
         });
 
-        choicesPanel.add(textField);
+        GridBagConstraints constraints = new GridBagConstraints();
+        //constraints.fill = GridBagConstraints.HORIZONTAL; // Allow horizontal expansion
+        constraints.gridx = 0;
+        constraints.gridy = 0;
+        //constraints.weightx = 1.0; // Allow the component to grow horizontally
+
+        choicesPanel.add(textField, constraints);
         window.add(choicesPanel);
         window.add(choicesPanel);
     }
