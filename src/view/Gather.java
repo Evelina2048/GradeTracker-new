@@ -211,6 +211,10 @@ public class Gather {
                 else if (textField.getText().trim().isEmpty() == false) {
                     moveOnPossible = true;
                     //if new user, and username not taken
+                    System.out.println("exiswting or new"+existingOrNew);
+                    if (existingOrNew.trim().equals("New User")) {
+                        System.out.println("gatherer is a new user");
+                    }
                     //write to (teacherOrStudent).csv file with:
                     //username
 
