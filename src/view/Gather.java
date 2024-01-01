@@ -242,11 +242,15 @@ public class Gather {
 
                         String username = textField.getText();
 
-                        System.out.println("gatherer is a new user");
+                        try (CSVWriter writer = new CSVWriter(new FileWriter(filePath, true))) { //write to (teacherOrStudent).csv file with:
+                            String[] data = { username }; //username
+                            writer.writeNext(data);
+                        } catch (IOException e2) {
+                            e.printStackTrace(); // Handle the exception appropriately
+                        }
+                        //CSWriter write= new CSWriter(Writer);
+
                     }
-                    //write to (teacherOrStudent).csv file with:
-                    //CSWriter write= new CSWriter(Writer);
-                    //username
 
                     //if existing, search for if this is truly existing in (teacherOrStudent).csv file
                     //then dont write
