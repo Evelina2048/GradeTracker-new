@@ -1,5 +1,6 @@
 package src.view;
 
+//visual stuff
 import javax.swing.ButtonGroup;
 import javax.swing.JButton;
 import javax.swing.JDialog;
@@ -7,7 +8,6 @@ import javax.swing.JFrame;
 import javax.swing.JRadioButton;
 import javax.swing.JTextField;
 import javax.swing.SwingConstants;
-
 import java.awt.BorderLayout;
 import java.awt.Color;
 import java.awt.Dimension;
