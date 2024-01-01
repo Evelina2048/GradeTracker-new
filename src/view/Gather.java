@@ -31,6 +31,20 @@ import java.awt.event.KeyAdapter;
 
 import java.awt.event.KeyEvent;
 
+//for reading csv
+import org.apache.commons.csv.CSVFormat;
+import org.apache.commons.csv.CSVParser;
+import org.apache.commons.csv.CSVRecord;
+import com.opencsv.CSWriter;
+import org.junit.jupiter.api.Test;
+
+
+import java.io.FileReader;
+import java.io.IOException;
+import java.io.Reader;
+//
+import java.io.Writer;
+
 public class Gather {
     private JFrame window;
     private String selectedText;
@@ -210,12 +224,13 @@ public class Gather {
 
                 else if (textField.getText().trim().isEmpty() == false) {
                     moveOnPossible = true;
-                    //if new user, and username not taken
-                    System.out.println("exiswting or new"+existingOrNew);
-                    if (existingOrNew.trim().equals("New User")) {
+                    if (existingOrNew.trim().equals("New User")) { //if new user,
+                        //and username not taken
+                        
                         System.out.println("gatherer is a new user");
                     }
                     //write to (teacherOrStudent).csv file with:
+                    CSWriter write= new CSWriter(Writer);
                     //username
 
                     //if existing, search for if this is truly existing in (teacherOrStudent).csv file
