@@ -226,11 +226,26 @@ public class Gather {
                     moveOnPossible = true;
                     if (existingOrNew.trim().equals("New User")) { //if new user,
                         //and username not taken
-                        
+                        if ("Student".equals(studentOrTeacherString)) {
+                            String filePath = "Student.csv";
+                            System.out.println("going to student.csv");
+                        }
+
+                        else if ("Teacher".equals(studentOrTeacherString)) {
+                            String filePath = "Teacher.csv";
+                            System.out.println("going to teacher.csv");
+                        }
+
+                        else {
+                            System.out.println("Something went wrong in gather.java");
+                        }
+
+                        String username = textField.getText();
+
                         System.out.println("gatherer is a new user");
                     }
                     //write to (teacherOrStudent).csv file with:
-                    CSWriter write= new CSWriter(Writer);
+                    //CSWriter write= new CSWriter(Writer);
                     //username
 
                     //if existing, search for if this is truly existing in (teacherOrStudent).csv file
