@@ -237,7 +237,7 @@ public class Gather {
                     if (existingOrNew.trim().equals("New User")) { //if new user,
                         //and username not taken
                         if ("Student".equals(studentOrTeacherString)) {
-                            filePath = "Student.csv";
+                            filePath = "/Users/evy/Documents/Personal Projects/GradeTracker-new/src/main/view/Student.csv";
                             System.out.println("going to student.csv");
                         }
 
@@ -248,11 +248,14 @@ public class Gather {
 
                         String username = textField.getText();
 
+                        System.out.println("the username is "+ username);
+                        System.out.println("the filepath is " + filePath);
+
                         try (CSVWriter writer = new CSVWriter(new FileWriter(filePath, true))) { //write to (teacherOrStudent).csv file with:
                             String[] data = { username }; //username
                             writer.writeNext(data);
                         } catch (IOException e2) {
-                            e2.printStackTrace(); // Handle the exception appropriately
+                            e2.printStackTrace(); 
                         }
                         //CSWriter write= new CSWriter(Writer);
 
