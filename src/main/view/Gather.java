@@ -40,7 +40,7 @@ import java.io.FileWriter;
 import java.io.IOException;
 import com.opencsv.CSVWriter;
 
-import static org.junit.jupiter.api.Test;
+import org.junit.jupiter.api.Test;
 
 import static org.junit.jupiter.api.Assertions.assertTrue;
 import static org.junit.jupiter.api.Assertions.fail;
@@ -233,20 +233,17 @@ public class Gather {
 
                 else if (textField.getText().trim().isEmpty() == false) {
                     moveOnPossible = true;
+                    String filePath = "somethingwentwrong";//if not overwritten, somethingwent wrong
                     if (existingOrNew.trim().equals("New User")) { //if new user,
                         //and username not taken
                         if ("Student".equals(studentOrTeacherString)) {
-                            String filePath = "Student.csv";
+                            filePath = "Student.csv";
                             System.out.println("going to student.csv");
                         }
 
                         else if ("Teacher".equals(studentOrTeacherString)) {
-                            String filePath = "Teacher.csv";
+                            filePath = "Teacher.csv";
                             System.out.println("going to teacher.csv");
-                        }
-
-                        else {
-                            System.out.println("Something went wrong in gather.java");
                         }
 
                         String username = textField.getText();
@@ -255,7 +252,7 @@ public class Gather {
                             String[] data = { username }; //username
                             writer.writeNext(data);
                         } catch (IOException e2) {
-                            e.printStackTrace(); // Handle the exception appropriately
+                            e2.printStackTrace(); // Handle the exception appropriately
                         }
                         //CSWriter write= new CSWriter(Writer);
 
