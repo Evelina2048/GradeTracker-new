@@ -52,18 +52,14 @@ public MainWindow(JFrame window2) {
 
 private void windowSetUp() {
     //window set up
-    //window = new JFrame();
-
     window.setTitle("Launcher");
     window.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
     window.setLayout(new BorderLayout());
     window.setSize(windowWidth, windowHeight);
-    //window.setLocationRelativeTo(null);
 }
  
 private void instructionsWordsWindow() {
     JLabel instructionsWords;
-    //instructions (north section for borderlayout)
     instructionsWords = new JLabel("Welcome! Are you a student or a teacher?");
     instructionsPanel= new JPanel();
     Color instructionsColor = Color.decode("#7A6D6D");
@@ -158,7 +154,6 @@ private void backNextButton() {
                 System.out.println("hello");
                 NewUser newUser = new NewUser(window, studentOrTeacher,existingOrNew, windowX, windowY);
                 newUser.setButtonSelected(existingOrNew);
-                //window.setVisible(false);
                 hideWindow();
             }
             else if (!moveOnPossible) {

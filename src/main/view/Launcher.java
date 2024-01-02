@@ -2,7 +2,6 @@ package main.view;
 
 import javax.swing.JFrame;
 import javax.swing.SwingUtilities;
-//import src.MainWindow;
 
 public class Launcher {
 

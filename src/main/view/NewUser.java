@@ -37,11 +37,7 @@ public class NewUser {
     JPanel backNextButtonsPanel;
 
     public NewUser(JFrame window2, String studentOrTeacher, String newOrExisting,int windowX, int windowY) {
-        System.out.println("in new user frame, the studentOrTeacher is "+ studentOrTeacher);
-
         window = window2;
-
-        //windowSetUp(windowX, windowY);
 
         instructionsWordsWindow(studentOrTeacher);
 
@@ -53,7 +49,6 @@ public class NewUser {
 
     private void windowSetUp(int windowX, int windowY) {
         //window set up
-        //window = new JFrame();
         window.setTitle("New User?");
         window.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
         window.setLayout(new BorderLayout());
@@ -151,9 +146,7 @@ public class NewUser {
                 MainWindow main = new MainWindow(window);
                 main.show(window.getX(),window.getY());
                 main.setButtonSelected(studentOrTeacher);
-                //we want our selection in this frame preserved in case the user goes "Next>" again.
                 main.setExistingOrNew(existingOrNew);
-                //
                 hideWindow();
                 
             }
@@ -240,7 +233,6 @@ public class NewUser {
     }
 
     else {
-        //window.setLocationRelativeTo(null);
         window.setLocation(window.getX(), window.getY());
     }
 
@@ -251,6 +243,5 @@ public class NewUser {
         instructionsPanel.setVisible(false);
         choicesPanel.setVisible(false);
         backNextButtonsPanel.setVisible(false);
-        //window.setVisible(false);
     }
 }

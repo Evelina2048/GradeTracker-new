@@ -22,8 +22,6 @@ import java.awt.event.ActionListener;
 import java.awt.event.ActionEvent;
 import java.awt.FlowLayout;
 
-import java.awt.event.FocusEvent;
-import java.awt.event.FocusListener;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 import java.awt.event.KeyListener;
@@ -95,7 +93,6 @@ public class Gather {
 
     private void windowSetUp(int windowX, int windowY) {
         //window set up
-        //window = new JFrame();
         window.setTitle("Input Username");
         window.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
         window.setLayout(new BorderLayout());
@@ -139,14 +136,10 @@ public class Gather {
         choicesPanel= new JPanel(new GridBagLayout());
         choicesPanel.setBackground(choicesPanelColor);
 
-        //need to add move on possible
-
-        ///
         textField.setPreferredSize(new Dimension(textField.getPreferredSize().width, 50)); // Set the height to 50 pixels
         textField.setFont(new Font("Roboto", Font.PLAIN, 14));
         textField.setForeground(Color.orange);
 
-        //textField.setSelectionColor(Color.);
         Color defaultTextColor = Color.decode("#B0B0B0");
         textField.setSelectedTextColor(defaultTextColor);
 
@@ -164,7 +157,6 @@ public class Gather {
             }
         };
 
-        //./
         textField.addMouseListener(new MouseAdapter() {
             @Override
             public void mouseClicked(MouseEvent e) {
@@ -175,10 +167,8 @@ public class Gather {
         });
 
         GridBagConstraints constraints = new GridBagConstraints();
-        //constraints.fill = GridBagConstraints.HORIZONTAL; // Allow horizontal expansion
         constraints.gridx = 0;
         constraints.gridy = 0;
-        //constraints.weightx = 1.0; // Allow the component to grow horizontally
 
         choicesPanel.add(textField, constraints);
         window.add(choicesPanel);
@@ -198,7 +188,6 @@ public class Gather {
                 System.out.println("in new user, selectedText is"+selectedText);
                 hideWindow();
                 NewUser newUser = new NewUser(window, studentOrTeacherString, existingOrNew,windowX, windowY);
-                //newUser.showWindow(window.getX(), window.getY());
                 newUser.setButtonSelected(existingOrNew);
 
                 
@@ -214,12 +203,8 @@ public class Gather {
             public void actionPerformed(ActionEvent e) {
                 int windowX = window.getX();
                 int windowY = window.getY();
-                System.out.println("textfieldemptied? "+textFieldEmptied+" textField.gettext " + textField.getText());
-                System.out.println("2nd statement " + (textField.getText().trim() == "Enter user name"));
-                System.out.println("3rd statement "+textField.getText().trim()+"Enter user name");
 
                 //check if the username is not empty
-                System.out.println("textfield "+textField.getText());
                 if (textField.getText().trim().isEmpty()) {
                     moveOnPossible = false;
                     errorMessageSetUp();
@@ -257,21 +242,8 @@ public class Gather {
                         } catch (IOException e1) {
                             e1.printStackTrace();
                         }
-                        
-
-                        // try (CSVWriter writer = new PrintWriter(new FileWriter(filePath, true))) { //write to (teacherOrStudent).csv file with:
-                        //     String[] data = {username};
-                        //     //username
-                        //     writer.println(data);
-                        // } catch (IOException e2) {
-                        //     e2.printStackTrace(); 
-                        // }
-                        //CSWriter write= new CSWriter(Writer);
 
                     }
-
-                    //if existing, search for if this is truly existing in (teacherOrStudent).csv file
-                    //then dont write
 
                 }
 
@@ -334,7 +306,6 @@ public class Gather {
         instructionsPanel.setVisible(false);
         choicesPanel.setVisible(false);
         backNextButtonsPanel.setVisible(false);
-        //window.setVisible(false);
     }
 
 }
