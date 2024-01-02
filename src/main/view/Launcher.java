@@ -1,4 +1,4 @@
-package src.view;
+package main.view;
 
 import javax.swing.JFrame;
 import javax.swing.SwingUtilities;

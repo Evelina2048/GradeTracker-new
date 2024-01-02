@@ -1,4 +1,4 @@
-package src.view;
+package main.view;
 
 import javax.swing.ButtonGroup;
 import javax.swing.JButton;
