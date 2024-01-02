@@ -38,6 +38,8 @@ import org.apache.commons.csv.CSVRecord;
 import com.opencsv.CSVWriter;
 import java.io.FileWriter;
 import java.io.IOException;
+import java.io.PrintWriter;
+
 import com.opencsv.CSVWriter;
 
 import org.junit.jupiter.api.Test;
@@ -45,9 +47,7 @@ import org.junit.jupiter.api.Test;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 import static org.junit.jupiter.api.Assertions.fail;
 
-
-
-
+import java.io.FileNotFoundException;
 import java.io.FileReader;
 import java.io.IOException;
 import java.io.Reader;
@@ -242,21 +242,30 @@ public class Gather {
                         }
 
                         else if ("Teacher".equals(studentOrTeacherString)) {
-                            filePath = "Teacher.csv";
+                            filePath = "/Users/evy/Documents/Personal Projects/GradeTracker-new/src/main/view/Teacher.csv";
                             System.out.println("going to teacher.csv");
                         }
 
-                        String username = textField.getText();
+                        String username = textField.getText().trim();
 
                         System.out.println("the username is "+ username);
                         System.out.println("the filepath is " + filePath);
 
-                        try (CSVWriter writer = new CSVWriter(new FileWriter(filePath, true))) { //write to (teacherOrStudent).csv file with:
-                            String[] data = { username }; //username
-                            writer.writeNext(data);
-                        } catch (IOException e2) {
-                            e2.printStackTrace(); 
+
+                        try (FileWriter writer = new FileWriter(filePath, true)) {
+                            writer.write(username + "\n");
+                        } catch (IOException e1) {
+                            e1.printStackTrace();
                         }
+                        
+
+                        // try (CSVWriter writer = new PrintWriter(new FileWriter(filePath, true))) { //write to (teacherOrStudent).csv file with:
+                        //     String[] data = {username};
+                        //     //username
+                        //     writer.println(data);
+                        // } catch (IOException e2) {
+                        //     e2.printStackTrace(); 
+                        // }
                         //CSWriter write= new CSWriter(Writer);
 
                     }
