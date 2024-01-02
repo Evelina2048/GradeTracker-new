@@ -220,29 +220,7 @@ public class Gather {
                     moveOnPossible = true;
                     String filePath = "somethingwentwrong";//if not overwritten, somethingwent wrong
                     if (existingOrNew.trim().equals("New User")) { //if new user,
-                        //and username not taken
-                        if ("Student".equals(studentOrTeacherString)) {
-                            filePath = "/Users/evy/Documents/Personal Projects/GradeTracker-new/src/main/view/Student.csv";
-                            System.out.println("going to student.csv");
-                        }
-
-                        else if ("Teacher".equals(studentOrTeacherString)) {
-                            filePath = "/Users/evy/Documents/Personal Projects/GradeTracker-new/src/main/view/Teacher.csv";
-                            System.out.println("going to teacher.csv");
-                        }
-
-                        String username = textField.getText().trim();
-
-                        System.out.println("the username is "+ username);
-                        System.out.println("the filepath is " + filePath);
-
-
-                        try (FileWriter writer = new FileWriter(filePath, true)) {
-                            writer.write(username + "\n");
-                        } catch (IOException e1) {
-                            e1.printStackTrace();
-                        }
-
+                    writeUsername(filePath);
                     }
 
                 }
@@ -279,6 +257,31 @@ public class Gather {
         dialog.setVisible(true);
     }
 
+    private void writeUsername(String filePath) {
+        //and username not taken
+        if ("Student".equals(studentOrTeacherString)) {
+            filePath = "/Users/evy/Documents/Personal Projects/GradeTracker-new/src/main/view/Student.csv";
+            System.out.println("going to student.csv");
+        }
+
+        else if ("Teacher".equals(studentOrTeacherString)) {
+            filePath = "/Users/evy/Documents/Personal Projects/GradeTracker-new/src/main/view/Teacher.csv";
+            System.out.println("going to teacher.csv");
+        }
+
+        String username = textField.getText().trim();
+
+        System.out.println("the username is "+ username);
+        System.out.println("the filepath is " + filePath);
+
+
+        try (FileWriter writer = new FileWriter(filePath, true)) {
+            writer.write(username + "\n");
+        } catch (IOException e1) {
+            e1.printStackTrace();
+        }
+
+    }
     private void setWindowX(int newWindowX) {
         windowX = newWindowX;
     }
