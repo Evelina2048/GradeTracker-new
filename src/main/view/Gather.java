@@ -276,7 +276,7 @@ public class Gather {
 
 
         try (FileWriter writer = new FileWriter(filePath, true)) {
-            writer.write(username + "\n");
+            writer.write(username + "," + "\n");
         } catch (IOException e1) {
             e1.printStackTrace();
         }
