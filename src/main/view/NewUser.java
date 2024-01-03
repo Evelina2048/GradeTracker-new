@@ -148,6 +148,7 @@ public class NewUser {
                 main.setButtonSelected(studentOrTeacher);
                 main.setExistingOrNew(existingOrNew);
                 hideWindow();
+                window.dispose();
                 
             }
         });
