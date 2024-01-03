@@ -145,6 +145,7 @@ public class NewUser {
 
         backButton.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent e) {
+                main.MainWindowLaunch();
                 main.show(window.getX(),window.getY());
                 main.setButtonSelected(studentOrTeacher);
                 main.setExistingOrNew(existingOrNew);

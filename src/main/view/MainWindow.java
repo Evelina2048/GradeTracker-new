@@ -48,6 +48,11 @@ JPanel backNextButtonsPanel;
 public MainWindow(JFrame window2) {
     //window = window2;
 
+    MainWindowLaunch();
+
+}
+
+public void MainWindowLaunch() {
     windowSetUp();
 
     instructionsWordsWindow();
@@ -63,7 +68,6 @@ public MainWindow(JFrame window2) {
 
     this.requestFocusInWindow();
 }
-
 
 private void windowSetUp() {
     //window set up
