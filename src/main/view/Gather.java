@@ -276,15 +276,15 @@ public class Gather {
 
 
         try (FileWriter writer = new FileWriter(filePath, true)) {
-            writer.write(username + "," + "\n");
-            commaCount(username);
+            int commaCountInt = commaCount(username);
+            writer.write(username + "," + commaCountInt + "," + "\n");
         } catch (IOException e1) {
             e1.printStackTrace();
         }
 
     }
 
-    private void commaCount(String username) {
+    private int commaCount(String username) {
         int commaCount = 0;
         for (int i = 0; i < username.length(); i++) {
             if (username.charAt(i) == ',') {
@@ -292,6 +292,7 @@ public class Gather {
             }
         }
         System.out.println(commaCount);
+        return commaCount;
     }
     private void setWindowX(int newWindowX) {
         windowX = newWindowX;
