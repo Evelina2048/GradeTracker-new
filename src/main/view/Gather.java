@@ -187,7 +187,7 @@ public class Gather {
             public void actionPerformed(ActionEvent e) {
                 System.out.println("in new user, selectedText is"+selectedText);
                 hideWindow();
-                NewUser newUser = new NewUser(window, studentOrTeacherString, existingOrNew,windowX, windowY);
+                NewUser newUser = new NewUser(new MainWindow(window), studentOrTeacherString, existingOrNew,windowX, windowY);
                 newUser.setButtonSelected(existingOrNew);
 
                 

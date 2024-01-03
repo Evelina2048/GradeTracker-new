@@ -36,14 +36,16 @@ public class NewUser {
     JPanel choicesPanel;
     JPanel backNextButtonsPanel;
 
-    public NewUser(JFrame window2, String studentOrTeacher, String newOrExisting,int windowX, int windowY) {
-        window = window2;
+    public NewUser(MainWindow main, String studentOrTeacher, String newOrExisting,int windowX, int windowY) {
+        //window = window2;
+        //MainWindow main = main2;
+        this.window = main;
 
         instructionsWordsWindow(studentOrTeacher);
 
         radioButtonSetUp();
 
-        buttonSetUp(studentOrTeacher);
+        buttonSetUp(main, studentOrTeacher);
     }
 
 
@@ -133,7 +135,7 @@ public class NewUser {
         return gbc;
     }
 
-    private void buttonSetUp(String studentOrTeacher) {
+    private void buttonSetUp(MainWindow main, String studentOrTeacher) {
         JButton backButton;
         JButton nextButton;
         //buttons
@@ -143,12 +145,11 @@ public class NewUser {
 
         backButton.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent e) {
-                MainWindow main = new MainWindow(window);
                 main.show(window.getX(),window.getY());
                 main.setButtonSelected(studentOrTeacher);
                 main.setExistingOrNew(existingOrNew);
                 hideWindow();
-                window.dispose();
+                //window.dispose();
                 
             }
         });
@@ -207,10 +208,6 @@ public class NewUser {
             existingButton.setSelected(true);
             moveOnPossible = true;
         }
-    }
-
-    private void UsernameCommaCount() {
-        //set up for username count
     }
 
     private void setWindowX(int newWindowX) {
