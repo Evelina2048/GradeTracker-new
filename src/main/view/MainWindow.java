@@ -1,10 +1,13 @@
 package main.view;
 
+import javax.swing.AbstractAction;
 import javax.swing.ButtonGroup;
 import javax.swing.JButton;
+import javax.swing.JComponent;
 import javax.swing.JDialog;
 import javax.swing.JFrame;
 import javax.swing.JRadioButton;
+import javax.swing.KeyStroke;
 import javax.swing.SwingConstants;
 
 import java.awt.BorderLayout;
@@ -19,8 +22,13 @@ import java.awt.event.ActionListener;
 import java.awt.event.ActionEvent;
 import java.awt.FlowLayout;
 
-public class MainWindow {
-private JFrame window;
+//key listening
+import java.awt.event.KeyEvent;
+import java.awt.event.KeyAdapter;
+import java.awt.event.KeyListener;
+
+public class MainWindow extends JFrame implements KeyListener{
+//private JFrame window;
 private String studentOrTeacher;
 private boolean moveOnPossible = false;
 private int windowX;
@@ -38,7 +46,7 @@ JPanel choicesPanel;
 JPanel backNextButtonsPanel;
 
 public MainWindow(JFrame window2) {
-    window = window2;
+    //window = window2;
 
     windowSetUp();
 
@@ -47,15 +55,23 @@ public MainWindow(JFrame window2) {
     radioButtonSetUp();
 
     backNextButton();
+
+    EnterAction enterAction = new EnterAction();
+
+    this.getRootPane().getInputMap(JComponent.WHEN_IN_FOCUSED_WINDOW).put(KeyStroke.getKeyStroke(KeyEvent.VK_ENTER, 0), "enterAction");
+    this.getRootPane().getActionMap().put("enterAction", enterAction);
+
+    this.requestFocusInWindow();
 }
 
 
 private void windowSetUp() {
     //window set up
-    window.setTitle("Launcher");
-    window.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
-    window.setLayout(new BorderLayout());
-    window.setSize(windowWidth, windowHeight);
+    this.setTitle("Launcher");
+    this.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
+    this.setLayout(new BorderLayout());
+    this.addKeyListener(this);
+    this.setSize(windowWidth, windowHeight);
 }
  
 private void instructionsWordsWindow() {
@@ -68,7 +84,7 @@ private void instructionsWordsWindow() {
     instructionsPanel.add(instructionsWords);
     Color instructionsWordsColor = Color.decode("#edebeb");
     instructionsWords.setForeground(instructionsWordsColor); //color
-    window.add(instructionsPanel, BorderLayout.NORTH);
+    this.add(instructionsPanel, BorderLayout.NORTH);
  
     //set the font for instructions
     Font instructionsFont = new Font("Roboto", Font.PLAIN, 30); // Change the font and size here
@@ -104,7 +120,7 @@ private void radioButtonSetUp() {
 
     addToChoicesPanel(teacherStudentGroup, teacherButton, studentButton, choicesPanel);
 
-    window.add(choicesPanel);
+    this.add(choicesPanel);
 }
 
 private void choicesButtonDecorate(JRadioButton button) {
@@ -144,27 +160,34 @@ private void backNextButton() {
     //next
     nextButton = new JButton("Next >");
     backNextButtonsPanel.add(nextButton, BorderLayout.EAST);
-    window.add(backNextButtonsPanel, BorderLayout.SOUTH);
+    this.add(backNextButtonsPanel, BorderLayout.SOUTH);
+
+
 
     nextButton.addActionListener(new ActionListener() {
         public void actionPerformed(ActionEvent e) {
-            int windowX = window.getX();
-            int windowY = window.getY();
-            if (moveOnPossible) {
-                System.out.println("hello");
-                NewUser newUser = new NewUser(window, studentOrTeacher,existingOrNew, windowX, windowY);
-                newUser.setButtonSelected(existingOrNew);
-                hideWindow();
-            }
-            else if (!moveOnPossible) {
-                errorMessageSetUp();
-            }
+            doNextButtonProcedure();
         }
-});
+    });
+
+
+}
+
+private void doNextButtonProcedure() {
+    int windowX = this.getX();
+    int windowY = this.getY();
+    if (moveOnPossible) {
+        NewUser newUser = new NewUser(this, studentOrTeacher,existingOrNew, windowX, windowY);
+        newUser.setButtonSelected(existingOrNew);
+        hideWindow();
+    }
+    else if (!moveOnPossible) {
+        errorMessageSetUp();
+    }
 }
 
 private void errorMessageSetUp() {
-    JDialog dialog = new JDialog(window, null, true);
+    JDialog dialog = new JDialog(this, null, true);
     dialog.setLayout(new FlowLayout());
     JLabel label = new JLabel("<html><center>Please choose an option");
     label.setHorizontalAlignment(SwingConstants.CENTER);
@@ -219,19 +242,21 @@ public int getWindowY() {
     return windowY;
 }
 
+
+
 public void show(int windowX, int windowY) {
    if (windowX != 0 && windowY != 0) {
-       window.setLocation(windowX, windowY);
+       this.setLocation(windowX, windowY);
        setWindowX(windowX);
        setWindowY(windowY);
 
    }
 
    else {
-    window.setLocationRelativeTo(null);
+    this.setLocationRelativeTo(null);
    }
 
-   window.setVisible(true);
+    this.setVisible(true);
 }
 
 private void hideWindow() {
@@ -240,5 +265,33 @@ private void hideWindow() {
     backNextButtonsPanel.setVisible(false);
 
 }
+
+public class EnterAction extends AbstractAction {
+    @Override
+    public void actionPerformed(ActionEvent e) {
+        doNextButtonProcedure();
+    }
+}
+
+@Override
+public void keyTyped(KeyEvent e) {
+    // TODO Auto-generated method stub
+    throw new UnsupportedOperationException("Unimplemented method 'keyTyped'");
+}
+
+
+@Override
+public void keyPressed(KeyEvent e) {
+    // TODO Auto-generated method stub
+    throw new UnsupportedOperationException("Unimplemented method 'keyPressed'");
+}
+
+
+@Override
+public void keyReleased(KeyEvent e) {
+    // TODO Auto-generated method stub
+    throw new UnsupportedOperationException("Unimplemented method 'keyReleased'");
+}
+
 
 }
