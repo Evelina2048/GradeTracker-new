@@ -208,6 +208,10 @@ public class NewUser {
         }
     }
 
+    private void UsernameCommaCount() {
+        //set up for username count
+    }
+
     private void setWindowX(int newWindowX) {
         windowX = newWindowX;
     }

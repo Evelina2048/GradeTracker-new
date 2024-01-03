@@ -277,10 +277,21 @@ public class Gather {
 
         try (FileWriter writer = new FileWriter(filePath, true)) {
             writer.write(username + "," + "\n");
+            commaCount(username);
         } catch (IOException e1) {
             e1.printStackTrace();
         }
 
+    }
+
+    private void commaCount(String username) {
+        int commaCount = 0;
+        for (int i = 0; i < username.length(); i++) {
+            if (username.charAt(i) == ',') {
+                commaCount++;
+            }
+        }
+        System.out.println(commaCount);
     }
     private void setWindowX(int newWindowX) {
         windowX = newWindowX;
