@@ -19,7 +19,7 @@ import java.awt.event.ActionListener;
 import java.awt.event.ActionEvent;
 import java.awt.FlowLayout;
 
-public class NewUser {
+public class NewUser extends JFrame {
     private JFrame window;
     private String existingOrNew;
     private boolean moveOnPossible = false;
@@ -149,8 +149,7 @@ public class NewUser {
                 main.show(window.getX(),window.getY());
                 main.setButtonSelected(studentOrTeacher);
                 main.setExistingOrNew(existingOrNew);
-                hideWindow();
-                //window.dispose();
+                hideWindow(); 
                 
             }
         });
@@ -165,7 +164,7 @@ public class NewUser {
                 int windowX = window.getX();
                 int windowY = window.getY();
                 if (moveOnPossible) {
-                    Gather gatherFrame = new Gather(window, studentOrTeacher, existingOrNew, windowX, windowY);
+                    Gather gatherFrame = new Gather(NewUser.this, studentOrTeacher, existingOrNew, windowX, windowY);
                     hideWindow();
                 }
                 else if (!moveOnPossible) {

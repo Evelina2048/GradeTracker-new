@@ -73,8 +73,8 @@ public class Gather {
     JPanel choicesPanel;
     JPanel backNextButtonsPanel;
 
-    public Gather(JFrame window2, String studentOrTeacher, String existingOrNew, int windowX, int windowY) {
-        window = window2;
+    public Gather(NewUser window2, String studentOrTeacher, String existingOrNew, int windowX, int windowY) {
+        this.window = window2;
         
         System.out.println("in gather frame, the studentOrTeacher is "+ studentOrTeacher);
         System.out.println("in gather frame, the existingOrNew is "+existingOrNew);
