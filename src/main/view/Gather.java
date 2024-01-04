@@ -52,7 +52,7 @@ import java.io.Reader;
 //
 import java.io.Writer;
 
-public class Gather {
+public class Gather extends JFrame {
     private JFrame window;
     private String selectedText;
     private boolean moveOnPossible = false;

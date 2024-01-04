@@ -166,6 +166,7 @@ public class NewUser extends JFrame {
                 if (moveOnPossible) {
                     Gather gatherFrame = new Gather(NewUser.this, studentOrTeacher, existingOrNew, windowX, windowY);
                     hideWindow();
+                    window.dispose();
                 }
                 else if (!moveOnPossible) {
                     errorMessageSetUp();
