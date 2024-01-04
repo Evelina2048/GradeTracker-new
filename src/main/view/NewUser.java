@@ -39,6 +39,10 @@ public class NewUser extends JFrame {
     public NewUser(MainWindow main, String studentOrTeacher, String newOrExisting,int windowX, int windowY) {
         //window = window2;
         //MainWindow main = main2;
+       newUserSetup(main, studentOrTeacher);
+    }
+
+    private void newUserSetup(MainWindow main, String studentOrTeacher) {
         this.window = main;
 
         instructionsWordsWindow(studentOrTeacher);

@@ -185,10 +185,18 @@ public class Gather extends JFrame {
 
         backButton.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent e) {
-                System.out.println("in new user, selectedText is"+selectedText);
-                hideWindow();
-                NewUser newUser = new NewUser(new MainWindow(window), studentOrTeacherString, existingOrNew,windowX, windowY);
-                newUser.setButtonSelected(existingOrNew);
+                //1/4/24 5:14
+                // System.out.println("in new user, selectedText is"+selectedText);
+                // hideWindow();
+                // NewUser newUser = new NewUser(new MainWindow(window), studentOrTeacherString, existingOrNew,windowX, windowY);
+                // newUser.setButtonSelected(existingOrNew);
+                //
+
+                // newUser.MainWindowLaunch();
+                // newUser.show(window.getX(),window.getY());
+                // newUser.setButtonSelected(studentOrTeacher);
+                // newUser.setExistingOrNew(existingOrNew);
+                // hideWindow(); 
 
                 
             }
