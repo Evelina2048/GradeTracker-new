@@ -52,7 +52,7 @@ import java.io.Reader;
 //
 import java.io.Writer;
 
-public class Gather extends JFrame {
+public class Gather {
     private JFrame window;
     private String selectedText;
     private boolean moveOnPossible = false;
@@ -60,6 +60,9 @@ public class Gather extends JFrame {
     private int windowY;
     private String studentOrTeacherString;
     private boolean textFieldEmptied;
+
+    private NewUser newUser;
+
     JRadioButton studentButton;
     JRadioButton teacherButton;
     ButtonGroup teacherStudentGroup;
@@ -73,26 +76,38 @@ public class Gather extends JFrame {
     JPanel choicesPanel;
     JPanel backNextButtonsPanel;
 
-    public Gather(NewUser window2, String studentOrTeacher, String existingOrNew, int windowX, int windowY) {
-        this.window = window2;
+    public Gather(MainWindow main, NewUser newUser, String studentOrTeacher, String existingOrNew, int windowX, int windowY) {
+    }
+
+    public void gatherLaunch(MainWindow main, NewUser newUser, String studentOrTeacher, String existingOrNew) {
+        //this.newUser = newUser;
         
-        System.out.println("in gather frame, the studentOrTeacher is "+ studentOrTeacher);
-        System.out.println("in gather frame, the existingOrNew is "+existingOrNew);
+        // System.out.println("in gather frame, the studentOrTeacher is "+ studentOrTeacher);
+        // System.out.println("in gather frame, the existingOrNew is "+existingOrNew);
+
+        this.window = newUser;
+        //gatherLaunch(main, newUser, studentOrTeacher, existingOrNew);
 
         studentOrTeacherString = studentOrTeacher;
         
-        windowSetUp(windowX, windowY);
+        windowSetUp(window, windowX, windowY);
 
         instructionsWordsWindow(existingOrNew);
 
         inputName();
 
-        buttonSetUp(existingOrNew);
+        buttonSetUp(main, newUser, existingOrNew, studentOrTeacher);
+
+
+
+
+        //showWindow(windowX, window);
     }
 
 
-    private void windowSetUp(int windowX, int windowY) {
+    private void windowSetUp(JFrame window, int windowX, int windowY) {
         //window set up
+
         window.setTitle("Input Username");
         window.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
         window.setLayout(new BorderLayout());
@@ -175,7 +190,7 @@ public class Gather extends JFrame {
         window.add(choicesPanel);
     }
 
-    private void buttonSetUp(String existingOrNew) {
+    private void buttonSetUp(MainWindow main, NewUser newUser, String existingOrNew, String studentOrTeacher) {
         JButton backButton;
         JButton nextButton;
         //buttons
@@ -185,20 +200,9 @@ public class Gather extends JFrame {
 
         backButton.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent e) {
-                //1/4/24 5:14
-                // System.out.println("in new user, selectedText is"+selectedText);
-                // hideWindow();
-                // NewUser newUser = new NewUser(new MainWindow(window), studentOrTeacherString, existingOrNew,windowX, windowY);
-                // newUser.setButtonSelected(existingOrNew);
-                //
 
-                // newUser.MainWindowLaunch();
-                // newUser.show(window.getX(),window.getY());
-                // newUser.setButtonSelected(studentOrTeacher);
-                // newUser.setExistingOrNew(existingOrNew);
-                // hideWindow(); 
+               backButtonAction(main, studentOrTeacher);
 
-                
             }
         });
         
@@ -209,40 +213,68 @@ public class Gather extends JFrame {
         
         nextButton.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent e) {
-                int windowX = window.getX();
-                int windowY = window.getY();
-
-                //check if the username is not empty
-                if (textField.getText().trim().isEmpty()) {
-                    moveOnPossible = false;
-                    errorMessageSetUp();
-                }
-
-                else if (textField.getText().equals("Enter user name") && textFieldEmptied == false) {
-                    System.out.println("in special cas");
-                    moveOnPossible = false;
-                    errorMessageSetUp();
-                }
-
-                else if (textField.getText().trim().isEmpty() == false) {
-                    moveOnPossible = true;
-                    String filePath = "somethingwentwrong";//if not overwritten, somethingwent wrong
-                    if (existingOrNew.trim().equals("New User")) { //if new user,
-                    writeUsername(filePath);
-                    }
-
-                }
-
-                else {
-                    moveOnPossible = false;
-                    System.out.println("is else");
-                    errorMessageSetUp();
-                }
-                
+                nextButtonAction(existingOrNew);
             }
         });
     }
 
+    private void nextButtonAction(String existingOrNew) {
+            int windowX = window.getX();
+            int windowY = window.getY();
+
+            //check if the username is not empty
+            if (textField.getText().trim().isEmpty()) {
+                moveOnPossible = false;
+                errorMessageSetUp();
+            }
+
+            else if (textField.getText().equals("Enter user name") && textFieldEmptied == false) {
+                System.out.println("in special cas");
+                moveOnPossible = false;
+                errorMessageSetUp();
+            }
+
+            else if (textField.getText().trim().isEmpty() == false) {
+                moveOnPossible = true;
+                String filePath = "somethingwentwrong";//if not overwritten, somethingwent wrong
+                if (existingOrNew.trim().equals("New User")) { //if new user,
+                writeUsername(filePath);
+                }
+
+            }
+
+            else {
+                moveOnPossible = false;
+                System.out.println("is else");
+                errorMessageSetUp();
+            }
+            
+    }
+    private void backButtonAction(MainWindow main, String studentOrTeacher) {
+        //1/4/24 5:14
+        // System.out.println("in new user, selectedText is"+selectedText);
+        // hideWindow();
+        // NewUser newUser = new NewUser(new MainWindow(window), studentOrTeacherString, existingOrNew,windowX, windowY);
+        // newUser.setButtonSelected(existingOrNew);
+        //
+
+         //♡♡♡♡♡♡♡♡♡♡♡♡♡♡♡♡♡♡♡♡♡♡♡♡♡♡♡♡♡♡♡♡♡♡♡♡♡♡♡♡♡♡♡♡♡♡♡♡
+         newUser.newUserSetup(main, studentOrTeacher);
+         newUser.showWindow(window.getX(),window.getY());
+         newUser.setButtonSelected(studentOrTeacher);
+         newUser.setButtonSelected(studentOrTeacher);
+         hideWindow(); 
+         //♡♡♡♡♡♡♡♡♡♡♡♡♡♡♡♡♡♡♡♡♡♡♡♡♡♡♡♡♡♡♡♡♡♡♡♡♡♡♡♡♡♡♡♡♡♡♡♡
+
+        // public void actionPerformed(ActionEvent e) {
+        //     main.MainWindowLaunch();
+        //     main.show(window.getX(),window.getY());
+        //     main.setButtonSelected(studentOrTeacher);
+        //     main.setExistingOrNew(existingOrNew);
+        //     hideWindow(); 
+
+                
+    }
     private void errorMessageSetUp() {
         JDialog dialog = new JDialog(window, null, true);
         dialog.setLayout(new FlowLayout());

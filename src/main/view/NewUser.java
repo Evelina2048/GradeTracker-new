@@ -25,6 +25,7 @@ public class NewUser extends JFrame {
     private boolean moveOnPossible = false;
     private int windowX;
     private int windowY;
+    private Gather gatherFrame;
     JRadioButton newUserButton;
     JRadioButton existingButton;
     ButtonGroup teacherStudentGroup;
@@ -42,7 +43,8 @@ public class NewUser extends JFrame {
        newUserSetup(main, studentOrTeacher);
     }
 
-    private void newUserSetup(MainWindow main, String studentOrTeacher) {
+    public void newUserSetup(MainWindow main, String studentOrTeacher) {
+        main.setTitle("NEW USRE");
         this.window = main;
 
         instructionsWordsWindow(studentOrTeacher);
@@ -168,9 +170,20 @@ public class NewUser extends JFrame {
                 int windowX = window.getX();
                 int windowY = window.getY();
                 if (moveOnPossible) {
-                    Gather gatherFrame = new Gather(NewUser.this, studentOrTeacher, existingOrNew, windowX, windowY);
                     hideWindow();
-                    window.dispose();
+
+                    //
+                    if (gatherFrame == null) {
+                        // Create a new instance of Gather if it doesn't exist
+                        gatherFrame = new Gather(main, NewUser.this, studentOrTeacher, existingOrNew, windowX, windowY);
+                    } else {
+                        // Update the existing Gather window panels
+                        gatherFrame.gatherLaunch(main, NewUser.this, studentOrTeacher, existingOrNew);
+                        gatherFrame.showWindow();  // Show the Gather window
+                    }
+                    //
+                    
+                    
                 }
                 else if (!moveOnPossible) {
                     errorMessageSetUp();
@@ -179,6 +192,12 @@ public class NewUser extends JFrame {
             }
         });
     }
+
+    // private void call(MainWindow main, String studentOrTeacher) {
+    //     Gather gatherFrame = new Gather(main, NewUser.this, studentOrTeacher, existingOrNew, windowX, windowY);
+    //     gatherFrame.gatherLaunch(main, this, studentOrTeacher, existingOrNew);
+                    
+    // }
 
     private void errorMessageSetUp() {
         JDialog dialog = new JDialog(window, null, true);
