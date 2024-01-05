@@ -185,7 +185,7 @@ public class Gather {
         backButton.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent e) {
 
-               backButtonAction(main, newUser, studentOrTeacher);
+               backButtonAction(main, newUser, studentOrTeacher, existingOrNew);
 
             }
         });
@@ -235,7 +235,7 @@ public class Gather {
         }
         
 }
-private void backButtonAction(MainWindow main, NewUser newUser, String studentOrTeacher) {
+private void backButtonAction(MainWindow main, NewUser newUser, String studentOrTeacher, String existingOrNew) {
     //1/4/24 5:14
     // System.out.println("in new user, selectedText is"+selectedText);
     // hideWindow();
@@ -246,8 +246,8 @@ private void backButtonAction(MainWindow main, NewUser newUser, String studentOr
      //♡♡♡♡♡♡♡♡♡♡♡♡♡♡♡♡♡♡♡♡♡♡♡♡♡♡♡♡♡♡♡♡♡♡♡♡♡♡♡♡♡♡♡♡♡♡♡♡
      newUser.newUserSetup(main, studentOrTeacher);
      newUser.showWindow(window.getX(),window.getY());
-     newUser.setButtonSelected(studentOrTeacher);
-     newUser.setButtonSelected(studentOrTeacher);
+     newUser.setButtonSelected(existingOrNew);
+    //newUser.setButtonSelected(studentOrTeacher);
      hideWindow(); 
      //♡♡♡♡♡♡♡♡♡♡♡♡♡♡♡♡♡♡♡♡♡♡♡♡♡♡♡♡♡♡♡♡♡♡♡♡♡♡♡♡♡♡♡♡♡♡♡♡
 
