@@ -21,6 +21,8 @@ import java.awt.FlowLayout;
 
 public class NewUser extends JFrame {
     private JFrame window;
+    private MainWindow main;
+    private String studentOrTeacher;
     private String existingOrNew;
     private boolean moveOnPossible = false;
     private int windowX;
@@ -43,15 +45,24 @@ public class NewUser extends JFrame {
        newUserSetup(main, studentOrTeacher);
     }
 
-    public void newUserSetup(MainWindow main, String studentOrTeacher) {
+    public void newUserSetup(MainWindow main2, String studentOrTeacherString) {
+        main = main2;
         main.setTitle("NEW USE");
         this.window = main;
+        studentOrTeacher = studentOrTeacherString;
 
         instructionsWordsWindow(studentOrTeacher);
 
         radioButtonSetUp();
 
         buttonSetUp(main, studentOrTeacher);
+
+        // EnterAction enterAction = new EnterAction();
+
+        // this.getRootPane().getInputMap(JComponent.WHEN_IN_FOCUSED_WINDOW).put(KeyStroke.getKeyStroke(KeyEvent.VK_ENTER, 0), "enterAction");
+        // this.getRootPane().getActionMap().put("enterAction", enterAction);
+
+        // this.requestFocusInWindow();
     }
 
 
@@ -167,34 +178,39 @@ public class NewUser extends JFrame {
         
         nextButton.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent e) {
-                int windowX = window.getX();
-                int windowY = window.getY();
-                if (moveOnPossible) {
-                    hideWindow();
-
-                    //
-                    if (gatherFrame == null) {
-                        // Create a new instance of Gather if it doesn't exist
-                        gatherFrame = new Gather(main, NewUser.this, studentOrTeacher, existingOrNew, windowX, windowY);
-                        gatherFrame.gatherLaunch(main, NewUser.this, studentOrTeacher, existingOrNew);
-                        System.out.println("gatherframe is null");
-                    } else {
-                        // Update the existing Gather window panels
-                        gatherFrame.gatherLaunch(main, NewUser.this, studentOrTeacher, existingOrNew);
-                        gatherFrame.showWindow(windowX, windowY);  // Show the Gather window
-                    }
-                    //
-                    
-                    
-                }
-                else if (!moveOnPossible) {
-                    errorMessageSetUp();
-                }
-                
+                doNextButtonProcedure();
             }
         });
     }
 
+    private void doNextButtonProcedure(){
+        //>/
+        int windowX = window.getX();
+            int windowY = window.getY();
+            if (moveOnPossible) {
+                hideWindow();
+
+                //
+                if (gatherFrame == null) {
+                    // Create a new instance of Gather if it doesn't exist
+                    gatherFrame = new Gather(main, NewUser.this, studentOrTeacher, existingOrNew, windowX, windowY);
+                    gatherFrame.gatherLaunch(main, NewUser.this, studentOrTeacher, existingOrNew);
+                    System.out.println("gatherframe is null");
+                } else {
+                    // Update the existing Gather window panels
+                    gatherFrame.gatherLaunch(main, NewUser.this, studentOrTeacher, existingOrNew);
+                    gatherFrame.showWindow(windowX, windowY);  // Show the Gather window
+                }
+                //
+                
+                
+            }
+            else if (!moveOnPossible) {
+                errorMessageSetUp();
+            }
+                
+        //>/
+    }
     // private void call(MainWindow main, String studentOrTeacher) {
     //     Gather gatherFrame = new Gather(main, NewUser.this, studentOrTeacher, existingOrNew, windowX, windowY);
     //     gatherFrame.gatherLaunch(main, this, studentOrTeacher, existingOrNew);
