@@ -44,7 +44,7 @@ public class NewUser extends JFrame {
     }
 
     public void newUserSetup(MainWindow main, String studentOrTeacher) {
-        main.setTitle("NEW USRE");
+        main.setTitle("NEW USE");
         this.window = main;
 
         instructionsWordsWindow(studentOrTeacher);
@@ -176,10 +176,12 @@ public class NewUser extends JFrame {
                     if (gatherFrame == null) {
                         // Create a new instance of Gather if it doesn't exist
                         gatherFrame = new Gather(main, NewUser.this, studentOrTeacher, existingOrNew, windowX, windowY);
+                        gatherFrame.gatherLaunch(main, NewUser.this, studentOrTeacher, existingOrNew);
+                        System.out.println("gatherframe is null");
                     } else {
                         // Update the existing Gather window panels
                         gatherFrame.gatherLaunch(main, NewUser.this, studentOrTeacher, existingOrNew);
-                        gatherFrame.showWindow();  // Show the Gather window
+                        gatherFrame.showWindow(windowX, windowY);  // Show the Gather window
                     }
                     //
                     

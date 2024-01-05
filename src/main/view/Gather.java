@@ -1,135 +1,74 @@
 package main.view;
 
-//visual stuff
 import javax.swing.ButtonGroup;
 import javax.swing.JButton;
 import javax.swing.JDialog;
 import javax.swing.JFrame;
 import javax.swing.JRadioButton;
-import javax.swing.JTextField;
 import javax.swing.SwingConstants;
+
 import java.awt.BorderLayout;
 import java.awt.Color;
-import java.awt.Dimension;
 import java.awt.Font;
 import javax.swing.JPanel;
 import javax.swing.JLabel;
-
 import java.awt.GridBagLayout;
+import java.awt.Insets;
 import java.awt.GridBagConstraints;
-
 import java.awt.event.ActionListener;
 import java.awt.event.ActionEvent;
 import java.awt.FlowLayout;
 
-import java.awt.event.MouseAdapter;
-import java.awt.event.MouseEvent;
-import java.awt.event.KeyListener;
-import java.awt.event.KeyAdapter;
-
-import java.awt.event.KeyEvent;
-
-//for reading csv
-import org.apache.commons.csv.CSVFormat;
-import org.apache.commons.csv.CSVParser;
-import org.apache.commons.csv.CSVRecord;
-import com.opencsv.CSVWriter;
-import java.io.FileWriter;
-import java.io.IOException;
-import java.io.PrintWriter;
-
-import com.opencsv.CSVWriter;
-
-import org.junit.jupiter.api.Test;
-
-import static org.junit.jupiter.api.Assertions.assertTrue;
-import static org.junit.jupiter.api.Assertions.fail;
-
-import java.io.FileNotFoundException;
-import java.io.FileReader;
-import java.io.IOException;
-import java.io.Reader;
-//
-import java.io.Writer;
-
-public class Gather {
+public class Gather extends JFrame {
     private JFrame window;
-    private String selectedText;
+    private String existingOrNew;
     private boolean moveOnPossible = false;
     private int windowX;
     private int windowY;
-    private String studentOrTeacherString;
-    private boolean textFieldEmptied;
-
-    private NewUser newUser;
-
-    JRadioButton studentButton;
-    JRadioButton teacherButton;
+    private Gather gatherFrame;
+    JRadioButton newUserButton;
+    JRadioButton existingButton;
     ButtonGroup teacherStudentGroup;
     int windowWidth = 800;
     int windowHeight = 500;
-    // Create a JTextField
-    JTextField textField = new JTextField(10); // 20 columns wide
 
-    //panels
+    //panel
     JPanel instructionsPanel;
     JPanel choicesPanel;
     JPanel backNextButtonsPanel;
 
-    public Gather(MainWindow main, NewUser newUser, String studentOrTeacher, String existingOrNew, int windowX, int windowY) {
+    public Gather(MainWindow main, NewUser newUser,String studentOrTeacher, String newOrExisting,int windowX, int windowY) {
+        //window = window2;
+        //MainWindow main = main2;
+       gatherLaunch(main, newUser, studentOrTeacher, existingOrNew);
     }
 
-    public void gatherLaunch(MainWindow main, NewUser newUser, String studentOrTeacher, String existingOrNew) {
-        //this.newUser = newUser;
-        
-        // System.out.println("in gather frame, the studentOrTeacher is "+ studentOrTeacher);
-        // System.out.println("in gather frame, the existingOrNew is "+existingOrNew);
+    public void gatherLaunch (MainWindow main, NewUser newUser, String studentOrTeacher, String existingOrNew) {
+        main.setTitle("NEW USRE");
+        this.window = main;
 
-        this.window = newUser;
-        //gatherLaunch(main, newUser, studentOrTeacher, existingOrNew);
+        instructionsWordsWindow(studentOrTeacher);
 
-        studentOrTeacherString = studentOrTeacher;
-        
-        windowSetUp(window, windowX, windowY);
+        radioButtonSetUp();
 
-        instructionsWordsWindow(existingOrNew);
-
-        inputName();
-
-        buttonSetUp(main, newUser, existingOrNew, studentOrTeacher);
-
-
-
-
-        //showWindow(windowX, window);
+        buttonSetUp(main, studentOrTeacher);
     }
 
 
-    private void windowSetUp(JFrame window, int windowX, int windowY) {
+    private void windowSetUp(int windowX, int windowY) {
         //window set up
-
-        window.setTitle("Input Username");
+        window.setTitle("New User?");
         window.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
         window.setLayout(new BorderLayout());
         window.setSize(800, 500);
         window.setLocation(windowX, windowY);
-        showWindow();
+        showWindow(windowX,windowY);
     }
     
-    private void instructionsWordsWindow(String existingOrNew) {
+    private void instructionsWordsWindow(String studentOrTeacher) {
         JLabel instructionsWords;
         //instructions (north section for borderlayout)
-        if (existingOrNew == "New User") {
-            instructionsWords = new JLabel("You are a new user. Create a user name.");
-        }
-        else if (existingOrNew == "Existing") {
-            instructionsWords = new JLabel("You are an existing user. Type in your user name");
-        }
-
-        else {
-            instructionsWords = new JLabel("Error");
-        }
-
+        instructionsWords = new JLabel("You are a "+studentOrTeacher+". Are you a new user?");
         instructionsPanel= new JPanel();
         Color instructionsColor = Color.decode("#7A6D6D");
         instructionsPanel.setBackground(instructionsColor);
@@ -144,53 +83,65 @@ public class Gather {
         instructionsWords.setFont(instructionsFont);
     }
 
-    private void inputName() {
+    private void radioButtonSetUp() {
         teacherStudentGroup = new ButtonGroup();
         Color choicesPanelColor = Color.decode("#AFA2A2");
 
         choicesPanel= new JPanel(new GridBagLayout());
         choicesPanel.setBackground(choicesPanelColor);
 
-        textField.setPreferredSize(new Dimension(textField.getPreferredSize().width, 50)); // Set the height to 50 pixels
-        textField.setFont(new Font("Roboto", Font.PLAIN, 14));
-        textField.setForeground(Color.orange);
-
-        Color defaultTextColor = Color.decode("#B0B0B0");
-        textField.setSelectedTextColor(defaultTextColor);
-
-        textField.setHorizontalAlignment(JTextField.CENTER);
-        textField.setText("Enter user name");
-        textFieldEmptied = false;
-
-        KeyListener deleteKeyListener = new KeyAdapter() {
-            @Override
-            public void keyPressed(KeyEvent e) {
-                if (e.getKeyCode() == KeyEvent.VK_DELETE) {
-                    textFieldEmptied = true;
-                    textField.removeKeyListener(this); // Remove the KeyListener
-                }
+        //initialize buttons with color
+        existingButton = new JRadioButton("Existing");
+        choicesButtonDecorate(existingButton);
+        existingButton.addActionListener(new ActionListener() {
+            public void actionPerformed(ActionEvent e) {
+            existingOrNew = existingButton.getText();
+            moveOnPossible = true;
             }
-        };
+            
+        });
 
-        textField.addMouseListener(new MouseAdapter() {
-            @Override
-            public void mouseClicked(MouseEvent e) {
-                textField.setText("");
-                textFieldEmptied = true;
-                textField.setForeground(Color.BLACK);
+        newUserButton = new JRadioButton("New User");
+        choicesButtonDecorate(newUserButton);
+        newUserButton.addActionListener(new ActionListener() {
+            public void actionPerformed(ActionEvent e) {
+                existingOrNew = newUserButton.getText();
+                moveOnPossible = true;
             }
         });
 
-        GridBagConstraints constraints = new GridBagConstraints();
-        constraints.gridx = 0;
-        constraints.gridy = 0;
+        addToChoicesPanel(teacherStudentGroup, existingButton, newUserButton, choicesPanel);
 
-        choicesPanel.add(textField, constraints);
-        window.add(choicesPanel);
         window.add(choicesPanel);
     }
 
-    private void buttonSetUp(MainWindow main, NewUser newUser, String existingOrNew, String studentOrTeacher) {
+    private void choicesButtonDecorate(JRadioButton button) {
+        Font buttonFont = new Font("Roboto", Font.PLAIN, 25); // Change the font and size here
+        button.setForeground(Color.WHITE);
+        button.setFont(buttonFont);
+    }
+
+    private void addToChoicesPanel(ButtonGroup teacherStudentGroup, JRadioButton existingButton, JRadioButton newUserButton, JPanel choicesPanel) {
+        teacherStudentGroup.add(existingButton);
+        teacherStudentGroup.add(newUserButton);
+        choicesPanel.add(existingButton);
+        choicesPanel.add(newUserButton);
+        choicesPanel.add(existingButton, choiceGbc());
+    }
+
+    private GridBagConstraints choiceGbc() {
+        //radio buttons distance
+        GridBagConstraints gbc = new GridBagConstraints();
+        gbc.gridx = 0;
+        gbc.gridy = 1;
+        gbc.gridwidth = 2;
+
+        gbc.anchor = GridBagConstraints.WEST;
+        gbc.insets = new Insets(10, 0, 0, 0); // Increase the horizontal spacing between components
+        return gbc;
+    }
+
+    private void buttonSetUp(MainWindow main, String studentOrTeacher) {
         JButton backButton;
         JButton nextButton;
         //buttons
@@ -200,9 +151,12 @@ public class Gather {
 
         backButton.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent e) {
-
-               backButtonAction(main, studentOrTeacher);
-
+                main.MainWindowLaunch();
+                main.show(window.getX(),window.getY());
+                main.setButtonSelected(studentOrTeacher);
+                main.setExistingOrNew(existingOrNew);
+                hideWindow(); 
+                
             }
         });
         
@@ -213,68 +167,30 @@ public class Gather {
         
         nextButton.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent e) {
-                nextButtonAction(existingOrNew);
+                int windowX = window.getX();
+                int windowY = window.getY();
+                if (moveOnPossible) {
+                    hideWindow();
+
+                    //
+                    //
+                    
+                    
+                }
+                else if (!moveOnPossible) {
+                    errorMessageSetUp();
+                }
+                
             }
         });
     }
 
-    private void nextButtonAction(String existingOrNew) {
-            int windowX = window.getX();
-            int windowY = window.getY();
+    // private void call(MainWindow main, String studentOrTeacher) {
+    //     Gather gatherFrame = new Gather(main, NewUser.this, studentOrTeacher, existingOrNew, windowX, windowY);
+    //     gatherFrame.gatherLaunch(main, this, studentOrTeacher, existingOrNew);
+                    
+    // }
 
-            //check if the username is not empty
-            if (textField.getText().trim().isEmpty()) {
-                moveOnPossible = false;
-                errorMessageSetUp();
-            }
-
-            else if (textField.getText().equals("Enter user name") && textFieldEmptied == false) {
-                System.out.println("in special cas");
-                moveOnPossible = false;
-                errorMessageSetUp();
-            }
-
-            else if (textField.getText().trim().isEmpty() == false) {
-                moveOnPossible = true;
-                String filePath = "somethingwentwrong";//if not overwritten, somethingwent wrong
-                if (existingOrNew.trim().equals("New User")) { //if new user,
-                writeUsername(filePath);
-                }
-
-            }
-
-            else {
-                moveOnPossible = false;
-                System.out.println("is else");
-                errorMessageSetUp();
-            }
-            
-    }
-    private void backButtonAction(MainWindow main, String studentOrTeacher) {
-        //1/4/24 5:14
-        // System.out.println("in new user, selectedText is"+selectedText);
-        // hideWindow();
-        // NewUser newUser = new NewUser(new MainWindow(window), studentOrTeacherString, existingOrNew,windowX, windowY);
-        // newUser.setButtonSelected(existingOrNew);
-        //
-
-         //♡♡♡♡♡♡♡♡♡♡♡♡♡♡♡♡♡♡♡♡♡♡♡♡♡♡♡♡♡♡♡♡♡♡♡♡♡♡♡♡♡♡♡♡♡♡♡♡
-         newUser.newUserSetup(main, studentOrTeacher);
-         newUser.showWindow(window.getX(),window.getY());
-         newUser.setButtonSelected(studentOrTeacher);
-         newUser.setButtonSelected(studentOrTeacher);
-         hideWindow(); 
-         //♡♡♡♡♡♡♡♡♡♡♡♡♡♡♡♡♡♡♡♡♡♡♡♡♡♡♡♡♡♡♡♡♡♡♡♡♡♡♡♡♡♡♡♡♡♡♡♡
-
-        // public void actionPerformed(ActionEvent e) {
-        //     main.MainWindowLaunch();
-        //     main.show(window.getX(),window.getY());
-        //     main.setButtonSelected(studentOrTeacher);
-        //     main.setExistingOrNew(existingOrNew);
-        //     hideWindow(); 
-
-                
-    }
     private void errorMessageSetUp() {
         JDialog dialog = new JDialog(window, null, true);
         dialog.setLayout(new FlowLayout());
@@ -292,57 +208,41 @@ public class Gather {
             }
         });
         
-        dialog.setLocationRelativeTo(studentButton);
+        dialog.setLocationRelativeTo(newUserButton);
         dialog.setLocation(dialog.getX(), dialog.getY() + 15); 
         dialog.setVisible(true);
     }
 
-    private void writeUsername(String filePath) {
-        //and username not taken
-        if ("Student".equals(studentOrTeacherString)) {
-            filePath = "/Users/evy/Documents/Personal Projects/GradeTracker-new/src/main/view/Student.csv";
-            System.out.println("going to student.csv");
+    public void setButtonSelected(String studentOrTeacher) {
+        existingOrNew = studentOrTeacher;
+        if (studentOrTeacher == "New User") {
+            newUserButton.setSelected(true);
+            moveOnPossible = true;
         }
-
-        else if ("Teacher".equals(studentOrTeacherString)) {
-            filePath = "/Users/evy/Documents/Personal Projects/GradeTracker-new/src/main/view/Teacher.csv";
-            System.out.println("going to teacher.csv");
+        
+        else if(studentOrTeacher == "Existing") {
+            existingButton.setSelected(true);
+            moveOnPossible = true;
         }
-
-        String username = textField.getText().trim();
-
-        System.out.println("the username is "+ username);
-        System.out.println("the filepath is " + filePath);
-
-
-        try (FileWriter writer = new FileWriter(filePath, true)) {
-            int commaCountInt = commaCount(username);
-            writer.write(username + "," + commaCountInt + "," + "\n");
-        } catch (IOException e1) {
-            e1.printStackTrace();
-        }
-
     }
 
-    private int commaCount(String username) {
-        int commaCount = 0;
-        for (int i = 0; i < username.length(); i++) {
-            if (username.charAt(i) == ',') {
-                commaCount++;
-            }
-        }
-        System.out.println(commaCount);
-        return commaCount;
-    }
     private void setWindowX(int newWindowX) {
         windowX = newWindowX;
+    }
+
+    public int getWindowX() {
+        return windowX;
     }
 
     private void setWindowY(int newWindowY) {
         windowY = newWindowY;
     }
 
-    public void showWindow() {
+    public int getWindowY() {
+        return windowY;
+    }
+
+    public void showWindow(int windowX, int windowY) {
     if (windowX != 0 && windowY != 0) {
         window.setLocation(windowX, windowY);
         setWindowX(windowX);
@@ -362,5 +262,4 @@ public class Gather {
         choicesPanel.setVisible(false);
         backNextButtonsPanel.setVisible(false);
     }
-
 }
