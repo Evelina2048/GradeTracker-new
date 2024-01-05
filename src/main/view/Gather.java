@@ -197,40 +197,44 @@ public class Gather {
         
         nextButton.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent e) {
-                nextButtonAction(existingOrNew);
+                nextButtonAction(existingOrNew, studentOrTeacher);
             }
         });
     }
 
     //>//
-    private void nextButtonAction(String existingOrNew) {
-        int windowX = window.getX();
+    private void nextButtonAction(String existingOrNew, String studentOrTeacherString) {
+        int windowX = window.getX(); 
         int windowY = window.getY();
+        boolean textFieldEmpty = textField.getText().trim().isEmpty();
+        boolean textFieldHasntChanged = textField.getText().equals("Enter user name") && textFieldEmptied == false;
+        boolean textFieldFilled = textField.getText().trim().isEmpty() == false;
 
         //check if the username is not empty
-        if (textField.getText().trim().isEmpty()) {
+        if (textFieldEmpty) {
             moveOnPossible = false;
             errorMessageSetUp();
         }
 
-        else if (textField.getText().equals("Enter user name") && textFieldEmptied == false) {
+        else if (textFieldHasntChanged) {
             System.out.println("in special cas");
             moveOnPossible = false;
             errorMessageSetUp();
         }
 
-        else if (textField.getText().trim().isEmpty() == false) {
+        else if (textFieldFilled) {
             moveOnPossible = true;
             String filePath = "somethingwentwrong";//if not overwritten, somethingwent wrong
+            System.out.println("neworexisting"+existingOrNew);
             if (existingOrNew.trim().equals("New User")) { //if new user,
-            writeUsername(filePath);
+                System.out.println("studentorteacherstring"+studentOrTeacherString);
+                writeUsername(filePath,studentOrTeacherString);
             }
-
         }
 
         else {
             moveOnPossible = false;
-            System.out.println("is else");
+            System.out.println("Something went wrong in username input");
             errorMessageSetUp();
         }
         
@@ -282,15 +286,16 @@ private void errorMessageSetUp() {
     dialog.setVisible(true);
 }
 
-private void writeUsername(String filePath) {
+private void writeUsername(String filePath, String studentOrTeacher) {
     //and username not taken
-    if ("Student".equals(studentOrTeacherString)) {
-        filePath = "/Users/evy/Documents/Personal Projects/GradeTracker-new/src/main/view/Student.csv";
+    System.out.println("studentOrTeacher"+ studentOrTeacher);
+    if ("Student".equals(studentOrTeacher)) {
+        filePath = "/Users/evy/Documents/GradeTracker-new/src/main/view/Student.csv";
         System.out.println("going to student.csv");
     }
 
-    else if ("Teacher".equals(studentOrTeacherString)) {
-        filePath = "/Users/evy/Documents/Personal Projects/GradeTracker-new/src/main/view/Teacher.csv";
+    else if ("Teacher".equals(studentOrTeacher)) {
+        filePath = "/Users/evy/Documents/GradeTracker-new/src/main/view/Teacher.csv";
         System.out.println("going to teacher.csv");
     }
 
