@@ -343,44 +343,14 @@ private int commaCount(String username) {
     }
 
     private void checkIfExisting() {
-        //sample
-        String sample = "1,sample,user";
-        //>sample
+        //loop through (studentOrTeacher)Username.txt
+        //if matches username
+        //  existing = true
+        //  try again writing. warning message
+        //else 
+        //  existing = false
+        //  write username
 
-        //loop through file to see if username in the first column
-        System.out.println("in check if existing");
-
-        //takes comma count then keep going until that number of commas+1 has been found
-        String commaCountForLine = "";
-        for (int i=0; i<sample.length(); i++) {//get commacount of sample
-            System.out.println("inloop1 should be printed twice for test");
-            if (sample.charAt(i) != ',') {
-                commaCountForLine += sample.charAt(i);
-            }
-            else {
-                break;
-            }
-        }
-
-        int commasGoneThrough = 0;
-        String usernameForLine = "";
-        //DisectUsername
-        System.out.println("commaCountForLine: "+commaCountForLine);
-        int commaCountLength = commaCountForLine.length();
-        for (int i=commaCountLength+1; i< sample.length(); i++) {
-            usernameForLine += sample.charAt(i);
-        }
-
-        System.out.println("userameforline: "+usernameForLine);
-        //then take all that minus last character, thats the username
-
-        //put that in an array
-        //Usernames = 
-        //check if username there
-
-        //if found, then give pop up
-
-        //if not, write to file
     }
 
     private void setWindowX(int newWindowX) {
