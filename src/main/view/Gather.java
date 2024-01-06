@@ -46,6 +46,8 @@ import org.junit.jupiter.api.Test;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 import static org.junit.jupiter.api.Assertions.fail;
 
+import java.io.BufferedReader;
+import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.FileReader;
 import java.io.IOException;
@@ -348,7 +350,28 @@ private int commaCount(String username) {
     private void checkIfExisting(String filePath) {
         System.out.println("filepath"+filePath);
         //loop through (studentOrTeacher)Username.txt
-        //if matches username
+
+        BufferedReader reader = null;
+
+        try {
+            File file = new File(filePath);
+            reader = new BufferedReader(new FileReader(filePath));
+
+            String line;
+            while ((line = reader.readLine()) != null) {
+                System.out.println(line);
+        }
+
+        } catch (IOException e) {
+            e.printStackTrace();
+        } finally {
+            try {
+                reader.close();
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
+        }
+                //if matches username
         //  existing = true
         //  try again writing. warning message
         //else 
