@@ -27,7 +27,7 @@ import java.awt.event.KeyEvent;
 import java.awt.event.KeyAdapter;
 import java.awt.event.KeyListener;
 
-public class MainWindow extends JFrame implements KeyListener{
+public class MainWindow extends JFrame {
 //private JFrame window;
 private String studentOrTeacher;
 private boolean moveOnPossible = false;
@@ -74,7 +74,6 @@ private void windowSetUp() {
     this.setTitle("Launcher");
     this.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
     this.setLayout(new BorderLayout());
-    this.addKeyListener(this);
     this.setSize(windowWidth, windowHeight);
 }
  
@@ -274,26 +273,5 @@ public class EnterAction extends AbstractAction {
         doNextButtonProcedure();
     }
 }
-
-@Override
-public void keyTyped(KeyEvent e) {
-    // TODO Auto-generated method stub
-    throw new UnsupportedOperationException("Unimplemented method 'keyTyped'");
-}
-
-
-@Override
-public void keyPressed(KeyEvent e) {
-    // TODO Auto-generated method stub
-    throw new UnsupportedOperationException("Unimplemented method 'keyPressed'");
-}
-
-
-@Override
-public void keyReleased(KeyEvent e) {
-    // TODO Auto-generated method stub
-    throw new UnsupportedOperationException("Unimplemented method 'keyReleased'");
-}
-
 
 }

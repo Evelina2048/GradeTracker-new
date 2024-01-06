@@ -27,7 +27,7 @@ import java.awt.event.KeyEvent;
 import java.awt.event.KeyAdapter;
 import java.awt.event.KeyListener;
 
-public class NewUser extends JFrame implements KeyListener{
+public class NewUser extends JFrame {
     private JFrame window;
     private MainWindow main;
     private String studentOrTeacher;
@@ -71,17 +71,6 @@ public class NewUser extends JFrame implements KeyListener{
         window.getRootPane().getActionMap().put("enterAction", enterAction);
 
         window.requestFocusInWindow();
-    }
-
-
-    private void windowSetUp(int windowX, int windowY) {
-        //window set up
-        window.setTitle("New User?");
-        window.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
-        window.setLayout(new BorderLayout());
-        window.setSize(800, 500);
-        window.setLocation(windowX, windowY);
-        showWindow(windowX,windowY);
     }
     
     private void instructionsWordsWindow(String studentOrTeacher) {
@@ -220,11 +209,6 @@ public class NewUser extends JFrame implements KeyListener{
                 
         //>/
     }
-    // private void call(MainWindow main, String studentOrTeacher) {
-    //     Gather gatherFrame = new Gather(main, NewUser.this, studentOrTeacher, existingOrNew, windowX, windowY);
-    //     gatherFrame.gatherLaunch(main, this, studentOrTeacher, existingOrNew);
-                    
-    // }
 
     private void errorMessageSetUp() {
         JDialog dialog = new JDialog(window, null, true);
@@ -303,24 +287,6 @@ public class NewUser extends JFrame implements KeyListener{
         public void actionPerformed(ActionEvent e) {
             doNextButtonProcedure();
         }
-    }
-
-    @Override
-    public void keyTyped(KeyEvent e) {
-        // TODO Auto-generated method stub
-        throw new UnsupportedOperationException("Unimplemented method 'keyTyped'");
-    }
-
-    @Override
-    public void keyPressed(KeyEvent e) {
-        // TODO Auto-generated method stub
-        throw new UnsupportedOperationException("Unimplemented method 'keyPressed'");
-    }
-
-    @Override
-    public void keyReleased(KeyEvent e) {
-        // TODO Auto-generated method stub
-        throw new UnsupportedOperationException("Unimplemented method 'keyReleased'");
     }
 }
 
