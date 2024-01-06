@@ -219,13 +219,13 @@ public class Gather {
         //check if the username is not empty
         if (textFieldEmpty) {
             moveOnPossible = false;
-            errorMessageSetUp("<html><center>Please choose an option");
+            errorMessageSetUp("<html><center>Please choose an option",200,90);
         }
 
         else if (textFieldHasntChanged) {
             System.out.println("in special cas");
             moveOnPossible = false;
-            errorMessageSetUp("<html><center>Please choose an option");
+            errorMessageSetUp("<html><center>Please choose an option",200,90);
         }
 
         else if (textFieldFilled) {
@@ -241,7 +241,7 @@ public class Gather {
         else {
             moveOnPossible = false;
             System.out.println("Something went wrong in username input");
-            errorMessageSetUp("<html><center>Something went wrong in username input");
+            errorMessageSetUp("<html><center>Something went wrong in username input",200,90);
         }
         
 }
@@ -254,7 +254,7 @@ private void backButtonAction(MainWindow main, NewUser newUser, String studentOr
  
             
 }
-private void errorMessageSetUp(String labelWords) {
+private void errorMessageSetUp(String labelWords, int width, int height) {
     JDialog dialog = new JDialog(window, null, true);
     dialog.setLayout(new FlowLayout());
     JLabel label = new JLabel(labelWords);
@@ -263,7 +263,7 @@ private void errorMessageSetUp(String labelWords) {
     JButton okButton = new JButton("OK");
     okButton.setVisible(true);
     dialog.add(okButton);
-    dialog.setSize(200,90);
+    dialog.setSize(width,height);
     okButton.addActionListener(new ActionListener() {
         public void actionPerformed(ActionEvent e) {
             dialog.setVisible(false);
@@ -365,7 +365,7 @@ private int commaCount(String username) {
                     System.out.println("username does equal");
 
                 //  try again writing. warning message
-                errorMessageSetUp("<html><center>Username already exists. Choose another");
+                errorMessageSetUp("<html><center>Username already exists.<br> Please choose another.",200,100);
                 }
                 //else 
                 //  existing = false
