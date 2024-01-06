@@ -344,7 +344,7 @@ private int commaCount(String username) {
 
     private void checkIfExisting() {
         //sample
-        String sample = "100, sampleuser";
+        String sample = "1,sample,user";
         //>sample
 
         //loop through file to see if username in the first column
@@ -356,7 +356,6 @@ private int commaCount(String username) {
             System.out.println("inloop1 should be printed twice for test");
             if (sample.charAt(i) != ',') {
                 commaCountForLine += sample.charAt(i);
-                //System.out.println("number"+commaCountForLine);
             }
             else {
                 break;
@@ -364,13 +363,19 @@ private int commaCount(String username) {
         }
 
         int commasGoneThrough = 0;
+        String usernameForLine = "";
         //DisectUsername
-        //int commaCountLength = commaCountForLine.length();
-        System.out.println("should be 2:"+commaCountLength);
-        for (int i=0; i<commasGoneThrough; i++) {
-
-            System.out.println("i:"+sample.charAt(i));
+        System.out.println("commaCountForLine: "+commaCountForLine);
+        int commaCountLength = commaCountForLine.length();
+        //System.out.println("should be 2:"+commaCountLength);
+        for (int i=commaCountLength+1; i< sample.length(); i++) {
+            //Integer.parseInt(commaCountForLine)
+            //System.out.println("start"+sample.charAt(commaCountLength));
+            //needs to start at 
+            usernameForLine += sample.charAt(i);
+            System.out.println("Should be from start of username to end. i:"+sample.charAt(i));
         }
+        System.out.println("userameforline: "+usernameForLine);
         //then take all that minus last character, thats the username
 
         //put that in an array
