@@ -211,7 +211,7 @@ public class Gather {
         boolean textFieldFilled = textField.getText().trim().isEmpty() == false;
 
         //delete after testing
-        checkIfExisting();
+        //checkIfExisting("/Users/evy/Documents/GradeTracker-new/src/main/view/studentUsername.txt");
         //delete after testing
 
         //check if the username is not empty
@@ -276,15 +276,18 @@ private void errorMessageSetUp() {
 
 private void writeUsername(String filePath, String studentOrTeacher) {
     //and username not taken
+    String usernamePath = "somethingwentwrong.txt";
     System.out.println("studentOrTeacher"+ studentOrTeacher);
     if ("Student".equals(studentOrTeacher)) {
         filePath = "/Users/evy/Documents/GradeTracker-new/src/main/view/student/Student.csv";
-        System.out.println("going to student.csv");
+        usernamePath = "/Users/evy/Documents/GradeTracker-new/src/main/view/studentUsername.txt";
+        System.out.println("going to student.csv"+usernamePath);
     }
 
     else if ("Teacher".equals(studentOrTeacher)) {
         filePath = "/Users/evy/Documents/GradeTracker-new/src/main/view/Teacher.csv";
-        System.out.println("going to teacher.csv");
+        usernamePath = "/Users/evy/Documents/GradeTracker-new/src/main/view/teacherUsername.txt";
+        System.out.println("going to teacher.csv"+usernamePath);
     }
 
     String username = textField.getText().trim();
@@ -294,7 +297,7 @@ private void writeUsername(String filePath, String studentOrTeacher) {
 
 
     try (FileWriter writer = new FileWriter(filePath, true)) {
-        checkIfExisting();
+        checkIfExisting(usernamePath);
         int commaCountInt = commaCount(username);
         writer.write(username + "," + commaCountInt + "," + "\n");
     } catch (IOException e1) {
@@ -342,7 +345,8 @@ private int commaCount(String username) {
         return gbc;
     }
 
-    private void checkIfExisting() {
+    private void checkIfExisting(String filePath) {
+        System.out.println("filepath"+filePath);
         //loop through (studentOrTeacher)Username.txt
         //if matches username
         //  existing = true
