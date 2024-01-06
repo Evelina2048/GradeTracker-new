@@ -219,13 +219,13 @@ public class Gather {
         //check if the username is not empty
         if (textFieldEmpty) {
             moveOnPossible = false;
-            errorMessageSetUp();
+            errorMessageSetUp("<html><center>Please choose an option");
         }
 
         else if (textFieldHasntChanged) {
             System.out.println("in special cas");
             moveOnPossible = false;
-            errorMessageSetUp();
+            errorMessageSetUp("<html><center>Please choose an option");
         }
 
         else if (textFieldFilled) {
@@ -241,7 +241,7 @@ public class Gather {
         else {
             moveOnPossible = false;
             System.out.println("Something went wrong in username input");
-            errorMessageSetUp();
+            errorMessageSetUp("<html><center>Something went wrong in username input");
         }
         
 }
@@ -254,10 +254,10 @@ private void backButtonAction(MainWindow main, NewUser newUser, String studentOr
  
             
 }
-private void errorMessageSetUp() {
+private void errorMessageSetUp(String labelWords) {
     JDialog dialog = new JDialog(window, null, true);
     dialog.setLayout(new FlowLayout());
-    JLabel label = new JLabel("<html><center>Please choose an option");
+    JLabel label = new JLabel(labelWords);
     label.setHorizontalAlignment(SwingConstants.CENTER);
     dialog.add(label);
     JButton okButton = new JButton("OK");
@@ -363,7 +363,9 @@ private int commaCount(String username) {
                 if (line.equals(username)) {//if matches username
                 //  existing = true
                     System.out.println("username does equal");
+
                 //  try again writing. warning message
+                errorMessageSetUp("<html><center>Username already exists. Choose another");
                 }
                 //else 
                 //  existing = false
