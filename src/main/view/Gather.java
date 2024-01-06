@@ -341,7 +341,16 @@ private int commaCount(String username) {
     private void checkIfExisting() {
         //loop through file to see if username in the first column
         System.out.println("in check if existing");
-        //Reader.read();
+
+        //takes comma count then keep going until that number of commas+1 has been found 
+        //then take all that minus last character, thats the username
+
+        //put that in an array
+        //check if username there
+
+        //if found, then give pop up
+
+        //if not, write to file
     }
 
     private void setWindowX(int newWindowX) {
