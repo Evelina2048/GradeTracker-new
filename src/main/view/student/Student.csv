@@ -3,3 +3,6 @@ UsernameCommaCount, Username,Classes,Types,Grades
 Enter username,0,
 hello,0,
 hello,0,
+nameshoew,0,
+Enter ghser name,0,
+ShouldEqual,0,

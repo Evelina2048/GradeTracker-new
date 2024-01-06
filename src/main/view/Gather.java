@@ -299,7 +299,7 @@ private void writeUsername(String filePath, String studentOrTeacher) {
 
 
     try (FileWriter writer = new FileWriter(filePath, true)) {
-        checkIfExisting(usernamePath);
+        checkIfExisting(usernamePath, username);
         int commaCountInt = commaCount(username);
         writer.write(username + "," + commaCountInt + "," + "\n");
     } catch (IOException e1) {
@@ -347,7 +347,7 @@ private int commaCount(String username) {
         return gbc;
     }
 
-    private void checkIfExisting(String filePath) {
+    private void checkIfExisting(String filePath, String username) {
         System.out.println("filepath"+filePath);
         //loop through (studentOrTeacher)Username.txt
 
@@ -360,6 +360,14 @@ private int commaCount(String username) {
             String line;
             while ((line = reader.readLine()) != null) {
                 System.out.println(line);
+                if (line.equals(username)) {//if matches username
+                //  existing = true
+                    System.out.println("username does equal");
+                //  try again writing. warning message
+                }
+                //else 
+                //  existing = false
+                //  write username
         }
 
         } catch (IOException e) {
@@ -371,12 +379,7 @@ private int commaCount(String username) {
                 e.printStackTrace();
             }
         }
-                //if matches username
-        //  existing = true
-        //  try again writing. warning message
-        //else 
-        //  existing = false
-        //  write username
+        
 
     }
 
