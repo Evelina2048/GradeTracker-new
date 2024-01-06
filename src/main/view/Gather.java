@@ -367,18 +367,15 @@ private int commaCount(String username) {
         //DisectUsername
         System.out.println("commaCountForLine: "+commaCountForLine);
         int commaCountLength = commaCountForLine.length();
-        //System.out.println("should be 2:"+commaCountLength);
         for (int i=commaCountLength+1; i< sample.length(); i++) {
-            //Integer.parseInt(commaCountForLine)
-            //System.out.println("start"+sample.charAt(commaCountLength));
-            //needs to start at 
             usernameForLine += sample.charAt(i);
-            System.out.println("Should be from start of username to end. i:"+sample.charAt(i));
         }
+
         System.out.println("userameforline: "+usernameForLine);
         //then take all that minus last character, thats the username
 
         //put that in an array
+        //Usernames = 
         //check if username there
 
         //if found, then give pop up
