@@ -344,7 +344,7 @@ private int commaCount(String username) {
 
     private void checkIfExisting() {
         //sample
-        String sample = "10, sampleuser";
+        String sample = "100, sampleuser";
         //>sample
 
         //loop through file to see if username in the first column
@@ -363,12 +363,12 @@ private int commaCount(String username) {
             }
         }
 
-        System.out.println("commaCountforline"+commaCountForLine);
-        //while (sample[i] != ',') {    
-        //}
+        int commasGoneThrough = 0;
+        //DisectUsername
+        //int commaCountLength = commaCountForLine.length();
+        System.out.println("should be 2:"+commaCountLength);
+        for (int i=0; i<commasGoneThrough; i++) {
 
-        //System.out.println("commacount"+commaCount);
-        for (int i=0; i<sample.length(); i++) {
             System.out.println("i:"+sample.charAt(i));
         }
         //then take all that minus last character, thats the username
