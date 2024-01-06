@@ -173,8 +173,6 @@ private void backNextButton() {
             doNextButtonProcedure();
         }
     });
-
-
 }
 
 private void doNextButtonProcedure() {

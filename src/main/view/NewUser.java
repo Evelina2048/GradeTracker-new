@@ -1,10 +1,13 @@
 package main.view;
 
+import javax.swing.AbstractAction;
 import javax.swing.ButtonGroup;
 import javax.swing.JButton;
+import javax.swing.JComponent;
 import javax.swing.JDialog;
 import javax.swing.JFrame;
 import javax.swing.JRadioButton;
+import javax.swing.KeyStroke;
 import javax.swing.SwingConstants;
 
 import java.awt.BorderLayout;
@@ -19,7 +22,12 @@ import java.awt.event.ActionListener;
 import java.awt.event.ActionEvent;
 import java.awt.FlowLayout;
 
-public class NewUser extends JFrame {
+//key listening
+import java.awt.event.KeyEvent;
+import java.awt.event.KeyAdapter;
+import java.awt.event.KeyListener;
+
+public class NewUser extends JFrame implements KeyListener{
     private JFrame window;
     private MainWindow main;
     private String studentOrTeacher;
@@ -57,12 +65,12 @@ public class NewUser extends JFrame {
 
         buttonSetUp(main, studentOrTeacher);
 
-        // EnterAction enterAction = new EnterAction();
+        EnterAction enterAction = new EnterAction();
 
-        // this.getRootPane().getInputMap(JComponent.WHEN_IN_FOCUSED_WINDOW).put(KeyStroke.getKeyStroke(KeyEvent.VK_ENTER, 0), "enterAction");
-        // this.getRootPane().getActionMap().put("enterAction", enterAction);
+        window.getRootPane().getInputMap(JComponent.WHEN_IN_FOCUSED_WINDOW).put(KeyStroke.getKeyStroke(KeyEvent.VK_ENTER, 0), "enterAction");
+        window.getRootPane().getActionMap().put("enterAction", enterAction);
 
-        // this.requestFocusInWindow();
+        window.requestFocusInWindow();
     }
 
 
@@ -185,6 +193,7 @@ public class NewUser extends JFrame {
 
     private void doNextButtonProcedure(){
         //>/
+        System.out.println("in do nextbutton proc");
         int windowX = window.getX();
             int windowY = window.getY();
             if (moveOnPossible) {
@@ -288,4 +297,30 @@ public class NewUser extends JFrame {
         choicesPanel.setVisible(false);
         backNextButtonsPanel.setVisible(false);
     }
+
+    public class EnterAction extends AbstractAction {
+        @Override
+        public void actionPerformed(ActionEvent e) {
+            doNextButtonProcedure();
+        }
+    }
+
+    @Override
+    public void keyTyped(KeyEvent e) {
+        // TODO Auto-generated method stub
+        throw new UnsupportedOperationException("Unimplemented method 'keyTyped'");
+    }
+
+    @Override
+    public void keyPressed(KeyEvent e) {
+        // TODO Auto-generated method stub
+        throw new UnsupportedOperationException("Unimplemented method 'keyPressed'");
+    }
+
+    @Override
+    public void keyReleased(KeyEvent e) {
+        // TODO Auto-generated method stub
+        throw new UnsupportedOperationException("Unimplemented method 'keyReleased'");
+    }
 }
+
