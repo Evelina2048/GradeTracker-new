@@ -290,7 +290,7 @@ private void writeUsername(String filePath, String studentOrTeacher) {
     //and username not taken
     System.out.println("studentOrTeacher"+ studentOrTeacher);
     if ("Student".equals(studentOrTeacher)) {
-        filePath = "/Users/evy/Documents/GradeTracker-new/src/main/view/Student.csv";
+        filePath = "/Users/evy/Documents/GradeTracker-new/src/main/view/student/Student.csv";
         System.out.println("going to student.csv");
     }
 
