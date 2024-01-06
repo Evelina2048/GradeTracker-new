@@ -210,6 +210,10 @@ public class Gather {
         boolean textFieldHasntChanged = textField.getText().equals("Enter user name") && textFieldEmptied == false;
         boolean textFieldFilled = textField.getText().trim().isEmpty() == false;
 
+        //delete after testing
+        checkIfExisting();
+        //delete after testing
+
         //check if the username is not empty
         if (textFieldEmpty) {
             moveOnPossible = false;
@@ -339,10 +343,17 @@ private int commaCount(String username) {
     }
 
     private void checkIfExisting() {
+        //sample
+        String sample = "0, sampleuser";
+        //>sample
+
         //loop through file to see if username in the first column
         System.out.println("in check if existing");
 
         //takes comma count then keep going until that number of commas+1 has been found 
+        for (int i=0; i<sample.length(); i++) {
+            System.out.println("i:"+sample.charAt(i));
+        }
         //then take all that minus last character, thats the username
 
         //put that in an array
