@@ -240,28 +240,12 @@ public class Gather {
         
 }
 private void backButtonAction(MainWindow main, NewUser newUser, String studentOrTeacher, String existingOrNew) {
-    //1/4/24 5:14
-    // System.out.println("in new user, selectedText is"+selectedText);
-    // hideWindow();
-    // NewUser newUser = new NewUser(new MainWindow(window), studentOrTeacherString, existingOrNew,windowX, windowY);
-    // newUser.setButtonSelected(existingOrNew);
-    //
 
-     //♡♡♡♡♡♡♡♡♡♡♡♡♡♡♡♡♡♡♡♡♡♡♡♡♡♡♡♡♡♡♡♡♡♡♡♡♡♡♡♡♡♡♡♡♡♡♡♡
      newUser.newUserSetup(main, studentOrTeacher);
      newUser.showWindow(window.getX(),window.getY());
      newUser.setButtonSelected(existingOrNew);
-    //newUser.setButtonSelected(studentOrTeacher);
      hideWindow(); 
-     //♡♡♡♡♡♡♡♡♡♡♡♡♡♡♡♡♡♡♡♡♡♡♡♡♡♡♡♡♡♡♡♡♡♡♡♡♡♡♡♡♡♡♡♡♡♡♡♡
-
-    // public void actionPerformed(ActionEvent e) {
-    //     main.MainWindowLaunch();
-    //     main.show(window.getX(),window.getY());
-    //     main.setButtonSelected(studentOrTeacher);
-    //     main.setExistingOrNew(existingOrNew);
-    //     hideWindow(); 
-
+ 
             
 }
 private void errorMessageSetUp() {
@@ -306,6 +290,7 @@ private void writeUsername(String filePath, String studentOrTeacher) {
 
 
     try (FileWriter writer = new FileWriter(filePath, true)) {
+        checkIfExisting();
         int commaCountInt = commaCount(username);
         writer.write(username + "," + commaCountInt + "," + "\n");
     } catch (IOException e1) {
@@ -353,12 +338,11 @@ private int commaCount(String username) {
         return gbc;
     }
 
- 
-    // private void call(MainWindow main, String studentOrTeacher) {
-    //     Gather gatherFrame = new Gather(main, NewUser.this, studentOrTeacher, existingOrNew, windowX, windowY);
-    //     gatherFrame.gatherLaunch(main, this, studentOrTeacher, existingOrNew);
-                    
-    // }
+    private void checkIfExisting() {
+        //loop through file to see if username in the first column
+        System.out.println("in check if existing");
+        //Reader.read();
+    }
 
     private void setWindowX(int newWindowX) {
         windowX = newWindowX;
