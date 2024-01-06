@@ -351,6 +351,8 @@ private int commaCount(String username) {
         System.out.println("in check if existing");
 
         //takes comma count then keep going until that number of commas+1 has been found 
+        char commaCount =  sample.charAt(0);
+        System.out.println("commacount"+commaCount);
         for (int i=0; i<sample.length(); i++) {
             System.out.println("i:"+sample.charAt(i));
         }
