@@ -8,6 +8,8 @@ import javax.swing.JFrame;
 import javax.swing.JRadioButton;
 import javax.swing.JTextField;
 import javax.swing.SwingConstants;
+import javax.swing.text.Caret;
+
 import java.awt.BorderLayout;
 import java.awt.Color;
 import java.awt.Dimension;
@@ -98,19 +100,6 @@ public class Gather {
 
         buttonSetUp(main, newUser, existingOrNew, studentOrTeacher);
 
-        
-        // window.getContentPane().addMouseListener(new MouseAdapter() {
-        //     @Override
-        //     public void mouseClicked(MouseEvent e) {
-        //         if (!textField.getBounds().contains(e.getPoint())) {
-        //             if (textField.getText().isEmpty()) {
-        //                 //textField.setEditable(false);
-        //                 textField.setText("Enter user name");
-        //                 textFieldEmptied = false;
-        //             }
-        //         }
-        //     }
-        // });
     }
     
     private void instructionsWordsWindow(String existingOrNew) {
@@ -148,9 +137,6 @@ public class Gather {
         choicesPanel= new JPanel(new GridBagLayout());
         choicesPanel.setBackground(choicesPanelColor);
 
-        textField.setEditable(false);
-        textField.setEditable(true);
-
         textField.setPreferredSize(new Dimension(textField.getPreferredSize().width, 50)); // Set the height to 50 pixels
         textField.setFont(new Font("Roboto", Font.PLAIN, 14));
         textField.setForeground(Color.orange);
@@ -162,6 +148,40 @@ public class Gather {
         textField.setText("Enter user name");
         textFieldEmptied = false;
 
+        textField.addFocusListener(new FocusAdapter() {
+            @Override
+            public void focusGained(FocusEvent e) {
+                if (textField.getText().equals("Enter user name") && textFieldEmptied == false) {
+                    textField.setText(""); // Clear the placeholder text when the field gains focus
+                    textField.setForeground(Color.BLACK); // Change the text color when typing
+                }
+            }
+        
+            // @Override
+            // public void focusLost(FocusEvent e) {
+            //     if (textField.getText().isEmpty()) {
+            //         textField.setForeground(Color.GRAY); // Reset the placeholder color if no text is entered
+            //         textField.setText("Enter user name"); // Set the placeholder text back when focus is lost and no text entered
+            //     }
+            // }
+        });
+
+        window.getContentPane().addMouseListener(new MouseAdapter() {
+            @Override
+            public void mouseClicked(MouseEvent e) {
+                System.out.println("helloooojodso");
+                if (textField.getBounds().contains(e.getPoint()) == false) {
+                    //textField.requestFocusInWindow();
+                    textField.setText("Enter user name");
+                    textField.setForeground(Color.GRAY);
+                    textFieldEmptied = false;
+                    window.requestFocus();
+                    //textField.setCaretColor(Color.WHITE);
+
+                }
+            }
+        });
+
         KeyListener deleteKeyListener = new KeyAdapter() {
             @Override
             public void keyPressed(KeyEvent e) {
@@ -172,19 +192,6 @@ public class Gather {
             }
         };
 
-        // textField.addMouseListener(new MouseAdapter() {
-        //     @Override
-        //     public void mouseClicked(MouseEvent e) {
-        //         textField.setEditable(true);
-        //         textField.setForeground(Color.BLACK);
-        //         textField.setCaretPosition(textField.getText().length());
-
-        //         if (!textFieldEmptied) {
-        //             textField.setText("");
-        //             textFieldEmptied = true;
-        //         }
-        //     }
-        // });
 
         GridBagConstraints constraints = new GridBagConstraints();
         constraints.gridx = 0;
