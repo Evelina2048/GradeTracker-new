@@ -84,8 +84,6 @@ public class Gather {
 
 
     public Gather(MainWindow main, NewUser newUser, String studentOrTeacher, String existingOrNew,int windowX, int windowY) {
-        //window = window2; 
-        //MainWindow main = main2;
 
        gatherLaunch(main, newUser, studentOrTeacher, existingOrNew);
 
@@ -101,23 +99,19 @@ public class Gather {
 
         buttonSetUp(main, newUser, existingOrNew, studentOrTeacher);
 
-        ///
-        window.getContentPane().addMouseListener(new MouseAdapter() {
-            @Override
-            public void mouseClicked(MouseEvent e) {
-                if (!textField.getBounds().contains(e.getPoint())) {
-                    textField.requestFocusInWindow();
-                    textField.setText("Enter user name");
-                    textField.setForeground(Color.GRAY);
-                    textFieldEmptied = false;
-                }
-            }
-        });
-        ///
-
-        //radioButtonSetUp();
-
-        //buttonSetUp(main, studentOrTeacher);
+        
+        // window.getContentPane().addMouseListener(new MouseAdapter() {
+        //     @Override
+        //     public void mouseClicked(MouseEvent e) {
+        //         if (!textField.getBounds().contains(e.getPoint())) {
+        //             if (textField.getText().isEmpty()) {
+        //                 //textField.setEditable(false);
+        //                 textField.setText("Enter user name");
+        //                 textFieldEmptied = false;
+        //             }
+        //         }
+        //     }
+        // });
     }
     
     private void instructionsWordsWindow(String existingOrNew) {
@@ -149,35 +143,13 @@ public class Gather {
     }
 
     private void inputName() {
-    teacherStudentGroup = new ButtonGroup();
+        teacherStudentGroup = new ButtonGroup();
         Color choicesPanelColor = Color.decode("#AFA2A2");
 
         choicesPanel= new JPanel(new GridBagLayout());
         choicesPanel.setBackground(choicesPanelColor);
 
-        //
-        textField.addFocusListener(new FocusAdapter() {
-            @Override
-            public void focusGained(FocusEvent e) {
-                System.out.println("focusgain");
-                if (textField.getText().equals("Enter user name")) {
-                    textField.setText(""); // Clear the placeholder text when the field gains focus
-                    textField.setForeground(Color.PINK); // Change the text color when typing
-                }
-            }
-        
-            @Override
-            public void focusLost(FocusEvent e) {
-                System.out.println("focuslost");
-                if (textField.getText().isEmpty()) {
-                    textField.setForeground(Color.GRAY); // Reset the placeholder color if no text is entered
-                    textField.setText("Enter user name"); // Set the placeholder text back when focus is lost and no text entered
-                }
-            }
-        });
-
-        //
-
+        textField.setEditable(false);
         textField.setPreferredSize(new Dimension(textField.getPreferredSize().width, 50)); // Set the height to 50 pixels
         textField.setFont(new Font("Roboto", Font.PLAIN, 14));
         textField.setForeground(Color.orange);
@@ -199,14 +171,19 @@ public class Gather {
             }
         };
 
-        textField.addMouseListener(new MouseAdapter() {
-            @Override
-            public void mouseClicked(MouseEvent e) {
-                textField.setText("");
-                textFieldEmptied = true;
-                textField.setForeground(Color.BLACK);
-            }
-        });
+        // textField.addMouseListener(new MouseAdapter() {
+        //     @Override
+        //     public void mouseClicked(MouseEvent e) {
+        //         textField.setEditable(true);
+        //         textField.setForeground(Color.BLACK);
+        //         textField.setCaretPosition(textField.getText().length());
+
+        //         if (!textFieldEmptied) {
+        //             textField.setText("");
+        //             textFieldEmptied = true;
+        //         }
+        //     }
+        // });
 
         GridBagConstraints constraints = new GridBagConstraints();
         constraints.gridx = 0;
@@ -253,11 +230,6 @@ public class Gather {
         boolean textFieldHasntChanged = textField.getText().equals("Enter user name") && textFieldEmptied == false;
         boolean textFieldFilled = textField.getText().trim().isEmpty() == false;
 
-        //delete after testing
-        //checkIfExisting("/Users/evy/Documents/GradeTracker-new/src/main/view/studentUsername.txt");
-        //delete after testing
-
-    
         //check if the username is not empty
         if (textFieldEmpty) {
             moveOnPossible = false;
@@ -360,8 +332,6 @@ private int commaCount(String username) {
     System.out.println(commaCount);
     return commaCount;
 }
-    //>//
-
 
     private void choicesButtonDecorate(JRadioButton button) {
         Font buttonFont = new Font("Roboto", Font.PLAIN, 25); // Change the font and size here
