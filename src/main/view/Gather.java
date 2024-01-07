@@ -348,33 +348,30 @@ private int commaCount(String username) {
     }
 
     private void checkIfExisting(String filePath, String username) {
-        System.out.println("filepath"+filePath);
-        //loop through (studentOrTeacher)Username.txt
         boolean usernametaken = false;
-        BufferedReader reader = null;
 
+        readNames(filePath, username, usernametaken);
+        if (usernametaken == false) {
+            writeNewName(filePath, username);    
+        }
+    }
+
+    private void writeNewName(String filePath, String username) {
+        System.out.println("writingtofile");
+            try (FileWriter writer = new FileWriter(filePath, true)) {
+                writer.write(username + "\n");
+
+            } catch (IOException e1) {
+                e1.printStackTrace();
+            }
+    }
+
+    private boolean readNames(String filePath, String username, Boolean usernametaken) {
+        BufferedReader reader = null;
         try {
             File file = new File(filePath);
             reader = new BufferedReader(new FileReader(filePath));
-
-            String line;
-            while ((line = reader.readLine()) != null) {
-                System.out.println(line);
-                if (line.equals(username)) {//if matches username
-                    //  existing = true
-                    System.out.println("username does equal");
-
-                    //  try again writing. warning message
-                    errorMessageSetUp("<html><center>Username already exists.<br> Please choose another.",200,100);
-                    usernametaken = true;
-                }
-
-                // else {
-                //     System.out.println("something went wrong in gather class check if existing");
-                // }
-
-        }
-
+            readLine(reader, username, usernametaken);
         } catch (IOException e) {
             e.printStackTrace();
         } finally {
@@ -384,21 +381,25 @@ private int commaCount(String username) {
                 e.printStackTrace();
             }
         }
-        System.out.println("usertaken: "+ usernametaken);
-        if (usernametaken == false) {
-            //  existing = false
-            //  write username
-            System.out.println("writingtofile");
-            try (FileWriter writer = new FileWriter(filePath, true)) {
-                writer.write(username + "\n");
+        return usernametaken;
+    }
 
-            } catch (IOException e1) {
-                e1.printStackTrace();
+    private boolean readLine(BufferedReader reader, String username, boolean usernametaken){
+        String line;
+        try {
+            while ((line = reader.readLine()) != null) {
+                System.out.println(line);
+                if (line.equals(username)) {//if matches username
+                    System.out.println("username does equal");
+                    errorMessageSetUp("<html><center>Username already exists.<br> Please choose another.",200,100);
+                    usernametaken = true;
+                    break;
+                }
             }
-            
-        }
-        
-
+        } catch (IOException e) { 
+            //e.printStackTrace();
+            System.err.println("Error reading the file: " + e.getMessage());
+        } return usernametaken;
     }
 
     private void setWindowX(int newWindowX) {
