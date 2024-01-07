@@ -73,8 +73,7 @@ public class Gather {
     ButtonGroup teacherStudentGroup;
     int windowWidth = 800;
     int windowHeight = 500;
-    // Create a JTextField
-    JTextField textField = new JTextField(10); // 20 columns wide
+    JTextField textField = new JTextField(10);
 
     //panels
     JPanel instructionsPanel;
@@ -149,7 +148,9 @@ public class Gather {
         choicesPanel= new JPanel(new GridBagLayout());
         choicesPanel.setBackground(choicesPanelColor);
 
-        //textField.setEditable(false);
+        textField.setEditable(false);
+        textField.setEditable(true);
+
         textField.setPreferredSize(new Dimension(textField.getPreferredSize().width, 50)); // Set the height to 50 pixels
         textField.setFont(new Font("Roboto", Font.PLAIN, 14));
         textField.setForeground(Color.orange);
