@@ -1,7 +1,6 @@
 package main.view;
 
 import javax.swing.BorderFactory;
-//visual stuff
 import javax.swing.ButtonGroup;
 import javax.swing.JButton;
 import javax.swing.JDialog;
@@ -9,7 +8,6 @@ import javax.swing.JFrame;
 import javax.swing.JRadioButton;
 import javax.swing.JTextField;
 import javax.swing.SwingConstants;
-import javax.swing.text.Caret;
 
 import java.awt.BorderLayout;
 import java.awt.Color;
@@ -19,7 +17,6 @@ import javax.swing.JPanel;
 import javax.swing.JLabel;
 
 import java.awt.GridBagLayout;
-import java.awt.Insets;
 import java.awt.GridBagConstraints;
 
 import java.awt.event.ActionListener;
@@ -28,48 +25,24 @@ import java.awt.FlowLayout;
 
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
-import java.awt.event.KeyListener;
-import java.awt.event.KeyAdapter;
 
-import java.awt.event.KeyEvent;
 import java.awt.event.FocusAdapter;
 import java.awt.event.FocusEvent;
 
-//for reading csv
-import org.apache.commons.csv.CSVFormat;
-import org.apache.commons.csv.CSVParser;
-import org.apache.commons.csv.CSVRecord;
-import com.opencsv.CSVWriter;
 import java.io.FileWriter;
 import java.io.IOException;
-import java.io.PrintWriter;
-
-import com.opencsv.CSVWriter;
-
-import org.junit.jupiter.api.Test;
-
-import static org.junit.jupiter.api.Assertions.assertTrue;
-import static org.junit.jupiter.api.Assertions.fail;
 
 import java.io.BufferedReader;
-import java.io.File;
-import java.io.FileNotFoundException;
+
 import java.io.FileReader;
-import java.io.IOException;
-import java.io.Reader;
-//
-import java.io.Writer;
+
 
 public class Gather {
     private JFrame window;
-    private String selectedText;
     private boolean moveOnPossible = false;
     private int windowX;
     private int windowY;
-    private String studentOrTeacherString;
     private boolean textFieldEmptied;
-
-    private NewUser newUser;
 
     JRadioButton studentButton;
     JRadioButton teacherButton;
@@ -166,29 +139,14 @@ public class Gather {
             public void mouseClicked(MouseEvent e) {
                 System.out.println("helloooojodso");
                 if (textField.getBounds().contains(e.getPoint()) == false) {
-                    //textField.requestFocusInWindow();
                     textField.setText("Enter user name");
                     textField.setForeground(Color.GRAY);
                     textFieldEmptied = false;
-                    //textField.setBorder(BorderFactory.createLineBorder(Color.BLACK));
-                    //textField.setBorder(BorderFactory.createLineBorder(Color.gray, 2));
                     window.requestFocus();
-                    //textField.setCaretColor(Color.WHITE);
 
                 }
             }
         });
-
-        KeyListener deleteKeyListener = new KeyAdapter() {
-            @Override
-            public void keyPressed(KeyEvent e) {
-                if (e.getKeyCode() == KeyEvent.VK_DELETE) {
-                    textFieldEmptied = true;
-                    textField.removeKeyListener(this); // Remove the KeyListener
-                }
-            }
-        };
-
 
         GridBagConstraints constraints = new GridBagConstraints();
         constraints.gridx = 0;
@@ -227,10 +185,7 @@ public class Gather {
         });
     }
 
-    //>//
     private void nextButtonAction(String existingOrNew, String studentOrTeacherString) {
-        int windowX = window.getX(); 
-        int windowY = window.getY();
         boolean textFieldEmpty = textField.getText().trim().isEmpty();
         boolean textFieldHasntChanged = textField.getText().equals("Enter user name") && textFieldEmptied == false;
         boolean textFieldFilled = textField.getText().trim().isEmpty() == false;
@@ -338,32 +293,6 @@ private int commaCount(String username) {
     return commaCount;
 }
 
-    private void choicesButtonDecorate(JRadioButton button) {
-        Font buttonFont = new Font("Roboto", Font.PLAIN, 25); // Change the font and size here
-        button.setForeground(Color.WHITE);
-        button.setFont(buttonFont);
-    }
-
-    private void addToChoicesPanel(ButtonGroup teacherStudentGroup, JRadioButton existingButton, JRadioButton newUserButton, JPanel choicesPanel) {
-        teacherStudentGroup.add(existingButton);
-        teacherStudentGroup.add(newUserButton);
-        choicesPanel.add(existingButton);
-        choicesPanel.add(newUserButton);
-        choicesPanel.add(existingButton, choiceGbc());
-    }
-
-    private GridBagConstraints choiceGbc() {
-        //radio buttons distance
-        GridBagConstraints gbc = new GridBagConstraints();
-        gbc.gridx = 0;
-        gbc.gridy = 1;
-        gbc.gridwidth = 2;
-
-        gbc.anchor = GridBagConstraints.WEST;
-        gbc.insets = new Insets(10, 0, 0, 0); // Increase the horizontal spacing between components
-        return gbc;
-    }
-
     private void checkIfExisting(String filePath, String username) {
         boolean usernametaken = false;
 
@@ -386,7 +315,6 @@ private int commaCount(String username) {
     private boolean readNames(String filePath, String username, Boolean usernametaken) {
         BufferedReader reader = null;
         try {
-            File file = new File(filePath);
             reader = new BufferedReader(new FileReader(filePath));
             readLine(reader, username, usernametaken);
         } catch (IOException e) {
@@ -414,7 +342,7 @@ private int commaCount(String username) {
                 }
             }
         } catch (IOException e) { 
-            //e.printStackTrace();
+            e.printStackTrace();
         } return usernametaken;
     }
 
