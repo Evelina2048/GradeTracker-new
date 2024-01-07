@@ -1,5 +1,6 @@
 package main.view;
 
+import javax.swing.BorderFactory;
 //visual stuff
 import javax.swing.ButtonGroup;
 import javax.swing.JButton;
@@ -139,7 +140,8 @@ public class Gather {
 
         textField.setPreferredSize(new Dimension(textField.getPreferredSize().width, 50)); // Set the height to 50 pixels
         textField.setFont(new Font("Roboto", Font.PLAIN, 14));
-        textField.setForeground(Color.orange);
+        textField.setForeground(Color.gray);
+        textField.setBorder(BorderFactory.createLineBorder(Color.gray, 2));
 
         Color defaultTextColor = Color.decode("#B0B0B0");
         textField.setSelectedTextColor(defaultTextColor);
@@ -157,13 +159,6 @@ public class Gather {
                 }
             }
         
-            // @Override
-            // public void focusLost(FocusEvent e) {
-            //     if (textField.getText().isEmpty()) {
-            //         textField.setForeground(Color.GRAY); // Reset the placeholder color if no text is entered
-            //         textField.setText("Enter user name"); // Set the placeholder text back when focus is lost and no text entered
-            //     }
-            // }
         });
 
         window.getContentPane().addMouseListener(new MouseAdapter() {
@@ -175,6 +170,8 @@ public class Gather {
                     textField.setText("Enter user name");
                     textField.setForeground(Color.GRAY);
                     textFieldEmptied = false;
+                    //textField.setBorder(BorderFactory.createLineBorder(Color.BLACK));
+                    //textField.setBorder(BorderFactory.createLineBorder(Color.gray, 2));
                     window.requestFocus();
                     //textField.setCaretColor(Color.WHITE);
 
