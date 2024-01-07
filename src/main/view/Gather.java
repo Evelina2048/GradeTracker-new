@@ -350,7 +350,7 @@ private int commaCount(String username) {
     private void checkIfExisting(String filePath, String username) {
         System.out.println("filepath"+filePath);
         //loop through (studentOrTeacher)Username.txt
-
+        boolean usernametaken = false;
         BufferedReader reader = null;
 
         try {
@@ -361,15 +361,18 @@ private int commaCount(String username) {
             while ((line = reader.readLine()) != null) {
                 System.out.println(line);
                 if (line.equals(username)) {//if matches username
-                //  existing = true
+                    //  existing = true
                     System.out.println("username does equal");
 
-                //  try again writing. warning message
-                errorMessageSetUp("<html><center>Username already exists.<br> Please choose another.",200,100);
+                    //  try again writing. warning message
+                    errorMessageSetUp("<html><center>Username already exists.<br> Please choose another.",200,100);
+                    usernametaken = true;
                 }
-                //else 
-                //  existing = false
-                //  write username
+
+                // else {
+                //     System.out.println("something went wrong in gather class check if existing");
+                // }
+
         }
 
         } catch (IOException e) {
@@ -380,6 +383,19 @@ private int commaCount(String username) {
             } catch (IOException e) {
                 e.printStackTrace();
             }
+        }
+        System.out.println("usertaken: "+ usernametaken);
+        if (usernametaken == false) {
+            //  existing = false
+            //  write username
+            System.out.println("writingtofile");
+            try (FileWriter writer = new FileWriter(filePath, true)) {
+                writer.write(username + "\n");
+
+            } catch (IOException e1) {
+                e1.printStackTrace();
+            }
+            
         }
         
 
