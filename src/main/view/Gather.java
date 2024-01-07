@@ -29,6 +29,8 @@ import java.awt.event.KeyListener;
 import java.awt.event.KeyAdapter;
 
 import java.awt.event.KeyEvent;
+import java.awt.event.FocusAdapter;
+import java.awt.event.FocusEvent;
 
 //for reading csv
 import org.apache.commons.csv.CSVFormat;
@@ -84,7 +86,9 @@ public class Gather {
     public Gather(MainWindow main, NewUser newUser, String studentOrTeacher, String existingOrNew,int windowX, int windowY) {
         //window = window2; 
         //MainWindow main = main2;
+
        gatherLaunch(main, newUser, studentOrTeacher, existingOrNew);
+
     }
 
     public void gatherLaunch (MainWindow main, NewUser newUser, String studentOrTeacher, String existingOrNew) {
@@ -96,6 +100,20 @@ public class Gather {
         inputName();
 
         buttonSetUp(main, newUser, existingOrNew, studentOrTeacher);
+
+        ///
+        window.getContentPane().addMouseListener(new MouseAdapter() {
+            @Override
+            public void mouseClicked(MouseEvent e) {
+                if (!textField.getBounds().contains(e.getPoint())) {
+                    textField.requestFocusInWindow();
+                    textField.setText("Enter user name");
+                    textField.setForeground(Color.GRAY);
+                    textFieldEmptied = false;
+                }
+            }
+        });
+        ///
 
         //radioButtonSetUp();
 
@@ -136,6 +154,29 @@ public class Gather {
 
         choicesPanel= new JPanel(new GridBagLayout());
         choicesPanel.setBackground(choicesPanelColor);
+
+        //
+        textField.addFocusListener(new FocusAdapter() {
+            @Override
+            public void focusGained(FocusEvent e) {
+                System.out.println("focusgain");
+                if (textField.getText().equals("Enter user name")) {
+                    textField.setText(""); // Clear the placeholder text when the field gains focus
+                    textField.setForeground(Color.PINK); // Change the text color when typing
+                }
+            }
+        
+            @Override
+            public void focusLost(FocusEvent e) {
+                System.out.println("focuslost");
+                if (textField.getText().isEmpty()) {
+                    textField.setForeground(Color.GRAY); // Reset the placeholder color if no text is entered
+                    textField.setText("Enter user name"); // Set the placeholder text back when focus is lost and no text entered
+                }
+            }
+        });
+
+        //
 
         textField.setPreferredSize(new Dimension(textField.getPreferredSize().width, 50)); // Set the height to 50 pixels
         textField.setFont(new Font("Roboto", Font.PLAIN, 14));
@@ -216,6 +257,7 @@ public class Gather {
         //checkIfExisting("/Users/evy/Documents/GradeTracker-new/src/main/view/studentUsername.txt");
         //delete after testing
 
+    
         //check if the username is not empty
         if (textFieldEmpty) {
             moveOnPossible = false;
@@ -398,7 +440,6 @@ private int commaCount(String username) {
             }
         } catch (IOException e) { 
             //e.printStackTrace();
-            System.err.println("Error reading the file: " + e.getMessage());
         } return usernametaken;
     }
 
