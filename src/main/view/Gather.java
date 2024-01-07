@@ -149,7 +149,7 @@ public class Gather {
         choicesPanel= new JPanel(new GridBagLayout());
         choicesPanel.setBackground(choicesPanelColor);
 
-        textField.setEditable(false);
+        //textField.setEditable(false);
         textField.setPreferredSize(new Dimension(textField.getPreferredSize().width, 50)); // Set the height to 50 pixels
         textField.setFont(new Font("Roboto", Font.PLAIN, 14));
         textField.setForeground(Color.orange);
