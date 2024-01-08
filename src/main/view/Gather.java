@@ -45,6 +45,7 @@ public class Gather {
     private int windowX;
     private int windowY;
     private boolean textFieldEmptied;
+    private Creator creator = new Creator();
 
     JRadioButton studentButton;
     JRadioButton teacherButton;
@@ -160,31 +161,23 @@ public class Gather {
     }
 
     private void buttonSetUpAction(MainWindow main, NewUser newUser, String existingOrNew, String studentOrTeacher) {
-        JButton backButton;
-        JButton nextButton;
-        //buttons
-        backNextButtonsPanel = new JPanel(new BorderLayout());
-        backButton = new JButton("< Back");
-        backNextButtonsPanel.add(backButton, BorderLayout.WEST);
-
+        JButton backButton = creator.backButtonCreate();
         backButton.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent e) {
-
                backButtonAction(main, newUser, studentOrTeacher, existingOrNew);
-
             }
         });
+
+       
         
-        //next
-        nextButton = new JButton("Next >");
-        backNextButtonsPanel.add(nextButton, BorderLayout.EAST);
-        window.add(backNextButtonsPanel, BorderLayout.SOUTH);
-        
+        JButton nextButton = creator.nextButtonCreate();
         nextButton.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent e) {
                 nextButtonAction(existingOrNew, studentOrTeacher);
             }
         });
+        backNextButtonsPanel = creator.makeBackNextButtonsPanel(backButton, nextButton);
+        window.add(backNextButtonsPanel, BorderLayout.SOUTH);
     }
 
     private void nextButtonAction(String existingOrNew, String studentOrTeacherString) {
