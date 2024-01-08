@@ -45,6 +45,8 @@ JPanel instructionsPanel;
 JPanel choicesPanel;
 JPanel backNextButtonsPanel;
 
+Decorator decorator = new Decorator();
+
 public MainWindow(JFrame window2) {
     //window = window2;
 
@@ -180,7 +182,7 @@ private void doNextButtonProcedure() {
     if (moveOnPossible) {
         NewUser newUser = new NewUser(this, studentOrTeacher,existingOrNew, windowX, windowY);
         newUser.setButtonSelected(existingOrNew);
-        hideWindow();
+        decorator.hideWindow(instructionsPanel, choicesPanel, backNextButtonsPanel);
     }
     else if (!moveOnPossible) {
         errorMessageSetUp();
@@ -258,13 +260,6 @@ public void show(int windowX, int windowY) {
    }
 
     this.setVisible(true);
-}
-
-private void hideWindow() {
-    instructionsPanel.setVisible(false);
-    choicesPanel.setVisible(false);
-    backNextButtonsPanel.setVisible(false);
-
 }
 
 public class EnterAction extends AbstractAction {

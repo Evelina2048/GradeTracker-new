@@ -47,6 +47,8 @@ public class NewUser extends JFrame {
     JPanel choicesPanel;
     JPanel backNextButtonsPanel;
 
+    Decorator decorator = new Decorator();
+
     public NewUser(MainWindow main, String studentOrTeacher, String newOrExisting,int windowX, int windowY) {
         //window = window2;
         //MainWindow main = main2;
@@ -163,7 +165,7 @@ public class NewUser extends JFrame {
                 main.show(window.getX(),window.getY());
                 main.setButtonSelected(studentOrTeacher);
                 main.setExistingOrNew(existingOrNew);
-                hideWindow(); 
+                decorator.hideWindow(instructionsPanel, choicesPanel, backNextButtonsPanel); 
                 
             }
         });
@@ -186,7 +188,7 @@ public class NewUser extends JFrame {
         int windowX = window.getX();
             int windowY = window.getY();
             if (moveOnPossible) {
-                hideWindow();
+                decorator.hideWindow(instructionsPanel, choicesPanel, backNextButtonsPanel);
 
                 //
                 if (gatherFrame == null) {
@@ -274,12 +276,6 @@ public class NewUser extends JFrame {
     }
 
     window.setVisible(true);
-    }
-
-    private void hideWindow() {
-        instructionsPanel.setVisible(false);
-        choicesPanel.setVisible(false);
-        backNextButtonsPanel.setVisible(false);
     }
 
     public class EnterAction extends AbstractAction {
