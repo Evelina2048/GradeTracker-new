@@ -127,19 +127,19 @@ private void addToChoicesPanel(ButtonGroup teacherStudentGroup, JRadioButton tea
     teacherStudentGroup.add(studentButton);
     choicesPanel.add(teacherButton);
     choicesPanel.add(studentButton);
-    choicesPanel.add(teacherButton, choiceGbc());
+    choicesPanel.add(teacherButton, decorator.choiceGbc());
 }
 
-private GridBagConstraints choiceGbc() {
-    //radio buttons distance
-    GridBagConstraints gbc = new GridBagConstraints();
-    gbc.gridx = 0;
-    gbc.gridy = 1;
-    gbc.gridwidth = 2;
+// private GridBagConstraints choiceGbc() {
+//     //radio buttons distance
+//     GridBagConstraints gbc = new GridBagConstraints();
+//     gbc.gridx = 0;
+//     gbc.gridy = 1;
+//     gbc.gridwidth = 2;
 
-    gbc.insets = new Insets(10, 0, 0, 0); // Increase the horizontal spacing between components
-    return gbc;
-}
+//     gbc.insets = new Insets(10, 0, 0, 0); // Increase the horizontal spacing between components
+//     return gbc;
+// }
 
 private void backNextButton() {
     JButton backButton;

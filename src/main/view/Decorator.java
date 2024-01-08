@@ -50,7 +50,52 @@ public class Decorator {
         instructionsWords.setFont(instructionsFont);
 
         return instructionsPanel;
-        }
+    }
+
+    // public void radioButtonSetUp() {
+    //     buttonGroup = new ButtonGroup();
+    //     Color choicesPanelColor = Color.decode("#AFA2A2");
+    
+    //     choicesPanel= new JPanel(new GridBagLayout());
+    //     choicesPanel.setBackground(choicesPanelColor);
+    
+    //     //initialize buttons with color
+    //     teacherButton = new JRadioButton("Teacher");
+    //     choicesButtonDecorate(teacherButton);
+    //     teacherButton.addActionListener(new ActionListener() {
+    //         public void actionPerformed(ActionEvent e) {
+    //            studentOrTeacher = teacherButton.getText();
+    //            moveOnPossible = true;
+    //         }
+            
+    //     });
+    
+    //     studentButton = new JRadioButton("Student");
+    //     choicesButtonDecorate(studentButton);
+    //     studentButton.addActionListener(new ActionListener() {
+    //         public void actionPerformed(ActionEvent e) {
+    //             studentOrTeacher = studentButton.getText();
+    //             moveOnPossible = true;
+    //         }
+    //     });
+    
+    //     addToChoicesPanel(buttonGroup, teacherButton, studentButton, choicesPanel);
+    
+    //     this.add(choicesPanel);
+    // }
+
+    public GridBagConstraints choiceGbc() {
+        //radio buttons distance
+        GridBagConstraints gbc = new GridBagConstraints();
+        gbc.gridx = 0;
+        gbc.gridy = 1;
+        gbc.gridwidth = 2;
+
+        gbc.anchor = GridBagConstraints.WEST;
+        gbc.insets = new Insets(10, 0, 0, 0); // Increase the horizontal spacing between components
+        return gbc;
+    }
+    
 
     public void setWindowX(int newWindowX) {
         windowX = newWindowX;

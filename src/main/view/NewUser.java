@@ -124,20 +124,20 @@ public class NewUser extends JFrame {
         teacherStudentGroup.add(newUserButton);
         choicesPanel.add(existingButton);
         choicesPanel.add(newUserButton);
-        choicesPanel.add(existingButton, choiceGbc());
+        choicesPanel.add(existingButton, decorator.choiceGbc());
     }
 
-    private GridBagConstraints choiceGbc() {
-        //radio buttons distance
-        GridBagConstraints gbc = new GridBagConstraints();
-        gbc.gridx = 0;
-        gbc.gridy = 1;
-        gbc.gridwidth = 2;
+    // private GridBagConstraints choiceGbc() {
+    //     //radio buttons distance
+    //     GridBagConstraints gbc = new GridBagConstraints();
+    //     gbc.gridx = 0;
+    //     gbc.gridy = 1;
+    //     gbc.gridwidth = 2;
 
-        gbc.anchor = GridBagConstraints.WEST;
-        gbc.insets = new Insets(10, 0, 0, 0); // Increase the horizontal spacing between components
-        return gbc;
-    }
+    //     gbc.anchor = GridBagConstraints.WEST;
+    //     gbc.insets = new Insets(10, 0, 0, 0); // Increase the horizontal spacing between components
+    //     return gbc;
+    // }
 
     private void buttonSetUp(MainWindow main, String studentOrTeacher) {
         JButton backButton;
