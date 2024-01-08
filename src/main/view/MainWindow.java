@@ -177,8 +177,9 @@ private void backNextButton() {
 }
 
 private void doNextButtonProcedure() {
-    int windowX = this.getX();
-    int windowY = this.getY();
+    decorator.setWindowX(this.getX());
+    decorator.setWindowY(this.getY());
+
     if (moveOnPossible) {
         NewUser newUser = new NewUser(this, studentOrTeacher,existingOrNew, windowX, windowY);
         newUser.setButtonSelected(existingOrNew);
@@ -229,29 +230,20 @@ public void setExistingOrNew(String existingOrNew2) {
     existingOrNew = existingOrNew2;
 }
 
-private void setWindowX(int newWindowX) {
-    windowX = newWindowX;
-}
+// public int getWindowX() {
+//     return windowX;
+// }
 
-public int getWindowX() {
-    return windowX;
-}
-
-private void setWindowY(int newWindowY) {
-    windowY = newWindowY;
-}
-
-public int getWindowY() {
-    return windowY;
-}
-
+// public int getWindowY() {
+//     return windowY;
+// }
 
 
 public void show(int windowX, int windowY) {
    if (windowX != 0 && windowY != 0) {
        this.setLocation(windowX, windowY);
-       setWindowX(windowX);
-       setWindowY(windowY);
+       decorator.setWindowX(windowX);
+       decorator.setWindowY(windowY);
 
    }
 

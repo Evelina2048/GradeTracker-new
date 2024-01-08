@@ -247,27 +247,19 @@ public class NewUser extends JFrame {
         }
     }
 
-    private void setWindowX(int newWindowX) {
-        windowX = newWindowX;
-    }
+    // public int getWindowX() {
+    //     return windowX;
+    // }
 
-    public int getWindowX() {
-        return windowX;
-    }
-
-    private void setWindowY(int newWindowY) {
-        windowY = newWindowY;
-    }
-
-    public int getWindowY() {
-        return windowY;
-    }
+    // private void setWindowY(int newWindowY) {
+    //     windowY = newWindowY;
+    // }
 
     public void showWindow(int windowX, int windowY) {
     if (windowX != 0 && windowY != 0) {
         window.setLocation(windowX, windowY);
-        setWindowX(windowX);
-        setWindowY(windowY);
+        decorator.setWindowX(windowX);
+        decorator.setWindowY(windowY);
 
     }
 
