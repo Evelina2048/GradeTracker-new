@@ -74,7 +74,7 @@ public class Gather {
         
         inputName();
 
-        buttonSetUp(main, newUser, existingOrNew, studentOrTeacher);
+        buttonSetUpAction(main, newUser, existingOrNew, studentOrTeacher);
 
     }
     
@@ -159,7 +159,7 @@ public class Gather {
         window.add(choicesPanel);
     }
 
-    private void buttonSetUp(MainWindow main, NewUser newUser, String existingOrNew, String studentOrTeacher) {
+    private void buttonSetUpAction(MainWindow main, NewUser newUser, String existingOrNew, String studentOrTeacher) {
         JButton backButton;
         JButton nextButton;
         //buttons
@@ -213,6 +213,7 @@ public class Gather {
                 writeUsername(filePath,studentOrTeacherString);
                 //move on to studentclasses class
                 System.out.println("should move to studentClasses class");
+                hideWindow();
                 StudentClasses studentClasses = new StudentClasses(window);
             }
         }

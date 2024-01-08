@@ -87,7 +87,6 @@ public class Decorator {
         gbc.insets = new Insets(10, 0, 0, 0); // Increase the horizontal spacing between components
         return gbc;
     }
-    
 
     public void setWindowX(int newWindowX) {
         windowX = newWindowX;
