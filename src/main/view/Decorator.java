@@ -35,6 +35,23 @@ public class Decorator {
 
     }
 
+    public JPanel InstructionsPanelDecorate(JFrame window, JPanel instructionsPanel, JLabel instructionsWords) {
+        instructionsPanel= new JPanel();
+        Color instructionsColor = Color.decode("#7A6D6D");
+        instructionsPanel.setBackground(instructionsColor);
+        
+        instructionsPanel.add(instructionsWords);
+        Color instructionsWordsColor = Color.decode("#edebeb");
+        instructionsWords.setForeground(instructionsWordsColor); //color
+        window.add(instructionsPanel, BorderLayout.NORTH);
+    
+        //set the font for instructions
+        Font instructionsFont = new Font("Roboto", Font.PLAIN, 30); // Change the font and size here
+        instructionsWords.setFont(instructionsFont);
+
+        return instructionsPanel;
+        }
+
     public void setWindowX(int newWindowX) {
         windowX = newWindowX;
     }
@@ -42,21 +59,6 @@ public class Decorator {
     public void setWindowY(int newWindowY) {
         windowY = newWindowY;
     }
-
-    // public void showWindow(JFrame window, int windowX, int windowY) {
-    //     if (windowX != 0 && windowY != 0) {
-    //         window.setLocation(windowX, windowY);
-    //         setWindowX(windowX);
-    //         setWindowY(windowY);
-     
-    //     }
-     
-    //     else {
-    //      window.setLocationRelativeTo(null);
-    //     }
-     
-    //      window.setVisible(true);
-    //  }
 
     public void errorMessageSetUp(JFrame window, JRadioButton button) {
         JDialog dialog = new JDialog(window, null, true);

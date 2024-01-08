@@ -76,21 +76,9 @@ public class NewUser extends JFrame {
     }
     
     private void instructionsWordsWindow(String studentOrTeacher) {
-        JLabel instructionsWords;
         //instructions (north section for borderlayout)
-        instructionsWords = new JLabel("You are a "+studentOrTeacher+". Are you a new user?");
-        instructionsPanel= new JPanel();
-        Color instructionsColor = Color.decode("#7A6D6D");
-        instructionsPanel.setBackground(instructionsColor);
-        
-        instructionsPanel.add(instructionsWords);
-        Color instructionsWordsColor = Color.decode("#edebeb");
-        instructionsWords.setForeground(instructionsWordsColor); //color
-        window.add(instructionsPanel, BorderLayout.NORTH);
-    
-        //set the font for instructions
-        Font instructionsFont = new Font("Roboto", Font.PLAIN, 30); // Change the font and size here
-        instructionsWords.setFont(instructionsFont);
+        JLabel instructionsWords = new JLabel("You are a "+studentOrTeacher+". Are you a new user?");
+        instructionsPanel = decorator.InstructionsPanelDecorate(window, instructionsPanel, instructionsWords);
     }
 
     private void radioButtonSetUp() {

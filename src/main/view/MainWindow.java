@@ -57,7 +57,7 @@ public MainWindow(JFrame window2) {
 public void MainWindowLaunch() {
     windowSetUp();
 
-    instructionsWordsWindow();
+    InstructionsWordsWindow();
 
     radioButtonSetUp();
 
@@ -79,21 +79,9 @@ private void windowSetUp() {
     this.setSize(windowWidth, windowHeight);
 }
  
-private void instructionsWordsWindow() {
-    JLabel instructionsWords;
-    instructionsWords = new JLabel("Welcome! Are you a student or a teacher?");
-    instructionsPanel= new JPanel();
-    Color instructionsColor = Color.decode("#7A6D6D");
-    instructionsPanel.setBackground(instructionsColor);
-     
-    instructionsPanel.add(instructionsWords);
-    Color instructionsWordsColor = Color.decode("#edebeb");
-    instructionsWords.setForeground(instructionsWordsColor); //color
-    this.add(instructionsPanel, BorderLayout.NORTH);
- 
-    //set the font for instructions
-    Font instructionsFont = new Font("Roboto", Font.PLAIN, 30); // Change the font and size here
-    instructionsWords.setFont(instructionsFont);
+private void InstructionsWordsWindow() {
+    JLabel instructionsWords = new JLabel("Welcome! Are you a student or a teacher?");
+    instructionsPanel = decorator.InstructionsPanelDecorate(this, instructionsPanel, instructionsWords );
 }
 
 private void radioButtonSetUp() {
