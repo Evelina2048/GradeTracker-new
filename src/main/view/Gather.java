@@ -41,6 +41,7 @@ import java.io.FileReader;
 
 public class Gather {
     private JFrame window;
+    private NewUser newUser;
     private boolean moveOnPossible = false;
     private int windowX;
     private int windowY;
@@ -67,9 +68,10 @@ public class Gather {
 
     }
 
-    public void gatherLaunch (MainWindow main, NewUser newUser, String studentOrTeacher, String existingOrNew) {
+    public void gatherLaunch (MainWindow main, NewUser newUser2, String studentOrTeacher, String existingOrNew) {
         main.setTitle("NEW USRE");
         this.window = main;
+        newUser = newUser2;
 
         instructionsWordsWindow(existingOrNew);
         
@@ -207,7 +209,7 @@ public class Gather {
                 //move on to studentclasses class
                 System.out.println("should move to studentClasses class");
                 hideWindow();
-                StudentClasses studentClasses = new StudentClasses(window);
+                StudentClasses studentClasses = new StudentClasses(window, newUser, studentOrTeacherString, existingOrNew);
             }
         }
 

@@ -38,16 +38,44 @@ import java.io.FileReader;
 
 //importing files
 import main.view.MainWindow;
+import main.view.NewUser;
+import main.view.Creator;
 
 
 public class StudentClasses extends JFrame {
     private JFrame window;
+    private Creator creator = new Creator();
+    private JPanel backNextButtonsPanel;
 
-    public StudentClasses(JFrame main) {
+    public StudentClasses(JFrame main,NewUser newUser, String studentOrTeacher, String existingOrNew) {
+        studentClassesLaunch(main);
+        buttonSetUpAction(main, newUser, studentOrTeacher, existingOrNew);
+    }
+
+    public void studentClassesLaunch(JFrame main) {
         System.out.println("in student classes");
         this.window = main;
         window.setTitle("StudentClasses");
     }
 
+    public void buttonSetUpAction(JFrame main, NewUser newUser, String studentOrTeacher, String existingOrNew) {
+        JButton backButton = creator.backButtonCreate();
+        backButton.addActionListener(new ActionListener() {
+            public void actionPerformed(ActionEvent e) {
+               //backButtonAction(main, newUser, studentOrTeacher, existingOrNew);
+            }
+        });
 
-}
+       
+        
+        JButton nextButton = creator.nextButtonCreate();
+        nextButton.addActionListener(new ActionListener() {
+            public void actionPerformed(ActionEvent e) {
+                //nextButtonAction(existingOrNew, studentOrTeacher);
+            }
+        });
+        backNextButtonsPanel = creator.makeBackNextButtonsPanel(backButton, nextButton);
+        window.add(backNextButtonsPanel, BorderLayout.SOUTH);
+    }
+
+    }
