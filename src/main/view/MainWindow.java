@@ -186,31 +186,31 @@ private void doNextButtonProcedure() {
         decorator.hideWindow(instructionsPanel, choicesPanel, backNextButtonsPanel);
     }
     else if (!moveOnPossible) {
-        errorMessageSetUp();
+        decorator.errorMessageSetUp(this, studentButton);
     }
 }
 
-private void errorMessageSetUp() {
-    JDialog dialog = new JDialog(this, null, true);
-    dialog.setLayout(new FlowLayout());
-    JLabel label = new JLabel("<html><center>Please choose an option");
-    label.setHorizontalAlignment(SwingConstants.CENTER);
-    dialog.add(label);
-    JButton okButton = new JButton("OK");
-    okButton.setVisible(true);
-    dialog.add(okButton);
-    dialog.setSize(200,90);
-    okButton.addActionListener(new ActionListener() {
-        public void actionPerformed(ActionEvent e) {
-            dialog.setVisible(false);
-            dialog.dispose(); 
-        }
-    });
+// private void errorMessageSetUp() {
+//     JDialog dialog = new JDialog(this, null, true);
+//     dialog.setLayout(new FlowLayout());
+//     JLabel label = new JLabel("<html><center>Please choose an option");
+//     label.setHorizontalAlignment(SwingConstants.CENTER);
+//     dialog.add(label);
+//     JButton okButton = new JButton("OK");
+//     okButton.setVisible(true);
+//     dialog.add(okButton);
+//     dialog.setSize(200,90);
+//     okButton.addActionListener(new ActionListener() {
+//         public void actionPerformed(ActionEvent e) {
+//             dialog.setVisible(false);
+//             dialog.dispose(); 
+//         }
+//     });
     
-    dialog.setLocationRelativeTo(studentButton);
-    dialog.setLocation(dialog.getX(), dialog.getY() + 15); 
-    dialog.setVisible(true);
-}
+//     dialog.setLocationRelativeTo(studentButton);
+//     dialog.setLocation(dialog.getX(), dialog.getY() + 15); 
+//     dialog.setVisible(true);
+// }
 
 public void setButtonSelected(String selectedButtonText) {
     studentOrTeacher = selectedButtonText;
