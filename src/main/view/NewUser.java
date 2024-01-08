@@ -4,11 +4,9 @@ import javax.swing.AbstractAction;
 import javax.swing.ButtonGroup;
 import javax.swing.JButton;
 import javax.swing.JComponent;
-import javax.swing.JDialog;
 import javax.swing.JFrame;
 import javax.swing.JRadioButton;
 import javax.swing.KeyStroke;
-import javax.swing.SwingConstants;
 
 import java.awt.BorderLayout;
 import java.awt.Color;
@@ -16,17 +14,11 @@ import java.awt.Font;
 import javax.swing.JPanel;
 import javax.swing.JLabel;
 import java.awt.GridBagLayout;
-import java.awt.Insets;
-import java.awt.GridBagConstraints;
 import java.awt.event.ActionListener;
 import java.awt.event.ActionEvent;
-import java.awt.FlowLayout;
 
 //key listening
 import java.awt.event.KeyEvent;
-import java.awt.event.KeyAdapter;
-import java.awt.event.KeyListener;
-
 public class NewUser extends JFrame {
     private JFrame window;
     private MainWindow main;
@@ -127,18 +119,6 @@ public class NewUser extends JFrame {
         choicesPanel.add(existingButton, decorator.choiceGbc());
     }
 
-    // private GridBagConstraints choiceGbc() {
-    //     //radio buttons distance
-    //     GridBagConstraints gbc = new GridBagConstraints();
-    //     gbc.gridx = 0;
-    //     gbc.gridy = 1;
-    //     gbc.gridwidth = 2;
-
-    //     gbc.anchor = GridBagConstraints.WEST;
-    //     gbc.insets = new Insets(10, 0, 0, 0); // Increase the horizontal spacing between components
-    //     return gbc;
-    // }
-
     private void buttonSetUp(MainWindow main, String studentOrTeacher) {
         JButton backButton;
         JButton nextButton;
@@ -194,32 +174,10 @@ public class NewUser extends JFrame {
                 
             }
             else if (!moveOnPossible) {
-                errorMessageSetUp();
+                decorator.errorMessageSetUp(window, newUserButton);
             }
                 
         //>/
-    }
-
-    private void errorMessageSetUp() {
-        JDialog dialog = new JDialog(window, null, true);
-        dialog.setLayout(new FlowLayout());
-        JLabel label = new JLabel("<html><center>Please choose an option");
-        label.setHorizontalAlignment(SwingConstants.CENTER);
-        dialog.add(label);
-        JButton okButton = new JButton("OK");
-        okButton.setVisible(true);
-        dialog.add(okButton);
-        dialog.setSize(200,90);
-        okButton.addActionListener(new ActionListener() {
-            public void actionPerformed(ActionEvent e) {
-                dialog.setVisible(false);
-                dialog.dispose(); 
-            }
-        });
-        
-        dialog.setLocationRelativeTo(newUserButton);
-        dialog.setLocation(dialog.getX(), dialog.getY() + 15); 
-        dialog.setVisible(true);
     }
 
     public void setButtonSelected(String studentOrTeacher) {
