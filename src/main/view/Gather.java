@@ -9,6 +9,8 @@ import javax.swing.JRadioButton;
 import javax.swing.JTextField;
 import javax.swing.SwingConstants;
 
+import main.view.student.StudentClasses;
+
 import java.awt.BorderLayout;
 import java.awt.Color;
 import java.awt.Dimension;
@@ -202,13 +204,16 @@ public class Gather {
             errorMessageSetUp("<html><center>Please choose an option",200,90);
         }
 
-        else if (textFieldFilled) {
+        else if (textFieldFilled) { //good case
             moveOnPossible = true;
             String filePath = "somethingwentwrong";//if not overwritten, somethingwent wrong
             System.out.println("neworexisting"+existingOrNew);
             if (existingOrNew.trim().equals("New User")) { //if new user,
                 System.out.println("studentorteacherstring"+studentOrTeacherString);
                 writeUsername(filePath,studentOrTeacherString);
+                //move on to studentclasses class
+                System.out.println("should move to studentClasses class");
+                StudentClasses studentClasses = new StudentClasses(window);
             }
         }
 
