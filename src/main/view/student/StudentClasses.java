@@ -46,6 +46,7 @@ public class StudentClasses extends JFrame {
     private JFrame window;
     private Creator creator = new Creator();
     private JPanel backNextButtonsPanel;
+    JButton newClassButton;
 
     public StudentClasses(JFrame main,NewUser newUser, String studentOrTeacher, String existingOrNew) {
         studentClassesLaunch(main);
@@ -72,7 +73,8 @@ public class StudentClasses extends JFrame {
         JButton nextButton = creator.nextButtonCreate();
         nextButton.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent e) {
-               StudentStatCollect statCollect = new StudentStatCollect(window, newUser, studentOrTeacher, existingOrNew);
+                hideWindow();
+                StudentStatCollect statCollect = new StudentStatCollect(window, newUser, studentOrTeacher, existingOrNew);
             }
         });
         backNextButtonsPanel = creator.makeBackNextButtonsPanel(backButton, nextButton);
@@ -81,7 +83,7 @@ public class StudentClasses extends JFrame {
 
     //create textbox "Class" placeholder
     private void createNewClassButton() {
-        JButton newClassButton = new JButton("New Class");
+        newClassButton = new JButton("New Class");
         newClassButton.setPreferredSize(new Dimension(80, 50));
         JPanel westPanel = new JPanel(new BorderLayout());
         westPanel.add(newClassButton, BorderLayout.SOUTH);
@@ -90,6 +92,8 @@ public class StudentClasses extends JFrame {
     }
 
     //create JButton "New Class"
-
+    private void hideWindow() {
+        newClassButton.setVisible(false);
+    }
 
     }
