@@ -82,8 +82,11 @@ public class StudentClasses extends JFrame {
     //create textbox "Class" placeholder
     private void createNewClassButton() {
         JButton newClassButton = new JButton("New Class");
-        newClassButton.setPreferredSize(new Dimension(100, 50));
-        window.add(newClassButton,BorderLayout.WEST);
+        newClassButton.setPreferredSize(new Dimension(80, 50));
+        JPanel westPanel = new JPanel(new BorderLayout());
+        westPanel.add(newClassButton, BorderLayout.SOUTH);
+
+        window.add(westPanel,BorderLayout.WEST);
     }
 
     //create JButton "New Class"
