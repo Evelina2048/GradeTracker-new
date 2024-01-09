@@ -42,21 +42,21 @@ import main.view.NewUser;
 import main.view.Creator;
 
 
-public class StudentClasses extends JFrame {
+public class StudentStatCollect extends JFrame {
     private JFrame window;
     private Creator creator = new Creator();
     private JPanel backNextButtonsPanel;
 
-    public StudentClasses(JFrame main,NewUser newUser, String studentOrTeacher, String existingOrNew) {
-        studentClassesLaunch(main);
-        createNewClassButton();
+    public StudentStatCollect(JFrame main,NewUser newUser, String studentOrTeacher, String existingOrNew) {
+        studentStatCollectLaunch(main);
+        //createNewClassButton();
         buttonSetUpAction(main, newUser, studentOrTeacher, existingOrNew);
     }
 
-    public void studentClassesLaunch(JFrame main) {
+    public void studentStatCollectLaunch(JFrame main) {
         System.out.println("in student classes");
         this.window = main;
-        window.setTitle("StudentClasses");
+        window.setTitle("StudentStatCollect");
     }
 
     public void buttonSetUpAction(JFrame main, NewUser newUser, String studentOrTeacher, String existingOrNew) {
@@ -72,7 +72,7 @@ public class StudentClasses extends JFrame {
         JButton nextButton = creator.nextButtonCreate();
         nextButton.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent e) {
-               StudentStatCollect statCollect = new StudentStatCollect(window, newUser, studentOrTeacher, existingOrNew);
+                //nextButtonAction(existingOrNew, studentOrTeacher);
             }
         });
         backNextButtonsPanel = creator.makeBackNextButtonsPanel(backButton, nextButton);
@@ -80,14 +80,14 @@ public class StudentClasses extends JFrame {
     }
 
     //create textbox "Class" placeholder
-    private void createNewClassButton() {
-        JButton newClassButton = new JButton("New Class");
-        newClassButton.setPreferredSize(new Dimension(80, 50));
-        JPanel westPanel = new JPanel(new BorderLayout());
-        westPanel.add(newClassButton, BorderLayout.SOUTH);
-
-        window.add(westPanel,BorderLayout.WEST);
-    }
+//    private void createNewClassButton() {
+//        JButton newClassButton = new JButton("New Class");
+//        newClassButton.setPreferredSize(new Dimension(80, 50));
+//        JPanel westPanel = new JPanel(new BorderLayout());
+//        westPanel.add(newClassButton, BorderLayout.SOUTH);
+//
+//        window.add(westPanel,BorderLayout.WEST);
+//    }
 
     //create JButton "New Class"
 
