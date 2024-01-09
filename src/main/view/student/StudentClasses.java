@@ -49,6 +49,7 @@ public class StudentClasses extends JFrame {
 
     public StudentClasses(JFrame main,NewUser newUser, String studentOrTeacher, String existingOrNew) {
         studentClassesLaunch(main);
+        createNewClassButton();
         buttonSetUpAction(main, newUser, studentOrTeacher, existingOrNew);
     }
 
@@ -77,5 +78,14 @@ public class StudentClasses extends JFrame {
         backNextButtonsPanel = creator.makeBackNextButtonsPanel(backButton, nextButton);
         window.add(backNextButtonsPanel, BorderLayout.SOUTH);
     }
+
+    //create textbox "Class" placeholder
+    private void createNewClassButton() {
+        JButton newClassButton = new JButton("New Class");
+        window.add(newClassButton);
+    }
+
+    //create JButton "New Class"
+
 
     }
