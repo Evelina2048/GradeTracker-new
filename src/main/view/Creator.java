@@ -68,4 +68,8 @@ public class Creator {
 
         return backNextButtonsPanel;
     }
+
+    public void createTextbox() {
+        
+    }
 }

@@ -53,7 +53,10 @@ public class Gather {
     ButtonGroup teacherStudentGroup;
     int windowWidth = 800;
     int windowHeight = 500;
-    JTextField textField = new JTextField(10);
+
+    Decorator decorate = new Decorator();
+    JTextField textField = decorate.decorateTextBox();
+
 
     //panels
     JPanel instructionsPanel;
@@ -116,16 +119,16 @@ public class Gather {
         choicesPanel= new JPanel(new GridBagLayout());
         choicesPanel.setBackground(choicesPanelColor);
 
-        textField.setPreferredSize(new Dimension(textField.getPreferredSize().width, 50)); // Set the height to 50 pixels
-        textField.setFont(new Font("Roboto", Font.PLAIN, 14));
-        textField.setForeground(Color.gray);
-        textField.setBorder(BorderFactory.createLineBorder(Color.gray, 2));
+        // textField.setPreferredSize(new Dimension(textField.getPreferredSize().width, 50)); // Set the height to 50 pixels
+        // textField.setFont(new Font("Roboto", Font.PLAIN, 14));
+        // textField.setForeground(Color.gray);
+        // textField.setBorder(BorderFactory.createLineBorder(Color.gray, 2));
 
-        Color defaultTextColor = Color.decode("#B0B0B0");
-        textField.setSelectedTextColor(defaultTextColor);
+        // Color defaultTextColor = Color.decode("#B0B0B0");
+        // textField.setSelectedTextColor(defaultTextColor);
 
-        textField.setHorizontalAlignment(JTextField.CENTER);
-        textField.setText("Enter user name");
+        // textField.setHorizontalAlignment(JTextField.CENTER);
+        // textField.setText("Enter user name");
         textFieldEmptied = false;
 
         textField.addFocusListener(new FocusAdapter() {

@@ -16,6 +16,46 @@ import java.awt.GridBagConstraints;
 import java.awt.event.ActionListener;
 import java.awt.event.ActionEvent;
 import java.awt.FlowLayout;
+///
+import javax.swing.BorderFactory;
+import javax.swing.ButtonGroup;
+import javax.swing.JButton;
+import javax.swing.JDialog;
+import javax.swing.JFrame;
+import javax.swing.JRadioButton;
+import javax.swing.JTextField;
+import javax.swing.SwingConstants;
+
+import main.view.student.StudentClasses;
+
+import java.awt.BorderLayout;
+import java.awt.Color;
+import java.awt.Dimension;
+import java.awt.Font;
+import javax.swing.JPanel;
+import javax.swing.JLabel;
+
+import java.awt.GridBagLayout;
+import java.awt.GridBagConstraints;
+
+import java.awt.event.ActionListener;
+import java.awt.event.ActionEvent;
+import java.awt.FlowLayout;
+
+import java.awt.event.MouseAdapter;
+import java.awt.event.MouseEvent;
+
+import java.awt.event.FocusAdapter;
+import java.awt.event.FocusEvent;
+
+import java.io.FileWriter;
+import java.io.IOException;
+
+import java.io.BufferedReader;
+
+import java.io.FileReader;
+
+///
 
 //key listening
 
@@ -123,6 +163,22 @@ public class Decorator {
         choicesPanel.setVisible(false);
         backNextButtonsPanel.setVisible(false);
     
+    }
+
+    public JTextField decorateTextBox() {
+       JTextField textField = new JTextField(10);
+       textField.setPreferredSize(new Dimension(textField.getPreferredSize().width, 50)); // Set the height to 50 pixels
+       textField.setFont(new Font("Roboto", Font.PLAIN, 14));
+       textField.setForeground(Color.gray);
+       textField.setBorder(BorderFactory.createLineBorder(Color.gray, 2));
+
+       Color defaultTextColor = Color.decode("#B0B0B0");
+       textField.setSelectedTextColor(defaultTextColor);
+
+       textField.setHorizontalAlignment(JTextField.CENTER);
+       textField.setText("Enter user name");
+
+       return textField;
     }
 
 }
