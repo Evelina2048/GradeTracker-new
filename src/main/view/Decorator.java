@@ -165,7 +165,7 @@ public class Decorator {
     
     }
 
-    public JTextField decorateTextBox() {
+    public JTextField decorateTextBox(String placeholderText) {
        JTextField textField = new JTextField(10);
        textField.setPreferredSize(new Dimension(textField.getPreferredSize().width, 50)); // Set the height to 50 pixels
        textField.setFont(new Font("Roboto", Font.PLAIN, 14));
@@ -176,7 +176,7 @@ public class Decorator {
        textField.setSelectedTextColor(defaultTextColor);
 
        textField.setHorizontalAlignment(JTextField.CENTER);
-       textField.setText("Enter user name");
+       textField.setText(placeholderText);
 
        return textField;
     }
@@ -188,7 +188,7 @@ public class Decorator {
     // }
 
     public void createRadioButtons() {
-        
+
     }
 
 }

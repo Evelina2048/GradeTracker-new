@@ -72,7 +72,7 @@ public class StudentClasses extends JFrame {
         System.out.println("In create textbox new");
         JPanel textFieldPanel = new JPanel(new FlowLayout(FlowLayout.LEFT));
         
-        JTextField textField = decorate.decorateTextBox();
+        JTextField textField = decorate.decorateTextBox("Enter Class Name");
         
         textFieldPanel.add(textField);
         
