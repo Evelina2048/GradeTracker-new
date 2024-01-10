@@ -264,13 +264,13 @@ private void writeUsername(String filePath, String studentOrTeacher) {
     System.out.println("studentOrTeacher"+ studentOrTeacher);
     if ("Student".equals(studentOrTeacher)) {
         filePath = "/Users/evy/Documents/GradeTracker-new/src/main/view/student/Student.csv";
-        usernamePath = "/Users/evy/Documents/GradeTracker-new/src/main/view/studentUsername.txt";
+        usernamePath = "/Users/evy/Documents/GradeTracker-new/src/main/view/UsernameCollection/studentUsername.txt";
         System.out.println("going to student.csv"+usernamePath);
     }
 
     else if ("Teacher".equals(studentOrTeacher)) {
         filePath = "/Users/evy/Documents/GradeTracker-new/src/main/view/Teacher.csv";
-        usernamePath = "/Users/evy/Documents/GradeTracker-new/src/main/view/teacherUsername.txt";
+        usernamePath = "/Users/evy/Documents/GradeTracker-new/src/main/view/UsernameCollection/teacherUsername.txt";
         System.out.println("going to teacher.csv"+usernamePath);
     }
 
