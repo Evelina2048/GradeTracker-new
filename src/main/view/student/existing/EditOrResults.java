@@ -58,7 +58,7 @@ public class EditOrResults extends JFrame {
     public void editOrResultsLaunch(JFrame main) {
         System.out.println("in student grades");
         this.window = main;
-        window.setTitle("PrintStudentGrades");
+        window.setTitle("EditOrResults");
     }
 
     public void buttonSetUpAction(JFrame main, String studentOrTeacher, String existingOrNew) {

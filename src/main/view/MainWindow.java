@@ -73,9 +73,9 @@ private void windowSetUp() {
 }
  
 private void InstructionsWordsWindow() {
-    JLabel instructionsWords = new JLabel("Welcome! Are you a student or a teacher?");
-    instructionsPanel = decorator.InstructionsPanelDecorate(this, instructionsPanel, instructionsWords );
-}
+        JLabel instructionsWords = new JLabel("Welcome! Are you a student or a teacher?");
+        instructionsPanel = decorator.InstructionsPanelDecorate(this, instructionsPanel, instructionsWords );
+    }
 
 private void radioButtonSetUp() {
     teacherStudentGroup = new ButtonGroup();

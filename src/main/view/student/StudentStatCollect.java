@@ -75,7 +75,7 @@ public class StudentStatCollect extends JFrame {
             public void actionPerformed(ActionEvent e) {
                 //write to file.
                 hideWindow();
-                PrintStudentGrades print = new PrintStudentGrades(main, newUser, studentOrTeacher,existingOrNew);
+                PrintStudentGrades print = new PrintStudentGrades(main, studentOrTeacher,existingOrNew);
             }
         });
         backNextButtonsPanel = creator.makeBackNextButtonsPanel(backButton, nextButton);
