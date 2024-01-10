@@ -38,6 +38,8 @@ import java.io.BufferedReader;
 
 import java.io.FileReader;
 
+import java.awt.Rectangle;
+
 //<remove later>//
 import main.view.student.existing.EditOrResults;
 //</remove later>//
@@ -141,7 +143,33 @@ public class Gather {
             @Override
             public void mouseClicked(MouseEvent e) {
                 System.out.println("helloooojodso");
-                if (textField.getBounds().contains(e.getPoint()) == false) {
+                System.out.println("bounds:"+e.getX()+" "+e.getY());
+                
+                ///
+                int topLeftX = 332;
+                int topLeftY = 221;
+                int topRightX = 467;
+                int topRightY = 222;
+                int bottomLeftX = 334;
+                int bottomLeftY = 270;
+                int bottomRightX = 467;
+                int bottomRightY = 269;
+
+                // Calculate width and height
+                int width = topRightX - topLeftX;
+                int height = bottomLeftY - topLeftY;
+
+                // Set the bounds of the textField
+                textField.setBounds(topLeftX, topLeftY, width, height);
+                int x = Math.min(Math.min(topLeftX, topRightX), Math.min(bottomLeftX, bottomRightX));
+                int y = Math.min(Math.min(topLeftY, topRightY), Math.min(bottomLeftY, bottomRightY));
+
+                // Create the bounds using the coordinates
+                Rectangle newBounds = new Rectangle(x, y, width, height);
+                ///
+
+                //textField.setbounds(332) //left top length height
+                if (newBounds.contains(e.getPoint()) == false) {
                     textField.setText("Enter user name");
                     textField.setForeground(Color.GRAY);
                     textFieldEmptied = false;
