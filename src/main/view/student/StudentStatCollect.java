@@ -91,9 +91,9 @@ public class StudentStatCollect extends JFrame {
        window.add(eastPanel,BorderLayout.EAST);
    }
 
-//For i in classes, give classes : class1 
-    //for j in types :
-        //type1gradeBox.
+    //For i in classes, give classes : class1 
+        //for j in types :
+            //type1gradeBox.
 
     private void hideWindow() {
         backNextButtonsPanel.setVisible(false);
