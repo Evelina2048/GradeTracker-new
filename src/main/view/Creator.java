@@ -68,4 +68,17 @@ public class Creator {
 
         return backNextButtonsPanel;
     }
+
+    public void textFieldFocusListener(JTextField textField, Boolean textFieldEmptied) {
+        textField.addFocusListener(new FocusAdapter() {
+            @Override
+            public void focusGained(FocusEvent e) {
+                if (textField.getText().equals("Enter user name") && textFieldEmptied == false) {
+                    textField.setText(""); // Clear the placeholder text when the field gains focus
+                    textField.setForeground(Color.BLACK); // Change the text color when typing
+                }
+            }
+        
+        });
+    }
 }

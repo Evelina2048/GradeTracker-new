@@ -125,16 +125,17 @@ public class Gather {
 
         textFieldEmptied = false;
 
-        textField.addFocusListener(new FocusAdapter() {
-            @Override
-            public void focusGained(FocusEvent e) {
-                if (textField.getText().equals("Enter user name") && textFieldEmptied == false) {
-                    textField.setText(""); // Clear the placeholder text when the field gains focus
-                    textField.setForeground(Color.BLACK); // Change the text color when typing
-                }
-            }
+        creator.textFieldFocusListener(textField, textFieldEmptied);
+        // textField.addFocusListener(new FocusAdapter() {
+        //     @Override
+        //     public void focusGained(FocusEvent e) {
+        //         if (textField.getText().equals("Enter user name") && textFieldEmptied == false) {
+        //             textField.setText(""); // Clear the placeholder text when the field gains focus
+        //             textField.setForeground(Color.BLACK); // Change the text color when typing
+        //         }
+        //     }
         
-        });
+        // });
 
         window.getContentPane().addMouseListener(new MouseAdapter() {
             @Override
