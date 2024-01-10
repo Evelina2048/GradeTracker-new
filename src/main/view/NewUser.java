@@ -17,6 +17,10 @@ import java.awt.GridBagLayout;
 import java.awt.event.ActionListener;
 import java.awt.event.ActionEvent;
 
+//remove later//
+import main.view.student.existing.EditOrResults;
+//removelater/>//
+
 //key listening
 import java.awt.event.KeyEvent;
 public class NewUser extends JFrame {
