@@ -68,5 +68,4 @@ public class Creator {
 
         return backNextButtonsPanel;
     }
-
 }

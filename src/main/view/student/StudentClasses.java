@@ -40,6 +40,7 @@ import java.io.FileReader;
 import main.view.MainWindow;
 import main.view.NewUser;
 import main.view.Creator;
+import main.view.Decorator;
 
 
 public class StudentClasses extends JFrame {
@@ -47,6 +48,8 @@ public class StudentClasses extends JFrame {
     private Creator creator = new Creator();
     private JPanel backNextButtonsPanel;
     JButton newClassButton;
+    Decorator decorate = new Decorator();
+    JTextField textField = decorate.decorateTextBox();
 
     public StudentClasses(JFrame main,NewUser newUser, String studentOrTeacher, String existingOrNew) {
         studentClassesLaunch(main);
@@ -58,6 +61,9 @@ public class StudentClasses extends JFrame {
         System.out.println("in student classes");
         this.window = main;
         window.setTitle("StudentClasses");
+
+        window.add(textField);
+        //textField.setVisible(true);
     }
 
     public void buttonSetUpAction(JFrame main, NewUser newUser, String studentOrTeacher, String existingOrNew) {
