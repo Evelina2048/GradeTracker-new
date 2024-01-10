@@ -42,22 +42,22 @@ import main.view.NewUser;
 import main.view.Creator;
 
 
-public class StudentStatCollect extends JFrame {
+public class PrintStudentGrades extends JFrame {
     private JFrame window;
     private Creator creator = new Creator();
     private JPanel backNextButtonsPanel;
-    private JButton newTypeButton;
 
-    public StudentStatCollect(JFrame main,NewUser newUser, String studentOrTeacher, String existingOrNew) {
+    public PrintStudentGrades(JFrame main,NewUser newUser, String studentOrTeacher, String existingOrNew) {
+        System.out.println("in print student grades");
         studentStatCollectLaunch(main);
-        createNewTypeButton();
+        //createNewTypeButton();
         buttonSetUpAction(main, newUser, studentOrTeacher, existingOrNew);
     }
 
     public void studentStatCollectLaunch(JFrame main) {
-        System.out.println("in student classes");
+        System.out.println("in student grades");
         this.window = main;
-        window.setTitle("StudentStatCollect");
+        window.setTitle("PrintStudentGrades");
     }
 
     public void buttonSetUpAction(JFrame main, NewUser newUser, String studentOrTeacher, String existingOrNew) {
@@ -74,28 +74,18 @@ public class StudentStatCollect extends JFrame {
         nextButton.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent e) {
                 //write to file.
-                hideWindow();
-                PrintStudentGrades print = new PrintStudentGrades(main, newUser, studentOrTeacher,existingOrNew);
+                //nextButtonAction(existingOrNew, studentOrTeacher);
             }
         });
         backNextButtonsPanel = creator.makeBackNextButtonsPanel(backButton, nextButton);
         window.add(backNextButtonsPanel, BorderLayout.SOUTH);
     }
 
-   private void createNewTypeButton() {
-       newTypeButton = new JButton("New Type");
-       newTypeButton.setPreferredSize(new Dimension(80, 50));
-       JPanel eastPanel = new JPanel(new BorderLayout());
-       eastPanel.add(newTypeButton, BorderLayout.NORTH);
 
-       window.add(eastPanel,BorderLayout.EAST);
-   }
+//North print grades
+//For i in classes:
+    //print class: percentageGrade, gpa (if applicable)
 
-//For i in classes, give classes : class1 
-    //for j in types :
-        //type1gradeBox.
+//overall gpa
 
-    private void hideWindow() {
-        newTypeButton.setVisible(false);
-    }
     }

@@ -85,6 +85,12 @@ public class StudentClasses extends JFrame {
     private void createNewClassButton() {
         newClassButton = new JButton("New Class");
         newClassButton.setPreferredSize(new Dimension(80, 50));
+        newClassButton.addActionListener(new ActionListener() {
+            public void actionPerformed(ActionEvent e) {
+                System.out.println("NewClassButtonPressed");
+        }
+    });
+
         JPanel westPanel = new JPanel(new BorderLayout());
         westPanel.add(newClassButton, BorderLayout.SOUTH);
 
@@ -93,6 +99,7 @@ public class StudentClasses extends JFrame {
 
     //create JButton "New Class"
     private void hideWindow() {
+        backNextButtonsPanel.setVisible(false);
         newClassButton.setVisible(false);
     }
 
