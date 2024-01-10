@@ -62,7 +62,10 @@ public class StudentClasses extends JFrame {
         this.window = main;
         window.setTitle("StudentClasses");
 
-        window.add(textField);
+        JPanel textFieldPanel = new JPanel(new FlowLayout(FlowLayout.LEFT));
+        textFieldPanel.add(textField);
+        textField.setPreferredSize(new Dimension(50, 50));
+        window.add(textFieldPanel, BorderLayout.NORTH);
         //textField.setVisible(true);
     }
 
@@ -107,6 +110,7 @@ public class StudentClasses extends JFrame {
     private void hideWindow() {
         backNextButtonsPanel.setVisible(false);
         newClassButton.setVisible(false);
+        textField.setVisible(false);
     }
 
     }
