@@ -61,12 +61,17 @@ public class StudentClasses extends JFrame {
         System.out.println("in student classes");
         this.window = main;
         window.setTitle("StudentClasses");
+        createTextBox();
+        //textField.setVisible(true);
+    }
 
+    private void createTextBox() {
+        System.out.println("In create textbox new");
         JPanel textFieldPanel = new JPanel(new FlowLayout(FlowLayout.LEFT));
         textFieldPanel.add(textField);
         textField.setPreferredSize(new Dimension(50, 50));
         window.add(textFieldPanel, BorderLayout.NORTH);
-        //textField.setVisible(true);
+
     }
 
     public void buttonSetUpAction(JFrame main, NewUser newUser, String studentOrTeacher, String existingOrNew) {
@@ -97,6 +102,8 @@ public class StudentClasses extends JFrame {
         newClassButton.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent e) {
                 System.out.println("NewClassButtonPressed");
+                createTextBox();
+                
         }
     });
 
