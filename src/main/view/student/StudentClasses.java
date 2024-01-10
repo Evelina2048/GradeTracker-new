@@ -49,9 +49,10 @@ public class StudentClasses extends JFrame {
     private Creator creator = new Creator();
     private JPanel backNextButtonsPanel;
     private JPanel textFieldContainer = new JPanel(new GridLayout(0, 1)); // Panel to hold text fields
+    private JTextField textField;
     JButton newClassButton;
     Decorator decorate = new Decorator();
-    JTextField textField = decorate.decorateTextBox();
+    //JTextField textField = decorate.decorateTextBox();
 
     public StudentClasses(JFrame main,NewUser newUser, String studentOrTeacher, String existingOrNew) {
         studentClassesLaunch(main);
@@ -70,7 +71,11 @@ public class StudentClasses extends JFrame {
     private void createTextBox() {
         System.out.println("In create textbox new");
         JPanel textFieldPanel = new JPanel(new FlowLayout(FlowLayout.LEFT));
+        
+        JTextField textField = decorate.decorateTextBox();
+        
         textFieldPanel.add(textField);
+        
         textField.setPreferredSize(new Dimension(50, 50));
         textFieldContainer.add(textFieldPanel); // Add to the container panel
         textFieldContainer.setVisible(true);
