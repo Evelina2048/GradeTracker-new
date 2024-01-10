@@ -17,6 +17,7 @@ import javax.swing.JPanel;
 import javax.swing.JLabel;
 
 import java.awt.GridBagLayout;
+import java.awt.GridLayout;
 import java.awt.GridBagConstraints;
 
 import java.awt.event.ActionListener;
@@ -47,6 +48,7 @@ public class StudentClasses extends JFrame {
     private JFrame window;
     private Creator creator = new Creator();
     private JPanel backNextButtonsPanel;
+    private JPanel textFieldContainer = new JPanel(new GridLayout(0, 1)); // Panel to hold text fields
     JButton newClassButton;
     Decorator decorate = new Decorator();
     JTextField textField = decorate.decorateTextBox();
@@ -70,7 +72,10 @@ public class StudentClasses extends JFrame {
         JPanel textFieldPanel = new JPanel(new FlowLayout(FlowLayout.LEFT));
         textFieldPanel.add(textField);
         textField.setPreferredSize(new Dimension(50, 50));
-        window.add(textFieldPanel, BorderLayout.NORTH);
+        textFieldContainer.add(textFieldPanel); // Add to the container panel
+        textFieldContainer.setVisible(true);
+        window.add(textFieldContainer, BorderLayout.NORTH);
+        window.revalidate(); // Refresh the layout
 
     }
 
