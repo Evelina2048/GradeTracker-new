@@ -261,20 +261,19 @@ private void errorMessageSetUp(String labelWords, int width, int height) {
 private void writeUsername(String filePath, String studentOrTeacher) {
     //and username not taken
     String usernamePath = "somethingwentwrong.txt";
+    String username = textField.getText().trim();
     System.out.println("studentOrTeacher"+ studentOrTeacher);
     if ("Student".equals(studentOrTeacher)) {
-        filePath = "/Users/evy/Documents/GradeTracker-new/src/main/view/student/Student.csv";
-        usernamePath = "/Users/evy/Documents/GradeTracker-new/src/main/view/UsernameCollection/studentUsername.txt";
+        filePath = "/Users/evy/Documents/GradeTracker-new/src/main/view/UserInfo/StudentInfo/"+username+".txt";
+        usernamePath = "/Users/evy/Documents/GradeTracker-new/src/main/view/UserInfo/studentUsername.txt";
         System.out.println("going to student.csv"+usernamePath);
     }
 
     else if ("Teacher".equals(studentOrTeacher)) {
         filePath = "/Users/evy/Documents/GradeTracker-new/src/main/view/Teacher.csv";
-        usernamePath = "/Users/evy/Documents/GradeTracker-new/src/main/view/UsernameCollection/teacherUsername.txt";
+        usernamePath = "/Users/evy/Documents/GradeTracker-new/src/main/view/UserInfo/teacherUsername.txt";
         System.out.println("going to teacher.csv"+usernamePath);
     }
-
-    String username = textField.getText().trim();
 
     System.out.println("the username is "+ username);
     System.out.println("the filepath is " + filePath);
