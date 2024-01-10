@@ -71,12 +71,7 @@ public class PrintStudentGrades extends JFrame {
        
         
         JButton nextButton = creator.nextButtonCreate();
-        nextButton.addActionListener(new ActionListener() {
-            public void actionPerformed(ActionEvent e) {
-                //write to file.
-                //nextButtonAction(existingOrNew, studentOrTeacher);
-            }
-        });
+        nextButton.setEnabled(false);
         backNextButtonsPanel = creator.makeBackNextButtonsPanel(backButton, nextButton);
         window.add(backNextButtonsPanel, BorderLayout.SOUTH);
     }

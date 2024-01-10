@@ -96,6 +96,7 @@ public class StudentStatCollect extends JFrame {
         //type1gradeBox.
 
     private void hideWindow() {
+        backNextButtonsPanel.setVisible(false);
         newTypeButton.setVisible(false);
     }
     }
