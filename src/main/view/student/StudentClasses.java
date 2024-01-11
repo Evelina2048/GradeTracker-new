@@ -80,6 +80,7 @@ public class StudentClasses extends JFrame {
         textFieldContainer.add(textFieldPanel); // Add to the container panel
         textFieldContainer.setVisible(true);
         window.add(textFieldContainer, BorderLayout.NORTH);
+        creator.textFieldFocusListener(textField, true);
         window.revalidate(); // Refresh the layout
 
     }
