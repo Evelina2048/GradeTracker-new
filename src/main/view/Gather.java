@@ -146,6 +146,7 @@ public class Gather {
                 System.out.println("bounds:"+e.getX()+" "+e.getY());
                 
                 ///
+                // Define the coordinates
                 int topLeftX = 332;
                 int topLeftY = 221;
                 int topRightX = 467;
@@ -156,11 +157,10 @@ public class Gather {
                 int bottomRightY = 269;
 
                 // Calculate width and height
-                int width = topRightX - topLeftX;
-                int height = bottomLeftY - topLeftY;
+                int width = Math.abs(topRightX - topLeftX); // Calculate width
+                int height = Math.abs(bottomLeftY - topLeftY); // Calculate height
 
-                // Set the bounds of the textField
-                textField.setBounds(topLeftX, topLeftY, width, height);
+                // Find the minimum x and y coordinates
                 int x = Math.min(Math.min(topLeftX, topRightX), Math.min(bottomLeftX, bottomRightX));
                 int y = Math.min(Math.min(topLeftY, topRightY), Math.min(bottomLeftY, bottomRightY));
 
