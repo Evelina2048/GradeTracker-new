@@ -32,7 +32,7 @@ import java.awt.event.FocusEvent;
 
 import java.io.FileWriter;
 import java.io.IOException;
-
+import java.util.concurrent.atomic.AtomicBoolean;
 import java.io.BufferedReader;
 
 import java.io.FileReader;
@@ -52,6 +52,7 @@ public class StudentClasses extends JFrame {
     private JPanel backNextButtonsPanel;
     private JPanel textFieldContainer = new JPanel(new GridLayout(0, 1)); // Panel to hold text fields
     private JTextField textField;
+    AtomicBoolean textFieldEmptied = new AtomicBoolean(false);;
     JButton newClassButton;
     Decorator decorate = new Decorator();
     //JTextField textField = decorate.decorateTextBox();
@@ -73,6 +74,8 @@ public class StudentClasses extends JFrame {
     private void createTextBox() {
         System.out.println("In create textbox new");
         JPanel textFieldPanel = new JPanel(new FlowLayout(FlowLayout.LEFT));
+
+        textFieldEmptied.set(false);
         
         JTextField textField = decorate.decorateTextBox("Enter Class Name");
         
@@ -82,7 +85,8 @@ public class StudentClasses extends JFrame {
         textFieldContainer.add(textFieldPanel); // Add to the container panel
         textFieldContainer.setVisible(true);
         window.add(textFieldContainer, BorderLayout.NORTH);
-        creator.textFieldFocusListener(window, textField, "Enter Class Name",false);
+
+        creator.textFieldFocusListener(window, textField, "Enter Class Name", textFieldEmptied);
         
         
         window.revalidate(); // Refresh the layout

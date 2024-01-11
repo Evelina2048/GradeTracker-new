@@ -33,7 +33,7 @@ import java.awt.event.FocusEvent;
 
 import java.io.FileWriter;
 import java.io.IOException;
-
+import java.util.concurrent.atomic.AtomicBoolean;
 import java.io.BufferedReader;
 
 import java.io.FileReader;
@@ -51,7 +51,7 @@ public class Gather {
     private boolean moveOnPossible = false;
     private int windowX;
     private int windowY;
-    private boolean textFieldEmptied;
+    private AtomicBoolean textFieldEmptied = new AtomicBoolean(false); 
     private Creator creator = new Creator();
 
     JRadioButton studentButton;
@@ -125,59 +125,49 @@ public class Gather {
         choicesPanel= new JPanel(new GridBagLayout());
         choicesPanel.setBackground(choicesPanelColor);
 
-        textFieldEmptied = false;
+        textFieldEmptied.set(false);
 
-        creator.textFieldFocusListener(textField, textFieldEmptied);
-        // textField.addFocusListener(new FocusAdapter() {
+        creator.textFieldFocusListener(window, textField, "Enter user name", textFieldEmptied);
+
+        // window.getContentPane().addMouseListener(new MouseAdapter() {
         //     @Override
-        //     public void focusGained(FocusEvent e) {
-        //         if (textField.getText().equals("Enter user name") && textFieldEmptied == false) {
-        //             textField.setText(""); // Clear the placeholder text when the field gains focus
-        //             textField.setForeground(Color.BLACK); // Change the text color when typing
+        //     public void mouseClicked(MouseEvent e) {
+        //         System.out.println("helloooojodso");
+        //         System.out.println("bounds:"+e.getX()+" "+e.getY());
+                
+        //         ///
+        //         // Define the coordinates
+        //         int topLeftX = 332;
+        //         int topLeftY = 221;
+        //         int topRightX = 467;
+        //         int topRightY = 222;
+        //         int bottomLeftX = 334;
+        //         int bottomLeftY = 270;
+        //         int bottomRightX = 467;
+        //         int bottomRightY = 269;
+
+        //         // Calculate width and height
+        //         int width = Math.abs(topRightX - topLeftX); // Calculate width
+        //         int height = Math.abs(bottomLeftY - topLeftY); // Calculate height
+
+        //         // Find the minimum x and y coordinates
+        //         int x = Math.min(Math.min(topLeftX, topRightX), Math.min(bottomLeftX, bottomRightX));
+        //         int y = Math.min(Math.min(topLeftY, topRightY), Math.min(bottomLeftY, bottomRightY));
+
+        //         // Create the bounds using the coordinates
+        //         Rectangle newBounds = new Rectangle(x, y, width, height);
+        //         ///
+
+        //         //textField.setbounds(332) //left top length height
+        //         if (newBounds.contains(e.getPoint()) == false) {
+        //             textField.setText("Enter user name");
+        //             textField.setForeground(Color.GRAY);
+        //             textFieldEmptied = false;
+        //             window.requestFocus();
+
         //         }
         //     }
-        
         // });
-
-        window.getContentPane().addMouseListener(new MouseAdapter() {
-            @Override
-            public void mouseClicked(MouseEvent e) {
-                System.out.println("helloooojodso");
-                System.out.println("bounds:"+e.getX()+" "+e.getY());
-                
-                ///
-                // Define the coordinates
-                int topLeftX = 332;
-                int topLeftY = 221;
-                int topRightX = 467;
-                int topRightY = 222;
-                int bottomLeftX = 334;
-                int bottomLeftY = 270;
-                int bottomRightX = 467;
-                int bottomRightY = 269;
-
-                // Calculate width and height
-                int width = Math.abs(topRightX - topLeftX); // Calculate width
-                int height = Math.abs(bottomLeftY - topLeftY); // Calculate height
-
-                // Find the minimum x and y coordinates
-                int x = Math.min(Math.min(topLeftX, topRightX), Math.min(bottomLeftX, bottomRightX));
-                int y = Math.min(Math.min(topLeftY, topRightY), Math.min(bottomLeftY, bottomRightY));
-
-                // Create the bounds using the coordinates
-                Rectangle newBounds = new Rectangle(x, y, width, height);
-                ///
-
-                //textField.setbounds(332) //left top length height
-                if (newBounds.contains(e.getPoint()) == false) {
-                    textField.setText("Enter user name");
-                    textField.setForeground(Color.GRAY);
-                    textFieldEmptied = false;
-                    window.requestFocus();
-
-                }
-            }
-        });
 
         GridBagConstraints constraints = new GridBagConstraints();
         constraints.gridx = 0;
@@ -210,7 +200,7 @@ public class Gather {
 
     private void nextButtonAction(String existingOrNew, String studentOrTeacherString) {
         boolean textFieldEmpty = textField.getText().trim().isEmpty();
-        boolean textFieldHasntChanged = textField.getText().equals("Enter user name") && textFieldEmptied == false;
+        boolean textFieldHasntChanged = textField.getText().equals("Enter user name") && !textFieldEmptied.get();
         boolean textFieldFilled = textField.getText().trim().isEmpty() == false;
 
         //check if the username is not empty

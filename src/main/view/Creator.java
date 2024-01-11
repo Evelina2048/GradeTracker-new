@@ -34,7 +34,7 @@ import java.awt.event.FocusEvent;
 
 import java.io.FileWriter;
 import java.io.IOException;
-
+import java.util.concurrent.atomic.AtomicBoolean;
 import java.io.BufferedReader;
 
 import java.io.FileReader;
@@ -70,28 +70,24 @@ public class Creator {
         return backNextButtonsPanel;
     }
 
-    public void textFieldFocusListener(JFrame window, JTextField textField, String placeholder, Boolean textFieldEmptied) {
+    public void textFieldFocusListener(JFrame window, JTextField textField, String placeholder, AtomicBoolean textFieldEmptied) {
         textField.addFocusListener(new FocusAdapter() {
             @Override
             public void focusGained(FocusEvent e) {
                 System.out.println("focusgained");
-                if (textField.getText().equals(placeholder) && textFieldEmptied == false) {
+                if (textField.getText().equals(placeholder) && !textFieldEmptied.get()) {
                     textField.setText(""); // Clear the placeholder text when the field gains focus
                     textField.setForeground(Color.BLACK); // Change the text color when typing
                 }
             }
-        
         });
 
-         //////
-         window.getContentPane().addMouseListener(new MouseAdapter() {
+        window.getContentPane().addMouseListener(new MouseAdapter() {
             @Override
             public void mouseClicked(MouseEvent e) {
                 System.out.println("helloooojodso");
-                System.out.println("bounds:"+e.getX()+" "+e.getY());
-                
-                ///
-                // Define the coordinates
+                System.out.println("bounds:" + e.getX() + " " + e.getY());
+
                 int topLeftX = 332;
                 int topLeftY = 221;
                 int topRightX = 467;
@@ -101,28 +97,21 @@ public class Creator {
                 int bottomRightX = 467;
                 int bottomRightY = 269;
 
-                // Calculate width and height
-                int width = Math.abs(topRightX - topLeftX); // Calculate width
-                int height = Math.abs(bottomLeftY - topLeftY); // Calculate height
+                int width = Math.abs(topRightX - topLeftX);
+                int height = Math.abs(bottomLeftY - topLeftY);
 
-                // Find the minimum x and y coordinates
                 int x = Math.min(Math.min(topLeftX, topRightX), Math.min(bottomLeftX, bottomRightX));
                 int y = Math.min(Math.min(topLeftY, topRightY), Math.min(bottomLeftY, bottomRightY));
 
-                // Create the bounds using the coordinates
                 Rectangle newBounds = new Rectangle(x, y, width, height);
-                ///
 
-                //textField.setbounds(332) //left top length height
-                if (newBounds.contains(e.getPoint()) == false) {
+                if (!newBounds.contains(e.getPoint())) {
                     textField.setText(placeholder);
                     textField.setForeground(Color.GRAY);
-                    textFieldEmptied = false;
+                    textFieldEmptied.set(false);
                     window.requestFocus();
-
                 }
             }
         });
-
     }
 }
