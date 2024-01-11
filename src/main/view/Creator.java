@@ -8,6 +8,7 @@ import javax.swing.JFrame;
 import javax.swing.JRadioButton;
 import javax.swing.JTextField;
 import javax.swing.SwingConstants;
+import javax.swing.text.Caret;
 
 import main.view.student.StudentClasses;
 
@@ -77,6 +78,7 @@ public class Creator {
                 System.out.println("focusgained");
                 if (textField.getText().equals(placeholder) && !textFieldEmptied.get()) {
                     textField.setText(""); // Clear the placeholder text when the field gains focus
+                    textFieldEmptied.set(true);
                     textField.setForeground(Color.BLACK); // Change the text color when typing
                 }
             }
@@ -105,12 +107,28 @@ public class Creator {
 
                 Rectangle newBounds = new Rectangle(x, y, width, height);
 
-                if (!newBounds.contains(e.getPoint())) {
+                boolean pointNotInTextbox = !newBounds.contains(e.getPoint());
+                // if (pointNotInTextbox && textFieldEmptied.get() == false) {
+                //     textField.setText(placeholder);
+                //     textField.setForeground(Color.GRAY);
+                //     window.requestFocus();
+                // }
+
+                System.out.println("pointnotintextbox "+pointNotInTextbox+" textfieldemptied "+textFieldEmptied+ " textFieldtext "+ textField.getText());
+
+                if (pointNotInTextbox && textField.getText().isEmpty()) {
+                    System.out.println("3rd option");
                     textField.setText(placeholder);
-                    textField.setForeground(Color.GRAY);
                     textFieldEmptied.set(false);
-                    window.requestFocus();
+                    window.requestFocusInWindow();
                 }
+
+                else if (pointNotInTextbox && textFieldEmptied.get() == true) {
+                    System.out.println("2nd option");
+                    textField.setForeground(Color.GRAY);
+                    window.requestFocusInWindow();
+                }
+
             }
         });
     }
