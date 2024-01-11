@@ -37,6 +37,8 @@ import java.io.BufferedReader;
 
 import java.io.FileReader;
 
+import java.awt.Rectangle;
+
 //importing files
 import main.view.MainWindow;
 import main.view.NewUser;
@@ -80,8 +82,11 @@ public class StudentClasses extends JFrame {
         textFieldContainer.add(textFieldPanel); // Add to the container panel
         textFieldContainer.setVisible(true);
         window.add(textFieldContainer, BorderLayout.NORTH);
-        creator.textFieldFocusListener(textField, true);
+        creator.textFieldFocusListener(window, textField, "Enter Class Name",false);
+        
+        
         window.revalidate(); // Refresh the layout
+
 
     }
 

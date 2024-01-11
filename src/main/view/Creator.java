@@ -70,16 +70,59 @@ public class Creator {
         return backNextButtonsPanel;
     }
 
-    public void textFieldFocusListener(JTextField textField, Boolean textFieldEmptied) {
+    public void textFieldFocusListener(JFrame window, JTextField textField, String placeholder, Boolean textFieldEmptied) {
         textField.addFocusListener(new FocusAdapter() {
             @Override
             public void focusGained(FocusEvent e) {
-                if (textField.getText().equals("Enter user name") && textFieldEmptied == false) {
+                System.out.println("focusgained");
+                if (textField.getText().equals(placeholder) && textFieldEmptied == false) {
                     textField.setText(""); // Clear the placeholder text when the field gains focus
                     textField.setForeground(Color.BLACK); // Change the text color when typing
                 }
             }
         
         });
+
+         //////
+         window.getContentPane().addMouseListener(new MouseAdapter() {
+            @Override
+            public void mouseClicked(MouseEvent e) {
+                System.out.println("helloooojodso");
+                System.out.println("bounds:"+e.getX()+" "+e.getY());
+                
+                ///
+                // Define the coordinates
+                int topLeftX = 332;
+                int topLeftY = 221;
+                int topRightX = 467;
+                int topRightY = 222;
+                int bottomLeftX = 334;
+                int bottomLeftY = 270;
+                int bottomRightX = 467;
+                int bottomRightY = 269;
+
+                // Calculate width and height
+                int width = Math.abs(topRightX - topLeftX); // Calculate width
+                int height = Math.abs(bottomLeftY - topLeftY); // Calculate height
+
+                // Find the minimum x and y coordinates
+                int x = Math.min(Math.min(topLeftX, topRightX), Math.min(bottomLeftX, bottomRightX));
+                int y = Math.min(Math.min(topLeftY, topRightY), Math.min(bottomLeftY, bottomRightY));
+
+                // Create the bounds using the coordinates
+                Rectangle newBounds = new Rectangle(x, y, width, height);
+                ///
+
+                //textField.setbounds(332) //left top length height
+                if (newBounds.contains(e.getPoint()) == false) {
+                    textField.setText(placeholder);
+                    textField.setForeground(Color.GRAY);
+                    textFieldEmptied = false;
+                    window.requestFocus();
+
+                }
+            }
+        });
+
     }
 }
