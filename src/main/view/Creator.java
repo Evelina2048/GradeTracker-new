@@ -85,6 +85,10 @@ public class Creator {
                 // else if (!textField.getText().equals(placeholder)){
 
                 // }
+
+                else {
+                    System.out.println("something went wrong in Creator class, focus gained");
+                }
             }
 
             @Override
@@ -104,7 +108,7 @@ public class Creator {
 
                 else {
                     System.out.println("something went wrong in focus lost");
-                    System.out.println("textfieldempty?"+textFieldEmptied);
+                    System.out.println("textfieldemptied?"+textFieldEmptied);
                 }
             }
         });
@@ -140,7 +144,7 @@ public class Creator {
                     System.out.println("3rd option");
                     textField.setText(placeholder);
                     textField.setForeground(Color.yellow);
-                    textFieldEmptied.set(false);
+                    textFieldEmptied.set(true);
                     window.requestFocusInWindow();
                 }
 
