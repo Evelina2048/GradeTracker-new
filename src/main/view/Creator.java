@@ -97,9 +97,14 @@ public class Creator {
                 }
                 
                 else if (!textField.getText().isEmpty() && textFieldEmptied.get() == true){
-                    textField.setForeground(Color.GRAY);
-                    textFieldEmptied.set(false);
+                    textField.setForeground(Color.orange);
+                    //textFieldEmptied.set(false);
                     window.requestFocusInWindow();
+                }
+
+                else {
+                    System.out.println("something went wrong in focus lost");
+                    System.out.println("textfieldempty?"+textFieldEmptied);
                 }
             }
         });
@@ -134,7 +139,7 @@ public class Creator {
                 if (pointNotInTextbox && textField.getText().isEmpty()) {
                     System.out.println("3rd option");
                     textField.setText(placeholder);
-                    textField.setForeground(Color.GRAY);
+                    textField.setForeground(Color.yellow);
                     textFieldEmptied.set(false);
                     window.requestFocusInWindow();
                 }
@@ -149,6 +154,10 @@ public class Creator {
                     window.requestFocusInWindow();
                     textField.setForeground(Color.blue);
 
+                }
+
+                else {
+                    System.out.println("something went wrong");
                 }
 
             }
