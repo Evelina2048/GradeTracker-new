@@ -82,10 +82,14 @@ public class Creator {
                     textFieldEmptied.set(true);
                 }
 
-                // else if (!textField.getText().equals(placeholder)){
+                else if (!textField.getText().equals(placeholder)){
+                    System.out.println("somethingdidntgowrongunimplemented");
+                }
 
-                // }
-
+                else if (textField.getText().equals(placeholder) && textFieldEmptied.get() == true) {
+                    textField.setText(""); // Clear the placeholder text when the field gains focus
+                    textFieldEmptied.set(true);
+                }
                 else {
                     System.out.println("something went wrong in Creator class, focus gained");
                 }
