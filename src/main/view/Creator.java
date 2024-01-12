@@ -79,7 +79,7 @@ public class Creator {
             @Override
             public void focusGained(FocusEvent e) {
                 System.out.println("focusgained");
-                //textField.setForeground(Color.BLACK);
+                System.out.println("textfieldemptied"+getEmptiedState(textField));
                 if (textField.getText().equals(placeholder) && getEmptiedState(textField) == false) {
                     textField.setText(""); // Clear the placeholder text when the field gains focus
                     setEmptiedState(textField, true);
@@ -91,34 +91,41 @@ public class Creator {
                     setEmptiedState(textField, true);
                 }
 
-                // else if (textField.getText().equals(placeholder) && textFieldEmptied.get() == true) {
-                //     textField.setText(""); // Clear the placeholder text when the field gains focus
-                //     textFieldEmptied.set(true);
-                // }
+                else if (textField.getText().equals(placeholder) && getEmptiedState(textField) == true) {
+                    textField.setText(""); // Clear the placeholder text when the field gains focus
+                    textField.setForeground(Color.BLACK);
+                    textFieldEmptied.set(true);
+                }
+
+                else if (textField.getText().isEmpty() && getEmptiedState(textField) == true) {
+                    System.out.println("going wrell");
+                }
+
                 else {
+                    System.out.println("textfieldemptied"+getEmptiedState(textField));
                     System.out.println("something went wrong in Creator class, focus gained");
                 }
             }
 
             @Override
             public void focusLost(FocusEvent e) {
-                System.out.println("focuslost");
-                // if (textField.getText().isEmpty()) {
-                //     textField.setForeground(Color.LIGHT_GRAY);
-                //     textField.setText(placeholder);
-                //     textFieldEmptied.set(false);
-                // }
+                System.out.println("focuslost to other textbox");
+                if (textField.getText().isEmpty()) {
+                    textField.setForeground(Color.PINK);
+                    textField.setText(placeholder);
+                    textFieldEmptied.set(false);
+                }
                 
-                if (!textField.getText().isEmpty() && textFieldEmptied.get() == true){
-                    textField.setForeground(Color.LIGHT_GRAY);
+                else if (!textField.getText().isEmpty() && textFieldEmptied.get() == true){
+                    textField.setForeground(Color.PINK);
                     //textFieldEmptied.set(false);
                     window.requestFocusInWindow();
                 }
 
-                // else {
-                //     System.out.println("something went wrong in focus lost");
-                //     System.out.println("textfieldemptied?"+textFieldEmptied);
-                // }
+                else {
+                    System.out.println("something went wrong in focus lost");
+                    System.out.println("textfieldemptied?"+textFieldEmptied);
+                }
             }
         });
 
@@ -151,26 +158,26 @@ public class Creator {
 
                 if (pointNotInTextbox && textField.getText().isEmpty()) {
                     textField.setText(placeholder);
-                    textField.setForeground(Color.GRAY);
-                    setEmptiedState(textField, false);
+                    textField.setForeground(Color.black);
+                    setEmptiedState(textField, true);
                     window.requestFocusInWindow();
                 }
 
                 else if (pointNotInTextbox && textFieldEmptied.get() == true && !textField.getText().isEmpty()) {
                     System.out.println("2nd option");
-                    textField.setForeground(Color.gray);
+                    textField.setForeground(Color.black);
                     window.requestFocusInWindow();
                 }
 
-                // else if (pointNotInTextbox) {
-                //     window.requestFocusInWindow();
-                //     textField.setForeground(Color.blue);
+                else if (pointNotInTextbox) {
+                    window.requestFocusInWindow();
+                    textField.setForeground(Color.black);
 
-                // }
+                }
 
-                // else {
-                //     System.out.println("something went wrong");
-                // }
+                else {
+                    System.out.println("something went wrong");
+                }
 
             }
         });
