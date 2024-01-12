@@ -73,6 +73,7 @@ public class Creator {
         return backNextButtonsPanel;
     }
 
+    
     public void textFieldFocusListener(JFrame window, JTextField textField, String placeholder, AtomicBoolean textFieldEmptied) { 
 
         textField.addFocusListener(new FocusAdapter() {
@@ -81,17 +82,20 @@ public class Creator {
                 System.out.println("focusgained");
                 System.out.println("textfieldemptied"+getEmptiedState(textField));
                 if (textField.getText().equals(placeholder) && getEmptiedState(textField) == false) {
+                    System.out.println("8");
                     textField.setText(""); // Clear the placeholder text when the field gains focus
                     setEmptiedState(textField, true);
                     textField.setForeground(Color.BLACK);
                 }
 
                 else if (!textField.getText().equals(placeholder) && !textField.getText().isEmpty() && getEmptiedState(textField) == true) {
+                    System.out.println("7");
                     textField.setForeground(Color.BLACK);
                     setEmptiedState(textField, true);
                 }
 
                 else if (textField.getText().equals(placeholder) && getEmptiedState(textField) == true) {
+                    System.out.println("6");
                     textField.setText(""); // Clear the placeholder text when the field gains focus
                     textField.setForeground(Color.BLACK);
                     textFieldEmptied.set(true);
@@ -104,22 +108,25 @@ public class Creator {
                 else {
                     System.out.println("textfieldemptied"+getEmptiedState(textField));
                     System.out.println("something went wrong in Creator class, focus gained");
+
                 }
             }
 
             @Override
             public void focusLost(FocusEvent e) {
                 System.out.println("focuslost to other textbox");
+                System.out.println("5");
                 if (textField.getText().isEmpty()) {
-                    textField.setForeground(Color.PINK);
+                    textField.setForeground(Color.pink);
                     textField.setText(placeholder);
                     textFieldEmptied.set(false);
                 }
                 
                 else if (!textField.getText().isEmpty() && textFieldEmptied.get() == true){
-                    textField.setForeground(Color.PINK);
+                    System.out.println("4");
+                    textField.setForeground(Color.pink);
                     //textFieldEmptied.set(false);
-                    window.requestFocusInWindow();
+                    ////////////////////window.requestFocusInWindow();
                 }
 
                 else {
@@ -157,21 +164,24 @@ public class Creator {
                 boolean pointNotInTextbox = !newBounds.contains(e.getPoint());
 
                 if (pointNotInTextbox && textField.getText().isEmpty()) {
+                    System.out.println("3");
                     textField.setText(placeholder);
-                    textField.setForeground(Color.black);
+                    textField.setForeground(Color.pink);
                     setEmptiedState(textField, true);
                     window.requestFocusInWindow();
                 }
 
                 else if (pointNotInTextbox && textFieldEmptied.get() == true && !textField.getText().isEmpty()) {
                     System.out.println("2nd option");
-                    textField.setForeground(Color.black);
+                    System.out.println("2");
+                    textField.setForeground(Color.pink);
                     window.requestFocusInWindow();
                 }
 
                 else if (pointNotInTextbox) {
+                    System.out.println("1");
+                    textField.setForeground(Color.pink);
                     window.requestFocusInWindow();
-                    textField.setForeground(Color.black);
 
                 }
 
@@ -181,6 +191,10 @@ public class Creator {
 
             }
         });
+
+    }
+
+    private void setTextColor() {
 
     }
 
