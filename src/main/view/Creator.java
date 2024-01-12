@@ -127,7 +127,7 @@ public class Creator {
                 
                 else if (!textField.getText().isEmpty() && textFieldEmptied.get() == true){
                     System.out.println("4");
-                    textField.setForeground(Color.black);
+                    textField.setForeground(Color.gray);
 
                 }
 
