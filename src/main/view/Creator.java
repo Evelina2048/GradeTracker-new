@@ -87,6 +87,10 @@ public class Creator {
             public void focusLost(FocusEvent e) {
                 System.out.println("focuslost");
                 //focusLost(window, textField, placeholder, textFieldEmptied);
+                if (textField.getText().isEmpty()) {
+                    textField.setText("Enter Class Name");
+                    textFieldEmptied.set(false);
+                }  
             }
         });
 
