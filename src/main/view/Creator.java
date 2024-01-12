@@ -82,8 +82,18 @@ public class Creator {
                     textField.setForeground(Color.BLACK); // Change the text color when typing
                 }
             }
+
+            @Override
+            public void focusLost(FocusEvent e) {
+                System.out.println("focuslost");
+                //focusLost(window, textField, placeholder, textFieldEmptied);
+            }
         });
 
+        focusLost(window, textField, placeholder, textFieldEmptied);
+    }
+
+    private void focusLost(JFrame window, JTextField textField, String placeholder, AtomicBoolean textFieldEmptied) {
         window.getContentPane().addMouseListener(new MouseAdapter() {
             @Override
             public void mouseClicked(MouseEvent e) {
@@ -114,7 +124,7 @@ public class Creator {
                 //     window.requestFocus();
                 // }
 
-                System.out.println("pointnotintextbox "+pointNotInTextbox+" textfieldemptied "+textFieldEmptied+ " textFieldtext "+ textField.getText());
+                //System.out.println("pointnotintextbox "+pointNotInTextbox+" textfieldemptied "+textFieldEmptied+ " textFieldtext "+ textField.getText());
 
                 if (pointNotInTextbox && textField.getText().isEmpty()) {
                     System.out.println("3rd option");
@@ -131,5 +141,6 @@ public class Creator {
 
             }
         });
+
     }
 }
