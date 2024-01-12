@@ -99,7 +99,7 @@ public class Creator {
             public void focusLost(FocusEvent e) {
                 System.out.println("focuslost");
                 if (textField.getText().isEmpty()) {
-                    textField.setForeground(Color.red);
+                    textField.setForeground(Color.LIGHT_GRAY);
                     textField.setText(placeholder);
                     textFieldEmptied.set(false);
                 }
