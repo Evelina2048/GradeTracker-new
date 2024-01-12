@@ -76,11 +76,15 @@ public class Creator {
             @Override
             public void focusGained(FocusEvent e) {
                 System.out.println("focusgained");
-                if (textField.getText().equals(placeholder)) {
-                    textField.setForeground(Color.BLACK); // Change the text color when typing
+                textField.setForeground(Color.BLACK);
+                if (textField.getText().equals(placeholder) && textFieldEmptied.get() == false) {
                     textField.setText(""); // Clear the placeholder text when the field gains focus
                     textFieldEmptied.set(true);
                 }
+
+                // else if (!textField.getText().equals(placeholder)){
+
+                // }
             }
 
             @Override
@@ -93,7 +97,7 @@ public class Creator {
                 }
                 
                 else if (!textField.getText().isEmpty() && textFieldEmptied.get() == true){
-                    textField.setForeground(Color.ORANGE);
+                    textField.setForeground(Color.GRAY);
                     textFieldEmptied.set(false);
                     window.requestFocusInWindow();
                 }
@@ -143,6 +147,8 @@ public class Creator {
 
                 else if (pointNotInTextbox) {
                     window.requestFocusInWindow();
+                    textField.setForeground(Color.blue);
+
                 }
 
             }
