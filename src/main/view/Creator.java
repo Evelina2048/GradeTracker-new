@@ -35,6 +35,7 @@ import java.awt.event.FocusEvent;
 
 import java.io.FileWriter;
 import java.io.IOException;
+import java.util.HashMap;
 import java.util.concurrent.atomic.AtomicBoolean;
 import java.io.BufferedReader;
 
@@ -42,6 +43,7 @@ import java.io.FileReader;
 
 public class Creator {
     private JPanel backNextButtonsPanel;
+    private HashMap<JTextField, Boolean> textFieldEmptiedMap = new HashMap<>();
     
     public Creator() {
 
@@ -71,25 +73,28 @@ public class Creator {
         return backNextButtonsPanel;
     }
 
-    public void textFieldFocusListener(JFrame window, JTextField textField, String placeholder, AtomicBoolean textFieldEmptied) {
+    public void textFieldFocusListener(JFrame window, JTextField textField, String placeholder, AtomicBoolean textFieldEmptied) { 
+
         textField.addFocusListener(new FocusAdapter() {
             @Override
             public void focusGained(FocusEvent e) {
                 System.out.println("focusgained");
-                textField.setForeground(Color.BLACK);
-                if (textField.getText().equals(placeholder) && textFieldEmptied.get() == false) {
+                //textField.setForeground(Color.BLACK);
+                if (textField.getText().equals(placeholder) && getEmptiedState(textField) == false) {
                     textField.setText(""); // Clear the placeholder text when the field gains focus
-                    textFieldEmptied.set(true);
+                    setEmptiedState(textField, true);
+                    textField.setForeground(Color.BLACK);
                 }
 
-                else if (!textField.getText().equals(placeholder)){
-                    System.out.println("somethingdidntgowrongunimplemented");
+                else if (!textField.getText().equals(placeholder) && !textField.getText().isEmpty() && getEmptiedState(textField) == true) {
+                    textField.setForeground(Color.BLACK);
+                    setEmptiedState(textField, true);
                 }
 
-                else if (textField.getText().equals(placeholder) && textFieldEmptied.get() == true) {
-                    textField.setText(""); // Clear the placeholder text when the field gains focus
-                    textFieldEmptied.set(true);
-                }
+                // else if (textField.getText().equals(placeholder) && textFieldEmptied.get() == true) {
+                //     textField.setText(""); // Clear the placeholder text when the field gains focus
+                //     textFieldEmptied.set(true);
+                // }
                 else {
                     System.out.println("something went wrong in Creator class, focus gained");
                 }
@@ -98,22 +103,22 @@ public class Creator {
             @Override
             public void focusLost(FocusEvent e) {
                 System.out.println("focuslost");
-                if (textField.getText().isEmpty()) {
-                    textField.setForeground(Color.LIGHT_GRAY);
-                    textField.setText(placeholder);
-                    textFieldEmptied.set(false);
-                }
+                // if (textField.getText().isEmpty()) {
+                //     textField.setForeground(Color.LIGHT_GRAY);
+                //     textField.setText(placeholder);
+                //     textFieldEmptied.set(false);
+                // }
                 
-                else if (!textField.getText().isEmpty() && textFieldEmptied.get() == true){
-                    textField.setForeground(Color.orange);
+                if (!textField.getText().isEmpty() && textFieldEmptied.get() == true){
+                    textField.setForeground(Color.LIGHT_GRAY);
                     //textFieldEmptied.set(false);
                     window.requestFocusInWindow();
                 }
 
-                else {
-                    System.out.println("something went wrong in focus lost");
-                    System.out.println("textfieldemptied?"+textFieldEmptied);
-                }
+                // else {
+                //     System.out.println("something went wrong in focus lost");
+                //     System.out.println("textfieldemptied?"+textFieldEmptied);
+                // }
             }
         });
 
@@ -143,33 +148,40 @@ public class Creator {
                 Rectangle newBounds = new Rectangle(x, y, width, height);
 
                 boolean pointNotInTextbox = !newBounds.contains(e.getPoint());
-               
+
                 if (pointNotInTextbox && textField.getText().isEmpty()) {
-                    System.out.println("3rd option");
                     textField.setText(placeholder);
-                    textField.setForeground(Color.yellow);
-                    textFieldEmptied.set(true);
+                    textField.setForeground(Color.GRAY);
+                    setEmptiedState(textField, false);
                     window.requestFocusInWindow();
                 }
 
-                else if (pointNotInTextbox && textFieldEmptied.get() == true) {
+                else if (pointNotInTextbox && textFieldEmptied.get() == true && !textField.getText().isEmpty()) {
                     System.out.println("2nd option");
-                    textField.setForeground(Color.green);
+                    textField.setForeground(Color.gray);
                     window.requestFocusInWindow();
                 }
 
-                else if (pointNotInTextbox) {
-                    window.requestFocusInWindow();
-                    textField.setForeground(Color.blue);
+                // else if (pointNotInTextbox) {
+                //     window.requestFocusInWindow();
+                //     textField.setForeground(Color.blue);
 
-                }
+                // }
 
-                else {
-                    System.out.println("something went wrong");
-                }
+                // else {
+                //     System.out.println("something went wrong");
+                // }
 
             }
         });
 
+    }
+
+    private boolean getEmptiedState(JTextField textField) {
+        return textFieldEmptiedMap.getOrDefault(textField, false);
+    }
+
+    private void setEmptiedState(JTextField textField, boolean state) {
+        textFieldEmptiedMap.put(textField, state);
     }
 }
