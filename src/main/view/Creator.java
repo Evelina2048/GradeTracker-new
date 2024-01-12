@@ -87,13 +87,13 @@ public class Creator {
             public void focusLost(FocusEvent e) {
                 System.out.println("focuslost");
                 if (textField.getText().isEmpty()) {
-                    textField.setForeground(Color.GRAY);
+                    textField.setForeground(Color.red);
                     textField.setText(placeholder);
                     textFieldEmptied.set(false);
                 }
                 
                 else if (!textField.getText().isEmpty() && textFieldEmptied.get() == true){
-                    textField.setForeground(Color.green);
+                    textField.setForeground(Color.ORANGE);
                     textFieldEmptied.set(false);
                     window.requestFocusInWindow();
                 }
@@ -137,7 +137,7 @@ public class Creator {
 
                 else if (pointNotInTextbox && textFieldEmptied.get() == true) {
                     System.out.println("2nd option");
-                    textField.setForeground(Color.GRAY);
+                    textField.setForeground(Color.green);
                     window.requestFocusInWindow();
                 }
 
