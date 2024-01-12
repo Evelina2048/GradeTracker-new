@@ -86,10 +86,10 @@ public class Creator {
             @Override
             public void focusLost(FocusEvent e) {
                 System.out.println("focuslost");
-                //focusLost(window, textField, placeholder, textFieldEmptied);
                 if (textField.getText().isEmpty()) {
-                    textField.setText("Enter Class Name");
+                    textField.setText(placeholder);
                     textFieldEmptied.set(false);
+                    textField.setForeground(Color.GRAY);
                 }  
             }
         });
@@ -133,6 +133,7 @@ public class Creator {
                 if (pointNotInTextbox && textField.getText().isEmpty()) {
                     System.out.println("3rd option");
                     textField.setText(placeholder);
+                    textField.setForeground(Color.GRAY);
                     textFieldEmptied.set(false);
                     window.requestFocusInWindow();
                 }
