@@ -127,7 +127,7 @@ public class Gather {
 
         textFieldEmptied.set(false);
 
-        creator.textFieldFocusListener(window, textField, "Enter user name", textFieldEmptied);
+        creator.textFieldFocusListener(window, textField, "Enter user name");
 
         // window.getContentPane().addMouseListener(new MouseAdapter() {
         //     @Override
@@ -349,9 +349,7 @@ private int commaCount(String username) {
         String line;
         try {
             while ((line = reader.readLine()) != null) {
-                System.out.println(line);
                 if (line.equals(username)) {//if matches username
-                    System.out.println("username does equal");
                     errorMessageSetUp("<html><center>Username already exists.<br> Please choose another.",200,100);
                     usernametaken = true;
                     break;

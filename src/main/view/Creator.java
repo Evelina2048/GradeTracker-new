@@ -36,7 +36,6 @@ import java.awt.event.FocusEvent;
 import java.io.FileWriter;
 import java.io.IOException;
 import java.util.HashMap;
-import java.util.concurrent.atomic.AtomicBoolean;
 import java.io.BufferedReader;
 
 import java.io.FileReader;
@@ -75,7 +74,7 @@ public class Creator {
     }
 
     
-    public void textFieldFocusListener(JFrame window, JTextField textField, String placeholder, AtomicBoolean textFieldEmptied) { 
+    public void textFieldFocusListener(JFrame window, JTextField textField, String placeholder) { 
 
         textField.addFocusListener(new FocusAdapter() {
             @Override
@@ -87,11 +86,15 @@ public class Creator {
 
                 }
                 if (textField.getText().equals(placeholder) && getEmptiedState(textField) == false) {
-                    System.out.println("8");
-                    textField.setText(""); // Clear the placeholder text when the field gains focus
+                    System.out.println("Inside condition block 8");
+                    System.out.println("Before setting emptied state: textFieldEmptied..." + getEmptiedState(textField));
+                    textField.setText("");
                     setEmptiedState(textField, true);
+                    System.out.println("After setting emptied state: textFieldEmptied..." + getEmptiedState(textField));
                     textField.setForeground(Color.BLACK);
+                    System.out.println("After setting color: textFieldEmptied..." + getEmptiedState(textField));
                 }
+                //System.out.println("After condition check: textFieldEmptied..." + getEmptiedState(textField));
 
                 else if (!textField.getText().equals(placeholder) && !textField.getText().isEmpty() && getEmptiedState(textField) == true) {
                     System.out.println("7");
@@ -103,7 +106,7 @@ public class Creator {
                     System.out.println("6");
                     textField.setText(""); // Clear the placeholder text when the field gains focus
                     textField.setForeground(Color.BLACK);
-                    textFieldEmptied.set(true);
+                    setEmptiedState(textField, true);
                 }
 
                 else {
@@ -117,31 +120,30 @@ public class Creator {
             @Override
             public void focusLost(FocusEvent e) {
                 System.out.println("focuslost");
-                System.out.println("5");
                 //JTextField previousTextbox = textField;
                 if (textField.getText().isEmpty()) {
-                    textField.setForeground(Color.black);
+                    System.out.println("5textfieldemptied..."+getEmptiedState(textField));
+                    textField.setForeground(Color.GRAY);
                     textField.setText(placeholder);
-                    textFieldEmptied.set(false);
+                    setEmptiedState(textField, false);
                 }
                 
-                else if (!textField.getText().isEmpty() && textFieldEmptied.get() == true){
+                else if (!textField.getText().isEmpty() && getEmptiedState(textField) == true){
                     System.out.println("4");
                     textField.setForeground(Color.gray);
 
                 }
-
                 else {
                     System.out.println("something went wrong in focus lost");
-                    System.out.println("textfieldemptied?"+textFieldEmptied);
+                    System.out.println("textfieldemptied?"+getEmptiedState(textField));
                 }
             }
         });
 
-        focusLost(window, textField, placeholder, textFieldEmptied);
+        focusLost(window, textField, placeholder);
     }
 
-    private void focusLost(JFrame window, JTextField textField, String placeholder, AtomicBoolean textFieldEmptied) {
+    private void focusLost(JFrame window, JTextField textField, String placeholder) {
         window.getContentPane().addMouseListener(new MouseAdapter() {
             @Override
             public void mouseClicked(MouseEvent e) {
@@ -169,12 +171,12 @@ public class Creator {
                 if (pointNotInTextbox && textField.getText().isEmpty()) {
                     System.out.println("3");
                     textField.setText(placeholder);
-                    //textField.setForeground(Color.BLACK);
-                    setEmptiedState(textField, true);
+                    textField.setForeground(Color.GRAY);
+                    setEmptiedState(textField, false);
                     window.requestFocusInWindow();
                 }
 
-                else if (pointNotInTextbox && textFieldEmptied.get() == true && !textField.getText().isEmpty()) {
+                else if (pointNotInTextbox &&  getEmptiedState(textField) == true && !textField.getText().isEmpty()) {
                     System.out.println("2nd option");
                     System.out.println("2");
                     //textField.setForeground(Color.BLACK);
@@ -182,9 +184,9 @@ public class Creator {
                 }
 
                 else if (pointNotInTextbox) {
-                    System.out.println("1");
                     //textField.setForeground(Color.black);
                     window.requestFocusInWindow();
+                    System.out.println("1textfieldemptied..."+getEmptiedState(textField));
 
                 }
 

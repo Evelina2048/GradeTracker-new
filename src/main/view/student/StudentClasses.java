@@ -86,7 +86,7 @@ public class StudentClasses extends JFrame {
         textFieldContainer.setVisible(true);
         window.add(textFieldContainer, BorderLayout.NORTH);
 
-        creator.textFieldFocusListener(window, textField, "Enter Class Name", textFieldEmptied);
+        creator.textFieldFocusListener(window, textField, "Enter Class Name");
         
         
         window.revalidate(); // Refresh the layout
