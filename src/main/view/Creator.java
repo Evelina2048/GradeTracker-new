@@ -76,7 +76,7 @@ public class Creator {
             @Override
             public void focusGained(FocusEvent e) {
                 System.out.println("focusgained");
-                if (textField.getText().equals(placeholder) && !textFieldEmptied.get()) {
+                if (textField.getText().equals(placeholder)) {
                     textField.setText(""); // Clear the placeholder text when the field gains focus
                     textFieldEmptied.set(true);
                     textField.setForeground(Color.BLACK); // Change the text color when typing
