@@ -82,7 +82,7 @@ public class Creator {
                 System.out.println("focusgained");
                 System.out.println("textfieldemptied"+getEmptiedState(textField));
                 if (previousTextbox != null) {
-                    previousTextbox.setForeground(Color.pink);
+                    previousTextbox.setForeground(Color.LIGHT_GRAY);
 
                 }
                 if (textField.getText().equals(placeholder) && getEmptiedState(textField) == false) {
