@@ -77,9 +77,9 @@ public class Creator {
             public void focusGained(FocusEvent e) {
                 System.out.println("focusgained");
                 if (textField.getText().equals(placeholder)) {
+                    textField.setForeground(Color.BLACK); // Change the text color when typing
                     textField.setText(""); // Clear the placeholder text when the field gains focus
                     textFieldEmptied.set(true);
-                    textField.setForeground(Color.BLACK); // Change the text color when typing
                 }
             }
 
@@ -87,10 +87,16 @@ public class Creator {
             public void focusLost(FocusEvent e) {
                 System.out.println("focuslost");
                 if (textField.getText().isEmpty()) {
+                    textField.setForeground(Color.GRAY);
                     textField.setText(placeholder);
                     textFieldEmptied.set(false);
-                    textField.setForeground(Color.GRAY);
-                }  
+                }
+                
+                else if (!textField.getText().isEmpty() && textFieldEmptied.get() == true){
+                    textField.setForeground(Color.green);
+                    textFieldEmptied.set(false);
+                    window.requestFocusInWindow();
+                }
             }
         });
 
@@ -101,9 +107,7 @@ public class Creator {
         window.getContentPane().addMouseListener(new MouseAdapter() {
             @Override
             public void mouseClicked(MouseEvent e) {
-                System.out.println("helloooojodso");
-                System.out.println("bounds:" + e.getX() + " " + e.getY());
-
+                System.out.println("mouse clicked");
                 int topLeftX = 332;
                 int topLeftY = 221;
                 int topRightX = 467;
@@ -122,14 +126,7 @@ public class Creator {
                 Rectangle newBounds = new Rectangle(x, y, width, height);
 
                 boolean pointNotInTextbox = !newBounds.contains(e.getPoint());
-                // if (pointNotInTextbox && textFieldEmptied.get() == false) {
-                //     textField.setText(placeholder);
-                //     textField.setForeground(Color.GRAY);
-                //     window.requestFocus();
-                // }
-
-                //System.out.println("pointnotintextbox "+pointNotInTextbox+" textfieldemptied "+textFieldEmptied+ " textFieldtext "+ textField.getText());
-
+               
                 if (pointNotInTextbox && textField.getText().isEmpty()) {
                     System.out.println("3rd option");
                     textField.setText(placeholder);
@@ -141,6 +138,10 @@ public class Creator {
                 else if (pointNotInTextbox && textFieldEmptied.get() == true) {
                     System.out.println("2nd option");
                     textField.setForeground(Color.GRAY);
+                    window.requestFocusInWindow();
+                }
+
+                else if (pointNotInTextbox) {
                     window.requestFocusInWindow();
                 }
 
