@@ -82,19 +82,19 @@ public class StudentClasses extends JFrame {
 
             textFieldEmptied.set(false);
             
-            JTextField textField = decorate.decorateTextBox("Enter Class Name");
+            JTextField newTextField = decorate.decorateTextBox("Enter Class Name");
             
-            textFieldPanel.add(textField);
+            textFieldPanel.add(newTextField);
             
-            textField.setPreferredSize(new Dimension(50, 50));
+            newTextField.setPreferredSize(new Dimension(50, 50));
             textFieldContainer.add(textFieldPanel); // Add to the container panel
             window.add(textFieldContainer, BorderLayout.NORTH);
 
-            creator.textFieldFocusListener(window, textField, "Enter Class Name");
+            creator.textFieldFocusListener(window, newTextField, "Enter Class Name");
 
         }
 
-        if (textboxCounter == 5) {
+        if (textboxCounter % 5 == 0 && textboxCounter != 0) {
             textboxcol++;
             System.out.println("textboxcol"+textboxcol);
             if (textboxcol<=5) {         
@@ -149,7 +149,7 @@ public class StudentClasses extends JFrame {
     private void hideWindow() {
         backNextButtonsPanel.setVisible(false);
         newClassButton.setVisible(false);
-        textField.setVisible(false);
+        //textField.setVisible(false);
     }
 
     }
