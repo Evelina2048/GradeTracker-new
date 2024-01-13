@@ -53,9 +53,10 @@ public class StudentClasses extends JFrame {
     private JPanel textFieldContainer = new JPanel(new GridLayout(0, 5)); // Panel to hold text fields
     private JTextField textField;
     private int textboxCounter = 0;
+    JPanel southContainer = new JPanel(new BorderLayout());
     //JPanel westPanel = new JPanel(new BorderLayout());
     //JPanel westPanel = new JPanel(new FlowLayout(FlowLayout.LEFT));
-    JPanel westPanel = new JPanel(new GridLayout(1,2));
+    //JPanel westPanel = new JPanel(new FlowLayout(FlowLayout.LEFT));
     AtomicBoolean textFieldEmptied = new AtomicBoolean(false);;
     JButton newClassButton;
     JButton deleteClassButton;
@@ -64,6 +65,7 @@ public class StudentClasses extends JFrame {
     //JTextField textField = decorate.decorateTextBox();
 
     public StudentClasses(JFrame main,NewUser newUser, String studentOrTeacher, String existingOrNew) {
+
         studentClassesLaunch(main);
         //createNewClassButton();
         westPanelCreate();
@@ -74,6 +76,7 @@ public class StudentClasses extends JFrame {
         System.out.println("in student classes");
         this.window = main;
         window.setTitle("StudentClasses");
+        window.setLayout(new BorderLayout());
         createTextBox();
         //textField.setVisible(true);
     }
@@ -123,7 +126,9 @@ public class StudentClasses extends JFrame {
             }
         });
         backNextButtonsPanel = creator.makeBackNextButtonsPanel(backButton, nextButton);
-        window.add(backNextButtonsPanel, BorderLayout.SOUTH);
+        southContainer.add(backNextButtonsPanel, BorderLayout.SOUTH);
+        
+        window.add(southContainer, BorderLayout.SOUTH);
     }
 
     //create textbox "Class" placeholder
@@ -158,13 +163,13 @@ public class StudentClasses extends JFrame {
         deleteClassButton();
 
 
-        JPanel buttonsPanel = new JPanel(new FlowLayout(FlowLayout.LEFT));
-        buttonsPanel.add(newClassButton);
-        buttonsPanel.add(deleteClassButton);
+        JPanel buttonsPanel = new JPanel(new BorderLayout());
+        buttonsPanel.add(newClassButton,BorderLayout.WEST);
+        buttonsPanel.add(deleteClassButton, BorderLayout.EAST);
+    
+        southContainer.add(buttonsPanel,BorderLayout.CENTER);
 
-
-
-        window.add(buttonsPanel, BorderLayout.WEST);
+        window.add(southContainer, BorderLayout.SOUTH);
 
     }
 
