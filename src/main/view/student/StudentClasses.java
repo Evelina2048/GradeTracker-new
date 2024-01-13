@@ -123,6 +123,10 @@ public class StudentClasses extends JFrame {
         });
 
         JButton saveButton = creator.saveButtonCreate();
+        saveButton.setPreferredSize(new Dimension(80,40));
+        JPanel saveButtonPanel = new JPanel();
+        saveButtonPanel.add(saveButton);
+
         saveButton.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent e) {
                 //nextButtonAction(existingOrNew, studentOrTeacher);
@@ -138,7 +142,7 @@ public class StudentClasses extends JFrame {
                 StudentStatCollect statCollect = new StudentStatCollect(window, newUser, studentOrTeacher, existingOrNew);
             }
         });
-        backNextButtonsPanel = creator.makeBackNextButtonsPanel(backButton, saveButton, nextButton);
+        backNextButtonsPanel = creator.makeBackNextButtonsPanel(backButton, saveButtonPanel, nextButton);
         southContainer.add(backNextButtonsPanel, BorderLayout.SOUTH);
         
         window.add(southContainer, BorderLayout.SOUTH);

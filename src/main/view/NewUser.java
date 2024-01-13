@@ -142,15 +142,15 @@ public class NewUser extends JFrame {
             }
         });
 
-        saveButton = new JButton("Save");
-        backNextButtonsPanel.add(saveButton, BorderLayout.CENTER);
-        window.add(backNextButtonsPanel, BorderLayout.SOUTH);
+        // saveButton = new JButton("Save");
+        // backNextButtonsPanel.add(saveButton, BorderLayout.CENTER);
+        // window.add(backNextButtonsPanel, BorderLayout.SOUTH);
         
-        saveButton.addActionListener(new ActionListener() {
-            public void actionPerformed(ActionEvent e) {
-                //doNextButtonProcedure();
-            }
-        });
+        // saveButton.addActionListener(new ActionListener() {
+        //     public void actionPerformed(ActionEvent e) {
+        //         //doNextButtonProcedure();
+        //     }
+        // });
         
         //next
         nextButton = new JButton("Next >");

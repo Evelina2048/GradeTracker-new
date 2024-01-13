@@ -133,9 +133,9 @@ private void backNextButton() {
     backButton.setEnabled(false);
     backNextButtonsPanel.add(backButton, BorderLayout.WEST);
 
-    nextButton = new JButton("Save");
-    backNextButtonsPanel.add(nextButton, BorderLayout.CENTER);
-    this.add(backNextButtonsPanel, BorderLayout.SOUTH);
+    // nextButton = new JButton("Save");
+    // backNextButtonsPanel.add(nextButton, BorderLayout.CENTER);
+    // this.add(backNextButtonsPanel, BorderLayout.SOUTH);
     
     //next
     nextButton = new JButton("Next >");

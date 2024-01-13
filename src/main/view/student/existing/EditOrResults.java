@@ -70,6 +70,8 @@ public class EditOrResults extends JFrame {
         });
 
         JButton saveButton = creator.saveButtonCreate();
+        JPanel saveButtonPanel = new JPanel();
+        saveButtonPanel.add(saveButton);
         saveButton.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent e) {
                 //nextButtonAction(existingOrNew, studentOrTeacher);
@@ -78,7 +80,7 @@ public class EditOrResults extends JFrame {
         
         JButton nextButton = creator.nextButtonCreate();
         nextButton.setEnabled(false);
-        backNextButtonsPanel = creator.makeBackNextButtonsPanel(backButton, saveButton, nextButton);
+        backNextButtonsPanel = creator.makeBackNextButtonsPanel(backButton, saveButtonPanel, nextButton);
         window.add(backNextButtonsPanel, BorderLayout.SOUTH);
     }
 

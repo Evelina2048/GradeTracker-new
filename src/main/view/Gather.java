@@ -188,8 +188,10 @@ public class Gather {
         });
 
         JButton saveButton = creator.saveButtonCreate();
+        JPanel saveButtonPanel = new JPanel(new BorderLayout());
         saveButton.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent e) {
+                //writeToFile();
                 //nextButtonAction(existingOrNew, studentOrTeacher);
             }
         });
@@ -200,7 +202,7 @@ public class Gather {
                 nextButtonAction(existingOrNew, studentOrTeacher);
             }
         });
-        backNextButtonsPanel = creator.makeBackNextButtonsPanel(backButton,saveButton, nextButton);
+        backNextButtonsPanel = creator.makeBackNextButtonsPanel(backButton,saveButtonPanel, nextButton);
         window.add(backNextButtonsPanel, BorderLayout.SOUTH);
     }
 
