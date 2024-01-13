@@ -53,7 +53,8 @@ public class StudentClasses extends JFrame {
     private JPanel textFieldContainer = new JPanel(new GridLayout(0, 5)); // Panel to hold text fields
     private JTextField textField;
     private int textboxCounter = 0;
-    JPanel westPanel = new JPanel(new BorderLayout());
+    //JPanel westPanel = new JPanel(new BorderLayout());
+    JPanel westPanel = new JPanel(new FlowLayout(FlowLayout.LEFT));
     AtomicBoolean textFieldEmptied = new AtomicBoolean(false);;
     JButton newClassButton;
     JButton deleteClassButton;
@@ -154,9 +155,11 @@ public class StudentClasses extends JFrame {
     private void westPanelCreate() {
         createNewClassButton();
         deleteClassButton();
+
+
         
-        westPanel.add(newClassButton, BorderLayout.SOUTH);
-        westPanel.add(deleteClassButton, BorderLayout.SOUTH);
+        westPanel.add(newClassButton, BorderLayout.WEST);
+        westPanel.add(deleteClassButton, BorderLayout.EAST);
 
 
 
