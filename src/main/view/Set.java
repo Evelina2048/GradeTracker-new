@@ -40,9 +40,18 @@ import java.io.FileReader;
 
 public class Set {
     private JPanel backNextButtonsPanel;
-    
+    private String username;
+
     public Set () {
 
+    }
+
+    public void setUsername(String my_username) {
+       username = my_username;
+    }
+
+    public String getUsername() {
+        return username;
     }
 
 }

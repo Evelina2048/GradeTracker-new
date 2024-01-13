@@ -53,6 +53,7 @@ public class Gather {
     private int windowY;
     private AtomicBoolean textFieldEmptied = new AtomicBoolean(false); 
     private Creator creator = new Creator();
+    Set set = new Set();
 
     JRadioButton studentButton;
     JRadioButton teacherButton;
@@ -225,7 +226,7 @@ public class Gather {
                 //move on to studentclasses class
                 System.out.println("should move to studentClasses class");
                 hideWindow();
-                StudentClasses studentClasses = new StudentClasses(window, newUser, studentOrTeacherString, existingOrNew);
+                StudentClasses studentClasses = new StudentClasses(window, newUser, studentOrTeacherString, existingOrNew, set);
             }
         }
 
@@ -271,6 +272,7 @@ private void writeUsername(String filePath, String studentOrTeacher) {
     //and username not taken
     String usernamePath = "somethingwentwrong.txt";
     String username = textField.getText().trim();
+    set.setUsername(username);
     System.out.println("studentOrTeacher"+ studentOrTeacher);
     if ("Student".equals(studentOrTeacher)) {
         filePath = "/Users/evy/Documents/GradeTracker-new/src/main/view/UserInfo/StudentInfo/"+username+".txt";
@@ -291,7 +293,7 @@ private void writeUsername(String filePath, String studentOrTeacher) {
     try (FileWriter writer = new FileWriter(filePath, true)) {
         checkIfExisting(usernamePath, username);
         int commaCountInt = commaCount(username);
-        writer.write(username + "," + commaCountInt + "," + "\n");
+        //writer.write(username + "," + commaCountInt + "," + "\n");
     } catch (IOException e1) {
         e1.printStackTrace();
     }

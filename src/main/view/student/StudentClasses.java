@@ -35,7 +35,7 @@ import java.io.FileWriter;
 import java.io.IOException;
 import java.util.concurrent.atomic.AtomicBoolean;
 import java.io.BufferedReader;
-
+import java.io.BufferedWriter;
 import java.io.FileReader;
 
 import java.awt.Rectangle;
@@ -43,6 +43,7 @@ import java.awt.Rectangle;
 //importing files
 import main.view.MainWindow;
 import main.view.NewUser;
+import main.view.Set;
 import main.view.Creator;
 import main.view.Decorator;
 
@@ -62,18 +63,20 @@ public class StudentClasses extends JFrame {
     JButton newClassButton;
     JButton deleteClassButton;
     Decorator decorate = new Decorator();
+    Set set;
 
     //JTextField textField = decorate.decorateTextBox();
 
-    public StudentClasses(JFrame main,NewUser newUser, String studentOrTeacher, String existingOrNew) {
+    public StudentClasses(JFrame main,NewUser newUser, String studentOrTeacher, String existingOrNew, Set set) {
 
-        studentClassesLaunch(main);
+        studentClassesLaunch(main, set);
         //createNewClassButton();
         westPanelCreate();
         buttonSetUpAction(main, newUser, studentOrTeacher, existingOrNew);
     }
 
-    public void studentClassesLaunch(JFrame main) {
+    public void studentClassesLaunch(JFrame main, Set set2) {
+        set = set2;
         System.out.println("in student classes");
         this.window = main;
         window.setTitle("StudentClasses");
@@ -122,6 +125,8 @@ public class StudentClasses extends JFrame {
         JButton nextButton = creator.nextButtonCreate();
         nextButton.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent e) {
+                System.out.println("nextbuttonhit");
+                writeTextToFile();
                 hideWindow();
                 StudentStatCollect statCollect = new StudentStatCollect(window, newUser, studentOrTeacher, existingOrNew);
             }
@@ -174,6 +179,30 @@ public class StudentClasses extends JFrame {
 
     }
 
+    private void writeTextToFile() {
+        //Set set = new Set();
+        String username = set.getUsername();
+        System.out.println("usernameeeeeeeeeeee"+username);
+        String filePath = "/Users/evy/Documents/GradeTracker-new/src/main/view/UserInfo/StudentInfo/"+username+".txt";
+        try (BufferedWriter writer = new BufferedWriter(new FileWriter(filePath))) {
+            for (Component component : textFieldContainer.getComponents()) {
+                if (component instanceof JPanel) {
+                    JPanel textFieldPanel = (JPanel) component;
+                    for (Component innerComponent : textFieldPanel.getComponents()) {
+                        if (innerComponent instanceof JTextField) {
+                            JTextField textField = (JTextField) innerComponent;
+                            String text = textField.getText();
+                            writer.write(text);
+                            writer.newLine();
+                        }
+                    }
+                }
+            }
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+    }
+
     private void deleteTextBox() {
         int componentsCount = textFieldContainer.getComponentCount();
         if (componentsCount > 0) {
@@ -189,7 +218,9 @@ public class StudentClasses extends JFrame {
     private void hideWindow() {
         backNextButtonsPanel.setVisible(false);
         newClassButton.setVisible(false);
-        textField.setVisible(false);
+        southContainer.setVisible(false);
+        textFieldContainer.setVisible(false);
+        //textField.setVisible(false);
     }
 
     }
