@@ -50,11 +50,9 @@ public class StudentClasses extends JFrame {
     private JFrame window;
     private Creator creator = new Creator();
     private JPanel backNextButtonsPanel;
-    private JPanel textFieldContainer = new JPanel(new GridLayout(5,0)); // Panel to hold text fields
-    private JPanel textFieldAll = new JPanel(new GridLayout(1,5)); // Panel to hold text fields
+    private JPanel textFieldContainer = new JPanel(new GridLayout(0, 5)); // Panel to hold text fields
     private JTextField textField;
     private int textboxCounter = 0;
-    private int textboxcol = 0;
     AtomicBoolean textFieldEmptied = new AtomicBoolean(false);;
     JButton newClassButton;
     Decorator decorate = new Decorator();
@@ -76,35 +74,30 @@ public class StudentClasses extends JFrame {
     }
 
     private void createTextBox() {
-        if (textboxCounter < 5) {
+        textboxCounter++;
+        if (textboxCounter <= 30) {
             System.out.println("In create textbox new");
             JPanel textFieldPanel = new JPanel(new FlowLayout(FlowLayout.LEFT));
 
             textFieldEmptied.set(false);
             
-            JTextField newTextField = decorate.decorateTextBox("Enter Class Name");
+            JTextField textField = decorate.decorateTextBox("Enter Class Name");
             
-            textFieldPanel.add(newTextField);
+            textFieldPanel.add(textField);
             
-            newTextField.setPreferredSize(new Dimension(50, 50));
+            textField.setPreferredSize(new Dimension(50, 50));
             textFieldContainer.add(textFieldPanel); // Add to the container panel
+            textFieldContainer.setVisible(true);
             window.add(textFieldContainer, BorderLayout.NORTH);
 
-            creator.textFieldFocusListener(window, newTextField, "Enter Class Name");
+            creator.textFieldFocusListener(window, textField, "Enter Class Name");
+            
+            
+            window.revalidate(); // Refresh the layout
 
         }
 
-        if (textboxCounter % 5 == 0 && textboxCounter != 0) {
-            textboxcol++;
-            System.out.println("textboxcol"+textboxcol);
-            if (textboxcol<=5) {         
-                textFieldAll.add(textFieldContainer);
-                textFieldContainer = new JPanel(new GridLayout(5, 0));
-                textboxCounter = 0;
-            }
-        }
 
-        window.revalidate(); // Refresh the layout
     }
 
     public void buttonSetUpAction(JFrame main, NewUser newUser, String studentOrTeacher, String existingOrNew) {
@@ -134,8 +127,9 @@ public class StudentClasses extends JFrame {
         newClassButton.setPreferredSize(new Dimension(80, 50));
         newClassButton.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent e) {
-                textboxCounter++;
-                createTextBox();                       
+                System.out.println("NewClassButtonPressed");
+                createTextBox();
+                
         }
     });
 
@@ -149,7 +143,7 @@ public class StudentClasses extends JFrame {
     private void hideWindow() {
         backNextButtonsPanel.setVisible(false);
         newClassButton.setVisible(false);
-        //textField.setVisible(false);
+        textField.setVisible(false);
     }
 
     }
