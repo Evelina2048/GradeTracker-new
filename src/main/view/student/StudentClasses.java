@@ -33,6 +33,8 @@ import java.awt.event.FocusEvent;
 
 import java.io.FileWriter;
 import java.io.IOException;
+import java.util.ArrayList;
+import java.util.List;
 import java.util.concurrent.atomic.AtomicBoolean;
 import java.io.BufferedReader;
 import java.io.BufferedWriter;
@@ -180,11 +182,14 @@ public class StudentClasses extends JFrame {
     }
 
     private void writeTextToFile() {
-        //Set set = new Set();
         String username = set.getUsername();
-        System.out.println("usernameeeeeeeeeeee"+username);
-        String filePath = "/Users/evy/Documents/GradeTracker-new/src/main/view/UserInfo/StudentInfo/"+username+".txt";
+        System.out.println("usernameeeeeeeeeeee" + username);
+        String filePath = "/Users/evy/Documents/GradeTracker-new/src/main/view/UserInfo/StudentInfo/" + username + ".txt";
+    
         try (BufferedWriter writer = new BufferedWriter(new FileWriter(filePath))) {
+            List<String> textList = new ArrayList<>();
+    
+            writer.write("Class:"+"\n");
             for (Component component : textFieldContainer.getComponents()) {
                 if (component instanceof JPanel) {
                     JPanel textFieldPanel = (JPanel) component;
@@ -192,17 +197,19 @@ public class StudentClasses extends JFrame {
                         if (innerComponent instanceof JTextField) {
                             JTextField textField = (JTextField) innerComponent;
                             String text = textField.getText();
-                            writer.write(text);
-                            writer.newLine();
+                            textList.add(text);
                         }
                     }
                 }
             }
+    
+            // Write the list as an array to the file
+            writer.write(textList.toString());
+    
         } catch (IOException e) {
             e.printStackTrace();
         }
     }
-
     private void deleteTextBox() {
         int componentsCount = textFieldContainer.getComponentCount();
         if (componentsCount > 0) {
