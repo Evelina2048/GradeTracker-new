@@ -125,6 +125,7 @@ public class NewUser extends JFrame {
 
     private void buttonSetUp(MainWindow main, String studentOrTeacher) {
         JButton backButton;
+        JButton saveButton;
         JButton nextButton;
         //buttons
         backNextButtonsPanel = new JPanel(new BorderLayout());
@@ -137,8 +138,17 @@ public class NewUser extends JFrame {
                 main.show(window.getX(),window.getY());
                 main.setButtonSelected(studentOrTeacher);
                 main.setExistingOrNew(existingOrNew);
-                decorator.hideWindow(instructionsPanel, choicesPanel, backNextButtonsPanel); 
-                
+                decorator.hideWindow(instructionsPanel, choicesPanel, backNextButtonsPanel);     
+            }
+        });
+
+        saveButton = new JButton("Save");
+        backNextButtonsPanel.add(saveButton, BorderLayout.CENTER);
+        window.add(backNextButtonsPanel, BorderLayout.SOUTH);
+        
+        saveButton.addActionListener(new ActionListener() {
+            public void actionPerformed(ActionEvent e) {
+                //doNextButtonProcedure();
             }
         });
         

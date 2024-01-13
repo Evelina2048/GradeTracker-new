@@ -75,11 +75,16 @@ public class PrintStudentGrades extends JFrame {
             }
         });
 
-       
-        
+        JButton saveButton = creator.saveButtonCreate();
+        saveButton.addActionListener(new ActionListener() {
+            public void actionPerformed(ActionEvent e) {
+                //nextButtonAction(existingOrNew, studentOrTeacher);
+            }
+        });
+
         JButton nextButton = creator.nextButtonCreate();
         nextButton.setEnabled(false);
-        backNextButtonsPanel = creator.makeBackNextButtonsPanel(backButton, nextButton);
+        backNextButtonsPanel = creator.makeBackNextButtonsPanel(backButton, saveButton, nextButton);
         window.add(backNextButtonsPanel, BorderLayout.SOUTH);
     }
 

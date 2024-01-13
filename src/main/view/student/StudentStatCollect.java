@@ -68,7 +68,12 @@ public class StudentStatCollect extends JFrame {
             }
         });
 
-       
+        JButton saveButton = creator.saveButtonCreate();
+        saveButton.addActionListener(new ActionListener() {
+            public void actionPerformed(ActionEvent e) {
+                //nextButtonAction(existingOrNew, studentOrTeacher);
+            }
+        });
         
         JButton nextButton = creator.nextButtonCreate();
         nextButton.addActionListener(new ActionListener() {
@@ -78,7 +83,7 @@ public class StudentStatCollect extends JFrame {
                 PrintStudentGrades print = new PrintStudentGrades(main, studentOrTeacher,existingOrNew);
             }
         });
-        backNextButtonsPanel = creator.makeBackNextButtonsPanel(backButton, nextButton);
+        backNextButtonsPanel = creator.makeBackNextButtonsPanel(backButton, saveButton, nextButton);
         window.add(backNextButtonsPanel, BorderLayout.SOUTH);
     }
 

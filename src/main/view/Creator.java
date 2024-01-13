@@ -56,6 +56,14 @@ public class Creator {
         return backButton;
         
     }
+    
+    public JButton saveButtonCreate() {
+        JButton saveButton;
+
+        saveButton = new JButton("Save");
+
+        return saveButton;
+    }
 
     public JButton nextButtonCreate() {
         JButton nextButton;
@@ -65,9 +73,10 @@ public class Creator {
         return nextButton;
     }
 
-    public JPanel makeBackNextButtonsPanel(JButton backButton, JButton nextButton) {
+    public JPanel makeBackNextButtonsPanel(JButton backButton, JButton saveButton, JButton nextButton) {
         backNextButtonsPanel = new JPanel(new BorderLayout());
         backNextButtonsPanel.add(backButton, BorderLayout.WEST);
+        backNextButtonsPanel.add(saveButton, BorderLayout.CENTER);
         backNextButtonsPanel.add(nextButton, BorderLayout.EAST);
 
         return backNextButtonsPanel;

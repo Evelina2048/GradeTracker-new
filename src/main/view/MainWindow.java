@@ -128,10 +128,15 @@ private void backNextButton() {
     JButton nextButton;
     //buttons
     backNextButtonsPanel = new JPanel(new BorderLayout());
+
     backButton = new JButton("< Back");
     backButton.setEnabled(false);
     backNextButtonsPanel.add(backButton, BorderLayout.WEST);
 
+    nextButton = new JButton("Save");
+    backNextButtonsPanel.add(nextButton, BorderLayout.CENTER);
+    this.add(backNextButtonsPanel, BorderLayout.SOUTH);
+    
     //next
     nextButton = new JButton("Next >");
     backNextButtonsPanel.add(nextButton, BorderLayout.EAST);

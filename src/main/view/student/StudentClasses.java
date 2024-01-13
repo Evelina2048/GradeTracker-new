@@ -122,8 +122,13 @@ public class StudentClasses extends JFrame {
             }
         });
 
-       
-        
+        JButton saveButton = creator.saveButtonCreate();
+        saveButton.addActionListener(new ActionListener() {
+            public void actionPerformed(ActionEvent e) {
+                //nextButtonAction(existingOrNew, studentOrTeacher);
+            }
+        });
+
         JButton nextButton = creator.nextButtonCreate();
         nextButton.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent e) {
@@ -133,7 +138,7 @@ public class StudentClasses extends JFrame {
                 StudentStatCollect statCollect = new StudentStatCollect(window, newUser, studentOrTeacher, existingOrNew);
             }
         });
-        backNextButtonsPanel = creator.makeBackNextButtonsPanel(backButton, nextButton);
+        backNextButtonsPanel = creator.makeBackNextButtonsPanel(backButton, saveButton, nextButton);
         southContainer.add(backNextButtonsPanel, BorderLayout.SOUTH);
         
         window.add(southContainer, BorderLayout.SOUTH);
