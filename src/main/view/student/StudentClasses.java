@@ -50,7 +50,7 @@ public class StudentClasses extends JFrame {
     private JFrame window;
     private Creator creator = new Creator();
     private JPanel backNextButtonsPanel;
-    private JPanel textFieldContainer = new JPanel(new GridLayout(5, 5)); // Panel to hold text fields
+    private JPanel textFieldContainer = new JPanel(new GridLayout(0, 5)); // Panel to hold text fields
     private JTextField textField;
     private int textboxCounter = 0;
     AtomicBoolean textFieldEmptied = new AtomicBoolean(false);;
@@ -75,7 +75,7 @@ public class StudentClasses extends JFrame {
 
     private void createTextBox() {
         textboxCounter++;
-        if (textboxCounter <= 25) {
+        if (textboxCounter <= 5) {
             System.out.println("In create textbox new");
             JPanel textFieldPanel = new JPanel(new FlowLayout(FlowLayout.LEFT));
 
