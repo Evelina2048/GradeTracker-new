@@ -50,11 +50,13 @@ public class StudentClasses extends JFrame {
     private JFrame window;
     private Creator creator = new Creator();
     private JPanel backNextButtonsPanel;
-    private JPanel textFieldContainer = new JPanel(new GridLayout(0, 1)); // Panel to hold text fields
+    private JPanel textFieldContainer = new JPanel(new GridLayout(5, 5)); // Panel to hold text fields
     private JTextField textField;
+    private int textboxCounter = 0;
     AtomicBoolean textFieldEmptied = new AtomicBoolean(false);;
     JButton newClassButton;
     Decorator decorate = new Decorator();
+
     //JTextField textField = decorate.decorateTextBox();
 
     public StudentClasses(JFrame main,NewUser newUser, String studentOrTeacher, String existingOrNew) {
@@ -72,24 +74,28 @@ public class StudentClasses extends JFrame {
     }
 
     private void createTextBox() {
-        System.out.println("In create textbox new");
-        JPanel textFieldPanel = new JPanel(new FlowLayout(FlowLayout.LEFT));
+        textboxCounter++;
+        if (textboxCounter <= 25) {
+            System.out.println("In create textbox new");
+            JPanel textFieldPanel = new JPanel(new FlowLayout(FlowLayout.LEFT));
 
-        textFieldEmptied.set(false);
-        
-        JTextField textField = decorate.decorateTextBox("Enter Class Name");
-        
-        textFieldPanel.add(textField);
-        
-        textField.setPreferredSize(new Dimension(50, 50));
-        textFieldContainer.add(textFieldPanel); // Add to the container panel
-        textFieldContainer.setVisible(true);
-        window.add(textFieldContainer, BorderLayout.NORTH);
+            textFieldEmptied.set(false);
+            
+            JTextField textField = decorate.decorateTextBox("Enter Class Name");
+            
+            textFieldPanel.add(textField);
+            
+            textField.setPreferredSize(new Dimension(50, 50));
+            textFieldContainer.add(textFieldPanel); // Add to the container panel
+            textFieldContainer.setVisible(true);
+            window.add(textFieldContainer, BorderLayout.NORTH);
 
-        creator.textFieldFocusListener(window, textField, "Enter Class Name");
-        
-        
-        window.revalidate(); // Refresh the layout
+            creator.textFieldFocusListener(window, textField, "Enter Class Name");
+            
+            
+            window.revalidate(); // Refresh the layout
+
+        }
 
 
     }
