@@ -53,15 +53,18 @@ public class StudentClasses extends JFrame {
     private JPanel textFieldContainer = new JPanel(new GridLayout(0, 5)); // Panel to hold text fields
     private JTextField textField;
     private int textboxCounter = 0;
+    JPanel westPanel = new JPanel(new BorderLayout());
     AtomicBoolean textFieldEmptied = new AtomicBoolean(false);;
     JButton newClassButton;
+    JButton deleteClassButton;
     Decorator decorate = new Decorator();
 
     //JTextField textField = decorate.decorateTextBox();
 
     public StudentClasses(JFrame main,NewUser newUser, String studentOrTeacher, String existingOrNew) {
         studentClassesLaunch(main);
-        createNewClassButton();
+        //createNewClassButton();
+        westPanelCreate();
         buttonSetUpAction(main, newUser, studentOrTeacher, existingOrNew);
     }
 
@@ -127,16 +130,38 @@ public class StudentClasses extends JFrame {
         newClassButton.setPreferredSize(new Dimension(80, 50));
         newClassButton.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent e) {
-                System.out.println("NewClassButtonPressed");
                 createTextBox();
                 
         }
     });
+        // westPanel.add(newClassButton, BorderLayout.SOUTH);
 
-        JPanel westPanel = new JPanel(new BorderLayout());
+        // window.add(westPanel,BorderLayout.WEST);
+    }
+
+    private void deleteClassButton() {
+        deleteClassButton = new JButton("Delete Class");
+        deleteClassButton.setPreferredSize(new Dimension(80, 50));
+        deleteClassButton.addActionListener(new ActionListener() {
+            public void actionPerformed(ActionEvent e) {
+                System.out.println("deleteClassButtonPressed");
+                createTextBox();
+                
+            }
+        });
+    }
+
+    private void westPanelCreate() {
+        createNewClassButton();
+        deleteClassButton();
+        
         westPanel.add(newClassButton, BorderLayout.SOUTH);
+        westPanel.add(deleteClassButton, BorderLayout.SOUTH);
+
+
 
         window.add(westPanel,BorderLayout.WEST);
+
     }
 
     //create JButton "New Class"
