@@ -11,6 +11,7 @@ import javax.swing.SwingConstants;
 
 import java.awt.BorderLayout;
 import java.awt.Color;
+import java.awt.Component;
 import java.awt.Dimension;
 import java.awt.Font;
 import javax.swing.JPanel;
@@ -148,11 +149,11 @@ public class StudentClasses extends JFrame {
 
     private void deleteClassButton() {
         deleteClassButton = new JButton("Delete Class");
-        deleteClassButton.setPreferredSize(new Dimension(80, 50));
+        deleteClassButton.setPreferredSize(new Dimension(100, 50));
         deleteClassButton.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent e) {
                 System.out.println("deleteClassButtonPressed");
-                createTextBox();
+                deleteTextBox();
                 
             }
         });
@@ -171,6 +172,17 @@ public class StudentClasses extends JFrame {
 
         window.add(southContainer, BorderLayout.SOUTH);
 
+    }
+
+    private void deleteTextBox() {
+        int componentsCount = textFieldContainer.getComponentCount();
+        if (componentsCount > 0) {
+            Component lastComponent = textFieldContainer.getComponent(componentsCount - 1);
+            textFieldContainer.remove(lastComponent);
+            window.revalidate();
+            window.repaint();
+            textboxCounter--;
+        }
     }
 
     //create JButton "New Class"
