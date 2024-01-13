@@ -50,9 +50,11 @@ public class StudentClasses extends JFrame {
     private JFrame window;
     private Creator creator = new Creator();
     private JPanel backNextButtonsPanel;
-    private JPanel textFieldContainer = new JPanel(new GridLayout(0, 5)); // Panel to hold text fields
+    private JPanel textFieldContainer = new JPanel(new GridLayout(5,0)); // Panel to hold text fields
+    private JPanel textFieldAll = new JPanel(new GridLayout(1,5)); // Panel to hold text fields
     private JTextField textField;
     private int textboxCounter = 0;
+    private int textboxcol = 0;
     AtomicBoolean textFieldEmptied = new AtomicBoolean(false);;
     JButton newClassButton;
     Decorator decorate = new Decorator();
@@ -74,8 +76,7 @@ public class StudentClasses extends JFrame {
     }
 
     private void createTextBox() {
-        textboxCounter++;
-        if (textboxCounter <= 5) {
+        if (textboxCounter < 5) {
             System.out.println("In create textbox new");
             JPanel textFieldPanel = new JPanel(new FlowLayout(FlowLayout.LEFT));
 
@@ -87,17 +88,23 @@ public class StudentClasses extends JFrame {
             
             textField.setPreferredSize(new Dimension(50, 50));
             textFieldContainer.add(textFieldPanel); // Add to the container panel
-            textFieldContainer.setVisible(true);
             window.add(textFieldContainer, BorderLayout.NORTH);
 
             creator.textFieldFocusListener(window, textField, "Enter Class Name");
-            
-            
-            window.revalidate(); // Refresh the layout
 
         }
 
+        if (textboxCounter == 5) {
+            textboxcol++;
+            System.out.println("textboxcol"+textboxcol);
+            if (textboxcol<=5) {         
+                textFieldAll.add(textFieldContainer);
+                textFieldContainer = new JPanel(new GridLayout(5, 0));
+                textboxCounter = 0;
+            }
+        }
 
+        window.revalidate(); // Refresh the layout
     }
 
     public void buttonSetUpAction(JFrame main, NewUser newUser, String studentOrTeacher, String existingOrNew) {
@@ -127,9 +134,8 @@ public class StudentClasses extends JFrame {
         newClassButton.setPreferredSize(new Dimension(80, 50));
         newClassButton.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent e) {
-                System.out.println("NewClassButtonPressed");
-                createTextBox();
-                
+                textboxCounter++;
+                createTextBox();                       
         }
     });
 
