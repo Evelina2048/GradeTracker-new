@@ -287,14 +287,14 @@ public class Creator {
         textFieldEmptiedMap.put(textField, state);
     }
 
-    public void deleteTextBox() {
+    public void deleteTextBox(JFrame window) {
         int componentsCount = textFieldContainer.getComponentCount();
         if (componentsCount > 0) {
             Component lastComponent = textFieldContainer.getComponent(componentsCount - 1);
             textFieldContainer.remove(lastComponent);
             //// window.revalidate(); 
             //// window.repaint();
-            //windowFix();
+            windowFix(window);
             textboxCounter--;
         }
     }

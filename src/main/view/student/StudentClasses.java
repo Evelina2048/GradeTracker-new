@@ -143,7 +143,7 @@ public class StudentClasses extends JFrame {
         deleteClassButton.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent e) {
                 System.out.println("deleteClassButtonPressed");
-                creator.deleteTextBox();
+                creator.deleteTextBox(window);
                 saveButton.setEnabled(true);
                 
             }
