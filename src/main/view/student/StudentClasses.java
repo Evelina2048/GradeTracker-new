@@ -24,7 +24,7 @@ public class StudentClasses extends JFrame {
     private JFrame window;
     private Creator creator;
     private JPanel backNextButtonsPanel;
-    private JPanel textFieldContainer = new JPanel(new GridLayout(0, 5)); // Panel to hold text fields
+    // private JPanel textFieldContainer = new JPanel(new GridLayout(0, 5)); // Panel to hold text fields
     private JTextField textField;
     private JButton saveButton;
     private int textboxCounter = 0;
@@ -54,36 +54,36 @@ public class StudentClasses extends JFrame {
         this.window = main;
         window.setTitle("StudentClasses");
         window.setLayout(new BorderLayout());
-        createTextBox();
+        creator.createTextBox(window);
         //textField.setVisible(true);
     }
 
-    private void createTextBox() {
-        textboxCounter++;
-        if (textboxCounter <= 30) {
-            System.out.println("In create textbox new");
-            JPanel textFieldPanel = new JPanel(new FlowLayout(FlowLayout.LEFT));
+    // private void createTextBox(JFrame window) {
+    //     textboxCounter++; //textBoxIncrement();
+    //     if (textboxCounter <= 30) {
+    //         System.out.println("In create textbox new");
+    //         JPanel textFieldPanel = new JPanel(new FlowLayout(FlowLayout.LEFT));
 
-            textFieldEmptied.set(false);
+    //         textFieldEmptied.set(false); //setEmptiedState(false);
             
-            JTextField textField = decorate.decorateTextBox("Enter Class Name");
+    //         JTextField textField = decorate.decorateTextBox("Enter Class Name"); 
             
-            textFieldPanel.add(textField);
+    //         textFieldPanel.add(textField); 
             
-            textField.setPreferredSize(new Dimension(50, 50));
-            textFieldContainer.add(textFieldPanel); // Add to the container panel
-            textFieldContainer.setVisible(true);
-            window.add(textFieldContainer, BorderLayout.NORTH);
+    //         textField.setPreferredSize(new Dimension(50, 50));
+    //         textFieldContainer.add(textFieldPanel); //
+    //         textFieldContainer.setVisible(true);
+    //         window.add(textFieldContainer, BorderLayout.NORTH);
 
-            creator.textFieldFocusListener(window, textField, "Enter Class Name");
+    //         creator.textFieldFocusListener(window, textField, "Enter Class Name"); //textFieldFocusListener(window, textField, "Enter Class Name");
             
             
-            window.revalidate(); // Refresh the layout
+    //         window.revalidate(); //windowFix(window)
 
-        }
+    //     }
 
 
-    }
+    // }
 
     public void buttonSetUpAction(JFrame main, NewUser newUser, String studentOrTeacher, String existingOrNew) {
         JButton backButton = creator.backButtonCreate();
@@ -100,7 +100,7 @@ public class StudentClasses extends JFrame {
 
         saveButton.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent e) {
-                creator.writeTextToFile(textFieldContainer, textFieldEmptied);
+                creator.writeTextToFile(textFieldEmptied);
                 saveButton.setEnabled(false);
                 //nextButtonAction(existingOrNew, studentOrTeacher);
             }
@@ -110,7 +110,7 @@ public class StudentClasses extends JFrame {
         nextButton.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent e) {
                 System.out.println("nextbuttonhit");
-                creator.writeTextToFile(textFieldContainer, textFieldEmptied);
+                creator.writeTextToFile(textFieldEmptied);
                 hideWindow();
                 StudentStatCollect statCollect = new StudentStatCollect(window, newUser, studentOrTeacher, existingOrNew, set);
             }
@@ -127,7 +127,7 @@ public class StudentClasses extends JFrame {
         newClassButton.setPreferredSize(new Dimension(80, 50));
         newClassButton.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent e) {
-                createTextBox();
+                creator.createTextBox(window);
                 saveButton.setEnabled(true);
                 
         }
@@ -143,7 +143,7 @@ public class StudentClasses extends JFrame {
         deleteClassButton.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent e) {
                 System.out.println("deleteClassButtonPressed");
-                deleteTextBox();
+                creator.deleteTextBox();
                 saveButton.setEnabled(true);
                 
             }
@@ -165,26 +165,24 @@ public class StudentClasses extends JFrame {
 
     }
 
-    private void deleteTextBox() {
-        int componentsCount = textFieldContainer.getComponentCount();
-        if (componentsCount > 0) {
-            Component lastComponent = textFieldContainer.getComponent(componentsCount - 1);
-            textFieldContainer.remove(lastComponent);
-            window.revalidate();
-            window.repaint();
-            textboxCounter--;
-        }
-    }
+    // private void deleteTextBox() {
+    //     int componentsCount = textFieldContainer.getComponentCount();
+    //     if (componentsCount > 0) {
+    //         Component lastComponent = textFieldContainer.getComponent(componentsCount - 1);
+    //         textFieldContainer.remove(lastComponent);
+    //         //// window.revalidate(); 
+    //         //// window.repaint();
+    //         //windowFix();
+    //         textboxCounter--;
+    //     }
+    // }
 
-    public JPanel getTextFieldContianer() {
-        return textFieldContainer;
-    }
     //create JButton "New Class"
     private void hideWindow() {
         backNextButtonsPanel.setVisible(false);
         newClassButton.setVisible(false);
         southContainer.setVisible(false);
-        textFieldContainer.setVisible(false);
+        creator.getTextFieldContainer().setVisible(false);
         //textField.setVisible(false);
     }
 

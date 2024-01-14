@@ -22,12 +22,22 @@ import java.util.concurrent.atomic.AtomicBoolean;
 import java.io.BufferedWriter;
 import java.awt.Component;
 
+import java.awt.Dimension;
+import java.awt.GridLayout;
+import java.awt.FlowLayout;
+
+import main.view.Creator;
+
 public class Creator {
     private JPanel backNextButtonsPanel;
     private HashMap<JTextField, Boolean> textFieldEmptiedMap = new HashMap<>();
     private JTextField previousTextbox;
     private Set set;
+    private Decorator decorate = new Decorator();
+    private int textboxCounter;
     //private Set set = new Set();
+    //private JPanel textFieldContainer;
+    private JPanel textFieldContainer = new JPanel(new GridLayout(0, 5)); // Panel to hold text fields
     
     public Creator(Set set) {
         this.set = set;
@@ -193,7 +203,7 @@ public class Creator {
 
     }
 
-    public void writeTextToFile(JPanel textFieldContainer, AtomicBoolean textFieldEmptied) {//, JButton saveButton) {
+    public void writeTextToFile(AtomicBoolean textFieldEmptied) {//, JButton saveButton) {
         //StudentClasses classes = new StudentClasses(null, null, null, null, set)
         String username = set.getUsername();
         System.out.println("usernameeeeeeeeeeee" + username);
@@ -232,11 +242,65 @@ public class Creator {
 
     }
 
+    
+
+    private void textBoxIncrement() {
+        textboxCounter++;
+    }
+
+    public void createTextBox(JFrame window) {
+        textboxCounter++; //textBoxIncrement();
+        if (textboxCounter <= 30) {
+            System.out.println("In create textbox new");
+            JPanel textFieldPanel = new JPanel(new FlowLayout(FlowLayout.LEFT));
+
+            JTextField textField = decorate.decorateTextBox("Enter Class Name");
+            setEmptiedState(textField, false);
+             
+            
+            textFieldPanel.add(textField); 
+            
+            textField.setPreferredSize(new Dimension(50, 50));
+            textFieldContainer.add(textFieldPanel); //
+            textFieldContainer.setVisible(true);
+            window.add(textFieldContainer, BorderLayout.NORTH);
+
+            textFieldFocusListener(window, textField, "Enter Class Name");
+            
+            
+            windowFix(window);
+
+        }
+
+
+    }
+
+    public JPanel getTextFieldContainer() {
+        return textFieldContainer;
+    }
+ 
     private boolean getEmptiedState(JTextField textField) {
         return textFieldEmptiedMap.getOrDefault(textField, false);
     }
 
     private void setEmptiedState(JTextField textField, boolean state) {
         textFieldEmptiedMap.put(textField, state);
+    }
+
+    public void deleteTextBox() {
+        int componentsCount = textFieldContainer.getComponentCount();
+        if (componentsCount > 0) {
+            Component lastComponent = textFieldContainer.getComponent(componentsCount - 1);
+            textFieldContainer.remove(lastComponent);
+            //// window.revalidate(); 
+            //// window.repaint();
+            //windowFix();
+            textboxCounter--;
+        }
+    }
+
+    public void windowFix(JFrame window) {
+        window.revalidate(); 
+        window.repaint();
     }
 }
