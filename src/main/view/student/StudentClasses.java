@@ -112,7 +112,7 @@ public class StudentClasses extends JFrame {
                 System.out.println("nextbuttonhit");
                 creator.writeTextToFile(textFieldContainer, textFieldEmptied);
                 hideWindow();
-                StudentStatCollect statCollect = new StudentStatCollect(window, newUser, studentOrTeacher, existingOrNew);
+                StudentStatCollect statCollect = new StudentStatCollect(window, newUser, studentOrTeacher, existingOrNew, set);
             }
         });
         backNextButtonsPanel = creator.makeBackNextButtonsPanel(backButton, saveButtonPanel, nextButton);

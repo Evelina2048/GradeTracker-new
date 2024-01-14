@@ -40,6 +40,7 @@ import java.io.FileReader;
 import main.view.MainWindow;
 import main.view.NewUser;
 import main.view.Creator;
+import main.view.Set;
 
 
 public class StudentStatCollect extends JFrame {
@@ -47,16 +48,19 @@ public class StudentStatCollect extends JFrame {
     private Creator creator;
     private JPanel backNextButtonsPanel;
     private JButton newTypeButton;
+    private Set set;
 
-    public StudentStatCollect(JFrame main,NewUser newUser, String studentOrTeacher, String existingOrNew) {
-        studentStatCollectLaunch(main);
+    public StudentStatCollect(JFrame main,NewUser newUser, String studentOrTeacher, String existingOrNew, Set set) {
+        this.window = main;
+        this.set = set;
+        creator = new Creator(set);
+        studentStatCollectLaunch(window);
         createNewTypeButton();
         buttonSetUpAction(main, newUser, studentOrTeacher, existingOrNew);
     }
 
-    public void studentStatCollectLaunch(JFrame main) {
+    public void studentStatCollectLaunch(JFrame window) {
         System.out.println("in student classes");
-        this.window = main;
         window.setTitle("StudentStatCollect");
     }
 
@@ -98,9 +102,9 @@ public class StudentStatCollect extends JFrame {
        window.add(eastPanel,BorderLayout.EAST);
    }
 
-    //For i in classes, give classes : class1 
-        //for j in types :
-            //type1gradeBox.
+    // For i in classes, give classes : class1 
+    //     for j in types :
+    //         type1gradeBox.
 
     private void hideWindow() {
         backNextButtonsPanel.setVisible(false);
