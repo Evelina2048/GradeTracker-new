@@ -210,8 +210,8 @@ public class Creator {
                         if (innerComponent instanceof JTextField) {
                             JTextField textField = (JTextField) innerComponent;
                             String text = textField.getText();
-                            System.out.println("test"+ (text != "Enter Class Name")+" textfieldEmptied" + textFieldEmptied.get());
-                            if (text != "Enter Class Name" && textFieldEmptied.get()== true) {
+                            System.out.println("test"+ (text != "Enter Class Name")+" textfieldEmptied" + getEmptiedState(textField));
+                            if (text != "Enter Class Name" && getEmptiedState(textField) == true) {
                                 System.out.println("heyo");
                                 textList.add(text);
                             }
