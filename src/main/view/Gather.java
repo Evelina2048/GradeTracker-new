@@ -173,6 +173,8 @@ public class Gather {
 
     private void buttonSetUpAction(MainWindow main, NewUser newUser, String existingOrNew, String studentOrTeacher) {
         JButton backButton = creator.backButtonCreate();
+        JPanel backButtonPanel = new JPanel();
+        backButtonPanel.add(backButton);
         backButton.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent e) {
                backButtonAction(main, newUser, studentOrTeacher, existingOrNew);
@@ -189,12 +191,14 @@ public class Gather {
         });
         
         JButton nextButton = creator.nextButtonCreate();
+        JPanel nextButtonPanel = new JPanel();
+        nextButtonPanel.add(nextButton);
         nextButton.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent e) {
                 nextButtonAction(existingOrNew, studentOrTeacher);
             }
         });
-        backNextButtonsPanel = creator.makeBackNextButtonsPanel(backButton,saveButtonPanel, nextButton);
+        backNextButtonsPanel = creator.makeBackNextButtonsPanel(backButtonPanel,saveButtonPanel, nextButtonPanel);
         window.add(backNextButtonsPanel, BorderLayout.SOUTH);
     }
 

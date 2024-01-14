@@ -47,6 +47,7 @@ public class Creator {
         JButton backButton;
         //buttons
         backButton = new JButton("< Back");
+        backButton.setPreferredSize(new Dimension(87, 29));
 
         return backButton;
         
@@ -64,11 +65,12 @@ public class Creator {
         JButton nextButton;
 
         nextButton = new JButton("Next >");
+        nextButton.setPreferredSize(new Dimension(87, 29));
 
         return nextButton;
     }
 
-    public JPanel makeBackNextButtonsPanel(JButton backButton, JPanel saveButtonPanel, JButton nextButton) {
+    public JPanel makeBackNextButtonsPanel(JPanel backButton, JPanel saveButtonPanel, JPanel nextButton) {
         backNextButtonsPanel = new JPanel(new BorderLayout());
         backNextButtonsPanel.add(backButton, BorderLayout.WEST);
         backNextButtonsPanel.add(saveButtonPanel, BorderLayout.CENTER);

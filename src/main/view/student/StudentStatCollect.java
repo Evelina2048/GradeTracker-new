@@ -66,6 +66,8 @@ public class StudentStatCollect extends JFrame {
 
     public void buttonSetUpAction(JFrame main, NewUser newUser, String studentOrTeacher, String existingOrNew) {
         JButton backButton = creator.backButtonCreate();
+        JPanel backButtonPanel = new JPanel();
+        backButtonPanel.add(backButton);
         backButton.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent e) {
                //backButtonAction(main, newUser, studentOrTeacher, existingOrNew);
@@ -82,6 +84,8 @@ public class StudentStatCollect extends JFrame {
         });
         
         JButton nextButton = creator.nextButtonCreate();
+        JPanel nextButtonPanel = new JPanel();
+        nextButtonPanel.add(nextButton);
         nextButton.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent e) {
                 //write to file.
@@ -89,7 +93,7 @@ public class StudentStatCollect extends JFrame {
                 PrintStudentGrades print = new PrintStudentGrades(main, studentOrTeacher,existingOrNew);
             }
         });
-        backNextButtonsPanel = creator.makeBackNextButtonsPanel(backButton, saveButtonPanel, nextButton);
+        backNextButtonsPanel = creator.makeBackNextButtonsPanel(backButtonPanel, saveButtonPanel, nextButtonPanel);
         window.add(backNextButtonsPanel, BorderLayout.SOUTH);
     }
 
