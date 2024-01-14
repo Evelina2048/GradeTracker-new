@@ -193,7 +193,7 @@ public class Creator {
 
     }
 
-    public void writeTextToFile(JPanel textFieldContainer, AtomicBoolean textFieldEmptied) {
+    public void writeTextToFile(JPanel textFieldContainer, AtomicBoolean textFieldEmptied) {//, JButton saveButton) {
         //StudentClasses classes = new StudentClasses(null, null, null, null, set)
         String username = set.getUsername();
         System.out.println("usernameeeeeeeeeeee" + username);
@@ -221,6 +221,7 @@ public class Creator {
     
             // Write the list as an array to the file
             writer.write(textList.toString());
+            // saveButton.setEnabled(true);
     
         } catch (IOException e) {
             e.printStackTrace();

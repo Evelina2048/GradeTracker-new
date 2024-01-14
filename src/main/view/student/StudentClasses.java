@@ -26,10 +26,11 @@ public class StudentClasses extends JFrame {
     private JPanel backNextButtonsPanel;
     private JPanel textFieldContainer = new JPanel(new GridLayout(0, 5)); // Panel to hold text fields
     private JTextField textField;
+    private JButton saveButton;
     private int textboxCounter = 0;
     JPanel southContainer = new JPanel(new BorderLayout());
     //JPanel westPanel = new JPanel(new BorderLayout());
-    //JPanel westPanel = new JPanel(new FlowLayout(FlowLayout.LEFT));
+    //JPanel westPanel = new JPanel(new FlowLayout(FlowLayout.LEFT));`
     //JPanel westPanel = new JPanel(new FlowLayout(FlowLayout.LEFT));
     AtomicBoolean textFieldEmptied = new AtomicBoolean(false);;
     JButton newClassButton;
@@ -92,7 +93,7 @@ public class StudentClasses extends JFrame {
             }
         });
 
-        JButton saveButton = creator.saveButtonCreate();
+        saveButton = creator.saveButtonCreate();
         saveButton.setPreferredSize(new Dimension(80,40));
         JPanel saveButtonPanel = new JPanel();
         saveButtonPanel.add(saveButton);
@@ -100,6 +101,7 @@ public class StudentClasses extends JFrame {
         saveButton.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent e) {
                 creator.writeTextToFile(textFieldContainer, textFieldEmptied);
+                saveButton.setEnabled(false);
                 //nextButtonAction(existingOrNew, studentOrTeacher);
             }
         });
@@ -126,6 +128,7 @@ public class StudentClasses extends JFrame {
         newClassButton.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent e) {
                 createTextBox();
+                saveButton.setEnabled(true);
                 
         }
     });
@@ -141,6 +144,7 @@ public class StudentClasses extends JFrame {
             public void actionPerformed(ActionEvent e) {
                 System.out.println("deleteClassButtonPressed");
                 deleteTextBox();
+                saveButton.setEnabled(true);
                 
             }
         });
