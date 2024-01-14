@@ -1,32 +1,12 @@
 package main.view;
 
-import javax.swing.BorderFactory;
-import javax.swing.ButtonGroup;
 import javax.swing.JButton;
-import javax.swing.JDialog;
 import javax.swing.JFrame;
-import javax.swing.JRadioButton;
 import javax.swing.JTextField;
-import javax.swing.SwingConstants;
-import javax.swing.text.Caret;
-
-import main.view.student.StudentClasses;
-
 import java.awt.BorderLayout;
 import java.awt.Color;
-import java.awt.Dimension;
-import java.awt.Font;
 import javax.swing.JPanel;
-import javax.swing.JLabel;
-
-import java.awt.GridBagLayout;
 import java.awt.Rectangle;
-import java.awt.GridBagConstraints;
-
-import java.awt.event.ActionListener;
-import java.awt.event.ActionEvent;
-import java.awt.FlowLayout;
-
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 
@@ -35,19 +15,24 @@ import java.awt.event.FocusEvent;
 
 import java.io.FileWriter;
 import java.io.IOException;
+import java.util.ArrayList;
 import java.util.HashMap;
-import java.io.BufferedReader;
-
-import java.io.FileReader;
+import java.util.List;
+import java.util.concurrent.atomic.AtomicBoolean;
+import java.io.BufferedWriter;
+import java.awt.Component;
 
 public class Creator {
     private JPanel backNextButtonsPanel;
     private HashMap<JTextField, Boolean> textFieldEmptiedMap = new HashMap<>();
     private JTextField previousTextbox;
+    private Set set;
+    //private Set set = new Set();
     
-    public Creator() {
-
+    public Creator(Set set) {
+        this.set = set;
     }
+
     public JButton backButtonCreate() {
         JButton backButton;
         //buttons
@@ -206,6 +191,41 @@ public class Creator {
             }
         });
 
+    }
+
+    public void writeTextToFile(JPanel textFieldContainer, AtomicBoolean textFieldEmptied) {
+        //StudentClasses classes = new StudentClasses(null, null, null, null, set)
+        String username = set.getUsername();
+        System.out.println("usernameeeeeeeeeeee" + username);
+        String filePath = "/Users/evy/Documents/GradeTracker-new/src/main/view/UserInfo/StudentInfo/" + username + ".txt";
+    
+        try (BufferedWriter writer = new BufferedWriter(new FileWriter(filePath))) {
+            List<String> textList = new ArrayList<>();
+    
+            writer.write("Class:"+"\n");
+            for (Component component : textFieldContainer.getComponents()) {
+                if (component instanceof JPanel) {
+                    JPanel textFieldPanel = (JPanel) component;
+                    for (Component innerComponent : textFieldPanel.getComponents()) {
+                        if (innerComponent instanceof JTextField) {
+                            JTextField textField = (JTextField) innerComponent;
+                            String text = textField.getText();
+                            System.out.println("test"+ (text != "Enter Class Name")+" textfieldEmptied" + textFieldEmptied.get());
+                            if (text != "Enter Class Name" && textFieldEmptied.get()== true) {
+                                System.out.println("heyo");
+                                textList.add(text);
+                            }
+                        }
+                    }
+                }
+            }
+    
+            // Write the list as an array to the file
+            writer.write(textList.toString());
+    
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
     }
 
     private void setTextColor() {

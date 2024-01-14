@@ -1,6 +1,5 @@
 package main.view;
 
-import javax.swing.BorderFactory;
 import javax.swing.ButtonGroup;
 import javax.swing.JButton;
 import javax.swing.JDialog;
@@ -13,7 +12,6 @@ import main.view.student.StudentClasses;
 
 import java.awt.BorderLayout;
 import java.awt.Color;
-import java.awt.Dimension;
 import java.awt.Font;
 import javax.swing.JPanel;
 import javax.swing.JLabel;
@@ -25,12 +23,6 @@ import java.awt.event.ActionListener;
 import java.awt.event.ActionEvent;
 import java.awt.FlowLayout;
 
-import java.awt.event.MouseAdapter;
-import java.awt.event.MouseEvent;
-
-import java.awt.event.FocusAdapter;
-import java.awt.event.FocusEvent;
-
 import java.io.FileWriter;
 import java.io.IOException;
 import java.util.concurrent.atomic.AtomicBoolean;
@@ -38,11 +30,9 @@ import java.io.BufferedReader;
 
 import java.io.FileReader;
 
-import java.awt.Rectangle;
-
-//<remove later>//
-import main.view.student.existing.EditOrResults;
-//</remove later>//
+//import class files
+import main.view.Creator;
+import main.view.Set;
 
 
 public class Gather {
@@ -52,9 +42,9 @@ public class Gather {
     private int windowX;
     private int windowY;
     private AtomicBoolean textFieldEmptied = new AtomicBoolean(false); 
-    private Creator creator = new Creator();
-    Set set = new Set();
-
+    private Set set;
+    private Creator creator;
+    
     JRadioButton studentButton;
     JRadioButton teacherButton;
     ButtonGroup teacherStudentGroup;
@@ -72,13 +62,15 @@ public class Gather {
 
 
 
-    public Gather(MainWindow main, NewUser newUser, String studentOrTeacher, String existingOrNew,int windowX, int windowY) {
-
-       gatherLaunch(main, newUser, studentOrTeacher, existingOrNew);
+    public Gather(MainWindow main, NewUser newUser, String studentOrTeacher, String existingOrNew,int windowX, int windowY, Set set) {
+        this.set = set;
+        creator = new Creator(set);
+        gatherLaunch(main, newUser, studentOrTeacher, existingOrNew);
 
     }
 
     public void gatherLaunch (MainWindow main, NewUser newUser2, String studentOrTeacher, String existingOrNew) {
+
         main.setTitle("NEW USRE");
         this.window = main;
         newUser = newUser2;

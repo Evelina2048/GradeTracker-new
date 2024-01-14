@@ -1,58 +1,28 @@
 package main.view.student;
 
-import javax.swing.BorderFactory;
-import javax.swing.ButtonGroup;
 import javax.swing.JButton;
-import javax.swing.JDialog;
 import javax.swing.JFrame;
-import javax.swing.JRadioButton;
 import javax.swing.JTextField;
-import javax.swing.SwingConstants;
-
 import java.awt.BorderLayout;
-import java.awt.Color;
 import java.awt.Component;
 import java.awt.Dimension;
-import java.awt.Font;
 import javax.swing.JPanel;
-import javax.swing.JLabel;
-
-import java.awt.GridBagLayout;
 import java.awt.GridLayout;
-import java.awt.GridBagConstraints;
-
 import java.awt.event.ActionListener;
 import java.awt.event.ActionEvent;
 import java.awt.FlowLayout;
 
-import java.awt.event.MouseAdapter;
-import java.awt.event.MouseEvent;
-
-import java.awt.event.FocusAdapter;
-import java.awt.event.FocusEvent;
-
-import java.io.FileWriter;
-import java.io.IOException;
-import java.util.ArrayList;
-import java.util.List;
 import java.util.concurrent.atomic.AtomicBoolean;
-import java.io.BufferedReader;
-import java.io.BufferedWriter;
-import java.io.FileReader;
-
-import java.awt.Rectangle;
-
-//importing files
-import main.view.MainWindow;
 import main.view.NewUser;
 import main.view.Set;
 import main.view.Creator;
 import main.view.Decorator;
 
 
+
 public class StudentClasses extends JFrame {
     private JFrame window;
-    private Creator creator = new Creator();
+    private Creator creator;
     private JPanel backNextButtonsPanel;
     private JPanel textFieldContainer = new JPanel(new GridLayout(0, 5)); // Panel to hold text fields
     private JTextField textField;
@@ -70,15 +40,15 @@ public class StudentClasses extends JFrame {
     //JTextField textField = decorate.decorateTextBox();
 
     public StudentClasses(JFrame main,NewUser newUser, String studentOrTeacher, String existingOrNew, Set set) {
-
+        creator = new Creator(set);
         studentClassesLaunch(main, set);
         //createNewClassButton();
         westPanelCreate();
         buttonSetUpAction(main, newUser, studentOrTeacher, existingOrNew);
     }
 
-    public void studentClassesLaunch(JFrame main, Set set2) {
-        set = set2;
+    public void studentClassesLaunch(JFrame main, Set set) {
+        this.set = set;
         System.out.println("in student classes");
         this.window = main;
         window.setTitle("StudentClasses");
@@ -129,6 +99,7 @@ public class StudentClasses extends JFrame {
 
         saveButton.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent e) {
+                creator.writeTextToFile(textFieldContainer, textFieldEmptied);
                 //nextButtonAction(existingOrNew, studentOrTeacher);
             }
         });
@@ -137,7 +108,7 @@ public class StudentClasses extends JFrame {
         nextButton.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent e) {
                 System.out.println("nextbuttonhit");
-                writeTextToFile();
+                creator.writeTextToFile(textFieldContainer, textFieldEmptied);
                 hideWindow();
                 StudentStatCollect statCollect = new StudentStatCollect(window, newUser, studentOrTeacher, existingOrNew);
             }
@@ -190,35 +161,6 @@ public class StudentClasses extends JFrame {
 
     }
 
-    private void writeTextToFile() {
-        String username = set.getUsername();
-        System.out.println("usernameeeeeeeeeeee" + username);
-        String filePath = "/Users/evy/Documents/GradeTracker-new/src/main/view/UserInfo/StudentInfo/" + username + ".txt";
-    
-        try (BufferedWriter writer = new BufferedWriter(new FileWriter(filePath))) {
-            List<String> textList = new ArrayList<>();
-    
-            writer.write("Class:"+"\n");
-            for (Component component : textFieldContainer.getComponents()) {
-                if (component instanceof JPanel) {
-                    JPanel textFieldPanel = (JPanel) component;
-                    for (Component innerComponent : textFieldPanel.getComponents()) {
-                        if (innerComponent instanceof JTextField) {
-                            JTextField textField = (JTextField) innerComponent;
-                            String text = textField.getText();
-                            textList.add(text);
-                        }
-                    }
-                }
-            }
-    
-            // Write the list as an array to the file
-            writer.write(textList.toString());
-    
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
-    }
     private void deleteTextBox() {
         int componentsCount = textFieldContainer.getComponentCount();
         if (componentsCount > 0) {
@@ -230,6 +172,9 @@ public class StudentClasses extends JFrame {
         }
     }
 
+    public JPanel getTextFieldContianer() {
+        return textFieldContainer;
+    }
     //create JButton "New Class"
     private void hideWindow() {
         backNextButtonsPanel.setVisible(false);

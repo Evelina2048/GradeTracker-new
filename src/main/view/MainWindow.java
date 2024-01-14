@@ -20,6 +20,8 @@ import java.awt.event.ActionEvent;
 //key listening
 import java.awt.event.KeyEvent;
 
+import main.view.Set;
+
 public class MainWindow extends JFrame {
 //private JFrame window;
 private String studentOrTeacher;
@@ -27,6 +29,7 @@ private boolean moveOnPossible = false;
 private int windowX;
 private int windowY;
 private String existingOrNew;
+private Set set;
 JRadioButton studentButton;
 JRadioButton teacherButton;
 ButtonGroup teacherStudentGroup;
@@ -40,14 +43,14 @@ JPanel backNextButtonsPanel;
 
 Decorator decorator = new Decorator();
 
-public MainWindow(JFrame window2) {
+public MainWindow(JFrame window2, Set set) {
     //window = window2;
-
-    MainWindowLaunch();
+    MainWindowLaunch(set);
 
 }
 
-public void MainWindowLaunch() {
+public void MainWindowLaunch(Set set) {
+    this.set = set;
     windowSetUp();
 
     InstructionsWordsWindow();
@@ -156,7 +159,7 @@ private void doNextButtonProcedure() {
     decorator.setWindowY(this.getY());
 
     if (moveOnPossible) {
-        NewUser newUser = new NewUser(this, studentOrTeacher,existingOrNew, windowX, windowY);
+        NewUser newUser = new NewUser(this, studentOrTeacher,existingOrNew, windowX, windowY, set);
         newUser.setButtonSelected(existingOrNew);
         decorator.hideWindow(instructionsPanel, choicesPanel, backNextButtonsPanel);
     }

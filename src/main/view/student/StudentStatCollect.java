@@ -44,7 +44,7 @@ import main.view.Creator;
 
 public class StudentStatCollect extends JFrame {
     private JFrame window;
-    private Creator creator = new Creator();
+    private Creator creator;
     private JPanel backNextButtonsPanel;
     private JButton newTypeButton;
 

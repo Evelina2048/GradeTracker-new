@@ -1,58 +1,28 @@
 package main.view.student.existing;
 
-import javax.swing.BorderFactory;
-import javax.swing.ButtonGroup;
 import javax.swing.JButton;
-import javax.swing.JDialog;
 import javax.swing.JFrame;
-import javax.swing.JRadioButton;
-import javax.swing.JTextField;
-import javax.swing.SwingConstants;
-import javax.swing.SwingUtilities;
-
 import java.awt.BorderLayout;
-import java.awt.Color;
-import java.awt.Dimension;
-import java.awt.Font;
 import javax.swing.JPanel;
-import javax.swing.JLabel;
-
-import java.awt.GridBagLayout;
-import java.awt.GridBagConstraints;
-
 import java.awt.event.ActionListener;
 import java.awt.event.ActionEvent;
-import java.awt.FlowLayout;
-
-import java.awt.event.MouseAdapter;
-import java.awt.event.MouseEvent;
-
-import java.awt.event.FocusAdapter;
-import java.awt.event.FocusEvent;
-
-import java.io.FileWriter;
-import java.io.IOException;
-
-import java.io.BufferedReader;
-
-import java.io.FileReader;
-
-//importing files
-import main.view.MainWindow;
-import main.view.NewUser;
 import main.view.Creator;
+import main.view.Set;
 
 
 public class EditOrResults extends JFrame {
     private JFrame window;
-    private Creator creator = new Creator();
     private JPanel backNextButtonsPanel;
+    private Creator creator;
+    private Set set;
 
-    public EditOrResults(JFrame main, String studentOrTeacher, String existingOrNew) {
+    public EditOrResults(JFrame main, String studentOrTeacher, String existingOrNew, Set set) {
+        this.set = set;
         System.out.println("in print student grades");
         editOrResultsLaunch(main);
         //createNewTypeButton();
         buttonSetUpAction(main, studentOrTeacher, existingOrNew);
+        creator = new Creator(set);
     }
 
     public void editOrResultsLaunch(JFrame main) {
@@ -85,23 +55,23 @@ public class EditOrResults extends JFrame {
     }
 
     //
-    public static void main(String[] args) {
-        JFrame main = new JFrame(); // Initialize your main JFrame here
+    // public static void main(String[] args) {
+    //     JFrame main = new JFrame(); // Initialize your main JFrame here
 
-        main.setSize(800, 600); // Set the size as needed
-        main.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE); // Set close operation
-        main.setVisible(true); // Make the frame visible
+    //     main.setSize(800, 600); // Set the size as needed
+    //     main.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE); // Set close operation
+    //     main.setVisible(true); // Make the frame visible
 
-        String studentOrTeacher = "Student"; // Initialize studentOrTeacher
-        String existingOrNew = "Existing"; // Initialize existingOrNew
+    //     String studentOrTeacher = "Student"; // Initialize studentOrTeacher
+    //     String existingOrNew = "Existing"; // Initialize existingOrNew
 
-        SwingUtilities.invokeLater(new Runnable() {
-            @Override
-            public void run() {
-                EditOrResults edit = new EditOrResults(main, studentOrTeacher, existingOrNew);
-            }
-        });
-    }
+    //     SwingUtilities.invokeLater(new Runnable() {
+    //         @Override
+    //         public void run() {
+    //             EditOrResults edit = new EditOrResults(main, studentOrTeacher, existingOrNew, set);
+    //         }
+    //     });
+    // }
     //
 
     }

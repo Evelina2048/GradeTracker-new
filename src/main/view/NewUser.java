@@ -32,6 +32,7 @@ public class NewUser extends JFrame {
     private int windowX;
     private int windowY;
     private Gather gatherFrame;
+    private Set set;
     JRadioButton newUserButton;
     JRadioButton existingButton;
     ButtonGroup teacherStudentGroup;
@@ -45,7 +46,8 @@ public class NewUser extends JFrame {
 
     Decorator decorator = new Decorator();
 
-    public NewUser(MainWindow main, String studentOrTeacher, String newOrExisting,int windowX, int windowY) {
+    public NewUser(MainWindow main, String studentOrTeacher, String newOrExisting,int windowX, int windowY, Set set) {
+        this.set = set;
         //window = window2;
         //MainWindow main = main2;
        newUserSetup(main, studentOrTeacher);
@@ -134,7 +136,7 @@ public class NewUser extends JFrame {
 
         backButton.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent e) {
-                main.MainWindowLaunch();
+                main.MainWindowLaunch(set);
                 main.show(window.getX(),window.getY());
                 main.setButtonSelected(studentOrTeacher);
                 main.setExistingOrNew(existingOrNew);
@@ -175,7 +177,7 @@ public class NewUser extends JFrame {
                 //
                 if (gatherFrame == null) {
                     // Create a new instance of Gather if it doesn't exist
-                    gatherFrame = new Gather(main, NewUser.this, studentOrTeacher, existingOrNew, windowX, windowY);
+                    gatherFrame = new Gather(main, NewUser.this, studentOrTeacher, existingOrNew, windowX, windowY, set);
                     gatherFrame.gatherLaunch(main, NewUser.this, studentOrTeacher, existingOrNew);
                     System.out.println("gatherframe is null");
                 } else {
