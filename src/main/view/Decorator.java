@@ -166,7 +166,9 @@ public class Decorator {
     }
 
     public JTextField decorateTextBox(String placeholderText) {
+       System.out.println("test2 in decorateTextBix"); 
        JTextField textField = new JTextField(10);
+       System.out.println("test3 (should be false) "+ (textField == null));
        textField.setPreferredSize(new Dimension(textField.getPreferredSize().width, 50)); // Set the height to 50 pixels
        textField.setFont(new Font("Roboto", Font.PLAIN, 14));
        textField.setForeground(Color.gray);
@@ -177,7 +179,8 @@ public class Decorator {
 
        textField.setHorizontalAlignment(JTextField.CENTER);
        textField.setText(placeholderText);
-
+        
+       System.out.println("test4 (should be true) "+ (textField.getText() == placeholderText));
        return textField;
     }
 
