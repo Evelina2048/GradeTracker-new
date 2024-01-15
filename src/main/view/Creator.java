@@ -38,6 +38,8 @@ public class Creator {
     private int textboxCounter;
     //private Set set = new Set();
     //private JPanel textFieldContainer;
+    private ArrayList<String> classList = new ArrayList<>();
+
     private JPanel textFieldContainer = new JPanel(new GridLayout(0, 5)); // Panel to hold text fields
     
     public Creator(Set set) {
@@ -237,12 +239,14 @@ public class Creator {
                             if (text != "Enter Class Name" && getEmptiedState(textField) == true && textList.contains(text) == false) {
                                 //textList.add(text+"\n");
                                 writer.write(text+"\n");
+                                classList.add(text);
                             }
                         }
                     }
                 }
             }
-    
+            System.out.println(classList+" classlist");
+            set.setClassList(classList);
             // Write the list as an array to the file
             //writer.write(textList.toString());
     

@@ -31,7 +31,7 @@ import java.awt.event.FocusEvent;
 
 import java.io.FileWriter;
 import java.io.IOException;
-
+import java.util.ArrayList;
 import java.io.BufferedReader;
 
 import java.io.FileReader;
@@ -120,15 +120,11 @@ public class StudentStatCollect extends JFrame {
     private void readClasses() {
         //filepath is username.txt
         String filePath = "/Users/evy/Documents/GradeTracker-new/src/main/view/UserInfo/StudentInfo/" + set.getUsername() +"/class"+ ".txt";
+        ArrayList<String> classList = set.getClassList();
 
-        try (BufferedReader reader = new BufferedReader(new FileReader(filePath))) {
-            String line;
-            while ((line = reader.readLine()) != null) {
-                System.out.println(line);
-                //set.getClasses();
-            }
-        } catch (IOException e) {
-            e.printStackTrace();
+        for (String className : classList) {
+            // Do something with each class name, for example, print it
+            System.out.println(className);
         }
     }
 
