@@ -220,7 +220,7 @@ public class Creator {
         }
     }
 
-    public void writeTextToFile(AtomicBoolean textFieldEmptied) {//, JButton saveButton) {
+    public void writeTextToFile(AtomicBoolean textFieldEmptied, String placeholder) {//, JButton saveButton) {
         //StudentClasses classes = new StudentClasses(null, null, null, null, set)
         String username = set.getUsername();
         System.out.println("usernameeeeeeeeeeee" + username);
@@ -236,8 +236,7 @@ public class Creator {
                         if (innerComponent instanceof JTextField) {
                             JTextField textField = (JTextField) innerComponent;
                             String text = textField.getText();
-                            System.out.println("test"+ (text != "Enter Class Name")+" textfieldEmptied" + getEmptiedState(textField));
-                            if (text != "Enter Class Name" && getEmptiedState(textField) == true && textList.contains(text) == false) {
+                            if (text != placeholder && getEmptiedState(textField) == true && textList.contains(text) == false) {
                                 //textList.add(text+"\n");
                                 writer.write(text+"\n");
                                 classList.add(text);
@@ -246,10 +245,7 @@ public class Creator {
                     }
                 }
             }
-            //System.out.println(classList+" classlist");
             set.setClassList(classList);
-            // Write the list as an array to the file
-            //writer.write(textList.toString());
     
         } catch (IOException e) {
             e.printStackTrace();
@@ -267,13 +263,13 @@ public class Creator {
         textboxCounter++;
     }
 
-    public JTextField createTextBox(JFrame window) {
+    public JTextField createTextBox(JFrame window, String placeholder) {
         textboxCounter++; //textBoxIncrement();
         if (textboxCounter <= 30) {
             System.out.println("In create textbox new");
             JPanel textFieldPanel = new JPanel(new FlowLayout(FlowLayout.LEFT));
 
-            textField = decorate.decorateTextBox("Enter Class Name");
+            textField = decorate.decorateTextBox(placeholder);//Enter Class Name
             setEmptiedState(textField, false);
              
             
@@ -284,7 +280,7 @@ public class Creator {
             textFieldContainer.setVisible(true);
             window.add(textFieldContainer, BorderLayout.NORTH);
 
-            textFieldFocusListener(window, textField, "Enter Class Name");
+            textFieldFocusListener(window, textField, placeholder);
             
             
             windowFix(window);
@@ -311,8 +307,6 @@ public class Creator {
         if (componentsCount > 0) {
             Component lastComponent = textFieldContainer.getComponent(componentsCount - 1);
             textFieldContainer.remove(lastComponent);
-            //// window.revalidate(); 
-            //// window.repaint();
             windowFix(window);
             textboxCounter--;
         }

@@ -55,7 +55,7 @@ public class StudentClasses extends JFrame {
         System.out.println("in student classes");
         window.setTitle("StudentClasses");
         window.setLayout(new BorderLayout());
-        creator.createTextBox(window);
+        creator.createTextBox(window, "Enter Class Name");
         //textField.setVisible(true);
         westPanelCreate();
         buttonSetUpAction(main, newUser, studentOrTeacher, existingOrNew);
@@ -84,7 +84,7 @@ public class StudentClasses extends JFrame {
         saveButton.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent e) {
                 creator.writeFolderToFile(textFieldEmptied);
-                creator.writeTextToFile(textFieldEmptied);
+                creator.writeTextToFile(textFieldEmptied, "Enter Class Name");
                 saveButton.setEnabled(false);
                 //nextButtonAction(existingOrNew, studentOrTeacher);
             }
@@ -98,7 +98,7 @@ public class StudentClasses extends JFrame {
             public void actionPerformed(ActionEvent e) {
                 System.out.println("nextbuttonhit");
                 creator.writeFolderToFile(textFieldEmptied);
-                creator.writeTextToFile(textFieldEmptied);
+                creator.writeTextToFile(textFieldEmptied, "Enter Class Name");
                 hideWindow();
                 StudentStatCollect statCollect = new StudentStatCollect(window, newUser, studentOrTeacher, existingOrNew, set);
             }
@@ -116,7 +116,7 @@ public class StudentClasses extends JFrame {
         newClassButton.setPreferredSize(new Dimension(80, 50));
         newClassButton.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent e) {
-                creator.createTextBox(window);
+                creator.createTextBox(window, "Enter Class Name");
                 saveButton.setEnabled(true);
                 
         }
