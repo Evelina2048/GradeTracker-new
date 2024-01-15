@@ -110,6 +110,12 @@ public class StudentStatCollect extends JFrame {
        newTypeButton.setPreferredSize(new Dimension(80, 50));
        eastPanel = new JPanel(new BorderLayout());
        eastPanel.add(newTypeButton, BorderLayout.NORTH);
+       newTypeButton.addActionListener(new ActionListener() {
+        public void actionPerformed(ActionEvent e) {
+            classLabelPanel.add(creator.createTextBox(window, "Grade Type1"));
+        }
+    });
+    
 
        window.add(eastPanel,BorderLayout.EAST);
    }
