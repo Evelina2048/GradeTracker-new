@@ -52,6 +52,7 @@ public class StudentStatCollect extends JFrame {
     private JPanel eastPanel;
     private JPanel classLabelPanel = new JPanel();
     private int index = 0;
+    private int typeNumber = 0;
 
     public StudentStatCollect(JFrame main,NewUser newUser, String studentOrTeacher, String existingOrNew, Set set) {
         this.window = main;
@@ -112,7 +113,8 @@ public class StudentStatCollect extends JFrame {
        eastPanel.add(newTypeButton, BorderLayout.NORTH);
        newTypeButton.addActionListener(new ActionListener() {
         public void actionPerformed(ActionEvent e) {
-            classLabelPanel.add(creator.createTextBox(window, "Grade Type1"));
+            typeNumber++;
+            classLabelPanel.add(creator.createTextBox(window, "Grade Type"+typeNumber));
         }
     });
     
@@ -143,7 +145,8 @@ public class StudentStatCollect extends JFrame {
         
         JLabel classLabel = new JLabel(classList.get(index));
         classLabelPanel.add(classLabel);
-        classLabelPanel.add(creator.createTextBox(window, "Grade Type1"));
+        typeNumber++;
+        classLabelPanel.add(creator.createTextBox(window, "Grade Type"+typeNumber));
             //System.out.println(className);
         //}
         window.add(classLabelPanel);
