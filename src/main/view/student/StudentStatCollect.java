@@ -49,6 +49,7 @@ public class StudentStatCollect extends JFrame {
     private JPanel backNextButtonsPanel;
     private JButton newTypeButton;
     private Set set;
+    private JPanel eastPanel;issues 
 
     public StudentStatCollect(JFrame main,NewUser newUser, String studentOrTeacher, String existingOrNew, Set set) {
         this.window = main;
@@ -102,7 +103,7 @@ public class StudentStatCollect extends JFrame {
    private void createNewTypeButton() {
        newTypeButton = new JButton("New Type");
        newTypeButton.setPreferredSize(new Dimension(80, 50));
-       JPanel eastPanel = new JPanel(new BorderLayout());
+       eastPanel = new JPanel(new BorderLayout());
        eastPanel.add(newTypeButton, BorderLayout.NORTH);
 
        window.add(eastPanel,BorderLayout.EAST);
@@ -120,5 +121,6 @@ public class StudentStatCollect extends JFrame {
         newTypeButton.setVisible(false);
         backNextButtonsPanel.setVisible(false);
         newTypeButton.setVisible(false);
+        eastPanel.setVisible(false);
     }
     }
