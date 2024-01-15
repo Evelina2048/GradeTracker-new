@@ -50,6 +50,7 @@ public class StudentStatCollect extends JFrame {
     private JButton newTypeButton;
     private Set set;
     private JPanel eastPanel;
+    private JPanel classLabelPanel = new JPanel();
 
     public StudentStatCollect(JFrame main,NewUser newUser, String studentOrTeacher, String existingOrNew, Set set) {
         this.window = main;
@@ -124,15 +125,18 @@ public class StudentStatCollect extends JFrame {
         creator.createTextBox(window);
     }
 
-    private void readClasses() {
+    private void readClasses() { 
         //filepath is username.txt
         String filePath = "/Users/evy/Documents/GradeTracker-new/src/main/view/UserInfo/StudentInfo/" + set.getUsername() +"/class"+ ".txt";
         ArrayList<String> classList = set.getClassList();
 
         for (String className : classList) {
-            // Do something with each class name, for example, print it
+            JLabel classLabel = new JLabel(className);
+            classLabelPanel.add(classLabel);
             System.out.println(className);
         }
+        window.add(classLabelPanel);
+        creator.windowFix(window);
     }
 
 
