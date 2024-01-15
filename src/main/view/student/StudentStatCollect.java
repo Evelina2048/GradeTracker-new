@@ -72,6 +72,7 @@ public class StudentStatCollect extends JFrame {
             public void actionPerformed(ActionEvent e) {
                 hideWindow();
                 StudentClasses studentClasses = new StudentClasses(main, newUser, studentOrTeacher, existingOrNew, set);
+                studentClasses.studentClassesLaunch(main, newUser, studentOrTeacher, existingOrNew, set);
             }
         });
 

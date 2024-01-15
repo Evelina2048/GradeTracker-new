@@ -46,16 +46,16 @@ public class NewUser extends JFrame {
 
     Decorator decorator = new Decorator();
 
-    public NewUser(MainWindow main, String studentOrTeacher, String newOrExisting,int windowX, int windowY, Set set) {
+    public NewUser(JFrame main, String studentOrTeacher, String newOrExisting,int windowX, int windowY, Set set) {
         this.set = set;
         //window = window2;
         //MainWindow main = main2;
        newUserSetup(main, studentOrTeacher);
     }
 
-    public void newUserSetup(MainWindow main2, String studentOrTeacherString) {
-        main = main2;
-        main.setTitle("NEW USE");
+    public void newUserSetup(JFrame main2, String studentOrTeacherString) {
+        this.window = main2;
+        window.setTitle("NEW USE");
         this.window = main;
         studentOrTeacher = studentOrTeacherString;
 

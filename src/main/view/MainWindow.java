@@ -23,7 +23,7 @@ import java.awt.event.KeyEvent;
 import main.view.Set;
 
 public class MainWindow extends JFrame {
-//private JFrame window;
+private JFrame window;
 private String studentOrTeacher;
 private boolean moveOnPossible = false;
 private int windowX;
@@ -44,7 +44,7 @@ JPanel backNextButtonsPanel;
 Decorator decorator = new Decorator();
 
 public MainWindow(JFrame window2, Set set) {
-    //window = window2;
+    window = window2;
     MainWindowLaunch(set);
 
 }
@@ -160,7 +160,7 @@ private void doNextButtonProcedure() {
     decorator.setWindowY(this.getY());
 
     if (moveOnPossible) {
-        NewUser newUser = new NewUser(this, studentOrTeacher,existingOrNew, windowX, windowY, set);
+        NewUser newUser = new NewUser(window, studentOrTeacher,existingOrNew, windowX, windowY, set);
         newUser.setButtonSelected(existingOrNew);
         decorator.hideWindow(instructionsPanel, choicesPanel, backNextButtonsPanel);
     }

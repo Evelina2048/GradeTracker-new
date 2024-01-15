@@ -35,7 +35,7 @@ import main.view.Creator;
 import main.view.Set;
 
 
-public class Gather {
+public class Gather extends JFrame{
     private JFrame window;
     private NewUser newUser;
     private boolean moveOnPossible = false;
@@ -62,14 +62,14 @@ public class Gather {
 
 
 
-    public Gather(MainWindow main, NewUser newUser, String studentOrTeacher, String existingOrNew,int windowX, int windowY, Set set) {
+    public Gather(JFrame main, NewUser newUser, String studentOrTeacher, String existingOrNew,int windowX, int windowY, Set set) {
         this.set = set;
         creator = new Creator(set);
         gatherLaunch(main, newUser, studentOrTeacher, existingOrNew);
 
     }
 
-    public void gatherLaunch (MainWindow main, NewUser newUser2, String studentOrTeacher, String existingOrNew) {
+    public void gatherLaunch (JFrame main, NewUser newUser2, String studentOrTeacher, String existingOrNew) {
 
         main.setTitle("NEW USRE");
         this.window = main;
@@ -171,7 +171,7 @@ public class Gather {
         window.add(choicesPanel);
     }
 
-    private void buttonSetUpAction(MainWindow main, NewUser newUser, String existingOrNew, String studentOrTeacher) {
+    private void buttonSetUpAction(JFrame main, NewUser newUser, String existingOrNew, String studentOrTeacher) {
         JButton backButton = creator.backButtonCreate();
         JPanel backButtonPanel = new JPanel();
         backButtonPanel.add(backButton);
@@ -241,7 +241,7 @@ public class Gather {
         }
         
 }
-private void backButtonAction(MainWindow main, NewUser newUser, String studentOrTeacher, String existingOrNew) {
+private void backButtonAction(JFrame main, NewUser newUser, String studentOrTeacher, String existingOrNew) {
 
      newUser.newUserSetup(main, studentOrTeacher);
      newUser.showWindow(window.getX(),window.getY());
