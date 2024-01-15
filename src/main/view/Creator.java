@@ -206,13 +206,15 @@ public class Creator {
 
     }
 
-    public void writeTextToFile(AtomicBoolean textFieldEmptied) {//, JButton saveButton) {
+    public void writeFolderToFile(AtomicBoolean textFieldEmptied) {//, JButton saveButton) {
         //StudentClasses classes = new StudentClasses(null, null, null, null, set)
         String username = set.getUsername();
         System.out.println("usernameeeeeeeeeeee" + username);
         String folderPath = "/Users/evy/Documents/GradeTracker-new/src/main/view/UserInfo/StudentInfo/"+username; //+ username;
         File folder = new File(folderPath);
-        folder.mkdirs();
+        if (!folder.exists()) {
+            folder.mkdirs();
+        }
         //try (BufferedWriter writer = new BufferedWriter(new FileWriter(folderPath))) {
         
             // List<String> textList = new ArrayList<>();
@@ -238,6 +240,42 @@ public class Creator {
             // writer.write(textList.toString());
             // // saveButton.setEnabled(true);
     }
+
+    public void writeTextToFile(AtomicBoolean textFieldEmptied) {//, JButton saveButton) {
+        //StudentClasses classes = new StudentClasses(null, null, null, null, set)
+        String username = set.getUsername();
+        System.out.println("usernameeeeeeeeeeee" + username);
+        String filePath = "/Users/evy/Documents/GradeTracker-new/src/main/view/UserInfo/StudentInfo/" + username + "/class.txt";
+    
+        try (BufferedWriter writer = new BufferedWriter(new FileWriter(filePath))) {
+            List<String> textList = new ArrayList<>();
+    
+            writer.write("Class:"+"\n");
+            for (Component component : textFieldContainer.getComponents()) {
+                if (component instanceof JPanel) {
+                    JPanel textFieldPanel = (JPanel) component;
+                    for (Component innerComponent : textFieldPanel.getComponents()) {
+                        if (innerComponent instanceof JTextField) {
+                            JTextField textField = (JTextField) innerComponent;
+                            String text = textField.getText();
+                            System.out.println("test"+ (text != "Enter Class Name")+" textfieldEmptied" + getEmptiedState(textField));
+                            if (text != "Enter Class Name" && getEmptiedState(textField) == true && textList.contains(text) == false) {
+                                textList.add(text);
+                            }
+                        }
+                    }
+                }
+            }
+    
+            // Write the list as an array to the file
+            writer.write(textList.toString());
+            // saveButton.setEnabled(true);
+    
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+    }
+
 
     private void setTextColor() {
 

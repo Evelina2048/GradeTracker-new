@@ -83,6 +83,7 @@ public class StudentClasses extends JFrame {
 
         saveButton.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent e) {
+                creator.writeFolderToFile(textFieldEmptied);
                 creator.writeTextToFile(textFieldEmptied);
                 saveButton.setEnabled(false);
                 //nextButtonAction(existingOrNew, studentOrTeacher);
@@ -96,6 +97,7 @@ public class StudentClasses extends JFrame {
         nextButton.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent e) {
                 System.out.println("nextbuttonhit");
+                creator.writeFolderToFile(textFieldEmptied);
                 creator.writeTextToFile(textFieldEmptied);
                 hideWindow();
                 StudentStatCollect statCollect = new StudentStatCollect(window, newUser, studentOrTeacher, existingOrNew, set);
