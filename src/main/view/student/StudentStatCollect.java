@@ -136,9 +136,8 @@ public class StudentStatCollect extends JFrame {
         //for (String className : classList) {
         
         JLabel classLabel = new JLabel(classList.get(index));
-        classLabelPanel.add(creator.createTextBox(window, "Enter Class Name"));
-
         classLabelPanel.add(classLabel);
+        classLabelPanel.add(creator.createTextBox(window, "Grade Type1"));
             //System.out.println(className);
         //}
         window.add(classLabelPanel);
