@@ -294,13 +294,8 @@ private void writeUsername(String filePath, String studentOrTeacher) {
     System.out.println("the filepath is " + filePath);
 
 
-    //try (FileWriter writer = new FileWriter(filePath, true)) {
     checkIfExisting(usernamePath, username);
-    int commaCountInt = commaCount(username);
-        //writer.write(username + "," + commaCountInt + "," + "\n");
-    //} catch (IOException e1) {
-    //    e1.printStackTrace();
-    //}
+    //int commaCountInt = commaCount(username);
 }
 
 private int commaCount(String username) {

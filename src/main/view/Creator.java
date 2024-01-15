@@ -215,30 +215,6 @@ public class Creator {
         if (!folder.exists()) {
             folder.mkdirs();
         }
-        //try (BufferedWriter writer = new BufferedWriter(new FileWriter(folderPath))) {
-        
-            // List<String> textList = new ArrayList<>();
-    
-            // writer.write("Class:"+"\n");
-            // for (Component component : textFieldContainer.getComponents()) {
-            //     if (component instanceof JPanel) {
-            //         JPanel textFieldPanel = (JPanel) component;
-            //         for (Component innerComponent : textFieldPanel.getComponents()) {
-            //             if (innerComponent instanceof JTextField) {
-            //                 JTextField textField = (JTextField) innerComponent;
-            //                 String text = textField.getText();
-            //                 System.out.println("test"+ (text != "Enter Class Name")+" textfieldEmptied" + getEmptiedState(textField));
-            //                 if (text != "Enter Class Name" && getEmptiedState(textField) == true && textList.contains(text) == false) {
-            //                     textList.add(text);
-            //                 }
-            //             }
-            //         }
-            //     }
-            // }
-    
-            // // Write the list as an array to the file
-            // writer.write(textList.toString());
-            // // saveButton.setEnabled(true);
     }
 
     public void writeTextToFile(AtomicBoolean textFieldEmptied) {//, JButton saveButton) {
@@ -250,7 +226,6 @@ public class Creator {
         try (BufferedWriter writer = new BufferedWriter(new FileWriter(filePath))) {
             List<String> textList = new ArrayList<>();
     
-            //writer.write("Class:"+"\n");
             for (Component component : textFieldContainer.getComponents()) {
                 if (component instanceof JPanel) {
                     JPanel textFieldPanel = (JPanel) component;
@@ -260,7 +235,8 @@ public class Creator {
                             String text = textField.getText();
                             System.out.println("test"+ (text != "Enter Class Name")+" textfieldEmptied" + getEmptiedState(textField));
                             if (text != "Enter Class Name" && getEmptiedState(textField) == true && textList.contains(text) == false) {
-                                textList.add(text+"\n");
+                                //textList.add(text+"\n");
+                                writer.write(text+"\n");
                             }
                         }
                     }
@@ -268,8 +244,7 @@ public class Creator {
             }
     
             // Write the list as an array to the file
-            writer.write(textList.toString());
-            // saveButton.setEnabled(true);
+            //writer.write(textList.toString());
     
         } catch (IOException e) {
             e.printStackTrace();

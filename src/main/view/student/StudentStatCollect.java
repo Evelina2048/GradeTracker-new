@@ -116,6 +116,7 @@ public class StudentStatCollect extends JFrame {
 
 
     //read classes array, first five classes
+
     private void readClasses() {
         //filepath is username.txt
         String filePath = "/Users/evy/Documents/GradeTracker-new/src/main/view/UserInfo/StudentInfo/" + set.getUsername() +"/class"+ ".txt";
@@ -124,6 +125,7 @@ public class StudentStatCollect extends JFrame {
             String line;
             while ((line = reader.readLine()) != null) {
                 System.out.println(line);
+                //set.getClasses();
             }
         } catch (IOException e) {
             e.printStackTrace();
