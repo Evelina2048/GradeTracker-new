@@ -245,7 +245,7 @@ public class Creator {
                     }
                 }
             }
-            System.out.println(classList+" classlist");
+            //System.out.println(classList+" classlist");
             set.setClassList(classList);
             // Write the list as an array to the file
             //writer.write(textList.toString());

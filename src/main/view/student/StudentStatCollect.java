@@ -58,6 +58,9 @@ public class StudentStatCollect extends JFrame {
         studentStatCollectLaunch(window);
         createNewTypeButton();
         buttonSetUpAction(main, newUser, studentOrTeacher, existingOrNew);
+        //
+        DisplayClasses();
+        //
     }
 
     public void studentStatCollectLaunch(JFrame window) {
@@ -116,6 +119,10 @@ public class StudentStatCollect extends JFrame {
 
 
     //read classes array, first five classes
+    private void DisplayClasses() {
+        //will be updated later
+        creator.createTextBox(window);
+    }
 
     private void readClasses() {
         //filepath is username.txt
