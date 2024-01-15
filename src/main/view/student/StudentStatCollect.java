@@ -87,7 +87,6 @@ public class StudentStatCollect extends JFrame {
         saveButton.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent e) {
                 //nextButtonAction(existingOrNew, studentOrTeacher);
-                readClasses();
             }
         });
         
@@ -122,6 +121,7 @@ public class StudentStatCollect extends JFrame {
     //read classes array, first five classes
     private void DisplayClasses() {
         //will be updated later
+        readClasses();
         creator.createTextBox(window);
     }
 
@@ -133,7 +133,7 @@ public class StudentStatCollect extends JFrame {
         for (String className : classList) {
             JLabel classLabel = new JLabel(className);
             classLabelPanel.add(classLabel);
-            System.out.println(className);
+            //System.out.println(className);
         }
         window.add(classLabelPanel);
         creator.windowFix(window);
