@@ -51,6 +51,7 @@ public class StudentStatCollect extends JFrame {
     private Set set;
     private JPanel eastPanel;
     private JPanel classLabelPanel = new JPanel();
+    private int index = 0;
 
     public StudentStatCollect(JFrame main,NewUser newUser, String studentOrTeacher, String existingOrNew, Set set) {
         this.window = main;
@@ -120,21 +121,25 @@ public class StudentStatCollect extends JFrame {
 
     //read classes array, first five classes
     private void DisplayClasses() {
-        //will be updated later
-        readClasses();
-        creator.createTextBox(window);
-    }
-
-    private void readClasses() { 
-        //filepath is username.txt
         String filePath = "/Users/evy/Documents/GradeTracker-new/src/main/view/UserInfo/StudentInfo/" + set.getUsername() +"/class"+ ".txt";
         ArrayList<String> classList = set.getClassList();
-
+        //will be updated later
         for (String className : classList) {
-            JLabel classLabel = new JLabel(className);
-            classLabelPanel.add(classLabel);
-            //System.out.println(className);
+            readClass(classList);
+            index++;
         }
+        creator.createTextBox(window);
+        //index++;
+    }
+
+    private void readClass(ArrayList<String> classList) { 
+        //filepath is username.txt
+        //for (String className : classList) {
+        
+        JLabel classLabel = new JLabel(classList.get(index));
+        classLabelPanel.add(classLabel);
+            //System.out.println(className);
+        //}
         window.add(classLabelPanel);
         creator.windowFix(window);
     }
