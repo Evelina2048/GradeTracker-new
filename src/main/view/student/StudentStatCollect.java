@@ -115,6 +115,8 @@ public class StudentStatCollect extends JFrame {
         public void actionPerformed(ActionEvent e) {
             typeNumber++;
             classLabelPanel.add(creator.createTextBox(window, "Grade Type"+typeNumber));
+            classLabelPanel.add(creator.createTextBox(window, "Percentage of Grade"));
+            classLabelPanel.add(creator.createTextBox(window, "Credits (optional)"));
         }
     });
     
