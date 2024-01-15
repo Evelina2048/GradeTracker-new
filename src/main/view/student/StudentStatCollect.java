@@ -70,7 +70,8 @@ public class StudentStatCollect extends JFrame {
         backButtonPanel.add(backButton);
         backButton.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent e) {
-               //backButtonAction(main, newUser, studentOrTeacher, existingOrNew);
+                hideWindow();
+                StudentClasses studentClasses = new StudentClasses(main, newUser, studentOrTeacher, existingOrNew, set);
             }
         });
 
@@ -110,7 +111,12 @@ public class StudentStatCollect extends JFrame {
     //     for j in types :
     //         type1gradeBox.
 
+
+    //read classes array, first five classes
+
+
     private void hideWindow() {
+        newTypeButton.setVisible(false);
         backNextButtonsPanel.setVisible(false);
         newTypeButton.setVisible(false);
     }
