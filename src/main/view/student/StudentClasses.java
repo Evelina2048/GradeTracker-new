@@ -55,7 +55,7 @@ public class StudentClasses extends JFrame {
         System.out.println("in student classes");
         window.setTitle("StudentClasses");
         window.setLayout(new BorderLayout());
-        creator.createTextBox(window, "Enter Class Name");
+        creator.createTextBox(window, "Enter Class Name", 50, 50);
         //textField.setVisible(true);
         westPanelCreate();
         buttonSetUpAction(main, newUser, studentOrTeacher, existingOrNew);
@@ -116,7 +116,7 @@ public class StudentClasses extends JFrame {
         newClassButton.setPreferredSize(new Dimension(80, 50));
         newClassButton.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent e) {
-                creator.createTextBox(window, "Enter Class Name");
+                creator.createTextBox(window, "Enter Class Name", 50, 50);
                 saveButton.setEnabled(true);
                 
         }

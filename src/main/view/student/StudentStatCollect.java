@@ -114,9 +114,8 @@ public class StudentStatCollect extends JFrame {
        newTypeButton.addActionListener(new ActionListener() {
         public void actionPerformed(ActionEvent e) {
             typeNumber++;
-            classLabelPanel.add(creator.createTextBox(window, "Grade Type"+typeNumber));
-            classLabelPanel.add(creator.createTextBox(window, "Percentage of Grade"));
-            classLabelPanel.add(creator.createTextBox(window, "Credits (optional)"));
+            classLabelPanel.add(creator.createTextBox(window, "Grade Type"+typeNumber, 50, 50));
+            classLabelPanel.add(creator.createTextBox(window, "Percentage of Grade", 50, 50));
         }
     });
     
@@ -136,6 +135,7 @@ public class StudentStatCollect extends JFrame {
         //will be updated later
         for (String className : classList) {
             readClass(classList);
+            classLabelPanel.add(creator.createTextBox(window, "Credits (optional)", 50, 50));
             index++;
         }
         //index++;
@@ -148,7 +148,7 @@ public class StudentStatCollect extends JFrame {
         JLabel classLabel = new JLabel(classList.get(index));
         classLabelPanel.add(classLabel);
         typeNumber++;
-        classLabelPanel.add(creator.createTextBox(window, "Grade Type"+typeNumber));
+        classLabelPanel.add(creator.createTextBox(window, "Grade Type"+typeNumber, 50, 50));
             //System.out.println(className);
         //}
         window.add(classLabelPanel);

@@ -263,7 +263,7 @@ public class Creator {
         textboxCounter++;
     }
 
-    public JTextField createTextBox(JFrame window, String placeholder) {
+    public JTextField createTextBox(JFrame window, String placeholder, int width, int height) {
         textboxCounter++; //textBoxIncrement();
         if (textboxCounter <= 30) {
             System.out.println("In create textbox new");
@@ -275,7 +275,7 @@ public class Creator {
             
             textFieldPanel.add(textField); 
             
-            textField.setPreferredSize(new Dimension(50, 50));
+            textField.setPreferredSize(new Dimension(width, height)); //50,50
             textFieldContainer.add(textFieldPanel); //
             textFieldContainer.setVisible(true);
             window.add(textFieldContainer, BorderLayout.NORTH);
