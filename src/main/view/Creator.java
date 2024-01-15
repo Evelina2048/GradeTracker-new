@@ -37,6 +37,7 @@ public class Creator {
     private Decorator decorate = new Decorator();
     private int textboxCounter;
     //private Set set = new Set();
+    private JTextField textField;
     //private JPanel textFieldContainer;
     private ArrayList<String> classList = new ArrayList<>();
 
@@ -266,13 +267,13 @@ public class Creator {
         textboxCounter++;
     }
 
-    public void createTextBox(JFrame window) {
+    public JTextField createTextBox(JFrame window) {
         textboxCounter++; //textBoxIncrement();
         if (textboxCounter <= 30) {
             System.out.println("In create textbox new");
             JPanel textFieldPanel = new JPanel(new FlowLayout(FlowLayout.LEFT));
 
-            JTextField textField = decorate.decorateTextBox("Enter Class Name");
+            textField = decorate.decorateTextBox("Enter Class Name");
             setEmptiedState(textField, false);
              
             
@@ -287,8 +288,8 @@ public class Creator {
             
             
             windowFix(window);
-
         }
+        return textField;
 
 
     }

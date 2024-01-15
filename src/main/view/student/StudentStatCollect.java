@@ -128,7 +128,6 @@ public class StudentStatCollect extends JFrame {
             readClass(classList);
             index++;
         }
-        creator.createTextBox(window);
         //index++;
     }
 
@@ -137,6 +136,8 @@ public class StudentStatCollect extends JFrame {
         //for (String className : classList) {
         
         JLabel classLabel = new JLabel(classList.get(index));
+        classLabelPanel.add(creator.createTextBox(window));
+
         classLabelPanel.add(classLabel);
             //System.out.println(className);
         //}
