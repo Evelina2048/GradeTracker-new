@@ -230,6 +230,7 @@ public class Gather {
                 System.out.println("should move to studentClasses class");
                 hideWindow();
                 StudentClasses studentClasses = new StudentClasses(window, newUser, studentOrTeacherString, existingOrNew, set);
+                studentClasses.studentClassesLaunch(window, newUser, studentOrTeacherString, existingOrNew, set);
             }
         }
 

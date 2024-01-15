@@ -41,21 +41,23 @@ public class StudentClasses extends JFrame {
     //JTextField textField = decorate.decorateTextBox();
 
     public StudentClasses(JFrame main,NewUser newUser, String studentOrTeacher, String existingOrNew, Set set) {
-        creator = new Creator(set);
-        studentClassesLaunch(main, set);
+        //studentClassesLaunch(main, newUser, studentOrTeacher, existingOrNew, set);
         //createNewClassButton();
-        westPanelCreate();
-        buttonSetUpAction(main, newUser, studentOrTeacher, existingOrNew);
+        // westPanelCreate();
+        // buttonSetUpAction(main, newUser, studentOrTeacher, existingOrNew);
     }
 
-    public void studentClassesLaunch(JFrame main, Set set) {
+    public void studentClassesLaunch(JFrame main, NewUser newUser, String studentOrTeacher, String existingOrNew, Set set) {
         this.window = main;
+        creator = new Creator(set);
         this.set = set;
         System.out.println("in student classes");
         window.setTitle("StudentClasses");
         window.setLayout(new BorderLayout());
         creator.createTextBox(window);
         //textField.setVisible(true);
+        westPanelCreate();
+        buttonSetUpAction(main, newUser, studentOrTeacher, existingOrNew);
     }
 
     public void buttonSetUpAction(JFrame main, NewUser newUser, String studentOrTeacher, String existingOrNew) {
