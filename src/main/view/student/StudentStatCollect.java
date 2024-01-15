@@ -118,7 +118,6 @@ public class StudentStatCollect extends JFrame {
     //read classes array, first five classes
     private void readClasses() {
         //filepath is username.txt
-        ///Users/evy/Documents/GradeTracker-new/src/main/view/UserInfo/StudentInfo/" + username + ".txt
         String filePath = "/Users/evy/Documents/GradeTracker-new/src/main/view/UserInfo/StudentInfo/" + set.getUsername() + ".txt"; // Replace with the actual path to your file
 
         try (BufferedReader reader = new BufferedReader(new FileReader(filePath))) {
