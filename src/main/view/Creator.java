@@ -250,7 +250,7 @@ public class Creator {
         try (BufferedWriter writer = new BufferedWriter(new FileWriter(filePath))) {
             List<String> textList = new ArrayList<>();
     
-            writer.write("Class:"+"\n");
+            //writer.write("Class:"+"\n");
             for (Component component : textFieldContainer.getComponents()) {
                 if (component instanceof JPanel) {
                     JPanel textFieldPanel = (JPanel) component;
@@ -260,7 +260,7 @@ public class Creator {
                             String text = textField.getText();
                             System.out.println("test"+ (text != "Enter Class Name")+" textfieldEmptied" + getEmptiedState(textField));
                             if (text != "Enter Class Name" && getEmptiedState(textField) == true && textList.contains(text) == false) {
-                                textList.add(text);
+                                textList.add(text+"\n");
                             }
                         }
                     }

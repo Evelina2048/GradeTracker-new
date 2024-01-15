@@ -279,13 +279,13 @@ private void writeUsername(String filePath, String studentOrTeacher) {
     set.setUsername(username);
     System.out.println("studentOrTeacher"+ studentOrTeacher);
     if ("Student".equals(studentOrTeacher)) {
-        filePath = "/Users/evy/Documents/GradeTracker-new/src/main/view/UserInfo/StudentInfo/"+username+".txt";
+        //filePath = "/Users/evy/Documents/GradeTracker-new/src/main/view/UserInfo/StudentInfo/"+username+".txt";
         usernamePath = "/Users/evy/Documents/GradeTracker-new/src/main/view/UserInfo/studentUsername.txt";
         System.out.println("going to student.csv"+usernamePath);
     }
 
     else if ("Teacher".equals(studentOrTeacher)) {
-        filePath = "/Users/evy/Documents/GradeTracker-new/src/main/view/Teacher.csv";
+       // filePath = "/Users/evy/Documents/GradeTracker-new/src/main/view/Teacher.csv";
         usernamePath = "/Users/evy/Documents/GradeTracker-new/src/main/view/UserInfo/teacherUsername.txt";
         System.out.println("going to teacher.csv"+usernamePath);
     }
@@ -294,14 +294,13 @@ private void writeUsername(String filePath, String studentOrTeacher) {
     System.out.println("the filepath is " + filePath);
 
 
-    try (FileWriter writer = new FileWriter(filePath, true)) {
-        checkIfExisting(usernamePath, username);
-        int commaCountInt = commaCount(username);
+    //try (FileWriter writer = new FileWriter(filePath, true)) {
+    checkIfExisting(usernamePath, username);
+    int commaCountInt = commaCount(username);
         //writer.write(username + "," + commaCountInt + "," + "\n");
-    } catch (IOException e1) {
-        e1.printStackTrace();
-    }
-
+    //} catch (IOException e1) {
+    //    e1.printStackTrace();
+    //}
 }
 
 private int commaCount(String username) {

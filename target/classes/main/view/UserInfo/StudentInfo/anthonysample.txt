@@ -1,2 +1,0 @@
-Class:
-[english, history, math]

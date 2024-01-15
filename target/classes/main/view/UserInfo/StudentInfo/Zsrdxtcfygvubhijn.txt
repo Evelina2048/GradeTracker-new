@@ -1,2 +1,0 @@
-Class:
-[english, h, Enter Class Name, Enter Class Name]
