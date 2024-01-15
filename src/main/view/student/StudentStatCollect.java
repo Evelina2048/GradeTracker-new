@@ -49,7 +49,7 @@ public class StudentStatCollect extends JFrame {
     private JPanel backNextButtonsPanel;
     private JButton newTypeButton;
     private Set set;
-    private JPanel eastPanel;issues 
+    private JPanel eastPanel;
 
     public StudentStatCollect(JFrame main,NewUser newUser, String studentOrTeacher, String existingOrNew, Set set) {
         this.window = main;
@@ -83,6 +83,7 @@ public class StudentStatCollect extends JFrame {
         saveButton.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent e) {
                 //nextButtonAction(existingOrNew, studentOrTeacher);
+                readClasses();
             }
         });
         
@@ -115,6 +116,21 @@ public class StudentStatCollect extends JFrame {
 
 
     //read classes array, first five classes
+    private void readClasses() {
+        //filepath is username.txt
+        ///Users/evy/Documents/GradeTracker-new/src/main/view/UserInfo/StudentInfo/" + username + ".txt
+        String filePath = "/Users/evy/Documents/GradeTracker-new/src/main/view/UserInfo/StudentInfo/" + set.getUsername() + ".txt"; // Replace with the actual path to your file
+
+        try (BufferedReader reader = new BufferedReader(new FileReader(filePath))) {
+            String line;
+            while ((line = reader.readLine()) != null) {
+                // Process each line as needed
+                System.out.println(line);
+            }
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+    }
 
 
     private void hideWindow() {

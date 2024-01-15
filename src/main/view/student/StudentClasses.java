@@ -18,16 +18,11 @@ import main.view.Set;
 import main.view.Creator;
 import main.view.Decorator;
 import main.view.Gather;
-import main.view.MainWindow;
+
 
 
 public class StudentClasses extends JFrame {
     private JFrame window;
-    private MainWindow main;
-    private NewUser newUser;
-    private String studentOrTeacher;
-    private String existingOrNew;
-
     private Creator creator;
     private JPanel backNextButtonsPanel;
     // private JPanel textFieldContainer = new JPanel(new GridLayout(0, 5)); // Panel to hold text fields
@@ -47,14 +42,13 @@ public class StudentClasses extends JFrame {
     //JTextField textField = decorate.decorateTextBox();
 
     public StudentClasses(JFrame main,NewUser newUser, String studentOrTeacher, String existingOrNew, Set set) {
+        //studentClassesLaunch(main, newUser, studentOrTeacher, existingOrNew, set);
+        //createNewClassButton();
+        // westPanelCreate();
+        // buttonSetUpAction(main, newUser, studentOrTeacher, existingOrNew);
     }
 
-    public void studentClassesLaunch(JFrame main, NewUser newUser, String studentOrTeacher2, String existingOrNew2, Set set) {
-        this.newUser = newUser;
-        studentOrTeacher = studentOrTeacher2;
-        existingOrNew = existingOrNew2;
-
-        //this.main = main;
+    public void studentClassesLaunch(JFrame main, NewUser newUser, String studentOrTeacher, String existingOrNew, Set set) {
         this.window = main;
         creator = new Creator(set);
         this.set = set;
@@ -62,6 +56,7 @@ public class StudentClasses extends JFrame {
         window.setTitle("StudentClasses");
         window.setLayout(new BorderLayout());
         creator.createTextBox(window);
+        //textField.setVisible(true);
         westPanelCreate();
         buttonSetUpAction(main, newUser, studentOrTeacher, existingOrNew);
     }
@@ -75,13 +70,10 @@ public class StudentClasses extends JFrame {
         backButton.setPreferredSize(new Dimension(87, 29));
         backButton.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent e) {
+                Gather gather = new Gather(window, newUser, studentOrTeacher, existingOrNew, window.getX(), window.getY(), set);
+                gather.showWindow(window.getX(), window.getY());
+                hideWindow(); 
                //backButtonAction(main, newUser, studentOrTeacher, existingOrNew);
-               Gather gather = new Gather(window, newUser, studentOrTeacher, existingOrNew, window.getX(), window.getY(), set);
-
-               ///System.out.println("get mainwindow type. main,window. : "+main.getType() + window.getType());
-
-               ///Gather gather = new Gather(window, newUser, studentOrTeacher, existingOrNew, window.getX(), window.getY(), set);
-               //gather.gatherLaunch(main, newUser, studentOrTeacher, existingOrNew);
             }
         });
 
@@ -148,8 +140,6 @@ public class StudentClasses extends JFrame {
     private void westPanelCreate() {
         createNewClassButton();
         deleteClassButton();
-        newClassButton.setVisible(true);
-        deleteClassButton.setVisible(true);
 
 
         JPanel buttonsPanel = new JPanel(new BorderLayout());
@@ -166,8 +156,10 @@ public class StudentClasses extends JFrame {
     private void hideWindow() {
         backNextButtonsPanel.setVisible(false);
         newClassButton.setVisible(false);
+        deleteClassButton.setVisible(false);
         southContainer.setVisible(false);
         creator.getTextFieldContainer().setVisible(false);
+
         //textField.setVisible(false);
     }
 

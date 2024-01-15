@@ -25,7 +25,7 @@ import main.view.student.existing.EditOrResults;
 import java.awt.event.KeyEvent;
 public class NewUser extends JFrame {
     private JFrame window;
-    private MainWindow main;
+    private JFrame main;
     private String studentOrTeacher;
     private String existingOrNew;
     private boolean moveOnPossible = false;
@@ -46,16 +46,16 @@ public class NewUser extends JFrame {
 
     Decorator decorator = new Decorator();
 
-    public NewUser(JFrame main, String studentOrTeacher, String newOrExisting,int windowX, int windowY, Set set) {
+    public NewUser(MainWindow main, String studentOrTeacher, String newOrExisting,int windowX, int windowY, Set set) {
         this.set = set;
         //window = window2;
         //MainWindow main = main2;
        newUserSetup(main, studentOrTeacher);
     }
 
-    public void newUserSetup(JFrame main2, String studentOrTeacherString) {
-        this.window = main2;
-        window.setTitle("NEW USE");
+    public void newUserSetup(JFrame window2, String studentOrTeacherString) {
+        main = window2;
+        main.setTitle("NEW USE");
         this.window = main;
         studentOrTeacher = studentOrTeacherString;
 
@@ -125,7 +125,7 @@ public class NewUser extends JFrame {
         choicesPanel.add(existingButton, decorator.choiceGbc());
     }
 
-    private void buttonSetUp(MainWindow main, String studentOrTeacher) {
+    private void buttonSetUp(JFrame main2, String studentOrTeacher) {
         JButton backButton;
         JButton saveButton;
         JButton nextButton;
@@ -136,10 +136,10 @@ public class NewUser extends JFrame {
 
         backButton.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent e) {
-                main.MainWindowLaunch(set);
-                main.show(window.getX(),window.getY());
-                main.setButtonSelected(studentOrTeacher);
-                main.setExistingOrNew(existingOrNew);
+                ((MainWindow) main2).MainWindowLaunch(set);
+                main2.show();
+                ((MainWindow) main2).setButtonSelected(studentOrTeacher);
+                ((MainWindow) main2).setExistingOrNew(existingOrNew);
                 decorator.hideWindow(instructionsPanel, choicesPanel, backNextButtonsPanel);     
             }
         });
@@ -239,4 +239,3 @@ public class NewUser extends JFrame {
         }
     }
 }
-
