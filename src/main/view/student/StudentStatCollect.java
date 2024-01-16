@@ -25,6 +25,7 @@ public class StudentStatCollect extends JFrame {
     private JPanel backNextButtonsPanel;
     private JButton newTypeButton;
     private Set set;
+    private JPanel classLabelPanel;
     //private JPanel classLabelPanel = new JPanel(new GridLayout(4,4));
     //private JPanel classLabelPanel = new JPanel(new FlowLayout(FlowLayout.LEFT));
     private int index = 0;
@@ -92,19 +93,18 @@ public class StudentStatCollect extends JFrame {
        newTypePanel.add(newTypeButton, BorderLayout.EAST);
        northPanel.add(newTypePanel, BorderLayout.NORTH);
        newTypePanel.setBackground(Color.PINK);
+
+       JPanel textBoxPanel = new JPanel();
        
-       //eastPanel = new JPanel(new FlowLayout(FlowLayout.RIGHT));
-       //eastPanel.setBackground(Color.PINK);
-       newTypeButton.addActionListener(new ActionListener() {
+        newTypeButton.addActionListener(new ActionListener() {
         public void actionPerformed(ActionEvent e) {
             typeNumber++;
-            window.add(creator.createTextBox(window, "Grade Type"+typeNumber, 50, 50));
-            window.add(creator.createTextBox(window, "Percentage of Grade", 80, 50));
+            textBoxPanel.add(creator.createTextBox(window, "Grade Type"+typeNumber, 50, 50));
+            textBoxPanel.add(creator.createTextBox(window, "Percentage of Grade", 80, 50));
+            window.add(textBoxPanel);
         }
     });
        window.add(northPanel);
-       //window.add(eastPanel,BorderLayout.EAST);
-       //creator.windowFix();
        creator.windowFix(window);
    }
 
@@ -121,23 +121,20 @@ public class StudentStatCollect extends JFrame {
 
         //for (String className : classList) {
         readClass(classList);
-        //classLabelPanel.add(creator.createTextBox(window, "Credits (optional)", 50, 50));
-        window.add(creator.createTextBox(window, "Credits (optional)", 50, 50));
+        classLabelPanel.add(creator.createTextBox(window, "Credits (optional)", 50, 50));
         index++;
-        //}
-        //index++;
+        creator.windowFix(window);
     }
 
     private void readClass(ArrayList<String> classList) { 
         JLabel classLabel = new JLabel(classList.get(index));
-        JPanel classLabelPanel = new JPanel();
+        classLabelPanel = new JPanel();
+        classLabelPanel.setBackground(Color.ORANGE);
         classLabelPanel.add(classLabel);
-        window.add(classLabelPanel);
         typeNumber++;
-        //classLabelPanel.add();
-        window.add(creator.createTextBox(window, "Grade Type"+typeNumber, 50, 50));
-        window.add(creator.createTextBox(window, "Percentage of Grade", 80, 50));
-        //window.add(classLabelPanel);
+        classLabelPanel.add(creator.createTextBox(window, "Grade Type"+typeNumber, 50, 50));
+        classLabelPanel.add(creator.createTextBox(window, "Percentage of Grade", 80, 50));
+        window.add(classLabelPanel);
         creator.windowFix(window);
     }
 
