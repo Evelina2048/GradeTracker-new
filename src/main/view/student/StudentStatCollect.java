@@ -25,9 +25,9 @@ public class StudentStatCollect extends JFrame {
     private JPanel backNextButtonsPanel;
     private JButton newTypeButton;
     private Set set;
-    private JPanel eastPanel;
+    //private JPanel eastPanel;
     //private JPanel classLabelPanel = new JPanel(new GridLayout(4,4));
-    private JPanel classLabelPanel = new JPanel(new FlowLayout(FlowLayout.LEFT));
+    //private JPanel classLabelPanel = new JPanel(new FlowLayout(FlowLayout.LEFT));
     private int index = 0;
     private int typeNumber = 0;
 
@@ -87,19 +87,23 @@ public class StudentStatCollect extends JFrame {
    private void createNewTypeButton() {
        newTypeButton = new JButton("New Type");
        newTypeButton.setPreferredSize(new Dimension(80, 50));
-       eastPanel = new JPanel(new FlowLayout(FlowLayout.RIGHT));
-       eastPanel.setBackground(Color.PINK);
-       eastPanel.add(newTypeButton);
+       JPanel newTypePanel = new JPanel(new BorderLayout());
+       JPanel northPanel = new JPanel(new BorderLayout());
+       newTypePanel.add(newTypeButton, BorderLayout.EAST);
+       northPanel.add(newTypePanel, BorderLayout.NORTH);
+       newTypePanel.setBackground(Color.PINK);
+       
+       //eastPanel = new JPanel(new FlowLayout(FlowLayout.RIGHT));
+       //eastPanel.setBackground(Color.PINK);
        newTypeButton.addActionListener(new ActionListener() {
         public void actionPerformed(ActionEvent e) {
             typeNumber++;
-            classLabelPanel.add(creator.createTextBox(window, "Grade Type"+typeNumber, 50, 50));
-            classLabelPanel.add(creator.createTextBox(window, "Percentage of Grade", 80, 50));
+            window.add(creator.createTextBox(window, "Grade Type"+typeNumber, 50, 50));
+            window.add(creator.createTextBox(window, "Percentage of Grade", 80, 50));
         }
     });
-    
-       window.add(classLabelPanel);
-       window.add(eastPanel,BorderLayout.EAST);
+       window.add(northPanel);
+       //window.add(eastPanel,BorderLayout.EAST);
        //creator.windowFix();
        creator.windowFix(window);
    }
@@ -117,7 +121,8 @@ public class StudentStatCollect extends JFrame {
 
         //for (String className : classList) {
         readClass(classList);
-        classLabelPanel.add(creator.createTextBox(window, "Credits (optional)", 50, 50));
+        //classLabelPanel.add(creator.createTextBox(window, "Credits (optional)", 50, 50));
+        window.add(creator.createTextBox(window, "Credits (optional)", 50, 50));
         index++;
         //}
         //index++;
@@ -125,11 +130,13 @@ public class StudentStatCollect extends JFrame {
 
     private void readClass(ArrayList<String> classList) { 
         JLabel classLabel = new JLabel(classList.get(index));
-        classLabelPanel.add(classLabel);
+        //classLabelPanel.add(classLabel);
+        window.add(classLabel);
         typeNumber++;
-        classLabelPanel.add(creator.createTextBox(window, "Grade Type"+typeNumber, 50, 50));
-        classLabelPanel.add(creator.createTextBox(window, "Percentage of Grade", 80, 50));
-        window.add(classLabelPanel);
+        //classLabelPanel.add();
+        window.add(creator.createTextBox(window, "Grade Type"+typeNumber, 50, 50));
+        window.add(creator.createTextBox(window, "Percentage of Grade", 80, 50));
+        //window.add(classLabelPanel);
         creator.windowFix(window);
     }
 
@@ -138,6 +145,6 @@ public class StudentStatCollect extends JFrame {
         newTypeButton.setVisible(false);
         backNextButtonsPanel.setVisible(false);
         newTypeButton.setVisible(false);
-        eastPanel.setVisible(false);
+        //eastPanel.setVisible(false);
     }
     }
