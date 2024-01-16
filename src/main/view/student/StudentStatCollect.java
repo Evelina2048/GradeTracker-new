@@ -25,7 +25,6 @@ public class StudentStatCollect extends JFrame {
     private JPanel backNextButtonsPanel;
     private JButton newTypeButton;
     private Set set;
-    //private JPanel eastPanel;
     //private JPanel classLabelPanel = new JPanel(new GridLayout(4,4));
     //private JPanel classLabelPanel = new JPanel(new FlowLayout(FlowLayout.LEFT));
     private int index = 0;
@@ -82,6 +81,7 @@ public class StudentStatCollect extends JFrame {
         });
         backNextButtonsPanel = creator.makeBackNextButtonsPanel(backButtonPanel, saveButtonPanel, nextButtonPanel);
         window.add(backNextButtonsPanel, BorderLayout.SOUTH);
+        creator.windowFix(window);
     }
 
    private void createNewTypeButton() {
@@ -130,8 +130,9 @@ public class StudentStatCollect extends JFrame {
 
     private void readClass(ArrayList<String> classList) { 
         JLabel classLabel = new JLabel(classList.get(index));
-        //classLabelPanel.add(classLabel);
-        window.add(classLabel);
+        JPanel classLabelPanel = new JPanel();
+        classLabelPanel.add(classLabel);
+        window.add(classLabelPanel);
         typeNumber++;
         //classLabelPanel.add();
         window.add(creator.createTextBox(window, "Grade Type"+typeNumber, 50, 50));
