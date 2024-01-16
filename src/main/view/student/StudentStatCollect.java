@@ -1,43 +1,19 @@
 package main.view.student;
 
-import javax.swing.BorderFactory;
-import javax.swing.ButtonGroup;
 import javax.swing.JButton;
-import javax.swing.JDialog;
 import javax.swing.JFrame;
-import javax.swing.JRadioButton;
-import javax.swing.JTextField;
-import javax.swing.SwingConstants;
-
 import java.awt.BorderLayout;
+import java.awt.GridLayout;
 import java.awt.Color;
 import java.awt.Dimension;
-import java.awt.Font;
 import javax.swing.JPanel;
 import javax.swing.JLabel;
-
-import java.awt.GridBagLayout;
-import java.awt.GridBagConstraints;
 
 import java.awt.event.ActionListener;
 import java.awt.event.ActionEvent;
 import java.awt.FlowLayout;
 
-import java.awt.event.MouseAdapter;
-import java.awt.event.MouseEvent;
-
-import java.awt.event.FocusAdapter;
-import java.awt.event.FocusEvent;
-
-import java.io.FileWriter;
-import java.io.IOException;
 import java.util.ArrayList;
-import java.io.BufferedReader;
-
-import java.io.FileReader;
-
-//importing files
-import main.view.MainWindow;
 import main.view.NewUser;
 import main.view.Creator;
 import main.view.Set;
@@ -50,7 +26,8 @@ public class StudentStatCollect extends JFrame {
     private JButton newTypeButton;
     private Set set;
     private JPanel eastPanel;
-    private JPanel classLabelPanel = new JPanel();
+    //private JPanel classLabelPanel = new JPanel(new GridLayout(4,4));
+    private JPanel classLabelPanel = new JPanel(new FlowLayout(FlowLayout.LEFT));
     private int index = 0;
     private int typeNumber = 0;
 
@@ -69,6 +46,7 @@ public class StudentStatCollect extends JFrame {
     public void studentStatCollectLaunch(JFrame window) {
         System.out.println("in student classes");
         window.setTitle("StudentStatCollect");
+        window.setPreferredSize(new Dimension(1000, 1000));
     }
 
     public void buttonSetUpAction(JFrame main, NewUser newUser, String studentOrTeacher, String existingOrNew) {
@@ -109,18 +87,21 @@ public class StudentStatCollect extends JFrame {
    private void createNewTypeButton() {
        newTypeButton = new JButton("New Type");
        newTypeButton.setPreferredSize(new Dimension(80, 50));
-       eastPanel = new JPanel(new BorderLayout());
-       eastPanel.add(newTypeButton, BorderLayout.NORTH);
+       eastPanel = new JPanel(new FlowLayout(FlowLayout.RIGHT));
+       eastPanel.setBackground(Color.PINK);
+       eastPanel.add(newTypeButton);
        newTypeButton.addActionListener(new ActionListener() {
         public void actionPerformed(ActionEvent e) {
             typeNumber++;
             classLabelPanel.add(creator.createTextBox(window, "Grade Type"+typeNumber, 50, 50));
-            classLabelPanel.add(creator.createTextBox(window, "Percentage of Grade", 50, 50));
+            classLabelPanel.add(creator.createTextBox(window, "Percentage of Grade", 80, 50));
         }
     });
     
-
+       window.add(classLabelPanel);
        window.add(eastPanel,BorderLayout.EAST);
+       //creator.windowFix();
+       creator.windowFix(window);
    }
 
     // For i in classes, give classes : class1 
@@ -133,24 +114,21 @@ public class StudentStatCollect extends JFrame {
         String filePath = "/Users/evy/Documents/GradeTracker-new/src/main/view/UserInfo/StudentInfo/" + set.getUsername() +"/class"+ ".txt";
         ArrayList<String> classList = set.getClassList();
         //will be updated later
-        for (String className : classList) {
-            readClass(classList);
-            classLabelPanel.add(creator.createTextBox(window, "Credits (optional)", 50, 50));
-            index++;
-        }
+
+        //for (String className : classList) {
+        readClass(classList);
+        classLabelPanel.add(creator.createTextBox(window, "Credits (optional)", 50, 50));
+        index++;
+        //}
         //index++;
     }
 
     private void readClass(ArrayList<String> classList) { 
-        //filepath is username.txt
-        //for (String className : classList) {
-        
         JLabel classLabel = new JLabel(classList.get(index));
         classLabelPanel.add(classLabel);
         typeNumber++;
         classLabelPanel.add(creator.createTextBox(window, "Grade Type"+typeNumber, 50, 50));
-            //System.out.println(className);
-        //}
+        classLabelPanel.add(creator.createTextBox(window, "Percentage of Grade", 80, 50));
         window.add(classLabelPanel);
         creator.windowFix(window);
     }
