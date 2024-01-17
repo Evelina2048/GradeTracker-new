@@ -27,7 +27,7 @@ public class StudentStatCollect extends JFrame {
     private JButton newTypeButton;
     private Set set;
     private JPanel eastPanel;
-    //private JPanel classLabelPanel = new JPanel(new GridLayout(4,4));
+    private JPanel classContainerPanel = new JPanel(new GridLayout(4,4));
     private JPanel classLabelPanel = new JPanel(new FlowLayout(FlowLayout.LEFT));
     private int index = 0;
     private int typeNumber = 0;
@@ -144,7 +144,8 @@ public class StudentStatCollect extends JFrame {
         percTextBox.setPreferredSize(new Dimension(100,50));
         percentagePanel.add(percTextBox);
         classLabelPanel.add(percentagePanel, BorderLayout.CENTER);
-        window.add(classLabelPanel);
+        classContainerPanel.add(classLabelPanel);
+        window.add(classContainerPanel);
         creator.windowFix(window);
     }
 
