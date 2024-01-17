@@ -27,10 +27,8 @@ public class StudentStatCollect extends JFrame {
     private JButton newTypeButton;
     private Set set;
     private JPanel eastPanel;
-    //private JPanel classContainerPanel = new JPanel(new GridLayout(4,4));
-    private JPanel classContainerContainerPanel = new JPanel(new FlowLayout(FlowLayout.LEFT));
-    private JPanel classContainerPanel = new JPanel(new FlowLayout(FlowLayout.LEFT));
-    private JPanel classLabelPanel = new JPanel(new GridLayout(0,6,10,10));
+    //private JPanel classLabelPanel = new JPanel(new GridLayout(4,4));
+    private JPanel classLabelPanel = new JPanel(new FlowLayout(FlowLayout.LEFT));
     private int index = 0;
     private int typeNumber = 0;
 
@@ -47,7 +45,6 @@ public class StudentStatCollect extends JFrame {
     }
 
     public void studentStatCollectLaunch(JFrame window) {
-        classLabelPanel.setPreferredSize(new Dimension (1000,50));
         System.out.println("in student classes");
         window.setTitle("StudentStatCollect");
         window.setPreferredSize(new Dimension(1000, 1000));
@@ -89,27 +86,23 @@ public class StudentStatCollect extends JFrame {
     }
 
    private void createNewTypeButton() {
-    newTypeButton = new JButton("New Type");
-    newTypeButton.setPreferredSize(new Dimension(100, 50));
-    eastPanel = new JPanel(new BorderLayout());
-    eastPanel.setPreferredSize(new Dimension(100,30));
-    eastPanel.setBackground(Color.PINK);
-    eastPanel.add(newTypeButton, BorderLayout.EAST);
-    newTypeButton.addActionListener(new ActionListener() {
-     public void actionPerformed(ActionEvent e) {
-        //typeNumber++;
-        //classLabelPanel.add(creator.createTextBox(window, "Grade Type"+typeNumber, 50, 50));
-        //classLabelPanel.add(creator.createTextBox(window, "Percentage of Grade", 80, 50));
-     }
+       newTypeButton = new JButton("New Type");
+       newTypeButton.setPreferredSize(new Dimension(80, 50));
+       eastPanel = new JPanel(new FlowLayout(FlowLayout.RIGHT));
+       eastPanel.setBackground(Color.PINK);
+       eastPanel.add(newTypeButton);
+       newTypeButton.addActionListener(new ActionListener() {
+        public void actionPerformed(ActionEvent e) {
+            typeNumber++;
+            classLabelPanel.add(creator.createTextBox(window, "Grade Type"+typeNumber, 50, 50));
+            classLabelPanel.add(creator.createTextBox(window, "Percentage of Grade", 80, 50));
+        }
     });
-    JPanel northPanel = new JPanel(new BorderLayout());
-    northPanel.add(eastPanel, BorderLayout.SOUTH);
-    northPanel.setPreferredSize(new Dimension(87,30));
- 
-    window.add(classLabelPanel);
-    window.add(northPanel);
-    //creator.windowFix();
-    creator.windowFix(window);
+    
+       window.add(classLabelPanel);
+       window.add(eastPanel,BorderLayout.EAST);
+       //creator.windowFix();
+       creator.windowFix(window);
    }
 
     // For i in classes, give classes : class1 
@@ -119,13 +112,14 @@ public class StudentStatCollect extends JFrame {
 
     //read classes array, first five classes
     private void DisplayClasses() {
+        //JTextField credits = creator.createTextBox(window, "Credits (optional)", 50, 50);
         String filePath = "/Users/evy/Documents/GradeTracker-new/src/main/view/UserInfo/StudentInfo/" + set.getUsername() +"/class"+ ".txt";
         ArrayList<String> classList = set.getClassList();
         //will be updated later
 
         //for (String className : classList) {
         readClass(classList);
-        classLabelPanel.add(creator.createTextBox(window, "Credits (optional)", 50, 50));
+        //classLabelPanel.add(creator.createTextBox(window, "Credits (optional)", 50, 50));
         index++;
         //}
         //index++;
@@ -133,28 +127,12 @@ public class StudentStatCollect extends JFrame {
 
     private void readClass(ArrayList<String> classList) { 
         JLabel classLabel = new JLabel(classList.get(index));
-        
-        JPanel classNamePanel = new JPanel(new FlowLayout(FlowLayout.LEFT, 5, 5));
-        classNamePanel.setBackground(Color.green);
-        classNamePanel.setPreferredSize(new Dimension(10,10));
-        classNamePanel.add(classLabel);
-        //JPanel percentagePanel = new JPanel(new FlowLayout(FlowLayout.LEFT));
-        JPanel percentagePanel = new JPanel(new BorderLayout());
-        JPanel gradeTypePanel = new JPanel(new BorderLayout());
-        gradeTypePanel.setPreferredSize(new Dimension(80,50));
-        percentagePanel.setPreferredSize(new Dimension(160,50));
-        classLabelPanel.add(classNamePanel);////////////
+        //JTextField gradeType = creator.createTextBox(window, "Grade Type"+typeNumber, 50, 50);
+        //JTextField gradePercentage = creator.createTextBox(window, "Percentage of Grade", 80, 50);
+        classLabelPanel.add(classLabel);
         typeNumber++;
-        JTextField gradeTextBox = creator.createTextBox(window, "Grade Type"+typeNumber, 50, 50); 
-        gradeTypePanel.add(gradeTextBox);
-        classLabelPanel.add(gradeTypePanel);
-        JTextField percTextBox = creator.createTextBox(window, "Percentage of Grade", 80, 50);
-        percTextBox.setPreferredSize(new Dimension(100,50));
-        percentagePanel.add(percTextBox);
-        classLabelPanel.add(percentagePanel, BorderLayout.CENTER);
-        classContainerPanel.add(classLabelPanel);
-        classContainerContainerPanel.add(classContainerPanel);
-        window.add(classContainerContainerPanel);
+        //classLabelPanel.add(creator.createTextBox(window, "Percentage of Grade", 80, 50));
+        //window.add(classLabelPanel);
         creator.windowFix(window);
     }
 
