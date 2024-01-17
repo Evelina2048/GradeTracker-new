@@ -169,7 +169,7 @@ public class Decorator {
        System.out.println("test2 in decorateTextBix"); 
        JTextField textField = new JTextField(10);
        System.out.println("test3 (should be false) "+ (textField == null));
-       textField.setPreferredSize(new Dimension(textField.getPreferredSize().width, 50)); // Set the height to 50 pixels
+       textField.setPreferredSize(new Dimension(10, 50)); // Set the height to 50 pixels
        textField.setFont(new Font("Roboto", Font.PLAIN, 14));
        textField.setForeground(Color.gray);
        textField.setBorder(BorderFactory.createLineBorder(Color.gray, 2));

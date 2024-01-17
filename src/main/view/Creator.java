@@ -275,7 +275,7 @@ public class Creator {
             
             textFieldPanel.add(textField); 
             
-            textField.setPreferredSize(new Dimension(width, height)); //50,50
+            textField.setPreferredSize(new Dimension(10, 10)); //width height
             textFieldContainer.add(textFieldPanel); //
             textFieldContainer.setVisible(true);
             window.add(textFieldContainer, BorderLayout.NORTH);

@@ -25,9 +25,9 @@ public class StudentStatCollect extends JFrame {
     private JPanel backNextButtonsPanel;
     private JButton newTypeButton;
     private Set set;
-    private JPanel classLabelPanel;
+    private JPanel eastPanel;
     //private JPanel classLabelPanel = new JPanel(new GridLayout(4,4));
-    //private JPanel classLabelPanel = new JPanel(new FlowLayout(FlowLayout.LEFT));
+    private JPanel classLabelPanel = new JPanel(new FlowLayout(FlowLayout.LEFT));
     private int index = 0;
     private int typeNumber = 0;
 
@@ -46,7 +46,7 @@ public class StudentStatCollect extends JFrame {
     public void studentStatCollectLaunch(JFrame window) {
         System.out.println("in student classes");
         window.setTitle("StudentStatCollect");
-        window.setPreferredSize(new Dimension(1000, 1000));
+        window.setPreferredSize(new Dimension(10, 1000));
     }
 
     public void buttonSetUpAction(JFrame main, NewUser newUser, String studentOrTeacher, String existingOrNew) {
@@ -82,29 +82,25 @@ public class StudentStatCollect extends JFrame {
         });
         backNextButtonsPanel = creator.makeBackNextButtonsPanel(backButtonPanel, saveButtonPanel, nextButtonPanel);
         window.add(backNextButtonsPanel, BorderLayout.SOUTH);
-        creator.windowFix(window);
     }
 
    private void createNewTypeButton() {
        newTypeButton = new JButton("New Type");
        newTypeButton.setPreferredSize(new Dimension(80, 50));
-       JPanel newTypePanel = new JPanel(new BorderLayout());
-       JPanel northPanel = new JPanel(new BorderLayout());
-       newTypePanel.add(newTypeButton, BorderLayout.EAST);
-       northPanel.add(newTypePanel, BorderLayout.NORTH);
-       newTypePanel.setBackground(Color.PINK);
-
-       JPanel textBoxPanel = new JPanel();
-       
-        newTypeButton.addActionListener(new ActionListener() {
+       eastPanel = new JPanel();
+       eastPanel.setBackground(Color.PINK);
+       eastPanel.add(newTypeButton);
+       newTypeButton.addActionListener(new ActionListener() {
         public void actionPerformed(ActionEvent e) {
             typeNumber++;
-            textBoxPanel.add(creator.createTextBox(window, "Grade Type"+typeNumber, 50, 50));
-            textBoxPanel.add(creator.createTextBox(window, "Percentage of Grade", 80, 50));
-            window.add(textBoxPanel);
+            classLabelPanel.add(creator.createTextBox(window, "Grade Type"+typeNumber, 10, 50));
+            classLabelPanel.add(creator.createTextBox(window, "Percentage of Grade", 10, 50));
         }
     });
-       window.add(northPanel);
+    
+       window.add(classLabelPanel);
+       window.add(eastPanel,BorderLayout.EAST);
+       //creator.windowFix();
        creator.windowFix(window);
    }
 
@@ -122,18 +118,20 @@ public class StudentStatCollect extends JFrame {
         //for (String className : classList) {
         readClass(classList);
         classLabelPanel.add(creator.createTextBox(window, "Credits (optional)", 50, 50));
+        classLabelPanel.setBackground(Color.yellow);
         index++;
-        creator.windowFix(window);
     }
 
     private void readClass(ArrayList<String> classList) { 
         JLabel classLabel = new JLabel(classList.get(index));
-        classLabelPanel = new JPanel();
-        classLabelPanel.setBackground(Color.ORANGE);
+        JPanel percentagePanel = new JPanel();
         classLabelPanel.add(classLabel);
         typeNumber++;
         classLabelPanel.add(creator.createTextBox(window, "Grade Type"+typeNumber, 50, 50));
-        classLabelPanel.add(creator.createTextBox(window, "Percentage of Grade", 80, 50));
+        percentagePanel.add(creator.createTextBox(window, "Percentage of Grade", 10, 10));
+        percentagePanel.setPreferredSize(new Dimension(10,10));
+        classLabelPanel.add(percentagePanel);
+        classLabelPanel.setForeground(Color.RED);
         window.add(classLabelPanel);
         creator.windowFix(window);
     }
@@ -142,7 +140,6 @@ public class StudentStatCollect extends JFrame {
     private void hideWindow() {
         newTypeButton.setVisible(false);
         backNextButtonsPanel.setVisible(false);
-        newTypeButton.setVisible(false);
-        //eastPanel.setVisible(false);
+        eastPanel.setVisible(false);
     }
     }
