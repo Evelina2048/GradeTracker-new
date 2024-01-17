@@ -119,7 +119,7 @@ public class StudentStatCollect extends JFrame {
         JPanel creditTypePanel = new JPanel(new BorderLayout());
         JTextField creditType = creator.createTextBox(window, "Credits (optional)", 50, 50);
         creditTypePanel.add(creditType);
-        creditTypePanel.setPreferredSize(new Dimension(150,50));
+        creditTypePanel.setPreferredSize(new Dimension(130,50));
         northCreditsPanel.add(creditTypePanel, BorderLayout.NORTH);
         ///
         //JTextField credits = creator.createTextBox(window, "Credits (optional)", 50, 50);
@@ -143,14 +143,14 @@ public class StudentStatCollect extends JFrame {
         JPanel gradePercentagePanel = new JPanel(new BorderLayout());
         JTextField gradePercentage = creator.createTextBox(window, "Percentage of Grade", 80, 50);
         gradePercentagePanel.add(gradePercentage);
-        gradePercentagePanel.setPreferredSize(new Dimension(150,50));
+        gradePercentagePanel.setPreferredSize(new Dimension(155,50));
         northGradePercentagePanel.add(gradePercentagePanel, BorderLayout.NORTH);
 
         JPanel northTypePanel = new JPanel(new BorderLayout());
         JPanel gradeTypePanel = new JPanel(new BorderLayout());
         JTextField gradeType = creator.createTextBox(window, "Grade Type"+typeNumber, 50, 50);
         gradeTypePanel.add(gradeType);
-        gradeTypePanel.setPreferredSize(new Dimension(150,50));
+        gradeTypePanel.setPreferredSize(new Dimension( 100,50));
         northTypePanel.add(gradeTypePanel, BorderLayout.NORTH);
 
         // JPanel northTypePanel = new JPanel(new BorderLayout());
@@ -160,9 +160,10 @@ public class StudentStatCollect extends JFrame {
         // gradeTypePanel.setPreferredSize(new Dimension(150,50));
         // northTypePanel.add(gradeTypePanel, BorderLayout.NORTH);
 
+        classLabelPanel.add(northCreditsPanel);
         classLabelPanel.add(northTypePanel);
         classLabelPanel.add(northGradePercentagePanel);
-        classLabelPanel.add(northCreditsPanel);
+        // classLabelPanel.add(northCreditsPanel);
         window.add(classLabelPanel, BorderLayout.WEST);
         typeNumber++;
        
