@@ -97,7 +97,9 @@ public class StudentStatCollect extends JFrame {
         public void actionPerformed(ActionEvent e) {
             typeNumber++;
             //classLabelPanel.add(creator.createTextBox(window, "Grade Type"+typeNumber, 50, 50));
+            gradeTypeBox();
             //classLabelPanel.add(creator.createTextBox(window, "Percentage of Grade", 80, 50));
+            gradePercentageBox();
         }
     });
     
@@ -115,12 +117,7 @@ public class StudentStatCollect extends JFrame {
     //read classes array, first five classes
     private void DisplayClasses() {
         ///
-        northCreditsPanel = new JPanel(new BorderLayout());
-        JPanel creditTypePanel = new JPanel(new BorderLayout());
-        JTextField creditType = creator.createTextBox(window, "Credits (optional)", 50, 50);
-        creditTypePanel.add(creditType);
-        creditTypePanel.setPreferredSize(new Dimension(130,50));
-        northCreditsPanel.add(creditTypePanel, BorderLayout.NORTH);
+        creditTypeBox();
         ///
         //JTextField credits = creator.createTextBox(window, "Credits (optional)", 50, 50);
         String filePath = "/Users/evy/Documents/GradeTracker-new/src/main/view/UserInfo/StudentInfo/" + set.getUsername() +"/class"+ ".txt";
@@ -141,15 +138,8 @@ public class StudentStatCollect extends JFrame {
         classLabelPanel.add(northCreditsPanel);
 
         gradePercentageBox();
+        gradeTypeBox();
 
-        JPanel northTypePanel = new JPanel(new BorderLayout());
-        JPanel gradeTypePanel = new JPanel(new BorderLayout());
-        JTextField gradeType = creator.createTextBox(window, "Grade Type"+typeNumber, 50, 50);
-        gradeTypePanel.add(gradeType);
-        gradeTypePanel.setPreferredSize(new Dimension( 100,50));
-        northTypePanel.add(gradeTypePanel, BorderLayout.NORTH);
-
-        classLabelPanel.add(northTypePanel);
         // classLabelPanel.add(northCreditsPanel);
         window.add(classLabelPanel, BorderLayout.WEST);
         typeNumber++;
@@ -166,6 +156,25 @@ public class StudentStatCollect extends JFrame {
         northGradePercentagePanel.add(gradePercentagePanel, BorderLayout.NORTH);
         classLabelPanel.add(northGradePercentagePanel);
 
+    }
+
+    private void gradeTypeBox() {
+        JPanel northTypePanel = new JPanel(new BorderLayout());
+        JPanel gradeTypePanel = new JPanel(new BorderLayout());
+        JTextField gradeType = creator.createTextBox(window, "Grade Type"+typeNumber, 50, 50);
+        gradeTypePanel.add(gradeType);
+        gradeTypePanel.setPreferredSize(new Dimension( 100,50));
+        northTypePanel.add(gradeTypePanel, BorderLayout.NORTH);
+        classLabelPanel.add(northTypePanel);
+    }
+
+    private void creditTypeBox() {
+        northCreditsPanel = new JPanel(new BorderLayout());
+        JPanel creditTypePanel = new JPanel(new BorderLayout());
+        JTextField creditType = creator.createTextBox(window, "Credits (optional)", 50, 50);
+        creditTypePanel.add(creditType);
+        creditTypePanel.setPreferredSize(new Dimension(130,50));
+        northCreditsPanel.add(creditTypePanel, BorderLayout.NORTH);
     }
 
 
