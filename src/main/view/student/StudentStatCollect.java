@@ -95,9 +95,9 @@ public class StudentStatCollect extends JFrame {
        eastPanel.add(newTypeButton);
        newTypeButton.addActionListener(new ActionListener() {
         public void actionPerformed(ActionEvent e) {
-            // typeNumber++;
-            // classLabelPanel.add(creator.createTextBox(window, "Grade Type"+typeNumber, 50, 50));
-            // classLabelPanel.add(creator.createTextBox(window, "Percentage of Grade", 80, 50));
+            typeNumber++;
+            //classLabelPanel.add(creator.createTextBox(window, "Grade Type"+typeNumber, 50, 50));
+            //classLabelPanel.add(creator.createTextBox(window, "Percentage of Grade", 80, 50));
         }
     });
     
@@ -138,6 +138,7 @@ public class StudentStatCollect extends JFrame {
     private void readClass(ArrayList<String> classList) { 
         JLabel classLabel = new JLabel(classList.get(index));
         classLabelPanel.add(classLabel,BorderLayout.WEST);
+        classLabelPanel.add(northCreditsPanel);
 
         JPanel northGradePercentagePanel = new JPanel(new BorderLayout());
         JPanel gradePercentagePanel = new JPanel(new BorderLayout());
@@ -153,14 +154,6 @@ public class StudentStatCollect extends JFrame {
         gradeTypePanel.setPreferredSize(new Dimension( 100,50));
         northTypePanel.add(gradeTypePanel, BorderLayout.NORTH);
 
-        // JPanel northTypePanel = new JPanel(new BorderLayout());
-        // JPanel gradeTypePanel = new JPanel(new BorderLayout());
-        // JTextField gradeType = creator.createTextBox(window, "Grade Type"+typeNumber, 50, 50);
-        // gradeTypePanel.add(gradeType);
-        // gradeTypePanel.setPreferredSize(new Dimension(150,50));
-        // northTypePanel.add(gradeTypePanel, BorderLayout.NORTH);
-
-        classLabelPanel.add(northCreditsPanel);
         classLabelPanel.add(northTypePanel);
         classLabelPanel.add(northGradePercentagePanel);
         // classLabelPanel.add(northCreditsPanel);
