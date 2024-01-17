@@ -133,12 +133,17 @@ public class StudentStatCollect extends JFrame {
 
     private void readClass(ArrayList<String> classList) { 
         JLabel classLabel = new JLabel(classList.get(index));
+        
+        JPanel classNamePanel = new JPanel(new FlowLayout(FlowLayout.LEFT, 5, 5));
+        classNamePanel.setBackground(Color.green);
+        classNamePanel.setPreferredSize(new Dimension(10,10));
+        classNamePanel.add(classLabel);
         //JPanel percentagePanel = new JPanel(new FlowLayout(FlowLayout.LEFT));
         JPanel percentagePanel = new JPanel(new BorderLayout());
         JPanel gradeTypePanel = new JPanel(new BorderLayout());
-        gradeTypePanel.setPreferredSize(new Dimension(100,50));
+        gradeTypePanel.setPreferredSize(new Dimension(80,50));
         percentagePanel.setPreferredSize(new Dimension(160,50));
-        classLabelPanel.add(classLabel);
+        classLabelPanel.add(classNamePanel);////////////
         typeNumber++;
         JTextField gradeTextBox = creator.createTextBox(window, "Grade Type"+typeNumber, 50, 50); 
         gradeTypePanel.add(gradeTextBox);
