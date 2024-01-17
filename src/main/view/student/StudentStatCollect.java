@@ -86,23 +86,27 @@ public class StudentStatCollect extends JFrame {
     }
 
    private void createNewTypeButton() {
-       newTypeButton = new JButton("New Type");
-       newTypeButton.setPreferredSize(new Dimension(80, 50));
-       eastPanel = new JPanel(new FlowLayout(FlowLayout.RIGHT));
-       eastPanel.setBackground(Color.PINK);
-       eastPanel.add(newTypeButton);
-       newTypeButton.addActionListener(new ActionListener() {
-        public void actionPerformed(ActionEvent e) {
-            typeNumber++;
-            classLabelPanel.add(creator.createTextBox(window, "Grade Type"+typeNumber, 50, 50));
-            classLabelPanel.add(creator.createTextBox(window, "Percentage of Grade", 80, 50));
-        }
+    newTypeButton = new JButton("New Type");
+    newTypeButton.setPreferredSize(new Dimension(100, 50));
+    eastPanel = new JPanel(new BorderLayout());
+    eastPanel.setPreferredSize(new Dimension(100,30));
+    eastPanel.setBackground(Color.PINK);
+    eastPanel.add(newTypeButton, BorderLayout.EAST);
+    newTypeButton.addActionListener(new ActionListener() {
+     public void actionPerformed(ActionEvent e) {
+        //typeNumber++;
+        //classLabelPanel.add(creator.createTextBox(window, "Grade Type"+typeNumber, 50, 50));
+        //classLabelPanel.add(creator.createTextBox(window, "Percentage of Grade", 80, 50));
+     }
     });
-    
-       window.add(classLabelPanel);
-       window.add(eastPanel,BorderLayout.EAST);
-       //creator.windowFix();
-       creator.windowFix(window);
+    JPanel northPanel = new JPanel(new BorderLayout());
+    northPanel.add(eastPanel, BorderLayout.SOUTH);
+    northPanel.setPreferredSize(new Dimension(87,30));
+ 
+    window.add(classLabelPanel);
+    window.add(northPanel);
+    //creator.windowFix();
+    creator.windowFix(window);
    }
 
     // For i in classes, give classes : class1 
