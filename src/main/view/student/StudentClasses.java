@@ -30,9 +30,6 @@ public class StudentClasses extends JFrame {
     private JButton saveButton;
     private int textboxCounter = 0;
     JPanel southContainer = new JPanel(new BorderLayout());
-    //JPanel westPanel = new JPanel(new BorderLayout());
-    //JPanel westPanel = new JPanel(new FlowLayout(FlowLayout.LEFT));`
-    //JPanel westPanel = new JPanel(new FlowLayout(FlowLayout.LEFT));
     AtomicBoolean textFieldEmptied = new AtomicBoolean(false);;
     JButton newClassButton;
     JButton deleteClassButton;
