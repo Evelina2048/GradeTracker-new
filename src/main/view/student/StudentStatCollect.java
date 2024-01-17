@@ -140,12 +140,7 @@ public class StudentStatCollect extends JFrame {
         classLabelPanel.add(classLabel,BorderLayout.WEST);
         classLabelPanel.add(northCreditsPanel);
 
-        JPanel northGradePercentagePanel = new JPanel(new BorderLayout());
-        JPanel gradePercentagePanel = new JPanel(new BorderLayout());
-        JTextField gradePercentage = creator.createTextBox(window, "Percentage of Grade", 80, 50);
-        gradePercentagePanel.add(gradePercentage);
-        gradePercentagePanel.setPreferredSize(new Dimension(155,50));
-        northGradePercentagePanel.add(gradePercentagePanel, BorderLayout.NORTH);
+        gradePercentageBox();
 
         JPanel northTypePanel = new JPanel(new BorderLayout());
         JPanel gradeTypePanel = new JPanel(new BorderLayout());
@@ -155,13 +150,22 @@ public class StudentStatCollect extends JFrame {
         northTypePanel.add(gradeTypePanel, BorderLayout.NORTH);
 
         classLabelPanel.add(northTypePanel);
-        classLabelPanel.add(northGradePercentagePanel);
         // classLabelPanel.add(northCreditsPanel);
         window.add(classLabelPanel, BorderLayout.WEST);
         typeNumber++;
        
         //window.add(classLabelPanel);
         creator.windowFix(window);
+    }
+    private void gradePercentageBox() {
+        JPanel northGradePercentagePanel = new JPanel(new BorderLayout());
+        JPanel gradePercentagePanel = new JPanel(new BorderLayout());
+        JTextField gradePercentage = creator.createTextBox(window, "Percentage of Grade", 80, 50);
+        gradePercentagePanel.add(gradePercentage);
+        gradePercentagePanel.setPreferredSize(new Dimension(155,50));
+        northGradePercentagePanel.add(gradePercentagePanel, BorderLayout.NORTH);
+        classLabelPanel.add(northGradePercentagePanel);
+
     }
 
 
