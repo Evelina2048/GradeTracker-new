@@ -113,7 +113,7 @@ public class StudentClasses extends JFrame {
     //create textbox "Class" placeholder
     private void createNewClassButton() {
         newClassButton = new JButton("New Class");
-        newClassButton.setPreferredSize(new Dimension(10, 50));
+        newClassButton.setPreferredSize(new Dimension(80, 50));
         newClassButton.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent e) {
                 creator.createTextBox(window, "Enter Class Name", 50, 50);
@@ -128,7 +128,7 @@ public class StudentClasses extends JFrame {
 
     private void deleteClassButton() {
         deleteClassButton = new JButton("Delete Class");
-        deleteClassButton.setPreferredSize(new Dimension(10, 50));
+        deleteClassButton.setPreferredSize(new Dimension(100, 50));
         deleteClassButton.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent e) {
                 System.out.println("deleteClassButtonPressed");

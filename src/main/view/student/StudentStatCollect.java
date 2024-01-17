@@ -7,6 +7,7 @@ import java.awt.GridLayout;
 import java.awt.Color;
 import java.awt.Dimension;
 import javax.swing.JPanel;
+import javax.swing.JTextField;
 import javax.swing.JLabel;
 
 import java.awt.event.ActionListener;
@@ -46,7 +47,7 @@ public class StudentStatCollect extends JFrame {
     public void studentStatCollectLaunch(JFrame window) {
         System.out.println("in student classes");
         window.setTitle("StudentStatCollect");
-        window.setPreferredSize(new Dimension(10, 1000));
+        window.setPreferredSize(new Dimension(1000, 1000));
     }
 
     public void buttonSetUpAction(JFrame main, NewUser newUser, String studentOrTeacher, String existingOrNew) {
@@ -87,14 +88,14 @@ public class StudentStatCollect extends JFrame {
    private void createNewTypeButton() {
        newTypeButton = new JButton("New Type");
        newTypeButton.setPreferredSize(new Dimension(80, 50));
-       eastPanel = new JPanel();
+       eastPanel = new JPanel(new FlowLayout(FlowLayout.RIGHT));
        eastPanel.setBackground(Color.PINK);
        eastPanel.add(newTypeButton);
        newTypeButton.addActionListener(new ActionListener() {
         public void actionPerformed(ActionEvent e) {
             typeNumber++;
-            classLabelPanel.add(creator.createTextBox(window, "Grade Type"+typeNumber, 10, 50));
-            classLabelPanel.add(creator.createTextBox(window, "Percentage of Grade", 10, 50));
+            classLabelPanel.add(creator.createTextBox(window, "Grade Type"+typeNumber, 50, 50));
+            classLabelPanel.add(creator.createTextBox(window, "Percentage of Grade", 80, 50));
         }
     });
     
@@ -118,20 +119,23 @@ public class StudentStatCollect extends JFrame {
         //for (String className : classList) {
         readClass(classList);
         classLabelPanel.add(creator.createTextBox(window, "Credits (optional)", 50, 50));
-        classLabelPanel.setBackground(Color.yellow);
         index++;
+        //}
+        //index++;
     }
 
     private void readClass(ArrayList<String> classList) { 
         JLabel classLabel = new JLabel(classList.get(index));
-        JPanel percentagePanel = new JPanel();
+        //JPanel percentagePanel = new JPanel(new FlowLayout(FlowLayout.LEFT));
+        JPanel percentagePanel = new JPanel(new BorderLayout());
+        percentagePanel.setPreferredSize(new Dimension(300,70));
         classLabelPanel.add(classLabel);
         typeNumber++;
         classLabelPanel.add(creator.createTextBox(window, "Grade Type"+typeNumber, 50, 50));
-        percentagePanel.add(creator.createTextBox(window, "Percentage of Grade", 10, 10));
-        percentagePanel.setPreferredSize(new Dimension(10,10));
-        classLabelPanel.add(percentagePanel);
-        classLabelPanel.setForeground(Color.RED);
+        JTextField percTextBox = creator.createTextBox(window, "Percentage of Grade", 80, 50);
+        percTextBox.setPreferredSize(new Dimension(300,70));
+        percentagePanel.add(percTextBox);
+        classLabelPanel.add(percentagePanel, BorderLayout.CENTER);
         window.add(classLabelPanel);
         creator.windowFix(window);
     }
@@ -140,6 +144,7 @@ public class StudentStatCollect extends JFrame {
     private void hideWindow() {
         newTypeButton.setVisible(false);
         backNextButtonsPanel.setVisible(false);
+        newTypeButton.setVisible(false);
         eastPanel.setVisible(false);
     }
     }
