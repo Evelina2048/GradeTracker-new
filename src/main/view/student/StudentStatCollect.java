@@ -93,9 +93,9 @@ public class StudentStatCollect extends JFrame {
        eastPanel.add(newTypeButton);
        newTypeButton.addActionListener(new ActionListener() {
         public void actionPerformed(ActionEvent e) {
-            typeNumber++;
-            classLabelPanel.add(creator.createTextBox(window, "Grade Type"+typeNumber, 50, 50));
-            classLabelPanel.add(creator.createTextBox(window, "Percentage of Grade", 80, 50));
+            // typeNumber++;
+            // classLabelPanel.add(creator.createTextBox(window, "Grade Type"+typeNumber, 50, 50));
+            // classLabelPanel.add(creator.createTextBox(window, "Percentage of Grade", 80, 50));
         }
     });
     
