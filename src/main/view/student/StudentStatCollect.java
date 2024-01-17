@@ -28,7 +28,7 @@ public class StudentStatCollect extends JFrame {
     private Set set;
     private JPanel eastPanel;
     //private JPanel classContainerPanel = new JPanel(new GridLayout(4,4));
-    private JPanel classContainerContainerPanel = new JPanel();
+    private JPanel classContainerContainerPanel = new JPanel(new FlowLayout(FlowLayout.LEFT));
     private JPanel classContainerPanel = new JPanel(new FlowLayout(FlowLayout.LEFT));
     private JPanel classLabelPanel = new JPanel(new GridLayout(0,6,10,10));
     private int index = 0;
@@ -47,7 +47,7 @@ public class StudentStatCollect extends JFrame {
     }
 
     public void studentStatCollectLaunch(JFrame window) {
-        classLabelPanel.setPreferredSize(new Dimension (100,50));
+        classLabelPanel.setPreferredSize(new Dimension (1000,50));
         System.out.println("in student classes");
         window.setTitle("StudentStatCollect");
         window.setPreferredSize(new Dimension(1000, 1000));
