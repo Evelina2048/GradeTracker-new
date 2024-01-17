@@ -32,6 +32,7 @@ public class StudentStatCollect extends JFrame {
     private JPanel classLabelPanel = new JPanel(new FlowLayout(FlowLayout.LEFT));
     private int index = 0;
     private int typeNumber = 0;
+    private JPanel northCreditsPanel;
 
     public StudentStatCollect(JFrame main,NewUser newUser, String studentOrTeacher, String existingOrNew, Set set) {
         this.window = main;
@@ -113,6 +114,14 @@ public class StudentStatCollect extends JFrame {
 
     //read classes array, first five classes
     private void DisplayClasses() {
+        ///
+        northCreditsPanel = new JPanel(new BorderLayout());
+        JPanel creditTypePanel = new JPanel(new BorderLayout());
+        JTextField creditType = creator.createTextBox(window, "Credits (optional)", 50, 50);
+        creditTypePanel.add(creditType);
+        creditTypePanel.setPreferredSize(new Dimension(150,50));
+        northCreditsPanel.add(creditTypePanel, BorderLayout.NORTH);
+        ///
         //JTextField credits = creator.createTextBox(window, "Credits (optional)", 50, 50);
         String filePath = "/Users/evy/Documents/GradeTracker-new/src/main/view/UserInfo/StudentInfo/" + set.getUsername() +"/class"+ ".txt";
         ArrayList<String> classList = set.getClassList();
@@ -144,11 +153,19 @@ public class StudentStatCollect extends JFrame {
         gradeTypePanel.setPreferredSize(new Dimension(150,50));
         northTypePanel.add(gradeTypePanel, BorderLayout.NORTH);
 
+        // JPanel northTypePanel = new JPanel(new BorderLayout());
+        // JPanel gradeTypePanel = new JPanel(new BorderLayout());
+        // JTextField gradeType = creator.createTextBox(window, "Grade Type"+typeNumber, 50, 50);
+        // gradeTypePanel.add(gradeType);
+        // gradeTypePanel.setPreferredSize(new Dimension(150,50));
+        // northTypePanel.add(gradeTypePanel, BorderLayout.NORTH);
+
         classLabelPanel.add(northTypePanel);
         classLabelPanel.add(northGradePercentagePanel);
+        classLabelPanel.add(northCreditsPanel);
         window.add(classLabelPanel, BorderLayout.WEST);
         typeNumber++;
-        //classLabelPanel.add(creator.createTextBox(window, "Percentage of Grade", 80, 50));
+       
         //window.add(classLabelPanel);
         creator.windowFix(window);
     }
