@@ -128,6 +128,7 @@ public class StudentStatCollect extends JFrame {
 
     private void readClass(ArrayList<String> classList) { 
         JLabel classLabel = new JLabel(classList.get(index));
+        classLabelPanel.add(classLabel,BorderLayout.WEST);
         //JTextField gradeType = creator.createTextBox(window, "Grade Type"+typeNumber, 50, 50);
         JPanel northGradePercentagePanel = new JPanel(new BorderLayout());
         JPanel gradePercentagePanel = new JPanel(new BorderLayout());
@@ -135,9 +136,9 @@ public class StudentStatCollect extends JFrame {
         gradePercentagePanel.add(gradePercentage);
         gradePercentagePanel.setPreferredSize(new Dimension(150,50));
         northGradePercentagePanel.add(gradePercentagePanel, BorderLayout.NORTH);
-        window.add(northGradePercentagePanel, BorderLayout.WEST);
 
-        classLabelPanel.add(classLabel,BorderLayout.CENTER);
+        classLabelPanel.add(northGradePercentagePanel);
+        window.add(classLabelPanel, BorderLayout.WEST);
         typeNumber++;
         //classLabelPanel.add(creator.createTextBox(window, "Percentage of Grade", 80, 50));
         //window.add(classLabelPanel);
