@@ -8,6 +8,7 @@ import java.awt.Color;
 import java.awt.Dimension;
 import javax.swing.JPanel;
 import javax.swing.JTextField;
+import javax.swing.border.Border;
 import javax.swing.JLabel;
 
 import java.awt.event.ActionListener;
@@ -128,8 +129,15 @@ public class StudentStatCollect extends JFrame {
     private void readClass(ArrayList<String> classList) { 
         JLabel classLabel = new JLabel(classList.get(index));
         //JTextField gradeType = creator.createTextBox(window, "Grade Type"+typeNumber, 50, 50);
-        //JTextField gradePercentage = creator.createTextBox(window, "Percentage of Grade", 80, 50);
-        classLabelPanel.add(classLabel);
+        JPanel northGradePercentagePanel = new JPanel(new BorderLayout());
+        JPanel gradePercentagePanel = new JPanel(new BorderLayout());
+        JTextField gradePercentage = creator.createTextBox(window, "Percentage of Grade", 80, 50);
+        gradePercentagePanel.add(gradePercentage);
+        gradePercentagePanel.setPreferredSize(new Dimension(150,50));
+        northGradePercentagePanel.add(gradePercentagePanel, BorderLayout.NORTH);
+        window.add(northGradePercentagePanel, BorderLayout.WEST);
+
+        classLabelPanel.add(classLabel,BorderLayout.CENTER);
         typeNumber++;
         //classLabelPanel.add(creator.createTextBox(window, "Percentage of Grade", 80, 50));
         //window.add(classLabelPanel);
