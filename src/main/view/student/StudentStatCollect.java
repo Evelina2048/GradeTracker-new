@@ -50,7 +50,7 @@ public class StudentStatCollect extends JFrame {
     public void studentStatCollectLaunch(JFrame window) {
         System.out.println("in student classes");
         window.setTitle("StudentStatCollect");
-        window.setPreferredSize(new Dimension(1000, 1000));
+        ///window.setPreferredSize(new Dimension(1000, 1000));
     }
 
     public void buttonSetUpAction(JFrame main, NewUser newUser, String studentOrTeacher, String existingOrNew) {
@@ -107,7 +107,7 @@ public class StudentStatCollect extends JFrame {
        classLabelPanelContainer.add(classLabelPanel);
        newTypePanel.add(newTypeButton, BorderLayout.NORTH);
        newTypePanel.setBackground(Color.PINK);
-       //newTypePanelContainer.add(newTypePanel, BorderLayout.NORTH);
+       newTypePanelContainer.add(newTypePanel, BorderLayout.NORTH);
        window.add(newTypePanel, BorderLayout.EAST);
        window.add(classLabelPanelContainer);
        creator.windowFix(window);
@@ -137,6 +137,7 @@ public class StudentStatCollect extends JFrame {
     }
 
     private void readClass(ArrayList<String> classList) { 
+        JPanel northPanel = new JPanel(new BorderLayout());
         JLabel classLabel = new JLabel(classList.get(index));
         classLabelPanel.add(classLabel);
         classLabelPanel.add(northCreditsPanel);
@@ -149,8 +150,9 @@ public class StudentStatCollect extends JFrame {
         container.add(classLabelPanel, BorderLayout.WEST);
         
         classLabelPanelContainer.add(classLabelPanel);
-
-        window.add(classLabelPanelContainer, BorderLayout.NORTH);
+        classLabelPanelContainer.setPreferredSize(new Dimension(10,window.getHeight()));
+        northPanel.add(classLabelPanelContainer, BorderLayout.WEST);
+        window.add(northPanel, BorderLayout.NORTH);
         typeNumber++;
        
         //window.add(classLabelPanel);
