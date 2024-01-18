@@ -28,8 +28,7 @@ public class StudentStatCollect extends JFrame {
     private JButton newTypeButton;
     private Set set;
     private JPanel container = new JPanel(new FlowLayout(FlowLayout.LEFT));
-    private JPanel classLabelPanelContainer = new JPanel(new BorderLayout());
-    private JPanel classLabelPanel = new JPanel(new GridLayout(0,4,5,5));
+    private JPanel classLabelPanel = new JPanel(new GridLayout(0,5,5,5));
     //private JPanel classLabelPanel = new JPanel(new FlowLayout(FlowLayout.LEFT));
     private int index = 0;
     private int typeNumber = 0;
@@ -50,7 +49,7 @@ public class StudentStatCollect extends JFrame {
     public void studentStatCollectLaunch(JFrame window) {
         System.out.println("in student classes");
         window.setTitle("StudentStatCollect");
-        ///window.setPreferredSize(new Dimension(1000, 1000));
+        window.setPreferredSize(new Dimension(1000, 1000));
     }
 
     public void buttonSetUpAction(JFrame main, NewUser newUser, String studentOrTeacher, String existingOrNew) {
@@ -91,10 +90,10 @@ public class StudentStatCollect extends JFrame {
    private void createNewTypeButton() {
        newTypeButton = new JButton("New Type");
        newTypeButton.setPreferredSize(new Dimension(80, 50));
-       JPanel newTypePanel = new JPanel(new BorderLayout());
-       //newTypePanel.setPreferredSize(new Dimension(80,10));
-       JPanel newTypePanelContainer = new JPanel(new BorderLayout());
-
+       JPanel newTypeButtonPanel = new JPanel();
+       JPanel northNewTypeButtonPanel = new JPanel(new BorderLayout());
+       newTypeButtonPanel.add(newTypeButton);
+       northNewTypeButtonPanel.add(newTypeButtonPanel,BorderLayout.NORTH);
        newTypeButton.addActionListener(new ActionListener() {
         public void actionPerformed(ActionEvent e) {
             typeNumber++;
@@ -102,14 +101,8 @@ public class StudentStatCollect extends JFrame {
             gradePercentageBox();
         }
     });
-       classLabelPanel.setBackground(Color.red);
-       //classLabelPanel.setPreferredSize(new Dimension(200,200));
-       classLabelPanelContainer.add(classLabelPanel);
-       newTypePanel.add(newTypeButton, BorderLayout.NORTH);
-       newTypePanel.setBackground(Color.PINK);
-       newTypePanelContainer.add(newTypePanel, BorderLayout.NORTH);
-       window.add(newTypePanel, BorderLayout.EAST);
-       window.add(classLabelPanelContainer);
+       window.add(northNewTypeButtonPanel, BorderLayout.EAST);
+       window.add(classLabelPanel, BorderLayout.WEST);
        creator.windowFix(window);
    }
 
@@ -137,7 +130,6 @@ public class StudentStatCollect extends JFrame {
     }
 
     private void readClass(ArrayList<String> classList) { 
-        JPanel northPanel = new JPanel(new BorderLayout());
         JLabel classLabel = new JLabel(classList.get(index));
         classLabelPanel.add(classLabel);
         classLabelPanel.add(northCreditsPanel);
@@ -148,11 +140,7 @@ public class StudentStatCollect extends JFrame {
 
         classLabelPanel.add(northCreditsPanel);
         container.add(classLabelPanel, BorderLayout.WEST);
-        
-        classLabelPanelContainer.add(classLabelPanel);
-        classLabelPanelContainer.setPreferredSize(new Dimension(10,window.getHeight()));
-        northPanel.add(classLabelPanelContainer, BorderLayout.WEST);
-        window.add(northPanel, BorderLayout.NORTH);
+        window.add(container);
         typeNumber++;
        
         //window.add(classLabelPanel);
