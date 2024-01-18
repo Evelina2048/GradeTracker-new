@@ -92,7 +92,7 @@ public class StudentStatCollect extends JFrame {
        newTypeButton = new JButton("New Type");
        newTypeButton.setPreferredSize(new Dimension(80, 50));
        JPanel newTypePanel = new JPanel(new BorderLayout());
-       newTypePanel.setPreferredSize(new Dimension(80,10));
+       //newTypePanel.setPreferredSize(new Dimension(80,10));
        JPanel newTypePanelContainer = new JPanel(new BorderLayout());
 
        newTypeButton.addActionListener(new ActionListener() {
@@ -103,9 +103,11 @@ public class StudentStatCollect extends JFrame {
         }
     });
        classLabelPanel.setBackground(Color.red);
+       //classLabelPanel.setPreferredSize(new Dimension(200,200));
        classLabelPanelContainer.add(classLabelPanel);
        newTypePanel.add(newTypeButton, BorderLayout.NORTH);
        newTypePanel.setBackground(Color.PINK);
+       //newTypePanelContainer.add(newTypePanel, BorderLayout.NORTH);
        window.add(newTypePanel, BorderLayout.EAST);
        window.add(classLabelPanelContainer);
        creator.windowFix(window);
@@ -148,7 +150,7 @@ public class StudentStatCollect extends JFrame {
         
         classLabelPanelContainer.add(classLabelPanel);
 
-        window.add(container);
+        window.add(classLabelPanelContainer, BorderLayout.NORTH);
         typeNumber++;
        
         //window.add(classLabelPanel);
