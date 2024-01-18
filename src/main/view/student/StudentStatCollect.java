@@ -96,9 +96,7 @@ public class StudentStatCollect extends JFrame {
        newTypeButton.addActionListener(new ActionListener() {
         public void actionPerformed(ActionEvent e) {
             typeNumber++;
-            //classLabelPanel.add(creator.createTextBox(window, "Grade Type"+typeNumber, 50, 50));
             gradeTypeBox();
-            //classLabelPanel.add(creator.createTextBox(window, "Percentage of Grade", 80, 50));
             gradePercentageBox();
         }
     });
@@ -155,6 +153,7 @@ public class StudentStatCollect extends JFrame {
         gradePercentagePanel.setPreferredSize(new Dimension(155,50));
         northGradePercentagePanel.add(gradePercentagePanel, BorderLayout.NORTH);
         classLabelPanel.add(northGradePercentagePanel);
+        creator.windowFix(window);
 
     }
 
@@ -166,6 +165,7 @@ public class StudentStatCollect extends JFrame {
         gradeTypePanel.setPreferredSize(new Dimension( 100,50));
         northTypePanel.add(gradeTypePanel, BorderLayout.NORTH);
         classLabelPanel.add(northTypePanel);
+        creator.windowFix(window);
     }
 
     private void creditTypeBox() {
