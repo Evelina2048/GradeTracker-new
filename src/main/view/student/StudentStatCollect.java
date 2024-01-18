@@ -91,6 +91,12 @@ public class StudentStatCollect extends JFrame {
    private void createNewTypeButton() {
        newTypeButton = new JButton("New Type");
        newTypeButton.setPreferredSize(new Dimension(80, 50));
+       JPanel newTypeButtonPanel = new JPanel();
+       newTypeButtonPanel.add(newTypeButton);
+       JPanel northNewTypePanel = new JPanel(new BorderLayout());
+
+       northNewTypePanel.add(newTypeButtonPanel,BorderLayout.EAST);
+       window.add(northNewTypePanel, BorderLayout.NORTH);
 
        newTypeButton.addActionListener(new ActionListener() {
         public void actionPerformed(ActionEvent e) {
@@ -130,11 +136,6 @@ public class StudentStatCollect extends JFrame {
 
         gradePercentageBox();
         gradeTypeBox();
-
-        classLabelPanel.add(northCreditsPanel);
-        container.add(classLabelPanel, BorderLayout.WEST);
-        
-        classLabelPanelContainer.add(classLabelPanel);
 
         typeNumber++;
        
