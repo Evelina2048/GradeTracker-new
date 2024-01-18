@@ -28,6 +28,7 @@ public class StudentStatCollect extends JFrame {
     private JButton newTypeButton;
     private Set set;
     private JPanel container = new JPanel(new FlowLayout(FlowLayout.LEFT));
+    private JPanel classLabelPanelContainer = new JPanel(new BorderLayout());
     private JPanel classLabelPanel = new JPanel(new GridLayout(0,4,5,5));
     //private JPanel classLabelPanel = new JPanel(new FlowLayout(FlowLayout.LEFT));
     private int index = 0;
@@ -90,6 +91,10 @@ public class StudentStatCollect extends JFrame {
    private void createNewTypeButton() {
        newTypeButton = new JButton("New Type");
        newTypeButton.setPreferredSize(new Dimension(80, 50));
+       JPanel newTypePanel = new JPanel(new BorderLayout());
+       newTypePanel.setPreferredSize(new Dimension(80,10));
+       JPanel newTypePanelContainer = new JPanel(new BorderLayout());
+
        newTypeButton.addActionListener(new ActionListener() {
         public void actionPerformed(ActionEvent e) {
             typeNumber++;
@@ -97,7 +102,12 @@ public class StudentStatCollect extends JFrame {
             gradePercentageBox();
         }
     });
-       window.add(classLabelPanel);
+       classLabelPanel.setBackground(Color.red);
+       classLabelPanelContainer.add(classLabelPanel);
+       newTypePanel.add(newTypeButton, BorderLayout.NORTH);
+       newTypePanel.setBackground(Color.PINK);
+       window.add(newTypePanel, BorderLayout.EAST);
+       window.add(classLabelPanelContainer);
        creator.windowFix(window);
    }
 
@@ -135,6 +145,9 @@ public class StudentStatCollect extends JFrame {
 
         classLabelPanel.add(northCreditsPanel);
         container.add(classLabelPanel, BorderLayout.WEST);
+        
+        classLabelPanelContainer.add(classLabelPanel);
+
         window.add(container);
         typeNumber++;
        
