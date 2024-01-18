@@ -27,6 +27,7 @@ public class StudentStatCollect extends JFrame {
     private JPanel backNextButtonsPanel;
     private JButton newTypeButton;
     private Set set;
+    private JPanel eastPanelContainer = new JPanel(new FlowLayout(FlowLayout.RIGHT));
     private JPanel eastPanel;
     private JPanel buttonContainer = new JPanel(new BorderLayout());
     private JPanel container = new JPanel(new FlowLayout(FlowLayout.LEFT));
@@ -90,10 +91,12 @@ public class StudentStatCollect extends JFrame {
     }
 
    private void createNewTypeButton() {
+       buttonContainer.setPreferredSize(new Dimension(10,60));
+       buttonContainer.setBackground(Color.GREEN);
        newTypeButton = new JButton("New Type");
        newTypeButton.setPreferredSize(new Dimension(80, 50));
        eastPanel = new JPanel(new FlowLayout(FlowLayout.RIGHT));
-       eastPanel.setBackground(Color.PINK);
+       eastPanel.setBackground(Color.ORANGE);
        eastPanel.add(newTypeButton);
        newTypeButton.addActionListener(new ActionListener() {
         public void actionPerformed(ActionEvent e) {
@@ -102,8 +105,12 @@ public class StudentStatCollect extends JFrame {
             gradePercentageBox();
         }
     });
-       buttonContainer.add(eastPanel, BorderLayout.NORTH);
+       eastPanelContainer.setPreferredSize(new Dimension(100,100));
+       eastPanelContainer.add(eastPanel);
+       buttonContainer.setPreferredSize(new Dimension(100,60));
+       buttonContainer.add(eastPanelContainer);
        window.add(classLabelPanel);
+       //buttonContainerContainer.add(buttonContainer);
        window.add(buttonContainer, BorderLayout.NORTH);
        //creator.windowFix();
        creator.windowFix(window);
