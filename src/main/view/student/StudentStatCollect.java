@@ -28,7 +28,8 @@ public class StudentStatCollect extends JFrame {
     private JButton newTypeButton;
     private Set set;
     private JPanel container = new JPanel(new FlowLayout(FlowLayout.LEFT));
-    private JPanel classLabelPanel = new JPanel(new GridLayout(0,5,5,5));
+    private JPanel classLabelPanelContainer = new JPanel(new BorderLayout());
+    private JPanel classLabelPanel = new JPanel(new GridLayout(0,4,5,5));
     //private JPanel classLabelPanel = new JPanel(new FlowLayout(FlowLayout.LEFT));
     private int index = 0;
     private int typeNumber = 0;
@@ -90,10 +91,7 @@ public class StudentStatCollect extends JFrame {
    private void createNewTypeButton() {
        newTypeButton = new JButton("New Type");
        newTypeButton.setPreferredSize(new Dimension(80, 50));
-       JPanel newTypeButtonPanel = new JPanel();
-       JPanel northNewTypeButtonPanel = new JPanel(new BorderLayout());
-       newTypeButtonPanel.add(newTypeButton);
-       northNewTypeButtonPanel.add(newTypeButtonPanel,BorderLayout.NORTH);
+
        newTypeButton.addActionListener(new ActionListener() {
         public void actionPerformed(ActionEvent e) {
             typeNumber++;
@@ -101,8 +99,6 @@ public class StudentStatCollect extends JFrame {
             gradePercentageBox();
         }
     });
-       window.add(northNewTypeButtonPanel, BorderLayout.EAST);
-       window.add(classLabelPanel, BorderLayout.WEST);
        creator.windowFix(window);
    }
 
@@ -131,16 +127,15 @@ public class StudentStatCollect extends JFrame {
 
     private void readClass(ArrayList<String> classList) { 
         JLabel classLabel = new JLabel(classList.get(index));
-        classLabelPanel.add(classLabel);
-        classLabelPanel.add(northCreditsPanel);
-
 
         gradePercentageBox();
         gradeTypeBox();
 
         classLabelPanel.add(northCreditsPanel);
         container.add(classLabelPanel, BorderLayout.WEST);
-        window.add(container);
+        
+        classLabelPanelContainer.add(classLabelPanel);
+
         typeNumber++;
        
         //window.add(classLabelPanel);
