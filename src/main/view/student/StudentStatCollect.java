@@ -28,7 +28,7 @@ public class StudentStatCollect extends JFrame {
     private JButton newTypeButton;
     private Set set;
     private JPanel eastPanel;
-    //private JPanel container = new JPanel(new GridLayout(6,6));
+    private JPanel container = new JPanel(new FlowLayout(FlowLayout.LEFT));
     private JPanel classLabelPanel = new JPanel(new GridLayout(0,4,5,5));
     //private JPanel classLabelPanel = new JPanel(new FlowLayout(FlowLayout.LEFT));
     private int index = 0;
@@ -132,14 +132,16 @@ public class StudentStatCollect extends JFrame {
 
     private void readClass(ArrayList<String> classList) { 
         JLabel classLabel = new JLabel(classList.get(index));
-        classLabelPanel.add(classLabel,BorderLayout.WEST);
+        classLabelPanel.add(classLabel);
         classLabelPanel.add(northCreditsPanel);
+
 
         gradePercentageBox();
         gradeTypeBox();
 
         // classLabelPanel.add(northCreditsPanel);
-        window.add(classLabelPanel, BorderLayout.WEST);
+        container.add(classLabelPanel, BorderLayout.WEST);
+        window.add(container);
         typeNumber++;
        
         //window.add(classLabelPanel);
