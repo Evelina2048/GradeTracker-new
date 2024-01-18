@@ -28,8 +28,9 @@ public class StudentStatCollect extends JFrame {
     private JButton newTypeButton;
     private Set set;
     private JPanel eastPanel;
-    //private JPanel classLabelPanel = new JPanel(new GridLayout(4,4));
-    private JPanel classLabelPanel = new JPanel(new FlowLayout(FlowLayout.LEFT));
+    //private JPanel container = new JPanel(new GridLayout(6,6));
+    private JPanel classLabelPanel = new JPanel(new GridLayout(0,4,5,5));
+    //private JPanel classLabelPanel = new JPanel(new FlowLayout(FlowLayout.LEFT));
     private int index = 0;
     private int typeNumber = 0;
     private JPanel northCreditsPanel;
@@ -100,7 +101,6 @@ public class StudentStatCollect extends JFrame {
             gradePercentageBox();
         }
     });
-    
        window.add(classLabelPanel);
        window.add(eastPanel,BorderLayout.EAST);
        //creator.windowFix();
