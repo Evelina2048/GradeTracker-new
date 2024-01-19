@@ -131,10 +131,14 @@ public class StudentStatCollect extends JFrame {
     }
 
     private void readClass(ArrayList<String> classList) { 
+        JPanel northClassPanelContainer = new JPanel(new BorderLayout());
+        JPanel classLabelPanelContainer = new JPanel(new BorderLayout());
         JLabel classLabel = new JLabel(classList.get(index));
-        classLabelPanel.add(classLabel);
-        classLabel.setPreferredSize(new Dimension(10,10));
+        classLabelPanelContainer.add(classLabel);
+        classLabelPanelContainer.setPreferredSize(new Dimension(155,50));
+        northClassPanelContainer.add(classLabelPanelContainer, BorderLayout.NORTH);
         classLabelPanel.setBackground(Color.PINK);
+        classLabelPanel.add(northClassPanelContainer);
         gradePercentageBox();
         gradeTypeBox();
 
