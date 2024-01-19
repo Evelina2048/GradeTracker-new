@@ -144,10 +144,8 @@ public class StudentStatCollect extends JFrame {
 
         typeNumber++;
         classLabelPanel.setPreferredSize(new Dimension(10,10));
-        //classLabelPanel.setBackground(Color.CYAN);
+
         window.add(classLabelPanel, BorderLayout.CENTER);
-        //window.add(northNewTypePanel, BorderLayout.NORTH);
-        //window.add(classLabelPanel);
         creator.windowFix(window);
     }
     private void gradePercentageBox() {
@@ -155,10 +153,13 @@ public class StudentStatCollect extends JFrame {
         JPanel gradePercentagePanel = new JPanel(new BorderLayout());
         JTextField gradePercentage = creator.createTextBox(window, "Percentage of Grade", 80, 50);
         gradePercentagePanel.add(gradePercentage);
-        gradePercentagePanel.setPreferredSize(new Dimension(155,50));
-        northGradePercentagePanel.add(gradePercentagePanel, BorderLayout.NORTH);
-        classLabelPanel.add(northGradePercentagePanel);
-        creator.windowFix(window);
+
+        // gradePercentagePanel.setPreferredSize(new Dimension(155,50));
+        // northGradePercentagePanel.add(gradePercentagePanel, BorderLayout.NORTH);
+        // classLabelPanel.add(northGradePercentagePanel);
+        // creator.windowFix(window);
+
+        
 
     }
 
@@ -177,9 +178,11 @@ public class StudentStatCollect extends JFrame {
         northCreditsPanel = new JPanel(new BorderLayout());
         JPanel creditTypePanel = new JPanel(new BorderLayout());
         JTextField creditType = creator.createTextBox(window, "Credits (optional)", 50, 50);
+        if (creditType != null) {
         creditTypePanel.add(creditType);
         creditTypePanel.setPreferredSize(new Dimension(130,50));
         northCreditsPanel.add(creditTypePanel, BorderLayout.NORTH);
+        }
     }
 
 
