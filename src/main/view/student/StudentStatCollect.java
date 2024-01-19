@@ -29,11 +29,12 @@ public class StudentStatCollect extends JFrame {
     private Set set;
     private JPanel container = new JPanel(new FlowLayout(FlowLayout.LEFT));
     private JPanel classLabelPanelContainer = new JPanel(new BorderLayout());
-    private JPanel classLabelPanel = new JPanel(new GridLayout(0,4,5,5));
     //private JPanel classLabelPanel = new JPanel(new FlowLayout(FlowLayout.LEFT));
+    private JPanel classLabelPanel = new JPanel(new GridLayout(4,4));
     private int index = 0;
     private int typeNumber = 0;
     private JPanel northCreditsPanel;
+    private JPanel northNewTypePanel;
 
     public StudentStatCollect(JFrame main,NewUser newUser, String studentOrTeacher, String existingOrNew, Set set) {
         this.window = main;
@@ -91,12 +92,9 @@ public class StudentStatCollect extends JFrame {
    private void createNewTypeButton() {
        newTypeButton = new JButton("New Type");
        newTypeButton.setPreferredSize(new Dimension(80, 50));
-       JPanel newTypeButtonPanel = new JPanel();
-       newTypeButtonPanel.add(newTypeButton);
-       JPanel northNewTypePanel = new JPanel(new BorderLayout());
+       JPanel newTypeButtonPanel = new JPanel(new BorderLayout());
 
-       northNewTypePanel.add(newTypeButtonPanel,BorderLayout.EAST);
-       window.add(northNewTypePanel, BorderLayout.NORTH);
+       newTypeButtonPanel.add(newTypeButton,BorderLayout.NORTH);
 
        newTypeButton.addActionListener(new ActionListener() {
         public void actionPerformed(ActionEvent e) {
@@ -105,6 +103,7 @@ public class StudentStatCollect extends JFrame {
             gradePercentageBox();
         }
     });
+       window.add(newTypeButtonPanel, BorderLayout.EAST);
        creator.windowFix(window);
    }
 
@@ -133,12 +132,16 @@ public class StudentStatCollect extends JFrame {
 
     private void readClass(ArrayList<String> classList) { 
         JLabel classLabel = new JLabel(classList.get(index));
-
+        classLabelPanel.add(classLabel);
+        classLabel.setPreferredSize(new Dimension(10,10));
         gradePercentageBox();
         gradeTypeBox();
 
         typeNumber++;
-       
+        classLabelPanel.setPreferredSize(new Dimension(10,10));
+        //classLabelPanel.setBackground(Color.CYAN);
+        window.add(classLabelPanel, BorderLayout.CENTER);
+        //window.add(northNewTypePanel, BorderLayout.NORTH);
         //window.add(classLabelPanel);
         creator.windowFix(window);
     }
