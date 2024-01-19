@@ -278,11 +278,8 @@ public class Creator {
             textField.setPreferredSize(new Dimension(width, height)); //50,50
             textFieldContainer.add(textFieldPanel); //
             textFieldContainer.setVisible(true);
-            window.add(textFieldContainer, BorderLayout.NORTH);
-
+            window.add(textFieldContainer, BorderLayout.NORTH); //problem
             textFieldFocusListener(window, textField, placeholder);
-            
-            
             windowFix(window);
         }
         return textField;
