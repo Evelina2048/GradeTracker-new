@@ -30,7 +30,7 @@ public class StudentStatCollect extends JFrame {
     private JPanel container = new JPanel(new FlowLayout(FlowLayout.LEFT));
     private JPanel classLabelPanelContainer = new JPanel(new BorderLayout());
     //private JPanel classLabelPanel = new JPanel(new FlowLayout(FlowLayout.LEFT));
-    private JPanel classLabelPanel = new JPanel(new GridLayout(0,4, 5, 5));
+    private JPanel classLabelPanel = new JPanel(new FlowLayout(FlowLayout.LEFT, 5, 5));
     private int index = 0;
     private int typeNumber = 0;
     private JPanel northCreditsPanel;
@@ -167,7 +167,7 @@ public class StudentStatCollect extends JFrame {
         JPanel gradeTypePanel = new JPanel(new BorderLayout());
         JTextField gradeType = creator.createTextBox(window, "Grade Type"+typeNumber, 10, 50);
         gradeTypePanel.add(gradeType);
-        gradeTypePanel.setPreferredSize(new Dimension( 10,50));
+        gradeTypePanel.setPreferredSize(new Dimension( 150,50));
         northTypePanel.add(gradeTypePanel, BorderLayout.NORTH);
         classLabelPanel.add(northTypePanel);
         creator.windowFix(window);
