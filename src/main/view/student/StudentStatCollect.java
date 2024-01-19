@@ -30,7 +30,7 @@ public class StudentStatCollect extends JFrame {
     private JPanel container = new JPanel(new FlowLayout(FlowLayout.LEFT));
     private JPanel classLabelPanelContainer = new JPanel(new BorderLayout());
     //private JPanel classLabelPanel = new JPanel(new FlowLayout(FlowLayout.LEFT));
-    private JPanel classLabelPanel = new JPanel(new GridLayout(4,4));
+    private JPanel classLabelPanel = new JPanel(new GridLayout(0,4, 5, 5));
     private int index = 0;
     private int typeNumber = 0;
     private JPanel northCreditsPanel;
@@ -134,6 +134,7 @@ public class StudentStatCollect extends JFrame {
         JLabel classLabel = new JLabel(classList.get(index));
         classLabelPanel.add(classLabel);
         classLabel.setPreferredSize(new Dimension(10,10));
+        classLabelPanel.setBackground(Color.PINK);
         gradePercentageBox();
         gradeTypeBox();
 
@@ -160,9 +161,9 @@ public class StudentStatCollect extends JFrame {
     private void gradeTypeBox() {
         JPanel northTypePanel = new JPanel(new BorderLayout());
         JPanel gradeTypePanel = new JPanel(new BorderLayout());
-        JTextField gradeType = creator.createTextBox(window, "Grade Type"+typeNumber, 50, 50);
+        JTextField gradeType = creator.createTextBox(window, "Grade Type"+typeNumber, 10, 50);
         gradeTypePanel.add(gradeType);
-        gradeTypePanel.setPreferredSize(new Dimension( 100,50));
+        gradeTypePanel.setPreferredSize(new Dimension( 10,50));
         northTypePanel.add(gradeTypePanel, BorderLayout.NORTH);
         classLabelPanel.add(northTypePanel);
         creator.windowFix(window);
