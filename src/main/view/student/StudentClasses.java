@@ -30,6 +30,10 @@ public class StudentClasses extends JFrame {
     private JTextField textField;
     private JButton saveButton;
     private int textboxCounter = 0;
+    private JPanel backButtonPanel = new JPanel();
+    ///
+    JPanel allButtonsPanel = new JPanel(new FlowLayout(FlowLayout.LEFT));
+    ///
     JPanel southContainer = new JPanel(new BorderLayout());
     AtomicBoolean textFieldEmptied = new AtomicBoolean(false);;
     JButton newClassButton;
@@ -62,7 +66,6 @@ public class StudentClasses extends JFrame {
     public void buttonSetUpAction(JFrame main, NewUser newUser, String studentOrTeacher, String existingOrNew) {
         JButton backButton = creator.backButtonCreate();
         ///
-        JPanel backButtonPanel = new JPanel();
         backButtonPanel.add(backButton);
         ////
         backButton.setPreferredSize(new Dimension(87, 29));
@@ -105,7 +108,7 @@ public class StudentClasses extends JFrame {
         backNextButtonsPanel = creator.makeBackNextButtonsPanel(backButtonPanel, saveButtonPanel, nextButtonPanel);
         southContainer.add(backNextButtonsPanel, BorderLayout.SOUTH);
         
-        window.add(southContainer, BorderLayout.SOUTH);
+        window.add(allButtonsPanel, BorderLayout.SOUTH);
     }
 
     //create textbox "Class" placeholder
@@ -141,7 +144,6 @@ public class StudentClasses extends JFrame {
         createNewClassButton();
         deleteClassButton();
 
-
         JPanel buttonsPanel = new JPanel(new BorderLayout());
         buttonsPanel.setPreferredSize(new Dimension(100,40));
         buttonsPanel.add(newClassButton,BorderLayout.WEST);
@@ -149,7 +151,10 @@ public class StudentClasses extends JFrame {
     
         southContainer.add(buttonsPanel,BorderLayout.CENTER);
 
-        window.add(southContainer, BorderLayout.SOUTH);
+        allButtonsPanel.add(buttonsPanel);
+        allButtonsPanel.add(southContainer);
+
+        //window.add(southContainer, BorderLayout.SOUTH);
 
     }
 
