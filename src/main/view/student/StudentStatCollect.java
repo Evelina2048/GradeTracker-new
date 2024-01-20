@@ -93,11 +93,11 @@ public class StudentStatCollect extends JFrame {
 
    private void createNewTypeButton() {
        newTypeButton = new JButton("New Type");
-       newTypeButton.setPreferredSize(new Dimension(80, 50));
+       newTypeButton.setPreferredSize(new Dimension(90, 50));
        JPanel newTypeButtonPanel = new JPanel(new BorderLayout());
 
        JButton delTypeButton = new JButton("Delete Type");
-       delTypeButton.setPreferredSize(new Dimension(80, 50));
+       delTypeButton.setPreferredSize(new Dimension(90, 50));
        JPanel delTypeButtonPanel = new JPanel(new BorderLayout());
 
        newTypeButtonPanel.add(newTypeButton,BorderLayout.NORTH);
@@ -110,11 +110,14 @@ public class StudentStatCollect extends JFrame {
 
        newDelContainerFlow.add(newDelContainer);
 
+       //gridlayout allows any time of resizing
+       //flowlayout allows resizing of width
+       
        newTypeButton.addActionListener(new ActionListener() {
         public void actionPerformed(ActionEvent e) {
-            typeNumber++; //doesnt make label appear
-            gradeTypeBox(); //does make label appear
-            gradePercentageBox(); //does make label appear
+            typeNumber++;
+            gradeTypeBox();
+            gradePercentageBox();
         }
     });
        window.add(newDelContainerFlow, BorderLayout.EAST);
