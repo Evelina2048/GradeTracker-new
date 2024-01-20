@@ -122,46 +122,6 @@ public class Gather {
 
         creator.textFieldFocusListener(window, textField, "Enter user name");
 
-        // window.getContentPane().addMouseListener(new MouseAdapter() {
-        //     @Override
-        //     public void mouseClicked(MouseEvent e) {
-        //         System.out.println("helloooojodso");
-        //         System.out.println("bounds:"+e.getX()+" "+e.getY());
-                
-        //         ///
-        //         // Define the coordinates
-        //         int topLeftX = 332;
-        //         int topLeftY = 221;
-        //         int topRightX = 467;
-        //         int topRightY = 222;
-        //         int bottomLeftX = 334;
-        //         int bottomLeftY = 270;
-        //         int bottomRightX = 467;
-        //         int bottomRightY = 269;
-
-        //         // Calculate width and height
-        //         int width = Math.abs(topRightX - topLeftX); // Calculate width
-        //         int height = Math.abs(bottomLeftY - topLeftY); // Calculate height
-
-        //         // Find the minimum x and y coordinates
-        //         int x = Math.min(Math.min(topLeftX, topRightX), Math.min(bottomLeftX, bottomRightX));
-        //         int y = Math.min(Math.min(topLeftY, topRightY), Math.min(bottomLeftY, bottomRightY));
-
-        //         // Create the bounds using the coordinates
-        //         Rectangle newBounds = new Rectangle(x, y, width, height);
-        //         ///
-
-        //         //textField.setbounds(332) //left top length height
-        //         if (newBounds.contains(e.getPoint()) == false) {
-        //             textField.setText("Enter user name");
-        //             textField.setForeground(Color.GRAY);
-        //             textFieldEmptied = false;
-        //             window.requestFocus();
-
-        //         }
-        //     }
-        // });
-
         GridBagConstraints constraints = new GridBagConstraints();
         constraints.gridx = 0;
         constraints.gridy = 0;
@@ -222,9 +182,7 @@ public class Gather {
         else if (textFieldFilled) { //good case
             moveOnPossible = true;
             String filePath = "somethingwentwrong";//if not overwritten, somethingwent wrong
-            System.out.println("neworexisting"+existingOrNew);
             if (existingOrNew.trim().equals("New User")) { //if new user,
-                System.out.println("studentorteacherstring"+studentOrTeacherString);
                 writeUsername(filePath,studentOrTeacherString);
                 //move on to studentclasses class
                 System.out.println("should move to studentClasses class");
@@ -277,17 +235,14 @@ private void writeUsername(String filePath, String studentOrTeacher) {
     String usernamePath = "somethingwentwrong.txt";
     String username = textField.getText().trim();
     set.setUsername(username);
-    System.out.println("studentOrTeacher"+ studentOrTeacher);
     if ("Student".equals(studentOrTeacher)) {
         //filePath = "/Users/evy/Documents/GradeTracker-new/src/main/view/UserInfo/StudentInfo/"+username+".txt";
         usernamePath = "/Users/evy/Documents/GradeTracker-new/src/main/view/UserInfo/studentUsername.txt";
-        System.out.println("going to student.csv"+usernamePath);
     }
 
     else if ("Teacher".equals(studentOrTeacher)) {
        // filePath = "/Users/evy/Documents/GradeTracker-new/src/main/view/Teacher.csv";
         usernamePath = "/Users/evy/Documents/GradeTracker-new/src/main/view/UserInfo/teacherUsername.txt";
-        System.out.println("going to teacher.csv"+usernamePath);
     }
 
     System.out.println("the username is "+ username);
@@ -305,7 +260,6 @@ private int commaCount(String username) {
             commaCount++;
         }
     }
-    System.out.println(commaCount);
     return commaCount;
 }
 

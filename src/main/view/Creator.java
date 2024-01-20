@@ -89,38 +89,28 @@ public class Creator {
         textField.addFocusListener(new FocusAdapter() {
             @Override
             public void focusGained(FocusEvent e) {
-                System.out.println("focusgained");
-                System.out.println("textfieldemptied"+getEmptiedState(textField));
                 if (previousTextbox != null) {
                     previousTextbox.setForeground(Color.LIGHT_GRAY);
 
                 }
                 if (textField.getText().equals(placeholder) && getEmptiedState(textField) == false) {
-                    System.out.println("Inside condition block 8");
-                    System.out.println("Before setting emptied state: textFieldEmptied..." + getEmptiedState(textField));
                     textField.setText("");
                     setEmptiedState(textField, true);
-                    System.out.println("After setting emptied state: textFieldEmptied..." + getEmptiedState(textField));
                     textField.setForeground(Color.BLACK);
-                    System.out.println("After setting color: textFieldEmptied..." + getEmptiedState(textField));
                 }
-                //System.out.println("After condition check: textFieldEmptied..." + getEmptiedState(textField));
 
                 else if (!textField.getText().equals(placeholder) && !textField.getText().isEmpty() && getEmptiedState(textField) == true) {
-                    System.out.println("7");
                     textField.setForeground(Color.BLACK);
                     setEmptiedState(textField, true);
                 }
 
                 else if (textField.getText().equals(placeholder) && getEmptiedState(textField) == true) {
-                    System.out.println("6");
                     textField.setText(""); // Clear the placeholder text when the field gains focus
                     textField.setForeground(Color.BLACK);
                     setEmptiedState(textField, true);
                 }
 
                 else {
-                    System.out.println("textfieldemptied"+getEmptiedState(textField));
                     System.out.println("something went wrong in Creator class, focus gained");
 
                 }
@@ -129,23 +119,18 @@ public class Creator {
 
             @Override
             public void focusLost(FocusEvent e) {
-                System.out.println("focuslost");
-                //JTextField previousTextbox = textField;
                 if (textField.getText().isEmpty()) {
-                    System.out.println("5textfieldemptied..."+getEmptiedState(textField));
                     textField.setForeground(Color.GRAY);
                     textField.setText(placeholder);
                     setEmptiedState(textField, false);
                 }
                 
                 else if (!textField.getText().isEmpty() && getEmptiedState(textField) == true){
-                    System.out.println("4");
                     textField.setForeground(Color.gray);
 
                 }
                 else {
                     System.out.println("something went wrong in focus lost");
-                    System.out.println("textfieldemptied?"+getEmptiedState(textField));
                 }
             }
         });
@@ -157,8 +142,6 @@ public class Creator {
         window.getContentPane().addMouseListener(new MouseAdapter() {
             @Override
             public void mouseClicked(MouseEvent e) {
-                System.out.println("mouse clicked");
-                //JTextField previousTextbox = textField;
                 int topLeftX = 332;
                 int topLeftY = 221;
                 int topRightX = 467;
@@ -187,16 +170,11 @@ public class Creator {
                 }
 
                 else if (pointNotInTextbox &&  getEmptiedState(textField) == true && !textField.getText().isEmpty()) {
-                    System.out.println("2nd option");
-                    System.out.println("2");
-                    //textField.setForeground(Color.BLACK);
                     window.requestFocusInWindow();
                 }
 
                 else if (pointNotInTextbox) {
-                    //textField.setForeground(Color.black);
                     window.requestFocusInWindow();
-                    System.out.println("1textfieldemptied..."+getEmptiedState(textField));
 
                 }
 
@@ -266,7 +244,6 @@ public class Creator {
     public JTextField createTextBox(JFrame window, String placeholder, int width, int height) {
         textboxCounter++; //textBoxIncrement();
         if (textboxCounter <= 30) {
-            System.out.println("In create textbox new");
             JPanel textFieldPanel = new JPanel(new FlowLayout(FlowLayout.LEFT));
 
             textField = decorate.decorateTextBox(placeholder);//Enter Class Name

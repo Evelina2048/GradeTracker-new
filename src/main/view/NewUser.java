@@ -167,14 +167,11 @@ public class NewUser extends JFrame {
     }
 
     private void doNextButtonProcedure(){
-        //>/
-        System.out.println("in do nextbutton proc");
         int windowX = window.getX();
             int windowY = window.getY();
             if (moveOnPossible) {
                 decorator.hideWindow(instructionsPanel, choicesPanel, backNextButtonsPanel);
 
-                //
                 if (gatherFrame == null) {
                     // Create a new instance of Gather if it doesn't exist
                     gatherFrame = new Gather(main, NewUser.this, studentOrTeacher, existingOrNew, windowX, windowY, set);

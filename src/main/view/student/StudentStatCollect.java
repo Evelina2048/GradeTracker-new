@@ -99,9 +99,9 @@ public class StudentStatCollect extends JFrame {
 
        newTypeButton.addActionListener(new ActionListener() {
         public void actionPerformed(ActionEvent e) {
-            typeNumber++;
-            gradeTypeBox();
-            gradePercentageBox();
+            typeNumber++; //doesnt make label appear
+            gradeTypeBox(); //does make label appear
+            gradePercentageBox(); //does make label appear
         }
     });
        window.add(newTypeButtonPanel, BorderLayout.EAST);
@@ -140,13 +140,12 @@ public class StudentStatCollect extends JFrame {
         classLabelPanelContainer.add(classLabel);
         classLabelPanelContainer.setPreferredSize(new Dimension(155,50));
         northClassPanelContainer.add(classLabelPanelContainer, BorderLayout.NORTH);
-        // classLabelPanel.setBackground(Color.PINK);
+
         classLabelPanel.add(northClassPanelContainer);
         gradePercentageBox();
         gradeTypeBox();
 
         typeNumber++;
-        classLabelPanel.setPreferredSize(new Dimension(10,10));
         window.add(classLabelPanel, BorderLayout.CENTER);
         creator.windowFix(window);
         }
