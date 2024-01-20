@@ -112,14 +112,23 @@ public class StudentStatCollect extends JFrame {
 
        //gridlayout allows any time of resizing
        //flowlayout allows resizing of width
-       
+
        newTypeButton.addActionListener(new ActionListener() {
         public void actionPerformed(ActionEvent e) {
             typeNumber++;
             gradeTypeBox();
             gradePercentageBox();
         }
-    });
+        });
+
+        delTypeButton.addActionListener(new ActionListener() {
+            public void actionPerformed(ActionEvent e) {
+                System.out.println("deltypebutton hit");
+                creator.deleteTextBox(window, classLabelPanel);
+                creator.deleteTextBox(window, classLabelPanel);
+        }
+        });
+
        window.add(newDelContainerFlow, BorderLayout.EAST);
        creator.windowFix(window);
    }
