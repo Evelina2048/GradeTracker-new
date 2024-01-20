@@ -142,13 +142,18 @@ public class StudentStatCollect extends JFrame {
 
     private void classLabel(ArrayList<String> classList) {
         if (numOfBoxes <= 28) {
+        creator.hideContainer();
         JPanel northClassPanelContainer = new JPanel(new BorderLayout());
         JPanel classLabelPanelContainer = new JPanel(new BorderLayout());
-        JLabel classLabel = new JLabel(classList.get(index));
+        //JLabel classLabel = new JLabel("h");
+        JLabel classLabel = new JLabel(classList.get(index)); //new JLabel("h"); 
         classLabelPanelContainer.add(classLabel);
         classLabelPanelContainer.setPreferredSize(new Dimension(155,50));
         northClassPanelContainer.add(classLabelPanelContainer, BorderLayout.NORTH);
         classLabelPanel.add(northClassPanelContainer);
+        //
+        northClassPanelContainer.setBackground(Color.PINK);
+        //
         classLabel.setVisible(true);
         creator.windowFix(window);
         numOfBoxes++;
@@ -157,9 +162,10 @@ public class StudentStatCollect extends JFrame {
 
     private void gradePercentageBox() {
         if (numOfBoxes <= 28) {
-        JPanel northGradePercentagePanel = new JPanel(new BorderLayout());
-        JPanel gradePercentagePanel = new JPanel(new BorderLayout());
-        JTextField gradePercentage = creator.createTextBox(window, "Percentage of Grade", 80, 50);
+        JPanel northGradePercentagePanel = new JPanel(new BorderLayout()); //not the sol
+        JPanel gradePercentagePanel = new JPanel(new BorderLayout()); //not the sol
+        JTextField gradePercentage = creator.createTextBox(window, "Percentage of Grade", 80, 50); //the sol
+        
         gradePercentagePanel.add(gradePercentage);
         gradePercentagePanel.setPreferredSize(new Dimension(155,50));
         northGradePercentagePanel.add(gradePercentagePanel, BorderLayout.NORTH);

@@ -241,27 +241,25 @@ public class Creator {
         textboxCounter++;
     }
 
-    public JTextField createTextBox(JFrame window, String placeholder, int width, int height) {
-        textboxCounter++; //textBoxIncrement();
+    public JTextField createTextBox(JFrame window, String placeholder, int width, int height) { //something here is causing the issue
+        textboxCounter++;
         if (textboxCounter <= 30) {
-            JPanel textFieldPanel = new JPanel(new FlowLayout(FlowLayout.LEFT));
+        JPanel textFieldPanel = new JPanel(new FlowLayout(FlowLayout.LEFT));
+        //textField = new JTextField(10); //not causing issue
+        textField = decorate.decorateTextBox(placeholder); //not causing issue
+        setEmptiedState(textField, false);
+        textFieldPanel.add(textField); 
 
-            textField = decorate.decorateTextBox(placeholder);//Enter Class Name
-            setEmptiedState(textField, false);
-             
-            
-            textFieldPanel.add(textField); 
-            
-            textField.setPreferredSize(new Dimension(width, height)); //50,50
-            textFieldContainer.add(textFieldPanel); //
-            textFieldContainer.setVisible(true);
-            window.add(textFieldContainer); //problem
-            textFieldFocusListener(window, textField, placeholder);
-            windowFix(window);
+        textField.setPreferredSize(new Dimension(width, height));
+        textFieldContainer.add(textFieldPanel);
+
+        textFieldContainer.setBackground(Color.orange);
+        window.add(textFieldContainer); //when commented, no issue... when uncommented, yes issue
+        //when commented no class gatherer appears
+        textFieldFocusListener(window, textField, placeholder);
+        windowFix(window);
         }
         return textField;
-
-
     }
 
     public JPanel getTextFieldContainer() {
@@ -289,5 +287,9 @@ public class Creator {
     public void windowFix(JFrame window) {
         window.revalidate(); 
         window.repaint();
+    }
+
+    public void hideContainer() {
+        textFieldContainer.setVisible(false);
     }
 }
