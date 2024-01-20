@@ -124,8 +124,10 @@ public class StudentStatCollect extends JFrame {
         delTypeButton.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent e) {
                 System.out.println("deltypebutton hit");
-                creator.deleteTextBox(window, classLabelPanel);
-                creator.deleteTextBox(window, classLabelPanel);
+                if (classLabelPanel.getComponentCount() >= 6) {
+                    creator.deleteTextBox(window, classLabelPanel);
+                    creator.deleteTextBox(window, classLabelPanel);
+                }
         }
         });
 
