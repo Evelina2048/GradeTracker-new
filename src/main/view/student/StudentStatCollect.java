@@ -132,24 +132,31 @@ public class StudentStatCollect extends JFrame {
     }
 
     private void readClass(ArrayList<String> classList) { 
-        if (numOfBoxes <= 28) {
-        JPanel northClassPanelContainer = new JPanel(new BorderLayout());
-        JPanel classLabelPanelContainer = new JPanel(new BorderLayout());
-        JLabel classLabel = new JLabel(classList.get(index));
-        numOfBoxes++;
-        classLabelPanelContainer.add(classLabel);
-        classLabelPanelContainer.setPreferredSize(new Dimension(155,50));
-        northClassPanelContainer.add(classLabelPanelContainer, BorderLayout.NORTH);
-
-        classLabelPanel.add(northClassPanelContainer);
+        System.out.println("test1: in read class");
+        classLabel(classList);
         gradePercentageBox();
         gradeTypeBox();
 
         typeNumber++;
         window.add(classLabelPanel, BorderLayout.CENTER);
         creator.windowFix(window);
+    }
+
+    private void classLabel(ArrayList<String> classList) {
+        if (numOfBoxes <= 28) {
+        JPanel northClassPanelContainer = new JPanel(new BorderLayout());
+        JPanel classLabelPanelContainer = new JPanel(new BorderLayout());
+        JLabel classLabel = new JLabel(classList.get(index));
+        classLabelPanelContainer.add(classLabel);
+        classLabelPanelContainer.setPreferredSize(new Dimension(155,50));
+        northClassPanelContainer.add(classLabelPanelContainer, BorderLayout.NORTH);
+        classLabelPanel.add(northClassPanelContainer);
+        classLabel.setVisible(true);
+        creator.windowFix(window);
+        numOfBoxes++;
         }
     }
+
     private void gradePercentageBox() {
         if (numOfBoxes <= 28) {
         JPanel northGradePercentagePanel = new JPanel(new BorderLayout());
@@ -187,6 +194,8 @@ public class StudentStatCollect extends JFrame {
         creditTypePanel.add(creditType);
         creditTypePanel.setPreferredSize(new Dimension(130,50));
         northCreditsPanel.add(creditTypePanel, BorderLayout.NORTH);
+        classLabelPanel.add(northCreditsPanel);
+        creator.windowFix(window);
         numOfBoxes++;
         }
     }
