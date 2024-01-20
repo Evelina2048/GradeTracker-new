@@ -96,7 +96,19 @@ public class StudentStatCollect extends JFrame {
        newTypeButton.setPreferredSize(new Dimension(80, 50));
        JPanel newTypeButtonPanel = new JPanel(new BorderLayout());
 
+       JButton delTypeButton = new JButton("Delete Type");
+       delTypeButton.setPreferredSize(new Dimension(80, 50));
+       JPanel delTypeButtonPanel = new JPanel(new BorderLayout());
+
        newTypeButtonPanel.add(newTypeButton,BorderLayout.NORTH);
+       delTypeButtonPanel.add(delTypeButton,BorderLayout.NORTH);
+
+       JPanel newDelContainerFlow = new JPanel(new FlowLayout(FlowLayout.LEFT,0,5));
+       JPanel newDelContainer = new JPanel(new GridLayout(2,1,0,5));
+       newDelContainer.add(newTypeButtonPanel);
+       newDelContainer.add(delTypeButtonPanel);
+
+       newDelContainerFlow.add(newDelContainer);
 
        newTypeButton.addActionListener(new ActionListener() {
         public void actionPerformed(ActionEvent e) {
@@ -105,7 +117,7 @@ public class StudentStatCollect extends JFrame {
             gradePercentageBox(); //does make label appear
         }
     });
-       window.add(newTypeButtonPanel, BorderLayout.EAST);
+       window.add(newDelContainerFlow, BorderLayout.EAST);
        creator.windowFix(window);
    }
 
