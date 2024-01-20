@@ -33,6 +33,7 @@ public class StudentStatCollect extends JFrame {
     private JPanel classLabelPanel = new JPanel(new FlowLayout(FlowLayout.LEFT, 5, 5));
     private int index = 0;
     private int typeNumber = 0;
+    private int numOfBoxes = 0; //must be 28 or less
     private JPanel northCreditsPanel;
     private JPanel northNewTypePanel;
 
@@ -131,26 +132,27 @@ public class StudentStatCollect extends JFrame {
     }
 
     private void readClass(ArrayList<String> classList) { 
+        if (numOfBoxes <= 28) {
         JPanel northClassPanelContainer = new JPanel(new BorderLayout());
         JPanel classLabelPanelContainer = new JPanel(new BorderLayout());
         JLabel classLabel = new JLabel(classList.get(index));
+        numOfBoxes++;
         classLabelPanelContainer.add(classLabel);
         classLabelPanelContainer.setPreferredSize(new Dimension(155,50));
         northClassPanelContainer.add(classLabelPanelContainer, BorderLayout.NORTH);
-        classLabelPanel.setBackground(Color.PINK);
+        // classLabelPanel.setBackground(Color.PINK);
         classLabelPanel.add(northClassPanelContainer);
         gradePercentageBox();
         gradeTypeBox();
 
         typeNumber++;
         classLabelPanel.setPreferredSize(new Dimension(10,10));
-        //classLabelPanel.setBackground(Color.CYAN);
         window.add(classLabelPanel, BorderLayout.CENTER);
-        //window.add(northNewTypePanel, BorderLayout.NORTH);
-        //window.add(classLabelPanel);
         creator.windowFix(window);
+        }
     }
     private void gradePercentageBox() {
+        if (numOfBoxes <= 28) {
         JPanel northGradePercentagePanel = new JPanel(new BorderLayout());
         JPanel gradePercentagePanel = new JPanel(new BorderLayout());
         JTextField gradePercentage = creator.createTextBox(window, "Percentage of Grade", 80, 50);
@@ -159,10 +161,13 @@ public class StudentStatCollect extends JFrame {
         northGradePercentagePanel.add(gradePercentagePanel, BorderLayout.NORTH);
         classLabelPanel.add(northGradePercentagePanel);
         creator.windowFix(window);
+        numOfBoxes++;
+        }
 
     }
 
     private void gradeTypeBox() {
+        if (numOfBoxes <= 28) {
         JPanel northTypePanel = new JPanel(new BorderLayout());
         JPanel gradeTypePanel = new JPanel(new BorderLayout());
         JTextField gradeType = creator.createTextBox(window, "Grade Type"+typeNumber, 10, 50);
@@ -171,15 +176,20 @@ public class StudentStatCollect extends JFrame {
         northTypePanel.add(gradeTypePanel, BorderLayout.NORTH);
         classLabelPanel.add(northTypePanel);
         creator.windowFix(window);
+        numOfBoxes++;
+        }
     }
 
     private void creditTypeBox() {
+        if (numOfBoxes <= 28) {
         northCreditsPanel = new JPanel(new BorderLayout());
         JPanel creditTypePanel = new JPanel(new BorderLayout());
         JTextField creditType = creator.createTextBox(window, "Credits (optional)", 50, 50);
         creditTypePanel.add(creditType);
         creditTypePanel.setPreferredSize(new Dimension(130,50));
         northCreditsPanel.add(creditTypePanel, BorderLayout.NORTH);
+        numOfBoxes++;
+        }
     }
 
 
