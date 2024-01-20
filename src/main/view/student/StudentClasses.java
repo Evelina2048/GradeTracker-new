@@ -12,6 +12,8 @@ import java.awt.event.ActionListener;
 import java.awt.event.ActionEvent;
 import java.awt.FlowLayout;
 
+import java.awt.GridBagConstraints;
+
 import java.util.concurrent.atomic.AtomicBoolean;
 import main.view.NewUser;
 import main.view.Set;
@@ -30,10 +32,6 @@ public class StudentClasses extends JFrame {
     private JTextField textField;
     private JButton saveButton;
     private int textboxCounter = 0;
-    private JPanel backButtonPanel = new JPanel();
-    ///
-    JPanel allButtonsPanel = new JPanel(new FlowLayout(FlowLayout.LEFT));
-    ///
     JPanel southContainer = new JPanel(new BorderLayout());
     AtomicBoolean textFieldEmptied = new AtomicBoolean(false);;
     JButton newClassButton;
@@ -65,8 +63,14 @@ public class StudentClasses extends JFrame {
 
     public void buttonSetUpAction(JFrame main, NewUser newUser, String studentOrTeacher, String existingOrNew) {
         JButton backButton = creator.backButtonCreate();
+        GridBagConstraints gbc = new GridBagConstraints();
+        gbc.fill = GridBagConstraints.HORIZONTAL;
         ///
-        backButtonPanel.add(backButton);
+        JPanel backButtonPanel = new JPanel();
+        gbc.gridx = 0; // Set the column index for backButton
+        gbc.gridy = 0; // Set the row index for backButton
+        gbc.weightx = 1.0; // Make backButton horizontally resizable
+        backButtonPanel.add(backButton, gbc); // Add backButton to backButtonPanel with constraints
         ////
         backButton.setPreferredSize(new Dimension(87, 29));
         backButton.addActionListener(new ActionListener() {
@@ -80,7 +84,10 @@ public class StudentClasses extends JFrame {
 
         saveButton = creator.saveButtonCreate();
         JPanel saveButtonPanel = new JPanel();
-        saveButtonPanel.add(saveButton);
+        gbc.gridx = 1; // Set the column index for saveButton
+        gbc.gridy = 0; // Set the row index for saveButton
+        gbc.weightx = 1.0; // Make saveButton horizontally resizable
+        backButtonPanel.add(saveButton, gbc); // Add saveButton to backButtonPanel with constraints
 
         saveButton.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent e) {
@@ -93,7 +100,11 @@ public class StudentClasses extends JFrame {
 
         JButton nextButton = creator.nextButtonCreate();
         JPanel nextButtonPanel = new JPanel();
-        nextButtonPanel.add(nextButton);
+        gbc.gridx = 2; // Set the column index for nextButton
+        gbc.gridy = 0; // Set the row index for nextButton
+        gbc.weightx = 1.0; // Make nextButton horizontally resizable
+        backButtonPanel.add(nextButton, gbc); // Add nextButton to backButtonPanel with constraints
+
         nextButton.setPreferredSize(new Dimension(87, 29));
         nextButton.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent e) {
@@ -108,7 +119,7 @@ public class StudentClasses extends JFrame {
         backNextButtonsPanel = creator.makeBackNextButtonsPanel(backButtonPanel, saveButtonPanel, nextButtonPanel);
         southContainer.add(backNextButtonsPanel, BorderLayout.SOUTH);
         
-        window.add(allButtonsPanel, BorderLayout.SOUTH);
+        window.add(southContainer, BorderLayout.SOUTH);
     }
 
     //create textbox "Class" placeholder
@@ -144,15 +155,30 @@ public class StudentClasses extends JFrame {
         createNewClassButton();
         deleteClassButton();
 
-        JPanel buttonsPanel = new JPanel(new BorderLayout());
-        buttonsPanel.setPreferredSize(new Dimension(100,40));
-        buttonsPanel.add(newClassButton,BorderLayout.WEST);
-        buttonsPanel.add(deleteClassButton, BorderLayout.EAST);
-    
-        southContainer.add(buttonsPanel,BorderLayout.CENTER);
 
-        allButtonsPanel.add(buttonsPanel);
-        allButtonsPanel.add(southContainer);
+        JPanel buttonsPanel = new JPanel(new GridLayout(1, 2, 5, 0));
+        ///
+
+        GridBagConstraints gbc = new GridBagConstraints();
+        gbc.fill = GridBagConstraints.HORIZONTAL;
+
+        // Add newClassButton
+        gbc.gridx = 0; // Set the column index for newClassButton
+        gbc.gridy = 0; // Set the row index for newClassButton
+        gbc.weightx = 1.0; // Make newClassButton horizontally resizable
+        buttonsPanel.add(newClassButton, gbc); // Add newClassButton to buttonsPanel with constraints
+
+        // Add deleteClassButton
+        gbc.gridx = 1; // Set the column index for deleteClassButton
+        gbc.gridy = 0; // Set the row index for deleteClassButton
+        gbc.weightx = 1.0; // Make deleteClassButton horizontally resizable
+        buttonsPanel.add(deleteClassButton, gbc); // Add deleteClassButton to buttonsPanel with constraints
+
+        // ...
+
+        // Add buttonsPanel
+        southContainer.add(buttonsPanel, BorderLayout.CENTER); // Add buttonsPanel to southContainer
+        ///
 
         //window.add(southContainer, BorderLayout.SOUTH);
 
