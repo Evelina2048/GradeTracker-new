@@ -26,6 +26,7 @@ public class StudentClasses extends JFrame {
     private Creator creator;
     private JPanel backNextButtonsPanel;
     // private JPanel textFieldContainer = new JPanel(new GridLayout(0, 5)); // Panel to hold text fields
+    private JPanel textFieldContainer = new JPanel(new FlowLayout(FlowLayout.LEFT, 5, 5));
     private JTextField textField;
     private JButton saveButton;
     private int textboxCounter = 0;
@@ -142,6 +143,7 @@ public class StudentClasses extends JFrame {
 
 
         JPanel buttonsPanel = new JPanel(new BorderLayout());
+        buttonsPanel.setPreferredSize(new Dimension(100,40));
         buttonsPanel.add(newClassButton,BorderLayout.WEST);
         buttonsPanel.add(deleteClassButton, BorderLayout.EAST);
     

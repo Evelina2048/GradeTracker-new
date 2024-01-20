@@ -33,7 +33,7 @@ private Set set;
 JRadioButton studentButton;
 JRadioButton teacherButton;
 ButtonGroup teacherStudentGroup;
-int windowWidth = 800;
+int windowWidth = 750;
 int windowHeight = 500;
 
 //panels

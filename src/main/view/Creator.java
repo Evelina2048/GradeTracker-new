@@ -41,7 +41,8 @@ public class Creator {
     //private JPanel textFieldContainer;
     private ArrayList<String> classList = new ArrayList<>();
 
-    private JPanel textFieldContainer = new JPanel(new GridLayout(0, 5)); // Panel to hold text fields
+    //private JPanel textFieldContainer = new JPanel(new GridLayout(0, 5)); // Panel to hold text fields
+    private JPanel textFieldContainer = new JPanel(new FlowLayout(FlowLayout.LEFT));
     
     public Creator(Set set) {
         this.set = set;
@@ -254,7 +255,7 @@ public class Creator {
         textFieldContainer.add(textFieldPanel);
 
         textFieldContainer.setBackground(Color.orange);
-        window.add(textFieldContainer); //when commented, no issue... when uncommented, yes issue
+        window.add(textFieldContainer);
         //when commented no class gatherer appears
         textFieldFocusListener(window, textField, placeholder);
         windowFix(window);
