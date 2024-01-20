@@ -116,7 +116,7 @@ public class StudentStatCollect extends JFrame {
     //read classes array, first five classes
     private void DisplayClasses() {
         ///
-        creditTypeBox();
+        //creditTypeBox();
         ///
         //JTextField credits = creator.createTextBox(window, "Credits (optional)", 50, 50);
         String filePath = "/Users/evy/Documents/GradeTracker-new/src/main/view/UserInfo/StudentInfo/" + set.getUsername() +"/class"+ ".txt";
@@ -125,15 +125,13 @@ public class StudentStatCollect extends JFrame {
 
         //for (String className : classList) {
         readClass(classList);
-        //classLabelPanel.add(creator.createTextBox(window, "Credits (optional)", 50, 50));
         index++;
-        //}
-        //index++;
     }
 
     private void readClass(ArrayList<String> classList) { 
         System.out.println("test1: in read class");
         classLabel(classList);
+        creditTypeBox();
         gradePercentageBox();
         gradeTypeBox();
 
