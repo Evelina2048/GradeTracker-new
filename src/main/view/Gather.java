@@ -350,4 +350,9 @@ private int commaCount(String username) {
         choicesPanel.setVisible(false);
         backNextButtonsPanel.setVisible(false);
     }
+
+    public void setTextToUsername() {
+        String username = set.getUsername();
+        textField.setText(username);
+    }
 }

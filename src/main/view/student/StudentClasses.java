@@ -70,6 +70,7 @@ public class StudentClasses extends JFrame {
         backButton.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent e) {
                 Gather gather = new Gather(window, newUser, studentOrTeacher, existingOrNew, window.getX(), window.getY(), set);
+                gather.setTextToUsername();
                 gather.showWindow(window.getX(), window.getY());
                 hideWindow(); 
                //backButtonAction(main, newUser, studentOrTeacher, existingOrNew);

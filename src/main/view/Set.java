@@ -27,5 +27,4 @@ public class Set {
     public ArrayList<String> getClassList() {
         return classList;
     }
-
 }
