@@ -147,7 +147,7 @@ public class StudentClasses extends JFrame {
 
         buttonsPanel.setBorder(BorderFactory.createEmptyBorder(0, 10, 0, 10));
 
-        buttonsPanel.setPreferredSize(new Dimension(100,40));
+        buttonsPanel.setPreferredSize(new Dimension(100,0));
         buttonsPanel.add(newClassButton,BorderLayout.WEST);
         buttonsPanel.add(deleteClassButton, BorderLayout.EAST);
     

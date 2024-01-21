@@ -1,5 +1,6 @@
 package main.view;
 
+import javax.swing.BorderFactory;
 import javax.swing.JButton;
 import javax.swing.JFrame;
 import javax.swing.JTextField;
@@ -80,6 +81,7 @@ public class Creator {
         backNextButtonsPanel.add(backButton, BorderLayout.WEST);
         backNextButtonsPanel.add(saveButtonPanel, BorderLayout.CENTER);
         backNextButtonsPanel.add(nextButton, BorderLayout.EAST);
+        backNextButtonsPanel.setBorder(BorderFactory.createEmptyBorder(0, 0, 0, 0));
 
         return backNextButtonsPanel;
     }
