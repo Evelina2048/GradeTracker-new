@@ -43,6 +43,7 @@ public class Creator {
     private int textboxCounter;
     //private Set set = new Set();
     private JTextField textField;
+    private String placeholder;
     //private JPanel textFieldContainer;
     private ArrayList<String> classList = new ArrayList<>();
     private JButton saveButton;
@@ -217,11 +218,11 @@ public class Creator {
         }
     }
 
-    public void writeTextToFile(AtomicBoolean textFieldEmptied, String placeholder) {//, JButton saveButton) {
+    public void writeTextToFile(String filePath) {//, JButton saveButton) {
         //StudentClasses classes = new StudentClasses(null, null, null, null, set)
         String username = set.getUsername();
         System.out.println("usernameeeeeeeeeeee" + username);
-        String filePath = "/Users/evy/Documents/GradeTracker-new/src/main/view/UserInfo/StudentInfo/" + username + "/class.txt";
+        //String filePath = "/Users/evy/Documents/GradeTracker-new/src/main/view/UserInfo/StudentInfo/" + username + "/class.txt";
     
         try (BufferedWriter writer = new BufferedWriter(new FileWriter(filePath))) {
             List<String> textList = new ArrayList<>();
@@ -278,6 +279,7 @@ public class Creator {
 
         textFieldContainer.setBackground(Color.orange);
         window.add(textFieldContainer);
+        //window.add(set.getTextFieldContainer());
         //when commented no class gatherer appears
         textFieldFocusListener(window, textField, placeholder);
         windowFix(window);

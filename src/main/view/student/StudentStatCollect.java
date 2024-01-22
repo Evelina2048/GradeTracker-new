@@ -34,6 +34,7 @@ public class StudentStatCollect extends JFrame {
     private int index = 0;
     private int typeNumber = 0;
     private int numOfBoxes = 0;
+    
     //private boolean underMaxBoxes = (numOfBoxes <=27);
     private JPanel northCreditsPanel;
     private JPanel northNewTypePanel;
@@ -74,6 +75,10 @@ public class StudentStatCollect extends JFrame {
         saveButtonPanel.add(saveButton);
         saveButton.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent e) {
+                System.out.println("save button hit");
+                set.setTextfieldContainer(classLabelPanel);
+                creator.writeTextToFile("/Users/evy/Documents/GradeTracker-new/src/main/view/UserInfo/StudentInfo/" +set.getUsername() + "/types.txt");
+                
                 //nextButtonAction(existingOrNew, studentOrTeacher);
             }
         });

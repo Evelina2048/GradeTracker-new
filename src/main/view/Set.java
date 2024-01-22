@@ -3,11 +3,13 @@ package main.view;
 import java.util.ArrayList;
 
 import javax.swing.JPanel;
+import javax.swing.JTextField;
 
 public class Set {
     private String username;
     private ArrayList<String> classList;
     private Boolean saveable;
+    private JPanel textFieldContainer;
 
     public Set () {
 
@@ -35,5 +37,13 @@ public class Set {
 
     public boolean getSaveable() {
         return saveable;
+    }
+
+    public void setTextfieldContainer(JPanel theTextFieldContainer) {
+        textFieldContainer = theTextFieldContainer;
+    }
+
+    public JPanel getTextFieldContainer() {
+        return textFieldContainer;
     }
 }
