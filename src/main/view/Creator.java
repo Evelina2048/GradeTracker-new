@@ -222,11 +222,13 @@ public class Creator {
         //StudentClasses classes = new StudentClasses(null, null, null, null, set)
         String username = set.getUsername();
         System.out.println("usernameeeeeeeeeeee" + username);
+        JPanel textFieldContainer =  set.getTextFieldContainer();
+        //System.out.println("in the counter. panel components after adding: "+textFieldPanel.getComponentCount());
         //String filePath = "/Users/evy/Documents/GradeTracker-new/src/main/view/UserInfo/StudentInfo/" + username + "/class.txt";
     
         try (BufferedWriter writer = new BufferedWriter(new FileWriter(filePath))) {
             List<String> textList = new ArrayList<>();
-    
+            System.out.println("test?: textfieldcontaimner components"+textFieldContainer.getComponentCount());
             for (Component component : textFieldContainer.getComponents()) {
                 if (component instanceof JPanel) {
                     JPanel textFieldPanel = (JPanel) component;
@@ -234,9 +236,12 @@ public class Creator {
                         if (innerComponent instanceof JTextField) {
                             JTextField textField = (JTextField) innerComponent;
                             String text = textField.getText();
+                            System.out.println("test3: is instance of jtextfield");
                             if (text != placeholder && getEmptiedState(textField) == true && textList.contains(text) == false) {
+                                System.out.println("test2: made it to writer");
                                 //textList.add(text+"\n");
                                 writer.write(text+"\n");
+                                System.out.println("test1 text:" + text);
                                 classList.add(text);
                             }
                         }
@@ -265,6 +270,7 @@ public class Creator {
         textboxCounter++;
         if (textboxCounter <= 30) {
         JPanel textFieldPanel = new JPanel(new FlowLayout(FlowLayout.LEFT));
+        System.out.println("in the counter. panel components: "+textFieldPanel.getComponentCount());
         //textField = new JTextField(10); //not causing issue
         textField = decorate.decorateTextBox(placeholder);
         setEmptiedState(textField, false);
@@ -273,9 +279,11 @@ public class Creator {
         addDocumentListener(textField);
         ///
         textFieldPanel.add(textField); 
+        System.out.println("in the counter. panel components after adding: "+textFieldPanel.getComponentCount());
 
         textField.setPreferredSize(new Dimension(width, height));
         textFieldContainer.add(textFieldPanel);
+        System.out.println("in the counter. container components after adding: "+textFieldContainer.getComponentCount());
 
         textFieldContainer.setBackground(Color.orange);
         window.add(textFieldContainer);
@@ -284,8 +292,12 @@ public class Creator {
         textFieldFocusListener(window, textField, placeholder);
         windowFix(window);
         }
+        set.setTextfieldContainer(textFieldContainer);
         return textField;
     }
+    // private void addToContainer() {
+
+    // }
 
     private void addDocumentListener(JTextField textField2) {
         textField.getDocument().addDocumentListener(new DocumentListener() {

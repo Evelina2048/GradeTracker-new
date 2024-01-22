@@ -77,6 +77,7 @@ public class StudentStatCollect extends JFrame {
             public void actionPerformed(ActionEvent e) {
                 System.out.println("save button hit");
                 set.setTextfieldContainer(classLabelPanel);
+                saveButton.setEnabled(false);
                 creator.writeTextToFile("/Users/evy/Documents/GradeTracker-new/src/main/view/UserInfo/StudentInfo/" +set.getUsername() + "/types.txt");
                 
                 //nextButtonAction(existingOrNew, studentOrTeacher);

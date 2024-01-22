@@ -41,6 +41,7 @@ public class Set {
 
     public void setTextfieldContainer(JPanel theTextFieldContainer) {
         textFieldContainer = theTextFieldContainer;
+        System.out.println("in set textfieldcontainer"+getTextFieldContainer());
     }
 
     public JPanel getTextFieldContainer() {
