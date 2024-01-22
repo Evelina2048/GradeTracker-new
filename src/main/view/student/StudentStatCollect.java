@@ -70,6 +70,7 @@ public class StudentStatCollect extends JFrame {
 
         JButton saveButton = creator.saveButtonCreate();
         JPanel saveButtonPanel = new JPanel();
+        saveButton.setEnabled(false);
         saveButtonPanel.add(saveButton);
         saveButton.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent e) {

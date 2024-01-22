@@ -291,7 +291,7 @@ public class Creator {
         public void insertUpdate(DocumentEvent e) {
             System.out.println("placeholderfill"+placeholderFill);
                 saveButton.setEnabled(true);
-                userClickedEmpty = false;
+                userClickedEmpty = false;       
         }
 
         @Override
