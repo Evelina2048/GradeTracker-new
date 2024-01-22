@@ -10,6 +10,7 @@ public class Set {
     private ArrayList<String> classList;
     private Boolean saveable;
     private JPanel textFieldContainer;
+    private JPanel textFieldPanel;
 
     public Set () {
 
@@ -41,7 +42,15 @@ public class Set {
 
     public void setTextfieldContainer(JPanel theTextFieldContainer) {
         textFieldContainer = theTextFieldContainer;
-        System.out.println("in set textfieldcontainer"+getTextFieldContainer());
+        //System.out.println("in set textfieldcontainer"+getTextFieldContainer());
+    }
+
+    public void setTextFieldPanel(JPanel theTextFieldPanel) {
+        textFieldPanel = theTextFieldPanel;
+    }
+
+    public JPanel getTextFieldPanel() {
+        return textFieldPanel;
     }
 
     public JPanel getTextFieldContainer() {

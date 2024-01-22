@@ -36,6 +36,7 @@ import javax.swing.event.DocumentListener;
 
 public class Creator {
     private JPanel backNextButtonsPanel;
+    private JPanel textFieldPanel= new JPanel(new FlowLayout(FlowLayout.LEFT));
     private HashMap<JTextField, Boolean> textFieldEmptiedMap = new HashMap<>();
     private JTextField previousTextbox;
     private Set set;
@@ -228,11 +229,13 @@ public class Creator {
     
         try (BufferedWriter writer = new BufferedWriter(new FileWriter(filePath))) {
             List<String> textList = new ArrayList<>();
-            System.out.println("test?: textfieldcontaimner components"+textFieldContainer.getComponentCount());
+            System.out.println("test7: textfieldcontaimner components"+textFieldContainer.getComponentCount());
             for (Component component : textFieldContainer.getComponents()) {
+                System.out.println("test6: textfieldpanel components"+textFieldPanel.getComponentCount());
                 if (component instanceof JPanel) {
-                    JPanel textFieldPanel = (JPanel) component;
+                    System.out.println("test5: component is an instance of JPanel");
                     for (Component innerComponent : textFieldPanel.getComponents()) {
+                        System.out.println("test4: there is a innercomponent: "+ innerComponent);
                         if (innerComponent instanceof JTextField) {
                             JTextField textField = (JTextField) innerComponent;
                             String text = textField.getText();
@@ -268,9 +271,12 @@ public class Creator {
 
     public JTextField createTextBox(JFrame window, String placeholder, int width, int height) { //something here is causing the issue
         textboxCounter++;
+        if (set.getTextFieldPanel() != null) {
+        textFieldPanel = set.getTextFieldPanel();
+        }
+
         if (textboxCounter <= 30) {
-        JPanel textFieldPanel = new JPanel(new FlowLayout(FlowLayout.LEFT));
-        System.out.println("in the counter. panel components: "+textFieldPanel.getComponentCount());
+        System.out.println("test9: in the counter. panel components: "+textFieldPanel.getComponentCount());
         //textField = new JTextField(10); //not causing issue
         textField = decorate.decorateTextBox(placeholder);
         setEmptiedState(textField, false);
@@ -278,8 +284,9 @@ public class Creator {
         ///
         addDocumentListener(textField);
         ///
+
         textFieldPanel.add(textField); 
-        System.out.println("in the counter. panel components after adding: "+textFieldPanel.getComponentCount());
+        System.out.println("test8: in the counter. panel components after adding: "+textFieldPanel.getComponentCount());
 
         textField.setPreferredSize(new Dimension(width, height));
         textFieldContainer.add(textFieldPanel);
@@ -293,6 +300,7 @@ public class Creator {
         windowFix(window);
         }
         set.setTextfieldContainer(textFieldContainer);
+        set.setTextFieldPanel(textFieldPanel);
         return textField;
     }
     // private void addToContainer() {
