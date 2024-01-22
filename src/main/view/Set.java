@@ -7,6 +7,7 @@ import javax.swing.JPanel;
 public class Set {
     private String username;
     private ArrayList<String> classList;
+    private Boolean saveable;
 
     public Set () {
 
@@ -26,5 +27,13 @@ public class Set {
 
     public ArrayList<String> getClassList() {
         return classList;
+    }
+
+    public void setSaveable(Boolean canSave) {
+        saveable = canSave;
+    }
+
+    public boolean getSaveable() {
+        return saveable;
     }
 }

@@ -78,6 +78,7 @@ public class StudentClasses extends JFrame {
         });
 
         saveButton = creator.saveButtonCreate();
+        saveButton.setEnabled(false);
         JPanel saveButtonPanel = new JPanel();
         saveButtonPanel.add(saveButton);
 
@@ -117,7 +118,7 @@ public class StudentClasses extends JFrame {
         newClassButton.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent e) {
                 creator.createTextBox(window, "Enter Class Name", 50, 50);
-                saveButton.setEnabled(true);
+                //saveButton.setEnabled(true);
                 
         }
     });
@@ -156,6 +157,10 @@ public class StudentClasses extends JFrame {
 
         window.add(southContainer, BorderLayout.SOUTH);
 
+    }
+
+    private void setSaveEnabled(){
+        saveButton.setEnabled(true);
     }
 
     //create JButton "New Class"

@@ -29,6 +29,10 @@ import java.awt.GridLayout;
 import java.awt.FlowLayout;
 
 import main.view.Creator;
+import main.view.student.StudentClasses;
+
+import javax.swing.event.DocumentEvent;
+import javax.swing.event.DocumentListener;
 
 public class Creator {
     private JPanel backNextButtonsPanel;
@@ -41,6 +45,9 @@ public class Creator {
     private JTextField textField;
     //private JPanel textFieldContainer;
     private ArrayList<String> classList = new ArrayList<>();
+    private JButton saveButton;
+    private boolean userClickedEmpty;
+    private boolean placeholderFill;
 
     //private JPanel textFieldContainer = new JPanel(new GridLayout(0, 5)); // Panel to hold text fields
     private JPanel textFieldContainer = new JPanel(new FlowLayout(FlowLayout.LEFT));
@@ -60,7 +67,7 @@ public class Creator {
     }
 
     public JButton saveButtonCreate() {
-        JButton saveButton;
+        //saveButton;
 
         saveButton = new JButton("Save");
 
@@ -98,6 +105,9 @@ public class Creator {
                 }
                 if (textField.getText().equals(placeholder) && getEmptiedState(textField) == false) {
                     textField.setText("");
+                    userClickedEmpty = true;
+                    
+                    //document.putProperty("name", "clicked");
                     setEmptiedState(textField, true);
                     textField.setForeground(Color.BLACK);
                 }
@@ -105,12 +115,16 @@ public class Creator {
                 else if (!textField.getText().equals(placeholder) && !textField.getText().isEmpty() && getEmptiedState(textField) == true) {
                     textField.setForeground(Color.BLACK);
                     setEmptiedState(textField, true);
+                    //setSaveEnabled();
                 }
 
                 else if (textField.getText().equals(placeholder) && getEmptiedState(textField) == true) {
                     textField.setText(""); // Clear the placeholder text when the field gains focus
+                    userClickedEmpty = true;
                     textField.setForeground(Color.BLACK);
                     setEmptiedState(textField, true);
+                    set.setSaveable(true);
+                    //setSaveEnabled();
                 }
 
                 else {
@@ -125,11 +139,13 @@ public class Creator {
                 if (textField.getText().isEmpty()) {
                     textField.setForeground(Color.GRAY);
                     textField.setText(placeholder);
+                    //userClickedEmpty = true;
                     setEmptiedState(textField, false);
                 }
                 
                 else if (!textField.getText().isEmpty() && getEmptiedState(textField) == true){
                     textField.setForeground(Color.gray);
+                    //setSaveEnabled();
 
                 }
                 else {
@@ -249,8 +265,12 @@ public class Creator {
         if (textboxCounter <= 30) {
         JPanel textFieldPanel = new JPanel(new FlowLayout(FlowLayout.LEFT));
         //textField = new JTextField(10); //not causing issue
-        textField = decorate.decorateTextBox(placeholder); //not causing issue
+        textField = decorate.decorateTextBox(placeholder);
         setEmptiedState(textField, false);
+        placeholderFill = true;
+        ///
+        addDocumentListener(textField);
+        ///
         textFieldPanel.add(textField); 
 
         textField.setPreferredSize(new Dimension(width, height));
@@ -263,6 +283,35 @@ public class Creator {
         windowFix(window);
         }
         return textField;
+    }
+
+    private void addDocumentListener(JTextField textField2) {
+        textField.getDocument().addDocumentListener(new DocumentListener() {
+        @Override
+        public void insertUpdate(DocumentEvent e) {
+            System.out.println("placeholderfill"+placeholderFill);
+                saveButton.setEnabled(true);
+                userClickedEmpty = false;
+        }
+
+        @Override
+        public void removeUpdate(DocumentEvent e) {
+            System.out.println("removeUpdate");
+            if (userClickedEmpty = false) {
+                saveButton.setEnabled(true);
+            }
+        }
+
+        @Override
+        public void changedUpdate(DocumentEvent e) {
+            //saveButton.setEnabled(true);
+        }
+        });
+    }
+
+    private boolean isTextDeletedFromClick(DocumentEvent e) {
+        Object nameProperty = e.getDocument().getProperty("name");
+        return nameProperty != null && nameProperty.equals("clicked");
     }
 
     public JPanel getTextFieldContainer() {
@@ -285,6 +334,10 @@ public class Creator {
             windowFix(window);
             textboxCounter--;
         }
+    }
+
+    private void setSaveEnabled() {
+        saveButton.setEnabled(true);
     }
 
     public void windowFix(JFrame window) {

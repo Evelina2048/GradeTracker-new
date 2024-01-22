@@ -303,7 +303,7 @@ private int commaCount(String username) {
         String line;
         try {
             while ((line = reader.readLine()) != null) {
-                if (line.equals(username)) {//if matches username
+                if (line.equals(username) && set.getUsername() == null) {//if matches username
                     errorMessageSetUp("<html><center>Username already exists.<br> Please choose another.",200,100);
                     usernametaken = true;
                     break;
@@ -354,5 +354,6 @@ private int commaCount(String username) {
     public void setTextToUsername() {
         String username = set.getUsername();
         textField.setText(username);
+        //textField.setEditable(false);
     }
 }
