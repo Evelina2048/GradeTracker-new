@@ -1,6 +1,7 @@
 package main.view;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 
 import javax.swing.JPanel;
 import javax.swing.JTextField;
@@ -11,6 +12,7 @@ public class Set {
     private Boolean saveable;
     private JPanel textFieldContainer;
     private JPanel textFieldPanel;
+    private HashMap<JTextField, Boolean> textFieldEmptiedMap = new HashMap<>();
 
     public Set () {
 
@@ -55,5 +57,13 @@ public class Set {
 
     public JPanel getTextFieldContainer() {
         return textFieldContainer;
+    }
+
+    public boolean getEmptiedState(JTextField textField) {
+        return textFieldEmptiedMap.getOrDefault(textField, false);
+    }
+
+    public void setEmptiedState(JTextField textField, boolean state) {
+        textFieldEmptiedMap.put(textField, state);
     }
 }

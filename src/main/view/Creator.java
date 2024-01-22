@@ -37,7 +37,7 @@ import javax.swing.event.DocumentListener;
 public class Creator {
     private JPanel backNextButtonsPanel;
     private JPanel textFieldPanel= new JPanel(new FlowLayout(FlowLayout.LEFT));
-    private HashMap<JTextField, Boolean> textFieldEmptiedMap = new HashMap<>();
+    // private HashMap<JTextField, Boolean> textFieldEmptiedMap = new HashMap<>();
     private JTextField previousTextbox;
     private Set set;
     private Decorator decorate = new Decorator();
@@ -105,26 +105,26 @@ public class Creator {
                     previousTextbox.setForeground(Color.LIGHT_GRAY);
 
                 }
-                if (textField.getText().equals(placeholder) && getEmptiedState(textField) == false) {
+                if (textField.getText().equals(placeholder) && set.getEmptiedState(textField) == false) {
                     textField.setText("");
                     userClickedEmpty = true;
                     
                     //document.putProperty("name", "clicked");
-                    setEmptiedState(textField, true);
+                    set.setEmptiedState(textField, true);
                     textField.setForeground(Color.BLACK);
                 }
 
-                else if (!textField.getText().equals(placeholder) && !textField.getText().isEmpty() && getEmptiedState(textField) == true) {
+                else if (!textField.getText().equals(placeholder) && !textField.getText().isEmpty() && set.getEmptiedState(textField) == true) {
                     textField.setForeground(Color.BLACK);
-                    setEmptiedState(textField, true);
+                    set.setEmptiedState(textField, true);
                     //setSaveEnabled();
                 }
 
-                else if (textField.getText().equals(placeholder) && getEmptiedState(textField) == true) {
+                else if (textField.getText().equals(placeholder) && set.getEmptiedState(textField) == true) {
                     textField.setText(""); // Clear the placeholder text when the field gains focus
                     userClickedEmpty = true;
                     textField.setForeground(Color.BLACK);
-                    setEmptiedState(textField, true);
+                    set.setEmptiedState(textField, true);
                     set.setSaveable(true);
                     //setSaveEnabled();
                 }
@@ -142,10 +142,10 @@ public class Creator {
                     textField.setForeground(Color.GRAY);
                     textField.setText(placeholder);
                     //userClickedEmpty = true;
-                    setEmptiedState(textField, false);
+                    set.setEmptiedState(textField, false);
                 }
                 
-                else if (!textField.getText().isEmpty() && getEmptiedState(textField) == true){
+                else if (!textField.getText().isEmpty() && set.getEmptiedState(textField) == true){
                     textField.setForeground(Color.gray);
                     //setSaveEnabled();
 
@@ -186,11 +186,11 @@ public class Creator {
                     System.out.println("3");
                     textField.setText(placeholder);
                     textField.setForeground(Color.GRAY);
-                    setEmptiedState(textField, false);
+                    set.setEmptiedState(textField, false);
                     window.requestFocusInWindow();
                 }
 
-                else if (pointNotInTextbox &&  getEmptiedState(textField) == true && !textField.getText().isEmpty()) {
+                else if (pointNotInTextbox &&  set.getEmptiedState(textField) == true && !textField.getText().isEmpty()) {
                     window.requestFocusInWindow();
                 }
 
@@ -240,7 +240,10 @@ public class Creator {
                             JTextField textField = (JTextField) innerComponent;
                             String text = textField.getText();
                             System.out.println("test3: is instance of jtextfield");
-                            if (text != placeholder && getEmptiedState(textField) == true && textList.contains(text) == false) {
+
+                            //getEmptiedState(textfield) is issue
+                            //if (text != placeholder && getEmptiedState(textField) == true && textList.contains(text) == false) {
+                            if (set.getEmptiedState(textField)) {
                                 System.out.println("test2: made it to writer");
                                 //textList.add(text+"\n");
                                 writer.write(text+"\n");
@@ -279,7 +282,7 @@ public class Creator {
         System.out.println("test9: in the counter. panel components: "+textFieldPanel.getComponentCount());
         //textField = new JTextField(10); //not causing issue
         textField = decorate.decorateTextBox(placeholder);
-        setEmptiedState(textField, false);
+        set.setEmptiedState(textField, false);
         placeholderFill = true;
         ///
         addDocumentListener(textField);
@@ -340,13 +343,13 @@ public class Creator {
         return textFieldContainer;
     }
  
-    private boolean getEmptiedState(JTextField textField) {
-        return textFieldEmptiedMap.getOrDefault(textField, false);
-    }
+    // private boolean getEmptiedState(JTextField textField) {
+    //     return textFieldEmptiedMap.getOrDefault(textField, false);
+    // }
 
-    private void setEmptiedState(JTextField textField, boolean state) {
-        textFieldEmptiedMap.put(textField, state);
-    }
+    // private void setEmptiedState(JTextField textField, boolean state) {
+    //     textFieldEmptiedMap.put(textField, state);
+    // }
 
     public void deleteTextBox(JFrame window, JPanel container) {
         int componentsCount = container.getComponentCount();
