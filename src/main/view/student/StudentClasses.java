@@ -85,6 +85,7 @@ public class StudentClasses extends JFrame {
         saveButton.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent e) {
                 creator.writeFolderToFile(textFieldEmptied);
+
                 creator.writeTextToFile("/Users/evy/Documents/GradeTracker-new/src/main/view/UserInfo/StudentInfo/" + set.getUsername() + "/class.txt");
                 saveButton.setEnabled(false);
                 //nextButtonAction(existingOrNew, studentOrTeacher);
@@ -101,6 +102,7 @@ public class StudentClasses extends JFrame {
                 creator.writeFolderToFile(textFieldEmptied);
                 creator.writeTextToFile("/Users/evy/Documents/GradeTracker-new/src/main/view/UserInfo/StudentInfo/" + set.getUsername() + "/class.txt");
                 hideWindow();
+                creator.hideContainer();
                 StudentStatCollect statCollect = new StudentStatCollect(window, newUser, studentOrTeacher, existingOrNew, set);
             }
         });

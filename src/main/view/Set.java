@@ -42,29 +42,29 @@ public class Set {
         return saveable;
     }
 
-    public void setTextFieldContainer(JPanel theTextFieldContainer) {
-        textFieldContainer = theTextFieldContainer;
-        //System.out.println("in set textfieldcontainer"+getTextFieldContainer());
-    }
+    // public void setTextFieldContainer(JPanel theTextFieldContainer) {
+    //     textFieldContainer = theTextFieldContainer;
+    //     //System.out.println("in set textfieldcontainer"+getTextFieldContainer());
+    // }
 
-    public void setTextFieldPanel(JPanel theTextFieldPanel) {
-        textFieldPanel = theTextFieldPanel;
-    }
+    // public void setTextFieldPanel(JPanel theTextFieldPanel) {
+    //     textFieldPanel = theTextFieldPanel;
+    // }
 
-    public JPanel getTextFieldPanel() {
-        return textFieldPanel;
-    }
+    // public JPanel getTextFieldPanel() {
+    //     return textFieldPanel;
+    // }
 
-    public JPanel getTextFieldContainer() {
-        //JPanel textFieldContainer = new JPanel();
-        //textFieldContainer.add(textFieldPanel);
-        return textFieldContainer;
-    }
+    // public JPanel getTextFieldContainer() {
+    //     //JPanel textFieldContainer = new JPanel();
+    //     //textFieldContainer.add(textFieldPanel);
+    //     return textFieldContainer;
+    // }
 
-    public void resetContainerAndPanel() {
-        textFieldContainer = null;
-        textFieldPanel = null;
-    }
+    // public void resetContainerAndPanel() {
+    //     textFieldContainer = null;
+    //     textFieldPanel = null;
+    // }
 
     public boolean getEmptiedState(JTextField textField) {
         return textFieldEmptiedMap.getOrDefault(textField, false);
