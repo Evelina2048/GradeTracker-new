@@ -394,6 +394,7 @@ public class Creator {
                 traverseComponents(writer, (Container) component);
             }
         }
+        set.setClassList(classList);
     }
 
     public void setClassList() {
