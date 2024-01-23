@@ -34,6 +34,17 @@ import main.view.student.StudentClasses;
 import javax.swing.event.DocumentEvent;
 import javax.swing.event.DocumentListener;
 
+import javax.swing.JPanel;
+import javax.swing.JTextField;
+import java.awt.Container;
+import java.io.BufferedWriter;
+import java.io.FileWriter;
+import java.io.IOException;
+import java.awt.Component;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
+
+
 public class Creator {
     private JPanel backNextButtonsPanel;
     private JPanel textFieldPanel= new JPanel(new FlowLayout(FlowLayout.LEFT));
@@ -225,30 +236,32 @@ public class Creator {
         debugPrintPanel();
         String username = set.getUsername();
         System.out.println("username " + username);
- 
-        try (BufferedWriter writer = new BufferedWriter(new FileWriter(filePath))) {
-            System.out.println("writetexttofile2 in the try statement"+ textFieldPanel.getComponentCount());
-            debugPrintPanel();
-            for (Component component : textFieldPanel.getComponents()) {
-                System.out.println("p");
-                if (component instanceof JTextField) {
-                    JTextField textField = (JTextField) component;
-                    String text = textField.getText();
-                    System.out.println("q");
+        System.out.println("Class List: " + classList);
+        // set.setClassList(classList);
+        traversePanelAndWrite(filePath, getTextFieldContainer());
+        // try (BufferedWriter writer = new BufferedWriter(new FileWriter(filePath))) {
+        //     System.out.println("writetexttofile2 in the try statement"+ textFieldPanel.getComponentCount());
+        //     debugPrintPanel();
+        //     for (Component component : textFieldPanel.getComponents()) {
+        //         System.out.println("p");
+        //         if (component instanceof JTextField) {
+        //             JTextField textField = (JTextField) component;
+        //             String text = textField.getText();
+        //             System.out.println("q");
 
-                    if (!text.isBlank() && !text.equals(placeholder) && set.getEmptiedState(textField) && !classList.contains(text)) {
-                        System.out.println("r");
-                        writer.write(text + "\n");
-                        classList.add(text);
-                    }
-                }
-            }
-            set.setClassList(classList);
-            System.out.println("writetexttopanel3 classlist,");
-            debugPrintPanel();
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
+        //             if (!text.isBlank() && !text.equals(placeholder) && set.getEmptiedState(textField) && !classList.contains(text)) {
+        //                 System.out.println("r");
+        //                 writer.write(text + "\n");
+        //                 classList.add(text);
+        //             }
+        //         }
+        //     }
+        //     set.setClassList(classList);
+        //     System.out.println("writetexttopanel3 classlist,");
+        //     debugPrintPanel();
+        // } catch (IOException e) {
+        //     e.printStackTrace();
+        // }
         //set.resetContainerAndPanel();
     }
 
@@ -341,6 +354,7 @@ public class Creator {
     }
 
     public void setTextFieldPanel(JPanel myPanel) {
+        System.out.println("in set text field panel ");
         System.out.println("components: "+textFieldPanel.getComponentCount());
         textFieldPanel = myPanel;
     }
@@ -348,4 +362,39 @@ public class Creator {
     public void debugPanelComponentCount() {
         System.out.println(textFieldPanel.getComponentCount());
     }
+
+    ////
+    public void traversePanelAndWrite(String filePath, Container container) {
+        try (BufferedWriter writer = new BufferedWriter(new FileWriter(filePath))) {
+            traverseComponents(writer, container);
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+    }
+    
+    private void traverseComponents(BufferedWriter writer, Container container) throws IOException {
+        for (Component component : container.getComponents()) {
+            if (component instanceof JTextField) {
+                JTextField textField = (JTextField) component;
+                String text = textField.getText();
+                System.out.println("q");
+    
+                if (!text.isBlank() && !text.equals(placeholder) && set.getEmptiedState(textField) && !classList.contains(text)) {
+                    System.out.println("r");
+                    classList.add(text);
+                    System.out.println("clas list:" + classList);
+                    writer.write(text + "\n");
+                    //classList.add(text);
+                }
+            } else if (component instanceof Container) {
+                traverseComponents(writer, (Container) component);
+            }
+        }
+    }
+
+    public void setClassList() {
+        System.out.println("setting class list");
+        set.setClassList(classList);
+    }
+    
 }
