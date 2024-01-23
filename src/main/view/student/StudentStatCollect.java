@@ -14,6 +14,7 @@ import javax.swing.JLabel;
 import java.awt.event.ActionListener;
 import java.awt.event.ActionEvent;
 import java.awt.FlowLayout;
+import java.awt.Component;
 
 import java.util.ArrayList;
 import main.view.NewUser;
@@ -40,6 +41,7 @@ public class StudentStatCollect extends JFrame {
     private JPanel northNewTypePanel;
 
     public StudentStatCollect(JFrame main,NewUser newUser, String studentOrTeacher, String existingOrNew, Set set) {
+        //set.resetContainerAndPanel();
         this.window = main;
         this.set = set;
         creator = new Creator(set);
@@ -76,8 +78,23 @@ public class StudentStatCollect extends JFrame {
         saveButton.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent e) {
                 System.out.println("save button hit");
-                set.setTextfieldContainer(classLabelPanel);
                 saveButton.setEnabled(false);
+                //container.add(classLabelPanel); //problem
+                for (Component component : set.getTextFieldPanel().getComponents()) {
+                    if (component instanceof JTextField) {
+                        JTextField textField = (JTextField) component;
+                        System.out.println("test13: panel: "+textField.getText());
+                    }
+                }
+                
+                creator.updateTextBoxContainerPanel();
+                for (Component component : set.getTextFieldPanel().getComponents()) {
+                    if (component instanceof JTextField) {
+                        JTextField textField = (JTextField) component;
+                        System.out.println("test11.5: panel: "+textField.getText());
+                    }
+                }
+    
                 creator.writeTextToFile("/Users/evy/Documents/GradeTracker-new/src/main/view/UserInfo/StudentInfo/" +set.getUsername() + "/types.txt");
                 
                 //nextButtonAction(existingOrNew, studentOrTeacher);
@@ -170,6 +187,10 @@ public class StudentStatCollect extends JFrame {
         gradeTypeBox();
 
         typeNumber++;
+        container.add(classLabelPanel);
+        //set.setTextFieldPanel(classLabelPanel);
+        //set.setTextFieldContainer(container);
+
         window.add(classLabelPanel, BorderLayout.CENTER);
         creator.windowFix(window);
     }

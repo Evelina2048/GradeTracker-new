@@ -42,7 +42,7 @@ public class Set {
         return saveable;
     }
 
-    public void setTextfieldContainer(JPanel theTextFieldContainer) {
+    public void setTextFieldContainer(JPanel theTextFieldContainer) {
         textFieldContainer = theTextFieldContainer;
         //System.out.println("in set textfieldcontainer"+getTextFieldContainer());
     }
@@ -56,7 +56,14 @@ public class Set {
     }
 
     public JPanel getTextFieldContainer() {
+        //JPanel textFieldContainer = new JPanel();
+        //textFieldContainer.add(textFieldPanel);
         return textFieldContainer;
+    }
+
+    public void resetContainerAndPanel() {
+        textFieldContainer = null;
+        textFieldPanel = null;
     }
 
     public boolean getEmptiedState(JTextField textField) {
