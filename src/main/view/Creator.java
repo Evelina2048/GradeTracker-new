@@ -284,6 +284,7 @@ public class Creator {
             textFieldFocusListener(window, textField, placeholder);
             windowFix(window);
         }
+        setTextFieldPanel(textFieldPanel);
         return textField;
     }
 
@@ -312,7 +313,8 @@ public class Creator {
     }
 
     public JPanel getTextFieldContainer() {
-        return textFieldContainer;
+        return textFieldPanel;
+        //return textFieldContainer;
     }
 
     public void resetTextFieldContainer() {
@@ -366,6 +368,7 @@ public class Creator {
     ////
     public void traversePanelAndWrite(String filePath, Container container) {
         try (BufferedWriter writer = new BufferedWriter(new FileWriter(filePath))) {
+            System.out.println("final filepath: "+ filePath);
             traverseComponents(writer, container);
         } catch (IOException e) {
             e.printStackTrace();
@@ -384,6 +387,7 @@ public class Creator {
                     classList.add(text);
                     System.out.println("clas list:" + classList);
                     writer.write(text + "\n");
+    
                     //classList.add(text);
                 }
             } else if (component instanceof Container) {

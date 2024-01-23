@@ -88,7 +88,7 @@ public class StudentClasses extends JFrame {
                 creator.setClassList();
                 //creator.anel();
                 //creator.writeTextToFile("/Users/evy/Documents/GradeTracker-new/src/main/view/UserInfo/StudentInfo/" + set.getUsername() + "/class.txt");
-                creator.writeTextToFile("/Users/evy/Documents/GradeTracker-new/src/main/view/UserInfo/StudentInfo/" + set.getUsername());
+                creator.writeTextToFile("/Users/evy/Documents/GradeTracker-new/src/main/view/UserInfo/StudentInfo/" + set.getUsername() + "/class.txt");
                 saveButton.setEnabled(false);
                 //nextButtonAction(existingOrNew, studentOrTeacher);
             }
