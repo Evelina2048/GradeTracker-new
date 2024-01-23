@@ -224,28 +224,41 @@ public class Creator {
         String username = set.getUsername();
         System.out.println("usernameeeeeeeeeeee" + username);
         JPanel textFieldContainer =  set.getTextFieldContainer();
+        JPanel textFieldPanel = set.getTextFieldPanel();
         //System.out.println("in the counter. panel components after adding: "+textFieldPanel.getComponentCount());
         //String filePath = "/Users/evy/Documents/GradeTracker-new/src/main/view/UserInfo/StudentInfo/" + username + "/class.txt";
     
+        ///
+        for (Component component : set.getTextFieldPanel().getComponents()) {
+            if (component instanceof JTextField) {
+                JTextField textField = (JTextField) component;
+                System.out.println("test7.5: panel: "+textField.getText());
+            }
+        }
+        ///
         try (BufferedWriter writer = new BufferedWriter(new FileWriter(filePath))) {
             List<String> textList = new ArrayList<>();
             System.out.println("test7: textfieldcontaimner components"+textFieldContainer.getComponentCount());
             for (Component component : textFieldContainer.getComponents()) {
                 System.out.println("test6: textfieldpanel components"+textFieldPanel.getComponentCount());
                 if (component instanceof JPanel) {
+                    ///
+            
+
+                    ///
                     System.out.println("test5: component is an instance of JPanel");
                     for (Component innerComponent : textFieldPanel.getComponents()) {
-                        System.out.println("test4: there is a innercomponent: "+ innerComponent);
+                        System.out.println("test4: there is a innercomponent: ");
                         if (innerComponent instanceof JTextField) {
                             JTextField textField = (JTextField) innerComponent;
                             String text = textField.getText();
                             System.out.println("test3: is instance of jtextfield");
 
                             //getEmptiedState(textfield) is issue
-                            //if (text != placeholder && getEmptiedState(textField) == true && textList.contains(text) == false) {
-                            if (set.getEmptiedState(textField)) {
+                            if (text != placeholder && set.getEmptiedState(textField) == true && textList.contains(text) == false) {
+                            //if (set.getEmptiedState(textField)) {
                                 System.out.println("test2: made it to writer");
-                                //textList.add(text+"\n");
+                                textList.add(text+"\n");
                                 writer.write(text+"\n");
                                 System.out.println("test1 text:" + text);
                                 classList.add(text);
@@ -259,6 +272,7 @@ public class Creator {
         } catch (IOException e) {
             e.printStackTrace();
         }
+        set.resetContainerAndPanel();
     }
 
 
@@ -273,12 +287,26 @@ public class Creator {
     }
 
     public JTextField createTextBox(JFrame window, String placeholder, int width, int height) { //something here is causing the issue
+        for (Component component : textFieldPanel.getComponents()) {
+            if (component instanceof JTextField) {
+                JTextField textField = (JTextField) component;
+                System.out.println("test11: panel: "+textField.getText());
+            }
+        }
         textboxCounter++;
         if (set.getTextFieldPanel() != null) {
         textFieldPanel = set.getTextFieldPanel();
         }
 
         if (textboxCounter <= 30) {
+        //for (Component components: textFieldContainer.getComponents()) {
+        for (Component component : textFieldPanel.getComponents()) {
+            if (component instanceof JTextField) {
+                JTextField textField = (JTextField) component;
+                System.out.println("test10: panel: "+textField.getText());
+            }
+        }
+        //}
         System.out.println("test9: in the counter. panel components: "+textFieldPanel.getComponentCount());
         //textField = new JTextField(10); //not causing issue
         textField = decorate.decorateTextBox(placeholder);
@@ -289,21 +317,39 @@ public class Creator {
         ///
 
         textFieldPanel.add(textField); 
+        set.setTextFieldPanel(textFieldPanel);//////
         System.out.println("test8: in the counter. panel components after adding: "+textFieldPanel.getComponentCount());
-
+        ////
+        for (Component component : set.getTextFieldPanel().getComponents()) {
+            if (component instanceof JTextField) {
+                JTextField textField = (JTextField) component;
+                System.out.println("test7.75: panel: "+textField.getText());
+            }
+        }
+        /////
         textField.setPreferredSize(new Dimension(width, height));
         textFieldContainer.add(textFieldPanel);
+         ////
+         for (Component component : set.getTextFieldPanel().getComponents()) {
+            if (component instanceof JTextField) {
+                JTextField textField = (JTextField) component;
+                System.out.println("test7.7: panel: "+textField.getText());
+            }
+        }
+        /////
+
+        set.setTextFieldContainer(textFieldContainer);
         System.out.println("in the counter. container components after adding: "+textFieldContainer.getComponentCount());
 
         textFieldContainer.setBackground(Color.orange);
+        set.setTextFieldContainer(textFieldContainer);
+        set.setTextFieldPanel(textFieldPanel);
         window.add(textFieldContainer);
         //window.add(set.getTextFieldContainer());
         //when commented no class gatherer appears
         textFieldFocusListener(window, textField, placeholder);
         windowFix(window);
         }
-        set.setTextfieldContainer(textFieldContainer);
-        set.setTextFieldPanel(textFieldPanel);
         return textField;
     }
     // private void addToContainer() {
@@ -342,6 +388,10 @@ public class Creator {
     public JPanel getTextFieldContainer() {
         return textFieldContainer;
     }
+
+    public void resetTextFieldContainer() {
+
+    }
  
     // private boolean getEmptiedState(JTextField textField) {
     //     return textFieldEmptiedMap.getOrDefault(textField, false);
@@ -372,5 +422,10 @@ public class Creator {
 
     public void hideContainer() {
         textFieldContainer.setVisible(false);
+    }
+
+    public void updateTextBoxContainerPanel() {
+        set.setTextFieldPanel(textFieldPanel);
+        set.setTextFieldContainer(textFieldContainer);
     }
 }
