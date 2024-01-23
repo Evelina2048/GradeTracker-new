@@ -50,6 +50,7 @@ public class Creator {
     private JButton saveButton;
     private boolean userClickedEmpty;
     private boolean placeholderFill;
+    private ArrayList<String>textFieldPanelText = new ArrayList<>();
 
     //private JPanel textFieldContainer = new JPanel(new GridLayout(0, 5)); // Panel to hold text fields
     private JPanel textFieldContainer = new JPanel(new FlowLayout(FlowLayout.LEFT));
@@ -211,7 +212,7 @@ public class Creator {
     public void writeFolderToFile(AtomicBoolean textFieldEmptied) {//, JButton saveButton) {
         //StudentClasses classes = new StudentClasses(null, null, null, null, set)
         String username = set.getUsername();
-        System.out.println("usernameeeeeeeeeeee" + username);
+        System.out.println("username " + username);
         String folderPath = "/Users/evy/Documents/GradeTracker-new/src/main/view/UserInfo/StudentInfo/"+username; //+ username;
         File folder = new File(folderPath);
         if (!folder.exists()) {
@@ -220,22 +221,31 @@ public class Creator {
     }
 
     public void writeTextToFile(String filePath) {//, JButton saveButton) {
+        System.out.println("writetexttofile1 made it into write text to file");
+        debugPrintPanel();
         String username = set.getUsername();
-        System.out.println("usernameeeeeeeeeeee" + username);
+        System.out.println("username " + username);
  
         try (BufferedWriter writer = new BufferedWriter(new FileWriter(filePath))) {
+            System.out.println("writetexttofile2 in the try statement"+ textFieldPanel.getComponentCount());
+            debugPrintPanel();
             for (Component component : textFieldPanel.getComponents()) {
+                System.out.println("p");
                 if (component instanceof JTextField) {
                     JTextField textField = (JTextField) component;
                     String text = textField.getText();
+                    System.out.println("q");
+
                     if (!text.isBlank() && !text.equals(placeholder) && set.getEmptiedState(textField) && !classList.contains(text)) {
+                        System.out.println("r");
                         writer.write(text + "\n");
                         classList.add(text);
                     }
                 }
             }
             set.setClassList(classList);
-            System.out.println("classlist"+classList);
+            System.out.println("writetexttopanel3 classlist,");
+            debugPrintPanel();
         } catch (IOException e) {
             e.printStackTrace();
         }
@@ -243,19 +253,23 @@ public class Creator {
     }
 
     public JTextField createTextBox(JFrame window, String placeholder, int width, int height) { //something here is causing the issue
-     
+        debugPanelComponentCount();
         textboxCounter++;
         if (textboxCounter <= 30) {
-        textField = decorate.decorateTextBox(placeholder);
-        set.setEmptiedState(textField, false);
-        placeholderFill = true;
-        addDocumentListener(textField);
-        textFieldPanel.add(textField); 
-        textField.setPreferredSize(new Dimension(width, height));
-        textFieldContainer.add(textFieldPanel);
-        window.add(textFieldPanel);
-        textFieldFocusListener(window, textField, placeholder);
-        windowFix(window);
+            textField = decorate.decorateTextBox(placeholder);
+            set.setEmptiedState(textField, false);
+            placeholderFill = true;
+            addDocumentListener(textField);
+            debugPanelComponentCount();
+            System.out.println("^before adding "+ textField.getText());
+            textFieldPanel.add(textField); 
+            debugPanelComponentCount();
+            System.out.println("^after adding");
+            textFieldPanelText.add(textField.getText());
+            textField.setPreferredSize(new Dimension(width, height));
+            window.add(textFieldPanel);
+            textFieldFocusListener(window, textField, placeholder);
+            windowFix(window);
         }
         return textField;
     }
@@ -266,7 +280,7 @@ public class Creator {
         public void insertUpdate(DocumentEvent e) {
             System.out.println("placeholderfill"+placeholderFill);
                 saveButton.setEnabled(true);
-                userClickedEmpty = false;       
+                userClickedEmpty = false; 
         }
 
         @Override
@@ -314,5 +328,24 @@ public class Creator {
     public void updateTextBoxContainerPanel() {
         //set.setTextFieldPanel(textFieldPanel);
         //set.setTextFieldContainer(textFieldContainer);
+    }
+
+    public void debugPrintPanel() {
+        //System.out.println("textfieldpaneltext"+textFieldPanelText);
+        for (Component component : textFieldPanel.getComponents()) {
+            if (component instanceof JTextField) {
+                JTextField textField = (JTextField) component;
+                System.out.println("debugPrintPanel " + textField.getText());
+            }
+        }
+    }
+
+    public void setTextFieldPanel(JPanel myPanel) {
+        System.out.println("components: "+textFieldPanel.getComponentCount());
+        textFieldPanel = myPanel;
+    }
+
+    public void debugPanelComponentCount() {
+        System.out.println(textFieldPanel.getComponentCount());
     }
 }
