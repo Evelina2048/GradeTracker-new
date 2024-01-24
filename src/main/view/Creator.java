@@ -240,6 +240,7 @@ public class Creator {
                 if (component instanceof JTextField) {
                     JTextField textField = (JTextField) component;
                     String text = textField.getText().trim();
+                    classList.add(text);
     
                     if (!text.isEmpty()) {
                         writer.write(text + "\n");
@@ -249,6 +250,7 @@ public class Creator {
         } catch (IOException e) {
             e.printStackTrace();
         }
+        set.setClassList(classList);
         //traversePanelAndWrite(filePath, getTextFieldContainer());
     }
 
@@ -316,7 +318,7 @@ public class Creator {
             windowFix(window);
             textboxCounter--;
         }
-        textFieldPanel = container;
+        //textFieldPanel = container;
     }
     public void windowFix(JFrame window) {
         window.revalidate(); 

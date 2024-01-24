@@ -210,7 +210,6 @@ public class StudentStatCollect extends JFrame {
         JPanel classLabelPanelContainer = new JPanel(new BorderLayout());
         //JLabel classLabel = new JLabel("h");
         JLabel classLabel = new JLabel(set.getClassList().get(index)); //new JLabel("h"); 
-        //allBoxesPanel.add(classLabel);
         classLabelPanelContainer.add(classLabel);
         classLabelPanelContainer.setPreferredSize(new Dimension(155,50));
         northClassPanelContainer.add(classLabelPanelContainer, BorderLayout.NORTH);
