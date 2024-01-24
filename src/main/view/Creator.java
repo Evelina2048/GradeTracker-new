@@ -62,6 +62,7 @@ public class Creator {
     private boolean userClickedEmpty;
     private boolean placeholderFill;
     private ArrayList<String>textFieldPanelText = new ArrayList<>();
+    
 
     //private JPanel textFieldContainer = new JPanel(new GridLayout(0, 5)); // Panel to hold text fields
     private JPanel textFieldContainer = new JPanel(new FlowLayout(FlowLayout.LEFT));
@@ -232,37 +233,23 @@ public class Creator {
     }
 
     public void writeTextToFile(String filePath) {//, JButton saveButton) {
-        System.out.println("writetexttofile1 made it into write text to file");
         debugPrintPanel();
         String username = set.getUsername();
-        System.out.println("username " + username);
-        System.out.println("Class List: " + classList);
-        // set.setClassList(classList);
-        traversePanelAndWrite(filePath, getTextFieldContainer());
-        // try (BufferedWriter writer = new BufferedWriter(new FileWriter(filePath))) {
-        //     System.out.println("writetexttofile2 in the try statement"+ textFieldPanel.getComponentCount());
-        //     debugPrintPanel();
-        //     for (Component component : textFieldPanel.getComponents()) {
-        //         System.out.println("p");
-        //         if (component instanceof JTextField) {
-        //             JTextField textField = (JTextField) component;
-        //             String text = textField.getText();
-        //             System.out.println("q");
-
-        //             if (!text.isBlank() && !text.equals(placeholder) && set.getEmptiedState(textField) && !classList.contains(text)) {
-        //                 System.out.println("r");
-        //                 writer.write(text + "\n");
-        //                 classList.add(text);
-        //             }
-        //         }
-        //     }
-        //     set.setClassList(classList);
-        //     System.out.println("writetexttopanel3 classlist,");
-        //     debugPrintPanel();
-        // } catch (IOException e) {
-        //     e.printStackTrace();
-        // }
-        //set.resetContainerAndPanel();
+        try (BufferedWriter writer = new BufferedWriter(new FileWriter(filePath))) {
+            for (Component component : textFieldPanel.getComponents()) {
+                if (component instanceof JTextField) {
+                    JTextField textField = (JTextField) component;
+                    String text = textField.getText().trim();
+    
+                    if (!text.isEmpty()) {
+                        writer.write(text + "\n");
+                    }
+                }
+            }
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+        //traversePanelAndWrite(filePath, getTextFieldContainer());
     }
 
     public JTextField createTextBox(JFrame window, String placeholder, int width, int height) { //something here is causing the issue
@@ -329,6 +316,7 @@ public class Creator {
             windowFix(window);
             textboxCounter--;
         }
+        textFieldPanel = container;
     }
     public void windowFix(JFrame window) {
         window.revalidate(); 
@@ -367,7 +355,7 @@ public class Creator {
 
     ////
     public void traversePanelAndWrite(String filePath, Container container) {
-        try (BufferedWriter writer = new BufferedWriter(new FileWriter(filePath))) {
+        try (BufferedWriter writer = new BufferedWriter(new FileWriter(filePath, true))) {
             System.out.println("final filepath: "+ filePath);
             traverseComponents(writer, container);
         } catch (IOException e) {
@@ -385,16 +373,13 @@ public class Creator {
                 if (!text.isBlank() && !text.equals(placeholder) && set.getEmptiedState(textField) && !classList.contains(text)) {
                     System.out.println("r");
                     classList.add(text);
-                    System.out.println("clas list:" + classList);
+                    System.out.println("clas list:" + classList);         
                     writer.write(text + "\n");
-    
-                    //classList.add(text);
                 }
             } else if (component instanceof Container) {
                 traverseComponents(writer, (Container) component);
             }
         }
-        set.setClassList(classList);
     }
 
     public void setClassList() {
