@@ -282,7 +282,7 @@ public class Creator {
         @Override
         public void insertUpdate(DocumentEvent e) {
             System.out.println("placeholderfill"+placeholderFill);
-                saveButton.setEnabled(true);
+                saveButtonEnable();
                 userClickedEmpty = false; 
         }
 
@@ -290,7 +290,7 @@ public class Creator {
         public void removeUpdate(DocumentEvent e) {
             System.out.println("removeUpdate");
             if (userClickedEmpty = false) {
-                saveButton.setEnabled(true);
+                saveButtonEnable();
             }
         }
 
@@ -387,6 +387,10 @@ public class Creator {
     public void setClassList() {
         System.out.println("setting class list");
         set.setClassList(classList);
+    }
+
+    public void saveButtonEnable() {
+        saveButton.setEnabled(true);
     }
     
 }

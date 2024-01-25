@@ -155,6 +155,7 @@ public class StudentStatCollect extends JFrame {
                 if (classLabelPanel.getComponentCount() >= 6) {
                     creator.deleteTextBox(window, classLabelPanel);
                     creator.deleteTextBox(window, classLabelPanel);
+                    creator.saveButtonEnable();
                 }
         }
         });
