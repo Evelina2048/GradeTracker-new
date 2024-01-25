@@ -233,17 +233,24 @@ public class Creator {
     }
 
     public void writeTextToFile(String filePath) {//, JButton saveButton) {
+        System.out.println("Step4: writeTextToFile."+textFieldPanel.getComponentCount());
+        //textFieldPanel = set.getTextFieldPanel();
         debugPrintPanel();
         String username = set.getUsername();
         try (BufferedWriter writer = new BufferedWriter(new FileWriter(filePath))) {
+            System.out.println("Step5:");
             for (Component component : textFieldPanel.getComponents()) {
+                System.out.println("Step6:");/// move to other function and call again until textbox. then call just for textbox.
                 if (component instanceof JTextField) {
+                    System.out.println("Step7:");
                     JTextField textField = (JTextField) component;
                     String text = textField.getText().trim();
                     classList.add(text);
     
                     if (!text.isEmpty()) {
+                        System.out.println("Step8:");
                         writer.write(text + "\n");
+                        System.out.println("should be writing");
                     }
                 }
             }
@@ -273,6 +280,8 @@ public class Creator {
             textFieldFocusListener(window, textField, placeholder);
             windowFix(window);
         }
+        //setTextFieldPanel(textFieldPanel);
+        //set.setTextFieldPanel(textFieldPanel);
         setTextFieldPanel(textFieldPanel);
         return textField;
     }
@@ -347,8 +356,10 @@ public class Creator {
 
     public void setTextFieldPanel(JPanel myPanel) {
         System.out.println("in set text field panel ");
-        System.out.println("components: "+textFieldPanel.getComponentCount());
+        System.out.println("Step2: components: "+textFieldPanel.getComponentCount());
+        //set.setTextFieldPanel(myPanel); textFieldPanel = myPanel;
         textFieldPanel = myPanel;
+        System.out.println("Step3: componentsAfter: "+textFieldPanel.getComponentCount());
     }
 
     public void debugPanelComponentCount() {
