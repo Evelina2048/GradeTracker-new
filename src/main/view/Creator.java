@@ -238,6 +238,35 @@ public class Creator {
         //textFieldPanel = set.getTextFieldPanel();
         debugPrintPanel();
         String username = set.getUsername();
+        try (BufferedWriter writer = new BufferedWriter(new FileWriter(filePath))) {
+            System.out.println("Step5:");
+            for (Component component : textFieldPanel.getComponents()) {
+                System.out.println("Step6:");/// move to other function and call again until textbox. then call just for textbox.
+                if (component instanceof JTextField) {
+                    System.out.println("Step7:");
+                    JTextField textField = (JTextField) component;
+                    String text = textField.getText().trim();
+                    classList.add(text);
+    
+                    if (!text.isEmpty()) {
+                        System.out.println("Step8:");
+                        writer.write(text + "\n");                             
+                        System.out.println("should be writing");
+                    }
+                }
+
+                if (component instanceof JPanel) {
+                    System.out.println("should appear. Its a JPanel");
+                    writeTextToFileWithAppend(filePath, (JPanel) component);
+                }
+            }
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+        set.setClassList(classList);
+        //traversePanelAndWrite(filePath, getTextFieldContainer());
+    }
+    private void writeTextToFileWithAppend(String filePath, JPanel textFieldPanel) {
         try (BufferedWriter writer = new BufferedWriter(new FileWriter(filePath, true))) {
             System.out.println("Step5:");
             for (Component component : textFieldPanel.getComponents()) {
@@ -257,15 +286,14 @@ public class Creator {
 
                 if (component instanceof JPanel) {
                     System.out.println("should appear. Its a JPanel");
-                    writeTextToFile(filePath, (JPanel) component);
+                    writeTextToFileWithAppend(filePath, (JPanel) component);
                 }
             }
         } catch (IOException e) {
             e.printStackTrace();
         }
-        set.setClassList(classList);
-        //traversePanelAndWrite(filePath, getTextFieldContainer());
     }
+
     private void cycleThroughPanel() {
         
     } 
