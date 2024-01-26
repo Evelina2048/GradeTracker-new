@@ -47,13 +47,13 @@ public class Set {
     //     //System.out.println("in set textfieldcontainer"+getTextFieldContainer());
     // }
 
-    // public void setTextFieldPanel(JPanel theTextFieldPanel) {
-    //     textFieldPanel = theTextFieldPanel;
-    // }
+    public void setTextFieldPanel(JPanel theTextFieldPanel) {
+        textFieldPanel = theTextFieldPanel;
+    }
 
-    // public JPanel getTextFieldPanel() {
-    //     return textFieldPanel;
-    // }
+    public JPanel getTextFieldPanel() {
+        return textFieldPanel;
+    }
 
     // public JPanel getTextFieldContainer() {
     //     //JPanel textFieldContainer = new JPanel();

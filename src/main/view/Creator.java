@@ -62,6 +62,7 @@ public class Creator {
     private boolean userClickedEmpty;
     private boolean placeholderFill;
     private ArrayList<String>textFieldPanelText = new ArrayList<>();
+    private BufferedWriter writer;
     
 
     //private JPanel textFieldContainer = new JPanel(new GridLayout(0, 5)); // Panel to hold text fields
@@ -232,12 +233,12 @@ public class Creator {
         }
     }
 
-    public void writeTextToFile(String filePath) {//, JButton saveButton) {
+    public void writeTextToFile(String filePath, JPanel textFieldPanel) {//, JButton saveButton) {
         System.out.println("Step4: writeTextToFile."+textFieldPanel.getComponentCount());
         //textFieldPanel = set.getTextFieldPanel();
         debugPrintPanel();
         String username = set.getUsername();
-        try (BufferedWriter writer = new BufferedWriter(new FileWriter(filePath))) {
+        try (BufferedWriter writer = new BufferedWriter(new FileWriter(filePath, true))) {
             System.out.println("Step5:");
             for (Component component : textFieldPanel.getComponents()) {
                 System.out.println("Step6:");/// move to other function and call again until textbox. then call just for textbox.
@@ -249,9 +250,14 @@ public class Creator {
     
                     if (!text.isEmpty()) {
                         System.out.println("Step8:");
-                        writer.write(text + "\n");
+                        writer.write(text + "\n");                             
                         System.out.println("should be writing");
                     }
+                }
+
+                if (component instanceof JPanel) {
+                    System.out.println("should appear. Its a JPanel");
+                    writeTextToFile(filePath, (JPanel) component);
                 }
             }
         } catch (IOException e) {
@@ -260,6 +266,9 @@ public class Creator {
         set.setClassList(classList);
         //traversePanelAndWrite(filePath, getTextFieldContainer());
     }
+    private void cycleThroughPanel() {
+        
+    } 
 
     public JTextField createTextBox(JFrame window, String placeholder, int width, int height) { //something here is causing the issue
         debugPanelComponentCount();

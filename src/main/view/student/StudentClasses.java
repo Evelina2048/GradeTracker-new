@@ -86,9 +86,8 @@ public class StudentClasses extends JFrame {
             public void actionPerformed(ActionEvent e) {
                 creator.writeFolderToFile(textFieldEmptied);
                 creator.setClassList();
-                //creator.anel();
                 //creator.writeTextToFile("/Users/evy/Documents/GradeTracker-new/src/main/view/UserInfo/StudentInfo/" + set.getUsername() + "/class.txt");
-                creator.writeTextToFile("/Users/evy/Documents/GradeTracker-new/src/main/view/UserInfo/StudentInfo/" + set.getUsername() + "/class.txt");
+                creator.writeTextToFile("/Users/evy/Documents/GradeTracker-new/src/main/view/UserInfo/StudentInfo/" + set.getUsername() + "/class.txt", creator.getTextFieldContainer());
                 saveButton.setEnabled(false);
                 //nextButtonAction(existingOrNew, studentOrTeacher);
             }
@@ -102,7 +101,7 @@ public class StudentClasses extends JFrame {
             public void actionPerformed(ActionEvent e) {
                 System.out.println("nextbuttonhit");
                 creator.writeFolderToFile(textFieldEmptied);
-                creator.writeTextToFile("/Users/evy/Documents/GradeTracker-new/src/main/view/UserInfo/StudentInfo/" + set.getUsername() + "/class.txt");
+                creator.writeTextToFile("/Users/evy/Documents/GradeTracker-new/src/main/view/UserInfo/StudentInfo/" + set.getUsername() + "/class.txt", creator.getTextFieldContainer());
                 hideWindow();
                 creator.hideContainer();
                 StudentStatCollect statCollect = new StudentStatCollect(window, newUser, studentOrTeacher, existingOrNew, set);

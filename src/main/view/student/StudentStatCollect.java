@@ -95,12 +95,14 @@ public class StudentStatCollect extends JFrame {
                 saveButton.setEnabled(false);
                 System.out.println("5in studentstatcollect before debug");
                 creator.debugPrintPanel();
-                creator.setTextFieldPanel(allBoxesPanel);
+                //creator.setTextFieldPanel(allBoxesPanel);
                 System.out.println("Componentssssss: "+ allBoxesPanel.getComponentCount());
 
-                //creator.writeTextToFile("/Users/evy/Documents/GradeTracker-new/src/main/view/UserInfo/StudentInfo/" +set.getUsername() + "/types.txt");
-                creator.traversePanelAndWrite("/Users/evy/Documents/GradeTracker-new/src/main/view/UserInfo/StudentInfo/" + set.getUsername() + "/types.txt", classLabelPanel);
-                //nextButtonAction(existingOrNew, studentOrTeacher);
+                creator.setTextFieldPanel(classLabelPanel);
+                //creator.traversePanelAndWrite("/Users/evy/Documents/GradeTracker-new/src/main/view/UserInfo/StudentInfo/" + set.getUsername() + "/types.txt", classLabelPanel);
+                System.out.println("Step1: classLabelPanelcomponents: "+classLabelPanel.getComponentCount());
+                creator.writeTextToFile("/Users/evy/Documents/GradeTracker-new/src/main/view/UserInfo/StudentInfo/" + set.getUsername() + "/types.txt", creator.getTextFieldContainer());
+
             }
         });
         
