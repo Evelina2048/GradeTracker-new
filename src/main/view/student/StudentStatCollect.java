@@ -42,6 +42,7 @@ public class StudentStatCollect extends JFrame {
     private Set set;
     private JPanel container = new JPanel(new FlowLayout(FlowLayout.LEFT));
     private JPanel classLabelPanelContainer = new JPanel(new BorderLayout());
+    private JPanel newDelContainerFlow;
     //private JPanel classLabelPanel = new JPanel(new FlowLayout(FlowLayout.LEFT));
     private JPanel classLabelPanel = new JPanel(new FlowLayout(FlowLayout.LEFT, 5, 5));
     //private int index = set.getClassListIndex();
@@ -113,7 +114,16 @@ public class StudentStatCollect extends JFrame {
             public void actionPerformed(ActionEvent e) {
                 //write to file.
                 hideWindow();
+
+                
+
+                if (set.getClassListIndex()+1 <= set.getClassList().size()) {
+                    StudentStatCollect statCollect = new StudentStatCollect(window, newUser, studentOrTeacher, existingOrNew, set);
+                }
+
+                else {
                 PrintStudentGrades print = new PrintStudentGrades(main, studentOrTeacher,existingOrNew);
+                }
             }
         });
         backNextButtonsPanel = creator.makeBackNextButtonsPanel(backButtonPanel, saveButtonPanel, nextButtonPanel);
@@ -132,7 +142,7 @@ public class StudentStatCollect extends JFrame {
        newTypeButtonPanel.add(newTypeButton,BorderLayout.NORTH);
        delTypeButtonPanel.add(delTypeButton,BorderLayout.NORTH);
 
-       JPanel newDelContainerFlow = new JPanel(new FlowLayout(FlowLayout.LEFT,0,5));
+       newDelContainerFlow = new JPanel(new FlowLayout(FlowLayout.LEFT,0,5));
        JPanel newDelContainer = new JPanel(new GridLayout(2,1,0,5));
        newDelContainer.add(newTypeButtonPanel);
        newDelContainer.add(delTypeButtonPanel);
@@ -289,6 +299,9 @@ public class StudentStatCollect extends JFrame {
 
     private void hideWindow() {
         backNextButtonsPanel.setVisible(false);
+        newDelContainerFlow.setVisible(false);
+        classLabelPanel.setVisible(false);
+        
     }
 
     ////

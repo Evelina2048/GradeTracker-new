@@ -104,7 +104,10 @@ public class StudentClasses extends JFrame {
                 creator.writeTextToFile("/Users/evy/Documents/GradeTracker-new/src/main/view/UserInfo/StudentInfo/" + set.getUsername() + "/class.txt", creator.getTextFieldContainer());
                 hideWindow();
                 creator.hideContainer();
+                //while (set.getClassListIndex()+1 <= set.getClassList().size()) {
                 StudentStatCollect statCollect = new StudentStatCollect(window, newUser, studentOrTeacher, existingOrNew, set);
+                //}
+                System.out.println("AStep1: "+set.getClassListIndex()+set.getClassList().size());
             }
         });
         System.out.println("test11 (should be 29) "+backButton.getHeight());
