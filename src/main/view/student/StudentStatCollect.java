@@ -44,7 +44,7 @@ public class StudentStatCollect extends JFrame {
     private JPanel classLabelPanelContainer = new JPanel(new BorderLayout());
     //private JPanel classLabelPanel = new JPanel(new FlowLayout(FlowLayout.LEFT));
     private JPanel classLabelPanel = new JPanel(new FlowLayout(FlowLayout.LEFT, 5, 5));
-    //private int index = 0;
+    //private int index = set.getClassListIndex();
     private int typeNumber = 0;
     private int numOfBoxes = 0;
     
@@ -93,6 +93,10 @@ public class StudentStatCollect extends JFrame {
                 System.out.println("4save button hit");
                 creator.debugPrintPanel();
                 saveButton.setEnabled(false);
+                System.out.println("5in studentstatcollect before debug");
+                creator.debugPrintPanel();
+                //creator.setTextFieldPanel(allBoxesPanel);
+                System.out.println("Componentssssss: "+ allBoxesPanel.getComponentCount());
 
                 creator.setTextFieldPanel(classLabelPanel);
                 //creator.traversePanelAndWrite("/Users/evy/Documents/GradeTracker-new/src/main/view/UserInfo/StudentInfo/" + set.getUsername() + "/types.txt", classLabelPanel);
@@ -109,22 +113,7 @@ public class StudentStatCollect extends JFrame {
             public void actionPerformed(ActionEvent e) {
                 //write to file.
                 hideWindow();
-
-                //if more classes:
-                if (set.getClassListIndex() < set.getClassList().size()) {
-                    System.out.println("there are more classes");
-                    StudentStatCollect stat = new StudentStatCollect(main, newUser, studentOrTeacher, existingOrNew, set);
-                }
-                //call this class again
-
-                //else:
-                else if (set.getClassListIndex() > set.getClassList().size()){
                 PrintStudentGrades print = new PrintStudentGrades(main, studentOrTeacher,existingOrNew);
-                }
-
-                else {
-                    System.out.println("Something went wrong in student stat collect");
-                }
             }
         });
         backNextButtonsPanel = creator.makeBackNextButtonsPanel(backButtonPanel, saveButtonPanel, nextButtonPanel);
@@ -188,15 +177,13 @@ public class StudentStatCollect extends JFrame {
         //creditTypeBox();
         ///
         //JTextField credits = creator.createTextBox(window, "Credits (optional)", 50, 50);
+        String filePath = "/Users/evy/Documents/GradeTracker-new/src/main/view/UserInfo/StudentInfo/" + set.getUsername() +"/class"+ ".txt";
         ArrayList<String> classList = set.getClassList();
-        String filePath = "/Users/evy/Documents/GradeTracker-new/src/main/view/UserInfo/StudentInfo/" + set.getUsername() +"/"+classList.get(set.getClassListIndex())+".txt";
         //will be updated later
 
         //for (String className : classList) {
         readClass(classList);
-        
-        //index++;
-        set.classListIndexIncrement();
+        set.incrementClassListIndex();
     }
 
     private void readClass(ArrayList<String> classList) { 

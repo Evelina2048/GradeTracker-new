@@ -12,7 +12,7 @@ import java.awt.GridLayout;
 import java.awt.event.ActionListener;
 import java.awt.event.ActionEvent;
 import java.awt.FlowLayout;
-import java.util.ArrayList;
+
 import java.util.concurrent.atomic.AtomicBoolean;
 import main.view.NewUser;
 import main.view.Set;
@@ -85,23 +85,9 @@ public class StudentClasses extends JFrame {
         saveButton.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent e) {
                 creator.writeFolderToFile(textFieldEmptied);
-
-                System.out.println("AStep1: componentsbeforesetting: "+ creator.debugtGetClassList());
                 creator.setClassList();
-                System.out.println("AStep6: componentsbeforesetting: "+ creator.debugtGetClassList());
-
-
-                //creator.writeTextToFile("/Users/evy/Documents/GradeTracker-new/src/main/view/UserInfo/StudentInfo/" + set.getUsername() + ...classList.get(0)
-                //ArrayList<String> classList = creator.getClassList();
-                //////////////////System.out.println("classlistsize: "+classList.size());//+" classlistindex");
-                System.out.println("look0"+set.getClassListIndex());
-                System.out.println("look1 "+set.getClassList());
-                //System.out.println("look"+set.getClassList().get(set.getClassListIndex()));
-
-
-                //creator.writeTextToFile("/Users/evy/Documents/GradeTracker-new/src/main/view/UserInfo/StudentInfo/" + set.getUsername() + "/"+ set.getClassList().get(set.getClassListIndex()) +"/.txt", creator.getTextFieldContainer());
-                
-                
+                //creator.writeTextToFile("/Users/evy/Documents/GradeTracker-new/src/main/view/UserInfo/StudentInfo/" + set.getUsername() + "/class.txt");
+                creator.writeTextToFile("/Users/evy/Documents/GradeTracker-new/src/main/view/UserInfo/StudentInfo/" + set.getUsername() + "/class.txt", creator.getTextFieldContainer());
                 saveButton.setEnabled(false);
                 //nextButtonAction(existingOrNew, studentOrTeacher);
             }

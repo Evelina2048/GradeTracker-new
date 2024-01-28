@@ -197,6 +197,7 @@ public class Creator {
                 boolean pointNotInTextbox = !newBounds.contains(e.getPoint());
 
                 if (pointNotInTextbox && textField.getText().isEmpty()) {
+                    System.out.println("3");
                     textField.setText(placeholder);
                     textField.setForeground(Color.GRAY);
                     set.setEmptiedState(textField, false);
@@ -237,14 +238,18 @@ public class Creator {
         //textFieldPanel = set.getTextFieldPanel();
         debugPrintPanel();
         String username = set.getUsername();
-        try (BufferedWriter writer = new BufferedWriter(new FileWriter(filePath))) {;
+        try (BufferedWriter writer = new BufferedWriter(new FileWriter(filePath))) {
+            System.out.println("Step5:");
             for (Component component : textFieldPanel.getComponents()) {
+                System.out.println("Step6:");/// move to other function and call again until textbox. then call just for textbox.
                 if (component instanceof JTextField) {
+                    System.out.println("Step7:");
                     JTextField textField = (JTextField) component;
                     String text = textField.getText().trim();
                     classList.add(text);
     
                     if (!text.isEmpty()) {
+                        System.out.println("Step8:");
                         writer.write(text + "\n");                             
                         System.out.println("should be writing");
                     }
@@ -258,13 +263,14 @@ public class Creator {
         } catch (IOException e) {
             e.printStackTrace();
         }
-        System.out.println("creator components: "+ classList.size());
         set.setClassList(classList);
         //traversePanelAndWrite(filePath, getTextFieldContainer());
     }
     private void writeTextToFileWithAppend(String filePath, JPanel textFieldPanel) {
         try (BufferedWriter writer = new BufferedWriter(new FileWriter(filePath, true))) {
+            System.out.println("Step5:");
             for (Component component : textFieldPanel.getComponents()) {
+                System.out.println("Step6:");/// move to other function and call again until textbox. then call just for textbox.
                 if (component instanceof JTextField) {
                     System.out.println("Step7:");
                     JTextField textField = (JTextField) component;
@@ -427,24 +433,12 @@ public class Creator {
     }
 
     public void setClassList() {
-        System.out.println("AStep2: setting class list. Size: "+ set.getClassList());
+        System.out.println("setting class list");
         set.setClassList(classList);
-        System.out.println("AStep5: setting class list. After. Size: "+ classList);
     }
-    //
-    
-    //
-
-    // public ArrayList<String> getClassList() {
-    //     return classList;
-    // }
 
     public void saveButtonEnable() {
         saveButton.setEnabled(true);
-    }
-
-    public ArrayList<String> debugtGetClassList() {
-        return classList;
     }
     
 }
