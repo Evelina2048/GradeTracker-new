@@ -102,7 +102,7 @@ public class StudentStatCollect extends JFrame {
                 creator.setTextFieldPanel(classLabelPanel);
                 //creator.traversePanelAndWrite("/Users/evy/Documents/GradeTracker-new/src/main/view/UserInfo/StudentInfo/" + set.getUsername() + "/types.txt", classLabelPanel);
                 System.out.println("Step1: classLabelPanelcomponents: "+classLabelPanel.getComponentCount());
-                creator.writeTextToFile("/Users/evy/Documents/GradeTracker-new/src/main/view/UserInfo/StudentInfo/" + set.getUsername() + "/types.txt", creator.getTextFieldContainer());
+                creator.writeTextToFile("/Users/evy/Documents/GradeTracker-new/src/main/view/UserInfo/StudentInfo/" + set.getUsername() + "/types"+ ".txt", creator.getTextFieldContainer());
 
             }
         });
@@ -116,7 +116,7 @@ public class StudentStatCollect extends JFrame {
                 hideWindow();
 
                 
-
+                set.incrementClassListIndex();
                 if (set.getClassListIndex()+1 <= set.getClassList().size()) {
                     StudentStatCollect statCollect = new StudentStatCollect(window, newUser, studentOrTeacher, existingOrNew, set);
                 }
@@ -193,7 +193,6 @@ public class StudentStatCollect extends JFrame {
 
         //for (String className : classList) {
         readClass(classList);
-        set.incrementClassListIndex();
     }
 
     private void readClass(ArrayList<String> classList) { 
