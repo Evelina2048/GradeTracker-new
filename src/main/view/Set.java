@@ -13,6 +13,7 @@ public class Set {
     private JPanel textFieldContainer;
     private JPanel textFieldPanel;
     private HashMap<JTextField, Boolean> textFieldEmptiedMap = new HashMap<>();
+    private int classIndex;
 
     public Set () {
 
@@ -27,11 +28,25 @@ public class Set {
     }
 
     public void setClassList(ArrayList<String> classList) {
+        System.out.println("AStep3 in setClassList. Size: "+classList);
         this.classList = classList;
+        System.out.println("AStep4 in setClassList. Size: "+classList.size());
+    }
+
+    public void resetClassList() {
+        this.classList.clear();
     }
 
     public ArrayList<String> getClassList() {
-        return classList;
+        return this.classList;
+    }
+    
+    public void classListIndexIncrement() {
+        this.classIndex++;
+    }
+
+    public int getClassListIndex() {
+        return this.classIndex;
     }
 
     public void setSaveable(Boolean canSave) {
