@@ -102,8 +102,8 @@ public class StudentStatCollect extends JFrame {
                 creator.setTextFieldPanel(classLabelPanel);
                 //creator.traversePanelAndWrite("/Users/evy/Documents/GradeTracker-new/src/main/view/UserInfo/StudentInfo/" + set.getUsername() + "/types.txt", classLabelPanel);
                 System.out.println("Step1: classLabelPanelcomponents: "+classLabelPanel.getComponentCount());
-                creator.writeTextToFile("/Users/evy/Documents/GradeTracker-new/src/main/view/UserInfo/StudentInfo/" + set.getUsername() + "/types"+ ".txt", creator.getTextFieldContainer());
-
+                ArrayList<String> classList = creator.writeTextToFile("/Users/evy/Documents/GradeTracker-new/src/main/view/UserInfo/StudentInfo/" + set.getUsername() + "/types"+ ".txt", creator.getTextFieldContainer());
+                set.setClassList(classList);
             }
         });
         

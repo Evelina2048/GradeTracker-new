@@ -233,7 +233,7 @@ public class Creator {
         }
     }
 
-    public void writeTextToFile(String filePath, JPanel textFieldPanel) {//, JButton saveButton) {
+    public ArrayList<String> writeTextToFile(String filePath, JPanel textFieldPanel) {//, JButton saveButton) {
         System.out.println("Step4: writeTextToFile."+textFieldPanel.getComponentCount());
         //textFieldPanel = set.getTextFieldPanel();
         debugPrintPanel();
@@ -263,8 +263,9 @@ public class Creator {
         } catch (IOException e) {
             e.printStackTrace();
         }
-        set.setClassList(classList);
-        //traversePanelAndWrite(filePath, getTextFieldContainer());
+        return classList;
+        //set.setClassList(classList);
+        
     }
     private void writeTextToFileWithAppend(String filePath, JPanel textFieldPanel) {
         try (BufferedWriter writer = new BufferedWriter(new FileWriter(filePath, true))) {

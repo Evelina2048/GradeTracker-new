@@ -12,7 +12,7 @@ import java.awt.GridLayout;
 import java.awt.event.ActionListener;
 import java.awt.event.ActionEvent;
 import java.awt.FlowLayout;
-
+import java.util.ArrayList;
 import java.util.concurrent.atomic.AtomicBoolean;
 import main.view.NewUser;
 import main.view.Set;
@@ -87,7 +87,8 @@ public class StudentClasses extends JFrame {
                 creator.writeFolderToFile(textFieldEmptied);
                 creator.setClassList();
                 //creator.writeTextToFile("/Users/evy/Documents/GradeTracker-new/src/main/view/UserInfo/StudentInfo/" + set.getUsername() + "/class.txt");
-                creator.writeTextToFile("/Users/evy/Documents/GradeTracker-new/src/main/view/UserInfo/StudentInfo/" + set.getUsername() + "/class.txt", creator.getTextFieldContainer());
+                ArrayList<String> classList = creator.writeTextToFile("/Users/evy/Documents/GradeTracker-new/src/main/view/UserInfo/StudentInfo/" + set.getUsername() + "/class.txt", creator.getTextFieldContainer());
+                set.setClassList(classList);
                 saveButton.setEnabled(false);
                 //nextButtonAction(existingOrNew, studentOrTeacher);
             }
@@ -101,7 +102,9 @@ public class StudentClasses extends JFrame {
             public void actionPerformed(ActionEvent e) {
                 System.out.println("nextbuttonhit");
                 creator.writeFolderToFile(textFieldEmptied);
-                creator.writeTextToFile("/Users/evy/Documents/GradeTracker-new/src/main/view/UserInfo/StudentInfo/" + set.getUsername() + "/class.txt", creator.getTextFieldContainer());
+                ArrayList<String> classList = creator.writeTextToFile("/Users/evy/Documents/GradeTracker-new/src/main/view/UserInfo/StudentInfo/" + set.getUsername() + "/class.txt", creator.getTextFieldContainer());
+                set.setClassList(classList);
+                
                 hideWindow();
                 creator.hideContainer();
                 //while (set.getClassListIndex()+1 <= set.getClassList().size()) {
