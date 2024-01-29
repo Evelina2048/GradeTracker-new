@@ -31,6 +31,17 @@ public class Set {
         this.classList = classList;
     }
 
+    public void removeClassFromClassList() {
+        int lastIndex = classList.size() - 1;
+        if (lastIndex >= 0) {
+            classList.remove(lastIndex);
+            System.out.println("Removed the most recent element.");
+        } else {
+            System.out.println("ArrayList is empty. Nothing to remove.");
+        }
+        
+    }
+
     public ArrayList<String> getClassList() {
         return classList;
     }

@@ -362,6 +362,7 @@ public class Creator {
         if (componentsCount > 0) {
             Component lastComponent = container.getComponent(componentsCount - 1);
             container.remove(lastComponent);
+            set.removeClassFromClassList();
             windowFix(window);
             textboxCounter--;
         }
