@@ -89,6 +89,11 @@ public class Set {
     public void incrementClassListIndex() {
         classListIndex++;
     }
+
+    public void decrementClassListIndex() {
+        classListIndex--;
+    }
+
     public int getClassListIndex() {
         return classListIndex;
     }

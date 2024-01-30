@@ -117,6 +117,7 @@ public class StudentStatCollect extends JFrame {
 
                 
                 set.incrementClassListIndex();
+                System.out.println("classlist: "+set.getClassList());
                 if (set.getClassListIndex()+1 <= set.getClassList().size()) {
                     StudentStatCollect statCollect = new StudentStatCollect(window, newUser, studentOrTeacher, existingOrNew, set);
                 }

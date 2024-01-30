@@ -362,11 +362,15 @@ public class Creator {
         if (componentsCount > 0) {
             Component lastComponent = container.getComponent(componentsCount - 1);
             container.remove(lastComponent);
+            //set.removeClassList()
             set.removeClassFromClassList();
+
+            //set.removeClassFromClassList();
             windowFix(window);
             textboxCounter--;
         }
         //textFieldPanel = container;
+        System.out.println("in getting text box: "+set.getClassList());
     }
     public void windowFix(JFrame window) {
         window.revalidate(); 
@@ -438,6 +442,8 @@ public class Creator {
         System.out.println("setting class list");
         set.setClassList(classList);
     }
+
+    //public void set 
 
     public void saveButtonEnable() {
         saveButton.setEnabled(true);
