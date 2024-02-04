@@ -6,6 +6,8 @@ import java.util.HashMap;
 import javax.swing.JPanel;
 import javax.swing.JTextField;
 
+import org.apache.commons.lang3.ObjectUtils.Null;
+
 public class Set {
     private String username;
     private ArrayList<String> classList;
@@ -27,8 +29,14 @@ public class Set {
         return username;
     }
 
-    public void setClassList(ArrayList<String> classList) {
-        this.classList = classList;
+    public void setClassList(ArrayList<String> newClassList) {
+        if (classList != null) {
+        classList.clear();
+        // if (!classList.isEmpty()) {
+        //     classList.clear();
+        }
+
+        classList = newClassList;
     }
 
     public void removeClassFromClassList() {

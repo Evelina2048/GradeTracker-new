@@ -321,6 +321,7 @@ public class Creator {
         //setTextFieldPanel(textFieldPanel);
         //set.setTextFieldPanel(textFieldPanel);
         setTextFieldPanel(textFieldPanel);
+        System.out.println("in create text box: " + set.getClassList());
         return textField;
     }
 
@@ -358,20 +359,20 @@ public class Creator {
     }
 
     public void deleteTextBox(JFrame window, JPanel container) {
+        System.out.println("Before: in getting text box: "+set.getClassList());
         int componentsCount = container.getComponentCount();
         if (componentsCount > 0) {
             Component lastComponent = container.getComponent(componentsCount - 1);
-            container.remove(lastComponent);
-            //set.removeClassList()
+            container.remove(lastComponent); 
+
             set.removeClassFromClassList();
 
-            //set.removeClassFromClassList();
             windowFix(window);
             textboxCounter--;
         }
-        //textFieldPanel = container;
         System.out.println("in getting text box: "+set.getClassList());
     }
+
     public void windowFix(JFrame window) {
         window.revalidate(); 
         window.repaint();

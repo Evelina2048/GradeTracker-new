@@ -88,7 +88,9 @@ public class StudentClasses extends JFrame {
                 creator.setClassList();
                 //creator.writeTextToFile("/Users/evy/Documents/GradeTracker-new/src/main/view/UserInfo/StudentInfo/" + set.getUsername() + "/class.txt");
                 ArrayList<String> classList = creator.writeTextToFile("/Users/evy/Documents/GradeTracker-new/src/main/view/UserInfo/StudentInfo/" + set.getUsername() + "/class.txt", creator.getTextFieldContainer());
-                set.setClassList(classList);
+                System.out.println("before setting list in save button"+set.getClassList());
+                //************set.setClassList(classList);
+                System.out.println("after setting list in save button"+set.getClassList());
                 saveButton.setEnabled(false);
                 //nextButtonAction(existingOrNew, studentOrTeacher);
             }
@@ -141,7 +143,7 @@ public class StudentClasses extends JFrame {
         deleteClassButton.setPreferredSize(new Dimension(100, 50));
         deleteClassButton.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent e) {
-                System.out.println("deleteClassButtonPressed");
+                System.out.println("deleteClassButtonPressed. ClassList:"+ set.getClassList());
                 creator.deleteTextBox(window, creator.getTextFieldContainer());
                 saveButton.setEnabled(true);
                 
@@ -151,6 +153,7 @@ public class StudentClasses extends JFrame {
 
     private void westPanelCreate() {
         createNewClassButton();
+        System.out.println("before creating delete class button"+set.getClassList());
         deleteClassButton();
 
 
