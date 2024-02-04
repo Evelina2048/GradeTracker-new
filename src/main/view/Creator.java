@@ -263,7 +263,9 @@ public class Creator {
         } catch (IOException e) {
             e.printStackTrace();
         }
-        return classList;
+        System.out.println("in write text to file: "+set.getClassList());
+       //return classList;
+       return set.getClassList();
         //set.setClassList(classList);
         
     }

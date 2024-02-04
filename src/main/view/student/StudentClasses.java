@@ -105,11 +105,13 @@ public class StudentClasses extends JFrame {
                 System.out.println("nextbuttonhit");
                 creator.writeFolderToFile(textFieldEmptied);
                 ArrayList<String> classList = creator.writeTextToFile("/Users/evy/Documents/GradeTracker-new/src/main/view/UserInfo/StudentInfo/" + set.getUsername() + "/class.txt", creator.getTextFieldContainer());
+                System.out.println("right before c lass list set in next: "+set.getClassList());
                 set.setClassList(classList);
                 
                 hideWindow();
                 creator.hideContainer();
                 //while (set.getClassListIndex()+1 <= set.getClassList().size()) {
+                System.out.println("before stat collect called: "+set.getClassList());
                 StudentStatCollect statCollect = new StudentStatCollect(window, newUser, studentOrTeacher, existingOrNew, set);
                 //}
                 System.out.println("AStep1: "+set.getClassListIndex()+set.getClassList().size());

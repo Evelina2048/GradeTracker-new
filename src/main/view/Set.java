@@ -37,6 +37,7 @@ public class Set {
         }
 
         classList = newClassList;
+        System.out.println("in set class list: "+classList);
     }
 
     public void removeClassFromClassList() {

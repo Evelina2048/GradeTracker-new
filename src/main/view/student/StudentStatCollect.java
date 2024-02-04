@@ -56,6 +56,7 @@ public class StudentStatCollect extends JFrame {
 
     public StudentStatCollect(JFrame main,NewUser newUser, String studentOrTeacher, String existingOrNew, Set set) {
         //set.resetContainerAndPanel();
+        System.out.println("in student stat collect: "+set.getClassList());
         this.window = main;
         this.set = set;
         creator = new Creator(set);
@@ -189,7 +190,10 @@ public class StudentStatCollect extends JFrame {
         ///
         //JTextField credits = creator.createTextBox(window, "Credits (optional)", 50, 50);
         String filePath = "/Users/evy/Documents/GradeTracker-new/src/main/view/UserInfo/StudentInfo/" + set.getUsername() +"/class"+ ".txt";
+        
         ArrayList<String> classList = set.getClassList();
+        System.out.println("in display classes: "+classList);
+        System.out.println("in display classes2: "+set.getClassList());
         //will be updated later
 
         //for (String className : classList) {
@@ -197,7 +201,7 @@ public class StudentStatCollect extends JFrame {
     }
 
     private void readClass(ArrayList<String> classList) { 
-        System.out.println("test1: in read class");
+        System.out.println("test1: in read class. ClassList");
         classLabel(classList);
         creditTypeBox();
         gradePercentageBox();
@@ -221,8 +225,9 @@ public class StudentStatCollect extends JFrame {
         creator.hideContainer();
         JPanel northClassPanelContainer = new JPanel(new BorderLayout());
         JPanel classLabelPanelContainer = new JPanel(new BorderLayout());
-        JLabel classLabel = new JLabel("h");
-        //JLabel classLabel = new JLabel(set.getClassList().get(set.getClassListIndex())); //new JLabel("h"); 
+        //JLabel classLabel = new JLabel("h");
+        System.out.println("classlabelbeforehand: "+set.getClassList());
+        JLabel classLabel = new JLabel(set.getClassList().get(set.getClassListIndex())); //new JLabel("h"); 
         classLabelPanelContainer.add(classLabel);
         classLabelPanelContainer.setPreferredSize(new Dimension(155,50));
         northClassPanelContainer.add(classLabelPanelContainer, BorderLayout.NORTH);
