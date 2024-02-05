@@ -233,30 +233,33 @@ public class Creator {
         }
     }
 
-    public ArrayList<String> writeTextToFile(String filePath, JPanel textFieldPanel) {//, JButton saveButton) {
-        System.out.println("Step4: writeTextToFile."+textFieldPanel.getComponentCount());
-        //textFieldPanel = set.getTextFieldPanel();
+    public void writeTextToFile(String filePath, JPanel textFieldPanel) {//, JButton saveButton) {
+        System.out.println("Step4: begin writeTextToFile."+ set.getClassList());
         debugPrintPanel();
         String username = set.getUsername();
         try (BufferedWriter writer = new BufferedWriter(new FileWriter(filePath))) {
-            System.out.println("Step5:");
+            //System.out.println("Step5:");
+            //set.resetClassList();
+            if (!classList.isEmpty()) {
+                classList.clear();
+            }
             for (Component component : textFieldPanel.getComponents()) {
-                System.out.println("Step6:");/// move to other function and call again until textbox. then call just for textbox.
+                //System.out.println("Step6:");/// move to other function and call again until textbox. then call just for textbox.
                 if (component instanceof JTextField) {
-                    System.out.println("Step7:");
+                    //System.out.println("Step7:");
                     JTextField textField = (JTextField) component;
                     String text = textField.getText().trim();
                     classList.add(text);
     
                     if (!text.isEmpty()) {
-                        System.out.println("Step8:");
+                        //System.out.println("Step8:");
                         writer.write(text + "\n");                             
                         System.out.println("should be writing");
                     }
                 }
 
                 if (component instanceof JPanel) {
-                    System.out.println("should appear. Its a JPanel");
+                    //System.out.println("should appear. Its a JPanel");
                     writeTextToFileWithAppend(filePath, (JPanel) component);
                 }
             }
@@ -264,9 +267,7 @@ public class Creator {
             e.printStackTrace();
         }
         System.out.println("in write text to file: "+set.getClassList());
-       //return classList;
-       return set.getClassList();
-        //set.setClassList(classList);
+        set.setClassList(classList);
         
     }
     private void writeTextToFileWithAppend(String filePath, JPanel textFieldPanel) {
@@ -442,10 +443,11 @@ public class Creator {
     }
 
     public void setClassList() {
-        System.out.println("setting class list");
+        System.out.println("setting class list. Before: "+ set.getClassList()+ classList);
         set.setClassList(classList);
-    }
+        System.out.println("setting class list. After: "+ set.getClassList()+ classList);
 
+    }
     //public void set 
 
     public void saveButtonEnable() {

@@ -30,12 +30,11 @@ public class Set {
     }
 
     public void setClassList(ArrayList<String> newClassList) {
-        if (classList != null) {
-        classList.clear();
-        // if (!classList.isEmpty()) {
-        //     classList.clear();
-        }
-
+        System.out.println("in set class list the newlist is: "+newClassList);
+        //if (classList != null) {
+        //    classList.clear();
+        //}
+        //System.out.println("2nd step: in set class list the newlist is: "+newClassList);
         classList = newClassList;
         System.out.println("in set class list: "+classList);
     }
@@ -105,5 +104,8 @@ public class Set {
 
     public int getClassListIndex() {
         return classListIndex;
+    }
+
+    public void resetClassList() {
     }
 }

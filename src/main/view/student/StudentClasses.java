@@ -86,13 +86,11 @@ public class StudentClasses extends JFrame {
             public void actionPerformed(ActionEvent e) {
                 creator.writeFolderToFile(textFieldEmptied);
                 creator.setClassList();
-                //creator.writeTextToFile("/Users/evy/Documents/GradeTracker-new/src/main/view/UserInfo/StudentInfo/" + set.getUsername() + "/class.txt");
-                ArrayList<String> classList = creator.writeTextToFile("/Users/evy/Documents/GradeTracker-new/src/main/view/UserInfo/StudentInfo/" + set.getUsername() + "/class.txt", creator.getTextFieldContainer());
-                System.out.println("before setting list in save button"+set.getClassList());
+                creator.writeTextToFile("/Users/evy/Documents/GradeTracker-new/src/main/view/UserInfo/StudentInfo/" + set.getUsername() + "/class.txt", creator.getTextFieldContainer());
+                //System.out.println("before setting list in save button"+set.getClassList());
                 //************set.setClassList(classList);
-                System.out.println("after setting list in save button"+set.getClassList());
+                //System.out.println("after setting list in save button"+set.getClassList());
                 saveButton.setEnabled(false);
-                //nextButtonAction(existingOrNew, studentOrTeacher);
             }
         });
 
@@ -104,7 +102,8 @@ public class StudentClasses extends JFrame {
             public void actionPerformed(ActionEvent e) {
                 System.out.println("nextbuttonhit");
                 creator.writeFolderToFile(textFieldEmptied);
-                ArrayList<String> classList = creator.writeTextToFile("/Users/evy/Documents/GradeTracker-new/src/main/view/UserInfo/StudentInfo/" + set.getUsername() + "/class.txt", creator.getTextFieldContainer());
+                ArrayList<String> classList = set.getClassList();
+                creator.writeTextToFile("/Users/evy/Documents/GradeTracker-new/src/main/view/UserInfo/StudentInfo/" + set.getUsername() + "/class.txt", creator.getTextFieldContainer());
                 System.out.println("right before c lass list set in next: "+set.getClassList());
                 set.setClassList(classList);
                 
@@ -112,6 +111,7 @@ public class StudentClasses extends JFrame {
                 creator.hideContainer();
                 //while (set.getClassListIndex()+1 <= set.getClassList().size()) {
                 System.out.println("before stat collect called: "+set.getClassList());
+                //set.setClassList(classList);
                 StudentStatCollect statCollect = new StudentStatCollect(window, newUser, studentOrTeacher, existingOrNew, set);
                 //}
                 System.out.println("AStep1: "+set.getClassListIndex()+set.getClassList().size());
@@ -131,7 +131,7 @@ public class StudentClasses extends JFrame {
         newClassButton.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent e) {
                 creator.createTextBox(window, "Enter Class Name", 50, 50);
-                //saveButton.setEnabled(true);
+                System.out.println("class list in new class button"+ set.getClassList());
                 
         }
     });
