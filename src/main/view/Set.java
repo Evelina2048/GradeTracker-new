@@ -11,6 +11,7 @@ import org.apache.commons.lang3.ObjectUtils.Null;
 public class Set {
     private String username;
     private ArrayList<String> classList;
+    private ArrayList<String> typeList;
     private Boolean saveable;
     private JPanel textFieldContainer;
     private JPanel textFieldPanel;
@@ -31,12 +32,14 @@ public class Set {
 
     public void setClassList(ArrayList<String> newClassList) {
         System.out.println("in set class list the newlist is: "+newClassList);
-        //if (classList != null) {
-        //    classList.clear();
-        //}
-        //System.out.println("2nd step: in set class list the newlist is: "+newClassList);
         classList = newClassList;
         System.out.println("in set class list: "+classList);
+    }
+
+    public void setTypeList(ArrayList<String> newTypeList) {
+        System.out.println("in set class list the newlist is: "+newTypeList);
+        typeList = newTypeList;
+        System.out.println("in set class list: "+ typeList);
     }
 
     public void removeClassFromClassList() {
@@ -53,6 +56,11 @@ public class Set {
     public ArrayList<String> getClassList() {
         return classList;
     }
+
+    public ArrayList<String> getTypeList() {
+        return typeList;
+    }
+
 
     public void setSaveable(Boolean canSave) {
         saveable = canSave;

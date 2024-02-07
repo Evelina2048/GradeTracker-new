@@ -94,18 +94,12 @@ public class StudentStatCollect extends JFrame {
         saveButton.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent e) {
                 System.out.println("4save button hit");
-                creator.debugPrintPanel();
                 saveButton.setEnabled(false);
-                System.out.println("5in studentstatcollect before debug");
-                creator.debugPrintPanel();
-                //creator.setTextFieldPanel(allBoxesPanel);
-                System.out.println("Componentssssss: "+ allBoxesPanel.getComponentCount());
-
                 creator.setTextFieldPanel(classLabelPanel);
                 //creator.traversePanelAndWrite("/Users/evy/Documents/GradeTracker-new/src/main/view/UserInfo/StudentInfo/" + set.getUsername() + "/types.txt", classLabelPanel);
-                System.out.println("Step1: classLabelPanelcomponents: "+classLabelPanel.getComponentCount());
                 ArrayList<String> classList = set.getClassList();
-                creator.writeTextToFile("/Users/evy/Documents/GradeTracker-new/src/main/view/UserInfo/StudentInfo/" + set.getUsername() + "/types"+ ".txt", creator.getTextFieldContainer());
+                //creator.writeTextToFile("/Users/evy/Documents/GradeTracker-new/src/main/view/UserInfo/StudentInfo/" + set.getUsername() + "/types"+ ".txt", creator.getTextFieldContainer());
+                creator.writeTextToFile("/Users/evy/Documents/GradeTracker-new/src/main/view/UserInfo/StudentInfo/" + set.getUsername() +"/"+classList+ ".txt", creator.getTextFieldContainer());
                 set.setClassList(classList);
             }
         });
