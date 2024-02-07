@@ -112,6 +112,7 @@ public class StudentClasses extends JFrame {
                 //while (set.getClassListIndex()+1 <= set.getClassList().size()) {
                 System.out.println("before stat collect called: "+set.getClassList());
                 //set.setClassList(classList);
+                set.setFinalClassList(classList);
                 StudentStatCollect statCollect = new StudentStatCollect(window, newUser, studentOrTeacher, existingOrNew, set);
                 //}
                 System.out.println("AStep1: "+set.getClassListIndex()+set.getClassList().size());

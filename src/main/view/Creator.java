@@ -63,6 +63,7 @@ public class Creator {
     private boolean placeholderFill;
     private ArrayList<String>textFieldPanelText = new ArrayList<>();
     private BufferedWriter writer;
+    private ArrayList<String> finalClassList;
     
 
     //private JPanel textFieldContainer = new JPanel(new GridLayout(0, 5)); // Panel to hold text fields

@@ -17,6 +17,7 @@ public class Set {
     private JPanel textFieldPanel;
     private HashMap<JTextField, Boolean> textFieldEmptiedMap = new HashMap<>();
     private int classListIndex = 0;
+    private ArrayList<String> finalClassList;
 
     public Set () {
 
@@ -55,6 +56,14 @@ public class Set {
 
     public ArrayList<String> getClassList() {
         return classList;
+    }
+
+    public void setFinalClassList(ArrayList<String> userFinalClassList) {
+        finalClassList = userFinalClassList;
+    }
+
+    public ArrayList<String> getFinalClassList() {
+        return finalClassList;
     }
 
     public ArrayList<String> getTypeList() {

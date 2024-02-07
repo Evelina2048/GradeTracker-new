@@ -54,6 +54,7 @@ public class StudentStatCollect extends JFrame {
     private JPanel northNewTypePanel;
     private JPanel allBoxesPanel = new JPanel();
     private ArrayList<String> classList;
+    private ArrayList<String> typeList;
 
     public StudentStatCollect(JFrame main,NewUser newUser, String studentOrTeacher, String existingOrNew, Set set) {
         //set.resetContainerAndPanel();
@@ -100,7 +101,7 @@ public class StudentStatCollect extends JFrame {
                 ArrayList<String> classList = set.getClassList();
                 //creator.writeTextToFile("/Users/evy/Documents/GradeTracker-new/src/main/view/UserInfo/StudentInfo/" + set.getUsername() + "/types"+ ".txt", creator.getTextFieldContainer());
                 creator.writeTextToFile("/Users/evy/Documents/GradeTracker-new/src/main/view/UserInfo/StudentInfo/" + set.getUsername() +"/"+classList.get(set.getClassListIndex())+ ".txt", creator.getTextFieldContainer());
-                System.out.println("Complete! Class list is: "+ set.getClassList());
+                System.out.println("Complete! Class list is: "+ set.getFinalClassList());
                 set.setClassList(classList);
             }
         });
