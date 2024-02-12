@@ -96,13 +96,7 @@ public class StudentStatCollect extends JFrame {
             public void actionPerformed(ActionEvent e) {
                 System.out.println("4save button hit");
                 saveButton.setEnabled(false);
-                creator.setTextFieldPanel(classLabelPanel);
-                //creator.traversePanelAndWrite("/Users/evy/Documents/GradeTracker-new/src/main/view/UserInfo/StudentInfo/" + set.getUsername() + "/types.txt", classLabelPanel);
-                ArrayList<String> classList = set.getClassList();
-                //creator.writeTextToFile("/Users/evy/Documents/GradeTracker-new/src/main/view/UserInfo/StudentInfo/" + set.getUsername() + "/types"+ ".txt", creator.getTextFieldContainer());
-                creator.writeTextToFile("/Users/evy/Documents/GradeTracker-new/src/main/view/UserInfo/StudentInfo/" + set.getUsername() +"/"+classList.get(set.getClassListIndex())+ ".txt", creator.getTextFieldContainer());
-                System.out.println("Complete! Class list is: "+ set.getFinalClassList());
-                set.setClassList(classList);
+                writeType();
             }
         });
         
@@ -112,7 +106,9 @@ public class StudentStatCollect extends JFrame {
         nextButton.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent e) {
                 //write to file.
+                writeType();
                 hideWindow();
+                
 
                 
                 set.incrementClassListIndex();
@@ -292,6 +288,14 @@ public class StudentStatCollect extends JFrame {
         creator.windowFix(window);
         numOfBoxes++;
         }
+    }
+
+    private void writeType() {
+        creator.setTextFieldPanel(classLabelPanel);
+        ArrayList<String> classList = set.getClassList();
+        creator.writeTextToFile("/Users/evy/Documents/GradeTracker-new/src/main/view/UserInfo/StudentInfo/" + set.getUsername() +"/"+classList.get(set.getClassListIndex())+ ".txt", creator.getTextFieldContainer());
+        System.out.println("Complete! Class list is: "+ set.getFinalClassList());
+        set.setClassList(classList);
     }
 
 
