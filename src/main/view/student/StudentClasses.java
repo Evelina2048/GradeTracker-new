@@ -84,12 +84,7 @@ public class StudentClasses extends JFrame {
 
         saveButton.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent e) {
-                creator.writeFolderToFile(textFieldEmptied);
-                creator.setClassList();
-                creator.writeTextToFile("/Users/evy/Documents/GradeTracker-new/src/main/view/UserInfo/StudentInfo/" + set.getUsername() + "/class.txt", creator.getTextFieldContainer());
-                //System.out.println("before setting list in save button"+set.getClassList());
-                //************set.setClassList(classList);
-                //System.out.println("after setting list in save button"+set.getClassList());
+                writeType();
                 saveButton.setEnabled(false);
             }
         });
@@ -113,6 +108,7 @@ public class StudentClasses extends JFrame {
                 System.out.println("before stat collect called: "+set.getClassList());
                 //set.setClassList(classList);
                 set.setFinalClassList(classList);
+                writeType();
                 StudentStatCollect statCollect = new StudentStatCollect(window, newUser, studentOrTeacher, existingOrNew, set);
                 //}
                 System.out.println("AStep1: "+set.getClassListIndex()+set.getClassList().size());
@@ -176,6 +172,12 @@ public class StudentClasses extends JFrame {
 
     private void setSaveEnabled(){
         saveButton.setEnabled(true);
+    }
+
+    private void writeType() {
+        creator.writeFolderToFile(textFieldEmptied);
+        creator.setClassList();
+        creator.writeTextToFile("/Users/evy/Documents/GradeTracker-new/src/main/view/UserInfo/StudentInfo/" + set.getUsername() + "/class.txt", creator.getTextFieldContainer());
     }
 
     //create JButton "New Class"
