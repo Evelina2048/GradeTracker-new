@@ -154,6 +154,7 @@ public class StudentStatCollect extends JFrame {
             typeNumber++;
             gradeTypeBox();
             gradePercentageBox();
+            gradesBox();
             System.out.println("ClassLabelPanel after adding: "+ allBoxesPanel.getComponentCount());
         }
         });
@@ -198,6 +199,7 @@ public class StudentStatCollect extends JFrame {
         creditTypeBox();
         gradePercentageBox();
         gradeTypeBox();
+        gradesBox();
 
         typeNumber++;
         container.add(classLabelPanel);
@@ -290,6 +292,24 @@ public class StudentStatCollect extends JFrame {
         creator.windowFix(window);
         numOfBoxes++;
         }
+    }
+
+    private void gradesBox() {
+        if (numOfBoxes < 27) {
+            northCreditsPanel = new JPanel(new BorderLayout());
+            JPanel creditTypePanel = new JPanel(new BorderLayout());
+            JTextField creditType = creator.createTextBox(window, "Grades", 50, 50);
+            
+            allBoxesPanel.add(creditType);
+            System.out.println("Components after adding: "+ allBoxesPanel.getComponentCount());
+            
+            creditTypePanel.add(creditType);
+            creditTypePanel.setPreferredSize(new Dimension(155,50));
+            northCreditsPanel.add(creditTypePanel, BorderLayout.NORTH);
+            classLabelPanel.add(northCreditsPanel);
+            creator.windowFix(window);
+            numOfBoxes++;
+            }
     }
 
     private void writeType() {
