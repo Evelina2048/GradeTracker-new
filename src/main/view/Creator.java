@@ -239,21 +239,16 @@ public class Creator {
         debugPrintPanel();
         String username = set.getUsername();
         try (BufferedWriter writer = new BufferedWriter(new FileWriter(filePath))) {
-            //System.out.println("Step5:");
-            //set.resetClassList();
             if (!classList.isEmpty()) {
                 classList.clear();
             }
             for (Component component : textFieldPanel.getComponents()) {
-                //System.out.println("Step6:");/// move to other function and call again until textbox. then call just for textbox.
                 if (component instanceof JTextField) {
-                    //System.out.println("Step7:");
                     JTextField textField = (JTextField) component;
                     String text = textField.getText().trim();
                     classList.add(text);
     
                     if (!text.isEmpty()) {
-                        //System.out.println("Step8:");
                         writer.write(text + "\n");                             
                         System.out.println("should be writing");
                     }
@@ -273,17 +268,13 @@ public class Creator {
     }
     private void writeTextToFileWithAppend(String filePath, JPanel textFieldPanel) {
         try (BufferedWriter writer = new BufferedWriter(new FileWriter(filePath, true))) {
-            //System.out.println("Step5:");
             for (Component component : textFieldPanel.getComponents()) {
-                //System.out.println("Step6:");/// move to other function and call again until textbox. then call just for textbox.
                 if (component instanceof JTextField) {
-                    //System.out.println("Step7:");
                     JTextField textField = (JTextField) component;
                     String text = textField.getText().trim();
                     classList.add(text);
     
                     if (!text.isEmpty()) {
-                        //System.out.println("Step8:");
                         writer.write(text + "\n");                             
                         System.out.println("should be writing");
                     }
@@ -312,20 +303,15 @@ public class Creator {
             placeholderFill = true;
             addDocumentListener(textField);
             debugPanelComponentCount();
-            //System.out.println("^before adding "+ textField.getText());
             textFieldPanel.add(textField); 
             debugPanelComponentCount();
-            //System.out.println("^after adding");
             textFieldPanelText.add(textField.getText());
             textField.setPreferredSize(new Dimension(width, height));
             window.add(textFieldPanel);
             textFieldFocusListener(window, textField, placeholder);
             windowFix(window);
         }
-        //setTextFieldPanel(textFieldPanel);
-        //set.setTextFieldPanel(textFieldPanel);
         setTextFieldPanel(textFieldPanel);
-        //System.out.println("in create text box: " + set.getClassList());
         return textField;
     }
 
@@ -355,7 +341,6 @@ public class Creator {
 
     public JPanel getTextFieldContainer() {
         return textFieldPanel;
-        //return textFieldContainer;
     }
 
     public void resetTextFieldContainer() {
@@ -393,7 +378,6 @@ public class Creator {
     }
 
     public void debugPrintPanel() {
-        //System.out.println("textfieldpaneltext"+textFieldPanelText);
         for (Component component : textFieldPanel.getComponents()) {
             if (component instanceof JTextField) {
                 JTextField textField = (JTextField) component;
@@ -405,7 +389,6 @@ public class Creator {
     public void setTextFieldPanel(JPanel myPanel) {
         System.out.println("in set text field panel ");
         System.out.println("Step2: components: "+textFieldPanel.getComponentCount());
-        //set.setTextFieldPanel(myPanel); textFieldPanel = myPanel;
         textFieldPanel = myPanel;
         System.out.println("Step3: componentsAfter: "+textFieldPanel.getComponentCount());
     }

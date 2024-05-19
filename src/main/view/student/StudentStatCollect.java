@@ -34,6 +34,9 @@ import java.awt.Component;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
+
 public class StudentStatCollect extends JFrame {
     private JFrame window;
     private Creator creator;
@@ -48,6 +51,8 @@ public class StudentStatCollect extends JFrame {
     //private int index = set.getClassListIndex();
     private int typeNumber = 0;
     private int numOfBoxes = 0;
+
+    private int maxBoxes = 25;
     
     //private boolean underMaxBoxes = (numOfBoxes <=27);
     private JPanel northCreditsPanel;
@@ -95,17 +100,18 @@ public class StudentStatCollect extends JFrame {
         saveButtonPanel.add(saveButton);
         saveButton.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent e) {
-                System.out.println("4save button hit"+set.getClassList());
+                //check if textbox is vaild
+
+                //if valid. regex?
+                Pattern pattern = Pattern.compile("[0-9]*", Pattern.CASE_INSENSITIVE);
+                Matcher matcher = pattern.matcher("88");
+                boolean matchFound = matcher.find();
+                System.out.println("matchfound? "+matchFound);
+                //
                 saveButton.setEnabled(false);
                 creator.setTextFieldPanel(classLabelPanel);
                 System.out.println("classlabelpanel save print::::::: "+classLabelPanel.getComponentCount());
-                //debugTest(classLabelPanel);
-
-                //ArrayList<String> classList = set.getClassList();
                 creator.writeTextToFile("/Users/evy/Documents/GradeTracker-new/src/main/view/UserInfo/StudentInfo/" + set.getUsername() +"/"+classList.get(set.getClassListIndex())+ ".txt", creator.getTextFieldContainer());
-                //System.out.println("Complete! Class list is before saving: "+ classList);
-                //set.setClassList(classList);
-                //System.out.println("Complete! Class list is after saving: "+ classList);
             }
         });
         
@@ -190,7 +196,6 @@ public class StudentStatCollect extends JFrame {
         ///
         //creditTypeBox();
         ///
-        //JTextField credits = creator.createTextBox(window, "Credits (optional)", 50, 50);
         String filePath = "/Users/evy/Documents/GradeTracker-new/src/main/view/UserInfo/StudentInfo/" + set.getUsername() +"/class"+ ".txt";
         ArrayList<String> classList = set.getClassList();
         //will be updated later
@@ -219,7 +224,7 @@ public class StudentStatCollect extends JFrame {
     }
 
     private void classLabel(ArrayList<String> classList) {
-        if (numOfBoxes <= 27) {
+        if (numOfBoxes <= maxBoxes) {
         creator.hideContainer();
         JPanel northClassPanelContainer = new JPanel(new BorderLayout());
         JPanel classLabelPanelContainer = new JPanel(new BorderLayout());
@@ -239,10 +244,10 @@ public class StudentStatCollect extends JFrame {
     }
 
     private void gradePercentageBox() {
-        if (numOfBoxes <= 27) {
+        if (numOfBoxes <= maxBoxes) {
         JPanel northGradePercentagePanel = new JPanel(new BorderLayout());
         JPanel gradePercentagePanel = new JPanel(new BorderLayout());
-        JTextField gradePercentage = creator.createTextBox(window, "Percentage of Grade", 80, 50); //the sol
+        JTextField gradePercentage = creator.createTextBox(window, "Percentage of Grade", 80, 10); //the sol
 
         //allBoxesPanel.add(gradePercentage);
         System.out.println("Components after adding: "+ allBoxesPanel.getComponentCount());
@@ -263,10 +268,10 @@ public class StudentStatCollect extends JFrame {
     }
 
     private void gradeTypeBox() {
-        if (numOfBoxes <= 27) {
+        if (numOfBoxes <= maxBoxes) {
         JPanel northTypePanel = new JPanel(new BorderLayout());
         JPanel gradeTypePanel = new JPanel(new BorderLayout());
-        JTextField gradeType = creator.createTextBox(window, "Grade Type"+typeNumber, 10, 50);
+        JTextField gradeType = creator.createTextBox(window, "Grade Type"+typeNumber, 10, 10);
         allBoxesPanel.add(gradeType);
         System.out.println("Components after addingg: "+ allBoxesPanel.getComponentCount());
         System.out.println("ClassLabelPanel components: "+ classLabelPanel.getComponentCount());
@@ -281,7 +286,7 @@ public class StudentStatCollect extends JFrame {
     }
 
     private void creditTypeBox() {
-        if (numOfBoxes < 27) {
+        if (numOfBoxes <= maxBoxes) {
         northCreditsPanel = new JPanel(new BorderLayout());
         JPanel creditTypePanel = new JPanel(new BorderLayout());
         JTextField creditType = creator.createTextBox(window, "Credits (optional)", 50, 50);
@@ -299,10 +304,10 @@ public class StudentStatCollect extends JFrame {
     }
 
     private void gradesBox() {
-        if (numOfBoxes < 27) {
+        if (numOfBoxes <= maxBoxes) {
             northCreditsPanel = new JPanel(new BorderLayout());
             JPanel creditTypePanel = new JPanel(new BorderLayout());
-            JTextField creditType = creator.createTextBox(window, "Grades", 50, 50);
+            JTextField creditType = creator.createTextBox(window, "Grades(format:# # #)", 10, 10);
             
             allBoxesPanel.add(creditType);
             System.out.println("Components after adding: "+ allBoxesPanel.getComponentCount());
@@ -351,6 +356,10 @@ public class StudentStatCollect extends JFrame {
         gradePercentageBox();
         gradesBox();
     }
+
+    // private void calculate() {
+    //     //parse the grade situation. but then needs correct input.
+    // }
 
     ////
     }
