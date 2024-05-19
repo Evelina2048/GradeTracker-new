@@ -273,17 +273,17 @@ public class Creator {
     }
     private void writeTextToFileWithAppend(String filePath, JPanel textFieldPanel) {
         try (BufferedWriter writer = new BufferedWriter(new FileWriter(filePath, true))) {
-            System.out.println("Step5:");
+            //System.out.println("Step5:");
             for (Component component : textFieldPanel.getComponents()) {
-                System.out.println("Step6:");/// move to other function and call again until textbox. then call just for textbox.
+                //System.out.println("Step6:");/// move to other function and call again until textbox. then call just for textbox.
                 if (component instanceof JTextField) {
-                    System.out.println("Step7:");
+                    //System.out.println("Step7:");
                     JTextField textField = (JTextField) component;
                     String text = textField.getText().trim();
                     classList.add(text);
     
                     if (!text.isEmpty()) {
-                        System.out.println("Step8:");
+                        //System.out.println("Step8:");
                         writer.write(text + "\n");                             
                         System.out.println("should be writing");
                     }
@@ -312,10 +312,10 @@ public class Creator {
             placeholderFill = true;
             addDocumentListener(textField);
             debugPanelComponentCount();
-            System.out.println("^before adding "+ textField.getText());
+            //System.out.println("^before adding "+ textField.getText());
             textFieldPanel.add(textField); 
             debugPanelComponentCount();
-            System.out.println("^after adding");
+            //System.out.println("^after adding");
             textFieldPanelText.add(textField.getText());
             textField.setPreferredSize(new Dimension(width, height));
             window.add(textFieldPanel);
@@ -325,7 +325,7 @@ public class Creator {
         //setTextFieldPanel(textFieldPanel);
         //set.setTextFieldPanel(textFieldPanel);
         setTextFieldPanel(textFieldPanel);
-        System.out.println("in create text box: " + set.getClassList());
+        //System.out.println("in create text box: " + set.getClassList());
         return textField;
     }
 

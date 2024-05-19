@@ -142,10 +142,10 @@ public class StudentClasses extends JFrame {
         deleteClassButton.setPreferredSize(new Dimension(100, 50));
         deleteClassButton.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent e) {
-                System.out.println("deleteClassButtonPressed. ClassList:"+ set.getClassList());
+                //System.out.println("deleteClassButtonPressed.Before. ClassList:"+ set.getClassList());
                 creator.deleteTextBox(window, creator.getTextFieldContainer());
                 saveButton.setEnabled(true);
-                
+                //System.out.println("class list after deleting"+set.getClassList());
             }
         });
     }

@@ -58,6 +58,7 @@ public class StudentStatCollect extends JFrame {
 
     public StudentStatCollect(JFrame main,NewUser newUser, String studentOrTeacher, String existingOrNew, Set set) {
         //set.resetContainerAndPanel();
+        System.out.println("classlistinstudentstatcollectbegining"+ set.getClassList());
         this.window = main;
         this.set = set;
         creator = new Creator(set);
@@ -71,7 +72,7 @@ public class StudentStatCollect extends JFrame {
 
     public void studentStatCollectLaunch(JFrame window) {
         classList = set.getClassList();
-        System.out.println("in student classes");
+        System.out.println("in student classes...........********"+classList);
         window.setTitle("StudentStatCollect");
         window.setPreferredSize(new Dimension(1000, 1000));
     }
@@ -94,13 +95,17 @@ public class StudentStatCollect extends JFrame {
         saveButtonPanel.add(saveButton);
         saveButton.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent e) {
-                System.out.println("4save button hit");
+                System.out.println("4save button hit"+set.getClassList());
                 saveButton.setEnabled(false);
                 creator.setTextFieldPanel(classLabelPanel);
-                ArrayList<String> classList = set.getClassList();
+                System.out.println("classlabelpanel save print::::::: "+classLabelPanel.getComponentCount());
+                //debugTest(classLabelPanel);
+
+                //ArrayList<String> classList = set.getClassList();
                 creator.writeTextToFile("/Users/evy/Documents/GradeTracker-new/src/main/view/UserInfo/StudentInfo/" + set.getUsername() +"/"+classList.get(set.getClassListIndex())+ ".txt", creator.getTextFieldContainer());
-                System.out.println("Complete! Class list is: "+ set.getFinalClassList());
-                set.setClassList(classList);
+                //System.out.println("Complete! Class list is before saving: "+ classList);
+                //set.setClassList(classList);
+                //System.out.println("Complete! Class list is after saving: "+ classList);
             }
         });
         
@@ -161,12 +166,15 @@ public class StudentStatCollect extends JFrame {
 
         delTypeButton.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent e) {
-                System.out.println("deltypebutton hit");
-                if (classLabelPanel.getComponentCount() >= 6) {
+                System.out.println("deltypebutton hitt");
+                System.out.println("deleteclasslist"+ classLabelPanel.getComponentCount());
+                if (classLabelPanel.getComponentCount() >= 8) {
+                    creator.deleteTextBox(window, classLabelPanel);
                     creator.deleteTextBox(window, classLabelPanel);
                     creator.deleteTextBox(window, classLabelPanel);
                     creator.saveButtonEnable();
                 }
+                System.out.println("deleteclasslistafter...."+ classLabelPanel.getComponentCount());
         }
         });
 
@@ -326,6 +334,20 @@ public class StudentStatCollect extends JFrame {
         newDelContainerFlow.setVisible(false);
         classLabelPanel.setVisible(false);
         
+    }
+
+    private void debugTest(JPanel classLabePanel) {
+        // Iterate over the components of the classLabelPanel
+        for (Component component : classLabelPanel.getComponents()) {
+            // Check if the component is an instance of JLabel
+            if (component instanceof JLabel) {
+                // Cast the component to JLabel
+                JLabel label = (JLabel) component;
+                // Print the text of the label
+                System.out.println("printing labels....:::>..."+label.getText());
+    }
+}
+
     }
 
     ////
