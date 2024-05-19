@@ -176,6 +176,7 @@ public class StudentStatCollect extends JFrame {
                     creator.deleteTextBox(window, classLabelPanel);
                     creator.deleteTextBox(window, classLabelPanel);
                     creator.deleteTextBox(window, classLabelPanel);
+                    numOfBoxes = numOfBoxes - 3;
                     creator.saveButtonEnable();
                 }
                 System.out.println("deleteclasslistafter...."+ classLabelPanel.getComponentCount());
