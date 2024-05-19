@@ -157,9 +157,7 @@ public class StudentStatCollect extends JFrame {
        newTypeButton.addActionListener(new ActionListener() {
         public void actionPerformed(ActionEvent e) {
             typeNumber++;
-            gradeTypeBox();
-            gradePercentageBox();
-            gradesBox();
+            newSet();
             System.out.println("ClassLabelPanel after adding: "+ allBoxesPanel.getComponentCount());
         }
         });
@@ -205,9 +203,7 @@ public class StudentStatCollect extends JFrame {
         System.out.println("test1: in read class");
         classLabel(classList);
         creditTypeBox();
-        gradePercentageBox();
-        gradeTypeBox();
-        gradesBox();
+        newSet();
 
         typeNumber++;
         container.add(classLabelPanel);
@@ -348,6 +344,12 @@ public class StudentStatCollect extends JFrame {
     }
 }
 
+    }
+
+    private void newSet() {
+        gradeTypeBox();
+        gradePercentageBox();
+        gradesBox();
     }
 
     ////
