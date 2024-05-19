@@ -162,7 +162,7 @@ public class StudentStatCollect extends JFrame {
 
        newTypeButton.addActionListener(new ActionListener() {
         public void actionPerformed(ActionEvent e) {
-            typeNumber++;
+            //typeNumber++;
             newSet();
             System.out.println("ClassLabelPanel after adding: "+ allBoxesPanel.getComponentCount());
         }
@@ -210,7 +210,7 @@ public class StudentStatCollect extends JFrame {
         creditTypeBox();
         newSet();
 
-        typeNumber++;
+        //typeNumber++;
         container.add(classLabelPanel);
         //set.setTextFieldPanel(classLabelPanel);
         //set.setTextFieldContainer(container);
@@ -271,7 +271,8 @@ public class StudentStatCollect extends JFrame {
         if (numOfBoxes <= maxBoxes) {
         JPanel northTypePanel = new JPanel(new BorderLayout());
         JPanel gradeTypePanel = new JPanel(new BorderLayout());
-        JTextField gradeType = creator.createTextBox(window, "Grade Type"+typeNumber, 10, 10);
+        typeNumber++;
+        JTextField gradeType = creator.createTextBox(window, "Grade Type "+typeNumber, 10, 10);
         allBoxesPanel.add(gradeType);
         System.out.println("Components after addingg: "+ allBoxesPanel.getComponentCount());
         System.out.println("ClassLabelPanel components: "+ classLabelPanel.getComponentCount());
