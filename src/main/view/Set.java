@@ -63,6 +63,7 @@ public class Set {
     }
 
     public ArrayList<String> getFinalClassList() {
+        System.out.println("ingetfinalclasslist: "+finalClassList);
         return finalClassList;
     }
 

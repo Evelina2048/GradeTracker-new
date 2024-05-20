@@ -60,12 +60,16 @@ public class StudentStatCollect extends JFrame {
     private JPanel allBoxesPanel = new JPanel();
     private ArrayList<String> classList;
     private ArrayList<String> typeList;
+    private final ArrayList<String> finalClassList;
 
     public StudentStatCollect(JFrame main,NewUser newUser, String studentOrTeacher, String existingOrNew, Set set) {
         //set.resetContainerAndPanel();
         System.out.println("classlistinstudentstatcollectbegining"+ set.getClassList());
         this.window = main;
         this.set = set;
+        //private final ArrayList<String> finalClassList = set.getFinalClassList();
+        this.finalClassList = new ArrayList<>(set.getFinalClassList());
+        System.out.println("finalclasslistafterinitialization: : "+finalClassList);
         creator = new Creator(set);
         studentStatCollectLaunch(window);
         createNewTypeButton();
@@ -103,15 +107,20 @@ public class StudentStatCollect extends JFrame {
                 //check if textbox is vaild
 
                 //if valid. regex?
-                Pattern pattern = Pattern.compile("[0-9]*", Pattern.CASE_INSENSITIVE);
+                Pattern pattern = Pattern.compile("^[0-9][0-9]*[.]*[0-9]*$", Pattern.CASE_INSENSITIVE);
                 Matcher matcher = pattern.matcher("88");
                 boolean matchFound = matcher.find();
                 System.out.println("matchfound? "+matchFound);
                 //
                 saveButton.setEnabled(false);
                 creator.setTextFieldPanel(classLabelPanel);
-                System.out.println("classlabelpanel save print::::::: "+classLabelPanel.getComponentCount());
-                creator.writeTextToFile("/Users/evy/Documents/GradeTracker-new/src/main/view/UserInfo/StudentInfo/" + set.getUsername() +"/"+classList.get(set.getClassListIndex())+ ".txt", creator.getTextFieldContainer());
+                System.out.println("classlabelpanel save print::::::: "+classLabelPanel.getComponentCount()+" "+numOfBoxes);
+                System.out.println("array test!!!!!!!!: "+classLabelPanel.getComponentCount()+" "+numOfBoxes);
+                //creator.writeTextToFile("/Users/evy/Documents/GradeTracker-new/src/main/view/UserInfo/StudentInfo/" + set.getUsername() +"/"+classList.get(set.getClassListIndex())+ ".txt", creator.getTextFieldContainer());
+                System.out.println("primary bug testser pppppp:::: "+ finalClassList);//gives bug
+                System.out.println("primary bug testser:::: "+ finalClassList.get(set.getClassListIndex()));//gives bug
+                creator.writeTextToFile("/Users/evy/Documents/GradeTracker-new/src/main/view/UserInfo/StudentInfo/" + set.getUsername() +"/"+finalClassList.get(set.getClassListIndex())+ ".txt", creator.getTextFieldContainer());
+                //creator.writeTextToFile("/Users/evy/Documents/GradeTracker-new/src/main/view/UserInfo/StudentInfo/" + set.getUsername() +"/"+classList.get(0)+ ".txt", creator.getTextFieldContainer());
             }
         });
         
@@ -226,82 +235,82 @@ public class StudentStatCollect extends JFrame {
 
     private void classLabel(ArrayList<String> classList) {
         if (numOfBoxes <= maxBoxes) {
-        creator.hideContainer();
-        JPanel northClassPanelContainer = new JPanel(new BorderLayout());
-        JPanel classLabelPanelContainer = new JPanel(new BorderLayout());
-        //JLabel classLabel = new JLabel("h");
-        JLabel classLabel = new JLabel(set.getClassList().get(set.getClassListIndex())); //new JLabel("h"); 
-        classLabelPanelContainer.add(classLabel);
-        classLabelPanelContainer.setPreferredSize(new Dimension(155,50));
-        northClassPanelContainer.add(classLabelPanelContainer, BorderLayout.NORTH);
-        classLabelPanel.add(northClassPanelContainer);
-        //
-        northClassPanelContainer.setBackground(Color.PINK);
-        //
-        classLabel.setVisible(true);
-        creator.windowFix(window);
-        numOfBoxes++;
+            creator.hideContainer();
+            JPanel northClassPanelContainer = new JPanel(new BorderLayout());
+            JPanel classLabelPanelContainer = new JPanel(new BorderLayout());
+            //JLabel classLabel = new JLabel("h");
+            JLabel classLabel = new JLabel(set.getClassList().get(set.getClassListIndex())); //new JLabel("h"); 
+            classLabelPanelContainer.add(classLabel);
+            classLabelPanelContainer.setPreferredSize(new Dimension(155,50));
+            northClassPanelContainer.add(classLabelPanelContainer, BorderLayout.NORTH);
+            classLabelPanel.add(northClassPanelContainer);
+            //
+            northClassPanelContainer.setBackground(Color.PINK);
+            //
+            classLabel.setVisible(true);
+            creator.windowFix(window);
+            numOfBoxes++;
         }
     }
 
     private void gradePercentageBox() {
         if (numOfBoxes <= maxBoxes) {
-        JPanel northGradePercentagePanel = new JPanel(new BorderLayout());
-        JPanel gradePercentagePanel = new JPanel(new BorderLayout());
-        JTextField gradePercentage = creator.createTextBox(window, "Percentage of Grade", 80, 10); //the sol
+            JPanel northGradePercentagePanel = new JPanel(new BorderLayout());
+            JPanel gradePercentagePanel = new JPanel(new BorderLayout());
+            JTextField gradePercentage = creator.createTextBox(window, "Percentage of Grade", 80, 10); //the sol
 
-        //allBoxesPanel.add(gradePercentage);
-        System.out.println("Components after adding: "+ allBoxesPanel.getComponentCount());
+            //allBoxesPanel.add(gradePercentage);
+            System.out.println("Components after adding: "+ allBoxesPanel.getComponentCount());
 
-        gradePercentagePanel.add(gradePercentage); //issue
-        gradePercentagePanel.setPreferredSize(new Dimension(155,50));
-        northGradePercentagePanel.add(gradePercentagePanel, BorderLayout.NORTH);
-        classLabelPanel.add(northGradePercentagePanel);
+            gradePercentagePanel.add(gradePercentage); //issue
+            gradePercentagePanel.setPreferredSize(new Dimension(155,50));
+            northGradePercentagePanel.add(gradePercentagePanel, BorderLayout.NORTH);
+            classLabelPanel.add(northGradePercentagePanel);
 
 
-        ////
-        //gradePercentage.setPreferredSize(new Dimension(155,50));
-        ////
-        creator.windowFix(window); 
-        numOfBoxes++;
+            ////
+            //gradePercentage.setPreferredSize(new Dimension(155,50));
+            ////
+            creator.windowFix(window); 
+            numOfBoxes++;
         }
 
     }
 
     private void gradeTypeBox() {
         if (numOfBoxes <= maxBoxes) {
-        JPanel northTypePanel = new JPanel(new BorderLayout());
-        JPanel gradeTypePanel = new JPanel(new BorderLayout());
-        typeNumber++;
-        JTextField gradeType = creator.createTextBox(window, "Grade Type "+typeNumber, 10, 10);
-        allBoxesPanel.add(gradeType);
-        System.out.println("Components after addingg: "+ allBoxesPanel.getComponentCount());
-        System.out.println("ClassLabelPanel components: "+ classLabelPanel.getComponentCount());
+            JPanel northTypePanel = new JPanel(new BorderLayout());
+            JPanel gradeTypePanel = new JPanel(new BorderLayout());
+            typeNumber++;
+            JTextField gradeType = creator.createTextBox(window, "Grade Type "+typeNumber, 10, 10);
+            allBoxesPanel.add(gradeType);
+            System.out.println("Components after addingg: "+ allBoxesPanel.getComponentCount());
+            System.out.println("ClassLabelPanel components: "+ classLabelPanel.getComponentCount());
 
-        gradeTypePanel.add(gradeType);
-        gradeTypePanel.setPreferredSize(new Dimension( 155,50));
-        northTypePanel.add(gradeTypePanel, BorderLayout.NORTH);
-        classLabelPanel.add(northTypePanel);
-        creator.windowFix(window);
-        numOfBoxes++;
+            gradeTypePanel.add(gradeType);
+            gradeTypePanel.setPreferredSize(new Dimension( 155,50));
+            northTypePanel.add(gradeTypePanel, BorderLayout.NORTH);
+            classLabelPanel.add(northTypePanel);
+            creator.windowFix(window);
+            numOfBoxes++;
         }
     }
 
     private void creditTypeBox() {
         if (numOfBoxes <= maxBoxes) {
-        northCreditsPanel = new JPanel(new BorderLayout());
-        JPanel creditTypePanel = new JPanel(new BorderLayout());
-        JTextField creditType = creator.createTextBox(window, "Credits (optional)", 50, 50);
-        
-        allBoxesPanel.add(creditType);
-        System.out.println("Components after adding: "+ allBoxesPanel.getComponentCount());
-        
-        creditTypePanel.add(creditType);
-        creditTypePanel.setPreferredSize(new Dimension(155,50));
-        northCreditsPanel.add(creditTypePanel, BorderLayout.NORTH);
-        classLabelPanel.add(northCreditsPanel);
-        creator.windowFix(window);
-        numOfBoxes++;
+            northCreditsPanel = new JPanel(new BorderLayout());
+            JPanel creditTypePanel = new JPanel(new BorderLayout());
+            JTextField creditType = creator.createTextBox(window, "Credits (optional)", 50, 50);
+            
+            allBoxesPanel.add(creditType);
+            System.out.println("Components after adding: "+ allBoxesPanel.getComponentCount());
+            
+            creditTypePanel.add(creditType);
+            creditTypePanel.setPreferredSize(new Dimension(155,50));
+            northCreditsPanel.add(creditTypePanel, BorderLayout.NORTH);
+            classLabelPanel.add(northCreditsPanel);
+            creator.windowFix(window);
+            numOfBoxes++;
         }
     }
 
