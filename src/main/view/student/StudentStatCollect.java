@@ -107,8 +107,9 @@ public class StudentStatCollect extends JFrame {
                 //check if textbox is vaild
 
                 //if valid. regex?
-                Pattern pattern = Pattern.compile("^[0-9][0-9]*[.]*[0-9]*$", Pattern.CASE_INSENSITIVE);
+                Pattern pattern = Pattern.compile("^(?:[0-9]*(?:.[0-9]+))*\s*$|^[0-9]*\s*$", Pattern.CASE_INSENSITIVE);
                 Matcher matcher = pattern.matcher("88");
+                //should check match 
                 boolean matchFound = matcher.find();
                 System.out.println("matchfound? "+matchFound);
                 //
