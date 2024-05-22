@@ -28,6 +28,7 @@ import javax.swing.JPanel;
 import javax.swing.JTextField;
 import java.awt.Container;
 import java.io.BufferedWriter;
+import java.io.FileReader;
 import java.io.FileWriter;
 import java.io.IOException;
 import java.awt.Component;
@@ -108,6 +109,9 @@ public class StudentStatCollect extends JFrame {
 
                 //if valid. regex?
                 Pattern pattern = Pattern.compile("^(?:[0-9]*(?:.[0-9]+))*\s*$|^[0-9]*\s*$", Pattern.CASE_INSENSITIVE);
+
+                correctGradeFormatChecker(pattern);
+
                 Matcher matcher = pattern.matcher("88");
                 //should check match 
                 boolean matchFound = matcher.find();
@@ -196,6 +200,85 @@ public class StudentStatCollect extends JFrame {
        window.add(newDelContainerFlow, BorderLayout.EAST);
        creator.windowFix(window);
    }
+
+   private void correctGradeFormatChecker(Pattern pattern) {
+        for (int i=0; i<=8; i++){
+            //component componentMatched = classLabelPanel.getComponent(0);
+            String text = goIntoPanel(classLabelPanel); //will return a text box. probably just first for now???
+
+            //JTextField textFieldOfComponent = (JTextField) componentMatched;
+            //String textOfComponent = textFieldOfComponent.getText();
+            Matcher matcher = pattern.matcher(text);
+            Boolean matcherBoolean = matcher.find();
+
+            System.out.println("matcher works?: "+ matcherBoolean);
+        }
+
+
+        //barebones
+        // String filePath = "path/to/your/file.txt"; // Specify the path to your file
+
+        // try (BufferedReader reader = new BufferedReader(new FileReader(filePath))) {
+        //     String line;
+        //     while ((line = reader.readLine()) != null) {
+        //         // Process each line of the file
+        //         System.out.println(line); // Print the line to the console
+        //     }
+        // } catch (IOException e) {
+        //     e.printStackTrace(); // Handle any IOException
+        // }
+        //
+        //index = 3
+        //for i in the file
+        //start at index 3
+        //check against regex
+        //if good, at 3
+        //if wrong send pop up
+    }
+
+    private String goIntoPanel(JPanel panel) {
+        Container container = panel;
+        for (Component component : container.getComponents()) {
+            if (component instanceof JTextField) {
+                JTextField textField = (JTextField) component;
+                String text = textField.getText();
+                return text;
+            }
+
+            else if (component instanceof JPanel) {
+                JPanel jpanel = (JPanel) component;
+                //JPanel backToPanel = (JPanel) component;
+                goIntoPanel(jpanel);
+            }
+        }
+        return "something went wrong StudentStatCollect";
+
+
+        //if (container.getComponents()) {
+
+        //}
+
+        ///
+
+        // if (panel instanceof Component) {
+        //     panel = (JTextField) panel;
+        // }
+
+        // if (panel.getComponent(0) instanceof JTextField) {
+        //     JTextField textfield = (JTextField) panel.getComponent(0);
+        //     return textfield;
+        // }
+
+        // else if (panel.getComponent(0) instanceof JPanel){
+        //     return goIntoPanel(panel.getComponent(0));
+        // }
+
+        // else {
+        //     System.out.println("something went wrong in goIntoPanel in StudentStatCollect");
+        // }
+        // return null;
+
+    }
 
     // For i in classes, give classes : class1 
     //     for j in types :
