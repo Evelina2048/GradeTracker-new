@@ -202,10 +202,13 @@ public class StudentStatCollect extends JFrame {
    }
 
    private void correctGradeFormatChecker(Pattern pattern) {
-        for (int i=0; i<=1; i++) {
+        int index = 4;
+        for (int i=0; i<=7; i++) {
             //component componentMatched = classLabelPanel.getComponent(0);
-            String text = goIntoPanel(classLabelPanel, 1); //will return a text box. probably just first for now??? //base case 5
 
+            //if it exists. otherwise, bye bye.
+            String text = goIntoPanel(classLabelPanel, index); //will return a text box. probably just first for now??? //base case 5
+            index = index + 3;
             //JTextField textFieldOfComponent = (JTextField) componentMatched;
             //String textOfComponent = textFieldOfComponent.getText();
             System.out.println("text before matcher works?"+text);
