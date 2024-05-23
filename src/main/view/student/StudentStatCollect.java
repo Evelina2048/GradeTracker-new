@@ -112,10 +112,10 @@ public class StudentStatCollect extends JFrame {
 
                 correctGradeFormatChecker(pattern);
 
-                Matcher matcher = pattern.matcher("88");
+                //Matcher matcher = pattern.matcher("88");
                 //should check match 
-                boolean matchFound = matcher.find();
-                System.out.println("matchfound? "+matchFound);
+                //boolean matchFound = matcher.find();
+                //System.out.println("matchfound? "+matchFound);
                 //
                 saveButton.setEnabled(false);
                 creator.setTextFieldPanel(classLabelPanel);
@@ -202,12 +202,13 @@ public class StudentStatCollect extends JFrame {
    }
 
    private void correctGradeFormatChecker(Pattern pattern) {
-        for (int i=0; i<=8; i++){
+        for (int i=0; i<=1; i++) {
             //component componentMatched = classLabelPanel.getComponent(0);
-            String text = goIntoPanel(classLabelPanel); //will return a text box. probably just first for now???
+            String text = goIntoPanel(classLabelPanel, 1); //will return a text box. probably just first for now??? //base case 5
 
             //JTextField textFieldOfComponent = (JTextField) componentMatched;
             //String textOfComponent = textFieldOfComponent.getText();
+            System.out.println("text before matcher works?"+text);
             Matcher matcher = pattern.matcher(text);
             Boolean matcherBoolean = matcher.find();
 
@@ -236,47 +237,34 @@ public class StudentStatCollect extends JFrame {
         //if wrong send pop up
     }
 
-    private String goIntoPanel(JPanel panel) {
+    private String goIntoPanel(JPanel panel, int index) {
         Container container = panel;
-        for (Component component : container.getComponents()) {
-            if (component instanceof JTextField) {
+        System.out.println("component count of panel: "+ container.getComponentCount());
+        Component component = container.getComponent(index);
+        if (component instanceof JTextField) {
                 JTextField textField = (JTextField) component;
                 String text = textField.getText();
+                System.out.println("about to return the text: "+ text);
                 return text;
-            }
+            } 
 
-            else if (component instanceof JPanel) {
+        else if (component instanceof JPanel) {
+                //System.out.println();
                 JPanel jpanel = (JPanel) component;
                 //JPanel backToPanel = (JPanel) component;
-                goIntoPanel(jpanel);
+
+                String text = goIntoPanel(jpanel, 0);
+
+                if (text != null) {
+                    return text;
+                }
+
+                //return "something went wrong StudentStatCollect";
+                //goIntoPanel(jpanel);
             }
-        }
-        return "something went wrong StudentStatCollect";
 
-
-        //if (container.getComponents()) {
-
-        //}
-
-        ///
-
-        // if (panel instanceof Component) {
-        //     panel = (JTextField) panel;
-        // }
-
-        // if (panel.getComponent(0) instanceof JTextField) {
-        //     JTextField textfield = (JTextField) panel.getComponent(0);
-        //     return textfield;
-        // }
-
-        // else if (panel.getComponent(0) instanceof JPanel){
-        //     return goIntoPanel(panel.getComponent(0));
-        // }
-
-        // else {
-        //     System.out.println("something went wrong in goIntoPanel in StudentStatCollect");
-        // }
-        // return null;
+            System.out.println("none of these" +component.getClass().getName());
+            return "something went wrong StudentStatCollect";
 
     }
 
