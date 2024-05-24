@@ -208,6 +208,10 @@ public class StudentStatCollect extends JFrame {
 
             //if it exists. otherwise, bye bye.
             String text = goIntoPanel(classLabelPanel, index); //will return a text box. probably just first for now??? //base case 5
+            if (text.equals("does not exist")) {
+                System.out.println("fail");
+                break;
+            }
             index = index + 3;
             //JTextField textFieldOfComponent = (JTextField) componentMatched;
             //String textOfComponent = textFieldOfComponent.getText();
@@ -243,7 +247,15 @@ public class StudentStatCollect extends JFrame {
     private String goIntoPanel(JPanel panel, int index) {
         Container container = panel;
         System.out.println("component count of panel: "+ container.getComponentCount());
+
+        //check component is not null
+        if (index >= container.getComponentCount()) {
+            System.out.println("component is null. Function: goIntoPanel. StudentStatCollect class");
+            return "does not exist";
+        }
         Component component = container.getComponent(index);
+
+
         if (component instanceof JTextField) {
                 JTextField textField = (JTextField) component;
                 String text = textField.getText();
