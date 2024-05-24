@@ -32,7 +32,7 @@ public class StudentStatCollect extends JFrame {
     private JButton newTypeButton;
     private Set set;
     private JPanel container = new JPanel(new FlowLayout(FlowLayout.LEFT));
-    private JPanel classLabelPanelContainer = new JPanel(new BorderLayout());
+    //private JPanel classLabelPanelContainer = new JPanel(new BorderLayout());
     private JPanel newDelContainerFlow;
     private JPanel classLabelPanel = new JPanel(new FlowLayout(FlowLayout.LEFT, 5, 5));
     private int typeNumber = 0;
@@ -41,9 +41,9 @@ public class StudentStatCollect extends JFrame {
     private int maxBoxes = 25;
     
     private JPanel northCreditsPanel;
-    private JPanel northNewTypePanel;
+    //private JPanel northNewTypePanel;
     private JPanel allBoxesPanel = new JPanel();
-    private ArrayList<String> classList;
+    //private ArrayList<String> typeList;
     private ArrayList<String> typeList;
     private final ArrayList<String> finalClassList;
 
@@ -59,7 +59,7 @@ public class StudentStatCollect extends JFrame {
     }
 
     public void studentStatCollectLaunch(JFrame window) {
-        classList = set.getClassList();
+        typeList = set.getCurrentPanelList();
         window.setTitle("StudentStatCollect");
         window.setPreferredSize(new Dimension(1000, 1000));
     }
@@ -219,14 +219,14 @@ public class StudentStatCollect extends JFrame {
     //read classes array, first five classes
     private void DisplayClasses() {
         String filePath = "/Users/evy/Documents/GradeTracker-new/src/main/view/UserInfo/StudentInfo/" + set.getUsername() +"/class"+ ".txt";
-        ArrayList<String> classList = set.getClassList();
+        ArrayList<String> typeList = set.getCurrentPanelList();
 
-        readClass(classList);
+        readClass(typeList);
     }
 
-    private void readClass(ArrayList<String> classList) { 
+    private void readClass(ArrayList<String> typeList) { 
         System.out.println("test1: in read class");
-        classLabel(classList);
+        classLabel(typeList);
         creditTypeBox();
         newSet();
 
@@ -236,7 +236,7 @@ public class StudentStatCollect extends JFrame {
         creator.windowFix(window);
     }
 
-    private void classLabel(ArrayList<String> classList) {
+    private void classLabel(ArrayList<String> typeList) {
         if (numOfBoxes <= maxBoxes) {
             creator.hideContainer();
             JPanel northClassPanelContainer = new JPanel(new BorderLayout());
@@ -326,10 +326,10 @@ public class StudentStatCollect extends JFrame {
 
     private void writeType() {
         creator.setTextFieldPanel(classLabelPanel);
-        ArrayList<String> classList = set.getClassList();
-        creator.writeTextToFile("/Users/evy/Documents/GradeTracker-new/src/main/view/UserInfo/StudentInfo/" + set.getUsername() +"/"+classList.get(set.getClassListIndex())+ ".txt", creator.getTextFieldContainer());
+        ArrayList<String> typeList = set.getCurrentPanelList();
+        creator.writeTextToFile("/Users/evy/Documents/GradeTracker-new/src/main/view/UserInfo/StudentInfo/" + set.getUsername() +"/"+typeList.get(set.getClassListIndex())+ ".txt", creator.getTextFieldContainer());
         System.out.println("Complete! Class list is: "+ set.getFinalClassList());
-        set.setClassList(classList);
+        set.setClassList(typeList);
     }
 
 

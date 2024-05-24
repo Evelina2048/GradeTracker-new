@@ -232,7 +232,7 @@ public class Creator {
     }
 
     public void writeTextToFile(String filePath, JPanel textFieldPanel) {
-        System.out.println("Step4: begin writeTextToFile."+ set.getClassList());
+        System.out.println("Step4: begin writeTextToFile."+ set.getCurrentPanelList());
         debugPrintPanel();
         String username = set.getUsername();
         try (BufferedWriter writer = new BufferedWriter(new FileWriter(filePath))) {
@@ -258,7 +258,7 @@ public class Creator {
         } catch (IOException e) {
             e.printStackTrace();
         }
-        System.out.println("in write text to file: "+set.getClassList());
+        System.out.println("in write text to file: "+set.getCurrentPanelList());
         set.setClassList(classList);
         
     }

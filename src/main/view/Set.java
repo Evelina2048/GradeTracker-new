@@ -54,7 +54,7 @@ public class Set {
         
     }
 
-    public ArrayList<String> getClassList() {
+    public ArrayList<String> getCurrentPanelList() {
         return classList;
     }
 

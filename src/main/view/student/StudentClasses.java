@@ -97,21 +97,21 @@ public class StudentClasses extends JFrame {
             public void actionPerformed(ActionEvent e) {
                 System.out.println("nextbuttonhit");
                 creator.writeFolderToFile(textFieldEmptied);
-                ArrayList<String> classList = set.getClassList();
+                ArrayList<String> classList = set.getCurrentPanelList();
                 creator.writeTextToFile("/Users/evy/Documents/GradeTracker-new/src/main/view/UserInfo/StudentInfo/" + set.getUsername() + "/class.txt", creator.getTextFieldContainer());
-                System.out.println("right before c lass list set in next: "+set.getClassList());
+                System.out.println("right before c lass list set in next: "+set.getCurrentPanelList());
                 set.setClassList(classList);
                 
                 hideWindow();
                 creator.hideContainer();
-                //while (set.getClassListIndex()+1 <= set.getClassList().size()) {
-                System.out.println("before stat collect called: "+set.getClassList());
+                //while (set.getClassListIndex()+1 <= set.getCurrentPanelList().size()) {
+                System.out.println("before stat collect called: "+set.getCurrentPanelList());
                 //set.setClassList(classList);
                 set.setFinalClassList(classList);
                 writeType();
                 StudentStatCollect statCollect = new StudentStatCollect(window, newUser, studentOrTeacher, existingOrNew, set);
                 //}
-                System.out.println("AStep1: "+set.getClassListIndex()+set.getClassList().size());
+                System.out.println("AStep1: "+set.getClassListIndex()+set.getCurrentPanelList().size());
             }
         });
         System.out.println("test11 (should be 29) "+backButton.getHeight());
@@ -128,7 +128,7 @@ public class StudentClasses extends JFrame {
         newClassButton.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent e) {
                 creator.createTextBox(window, "Enter Class Name", 50, 50);
-                System.out.println("class list in new class button"+ set.getClassList());
+                System.out.println("class list in new class button"+ set.getCurrentPanelList());
                 
         }
     });
@@ -142,17 +142,17 @@ public class StudentClasses extends JFrame {
         deleteClassButton.setPreferredSize(new Dimension(100, 50));
         deleteClassButton.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent e) {
-                //System.out.println("deleteClassButtonPressed.Before. ClassList:"+ set.getClassList());
+                //System.out.println("deleteClassButtonPressed.Before. ClassList:"+ set.getCurrentPanelList());
                 creator.deleteTextBox(window, creator.getTextFieldContainer());
                 saveButton.setEnabled(true);
-                //System.out.println("class list after deleting"+set.getClassList());
+                //System.out.println("class list after deleting"+set.getCurrentPanelList());
             }
         });
     }
 
     private void westPanelCreate() {
         createNewClassButton();
-        System.out.println("before creating delete class button"+set.getClassList());
+        System.out.println("before creating delete class button"+set.getCurrentPanelList());
         deleteClassButton();
 
 
