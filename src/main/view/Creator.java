@@ -198,7 +198,6 @@ public class Creator {
                 boolean pointNotInTextbox = !newBounds.contains(e.getPoint());
 
                 if (pointNotInTextbox && textField.getText().isEmpty()) {
-                    System.out.println("3");
                     textField.setText(placeholder);
                     textField.setForeground(Color.GRAY);
                     set.setEmptiedState(textField, false);
@@ -223,10 +222,8 @@ public class Creator {
 
     }
 
-    public void writeFolderToFile(AtomicBoolean textFieldEmptied) {//, JButton saveButton) {
-        //StudentClasses classes = new StudentClasses(null, null, null, null, set)
+    public void writeFolderToFile(AtomicBoolean textFieldEmptied) {
         String username = set.getUsername();
-        System.out.println("username " + username);
         String folderPath = "/Users/evy/Documents/GradeTracker-new/src/main/view/UserInfo/StudentInfo/"+username; //+ username;
         File folder = new File(folderPath);
         if (!folder.exists()) {
@@ -234,7 +231,7 @@ public class Creator {
         }
     }
 
-    public void writeTextToFile(String filePath, JPanel textFieldPanel) {//, JButton saveButton) {
+    public void writeTextToFile(String filePath, JPanel textFieldPanel) {
         System.out.println("Step4: begin writeTextToFile."+ set.getClassList());
         debugPrintPanel();
         String username = set.getUsername();
@@ -255,7 +252,6 @@ public class Creator {
                 }
 
                 if (component instanceof JPanel) {
-                    //System.out.println("should appear. Its a JPanel");
                     writeTextToFileWithAppend(filePath, (JPanel) component);
                 }
             }
@@ -281,7 +277,6 @@ public class Creator {
                 }
 
                 if (component instanceof JPanel) {
-                    System.out.println("should appear. Its a JPanel");
                     writeTextToFileWithAppend(filePath, (JPanel) component);
                 }
             }
@@ -319,14 +314,14 @@ public class Creator {
         textField.getDocument().addDocumentListener(new DocumentListener() {
         @Override
         public void insertUpdate(DocumentEvent e) {
-            System.out.println("placeholderfill"+placeholderFill);
+            //System.out.println("placeholderfill"+placeholderFill);
                 saveButtonEnable();
                 userClickedEmpty = false; 
         }
 
         @Override
         public void removeUpdate(DocumentEvent e) {
-            System.out.println("removeUpdate");
+            //System.out.println("removeUpdate");
             if (userClickedEmpty = false) {
                 saveButtonEnable();
             }
@@ -348,7 +343,6 @@ public class Creator {
     }
 
     public void deleteTextBox(JFrame window, JPanel container) {
-        System.out.println("Before: in getting text box: "+set.getClassList());
         int componentsCount = container.getComponentCount();
         if (componentsCount > 0) {
             Component lastComponent = container.getComponent(componentsCount - 1);
@@ -359,7 +353,6 @@ public class Creator {
             windowFix(window);
             textboxCounter--;
         }
-        System.out.println("in getting text box: "+set.getClassList());
     }
 
     public void windowFix(JFrame window) {
@@ -387,10 +380,7 @@ public class Creator {
     }
 
     public void setTextFieldPanel(JPanel myPanel) {
-        System.out.println("in set text field panel ");
-        System.out.println("Step2: components: "+textFieldPanel.getComponentCount());
         textFieldPanel = myPanel;
-        System.out.println("Step3: componentsAfter: "+textFieldPanel.getComponentCount());
     }
 
     public void debugPanelComponentCount() {
@@ -412,12 +402,9 @@ public class Creator {
             if (component instanceof JTextField) {
                 JTextField textField = (JTextField) component;
                 String text = textField.getText();
-                System.out.println("q");
     
                 if (!text.isBlank() && !text.equals(placeholder) && set.getEmptiedState(textField) && !classList.contains(text)) {
-                    System.out.println("r");
-                    classList.add(text);
-                    System.out.println("clas list:" + classList);         
+                    classList.add(text);   
                     writer.write(text + "\n");
                 }
             } else if (component instanceof Container) {
@@ -427,9 +414,7 @@ public class Creator {
     }
 
     public void setClassList() {
-        System.out.println("setting class list. Before: "+ set.getClassList()+ classList);
         set.setClassList(classList);
-        System.out.println("setting class list. After: "+ set.getClassList()+ classList);
 
     }
     //public void set 
