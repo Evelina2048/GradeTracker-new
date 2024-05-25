@@ -55,11 +55,13 @@ public class Set {
     }
 
     public ArrayList<String> getCurrentPanelList() {
+        //System.out.println("current panel list is kkkk:   "+ classList+ typeof(classList));
         return classList;
     }
 
     public void setFinalClassList(ArrayList<String> userFinalClassList) {
         finalClassList = userFinalClassList;
+        System.out.println("insetfinalclasslist: "+finalClassList);
     }
 
     public ArrayList<String> getFinalClassList() {

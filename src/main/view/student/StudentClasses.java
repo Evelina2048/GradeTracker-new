@@ -95,20 +95,17 @@ public class StudentClasses extends JFrame {
         nextButton.setPreferredSize(new Dimension(87, 29));
         nextButton.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent e) {
+                //writeType();
                 System.out.println("nextbuttonhit");
                 creator.writeFolderToFile(textFieldEmptied);
-                ArrayList<String> classList = set.getCurrentPanelList();
                 creator.writeTextToFile("/Users/evy/Documents/GradeTracker-new/src/main/view/UserInfo/StudentInfo/" + set.getUsername() + "/class.txt", creator.getTextFieldContainer());
-                System.out.println("right before c lass list set in next: "+set.getCurrentPanelList());
-                set.setClassList(classList);
+                ArrayList<String> classList = set.getCurrentPanelList();
+                System.out.println("right before class list set in nexttttttt: "+ classList+ "......"+set.getCurrentPanelList());
+                set.setFinalClassList(classList); //lookie
                 
                 hideWindow();
                 creator.hideContainer();
-                //while (set.getClassListIndex()+1 <= set.getCurrentPanelList().size()) {
                 System.out.println("before stat collect called: "+set.getCurrentPanelList());
-                //set.setClassList(classList);
-                set.setFinalClassList(classList);
-                writeType();
                 StudentStatCollect statCollect = new StudentStatCollect(window, newUser, studentOrTeacher, existingOrNew, set);
                 //}
                 System.out.println("AStep1: "+set.getClassListIndex()+set.getCurrentPanelList().size());
@@ -142,10 +139,8 @@ public class StudentClasses extends JFrame {
         deleteClassButton.setPreferredSize(new Dimension(100, 50));
         deleteClassButton.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent e) {
-                //System.out.println("deleteClassButtonPressed.Before. ClassList:"+ set.getCurrentPanelList());
                 creator.deleteTextBox(window, creator.getTextFieldContainer());
                 saveButton.setEnabled(true);
-                //System.out.println("class list after deleting"+set.getCurrentPanelList());
             }
         });
     }

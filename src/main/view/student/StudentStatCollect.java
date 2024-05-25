@@ -45,12 +45,14 @@ public class StudentStatCollect extends JFrame {
     private JPanel allBoxesPanel = new JPanel();
     //private ArrayList<String> typeList;
     private ArrayList<String> typeList;
-    private final ArrayList<String> finalClassList;
+    private ArrayList<String> finalClassList;
 
     public StudentStatCollect(JFrame main,NewUser newUser, String studentOrTeacher, String existingOrNew, Set set) {
         this.window = main;
         this.set = set;
-        this.finalClassList = new ArrayList<>(set.getFinalClassList());
+        System.out.println("final class list issssss before: "+ finalClassList);
+        finalClassList = set.getFinalClassList();
+        System.out.println("final class list issssss: "+ finalClassList);
         creator = new Creator(set);
         studentStatCollectLaunch(window);
         createNewTypeButton();
@@ -59,7 +61,7 @@ public class StudentStatCollect extends JFrame {
     }
 
     public void studentStatCollectLaunch(JFrame window) {
-        typeList = set.getCurrentPanelList();
+        //List = set.getCurrentPanelList();
         window.setTitle("StudentStatCollect");
         window.setPreferredSize(new Dimension(1000, 1000));
     }
@@ -80,18 +82,8 @@ public class StudentStatCollect extends JFrame {
         JPanel saveButtonPanel = new JPanel();
         saveButton.setEnabled(false);
         saveButtonPanel.add(saveButton);
-        saveButton.addActionListener(new ActionListener() {
-            public void actionPerformed(ActionEvent e) {
-                //check if textbox is vaild
-                Pattern pattern = Pattern.compile("^(?:[0-9]*(?:.[0-9]+))*\s*$|^[0-9]*\s*$", Pattern.CASE_INSENSITIVE);
-
-                correctGradeFormatChecker(pattern);
-
-                saveButton.setEnabled(false);
-                creator.setTextFieldPanel(classLabelPanel);
-                creator.writeTextToFile("/Users/evy/Documents/GradeTracker-new/src/main/view/UserInfo/StudentInfo/" + set.getUsername() +"/"+finalClassList.get(set.getClassListIndex())+ ".txt", creator.getTextFieldContainer());
-            }
-        });
+        saveAction(saveButton);
+        saveButton.setEnabled(false);
         
         JButton nextButton = creator.nextButtonCreate();
         JPanel nextButtonPanel = new JPanel();
@@ -100,7 +92,7 @@ public class StudentStatCollect extends JFrame {
             public void actionPerformed(ActionEvent e) {
                 //write to file.
                 hideWindow();
-
+                saveAction(saveButton);
                 
                 set.incrementClassListIndex();
                 if (set.getClassListIndex()+1 <= set.getFinalClassList().size()) {
@@ -114,6 +106,20 @@ public class StudentStatCollect extends JFrame {
         });
         backNextButtonsPanel = creator.makeBackNextButtonsPanel(backButtonPanel, saveButtonPanel, nextButtonPanel);
         window.add(backNextButtonsPanel, BorderLayout.SOUTH);
+    }
+
+    private void saveAction(JButton saveButton) {
+        saveButton.addActionListener(new ActionListener() {
+            public void actionPerformed(ActionEvent e) {
+                //check if textbox is vaild
+                Pattern pattern = Pattern.compile("^(?:[0-9]*(?:.[0-9]+))*\s*$|^[0-9]*\s*$", Pattern.CASE_INSENSITIVE);
+
+                correctGradeFormatChecker(pattern);
+
+                creator.setTextFieldPanel(classLabelPanel);
+                creator.writeTextToFile("/Users/evy/Documents/GradeTracker-new/src/main/view/UserInfo/StudentInfo/" + set.getUsername() +"/"+finalClassList.get(set.getClassListIndex())+ ".txt", creator.getTextFieldContainer());
+            }
+        });
     }
 
    private void createNewTypeButton() {
