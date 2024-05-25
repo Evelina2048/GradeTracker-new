@@ -359,9 +359,19 @@ public class StudentStatCollect extends JFrame {
 }
 
     }
+    private void boxManageCreate() {
+        if (numOfBoxes <= maxBoxes) {
+            JPanel northTypePanel = creator.typeBox(window);
+            classLabelPanel.add(northTypePanel);
+            typeNumber++;
+            creator.windowFix(window);
+            numOfBoxes++;
+        }
+    }
 
     private void newSet() {
-        gradeTypeBox();
+        //gradeTypeBox();
+        boxManageCreate();
         gradePercentageBox();
         gradesBox();
     }

@@ -422,5 +422,19 @@ public class Creator {
     public void saveButtonEnable() {
         saveButton.setEnabled(true);
     }
+
+    public JPanel typeBox(JFrame window) {
+            JPanel northTypePanel = new JPanel(new BorderLayout());
+            JPanel gradeTypePanel = new JPanel(new BorderLayout());
+            JTextField gradeType = createTextBox(window, "Test test test ", 10, 10);
+            //allBoxesPanel.add(gradeType);
+
+            gradeTypePanel.add(gradeType);
+            gradeTypePanel.setPreferredSize(new Dimension( 155,50));
+            northTypePanel.add(gradeTypePanel, BorderLayout.NORTH);
+            windowFix(window);
+
+            return northTypePanel;
+    }
     
 }
