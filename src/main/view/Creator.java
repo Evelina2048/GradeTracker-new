@@ -3,6 +3,7 @@ package main.view;
 import javax.swing.BorderFactory;
 import javax.swing.JButton;
 import javax.swing.JFrame;
+import javax.swing.JLabel;
 import javax.swing.JTextField;
 import java.awt.BorderLayout;
 import java.awt.Color;
@@ -423,16 +424,28 @@ public class Creator {
         saveButton.setEnabled(true);
     }
 
-    public JPanel typeBox(JFrame window, String placeholder) {
+    public JPanel typeBox(JFrame window, String placeholder, String my_type) {
             JPanel northTypePanel = new JPanel(new BorderLayout());
             JPanel gradeTypePanel = new JPanel(new BorderLayout());
-            JTextField gradeType = createTextBox(window, placeholder, 10, 10);
+
+
+            if (my_type.equals("JTextField")) {
+                JTextField toAddType = createTextBox(window, placeholder, 10, 10);
+                gradeTypePanel.add(toAddType);
+            }
+
+            else if(my_type.equals("JLabel")) {
+                JLabel toAddType = new JLabel(placeholder);
+                //JLabel toAddType = new JLabel(placeholder);
+                gradeTypePanel.add(toAddType);
+            }
             //allBoxesPanel.add(gradeType);
 
-            gradeTypePanel.add(gradeType);
+            //gradeTypePanel.add(toAddType);
             gradeTypePanel.setPreferredSize(new Dimension( 155,50));
             northTypePanel.add(gradeTypePanel, BorderLayout.NORTH);
             windowFix(window);
+            //window.add(toAddType);
 
             return northTypePanel;
     }
