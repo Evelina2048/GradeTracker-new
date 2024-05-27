@@ -374,6 +374,7 @@ public class StudentStatCollect extends JFrame {
     }
     private void boxManageCreate(String placeholder, String type) {
         if (numOfBoxes <= maxBoxes) {
+            creator.hideContainer();
             JPanel northTypePanel = creator.typeBox(window, placeholder, type);
             classLabelPanel.add(northTypePanel);
             typeNumber++;

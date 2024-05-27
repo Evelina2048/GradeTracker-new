@@ -1,0 +1,25 @@
+Credits (optional)
+Grade Type 1
+Percentage of Grade
+1
+Grade Type 2
+Percentage of Grade
+1
+Grade Type 3
+Percentage of Grade
+1
+Grade Type 4
+Percentage of Grade
+1
+Grade Type 5
+Percentage of Grade
+1
+Grade Type 6
+Percentage of Grade
+1
+Grade Type 7
+Percentage of Grade
+1
+Grade Type 8
+Percentage of Grade
+1
