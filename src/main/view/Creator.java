@@ -17,6 +17,9 @@ import java.awt.event.FocusEvent;
 
 import java.io.FileWriter;
 import java.io.IOException;
+import java.nio.file.Files;
+import java.nio.file.Path;
+import java.nio.file.Paths;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
@@ -449,5 +452,23 @@ public class Creator {
 
             return northTypePanel;
     }
+
+	public boolean isFileEmpty(String filePath) {
+        Path path = Paths.get(filePath);
+        try {
+            long fileSize = Files.size(path);
+            System.out.println("fileSize: "+ fileSize);
+            if (fileSize == 0) {
+                return true;
+            }
+        }
+
+        catch (IOException e) {
+            System.err.println("an error occured in creator.java in isFileEmpty");
+		    return false;
+        }
+        System.err.println("an issue occured in creator.java in isFileEmpty");
+        return false;
     
+}
 }

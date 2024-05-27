@@ -10,6 +10,7 @@ import java.awt.Dimension;
 import javax.swing.JPanel;
 import java.awt.GridLayout;
 import java.awt.event.ActionListener;
+import java.nio.file.Path;
 import java.awt.event.ActionEvent;
 import java.awt.FlowLayout;
 import java.util.ArrayList;
@@ -55,6 +56,16 @@ public class StudentClasses extends JFrame {
         window.setTitle("StudentClasses");
         window.setLayout(new BorderLayout());
         creator.createTextBox(window, "Enter Class Name", 50, 50);
+        
+        // if (set.getFinalClassList() != null) {//case for if existing file
+        //     System.out.println("I have info to load!");
+
+        // }
+        //String filepath = "/Users/evy/Documents/GradeTracker-new/src/main/view/UserInfo/StudentInfo/"+set.getUsername()+"/class.txt";
+
+        if (!creator.isFileEmpty("/Users/evy/Documents/GradeTracker-new/src/main/view/UserInfo/StudentInfo/"+set.getUsername()+"/class.txt")) {//case for if existing file
+            System.out.println("I have info to load!");
+        }
         //textField.setVisible(true);
         westPanelCreate();
         buttonSetUpAction(main, newUser, studentOrTeacher, existingOrNew);

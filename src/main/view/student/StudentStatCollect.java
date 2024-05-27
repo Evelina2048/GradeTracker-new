@@ -73,8 +73,14 @@ public class StudentStatCollect extends JFrame {
         backButton.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent e) {
                 hideWindow();
-                StudentClasses studentClasses = new StudentClasses(main, newUser, studentOrTeacher, existingOrNew, set);
-                studentClasses.studentClassesLaunch(main, newUser, studentOrTeacher, existingOrNew, set);
+
+                if (set.getClassListIndex() == 0) { //case for back to classes
+                    System.out.println("I here");
+                    StudentClasses studentClasses = new StudentClasses(main, newUser, studentOrTeacher, existingOrNew, set);
+                    studentClasses.studentClassesLaunch(main, newUser, studentOrTeacher, existingOrNew, set);
+                }
+
+                //case for previous class
             }
         });
 
