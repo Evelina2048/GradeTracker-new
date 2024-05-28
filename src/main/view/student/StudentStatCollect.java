@@ -80,6 +80,16 @@ public class StudentStatCollect extends JFrame {
                     studentClasses.studentClassesLaunch(main, newUser, studentOrTeacher, existingOrNew, set);
                 }
 
+                else if (set.getClassListIndex() > 0) {
+                    System.out.println("there are previous classes");
+                    //
+                    set.decrementClassListIndex();
+                    StudentStatCollect studentStatCollect = new StudentStatCollect(main, newUser, studentOrTeacher, existingOrNew, set);
+                    studentStatCollectLaunch(main);
+                    //JFrame main,NewUser newUser, String studentOrTeacher, String existingOrNew, Set set
+                    //
+                }
+
                 //case for previous class
             }
         });
@@ -100,13 +110,14 @@ public class StudentStatCollect extends JFrame {
                 hideWindow();
                 saveAction(saveButton);
                 
+
                 set.incrementClassListIndex();
                 if (set.getClassListIndex()+1 <= set.getFinalClassList().size()) {
                     StudentStatCollect statCollect = new StudentStatCollect(window, newUser, studentOrTeacher, existingOrNew, set);
                 }
 
                 else {
-                PrintStudentGrades print = new PrintStudentGrades(main, studentOrTeacher,existingOrNew);
+                    PrintStudentGrades print = new PrintStudentGrades(main, studentOrTeacher,existingOrNew);
                 }
             }
         });
