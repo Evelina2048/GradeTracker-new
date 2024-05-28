@@ -453,22 +453,22 @@ public class Creator {
             return northTypePanel;
     }
 
-	public boolean isFileEmpty(String filePath) {
-        Path path = Paths.get(filePath);
-        try {
-            long fileSize = Files.size(path);
-            System.out.println("fileSize: "+ fileSize);
-            if (fileSize == 0) {
-                return true;
-            }
-        }
+// 	public boolean isFileEmpty(String filePath) {
+//         Path path = Paths.get(filePath);
+//         try {
+//             long fileSize = Files.size(path);
+//             System.out.println("fileSize: "+ fileSize);
+//             if (fileSize == 0) {
+//                 return true;
+//             }
+//         }
 
-        catch (IOException e) {
-            System.err.println("an error occured in creator.java in isFileEmpty");
-		    return false;
-        }
-        System.err.println("an issue occured in creator.java in isFileEmpty");
-        return false;
+//         catch (IOException e) {
+//             System.err.println("an error occured in creator.java in isFileEmpty");
+// 		    return false;
+//         }
+//         System.err.println("an issue occured in creator.java in isFileEmpty");
+//         return false;
     
-}
+// }
 }

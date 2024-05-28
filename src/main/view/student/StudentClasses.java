@@ -19,6 +19,7 @@ import main.view.NewUser;
 import main.view.Set;
 import main.view.Creator;
 import main.view.Decorator;
+import main.view.FileHandler;
 import main.view.Gather;
 
 
@@ -37,6 +38,7 @@ public class StudentClasses extends JFrame {
     JButton newClassButton;
     JButton deleteClassButton;
     Decorator decorate = new Decorator();
+    FileHandler fileHandler = new FileHandler();
     Set set;
 
     //JTextField textField = decorate.decorateTextBox();
@@ -56,15 +58,17 @@ public class StudentClasses extends JFrame {
         window.setTitle("StudentClasses");
         window.setLayout(new BorderLayout());
         creator.createTextBox(window, "Enter Class Name", 50, 50);
+    
         
         // if (set.getFinalClassList() != null) {//case for if existing file
         //     System.out.println("I have info to load!");
 
         // }
-        //String filepath = "/Users/evy/Documents/GradeTracker-new/src/main/view/UserInfo/StudentInfo/"+set.getUsername()+"/class.txt";
-
-        if (!creator.isFileEmpty("/Users/evy/Documents/GradeTracker-new/src/main/view/UserInfo/StudentInfo/"+set.getUsername()+"/class.txt")) {//case for if existing file
+        String filePath = "/Users/evy/Documents/GradeTracker-new/src/main/view/UserInfo/StudentInfo/"+set.getUsername()+"/class.txt";
+        if (!fileHandler.isFileEmpty(filePath)) {//case for if existing file
             System.out.println("I have info to load!");
+            fileHandler.readFile(filePath);
+
         }
         //textField.setVisible(true);
         westPanelCreate();

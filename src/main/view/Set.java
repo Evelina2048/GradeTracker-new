@@ -6,8 +6,6 @@ import java.util.HashMap;
 import javax.swing.JPanel;
 import javax.swing.JTextField;
 
-import org.apache.commons.lang3.ObjectUtils.Null;
-
 public class Set {
     private String username;
     private ArrayList<String> classList;
