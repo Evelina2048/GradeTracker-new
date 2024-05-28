@@ -57,7 +57,7 @@ public class StudentClasses extends JFrame {
         System.out.println("in student classes");
         window.setTitle("StudentClasses");
         window.setLayout(new BorderLayout());
-        creator.createTextBox(window, "Enter Class Name", 50, 50);
+
     
         
         // if (set.getFinalClassList() != null) {//case for if existing file
@@ -67,8 +67,15 @@ public class StudentClasses extends JFrame {
         String filePath = "/Users/evy/Documents/GradeTracker-new/src/main/view/UserInfo/StudentInfo/"+set.getUsername()+"/class.txt";
         if (!fileHandler.isFileEmpty(filePath)) {//case for if existing file
             System.out.println("I have info to load!");
-            fileHandler.readFile(filePath);
+            ArrayList<String> myList = fileHandler.readFileToList(filePath);
+            for (int index=0; index<=1; index++) {
+                creator.createTextBox(window, myList.get(index), 10, 50);
+            }
 
+        }
+
+        else {
+            creator.createTextBox(window, "Enter Class Name", 50, 50);
         }
         //textField.setVisible(true);
         westPanelCreate();

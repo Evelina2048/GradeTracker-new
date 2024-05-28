@@ -7,20 +7,29 @@ import java.io.IOException;
 import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
+import java.util.ArrayList;
+import java.util.List;
+import java.util.ListIterator;
 
 public class FileHandler {
 
-        public void readFile(String filePath) {
+        public ArrayList<String> readFileToList(String filePath) {
             String line;
+            ArrayList<String> myList = new ArrayList<>() {
+                
+            };
             try {
                 BufferedReader reader = new BufferedReader(new FileReader(filePath));
                 while ((line = reader.readLine()) != null) {
                     System.out.println("printing file..."+ line);
+                    myList.add(line);
+                    
                 }
-                }
+            }
             catch (IOException e) { 
                 e.printStackTrace();
             }
+            return myList;
         }
 
 
