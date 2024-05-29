@@ -24,6 +24,7 @@ import java.awt.Container;
 
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
+import main.view.FileHandler;
 
 public class StudentStatCollect extends JFrame {
     private JFrame window;
@@ -81,10 +82,13 @@ public class StudentStatCollect extends JFrame {
                 }
 
                 else if (set.getClassListIndex() > 0) {
+                    FileHandler fileHandler = new FileHandler();
                     System.out.println("there are previous classes");
+                    hideWindow();
                     //
                     set.decrementClassListIndex();
                     StudentStatCollect studentStatCollect = new StudentStatCollect(main, newUser, studentOrTeacher, existingOrNew, set);
+                    fileHandler.loadTextboxes(window, set, "/Users/evy/Documents/GradeTracker-new/src/main/view/UserInfo/StudentInfo/"+set.getUsername()+"/"+set.getFinalClassList().get(set.getClassListIndex())+".txt");
                     studentStatCollectLaunch(main);
                     //JFrame main,NewUser newUser, String studentOrTeacher, String existingOrNew, Set set
                     //

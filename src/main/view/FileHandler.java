@@ -11,6 +11,10 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.ListIterator;
 
+import javax.swing.JFrame;
+
+import main.view.Creator;
+
 public class FileHandler {
 
         public ArrayList<String> readFileToList(String filePath) {
@@ -22,13 +26,14 @@ public class FileHandler {
                 BufferedReader reader = new BufferedReader(new FileReader(filePath));
                 while ((line = reader.readLine()) != null) {
                     System.out.println("printing file..."+ line);
-                    myList.add(line);
-                    
+                    myList.add(line);                 
                 }
+                reader.close();
             }
             catch (IOException e) { 
                 e.printStackTrace();
             }
+            
             return myList;
         }
 
@@ -55,4 +60,14 @@ public class FileHandler {
             }
         
     }
+
+
+        public void loadTextboxes(JFrame window, Set set, String filePath) {
+            Creator creator = new Creator(set);
+            ArrayList<String> arrayList = readFileToList("/Users/evy/Documents/GradeTracker-new/src/main/view/UserInfo/StudentInfo/"+set.getUsername()+"/"+set.getFinalClassList().get(set.getClassListIndex())+".txt");
+            System.out.println("arrayList"+arrayList);
+            for (int i = 0; i<arrayList.size(); i++) {
+                creator.createTextBox(window, arrayList.get(i), 10, 50);
+                }
+        }
 }
