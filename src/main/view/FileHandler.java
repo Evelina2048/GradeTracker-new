@@ -64,14 +64,16 @@ public class FileHandler {
     }
 
 
-        public void loadTextboxes(JFrame window, Set set, String filePath) {
+        public JPanel loadTextboxes(JFrame window, Set set, String filePath) {
             Creator creator = new Creator(set);
             ArrayList<String> arrayList = readFileToList("/Users/evy/Documents/GradeTracker-new/src/main/view/UserInfo/StudentInfo/"+set.getUsername()+"/"+set.getFinalClassList().get(set.getClassListIndex())+".txt");
             JPanel jpanel = new JPanel();
             System.out.println("arrayList"+arrayList);
             for (int i = 0; i<arrayList.size(); i++) {
-                creator.createTextBox(window, arrayList.get(i), 10, 50);
-                //creator.typeBox(window, arrayList.get(i), "JTextField");
+                //creator.createTextBox(window, arrayList.get(i), 10, 50);
+                jpanel.add(creator.typeBox(window, arrayList.get(i), "JTextField"));
             }
+            //window.add(jpanel);
+            return jpanel;
         }
 }

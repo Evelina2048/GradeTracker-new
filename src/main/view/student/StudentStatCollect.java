@@ -105,7 +105,9 @@ public class StudentStatCollect extends JFrame {
                     StudentStatCollect studentStatCollect = new StudentStatCollect(main, newUser, studentOrTeacher, existingOrNew, set);
                     //studentStatCollectLaunch(main);
                     setUpButtonsAndWindow(main, newUser, studentOrTeacher, existingOrNew, set);
-                    fileHandler.loadTextboxes(main, set, "/Users/evy/Documents/GradeTracker-new/src/main/view/UserInfo/StudentInfo/"+set.getUsername()+"/"+set.getFinalClassList().get(set.getClassListIndex())+".txt");
+                    JPanel jpanel = new JPanel();
+                    jpanel = fileHandler.loadTextboxes(main, set, "/Users/evy/Documents/GradeTracker-new/src/main/view/UserInfo/StudentInfo/"+set.getUsername()+"/"+set.getFinalClassList().get(set.getClassListIndex())+".txt");
+                    window.add(jpanel);
                     //classLabelPanel.add(jpanelOfLoadedBoxes);
                     
 
