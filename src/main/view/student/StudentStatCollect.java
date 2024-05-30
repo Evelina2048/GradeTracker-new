@@ -72,6 +72,8 @@ public class StudentStatCollect extends JFrame {
 
     public void setUpButtonsAndWindow(JFrame main,NewUser newUser, String studentOrTeacher, String existingOrNew, Set set) { //run everytime
         boxManageCreate("hello", "JTextField");
+        newSet();
+        newSet();
         window.add(classLabelPanel, BorderLayout.CENTER);
         studentStatCollectLaunch(window);
         createNewTypeButton();
@@ -198,6 +200,7 @@ public class StudentStatCollect extends JFrame {
         public void actionPerformed(ActionEvent e) {
             newSet();
             System.out.println("newTypeButtonHit");
+            window.add(classLabelPanel, BorderLayout.CENTER);
             //System.out.println("ClassLabelPanel after adding: "+ allBoxesPanel.getComponentCount());
         }
         });
