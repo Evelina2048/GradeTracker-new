@@ -70,7 +70,9 @@ public class StudentStatCollect extends JFrame {
         setUpButtonsAndWindow(main, newUser, studentOrTeacher, existingOrNew, set);
     }
 
-    public void setUpButtonsAndWindow(JFrame main,NewUser newUser, String studentOrTeacher, String existingOrNew, Set set) {
+    public void setUpButtonsAndWindow(JFrame main,NewUser newUser, String studentOrTeacher, String existingOrNew, Set set) { //run everytime
+        boxManageCreate("hello", "JTextField");
+        window.add(classLabelPanel, BorderLayout.CENTER);
         studentStatCollectLaunch(window);
         createNewTypeButton();
         buttonSetUpAction(main, newUser, studentOrTeacher, existingOrNew);
@@ -105,9 +107,14 @@ public class StudentStatCollect extends JFrame {
                     StudentStatCollect studentStatCollect = new StudentStatCollect(main, newUser, studentOrTeacher, existingOrNew, set);
                     //studentStatCollectLaunch(main);
                     setUpButtonsAndWindow(main, newUser, studentOrTeacher, existingOrNew, set);
-                    JPanel jpanel = new JPanel();
-                    jpanel = fileHandler.loadTextboxes(main, set, "/Users/evy/Documents/GradeTracker-new/src/main/view/UserInfo/StudentInfo/"+set.getUsername()+"/"+set.getFinalClassList().get(set.getClassListIndex())+".txt");
-                    window.add(jpanel);
+                    // JPanel jpanel = new JPanel();
+                    // jpanel = fileHandler.loadTextboxes(main, set, "/Users/evy/Documents/GradeTracker-new/src/main/view/UserInfo/StudentInfo/"+set.getUsername()+"/"+set.getFinalClassList().get(set.getClassListIndex())+".txt");
+                    // for (int i =0; i<jpanel.getComponentCount(); i++) {
+                    //     classLabelPanel.add(jpanel.getComponent(i));
+                    // }
+                    //classLabelPanel.add(jpanel);
+                    //window.add(jpanel);
+                    
                     //classLabelPanel.add(jpanelOfLoadedBoxes);
                     
 
