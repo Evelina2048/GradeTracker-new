@@ -103,9 +103,12 @@ public class StudentStatCollect extends JFrame {
                     //
                     set.decrementClassListIndex();
                     StudentStatCollect studentStatCollect = new StudentStatCollect(main, newUser, studentOrTeacher, existingOrNew, set);
-                    fileHandler.loadTextboxes(window, set, "/Users/evy/Documents/GradeTracker-new/src/main/view/UserInfo/StudentInfo/"+set.getUsername()+"/"+set.getFinalClassList().get(set.getClassListIndex())+".txt");
                     //studentStatCollectLaunch(main);
                     setUpButtonsAndWindow(main, newUser, studentOrTeacher, existingOrNew, set);
+                    fileHandler.loadTextboxes(main, set, "/Users/evy/Documents/GradeTracker-new/src/main/view/UserInfo/StudentInfo/"+set.getUsername()+"/"+set.getFinalClassList().get(set.getClassListIndex())+".txt");
+                    //classLabelPanel.add(jpanelOfLoadedBoxes);
+                    
+
                     //JFrame main,NewUser newUser, String studentOrTeacher, String existingOrNew, Set set
                     //
                 }
@@ -134,6 +137,7 @@ public class StudentStatCollect extends JFrame {
                 set.incrementClassListIndex();
                 if (set.getClassListIndex()+1 <= set.getFinalClassList().size()) {
                     StudentStatCollect statCollect = new StudentStatCollect(window, newUser, studentOrTeacher, existingOrNew, set);
+                    statCollect.firstRun(main, newUser, studentOrTeacher, existingOrNew, set);
                 }
 
                 else {
@@ -184,7 +188,8 @@ public class StudentStatCollect extends JFrame {
        newTypeButton.addActionListener(new ActionListener() {
         public void actionPerformed(ActionEvent e) {
             newSet();
-            System.out.println("ClassLabelPanel after adding: "+ allBoxesPanel.getComponentCount());
+            System.out.println("newTypeButtonHit");
+            //System.out.println("ClassLabelPanel after adding: "+ allBoxesPanel.getComponentCount());
         }
         });
 
@@ -314,6 +319,7 @@ public class StudentStatCollect extends JFrame {
     }
 
     private void newSet() {
+        System.out.println("new set added");
         boxManageCreate("Grade Type "+typeNumber, "JTextField");
         boxManageCreate("Percentage of Grade", "JTextField");
         boxManageCreate("Grades(format:# # #)", "JTextField");
