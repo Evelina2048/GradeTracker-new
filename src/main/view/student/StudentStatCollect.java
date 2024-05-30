@@ -49,16 +49,31 @@ public class StudentStatCollect extends JFrame {
     private ArrayList<String> finalClassList;
 
     public StudentStatCollect(JFrame main,NewUser newUser, String studentOrTeacher, String existingOrNew, Set set) {
+        // this.window = main;
+        // this.set = set;
+        // System.out.println("final class list issssss before: "+ finalClassList);
+        // finalClassList = set.getFinalClassList();
+        // System.out.println("final class list issssss: "+ finalClassList);
+        // creator = new Creator(set);
+        // DisplayClasses();
+        // setUpButtonsAndWindow(main, newUser, studentOrTeacher, existingOrNew, set);
+        //firstRun(main, newUser, studentOrTeacher, existingOrNew, set);
+    }
+    public void firstRun(JFrame main,NewUser newUser, String studentOrTeacher, String existingOrNew, Set set) {
         this.window = main;
         this.set = set;
         System.out.println("final class list issssss before: "+ finalClassList);
         finalClassList = set.getFinalClassList();
         System.out.println("final class list issssss: "+ finalClassList);
         creator = new Creator(set);
+        DisplayClasses();
+        setUpButtonsAndWindow(main, newUser, studentOrTeacher, existingOrNew, set);
+    }
+
+    public void setUpButtonsAndWindow(JFrame main,NewUser newUser, String studentOrTeacher, String existingOrNew, Set set) {
         studentStatCollectLaunch(window);
         createNewTypeButton();
         buttonSetUpAction(main, newUser, studentOrTeacher, existingOrNew);
-        DisplayClasses();
     }
 
     public void studentStatCollectLaunch(JFrame window) {
@@ -89,7 +104,8 @@ public class StudentStatCollect extends JFrame {
                     set.decrementClassListIndex();
                     StudentStatCollect studentStatCollect = new StudentStatCollect(main, newUser, studentOrTeacher, existingOrNew, set);
                     fileHandler.loadTextboxes(window, set, "/Users/evy/Documents/GradeTracker-new/src/main/view/UserInfo/StudentInfo/"+set.getUsername()+"/"+set.getFinalClassList().get(set.getClassListIndex())+".txt");
-                    studentStatCollectLaunch(main);
+                    //studentStatCollectLaunch(main);
+                    setUpButtonsAndWindow(main, newUser, studentOrTeacher, existingOrNew, set);
                     //JFrame main,NewUser newUser, String studentOrTeacher, String existingOrNew, Set set
                     //
                 }
