@@ -79,11 +79,13 @@ public class StudentStatCollect extends JFrame {
                     System.out.println("I here");
                     StudentClasses studentClasses = new StudentClasses(main, newUser, studentOrTeacher, existingOrNew, set);
                     studentClasses.studentClassesLaunch(main, newUser, studentOrTeacher, existingOrNew, set);
+                    saveButtonAction();
                 }
 
                 else if (set.getClassListIndex() > 0) {
                     System.out.println("there are previous classes");
                     //
+                    saveButtonAction();
                     set.decrementClassListIndex();
 
                     //StudentStatCollect studentStatCollect = new StudentStatCollect(main, newUser, studentOrTeacher, existingOrNew, set);
@@ -119,7 +121,7 @@ public class StudentStatCollect extends JFrame {
             public void actionPerformed(ActionEvent e) {
                 //write to file.
                 hideWindow();
-                saveAction(saveButton);
+                saveButtonAction();
                 
 
                 set.incrementClassListIndex();
@@ -140,14 +142,18 @@ public class StudentStatCollect extends JFrame {
         saveButton.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent e) {
                 //check if textbox is vaild
-                Pattern pattern = Pattern.compile("^(?:[0-9]*(?:.[0-9]+))*\s*$|^[0-9]*\s*$", Pattern.CASE_INSENSITIVE);
-
-                correctGradeFormatChecker(pattern);
-
-                set.setTextFieldPanel(classLabelPanel);
-                creator.writeTextToFile("/Users/evy/Documents/GradeTracker-new/src/main/view/UserInfo/StudentInfo/" + set.getUsername() +"/"+finalClassList.get(set.getClassListIndex())+ ".txt", set.getTextFieldPanel());
+                saveButton.setEnabled(false);
+                saveButtonAction();
             }
         });
+    }
+
+    private void saveButtonAction() {
+        Pattern pattern = Pattern.compile("^(?:[0-9]*(?:.[0-9]+))*\s*$|^[0-9]*\s*$", Pattern.CASE_INSENSITIVE);
+        correctGradeFormatChecker(pattern);
+
+        set.setTextFieldPanel(classLabelPanel);
+        creator.writeTextToFile("/Users/evy/Documents/GradeTracker-new/src/main/view/UserInfo/StudentInfo/" + set.getUsername() +"/"+finalClassList.get(set.getClassListIndex())+ ".txt", set.getTextFieldPanel());
     }
 
    private void createNewTypeButton() {
