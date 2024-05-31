@@ -19,12 +19,12 @@ import java.util.ArrayList;
 import main.view.NewUser;
 import main.view.Creator;
 import main.view.Set;
+import main.view.FileHandler;
 
 import java.awt.Container;
 
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
-import main.view.FileHandler;
 
 public class StudentStatCollect extends JFrame {
     private JFrame window;
@@ -49,39 +49,20 @@ public class StudentStatCollect extends JFrame {
     private ArrayList<String> finalClassList;
 
     public StudentStatCollect(JFrame main,NewUser newUser, String studentOrTeacher, String existingOrNew, Set set) {
-        // this.window = main;
-        // this.set = set;
-        // System.out.println("final class list issssss before: "+ finalClassList);
-        // finalClassList = set.getFinalClassList();
-        // System.out.println("final class list issssss: "+ finalClassList);
-        // creator = new Creator(set);
-        // DisplayClasses();
-        // setUpButtonsAndWindow(main, newUser, studentOrTeacher, existingOrNew, set);
-        //firstRun(main, newUser, studentOrTeacher, existingOrNew, set);
+        studentStatCollectLaunch(main, newUser, studentOrTeacher, existingOrNew, set);
     }
-    public void firstRun(JFrame main,NewUser newUser, String studentOrTeacher, String existingOrNew, Set set) {
+
+    public void studentStatCollectLaunch(JFrame main, NewUser newUser, String studentOrTeacher, String existingOrNew, Set set) {
+        //List = set.getCurrentPanelList();
         this.window = main;
         this.set = set;
         System.out.println("final class list issssss before: "+ finalClassList);
         finalClassList = set.getFinalClassList();
         System.out.println("final class list issssss: "+ finalClassList);
         creator = new Creator(set);
-        DisplayClasses();
-        setUpButtonsAndWindow(main, newUser, studentOrTeacher, existingOrNew, set);
-    }
-
-    public void setUpButtonsAndWindow(JFrame main,NewUser newUser, String studentOrTeacher, String existingOrNew, Set set) { //run everytime
-        boxManageCreate("hello", "JTextField");
-        newSet();
-        newSet();
-        window.add(classLabelPanel, BorderLayout.CENTER);
-        studentStatCollectLaunch(window);
         createNewTypeButton();
         buttonSetUpAction(main, newUser, studentOrTeacher, existingOrNew);
-    }
-
-    public void studentStatCollectLaunch(JFrame window) {
-        //List = set.getCurrentPanelList();
+        DisplayClasses();
         window.setTitle("StudentStatCollect");
         window.setPreferredSize(new Dimension(1000, 1000));
     }
@@ -92,7 +73,7 @@ public class StudentStatCollect extends JFrame {
         backButtonPanel.add(backButton);
         backButton.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent e) {
-                hideWindow();
+                //hideWindow();
 
                 if (set.getClassListIndex() == 0) { //case for back to classes
                     System.out.println("I here");
@@ -101,27 +82,23 @@ public class StudentStatCollect extends JFrame {
                 }
 
                 else if (set.getClassListIndex() > 0) {
-                    FileHandler fileHandler = new FileHandler();
                     System.out.println("there are previous classes");
-                    hideWindow();
                     //
                     set.decrementClassListIndex();
-                    StudentStatCollect studentStatCollect = new StudentStatCollect(main, newUser, studentOrTeacher, existingOrNew, set);
-                    //studentStatCollectLaunch(main);
-                    setUpButtonsAndWindow(main, newUser, studentOrTeacher, existingOrNew, set);
-                    // JPanel jpanel = new JPanel();
-                    // jpanel = fileHandler.loadTextboxes(main, set, "/Users/evy/Documents/GradeTracker-new/src/main/view/UserInfo/StudentInfo/"+set.getUsername()+"/"+set.getFinalClassList().get(set.getClassListIndex())+".txt");
-                    // for (int i =0; i<jpanel.getComponentCount(); i++) {
-                    //     classLabelPanel.add(jpanel.getComponent(i));
-                    // }
-                    //classLabelPanel.add(jpanel);
-                    //window.add(jpanel);
-                    
-                    //classLabelPanel.add(jpanelOfLoadedBoxes);
-                    
 
-                    //JFrame main,NewUser newUser, String studentOrTeacher, String existingOrNew, Set set
-                    //
+                    //StudentStatCollect studentStatCollect = new StudentStatCollect(main, newUser, studentOrTeacher, existingOrNew, set);
+                    //studentStatCollectLaunch(main, newUser, studentOrTeacher, existingOrNew, set);
+                    classLabelPanel.removeAll();
+                    classLabelPanel.revalidate();
+                    classLabelPanel.repaint();
+                    FileHandler fileHandler = new FileHandler();
+                    JPanel jpanel = new JPanel();
+                    //jpanel = fileHandler.loadTextboxes(main, set);
+                    jpanel = fileHandler.loadTextboxes(window, set);
+                    classLabelPanel.add(jpanel);
+
+
+                    
                 }
 
                 //case for previous class
@@ -148,7 +125,6 @@ public class StudentStatCollect extends JFrame {
                 set.incrementClassListIndex();
                 if (set.getClassListIndex()+1 <= set.getFinalClassList().size()) {
                     StudentStatCollect statCollect = new StudentStatCollect(window, newUser, studentOrTeacher, existingOrNew, set);
-                    statCollect.firstRun(main, newUser, studentOrTeacher, existingOrNew, set);
                 }
 
                 else {
@@ -168,8 +144,8 @@ public class StudentStatCollect extends JFrame {
 
                 correctGradeFormatChecker(pattern);
 
-                creator.setTextFieldPanel(classLabelPanel);
-                creator.writeTextToFile("/Users/evy/Documents/GradeTracker-new/src/main/view/UserInfo/StudentInfo/" + set.getUsername() +"/"+finalClassList.get(set.getClassListIndex())+ ".txt", creator.getTextFieldContainer());
+                set.setTextFieldPanel(classLabelPanel);
+                creator.writeTextToFile("/Users/evy/Documents/GradeTracker-new/src/main/view/UserInfo/StudentInfo/" + set.getUsername() +"/"+finalClassList.get(set.getClassListIndex())+ ".txt", set.getTextFieldPanel());
             }
         });
     }
@@ -199,9 +175,7 @@ public class StudentStatCollect extends JFrame {
        newTypeButton.addActionListener(new ActionListener() {
         public void actionPerformed(ActionEvent e) {
             newSet();
-            System.out.println("newTypeButtonHit");
-            window.add(classLabelPanel, BorderLayout.CENTER);
-            //System.out.println("ClassLabelPanel after adding: "+ allBoxesPanel.getComponentCount());
+            System.out.println("ClassLabelPanel after adding: "+ allBoxesPanel.getComponentCount());
         }
         });
 
@@ -280,8 +254,16 @@ public class StudentStatCollect extends JFrame {
     private void DisplayClasses() {
         String filePath = "/Users/evy/Documents/GradeTracker-new/src/main/view/UserInfo/StudentInfo/" + set.getUsername() +"/class"+ ".txt";
         ArrayList<String> typeList = set.getCurrentPanelList();
+
+        readClass(typeList);
+    }
+
+    private void readClass(ArrayList<String> typeList) { 
+        System.out.println("test1: in read class");
+        //classLabel(typeList);
         boxManageCreate(set.getFinalClassList().get(set.getClassListIndex()), "JLabel");
         boxManageCreate("Credits (optional)", "JTextField");
+        //creditTypeBox();
         newSet();
 
         container.add(classLabelPanel);
@@ -331,10 +313,16 @@ public class StudentStatCollect extends JFrame {
     }
 
     private void newSet() {
-        System.out.println("new set added");
         boxManageCreate("Grade Type "+typeNumber, "JTextField");
+        //boxManageCreate("Percentage of Grade");
         boxManageCreate("Percentage of Grade", "JTextField");
         boxManageCreate("Grades(format:# # #)", "JTextField");
+        //gradesBox();
     }
 
+    // private void calculate() {
+    //     //parse the grade situation. but then needs correct input.
+    // }
+
+    ////
     }

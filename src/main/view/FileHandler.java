@@ -64,7 +64,7 @@ public class FileHandler {
     }
 
 
-        public JPanel loadTextboxes(JFrame window, Set set, String filePath) {
+        public JPanel loadTextboxes(JFrame window, Set set) {
             Creator creator = new Creator(set);
             ArrayList<String> arrayList = readFileToList("/Users/evy/Documents/GradeTracker-new/src/main/view/UserInfo/StudentInfo/"+set.getUsername()+"/"+set.getFinalClassList().get(set.getClassListIndex())+".txt");
             JPanel jpanel = new JPanel();

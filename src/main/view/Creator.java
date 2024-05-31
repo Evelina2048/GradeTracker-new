@@ -310,7 +310,7 @@ public class Creator {
             textFieldFocusListener(window, textField, placeholder);
             windowFix(window);
         }
-        setTextFieldPanel(textFieldPanel);
+        set.setTextFieldPanel(textFieldPanel);
         return textField;
     }
 

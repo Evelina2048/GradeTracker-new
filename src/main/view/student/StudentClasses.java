@@ -129,7 +129,6 @@ public class StudentClasses extends JFrame {
                 creator.hideContainer();
                 System.out.println("before stat collect called: "+set.getCurrentPanelList());
                 StudentStatCollect statCollect = new StudentStatCollect(window, newUser, studentOrTeacher, existingOrNew, set);
-                statCollect.firstRun(window, newUser, studentOrTeacher, existingOrNew, set);
                 //}
                 System.out.println("AStep1: "+set.getClassListIndex()+set.getCurrentPanelList().size());
             }
