@@ -98,8 +98,12 @@ public class StudentStatCollect extends JFrame {
                     //jpanel = fileHandler.loadTextboxes(main, set);
                     boxManageCreate(set.getFinalClassList().get(set.getClassListIndex()), "JLabel"); //displays class label 
                     jpanel = fileHandler.loadTextboxes(window, set);
+                    //newSet();
+                    //newSet();
+                    
+                    //need loaded boxes to be the same jpanel layering as newSet
                     classLabelPanel.add(jpanel);
-
+ 
 
                     
                 }

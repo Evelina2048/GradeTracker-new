@@ -14,6 +14,7 @@ import java.util.ListIterator;
 import javax.swing.JFrame;
 import javax.swing.JPanel;
 import javax.swing.JTextField;
+import java.awt.BorderLayout;
 
 import main.view.Creator;
 
@@ -68,12 +69,16 @@ public class FileHandler {
             Creator creator = new Creator(set);
             ArrayList<String> arrayList = readFileToList("/Users/evy/Documents/GradeTracker-new/src/main/view/UserInfo/StudentInfo/"+set.getUsername()+"/"+set.getFinalClassList().get(set.getClassListIndex())+".txt");
             JPanel jpanel = new JPanel();
+            JPanel northTypePanel = new JPanel(new BorderLayout());
+            JPanel gradeTypePanel = new JPanel(new BorderLayout());
             System.out.println("arrayList"+arrayList);
             for (int i = 0; i<arrayList.size(); i++) {
                 //creator.createTextBox(window, arrayList.get(i), 10, 50);
-                jpanel.add(creator.typeBox(window, arrayList.get(i), "JTextField"));
+                gradeTypePanel.add(creator.typeBox(window, arrayList.get(i), "JTextField"));
             }
+            northTypePanel.add(gradeTypePanel, BorderLayout.NORTH);
+            creator.windowFix(window);
             //window.add(jpanel);
-            return jpanel;
+            return northTypePanel;
         }
 }
