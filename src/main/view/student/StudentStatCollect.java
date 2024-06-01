@@ -96,6 +96,7 @@ public class StudentStatCollect extends JFrame {
                     FileHandler fileHandler = new FileHandler();
                     JPanel jpanel = new JPanel();
                     //jpanel = fileHandler.loadTextboxes(main, set);
+                    boxManageCreate(set.getFinalClassList().get(set.getClassListIndex()), "JLabel"); //displays class label 
                     jpanel = fileHandler.loadTextboxes(window, set);
                     classLabelPanel.add(jpanel);
 
@@ -312,17 +313,18 @@ public class StudentStatCollect extends JFrame {
             creator.hideContainer();
             JPanel northTypePanel = creator.typeBox(window, placeholder, type);
             classLabelPanel.add(northTypePanel);
-            typeNumber++;
             creator.windowFix(window);
             numOfBoxes++;
         }
     }
 
     private void newSet() {
+        typeNumber++;
         boxManageCreate("Grade Type "+typeNumber, "JTextField");
         //boxManageCreate("Percentage of Grade");
         boxManageCreate("Percentage of Grade", "JTextField");
         boxManageCreate("Grades(format:# # #)", "JTextField");
+        
         //gradesBox();
     }
 
