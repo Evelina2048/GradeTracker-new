@@ -68,30 +68,27 @@ public class FileHandler {
 
 
         public JPanel loadTextboxes(JFrame window, Set set) {
-            // Creator creator = new Creator(set);
-            // ArrayList<String> arrayList = readFileToList("/Users/evy/Documents/GradeTracker-new/src/main/view/UserInfo/StudentInfo/"+set.getUsername()+"/"+set.getFinalClassList().get(set.getClassListIndex())+".txt");
-            // JPanel bigPanel = new JPanel(new FlowLayout(FlowLayout.LEFT));
-            // System.out.println("arrayList"+arrayList);
-            // for (int i = 0; i<arrayList.size(); i++) {
-            //     //creator.createTextBox(window, arrayList.get(i), 10, 50);
-            //     bigPanel.add(creator.boxCreate(window, arrayList.get(i), "JTextField"));
-
-            // }
-            // creator.windowFix(window);
-            // return bigPanel;
             Creator creator = new Creator(set);
-           // JPanel bigPanel = new JPanel(new GridLayout(0,4,5,5));//(new GridLayout(0,5,5,5));
-            JPanel bigPanel = new JPanel();
-            JPanel containerPanel = new JPanel(new FlowLayout(FlowLayout.LEFT));
-            bigPanel.add(creator.boxCreate(window, "testing", "JTextField"));
-            bigPanel.add(creator.boxCreate(window, "test", "JTextField"));
-            bigPanel.add(creator.boxCreate(window, "tester", "JTextField"));
-            bigPanel.add(creator.boxCreate(window, "tests", "JTextField"));
-            bigPanel.add(creator.boxCreate(window, "testy", "JTextField"));
-            //containerPanel.add(bigPanel);
-            return bigPanel;
-    
-            //classLabelPanel.add(bigPanel);
+            ArrayList<String> arrayList = readFileToList("/Users/evy/Documents/GradeTracker-new/src/main/view/UserInfo/StudentInfo/"+set.getUsername()+"/"+set.getFinalClassList().get(set.getClassListIndex())+".txt");
+            JPanel bigPanel = new JPanel(new FlowLayout(FlowLayout.LEFT));
+            System.out.println("arrayList"+arrayList);
+            for (int i = 0; i<arrayList.size(); i++) {
+                //creator.createTextBox(window, arrayList.get(i), 10, 50);
+                bigPanel.add(creator.boxCreate(window, arrayList.get(i), "JTextField"));
+
+            }
             //creator.windowFix(window);
+            return bigPanel;
+
+            // Creator creator = new Creator(set);
+            // JPanel bigPanel = new JPanel();
+            // JPanel containerPanel = new JPanel(new FlowLayout(FlowLayout.LEFT));
+            // bigPanel.add(creator.boxCreate(window, "testing", "JTextField"));
+            // bigPanel.add(creator.boxCreate(window, "test", "JTextField"));
+            // bigPanel.add(creator.boxCreate(window, "tester", "JTextField"));
+            // bigPanel.add(creator.boxCreate(window, "tests", "JTextField"));
+            // bigPanel.add(creator.boxCreate(window, "testy", "JTextField"));
+            // return bigPanel;
+    
         }
 }
