@@ -102,7 +102,7 @@ public class StudentStatCollect extends JFrame {
                     bigPanel.removeAll();
                     bigPanel.revalidate();
                     bigPanel.repaint();
-                    
+
                     FileHandler fileHandler = new FileHandler();
                     //JPanel northTypePanel = new JPanel(new FlowLayout(FlowLayout.LEFT));
                     JPanel northTypePanel = new JPanel(new GridLayout(0,4,5,5));
@@ -116,6 +116,7 @@ public class StudentStatCollect extends JFrame {
                     JPanel testPanel = fileHandler.loadTextboxes(window, set);
                     System.out.println("test panel components: "+ testPanel.getComponentCount());
                     int numberOfComponents = testPanel.getComponentCount();
+                    numOfBoxes += numberOfComponents;
                     for (int i = 0; i < numberOfComponents; i++) {
                         //System.out.println("test panel components: "+ testPanel.getComponent(i));
                         JPanel component = (JPanel) testPanel.getComponent(0);
@@ -189,7 +190,7 @@ public class StudentStatCollect extends JFrame {
         Pattern pattern = Pattern.compile("^(?:[0-9]*(?:.[0-9]+))*\s*$|^[0-9]*\s*$", Pattern.CASE_INSENSITIVE);
         correctGradeFormatChecker(pattern);
 
-        set.setTextFieldPanel(classLabelPanel);
+        set.setTextFieldPanel(bigPanel);
         creator.writeTextToFile("/Users/evy/Documents/GradeTracker-new/src/main/view/UserInfo/StudentInfo/" + set.getUsername() +"/"+finalClassList.get(set.getClassListIndex())+ ".txt", set.getTextFieldPanel());
     }
 
@@ -225,17 +226,17 @@ public class StudentStatCollect extends JFrame {
         delTypeButton.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent e) {
                 System.out.println("deltypebutton hitt");
-                System.out.println("deleteclasslist"+ classLabelPanel.getComponentCount());
-                if (classLabelPanel.getComponentCount() >= 8) {
-                    creator.deleteTextBox(window, classLabelPanel);
-                    creator.deleteTextBox(window, classLabelPanel);
-                    creator.deleteTextBox(window, classLabelPanel);
+                System.out.println("deleteclasslist"+ bigPanel.getComponentCount());
+                if (bigPanel.getComponentCount() >= 8) {
+                    creator.deleteTextBox(window, bigPanel);
+                    creator.deleteTextBox(window, bigPanel);
+                    creator.deleteTextBox(window, bigPanel);
                     numOfBoxes = numOfBoxes - 3;
                     typeNumber--;
                     
                     creator.saveButtonEnable();
                 }
-                System.out.println("deleteclasslistafter...."+ classLabelPanel.getComponentCount());
+                System.out.println("deleteclasslistafter...."+ bigPanel.getComponentCount());
         }
         });
 
