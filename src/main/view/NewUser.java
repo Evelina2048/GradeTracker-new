@@ -17,10 +17,6 @@ import java.awt.GridBagLayout;
 import java.awt.event.ActionListener;
 import java.awt.event.ActionEvent;
 
-//remove later//
-import main.view.student.existing.EditOrResults;
-//removelater/>//
-
 //key listening
 import java.awt.event.KeyEvent;
 public class NewUser extends JFrame {
@@ -48,20 +44,16 @@ public class NewUser extends JFrame {
 
     public NewUser(String newOrExisting,int windowX, int windowY, Set set) {
         this.set = set;
-        //window = window2;
-        //MainWindow main = main2;
-       newUserSetup(main, studentOrTeacher);
+       newUserSetup();
     }
 
-    public void newUserSetup(JFrame window2, String studentOrTeacherString) {
-        //main = window2;
+    public void newUserSetup() {
         main = set.getWindow();
         studentOrTeacher = set.getStudentOrTeacher();
         main.setTitle("NEW USE");
         this.window = main;
-        //studentOrTeacher = studentOrTeacherString;
 
-        instructionsWordsWindow(studentOrTeacher);
+        instructionsWordsWindow();
 
         radioButtonSetUp();
 
@@ -75,7 +67,7 @@ public class NewUser extends JFrame {
         window.requestFocusInWindow();
     }
     
-    private void instructionsWordsWindow(String studentOrTeacher) {
+    private void instructionsWordsWindow() {
         //instructions (north section for borderlayout)
         JLabel instructionsWords = new JLabel("You are a "+studentOrTeacher+". Are you a new user?");
         instructionsPanel = decorator.InstructionsPanelDecorate(window, instructionsPanel, instructionsWords);
@@ -129,7 +121,6 @@ public class NewUser extends JFrame {
 
     private void buttonSetUp(JFrame main2, String studentOrTeacher) {
         JButton backButton;
-        JButton saveButton;
         JButton nextButton;
         //buttons
         backNextButtonsPanel = new JPanel(new BorderLayout());
@@ -138,23 +129,13 @@ public class NewUser extends JFrame {
 
         backButton.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent e) {
-                ((MainWindow) main2).MainWindowLaunch(set);
-                main2.show();
-                ((MainWindow) main2).setButtonSelected(studentOrTeacher);
-                ((MainWindow) main2).setExistingOrNew(existingOrNew);
+                MainWindow main = new MainWindow(set);
+                main.MainWindowLaunch(set);
+                main.setButtonSelected(studentOrTeacher);
+                main.setExistingOrNew(existingOrNew);
                 decorator.hideWindow(instructionsPanel, choicesPanel, backNextButtonsPanel);     
             }
         });
-
-        // saveButton = new JButton("Save");
-        // backNextButtonsPanel.add(saveButton, BorderLayout.CENTER);
-        // window.add(backNextButtonsPanel, BorderLayout.SOUTH);
-        
-        // saveButton.addActionListener(new ActionListener() {
-        //     public void actionPerformed(ActionEvent e) {
-        //         //doNextButtonProcedure();
-        //     }
-        // });
         
         //next
         nextButton = new JButton("Next >");
@@ -184,7 +165,6 @@ public class NewUser extends JFrame {
                     gatherFrame.gatherLaunch(main, NewUser.this, studentOrTeacher, existingOrNew);
                     gatherFrame.showWindow(windowX, windowY);  // Show the Gather window
                 }
-                //
                 
                 
             }
@@ -192,7 +172,6 @@ public class NewUser extends JFrame {
                 decorator.errorMessageSetUp(window, newUserButton);
             }
                 
-        //>/
     }
 
     public void setButtonSelected(String studentOrTeacher) {
@@ -207,14 +186,6 @@ public class NewUser extends JFrame {
             moveOnPossible = true;
         }
     }
-
-    // public int getWindowX() {
-    //     return windowX;
-    // }
-
-    // private void setWindowY(int newWindowY) {
-    //     windowY = newWindowY;
-    // }
 
     public void showWindow(int windowX, int windowY) {
     if (windowX != 0 && windowY != 0) {

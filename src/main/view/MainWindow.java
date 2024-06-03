@@ -40,10 +40,11 @@ int windowHeight = 500;
 JPanel instructionsPanel;
 JPanel choicesPanel;
 JPanel backNextButtonsPanel;
+JFrame window;
 
 Decorator decorator = new Decorator();
 
-public MainWindow(JFrame window2, Set set) {
+public MainWindow(Set set) {
     //window = window2;
     MainWindowLaunch(set);
 
@@ -51,6 +52,7 @@ public MainWindow(JFrame window2, Set set) {
 
 public void MainWindowLaunch(Set set) {
     this.set = set;
+    this.window = set.getWindow();
     windowSetUp();
 
     InstructionsWordsWindow();
