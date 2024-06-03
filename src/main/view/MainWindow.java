@@ -160,7 +160,8 @@ private void doNextButtonProcedure() {
     decorator.setWindowY(this.getY());
 
     if (moveOnPossible) {
-        NewUser newUser = new NewUser(this, studentOrTeacher,existingOrNew, windowX, windowY, set);
+        setUserInfo();
+        NewUser newUser = new NewUser(existingOrNew, windowX, windowY, set);
         newUser.setButtonSelected(existingOrNew);
         decorator.hideWindow(instructionsPanel, choicesPanel, backNextButtonsPanel);
     }
@@ -168,6 +169,12 @@ private void doNextButtonProcedure() {
         decorator.errorMessageSetUp(this, studentButton);
     }
 }
+
+private void setUserInfo() {
+    set.setWindow(this);
+    set.setStudentOrTeacher(studentOrTeacher);
+}
+
 
 public void setButtonSelected(String selectedButtonText) {
     studentOrTeacher = selectedButtonText;

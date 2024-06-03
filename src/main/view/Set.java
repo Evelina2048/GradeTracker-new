@@ -3,6 +3,7 @@ package main.view;
 import java.util.ArrayList;
 import java.util.HashMap;
 
+import javax.swing.JFrame;
 import javax.swing.JPanel;
 import javax.swing.JTextField;
 import java.awt.Component;
@@ -17,6 +18,9 @@ public class Set {
     private HashMap<JTextField, Boolean> textFieldEmptiedMap = new HashMap<>();
     private int classListIndex = 0;
     private ArrayList<String> finalClassList;
+    private String existingOrNew;
+    private String studentOrTeacher;
+    private JFrame window;
 
     public Set () {
 
@@ -130,5 +134,29 @@ public class Set {
     }
 
     public void resetClassList() {
+    }
+
+    public void setExistingOrNew(String myExistingOrNew) {
+        existingOrNew = myExistingOrNew;
+    }
+
+    public String getExistingOrNew() {
+        return existingOrNew;
+    }
+
+    public void setStudentOrTeacher(String myStudentOrTeacher) {
+        studentOrTeacher = myStudentOrTeacher;
+    }
+
+    public String getStudentOrTeacher() {
+        return studentOrTeacher;
+    }
+
+    public void setWindow(JFrame myWindow) {
+        window = myWindow;
+    }
+
+    public JFrame getWindow() {
+        return window;
     }
 }

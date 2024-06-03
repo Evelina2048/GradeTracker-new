@@ -46,7 +46,7 @@ public class NewUser extends JFrame {
 
     Decorator decorator = new Decorator();
 
-    public NewUser(MainWindow main, String studentOrTeacher, String newOrExisting,int windowX, int windowY, Set set) {
+    public NewUser(String newOrExisting,int windowX, int windowY, Set set) {
         this.set = set;
         //window = window2;
         //MainWindow main = main2;
@@ -54,10 +54,12 @@ public class NewUser extends JFrame {
     }
 
     public void newUserSetup(JFrame window2, String studentOrTeacherString) {
-        main = window2;
+        //main = window2;
+        main = set.getWindow();
+        studentOrTeacher = set.getStudentOrTeacher();
         main.setTitle("NEW USE");
         this.window = main;
-        studentOrTeacher = studentOrTeacherString;
+        //studentOrTeacher = studentOrTeacherString;
 
         instructionsWordsWindow(studentOrTeacher);
 
