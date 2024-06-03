@@ -426,7 +426,7 @@ public class Creator {
     public void saveButtonEnable() {
         saveButton.setEnabled(true);
     }
-
+    
     public JPanel typeBox(JFrame window, String placeholder, String my_type) {
             JPanel northTypePanel = new JPanel(new BorderLayout());
             JPanel gradeTypePanel = new JPanel(new BorderLayout());
@@ -452,6 +452,14 @@ public class Creator {
 
             return northTypePanel;
     }
+
+	public JPanel boxCreate(JFrame window, String placeholder, String type) {
+        hideContainer();
+        JPanel bigPanel = typeBox(window, placeholder, type);
+        //classLabelPanel.add(bigPanel);
+        windowFix(window);
+        return bigPanel;
+	}
 
 // 	public boolean isFileEmpty(String filePath) {
 //         Path path = Paths.get(filePath);

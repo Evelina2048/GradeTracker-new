@@ -5,6 +5,7 @@ import java.util.HashMap;
 
 import javax.swing.JPanel;
 import javax.swing.JTextField;
+import java.awt.Component;
 
 public class Set {
     private String username;
@@ -91,6 +92,10 @@ public class Set {
 
     public JPanel getTextFieldPanel() {
         return textFieldPanel;
+    }
+
+    public void addTextFieldPanel(Component add) {
+        textFieldPanel.add(add);
     }
 
     // public JPanel getTextFieldContainer() {

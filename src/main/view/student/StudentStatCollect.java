@@ -8,6 +8,7 @@ import java.awt.Color;
 import java.awt.Dimension;
 import javax.swing.JPanel;
 import javax.swing.JTextField;
+import javax.swing.text.JTextComponent;
 import javax.swing.JLabel;
 
 import java.awt.event.ActionListener;
@@ -35,7 +36,9 @@ public class StudentStatCollect extends JFrame {
     private JPanel container = new JPanel(new FlowLayout(FlowLayout.LEFT));
     //private JPanel classLabelPanelContainer = new JPanel(new BorderLayout());
     private JPanel newDelContainerFlow;
-    private JPanel classLabelPanel = new JPanel(new FlowLayout(FlowLayout.LEFT, 5, 5));
+    //private JPanel classLabelPanel = new JPanel(new FlowLayout(FlowLayout.LEFT, 5, 5));
+    private JPanel classLabelPanel = new JPanel(new FlowLayout(FlowLayout.LEFT));
+
     private int typeNumber = 0;
     private int numOfBoxes = 0;
 
@@ -47,6 +50,8 @@ public class StudentStatCollect extends JFrame {
     //private ArrayList<String> typeList;
     private ArrayList<String> typeList;
     private ArrayList<String> finalClassList;
+
+    private JPanel bigPanel = new JPanel(new GridLayout(0,4,5,5));
 
     public StudentStatCollect(JFrame main,NewUser newUser, String studentOrTeacher, String existingOrNew, Set set) {
         studentStatCollectLaunch(main, newUser, studentOrTeacher, existingOrNew, set);
@@ -94,15 +99,37 @@ public class StudentStatCollect extends JFrame {
                     classLabelPanel.revalidate();
                     classLabelPanel.repaint();
                     FileHandler fileHandler = new FileHandler();
-                    JPanel jpanel = new JPanel();
+                    //JPanel northTypePanel = new JPanel(new FlowLayout(FlowLayout.LEFT));
+                    JPanel northTypePanel = new JPanel(new GridLayout(0,4,5,5));
+                    JPanel layeredPanel = new JPanel(new FlowLayout(FlowLayout.LEFT));
+                    //JPanel northTypePanel = new JPanel(new BorderLayout());
                     //jpanel = fileHandler.loadTextboxes(main, set);
                     boxManageCreate(set.getFinalClassList().get(set.getClassListIndex()), "JLabel"); //displays class label 
-                    jpanel = fileHandler.loadTextboxes(window, set);
+                    //newSet();
+                    //newSet();
+                    //northTypePanel = fileHandler.loadTextboxes(window, set);
+                    JPanel testPanel = fileHandler.loadTextboxes(window, set);
+                    System.out.println("test panel components: "+ testPanel.getComponentCount());
+                    int numberOfComponents = testPanel.getComponentCount();
+                    for (int i = 0; i < numberOfComponents; i++) {
+                        //System.out.println("test panel components: "+ testPanel.getComponent(i));
+                        JPanel component = (JPanel) testPanel.getComponent(0);
+                        JPanel componentTwo = (JPanel) component.getComponent(0);
+                        JTextField componentThree = (JTextField) componentTwo.getComponent(0);
+                        String text = componentThree.getText();
+                        System.out.println("text: "+ text+ "components: " + testPanel.getComponentCount());
+                        //northTypePanel.add(testPanel.getComponent(0));
+                        bigPanel.add(testPanel.getComponent(0));
+                        //classLabelPanel.add(bigPanel.getComponent(i));
+                    }
+                    classLabelPanel.add(bigPanel);
+                    //classLabelPanel.add(northTypePanel);
+                    creator.windowFix(window);
                     //newSet();
                     //newSet();
                     
                     //need loaded boxes to be the same jpanel layering as newSet
-                    classLabelPanel.add(jpanel);
+                    //classLabelPanel.add(northTypePanel);
  
 
                     
@@ -314,9 +341,10 @@ public class StudentStatCollect extends JFrame {
     }
     private void boxManageCreate(String placeholder, String type) {
         if (numOfBoxes <= maxBoxes) {
-            creator.hideContainer();
-            JPanel northTypePanel = creator.typeBox(window, placeholder, type);
-            classLabelPanel.add(northTypePanel);
+            //creator.hideContainer();
+            //JPanel bigPanel = creator.typeBox(window, placeholder, type);
+            bigPanel.add(creator.boxCreate(window, placeholder, type));
+            classLabelPanel.add(bigPanel);
             creator.windowFix(window);
             numOfBoxes++;
         }
@@ -325,11 +353,8 @@ public class StudentStatCollect extends JFrame {
     private void newSet() {
         typeNumber++;
         boxManageCreate("Grade Type "+typeNumber, "JTextField");
-        //boxManageCreate("Percentage of Grade");
         boxManageCreate("Percentage of Grade", "JTextField");
         boxManageCreate("Grades(format:# # #)", "JTextField");
-        
-        //gradesBox();
     }
 
     // private void calculate() {
