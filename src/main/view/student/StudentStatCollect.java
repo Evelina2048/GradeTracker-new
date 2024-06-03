@@ -98,6 +98,11 @@ public class StudentStatCollect extends JFrame {
                     classLabelPanel.removeAll();
                     classLabelPanel.revalidate();
                     classLabelPanel.repaint();
+
+                    bigPanel.removeAll();
+                    bigPanel.revalidate();
+                    bigPanel.repaint();
+                    
                     FileHandler fileHandler = new FileHandler();
                     //JPanel northTypePanel = new JPanel(new FlowLayout(FlowLayout.LEFT));
                     JPanel northTypePanel = new JPanel(new GridLayout(0,4,5,5));
