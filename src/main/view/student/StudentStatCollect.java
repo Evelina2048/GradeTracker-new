@@ -50,6 +50,7 @@ public class StudentStatCollect extends JFrame {
     //private ArrayList<String> typeList;
     private ArrayList<String> typeList;
     private ArrayList<String> finalClassList;
+    private FileHandler fileHandler;
 
     private JPanel bigPanel = new JPanel(new GridLayout(0,4,5,5));
 
@@ -65,6 +66,7 @@ public class StudentStatCollect extends JFrame {
         finalClassList = set.getFinalClassList();
         System.out.println("final class list issssss: "+ finalClassList);
         creator = new Creator(set);
+        fileHandler = new FileHandler();
         createNewTypeButton();
         buttonSetUpAction(main, newUser, studentOrTeacher, existingOrNew);
         DisplayClasses();
@@ -82,9 +84,12 @@ public class StudentStatCollect extends JFrame {
 
                 if (set.getClassListIndex() == 0) { //case for back to classes
                     System.out.println("I here");
+                    hideWindow();
                     StudentClasses studentClasses = new StudentClasses(main, newUser, studentOrTeacher, existingOrNew, set);
                     studentClasses.studentClassesLaunch(main, newUser, studentOrTeacher, existingOrNew, set);
                     saveButtonAction();
+                    //String filePath = "/Users/evy/Documents/GradeTracker-new/src/main/view/UserInfo/StudentInfo/"+set.getUsername()+"/class.txt";
+                    //JPanel testPanel = fileHandler.loadTextboxes(window, filePath, set);
                 }
 
                 else if (set.getClassListIndex() > 0) {
@@ -103,7 +108,6 @@ public class StudentStatCollect extends JFrame {
                     bigPanel.revalidate();
                     bigPanel.repaint();
 
-                    FileHandler fileHandler = new FileHandler();
                     //JPanel northTypePanel = new JPanel(new FlowLayout(FlowLayout.LEFT));
                     JPanel northTypePanel = new JPanel(new GridLayout(0,4,5,5));
                     JPanel layeredPanel = new JPanel(new FlowLayout(FlowLayout.LEFT));
@@ -113,7 +117,8 @@ public class StudentStatCollect extends JFrame {
                     //newSet();
                     //newSet();
                     //northTypePanel = fileHandler.loadTextboxes(window, set);
-                    JPanel testPanel = fileHandler.loadTextboxes(window, set);
+                    String filePath = "/Users/evy/Documents/GradeTracker-new/src/main/view/UserInfo/StudentInfo/"+set.getUsername()+"/"+set.getFinalClassList().get(set.getClassListIndex())+".txt";
+                    JPanel testPanel = fileHandler.loadTextboxes(window, filePath, set);
                     System.out.println("test panel components: "+ testPanel.getComponentCount());
                     int numberOfComponents = testPanel.getComponentCount();
                     numOfBoxes += numberOfComponents;
