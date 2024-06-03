@@ -68,7 +68,7 @@ public class StudentClasses extends JFrame {
         if (!fileHandler.isFileEmpty(filePath)) {//case for if existing file
             System.out.println("I have info to load!");
             ArrayList<String> myList = fileHandler.readFileToList(filePath);
-            for (int index=0; index<=1; index++) {
+            for (int index=0; index<myList.size(); index++) {
                 creator.createTextBox(window, myList.get(index), 10, 50);
             }
 
