@@ -65,7 +65,7 @@ public class StudentClasses extends JFrame {
 
         // }
         String filePath = "/Users/evy/Documents/GradeTracker-new/src/main/view/UserInfo/StudentInfo/"+set.getUsername()+"/class.txt";
-        if (!fileHandler.isFileEmpty(filePath)) {//case for if existing file
+        if (fileHandler.fileIsNotEmpty(filePath)) {//case for if existing file
             System.out.println("I have info to load!");
             ArrayList<String> myList = fileHandler.readFileToList(filePath);
             for (int index=0; index<myList.size(); index++) {

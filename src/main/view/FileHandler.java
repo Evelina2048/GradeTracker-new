@@ -43,16 +43,16 @@ public class FileHandler {
         }
 
 
-        public boolean isFileEmpty(String filePath) {
+        public boolean fileIsNotEmpty(String filePath) {
             try {
                 BufferedReader reader = new BufferedReader(new FileReader(filePath));
                 System.out.println("File exists"); 
-                return false;
+                return true;
             }
 
             catch (FileNotFoundException e) {
                 System.out.println("File does not exist"); 
-                return true;
+                return false;
             }
     
             catch (IOException e) {
