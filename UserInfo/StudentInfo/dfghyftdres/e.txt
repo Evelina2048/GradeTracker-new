@@ -1,4 +1,0 @@
-10
-Grade Type 1
-Percentage of Grade
-Grades(format:# # #)

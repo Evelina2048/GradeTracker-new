@@ -244,14 +244,15 @@ public class Creator {
                 classList.clear();
             }
             for (Component component : textFieldPanel.getComponents()) {
-                if (component instanceof JTextField) {
+                if (component instanceof JTextField ) {
                     JTextField textField = (JTextField) component;
-                    String text = textField.getText().trim();
-                    classList.add(text);
-    
-                    if (!text.isEmpty()) {
-                        writer.write(text + "\n");                             
-                        System.out.println("should be writing");
+                    if (set.getEmptiedState(textField) == true) {
+                        String text = textField.getText().trim();
+                        classList.add(text);
+                        if (!text.isEmpty()) {
+                            writer.write(text + "\n");                             
+                            System.out.println("should be writing");
+                        }
                     }
                 }
 
@@ -271,13 +272,15 @@ public class Creator {
             for (Component component : textFieldPanel.getComponents()) {
                 if (component instanceof JTextField) {
                     JTextField textField = (JTextField) component;
+                    if (set.getEmptiedState(textField) == true) {
                     String text = textField.getText().trim();
                     classList.add(text);
-    
+                    
                     if (!text.isEmpty()) {
                         writer.write(text + "\n");                             
                         System.out.println("should be writing");
                     }
+                }
                 }
 
                 if (component instanceof JPanel) {
