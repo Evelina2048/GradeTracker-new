@@ -157,7 +157,7 @@ public class Gather {
         backNextButtonsPanel = creator.makeBackNextButtonsPanel(backButtonPanel,saveButtonPanel, nextButtonPanel);
         window.add(backNextButtonsPanel, BorderLayout.SOUTH);
     }
-    
+
     private void makeBackButton() {
         JButton backButton = creator.backButtonCreate();
         backButtonPanel.add(backButton);
@@ -204,8 +204,8 @@ public class Gather {
                 writeUsername(filePath);
                 //move on to studentclasses class
                 hideWindow();
-                StudentClasses studentClasses = new StudentClasses(window, newUser, studentOrTeacher, existingOrNew, set);
-                studentClasses.studentClassesLaunch(window, newUser, studentOrTeacher, existingOrNew, set);
+                StudentClasses studentClasses = new StudentClasses(set);
+                studentClasses.studentClassesLaunch(set);
             }
         }
         else {

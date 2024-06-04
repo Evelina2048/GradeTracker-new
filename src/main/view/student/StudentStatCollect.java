@@ -4,13 +4,9 @@ import javax.swing.JButton;
 import javax.swing.JFrame;
 import java.awt.BorderLayout;
 import java.awt.GridLayout;
-import java.awt.Color;
 import java.awt.Dimension;
 import javax.swing.JPanel;
 import javax.swing.JTextField;
-import javax.swing.text.JTextComponent;
-import javax.swing.JLabel;
-
 import java.awt.event.ActionListener;
 import java.awt.event.ActionEvent;
 import java.awt.FlowLayout;
@@ -44,23 +40,20 @@ public class StudentStatCollect extends JFrame {
 
     private int maxBoxes = 25;
     
-    private JPanel northCreditsPanel;
     //private JPanel northNewTypePanel;
     private JPanel allBoxesPanel = new JPanel();
-    //private ArrayList<String> typeList;
-    private ArrayList<String> typeList;
     private ArrayList<String> finalClassList;
     private FileHandler fileHandler;
 
     private JPanel textBoxPanel = new JPanel(new GridLayout(0,4,5,5));
 
-    public StudentStatCollect(JFrame main,NewUser newUser, String studentOrTeacher, String existingOrNew, Set set) {
-        studentStatCollectLaunch(main, newUser, studentOrTeacher, existingOrNew, set);
+    public StudentStatCollect(Set set) {
+        studentStatCollectLaunch(set);
     }
 
-    public void studentStatCollectLaunch(JFrame main, NewUser newUser, String studentOrTeacher, String existingOrNew, Set set) {
+    public void studentStatCollectLaunch(Set set) {
         //List = set.getCurrentPanelList();
-        this.window = main;
+        this.window = set.getWindow();
         this.set = set;
         System.out.println("final class list issssss before: "+ finalClassList);
         finalClassList = set.getFinalClassList();
@@ -68,86 +61,17 @@ public class StudentStatCollect extends JFrame {
         creator = new Creator(set);
         fileHandler = new FileHandler();
         createNewTypeButton();
-        buttonSetUpAction(main, newUser, studentOrTeacher, existingOrNew);
+        buttonSetUpAction();
         DisplayClasses();
         window.setTitle("StudentStatCollect");
         window.setPreferredSize(new Dimension(1000, 1000));
     }
 
-    public void buttonSetUpAction(JFrame main, NewUser newUser, String studentOrTeacher, String existingOrNew) {
+    public void buttonSetUpAction() {
         JButton backButton = creator.backButtonCreate();
         JPanel backButtonPanel = new JPanel();
         backButtonPanel.add(backButton);
-        backButton.addActionListener(new ActionListener() {
-            public void actionPerformed(ActionEvent e) {
-                //hideWindow();
-
-                if (set.getClassListIndex() == 0) { //case for back to classes
-                    System.out.println("I here");
-                    hideWindow();
-                    StudentClasses studentClasses = new StudentClasses(main, newUser, studentOrTeacher, existingOrNew, set);
-                    studentClasses.studentClassesLaunch(main, newUser, studentOrTeacher, existingOrNew, set);
-                    saveButtonAction();
-                    //String filePath = "/Users/evy/Documents/GradeTracker-new/src/main/view/UserInfo/StudentInfo/"+set.getUsername()+"/class.txt";
-                    //JPanel testPanel = fileHandler.loadTextboxes(window, filePath, set);
-                }
-
-                else if (set.getClassListIndex() > 0) {
-                    System.out.println("there are previous classes");
-                    //
-                    saveButtonAction();
-                    set.decrementClassListIndex();
-
-                    //StudentStatCollect studentStatCollect = new StudentStatCollect(main, newUser, studentOrTeacher, existingOrNew, set);
-                    //studentStatCollectLaunch(main, newUser, studentOrTeacher, existingOrNew, set);
-                    classLabelPanel.removeAll();
-                    classLabelPanel.revalidate();
-                    classLabelPanel.repaint();
-
-                    textBoxPanelReset();
-
-                    //JPanel northTypePanel = new JPanel(new FlowLayout(FlowLayout.LEFT));
-                    JPanel northTypePanel = new JPanel(new GridLayout(0,4,5,5));
-                    JPanel layeredPanel = new JPanel(new FlowLayout(FlowLayout.LEFT));
-                    //JPanel northTypePanel = new JPanel(new BorderLayout());
-                    //jpanel = fileHandler.loadTextboxes(main, set);
-                    boxManageCreate(set.getFinalClassList().get(set.getClassListIndex()), "JLabel"); //displays class label 
-                    //newSet();
-                    //newSet();
-                    //northTypePanel = fileHandler.loadTextboxes(window, set);
-                    String filePath = "/Users/evy/Documents/GradeTracker-new/src/main/view/UserInfo/StudentInfo/"+set.getUsername()+"/"+set.getFinalClassList().get(set.getClassListIndex())+".txt";
-                    JPanel testPanel = fileHandler.loadTextboxes(window, filePath, set);
-                    System.out.println("test panel components: "+ testPanel.getComponentCount());
-                    int numberOfComponents = testPanel.getComponentCount();
-                    numOfBoxes += numberOfComponents;
-                    for (int i = 0; i < numberOfComponents; i++) {
-                        //System.out.println("test panel components: "+ testPanel.getComponent(i));
-                        JPanel component = (JPanel) testPanel.getComponent(0);
-                        JPanel componentTwo = (JPanel) component.getComponent(0);
-                        JTextField componentThree = (JTextField) componentTwo.getComponent(0);
-                        String text = componentThree.getText();
-                        System.out.println("text: "+ text+ "components: " + testPanel.getComponentCount());
-                        //northTypePanel.add(testPanel.getComponent(0));
-                        textBoxPanel.add(testPanel.getComponent(0));
-                        //classLabelPanel.add(textBoxPanel.getComponent(i));
-                    }
-                    classLabelPanel.add(textBoxPanel);
-                    //classLabelPanel.add(northTypePanel);
-                    creator.windowFix(window);
-                    //newSet();
-                    //newSet();
-                    
-                    //need loaded boxes to be the same jpanel layering as newSet
-                    //classLabelPanel.add(northTypePanel);
- 
-
-                    
-                }
-
-                //case for previous class
-            }
-        });
-
+        backAction(backButton);
         JButton saveButton = creator.saveButtonCreate();
         JPanel saveButtonPanel = new JPanel();
         saveButton.setEnabled(false);
@@ -158,49 +82,7 @@ public class StudentStatCollect extends JFrame {
         JButton nextButton = creator.nextButtonCreate();
         JPanel nextButtonPanel = new JPanel();
         nextButtonPanel.add(nextButton);
-        nextButton.addActionListener(new ActionListener() {
-            public void actionPerformed(ActionEvent e) {
-                saveButtonAction();
-                
-                set.incrementClassListIndex();
-                if (set.getClassListIndex()+1 <= set.getFinalClassList().size()) {
-                    String filePath = "/Users/evy/Documents/GradeTracker-new/src/main/view/UserInfo/StudentInfo/"+set.getUsername()+"/"+set.getFinalClassList().get(set.getClassListIndex())+".txt";
-                    System.out.println("going to class math");
-                    if (fileHandler.fileIsNotEmpty(filePath)) {
-                        System.out.println("math is not empty");
-                        textBoxPanelReset();
-                        boxManageCreate(set.getFinalClassList().get(set.getClassListIndex()), "JLabel"); //displays class label 
-                        JPanel testPanel = fileHandler.loadTextboxes(window, filePath, set);
-                        System.out.println("test panel components: "+ testPanel.getComponentCount());
-                        int numberOfComponents = testPanel.getComponentCount();
-                        //fileHandler.loadTextboxes(window, filePath, set);
-                        for (int i = 0; i < numberOfComponents; i++) {
-                            //System.out.println("test panel components: "+ testPanel.getComponent(i));
-                            JPanel component = (JPanel) testPanel.getComponent(0);
-                            JPanel componentTwo = (JPanel) component.getComponent(0);
-                            JTextField componentThree = (JTextField) componentTwo.getComponent(0);
-                            String text = componentThree.getText();
-                            System.out.println("text: "+ text+ "components: " + testPanel.getComponentCount());
-                            //northTypePanel.add(testPanel.getComponent(0));
-                            textBoxPanel.add(testPanel.getComponent(0));
-                            //classLabelPanel.add(textBoxPanel.getComponent(i));
-                        }
-                        classLabelPanel.add(textBoxPanel);
-                        //classLabelPanel.add(northTypePanel);
-                        creator.windowFix(window);
-                    }
-                    else {
-                        hideWindow();
-                        StudentStatCollect statCollect = new StudentStatCollect(window, newUser, studentOrTeacher, existingOrNew, set);
-                    }
-                }
-
-                else {
-                    hideWindow();
-                    PrintStudentGrades print = new PrintStudentGrades(main, studentOrTeacher,existingOrNew);
-                }
-            }
-        });
+        nextButtonAction(nextButton);
         backNextButtonsPanel = creator.makeBackNextButtonsPanel(backButtonPanel, saveButtonPanel, nextButtonPanel);
         window.add(backNextButtonsPanel, BorderLayout.SOUTH);
     }
@@ -209,6 +91,41 @@ public class StudentStatCollect extends JFrame {
         textBoxPanel.removeAll();
         textBoxPanel.revalidate();
         textBoxPanel.repaint();
+    }
+    
+    private void backAction(JButton backButton) {
+        backButton.addActionListener(new ActionListener() {
+            public void actionPerformed(ActionEvent e) {
+                if (set.getClassListIndex() == 0) { //case for back to classes
+                    hideWindow();
+                    StudentClasses studentClasses = new StudentClasses(set);
+                    studentClasses.studentClassesLaunch(set);
+                    saveButtonAction();
+                }
+                else if (set.getClassListIndex() > 0) {
+                    System.out.println("there are previous classes");
+                    saveButtonAction();
+                    set.decrementClassListIndex();
+                    classLabelPanel.removeAll();
+                    classLabelPanel.revalidate();
+                    classLabelPanel.repaint();
+                    textBoxPanelReset();
+                    new JPanel(new GridLayout(0,4,5,5));
+                    new JPanel(new FlowLayout(FlowLayout.LEFT));
+                    boxManageCreate(set.getFinalClassList().get(set.getClassListIndex()), "JLabel"); //displays class label 
+                    String filePath = "/Users/evy/Documents/GradeTracker-new/src/main/view/UserInfo/StudentInfo/"+set.getUsername()+"/"+set.getFinalClassList().get(set.getClassListIndex())+".txt";
+                    JPanel testPanel = fileHandler.loadTextboxes(window, filePath, set);
+                    int numberOfComponents = testPanel.getComponentCount();
+                    numOfBoxes += numberOfComponents;
+                    for (int i = 0; i < numberOfComponents; i++) {
+                        textBoxPanel.add(testPanel.getComponent(0));
+                    }
+                    classLabelPanel.add(textBoxPanel);
+                    creator.windowFix(window);                  
+                }
+            }
+        });
+
     }
 
     private void saveAction(JButton saveButton) {
@@ -229,61 +146,86 @@ public class StudentStatCollect extends JFrame {
         creator.writeTextToFile("/Users/evy/Documents/GradeTracker-new/src/main/view/UserInfo/StudentInfo/" + set.getUsername() +"/"+finalClassList.get(set.getClassListIndex())+ ".txt", set.getTextFieldPanel());
     }
 
+    private void nextButtonAction(JButton nextButton) {
+        nextButton.addActionListener(new ActionListener() {
+            public void actionPerformed(ActionEvent e) {
+                saveButtonAction();
+                set.incrementClassListIndex();
+                if (set.getClassListIndex()+1 <= set.getFinalClassList().size()) {
+                    String filePath = "/Users/evy/Documents/GradeTracker-new/src/main/view/UserInfo/StudentInfo/"+set.getUsername()+"/"+set.getFinalClassList().get(set.getClassListIndex())+".txt";
+                    if (fileHandler.fileIsNotEmpty(filePath)) {
+                        textBoxPanelReset();
+                        boxManageCreate(set.getFinalClassList().get(set.getClassListIndex()), "JLabel"); //displays class label 
+                        JPanel testPanel = fileHandler.loadTextboxes(window, filePath, set);
+                        int numberOfComponents = testPanel.getComponentCount();
+                        for (int i = 0; i < numberOfComponents; i++) {
+                            textBoxPanel.add(testPanel.getComponent(0));
+                        }
+                        classLabelPanel.add(textBoxPanel);
+                        creator.windowFix(window);
+                    }
+                    else {
+                        hideWindow();
+                        new StudentStatCollect(set);
+                    }
+                }
+                else {
+                    hideWindow();
+                    new PrintStudentGrades(set.getWindow(), set.getStudentOrTeacher(), set.getExistingOrNew());
+                }
+            }
+        });
+    }
+
    private void createNewTypeButton() {
        newTypeButton = new JButton("New Type");
        newTypeButton.setPreferredSize(new Dimension(90, 50));
        JPanel newTypeButtonPanel = new JPanel(new BorderLayout());
-
-       JButton delTypeButton = new JButton("Delete Type");
-       delTypeButton.setPreferredSize(new Dimension(90, 50));
-       JPanel delTypeButtonPanel = new JPanel(new BorderLayout());
-
        newTypeButtonPanel.add(newTypeButton,BorderLayout.NORTH);
-       delTypeButtonPanel.add(delTypeButton,BorderLayout.NORTH);
 
        newDelContainerFlow = new JPanel(new FlowLayout(FlowLayout.LEFT,0,5));
        JPanel newDelContainer = new JPanel(new GridLayout(2,1,0,5));
-       newDelContainer.add(newTypeButtonPanel);
-       newDelContainer.add(delTypeButtonPanel);
-
-       newDelContainerFlow.add(newDelContainer);
-
        //gridlayout allows any time of resizing
        //flowlayout allows resizing of width
-
        newTypeButton.addActionListener(new ActionListener() {
         public void actionPerformed(ActionEvent e) {
             newSet();
             System.out.println("ClassLabelPanel after adding: "+ allBoxesPanel.getComponentCount());
         }
         });
-
-        delTypeButton.addActionListener(new ActionListener() {
-            public void actionPerformed(ActionEvent e) {
-                System.out.println("deltypebutton hitt");
-                System.out.println("deleteclasslist"+ textBoxPanel.getComponentCount());
-                if (textBoxPanel.getComponentCount() >= 8) {
-                    creator.deleteTextBox(window, textBoxPanel);
-                    creator.deleteTextBox(window, textBoxPanel);
-                    creator.deleteTextBox(window, textBoxPanel);
-                    numOfBoxes = numOfBoxes - 3;
-                    typeNumber--;
-                    
-                    creator.saveButtonEnable();
-                }
-                System.out.println("deleteclasslistafter...."+ textBoxPanel.getComponentCount());
-        }
-        });
-
+       JPanel delTypeButtonPanel = deleteButtonPanel();
+       newDelContainer.add(newTypeButtonPanel);
+       newDelContainer.add(delTypeButtonPanel);
+       newDelContainerFlow.add(newDelContainer);
        window.add(newDelContainerFlow, BorderLayout.EAST);
        creator.windowFix(window);
+   }
+
+   private JPanel deleteButtonPanel() {
+    JButton delTypeButton = new JButton("Delete Type");
+        delTypeButton.setPreferredSize(new Dimension(90, 50));
+        delTypeButton.addActionListener(new ActionListener() {
+        public void actionPerformed(ActionEvent e) {
+            if (textBoxPanel.getComponentCount() >= 8) {
+                creator.deleteTextBox(window, textBoxPanel);
+                creator.deleteTextBox(window, textBoxPanel);
+                creator.deleteTextBox(window, textBoxPanel);
+                numOfBoxes = numOfBoxes - 3;
+                typeNumber--;
+                
+                creator.saveButtonEnable();
+            }
+    }
+    });  
+    JPanel delTypeButtonPanel = new JPanel(new BorderLayout());
+    delTypeButtonPanel.add(delTypeButton,BorderLayout.NORTH);
+    return delTypeButtonPanel;
    }
 
    private void correctGradeFormatChecker(Pattern pattern) {
         int index = 4;
         for (int i=1; i<=8; i++) { //max num of grade type
-            //if it exists. otherwise, bye bye.
-            String text = goIntoPanel(classLabelPanel, index); //will return a text box. probably just first for now??? //base case 5
+            String text = goIntoPanel(classLabelPanel, index);
             if (text.equals("does not exist")) {
                 System.out.println("fail");
                 break;
@@ -299,66 +241,41 @@ public class StudentStatCollect extends JFrame {
 
     private String goIntoPanel(JPanel panel, int index) {
         Container container = panel;
-        System.out.println("component count of panel: "+ container.getComponentCount());
-
-        //check component is not null
-        if (index >= container.getComponentCount()) {
-            System.out.println("component is null. Function: goIntoPanel. StudentStatCollect class");
+        if (index >= container.getComponentCount()) { //check component is not null
             return "does not exist";
         }
         Component component = container.getComponent(index);
-
-
         if (component instanceof JTextField) {
                 JTextField textField = (JTextField) component;
                 String text = textField.getText();
                 return text;
             } 
-
         else if (component instanceof JPanel) {
                 JPanel jpanel = (JPanel) component;
                 String text = goIntoPanel(jpanel, 0);
-
                 if (text != null) {
                     return text;
                 }
             }
-
             System.out.println("none of these" +component.getClass().getName());
             return "something went wrong StudentStatCollect";
-
-    }
+        }
 
     //read classes array, first five classes
     private void DisplayClasses() {
-        String filePath = "/Users/evy/Documents/GradeTracker-new/src/main/view/UserInfo/StudentInfo/" + set.getUsername() +"/class"+ ".txt";
+        set.getUsername();
         ArrayList<String> typeList = set.getCurrentPanelList();
-
         readClass(typeList);
     }
 
     private void readClass(ArrayList<String> typeList) { 
-        System.out.println("test1: in read class");
-        //classLabel(typeList);
         boxManageCreate(set.getFinalClassList().get(set.getClassListIndex()), "JLabel");
         boxManageCreate("Credits (optional)", "JTextField");
-        //creditTypeBox();
         newSet();
-
         container.add(classLabelPanel);
-        
         window.add(classLabelPanel, BorderLayout.CENTER);
         creator.windowFix(window);
     }
-
-    private void writeType() {
-        creator.setTextFieldPanel(classLabelPanel);
-        ArrayList<String> typeList = set.getCurrentPanelList();
-        creator.writeTextToFile("/Users/evy/Documents/GradeTracker-new/src/main/view/UserInfo/StudentInfo/" + set.getUsername() +"/"+typeList.get(set.getClassListIndex())+ ".txt", creator.getTextFieldContainer());
-        System.out.println("Complete! Class list is: "+ set.getFinalClassList());
-        set.setClassList(typeList);
-    }
-
 
     private void hideWindow() {
         backNextButtonsPanel.setVisible(false);
@@ -367,23 +284,8 @@ public class StudentStatCollect extends JFrame {
         
     }
 
-    private void debugTest(JPanel classLabePanel) {
-        // Iterate over the components of the classLabelPanel
-        for (Component component : classLabelPanel.getComponents()) {
-            // Check if the component is an instance of JLabel
-            if (component instanceof JLabel) {
-                // Cast the component to JLabel
-                JLabel label = (JLabel) component;
-                // Print the text of the label
-                System.out.println("printing labels....:::>..."+label.getText());
-    }
-}
-
-    }
     private void boxManageCreate(String placeholder, String type) {
         if (numOfBoxes <= maxBoxes) {
-            //creator.hideContainer();
-            //JPanel textBoxPanel = creator.typeBox(window, placeholder, type);
             textBoxPanel.add(creator.boxCreate(window, placeholder, type));
             classLabelPanel.add(textBoxPanel);
             creator.windowFix(window);

@@ -5,12 +5,10 @@ import javax.swing.JButton;
 import javax.swing.JFrame;
 import javax.swing.JTextField;
 import java.awt.BorderLayout;
-import java.awt.Component;
 import java.awt.Dimension;
 import javax.swing.JPanel;
 import java.awt.GridLayout;
 import java.awt.event.ActionListener;
-import java.nio.file.Path;
 import java.awt.event.ActionEvent;
 import java.awt.FlowLayout;
 import java.util.ArrayList;
@@ -43,15 +41,15 @@ public class StudentClasses extends JFrame {
 
     //JTextField textField = decorate.decorateTextBox();
 
-    public StudentClasses(JFrame main,NewUser newUser, String studentOrTeacher, String existingOrNew, Set set) {
+    public StudentClasses(Set set) {
         //studentClassesLaunch(main, newUser, studentOrTeacher, existingOrNew, set);
         //createNewClassButton();
         // westPanelCreate();
         // buttonSetUpAction(main, newUser, studentOrTeacher, existingOrNew);
     }
 
-    public void studentClassesLaunch(JFrame main, NewUser newUser, String studentOrTeacher, String existingOrNew, Set set) {
-        this.window = main;
+    public void studentClassesLaunch(Set set) {
+        this.window = set.getWindow();
         creator = new Creator(set);
         this.set = set;
         System.out.println("in student classes");
@@ -79,10 +77,10 @@ public class StudentClasses extends JFrame {
         }
         //textField.setVisible(true);
         westPanelCreate();
-        buttonSetUpAction(main, newUser, studentOrTeacher, existingOrNew);
+        buttonSetUpAction();
     }
 
-    public void buttonSetUpAction(JFrame main, NewUser newUser, String studentOrTeacher, String existingOrNew) {
+    public void buttonSetUpAction() {
         JButton backButton = creator.backButtonCreate();
         ///
         JPanel backButtonPanel = new JPanel();
@@ -128,7 +126,7 @@ public class StudentClasses extends JFrame {
                 hideWindow();
                 creator.hideContainer();
                 System.out.println("before stat collect called: "+set.getCurrentPanelList());
-                StudentStatCollect statCollect = new StudentStatCollect(window, newUser, studentOrTeacher, existingOrNew, set);
+                StudentStatCollect statCollect = new StudentStatCollect(set);
                 //}
                 System.out.println("AStep1: "+set.getClassListIndex()+set.getCurrentPanelList().size());
             }
