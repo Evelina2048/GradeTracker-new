@@ -4,21 +4,10 @@ import java.io.BufferedReader;
 import java.io.FileNotFoundException;
 import java.io.FileReader;
 import java.io.IOException;
-import java.nio.file.Files;
-import java.nio.file.Path;
-import java.nio.file.Paths;
 import java.util.ArrayList;
-import java.util.List;
-import java.util.ListIterator;
-
 import javax.swing.JFrame;
 import javax.swing.JPanel;
-import javax.swing.JTextField;
-import java.awt.BorderLayout;
 import java.awt.FlowLayout;
-import java.awt.GridLayout;
-
-import main.view.Creator;
 
 public class FileHandler {
 
@@ -47,6 +36,7 @@ public class FileHandler {
             try {
                 BufferedReader reader = new BufferedReader(new FileReader(filePath));
                 System.out.println("File exists"); 
+                reader.close();
                 return true;
             }
 

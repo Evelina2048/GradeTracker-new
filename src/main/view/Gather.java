@@ -52,7 +52,6 @@ public class Gather {
     Decorator decorate = new Decorator();
     JTextField textField = decorate.decorateTextBox("Enter user name");
 
-
     //panels
     JPanel instructionsPanel;
     JPanel choicesPanel;
@@ -61,12 +60,6 @@ public class Gather {
     JPanel backButtonPanel;
     JPanel nextButtonPanel;
     JPanel saveButtonPanel;
-
-    // JPanel backButtonPanel = new JPanel();
-    // JPanel saveButtonPanel = new JPanel(new BorderLayout());
-    // JPanel nextButtonPanel = new JPanel();
-
-
 
     public Gather(Set set) {
         this.set = set;
@@ -201,11 +194,7 @@ public class Gather {
         else if (textFieldFilled) { //good case
             String filePath = "somethingwentwrong";//if not overwritten, somethingwent wrong
             if (existingOrNew.trim().equals("New User")) { //if new user,
-                writeUsername(filePath);
-                //move on to studentclasses class
-                hideWindow();
-                StudentClasses studentClasses = new StudentClasses(set);
-                studentClasses.studentClassesLaunch(set);
+                goToStudentClasses(filePath);
             }
         }
         else {
@@ -350,7 +339,12 @@ private void writeUsername(String filePath) {
         String username = set.getUsername();
         textField.setText(username);
     }
-    // private void goToStudentClasses() {
-        
-    // }
+
+    private void goToStudentClasses(String filePath) {
+        writeUsername(filePath);
+        //move on to studentclasses class
+        hideWindow();
+        StudentClasses studentClasses = new StudentClasses(set);
+        studentClasses.studentClassesLaunch(set);
+    }
 }

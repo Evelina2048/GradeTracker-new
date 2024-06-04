@@ -3,17 +3,14 @@ package main.view.student;
 import javax.swing.BorderFactory;
 import javax.swing.JButton;
 import javax.swing.JFrame;
-import javax.swing.JTextField;
 import java.awt.BorderLayout;
 import java.awt.Dimension;
 import javax.swing.JPanel;
 import java.awt.GridLayout;
 import java.awt.event.ActionListener;
 import java.awt.event.ActionEvent;
-import java.awt.FlowLayout;
 import java.util.ArrayList;
 import java.util.concurrent.atomic.AtomicBoolean;
-import main.view.NewUser;
 import main.view.Set;
 import main.view.Creator;
 import main.view.Decorator;
@@ -26,11 +23,7 @@ public class StudentClasses extends JFrame {
     private JFrame window;
     private Creator creator;
     private JPanel backNextButtonsPanel;
-    // private JPanel textFieldContainer = new JPanel(new GridLayout(0, 5)); // Panel to hold text fields
-    private JPanel textFieldContainer = new JPanel(new FlowLayout(FlowLayout.LEFT, 5, 5));
-    private JTextField textField;
     private JButton saveButton;
-    private int textboxCounter = 0;
     JPanel southContainer = new JPanel(new GridLayout(2,1,0,0));
     AtomicBoolean textFieldEmptied = new AtomicBoolean(false);;
     JButton newClassButton;
@@ -126,7 +119,7 @@ public class StudentClasses extends JFrame {
                 hideWindow();
                 creator.hideContainer();
                 System.out.println("before stat collect called: "+set.getCurrentPanelList());
-                StudentStatCollect statCollect = new StudentStatCollect(set);
+                new StudentStatCollect(set);
                 //}
                 System.out.println("AStep1: "+set.getClassListIndex()+set.getCurrentPanelList().size());
             }
@@ -183,10 +176,6 @@ public class StudentClasses extends JFrame {
 
         window.add(southContainer, BorderLayout.SOUTH);
 
-    }
-
-    private void setSaveEnabled(){
-        saveButton.setEnabled(true);
     }
 
     private void writeType() {

@@ -17,60 +17,35 @@ import java.awt.event.FocusEvent;
 
 import java.io.FileWriter;
 import java.io.IOException;
-import java.nio.file.Files;
-import java.nio.file.Path;
-import java.nio.file.Paths;
 import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.List;
 import java.util.concurrent.atomic.AtomicBoolean;
 import java.io.BufferedWriter;
 import java.io.File;
 import java.awt.Component;
 
 import java.awt.Dimension;
-import java.awt.GridLayout;
 import java.awt.FlowLayout;
 
 import main.view.Creator;
-import main.view.student.StudentClasses;
-
 import javax.swing.event.DocumentEvent;
 import javax.swing.event.DocumentListener;
 
-import javax.swing.JPanel;
-import javax.swing.JTextField;
 import java.awt.Container;
-import java.io.BufferedWriter;
-import java.io.FileWriter;
-import java.io.IOException;
-import java.awt.Component;
-import java.awt.event.ActionEvent;
-import java.awt.event.ActionListener;
 
 
 public class Creator {
     private JPanel backNextButtonsPanel;
     private JPanel textFieldPanel= new JPanel(new FlowLayout(FlowLayout.LEFT));
-    // private HashMap<JTextField, Boolean> textFieldEmptiedMap = new HashMap<>();
     private JTextField previousTextbox;
     private Set set;
     private Decorator decorate = new Decorator();
     private int textboxCounter;
-    //private Set set = new Set();
     private JTextField textField;
     private String placeholder;
-    //private JPanel textFieldContainer;
     private ArrayList<String> classList = new ArrayList<>();
     private JButton saveButton;
-    private boolean userClickedEmpty;
-    private boolean placeholderFill;
     private ArrayList<String>textFieldPanelText = new ArrayList<>();
-    private BufferedWriter writer;
-    private ArrayList<String> finalClassList;
     
-
-    //private JPanel textFieldContainer = new JPanel(new GridLayout(0, 5)); // Panel to hold text fields
     private JPanel textFieldContainer = new JPanel(new FlowLayout(FlowLayout.LEFT));
     
     public Creator(Set set) {
@@ -79,7 +54,6 @@ public class Creator {
 
     public JButton backButtonCreate() {
         JButton backButton;
-        //buttons
         backButton = new JButton("< Back");
         backButton.setPreferredSize(new Dimension(87, 29));
 
@@ -88,10 +62,7 @@ public class Creator {
     }
 
     public JButton saveButtonCreate() {
-        //saveButton;
-
         saveButton = new JButton("Save");
-
         return saveButton;
     }
 
@@ -126,9 +97,6 @@ public class Creator {
                 }
                 if (textField.getText().equals(placeholder) && set.getEmptiedState(textField) == false) {
                     textField.setText("");
-                    userClickedEmpty = true;
-                    
-                    //document.putProperty("name", "clicked");
                     set.setEmptiedState(textField, true);
                     textField.setForeground(Color.BLACK);
                 }
@@ -136,16 +104,13 @@ public class Creator {
                 else if (!textField.getText().equals(placeholder) && !textField.getText().isEmpty() && set.getEmptiedState(textField) == true) {
                     textField.setForeground(Color.BLACK);
                     set.setEmptiedState(textField, true);
-                    //setSaveEnabled();
                 }
 
                 else if (textField.getText().equals(placeholder) && set.getEmptiedState(textField) == true) {
                     textField.setText(""); // Clear the placeholder text when the field gains focus
-                    userClickedEmpty = true;
                     textField.setForeground(Color.BLACK);
                     set.setEmptiedState(textField, true);
                     set.setSaveable(true);
-                    //setSaveEnabled();
                 }
 
                 else {
@@ -160,14 +125,11 @@ public class Creator {
                 if (textField.getText().isEmpty()) {
                     textField.setForeground(Color.GRAY);
                     textField.setText(placeholder);
-                    //userClickedEmpty = true;
                     set.setEmptiedState(textField, false);
                 }
                 
                 else if (!textField.getText().isEmpty() && set.getEmptiedState(textField) == true){
                     textField.setForeground(Color.gray);
-                    //setSaveEnabled();
-
                 }
                 else {
                     System.out.println("something went wrong in focus lost");
@@ -238,7 +200,7 @@ public class Creator {
     public void writeTextToFile(String filePath, JPanel textFieldPanel) {
         System.out.println("Step4: begin writeTextToFile."+ set.getCurrentPanelList());
         debugPrintPanel();
-        String username = set.getUsername();
+        set.getUsername();
         try (BufferedWriter writer = new BufferedWriter(new FileWriter(filePath))) {
             if (!classList.isEmpty()) {
                 classList.clear();
@@ -292,17 +254,12 @@ public class Creator {
         }
     }
 
-    private void cycleThroughPanel() {
-        
-    } 
-
     public JTextField createTextBox(JFrame window, String placeholder, int width, int height) { //something here is causing the issue
         debugPanelComponentCount();
         textboxCounter++;
         if (textboxCounter <= 30) {
             textField = decorate.decorateTextBox(placeholder);
             set.setEmptiedState(textField, false);
-            placeholderFill = true;
             addDocumentListener(textField);
             debugPanelComponentCount();
             textFieldPanel.add(textField); 
@@ -321,17 +278,15 @@ public class Creator {
         textField.getDocument().addDocumentListener(new DocumentListener() {
         @Override
         public void insertUpdate(DocumentEvent e) {
-            //System.out.println("placeholderfill"+placeholderFill);
-                saveButtonEnable();
-                userClickedEmpty = false; 
+                saveButtonEnable(); 
         }
 
         @Override
         public void removeUpdate(DocumentEvent e) {
-            //System.out.println("removeUpdate");
-            if (userClickedEmpty = false) {
-                saveButtonEnable();
-            }
+            System.out.println("removeUpdate");
+            // if (false) {
+            //     saveButtonEnable();
+            // }
         }
 
         @Override
@@ -372,11 +327,6 @@ public class Creator {
         textFieldPanel.setVisible(false);
     }
 
-    public void updateTextBoxContainerPanel() {
-        //set.setTextFieldPanel(textFieldPanel);
-        //set.setTextFieldContainer(textFieldContainer);
-    }
-
     public void debugPrintPanel() {
         for (Component component : textFieldPanel.getComponents()) {
             if (component instanceof JTextField) {
@@ -394,7 +344,6 @@ public class Creator {
         System.out.println(textFieldPanel.getComponentCount());
     }
 
-    ////
     public void traversePanelAndWrite(String filePath, Container container) {
         try (BufferedWriter writer = new BufferedWriter(new FileWriter(filePath, true))) {
             System.out.println("final filepath: "+ filePath);
@@ -424,7 +373,6 @@ public class Creator {
         set.setClassList(classList);
 
     }
-    //public void set 
 
     public void saveButtonEnable() {
         saveButton.setEnabled(true);
@@ -445,13 +393,9 @@ public class Creator {
                 //JLabel toAddType = new JLabel(placeholder);
                 gradeTypePanel.add(toAddType);
             }
-            //allBoxesPanel.add(gradeType);
-
-            //gradeTypePanel.add(toAddType);
             gradeTypePanel.setPreferredSize(new Dimension( 155,50));
             northTypePanel.add(gradeTypePanel, BorderLayout.NORTH);
             windowFix(window);
-            //window.add(toAddType);
 
             return northTypePanel;
     }
@@ -459,7 +403,6 @@ public class Creator {
 	public JPanel boxCreate(JFrame window, String placeholder, String type) {
         hideContainer();
         JPanel bigPanel = typeBox(window, placeholder, type);
-        //classLabelPanel.add(bigPanel);
         windowFix(window);
         return bigPanel;
 	}
@@ -485,24 +428,4 @@ public class Creator {
             System.out.println("none of these" +component.getClass().getName());
             return "something went wrong StudentStatCollect";
         }
-
-
-// 	public boolean isFileEmpty(String filePath) {
-//         Path path = Paths.get(filePath);
-//         try {
-//             long fileSize = Files.size(path);
-//             System.out.println("fileSize: "+ fileSize);
-//             if (fileSize == 0) {
-//                 return true;
-//             }
-//         }
-
-//         catch (IOException e) {
-//             System.err.println("an error occured in creator.java in isFileEmpty");
-// 		    return false;
-//         }
-//         System.err.println("an issue occured in creator.java in isFileEmpty");
-//         return false;
-    
-// }
 }
