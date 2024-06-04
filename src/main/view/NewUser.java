@@ -25,8 +25,6 @@ public class NewUser extends JFrame {
     private String studentOrTeacher;
     private String existingOrNew;
     private boolean moveOnPossible = false;
-    private int windowX;
-    private int windowY;
     private Gather gatherFrame;
     private Set set;
     JRadioButton newUserButton;
@@ -57,7 +55,7 @@ public class NewUser extends JFrame {
 
         radioButtonSetUp();
 
-        buttonSetUp(main, studentOrTeacher);
+        buttonSetUp();
 
         EnterAction enterAction = new EnterAction();
 
@@ -119,7 +117,7 @@ public class NewUser extends JFrame {
         choicesPanel.add(existingButton, decorator.choiceGbc());
     }
 
-    private void buttonSetUp(JFrame main2, String studentOrTeacher) {
+    private void buttonSetUp() {
         JButton backButton;
         JButton nextButton;
         //buttons
@@ -129,11 +127,20 @@ public class NewUser extends JFrame {
 
         backButton.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent e) {
-                MainWindow main = new MainWindow(set);
-                main.MainWindowLaunch(set);
-                main.setButtonSelected(studentOrTeacher);
-                main.setExistingOrNew(existingOrNew);
+                set.setWindow(window);
                 decorator.hideWindow(instructionsPanel, choicesPanel, backNextButtonsPanel);     
+                MainWindow main = (MainWindow) set.getWindow();
+                // main.windowSetUp();
+
+                // main.InstructionsWordsWindow();
+            
+                // main.radioButtonSetUp();
+            
+                // main.backNextButton();
+
+                main.MainWindowLaunch(set);
+                main.setButtonSelected();
+                //main.setExistingOrNew(existingOrNew);
             }
         });
         

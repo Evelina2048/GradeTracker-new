@@ -20,8 +20,6 @@ import java.awt.event.ActionEvent;
 //key listening
 import java.awt.event.KeyEvent;
 
-import main.view.Set;
-
 public class MainWindow extends JFrame {
 //private JFrame window;
 private String studentOrTeacher;
@@ -52,7 +50,7 @@ public MainWindow(Set set) {
 
 public void MainWindowLaunch(Set set) {
     this.set = set;
-    this.window = set.getWindow();
+    // //this.window = set.getWindow();
     windowSetUp();
 
     InstructionsWordsWindow();
@@ -71,6 +69,7 @@ public void MainWindowLaunch(Set set) {
 
 private void windowSetUp() {
     //window set up
+    System.out.println("hereeeeeeeee");
     this.setTitle("Launcher");
     this.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
     this.setLayout(new BorderLayout());
@@ -178,8 +177,8 @@ private void setUserInfo() {
 }
 
 
-public void setButtonSelected(String selectedButtonText) {
-    studentOrTeacher = selectedButtonText;
+public void setButtonSelected() {
+    String selectedButtonText = set.getStudentOrTeacher();
     if (selectedButtonText == "Student") {
         studentButton.setSelected(true);
         moveOnPossible = true;
@@ -195,15 +194,6 @@ public void setExistingOrNew(String existingOrNew2) {
     System.out.println("setExistingOrNew in Main Window "+existingOrNew2);
     existingOrNew = existingOrNew2;
 }
-
-// public int getWindowX() {
-//     return windowX;
-// }
-
-// public int getWindowY() {
-//     return windowY;
-// }
-
 
 public void show(int windowX, int windowY) {
    if (windowX != 0 && windowY != 0) {
