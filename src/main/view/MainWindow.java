@@ -24,9 +24,6 @@ public class MainWindow extends JFrame {
 //private JFrame window;
 private String studentOrTeacher;
 private boolean moveOnPossible = false;
-private int windowX;
-private int windowY;
-private String existingOrNew;
 private Set set;
 JRadioButton studentButton;
 JRadioButton teacherButton;
@@ -50,7 +47,6 @@ public MainWindow(Set set) {
 
 public void MainWindowLaunch(Set set) {
     this.set = set;
-    // //this.window = set.getWindow();
     windowSetUp();
 
     InstructionsWordsWindow();
@@ -152,12 +148,10 @@ private void backNextButton() {
 }
 
 private void doNextButtonProcedure() {
-    decorator.setWindowX(this.getX());
-    decorator.setWindowY(this.getY());
 
     if (moveOnPossible) {
         setUserInfo();
-        NewUser newUser = new NewUser(existingOrNew, windowX, windowY, set);
+        NewUser newUser = new NewUser(set);
         if (set.getExistingOrNew() != null) {
             newUser.setButtonSelected();
         }
@@ -188,14 +182,11 @@ public void setButtonSelected() {
 }
 
 public void setExistingOrNew(String existingOrNew2) {
-    existingOrNew = existingOrNew2;
 }
 
 public void show(int windowX, int windowY) {
    if (windowX != 0 && windowY != 0) {
        this.setLocation(windowX, windowY);
-       decorator.setWindowX(windowX);
-       decorator.setWindowY(windowY);
 
    }
 

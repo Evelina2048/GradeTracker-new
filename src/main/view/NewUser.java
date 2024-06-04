@@ -40,7 +40,7 @@ public class NewUser extends JFrame {
 
     Decorator decorator = new Decorator();
 
-    public NewUser(String newOrExisting,int windowX, int windowY, Set set) {
+    public NewUser(Set set) {
         this.set = set;
        newUserSetup();
     }
@@ -162,15 +162,16 @@ public class NewUser extends JFrame {
             int windowY = window.getY();
             if (moveOnPossible) {
                 decorator.hideWindow(instructionsPanel, choicesPanel, backNextButtonsPanel);
+                set.setExistingOrNew(existingOrNew);
 
                 if (gatherFrame == null) {
                     // Create a new instance of Gather if it doesn't exist
-                    gatherFrame = new Gather(main, NewUser.this, studentOrTeacher, existingOrNew, windowX, windowY, set);
-                    gatherFrame.gatherLaunch(main, NewUser.this, studentOrTeacher, existingOrNew);
+                    gatherFrame = new Gather(set);
+                    gatherFrame.gatherLaunch();
                     System.out.println("gatherframe is null");
                 } else {
                     // Update the existing Gather window panels
-                    gatherFrame.gatherLaunch(main, NewUser.this, studentOrTeacher, existingOrNew);
+                    gatherFrame.gatherLaunch();
                     gatherFrame.showWindow(windowX, windowY);  // Show the Gather window
                 }    
             }
@@ -195,8 +196,8 @@ public class NewUser extends JFrame {
     public void showWindow(int windowX, int windowY) {
     if (windowX != 0 && windowY != 0) {
         window.setLocation(windowX, windowY);
-        decorator.setWindowX(windowX);
-        decorator.setWindowY(windowY);
+        // decorator.setWindowX(windowX);
+        // decorator.setWindowY(windowY);
 
     }
 

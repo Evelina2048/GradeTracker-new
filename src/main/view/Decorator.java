@@ -18,50 +18,14 @@ import java.awt.event.ActionEvent;
 import java.awt.FlowLayout;
 ///
 import javax.swing.BorderFactory;
-import javax.swing.ButtonGroup;
-import javax.swing.JButton;
-import javax.swing.JDialog;
-import javax.swing.JFrame;
-import javax.swing.JRadioButton;
 import javax.swing.JTextField;
-import javax.swing.SwingConstants;
-
-import main.view.student.StudentClasses;
-
-import java.awt.BorderLayout;
-import java.awt.Color;
 import java.awt.Dimension;
-import java.awt.Font;
-import javax.swing.JPanel;
-import javax.swing.JLabel;
-
-import java.awt.GridBagLayout;
-import java.awt.GridBagConstraints;
-
-import java.awt.event.ActionListener;
-import java.awt.event.ActionEvent;
-import java.awt.FlowLayout;
-
-import java.awt.event.MouseAdapter;
-import java.awt.event.MouseEvent;
-
-import java.awt.event.FocusAdapter;
-import java.awt.event.FocusEvent;
-
-import java.io.FileWriter;
-import java.io.IOException;
-
-import java.io.BufferedReader;
-
-import java.io.FileReader;
 
 ///
 
 //key listening
 
 public class Decorator {
-    private int windowX;
-    private int windowY;
     
     public Decorator() {
 
@@ -84,38 +48,6 @@ public class Decorator {
         return instructionsPanel;
     }
 
-    // public void radioButtonSetUp() {
-    //     buttonGroup = new ButtonGroup();
-    //     Color choicesPanelColor = Color.decode("#AFA2A2");
-    
-    //     choicesPanel= new JPanel(new GridBagLayout());
-    //     choicesPanel.setBackground(choicesPanelColor);
-    
-    //     //initialize buttons with color
-    //     teacherButton = new JRadioButton("Teacher");
-    //     choicesButtonDecorate(teacherButton);
-    //     teacherButton.addActionListener(new ActionListener() {
-    //         public void actionPerformed(ActionEvent e) {
-    //            studentOrTeacher = teacherButton.getText();
-    //            moveOnPossible = true;
-    //         }
-            
-    //     });
-    
-    //     studentButton = new JRadioButton("Student");
-    //     choicesButtonDecorate(studentButton);
-    //     studentButton.addActionListener(new ActionListener() {
-    //         public void actionPerformed(ActionEvent e) {
-    //             studentOrTeacher = studentButton.getText();
-    //             moveOnPossible = true;
-    //         }
-    //     });
-    
-    //     addToChoicesPanel(buttonGroup, teacherButton, studentButton, choicesPanel);
-    
-    //     this.add(choicesPanel);
-    // }
-
     public GridBagConstraints choiceGbc() {
         //radio buttons distance
         GridBagConstraints gbc = new GridBagConstraints();
@@ -126,14 +58,6 @@ public class Decorator {
         gbc.anchor = GridBagConstraints.WEST;
         gbc.insets = new Insets(10, 0, 0, 0); // Increase the horizontal spacing between components
         return gbc;
-    }
-
-    public void setWindowX(int newWindowX) {
-        windowX = newWindowX;
-    }
-
-    public void setWindowY(int newWindowY) {
-        windowY = newWindowY;
     }
 
     public void errorMessageSetUp(JFrame window, JRadioButton button) {
@@ -179,16 +103,4 @@ public class Decorator {
        textField.setText(placeholderText);
        return textField;
     }
-
-    
-    // public JButton createJButton() {
-    //     JButton newClassButton = new JButton("New Class");
-
-    //     return newClassButton;
-    // }
-
-    // public void createRadioButtons() {
-
-    // }
-
 }
