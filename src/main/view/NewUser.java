@@ -181,9 +181,7 @@ public class NewUser extends JFrame {
 
     public void setButtonSelected() {
         existingOrNew = set.getExistingOrNew().trim();
-        System.out.println("in set button selected: "+existingOrNew);
         if (existingOrNew == "New User") {
-            System.out.println("heyo");
             newUserButton.setSelected(true);
             moveOnPossible = true;
         }

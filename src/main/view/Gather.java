@@ -31,14 +31,10 @@ import java.io.BufferedReader;
 import java.io.FileReader;
 
 //import class files
-import main.view.Creator;
-import main.view.Set;
-
 
 public class Gather {
     private JFrame window;
     private NewUser newUser;
-    private boolean moveOnPossible = false;
     private int windowX;
     private int windowY;
     private AtomicBoolean textFieldEmptied = new AtomicBoolean(false); 
@@ -166,38 +162,24 @@ public class Gather {
         boolean textFieldEmpty = textField.getText().trim().isEmpty();
         boolean textFieldHasntChanged = textField.getText().equals("Enter user name") && !textFieldEmptied.get();
         boolean textFieldFilled = textField.getText().trim().isEmpty() == false;
-
         //check if the username is not empty
-        if (textFieldEmpty) {
-            moveOnPossible = false;
+        if (textFieldEmpty || textFieldHasntChanged) {
             errorMessageSetUp("<html><center>Please choose an option",200,90);
         }
-
-        else if (textFieldHasntChanged) {
-            System.out.println("in special cas");
-            moveOnPossible = false;
-            errorMessageSetUp("<html><center>Please choose an option",200,90);
-        }
-
         else if (textFieldFilled) { //good case
-            moveOnPossible = true;
             String filePath = "somethingwentwrong";//if not overwritten, somethingwent wrong
             if (existingOrNew.trim().equals("New User")) { //if new user,
                 writeUsername(filePath,studentOrTeacherString);
                 //move on to studentclasses class
-                System.out.println("should move to studentClasses class");
                 hideWindow();
                 StudentClasses studentClasses = new StudentClasses(window, newUser, studentOrTeacherString, existingOrNew, set);
                 studentClasses.studentClassesLaunch(window, newUser, studentOrTeacherString, existingOrNew, set);
             }
         }
-
         else {
-            moveOnPossible = false;
             System.out.println("Something went wrong in username input");
             errorMessageSetUp("<html><center>Something went wrong in username input",200,90);
         }
-        
 }
 private void backButtonAction(JFrame window2, NewUser newUser, String studentOrTeacher, String existingOrNew) {
 
@@ -236,31 +218,14 @@ private void writeUsername(String filePath, String studentOrTeacher) {
     String username = textField.getText().trim();
     set.setUsername(username);
     if ("Student".equals(studentOrTeacher)) {
-        //filePath = "/Users/evy/Documents/GradeTracker-new/src/main/view/UserInfo/StudentInfo/"+username+".txt";
         usernamePath = "/Users/evy/Documents/GradeTracker-new/src/main/view/UserInfo/studentUsername.txt";
     }
 
     else if ("Teacher".equals(studentOrTeacher)) {
-       // filePath = "/Users/evy/Documents/GradeTracker-new/src/main/view/Teacher.csv";
         usernamePath = "/Users/evy/Documents/GradeTracker-new/src/main/view/UserInfo/teacherUsername.txt";
     }
 
-    System.out.println("the username is "+ username);
-    System.out.println("the filepath is " + filePath);
-
-
     checkIfExisting(usernamePath, username);
-    //int commaCountInt = commaCount(username);
-}
-
-private int commaCount(String username) {
-    int commaCount = 0;
-    for (int i = 0; i < username.length(); i++) {
-        if (username.charAt(i) == ',') {
-            commaCount++;
-        }
-    }
-    return commaCount;
 }
 
     private void checkIfExisting(String filePath, String username) {
@@ -273,7 +238,6 @@ private int commaCount(String username) {
     }
 
     private void writeNewName(String filePath, String username) {
-        System.out.println("writingtofile");
             try (FileWriter writer = new FileWriter(filePath, true)) {
                 writer.write(username + "\n");
 
@@ -354,6 +318,8 @@ private int commaCount(String username) {
     public void setTextToUsername() {
         String username = set.getUsername();
         textField.setText(username);
-        //textField.setEditable(false);
     }
+    // private void goToStudentClasses() {
+        
+    // }
 }

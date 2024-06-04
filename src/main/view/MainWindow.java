@@ -69,7 +69,6 @@ public void MainWindowLaunch(Set set) {
 
 private void windowSetUp() {
     //window set up
-    System.out.println("hereeeeeeeee");
     this.setTitle("Launcher");
     this.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
     this.setLayout(new BorderLayout());
@@ -136,12 +135,7 @@ private void backNextButton() {
     backButton = new JButton("< Back");
     backButton.setEnabled(false);
     backNextButtonsPanel.add(backButton, BorderLayout.WEST);
-    System.out.println("backbuttonpreferedsize "+backButton.getPreferredSize());
 
-    // nextButton = new JButton("Save");
-    // backNextButtonsPanel.add(nextButton, BorderLayout.CENTER);
-    // this.add(backNextButtonsPanel, BorderLayout.SOUTH);
-    
     //next
     nextButton = new JButton("Next >");
     backNextButtonsPanel.add(nextButton, BorderLayout.EAST);
@@ -194,7 +188,6 @@ public void setButtonSelected() {
 }
 
 public void setExistingOrNew(String existingOrNew2) {
-    System.out.println("setExistingOrNew in Main Window "+existingOrNew2);
     existingOrNew = existingOrNew2;
 }
 
