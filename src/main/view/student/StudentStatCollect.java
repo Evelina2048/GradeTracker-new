@@ -13,7 +13,6 @@ import java.awt.FlowLayout;
 import java.awt.Component;
 
 import java.util.ArrayList;
-import main.view.NewUser;
 import main.view.Creator;
 import main.view.Set;
 import main.view.FileHandler;
@@ -30,29 +29,22 @@ public class StudentStatCollect extends JFrame {
     private JButton newTypeButton;
     private Set set;
     private JPanel container = new JPanel(new FlowLayout(FlowLayout.LEFT));
-    //private JPanel classLabelPanelContainer = new JPanel(new BorderLayout());
     private JPanel newDelContainerFlow;
-    //private JPanel classLabelPanel = new JPanel(new FlowLayout(FlowLayout.LEFT, 5, 5));
     private JPanel classLabelPanel = new JPanel(new FlowLayout(FlowLayout.LEFT));
-
-    private int typeNumber = 0;
-    private int numOfBoxes = 0;
-
-    private int maxBoxes = 25;
-    
-    //private JPanel northNewTypePanel;
     private JPanel allBoxesPanel = new JPanel();
     private ArrayList<String> finalClassList;
     private FileHandler fileHandler;
-
     private JPanel textBoxPanel = new JPanel(new GridLayout(0,4,5,5));
+
+    private int typeNumber = 0;
+    private int numOfBoxes = 0;
+    private int maxBoxes = 25;
 
     public StudentStatCollect(Set set) {
         studentStatCollectLaunch(set);
     }
 
     public void studentStatCollectLaunch(Set set) {
-        //List = set.getCurrentPanelList();
         this.window = set.getWindow();
         this.set = set;
         System.out.println("final class list issssss before: "+ finalClassList);
@@ -103,29 +95,32 @@ public class StudentStatCollect extends JFrame {
                     saveButtonAction();
                 }
                 else if (set.getClassListIndex() > 0) {
-                    System.out.println("there are previous classes");
-                    saveButtonAction();
-                    set.decrementClassListIndex();
-                    classLabelPanel.removeAll();
-                    classLabelPanel.revalidate();
-                    classLabelPanel.repaint();
-                    textBoxPanelReset();
-                    new JPanel(new GridLayout(0,4,5,5));
-                    new JPanel(new FlowLayout(FlowLayout.LEFT));
-                    boxManageCreate(set.getFinalClassList().get(set.getClassListIndex()), "JLabel"); //displays class label 
-                    String filePath = "/Users/evy/Documents/GradeTracker-new/src/main/view/UserInfo/StudentInfo/"+set.getUsername()+"/"+set.getFinalClassList().get(set.getClassListIndex())+".txt";
-                    JPanel testPanel = fileHandler.loadTextboxes(window, filePath, set);
-                    int numberOfComponents = testPanel.getComponentCount();
-                    numOfBoxes += numberOfComponents;
-                    for (int i = 0; i < numberOfComponents; i++) {
-                        textBoxPanel.add(testPanel.getComponent(0));
-                    }
-                    classLabelPanel.add(textBoxPanel);
-                    creator.windowFix(window);                  
+                    goToPreviousClasses();              
                 }
             }
         });
+    }
 
+    private void goToPreviousClasses() {
+        System.out.println("there are previous classes");
+        saveButtonAction();
+        set.decrementClassListIndex();
+        classLabelPanel.removeAll();
+        classLabelPanel.revalidate();
+        classLabelPanel.repaint();
+        textBoxPanelReset();
+        new JPanel(new GridLayout(0,4,5,5));
+        new JPanel(new FlowLayout(FlowLayout.LEFT));
+        boxManageCreate(set.getFinalClassList().get(set.getClassListIndex()), "JLabel"); //displays class label 
+        String filePath = "/Users/evy/Documents/GradeTracker-new/src/main/view/UserInfo/StudentInfo/"+set.getUsername()+"/"+set.getFinalClassList().get(set.getClassListIndex())+".txt";
+        JPanel testPanel = fileHandler.loadTextboxes(window, filePath, set);
+        int numberOfComponents = testPanel.getComponentCount();
+        numOfBoxes += numberOfComponents;
+        for (int i = 0; i < numberOfComponents; i++) {
+            textBoxPanel.add(testPanel.getComponent(0));
+        }
+        classLabelPanel.add(textBoxPanel);
+        creator.windowFix(window);    
     }
 
     private void saveAction(JButton saveButton) {
@@ -152,22 +147,7 @@ public class StudentStatCollect extends JFrame {
                 saveButtonAction();
                 set.incrementClassListIndex();
                 if (set.getClassListIndex()+1 <= set.getFinalClassList().size()) {
-                    String filePath = "/Users/evy/Documents/GradeTracker-new/src/main/view/UserInfo/StudentInfo/"+set.getUsername()+"/"+set.getFinalClassList().get(set.getClassListIndex())+".txt";
-                    if (fileHandler.fileIsNotEmpty(filePath)) {
-                        textBoxPanelReset();
-                        boxManageCreate(set.getFinalClassList().get(set.getClassListIndex()), "JLabel"); //displays class label 
-                        JPanel testPanel = fileHandler.loadTextboxes(window, filePath, set);
-                        int numberOfComponents = testPanel.getComponentCount();
-                        for (int i = 0; i < numberOfComponents; i++) {
-                            textBoxPanel.add(testPanel.getComponent(0));
-                        }
-                        classLabelPanel.add(textBoxPanel);
-                        creator.windowFix(window);
-                    }
-                    else {
-                        hideWindow();
-                        new StudentStatCollect(set);
-                    }
+                    visitNextStudentClass();
                 }
                 else {
                     hideWindow();
@@ -175,6 +155,25 @@ public class StudentStatCollect extends JFrame {
                 }
             }
         });
+    }
+
+    private void visitNextStudentClass() {
+        String filePath = "/Users/evy/Documents/GradeTracker-new/src/main/view/UserInfo/StudentInfo/"+set.getUsername()+"/"+set.getFinalClassList().get(set.getClassListIndex())+".txt";
+        if (fileHandler.fileIsNotEmpty(filePath)) {
+            textBoxPanelReset();
+            boxManageCreate(set.getFinalClassList().get(set.getClassListIndex()), "JLabel"); //displays class label 
+            JPanel testPanel = fileHandler.loadTextboxes(window, filePath, set);
+            int numberOfComponents = testPanel.getComponentCount();
+            for (int i = 0; i < numberOfComponents; i++) {
+                textBoxPanel.add(testPanel.getComponent(0));
+            }
+            classLabelPanel.add(textBoxPanel);
+            creator.windowFix(window);
+        }
+        else { //first time visiting next class
+            hideWindow();
+            new StudentStatCollect(set);
+        }
     }
 
    private void createNewTypeButton() {
