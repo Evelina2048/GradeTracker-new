@@ -40,6 +40,8 @@ public class Gather {
     private AtomicBoolean textFieldEmptied = new AtomicBoolean(false); 
     private Set set;
     private Creator creator;
+    private String existingOrNew;
+    private String studentOrTeacher;
     
     JRadioButton studentButton;
     JRadioButton teacherButton;
@@ -56,55 +58,70 @@ public class Gather {
     JPanel choicesPanel;
     JPanel backNextButtonsPanel;
 
+    JPanel backButtonPanel;
+    JPanel nextButtonPanel;
+    JPanel saveButtonPanel;
+
+    // JPanel backButtonPanel = new JPanel();
+    // JPanel saveButtonPanel = new JPanel(new BorderLayout());
+    // JPanel nextButtonPanel = new JPanel();
 
 
-    public Gather(JFrame window2, NewUser newUser, String studentOrTeacher, String existingOrNew,int windowX, int windowY, Set set) {
+
+    public Gather(Set set) {
         this.set = set;
+        existingOrNew = set.getExistingOrNew();
+        studentOrTeacher = set.getStudentOrTeacher();
+        this.window = set.getWindow();
         creator = new Creator(set);
-        gatherLaunch(window2, newUser, studentOrTeacher, existingOrNew);
+        newUser = new NewUser(set);
+        gatherLaunch();
 
     }
 
-    public void gatherLaunch (JFrame window2, NewUser newUser2, String studentOrTeacher, String existingOrNew) {
+    public void gatherLaunch () {
+        
+        window.setTitle("Gather");
+        this.window = set.getWindow();
 
-        window2.setTitle("NEW USRE");
-        this.window = window2;
-        newUser = newUser2;
-
-        instructionsWordsWindow(existingOrNew);
+        instructionsWordsWindow();
         
         inputName();
 
-        buttonSetUpAction(window2, newUser, existingOrNew, studentOrTeacher);
+        buttonSetUpAction();
 
     }
     
-    private void instructionsWordsWindow(String existingOrNew) {
-        JLabel instructionsWords;
+    private void instructionsWordsWindow() {
+        JLabel instructionsWordsLabel;
         //instructions (north section for borderlayout)
         if (existingOrNew == "New User") {
-            instructionsWords = new JLabel("You are a new user. Create a user name.");
+            instructionsWordsLabel = new JLabel("You are a new user. Create a user name.");
         }
         else if (existingOrNew == "Existing") {
-            instructionsWords = new JLabel("You are an existing user. Type in your user name");
+            instructionsWordsLabel = new JLabel("You are an existing user. Type in your user name");
         }
 
         else {
-            instructionsWords = new JLabel("Error");
+            instructionsWordsLabel = new JLabel("Error");
         }
 
+        decorateInstructions(instructionsWordsLabel);
+    }
+
+    private void decorateInstructions(JLabel instructionsWordsLabel) {
         instructionsPanel= new JPanel();
         Color instructionsColor = Color.decode("#7A6D6D");
         instructionsPanel.setBackground(instructionsColor);
         
-        instructionsPanel.add(instructionsWords);
+        instructionsPanel.add(instructionsWordsLabel);
         Color instructionsWordsColor = Color.decode("#edebeb");
-        instructionsWords.setForeground(instructionsWordsColor); //color
+        instructionsWordsLabel.setForeground(instructionsWordsColor); //color
         window.add(instructionsPanel, BorderLayout.NORTH);
     
         //set the font for instructions
         Font instructionsFont = new Font("Roboto", Font.PLAIN, 30); // Change the font and size here
-        instructionsWords.setFont(instructionsFont);
+        instructionsWordsLabel.setFont(instructionsFont);
     }
 
     private void inputName() {
@@ -127,38 +144,53 @@ public class Gather {
         window.add(choicesPanel);
     }
 
-    private void buttonSetUpAction(JFrame window2, NewUser newUser, String existingOrNew, String studentOrTeacher) {
+    private void buttonSetUpAction() {
+        backButtonPanel = new JPanel();
+        saveButtonPanel = new JPanel(new BorderLayout());
+        nextButtonPanel = new JPanel();
+
+        makeBackButton();
+
+        makeSaveButton();
+        
+        makeNextButton();
+        backNextButtonsPanel = creator.makeBackNextButtonsPanel(backButtonPanel,saveButtonPanel, nextButtonPanel);
+        window.add(backNextButtonsPanel, BorderLayout.SOUTH);
+    }
+    
+    private void makeBackButton() {
         JButton backButton = creator.backButtonCreate();
-        JPanel backButtonPanel = new JPanel();
         backButtonPanel.add(backButton);
         backButton.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent e) {
-               backButtonAction(window2, newUser, studentOrTeacher, existingOrNew);
+               backButtonAction();
             }
         });
+    }
 
+    private void makeSaveButton() {
         JButton saveButton = creator.saveButtonCreate();
-        JPanel saveButtonPanel = new JPanel(new BorderLayout());
         saveButton.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent e) {
                 //writeToFile();
                 //nextButtonAction(existingOrNew, studentOrTeacher);
             }
         });
-        
+    }
+
+    private void makeNextButton() {
         JButton nextButton = creator.nextButtonCreate();
-        JPanel nextButtonPanel = new JPanel();
         nextButtonPanel.add(nextButton);
         nextButton.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent e) {
-                nextButtonAction(existingOrNew, studentOrTeacher);
+                nextButtonAction();
             }
         });
-        backNextButtonsPanel = creator.makeBackNextButtonsPanel(backButtonPanel,saveButtonPanel, nextButtonPanel);
-        window.add(backNextButtonsPanel, BorderLayout.SOUTH);
     }
 
-    private void nextButtonAction(String existingOrNew, String studentOrTeacherString) {
+
+
+    private void nextButtonAction() {
         boolean textFieldEmpty = textField.getText().trim().isEmpty();
         boolean textFieldHasntChanged = textField.getText().equals("Enter user name") && !textFieldEmptied.get();
         boolean textFieldFilled = textField.getText().trim().isEmpty() == false;
@@ -169,11 +201,11 @@ public class Gather {
         else if (textFieldFilled) { //good case
             String filePath = "somethingwentwrong";//if not overwritten, somethingwent wrong
             if (existingOrNew.trim().equals("New User")) { //if new user,
-                writeUsername(filePath,studentOrTeacherString);
+                writeUsername(filePath);
                 //move on to studentclasses class
                 hideWindow();
-                StudentClasses studentClasses = new StudentClasses(window, newUser, studentOrTeacherString, existingOrNew, set);
-                studentClasses.studentClassesLaunch(window, newUser, studentOrTeacherString, existingOrNew, set);
+                StudentClasses studentClasses = new StudentClasses(window, newUser, studentOrTeacher, existingOrNew, set);
+                studentClasses.studentClassesLaunch(window, newUser, studentOrTeacher, existingOrNew, set);
             }
         }
         else {
@@ -181,8 +213,7 @@ public class Gather {
             errorMessageSetUp("<html><center>Something went wrong in username input",200,90);
         }
 }
-private void backButtonAction(JFrame window2, NewUser newUser, String studentOrTeacher, String existingOrNew) {
-
+private void backButtonAction() {
     newUser.newUserSetup();
     newUser.showWindow(window.getX(),window.getY());
     newUser.setButtonSelected();
@@ -212,7 +243,7 @@ private void errorMessageSetUp(String labelWords, int width, int height) {
     dialog.setVisible(true);
 }
 
-private void writeUsername(String filePath, String studentOrTeacher) {
+private void writeUsername(String filePath) {
     //and username not taken
     String usernamePath = "somethingwentwrong.txt";
     String username = textField.getText().trim();
