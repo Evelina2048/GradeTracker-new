@@ -464,6 +464,29 @@ public class Creator {
         return bigPanel;
 	}
 
+    public String goIntoPanel(JPanel panel, int index) {
+        Container container = panel;
+        if (index >= container.getComponentCount()) { //check component is not null
+            return "does not exist";
+        }
+        Component component = container.getComponent(index);
+        if (component instanceof JTextField) {
+                JTextField textField = (JTextField) component;
+                String text = textField.getText();
+                return text;
+            } 
+        else if (component instanceof JPanel) {
+                JPanel jpanel = (JPanel) component;
+                String text = goIntoPanel(jpanel, 0);
+                if (text != null) {
+                    return text;
+                }
+            }
+            System.out.println("none of these" +component.getClass().getName());
+            return "something went wrong StudentStatCollect";
+        }
+
+
 // 	public boolean isFileEmpty(String filePath) {
 //         Path path = Paths.get(filePath);
 //         try {

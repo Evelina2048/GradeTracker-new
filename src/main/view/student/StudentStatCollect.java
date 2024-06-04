@@ -224,7 +224,7 @@ public class StudentStatCollect extends JFrame {
    private void correctGradeFormatChecker(Pattern pattern) {
         int index = 4;
         for (int i=1; i<=8; i++) { //max num of grade type
-            String text = goIntoPanel(classLabelPanel, index);
+            String text = creator.goIntoPanel(classLabelPanel, index);
             if (text.equals("does not exist")) {
                 System.out.println("fail");
                 break;
@@ -237,29 +237,6 @@ public class StudentStatCollect extends JFrame {
             System.out.println("matcher works?: "+ matcherBoolean);
         }
     }
-
-    private String goIntoPanel(JPanel panel, int index) {
-        Container container = panel;
-        if (index >= container.getComponentCount()) { //check component is not null
-            return "does not exist";
-        }
-        Component component = container.getComponent(index);
-        if (component instanceof JTextField) {
-                JTextField textField = (JTextField) component;
-                String text = textField.getText();
-                return text;
-            } 
-        else if (component instanceof JPanel) {
-                JPanel jpanel = (JPanel) component;
-                String text = goIntoPanel(jpanel, 0);
-                if (text != null) {
-                    return text;
-                }
-            }
-            System.out.println("none of these" +component.getClass().getName());
-            return "something went wrong StudentStatCollect";
-        }
-
     //read classes array, first five classes
     private void DisplayClasses() {
         set.getUsername();
