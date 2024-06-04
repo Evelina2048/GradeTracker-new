@@ -13,7 +13,6 @@ public class Set {
     private ArrayList<String> classList;
     private ArrayList<String> typeList;
     private Boolean saveable;
-    private JPanel textFieldContainer;
     private JPanel textFieldPanel;
     private HashMap<JTextField, Boolean> textFieldEmptiedMap = new HashMap<>();
     private int classListIndex = 0;
@@ -35,22 +34,17 @@ public class Set {
     }
 
     public void setClassList(ArrayList<String> newClassList) {
-        System.out.println("in set class list the newlist is: "+newClassList);
         classList = newClassList;
-        System.out.println("in set class list: "+classList);
     }
 
     public void setTypeList(ArrayList<String> newTypeList) {
-        System.out.println("in set class list the newlist is: "+newTypeList);
         typeList = newTypeList;
-        System.out.println("in set class list: "+ typeList);
     }
 
     public void removeClassFromClassList() {
         int lastIndex = classList.size() - 1;
         if (lastIndex >= 0) {
             classList.remove(lastIndex);
-            System.out.println("Removed the most recent element.");
         } else {
             System.out.println("ArrayList is empty. Nothing to remove.");
         }
@@ -58,13 +52,11 @@ public class Set {
     }
 
     public ArrayList<String> getCurrentPanelList() {
-        //System.out.println("current panel list is kkkk:   "+ classList+ typeof(classList));
         return classList;
     }
 
     public void setFinalClassList(ArrayList<String> userFinalClassList) {
         finalClassList = userFinalClassList;
-        System.out.println("insetfinalclasslist: "+finalClassList);
     }
 
     public ArrayList<String> getFinalClassList() {
@@ -85,11 +77,6 @@ public class Set {
         return saveable;
     }
 
-    // public void setTextFieldContainer(JPanel theTextFieldContainer) {
-    //     textFieldContainer = theTextFieldContainer;
-    //     //System.out.println("in set textfieldcontainer"+getTextFieldContainer());
-    // }
-
     public void setTextFieldPanel(JPanel theTextFieldPanel) {
         textFieldPanel = theTextFieldPanel;
     }
@@ -101,17 +88,6 @@ public class Set {
     public void addTextFieldPanel(Component add) {
         textFieldPanel.add(add);
     }
-
-    // public JPanel getTextFieldContainer() {
-    //     //JPanel textFieldContainer = new JPanel();
-    //     //textFieldContainer.add(textFieldPanel);
-    //     return textFieldContainer;
-    // }
-
-    // public void resetContainerAndPanel() {
-    //     textFieldContainer = null;
-    //     textFieldPanel = null;
-    // }
 
     public boolean getEmptiedState(JTextField textField) {
         return textFieldEmptiedMap.getOrDefault(textField, false);
