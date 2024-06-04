@@ -201,10 +201,10 @@ public class Gather {
 }
 private void backButtonAction(JFrame window2, NewUser newUser, String studentOrTeacher, String existingOrNew) {
 
-     newUser.newUserSetup();
-     newUser.showWindow(window.getX(),window.getY());
-     newUser.setButtonSelected(existingOrNew);
-     hideWindow(); 
+    newUser.newUserSetup();
+    newUser.showWindow(window.getX(),window.getY());
+    newUser.setButtonSelected();
+    hideWindow(); 
  
             
 }

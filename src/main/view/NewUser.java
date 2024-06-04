@@ -48,7 +48,7 @@ public class NewUser extends JFrame {
     public void newUserSetup() {
         main = set.getWindow();
         studentOrTeacher = set.getStudentOrTeacher();
-        main.setTitle("NEW USE");
+        main.setTitle("New User");
         this.window = main;
 
         instructionsWordsWindow();
@@ -78,6 +78,16 @@ public class NewUser extends JFrame {
         choicesPanel= new JPanel(new GridBagLayout());
         choicesPanel.setBackground(choicesPanelColor);
 
+        existingButton();
+
+        newUserButton();
+
+        addToChoicesPanel(teacherStudentGroup, existingButton, newUserButton, choicesPanel);
+
+        window.add(choicesPanel);
+    }
+
+    private void existingButton() {
         //initialize buttons with color
         existingButton = new JRadioButton("Existing");
         choicesButtonDecorate(existingButton);
@@ -88,7 +98,9 @@ public class NewUser extends JFrame {
             }
             
         });
+    }
 
+    private void newUserButton() {
         newUserButton = new JRadioButton("New User");
         choicesButtonDecorate(newUserButton);
         newUserButton.addActionListener(new ActionListener() {
@@ -97,10 +109,6 @@ public class NewUser extends JFrame {
                 moveOnPossible = true;
             }
         });
-
-        addToChoicesPanel(teacherStudentGroup, existingButton, newUserButton, choicesPanel);
-
-        window.add(choicesPanel);
     }
 
     private void choicesButtonDecorate(JRadioButton button) {
@@ -127,20 +135,12 @@ public class NewUser extends JFrame {
 
         backButton.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent e) {
+                set.setExistingOrNew(existingOrNew);
                 set.setWindow(window);
                 decorator.hideWindow(instructionsPanel, choicesPanel, backNextButtonsPanel);     
                 MainWindow main = (MainWindow) set.getWindow();
-                // main.windowSetUp();
-
-                // main.InstructionsWordsWindow();
-            
-                // main.radioButtonSetUp();
-            
-                // main.backNextButton();
-
                 main.MainWindowLaunch(set);
                 main.setButtonSelected();
-                //main.setExistingOrNew(existingOrNew);
             }
         });
         
@@ -152,6 +152,7 @@ public class NewUser extends JFrame {
         nextButton.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent e) {
                 doNextButtonProcedure();
+                set.setExistingOrNew(existingOrNew);
             }
         });
     }
@@ -171,24 +172,23 @@ public class NewUser extends JFrame {
                     // Update the existing Gather window panels
                     gatherFrame.gatherLaunch(main, NewUser.this, studentOrTeacher, existingOrNew);
                     gatherFrame.showWindow(windowX, windowY);  // Show the Gather window
-                }
-                
-                
+                }    
             }
             else if (!moveOnPossible) {
                 decorator.errorMessageSetUp(window, newUserButton);
-            }
-                
+            }            
     }
 
-    public void setButtonSelected(String studentOrTeacher) {
-        existingOrNew = studentOrTeacher;
-        if (studentOrTeacher == "New User") {
+    public void setButtonSelected() {
+        existingOrNew = set.getExistingOrNew().trim();
+        System.out.println("in set button selected: "+existingOrNew);
+        if (existingOrNew == "New User") {
+            System.out.println("heyo");
             newUserButton.setSelected(true);
             moveOnPossible = true;
         }
         
-        else if(studentOrTeacher == "Existing") {
+        else if(existingOrNew == "Existing") {
             existingButton.setSelected(true);
             moveOnPossible = true;
         }

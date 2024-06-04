@@ -152,6 +152,7 @@ private void backNextButton() {
     nextButton.addActionListener(new ActionListener() {
         public void actionPerformed(ActionEvent e) {
             doNextButtonProcedure();
+            set.setStudentOrTeacher(studentOrTeacher);
         }
     });
 }
@@ -163,7 +164,9 @@ private void doNextButtonProcedure() {
     if (moveOnPossible) {
         setUserInfo();
         NewUser newUser = new NewUser(existingOrNew, windowX, windowY, set);
-        newUser.setButtonSelected(existingOrNew);
+        if (set.getExistingOrNew() != null) {
+            newUser.setButtonSelected();
+        }
         decorator.hideWindow(instructionsPanel, choicesPanel, backNextButtonsPanel);
     }
     else if (!moveOnPossible) {
