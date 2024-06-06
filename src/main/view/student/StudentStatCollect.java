@@ -107,7 +107,7 @@ public class StudentStatCollect extends JFrame {
         textBoxPanelReset();
         new JPanel(new GridLayout(0,4,5,5));
         new JPanel(new FlowLayout(FlowLayout.LEFT));
-        boxManageCreate(set.getFinalClassList().get(set.getClassListIndex()), "JLabel"); //displays class label 
+        //boxManageCreate(set.getFinalClassList().get(set.getClassListIndex()), "JLabel"); //displays class label 
         addLoadedBoxes();
     }
 
@@ -171,6 +171,10 @@ public class StudentStatCollect extends JFrame {
                 textBoxPanel.add(testPanel.getComponent(0));
             }
             classLabelPanel.add(textBoxPanel);
+            if (textBoxPanel.getComponentCount() <= 1) { //The reason it is <=1 and not 0, is to account for the classLabel
+                boxManageCreate("Credits (optional)", "JTextField");
+                newSet();
+            }
             creator.windowFix(window);
         }
         else { //first time visiting next class
@@ -178,6 +182,7 @@ public class StudentStatCollect extends JFrame {
             StudentStatCollect studentStatCollect = new StudentStatCollect(set);
             studentStatCollect.DisplayClasses();
         }
+
     }
 
    private void createNewTypeButton() {
