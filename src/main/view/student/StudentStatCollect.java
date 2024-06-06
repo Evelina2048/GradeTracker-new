@@ -42,6 +42,7 @@ public class StudentStatCollect extends JFrame {
     public void studentStatCollectLaunch(Set set) {
         this.window = set.getWindow();
         this.set = set;
+        finalClassList = set.getFinalClassList();
         System.out.println("final class list issssss before: "+ finalClassList);
         finalClassList = set.getFinalClassList();
         System.out.println("final class list issssss: "+ finalClassList);
@@ -240,6 +241,7 @@ public class StudentStatCollect extends JFrame {
     }
 
     private void readClass(ArrayList<String> typeList) { 
+        System.out.println("readclass test:"+ set.getFinalClassList()+"index: "+set.getClassListIndex());
         boxManageCreate(set.getFinalClassList().get(set.getClassListIndex()), "JLabel");
         boxManageCreate("Credits (optional)", "JTextField");
         newSet();
@@ -257,7 +259,7 @@ public class StudentStatCollect extends JFrame {
 
     private void boxManageCreate(String placeholder, String type) {
         if (numOfBoxes <= maxBoxes) {
-            textBoxPanel.add(creator.boxCreate(window, placeholder, type));
+            textBoxPanel.add(creator.boxCreate(window, placeholder, type, false));
             classLabelPanel.add(textBoxPanel);
             creator.windowFix(window);
             numOfBoxes++;

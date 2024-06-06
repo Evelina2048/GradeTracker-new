@@ -56,6 +56,7 @@ public class Set {
     }
 
     public void setFinalClassList(ArrayList<String> userFinalClassList) {
+        System.out.println("insetfinalclasslist: "+finalClassList);
         finalClassList = userFinalClassList;
     }
 

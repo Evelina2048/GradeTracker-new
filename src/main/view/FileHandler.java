@@ -64,9 +64,11 @@ public class FileHandler {
             System.out.println("arrayList"+arrayList);
             for (int i = 0; i<arrayList.size(); i++) {
                 //creator.createTextBox(window, arrayList.get(i), 10, 50);
-                bigPanel.add(creator.boxCreate(window, arrayList.get(i), "JTextField"));
+                bigPanel.add(creator.boxCreate(window, arrayList.get(i), "JTextField", true));
 
             }
+            set.setTextFieldPanel(bigPanel);
+            //set.setEmptiedState(textField);
             //creator.windowFix(window);
             return bigPanel;
 

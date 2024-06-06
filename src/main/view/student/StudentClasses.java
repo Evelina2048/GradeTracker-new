@@ -59,14 +59,19 @@ public class StudentClasses extends JFrame {
         if (fileHandler.fileIsNotEmpty(filePath)) {//case for if existing file
             System.out.println("I have info to load!");
             ArrayList<String> myList = fileHandler.readFileToList(filePath);
+            System.out.println("classList<3"+set.getFinalClassList());
             for (int index=0; index<myList.size(); index++) {
-                creator.createTextBox(window, myList.get(index), 10, 50);
+                creator.createTextBox(window, myList.get(index), 10, 50, true);
             }
+            set.setClassList(myList);
+            set.setFinalClassList(set.getCurrentPanelList());
+            System.out.println("classList<3``````"+set.getFinalClassList());
+
 
         }
 
         else {
-            creator.createTextBox(window, "Enter Class Name", 50, 50);
+            creator.createTextBox(window, "Enter Class Name", 50, 50, true);
         }
         //textField.setVisible(true);
         westPanelCreate();
@@ -108,26 +113,31 @@ public class StudentClasses extends JFrame {
         nextButton.setPreferredSize(new Dimension(87, 29));
         nextButton.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent e) {
-                //writeType();
+                ArrayList<String> classList;
+                classList = set.getCurrentPanelList();
+                System.out.println("aaaaaaaa: "+classList);
+                //ArrayList<String> classList = set.getFinalClassList();
+                System.out.println("|||before class list set in nexttttttt:<3<3 "+ classList+ "......"+set.getCurrentPanelList());
+                set.setClassList(classList);
+                writeType();
                 System.out.println("nextbuttonhit");
                 creator.writeFolderToFile(textFieldEmptied);
                 creator.writeTextToFile("/Users/evy/Documents/GradeTracker-new/src/main/view/UserInfo/StudentInfo/" + set.getUsername() + "/class.txt", creator.getTextFieldContainer());
-                ArrayList<String> classList = set.getCurrentPanelList();
-                System.out.println("right before class list set in nexttttttt: "+ classList+ "......"+set.getCurrentPanelList());
                 set.setFinalClassList(classList); //lookie
+                System.out.println("|||after right before class list set in nexttttttt:<3<3 "+ classList+ "......"+set.getCurrentPanelList());
                 
                 hideWindow();
                 creator.hideContainer();
-                System.out.println("before stat collect called: "+set.getCurrentPanelList());
+                System.out.println("before stat collect called: "+set.getCurrentPanelList()+" "+set.getFinalClassList());
+                set.setFinalClassList(set.getCurrentPanelList());
                 new StudentStatCollect(set);
-                //}
-                System.out.println("AStep1: "+set.getClassListIndex()+set.getCurrentPanelList().size());
             }
         });
-        System.out.println("test11 (should be 29) "+backButton.getHeight());
         backNextButtonsPanel = creator.makeBackNextButtonsPanel(backButtonPanel, saveButtonPanel, nextButtonPanel);
         southContainer.add(backNextButtonsPanel, BorderLayout.SOUTH);
-        
+
+        System.out.println("3classList<3"+set.getFinalClassList());
+        //set.setTextFieldPanel();
         window.add(southContainer, BorderLayout.SOUTH);
     }
 
@@ -137,7 +147,7 @@ public class StudentClasses extends JFrame {
         newClassButton.setPreferredSize(new Dimension(87, 50));
         newClassButton.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent e) {
-                creator.createTextBox(window, "Enter Class Name", 50, 50);
+                creator.createTextBox(window, "Enter Class Name", 50, 50, false);
                 System.out.println("class list in new class button"+ set.getCurrentPanelList());
                 
         }

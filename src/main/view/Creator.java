@@ -203,10 +203,14 @@ public class Creator {
         set.getUsername();
         try (BufferedWriter writer = new BufferedWriter(new FileWriter(filePath))) {
             if (!classList.isEmpty()) {
-                classList.clear();
+               classList.clear();
             }
             for (Component component : textFieldPanel.getComponents()) {
+                System.out.println("textFieldPanel:::"+textFieldPanel.getComponentCount());
+                System.out.println("textFieldPanel:::"+textFieldPanel.getComponentCount());
+                System.out.println("textFieldPanel:::"+textFieldPanel.getComponentCount());
                 if (component instanceof JTextField ) {
+                    System.out.println("made it past first test. Is it emptied?"+ set.getEmptiedState(textField));
                     JTextField textField = (JTextField) component;
                     if (set.getEmptiedState(textField) == true) {
                         String text = textField.getText().trim();
@@ -220,6 +224,10 @@ public class Creator {
 
                 if (component instanceof JPanel) {
                     writeTextToFileWithAppend(filePath, (JPanel) component);
+                }
+
+                else {
+                    System.out.println("component is something else. Something went wrong"+ component.getClass().getName());
                 }
             }
         } catch (IOException e) {
@@ -254,7 +262,7 @@ public class Creator {
         }
     }
 
-    public JTextField createTextBox(JFrame window, String placeholder, int width, int height) { //something here is causing the issue
+    public JTextField createTextBox(JFrame window, String placeholder, int width, int height, Boolean loaded) { //something here is causing the issue
         debugPanelComponentCount();
         textboxCounter++;
         if (textboxCounter <= 30) {
@@ -270,7 +278,12 @@ public class Creator {
             textFieldFocusListener(window, textField, placeholder);
             windowFix(window);
         }
+        if (loaded) {
+            set.setEmptiedState(textField, true);
+        }
+
         set.setTextFieldPanel(textFieldPanel);
+
         return textField;
     }
 
@@ -378,13 +391,13 @@ public class Creator {
         saveButton.setEnabled(true);
     }
     
-    public JPanel typeBox(JFrame window, String placeholder, String my_type) {
+    public JPanel typeBox(JFrame window, String placeholder, String my_type, Boolean loaded) {
             JPanel northTypePanel = new JPanel(new BorderLayout());
             JPanel gradeTypePanel = new JPanel(new BorderLayout());
 
 
             if (my_type.equals("JTextField")) {
-                JTextField toAddType = createTextBox(window, placeholder, 10, 10);
+                JTextField toAddType = createTextBox(window, placeholder, 10, 10, loaded);
                 gradeTypePanel.add(toAddType);
             }
 
@@ -400,9 +413,9 @@ public class Creator {
             return northTypePanel;
     }
 
-	public JPanel boxCreate(JFrame window, String placeholder, String type) {
+	public JPanel boxCreate(JFrame window, String placeholder, String type, Boolean loaded) {
         hideContainer();
-        JPanel bigPanel = typeBox(window, placeholder, type);
+        JPanel bigPanel = typeBox(window, placeholder, type, loaded);
         windowFix(window);
         return bigPanel;
 	}
