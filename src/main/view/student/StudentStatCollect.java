@@ -160,6 +160,7 @@ public class StudentStatCollect extends JFrame {
     }
 
     private void visitNextStudentClass() {
+        //readClass(finalClassList);
         String filePath = "/Users/evy/Documents/GradeTracker-new/src/main/view/UserInfo/StudentInfo/"+set.getUsername()+"/"+set.getFinalClassList().get(set.getClassListIndex())+".txt";
         if (fileHandler.fileIsNotEmpty(filePath)) {
             textBoxPanelReset();
@@ -174,7 +175,8 @@ public class StudentStatCollect extends JFrame {
         }
         else { //first time visiting next class
             hideWindow();
-            new StudentStatCollect(set);
+            StudentStatCollect studentStatCollect = new StudentStatCollect(set);
+            studentStatCollect.DisplayClasses();
         }
     }
 
