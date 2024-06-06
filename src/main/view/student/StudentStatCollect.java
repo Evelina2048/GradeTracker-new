@@ -108,6 +108,10 @@ public class StudentStatCollect extends JFrame {
         new JPanel(new GridLayout(0,4,5,5));
         new JPanel(new FlowLayout(FlowLayout.LEFT));
         boxManageCreate(set.getFinalClassList().get(set.getClassListIndex()), "JLabel"); //displays class label 
+        addLoadedBoxes();
+    }
+
+    public void addLoadedBoxes() {
         String filePath = "/Users/evy/Documents/GradeTracker-new/src/main/view/UserInfo/StudentInfo/"+set.getUsername()+"/"+set.getFinalClassList().get(set.getClassListIndex())+".txt";
         JPanel testPanel = fileHandler.loadTextboxes(window, filePath, set);
         int numberOfComponents = testPanel.getComponentCount();

@@ -130,7 +130,23 @@ public class StudentClasses extends JFrame {
                 creator.hideContainer();
                 System.out.println("before stat collect called: "+set.getCurrentPanelList()+" "+set.getFinalClassList());
                 set.setFinalClassList(set.getCurrentPanelList());
-                new StudentStatCollect(set);
+                
+                //check if there is a file under the next index
+                //need command to check if there are other files in this username folder
+                StudentStatCollect studentStatCollect = new StudentStatCollect(set);
+                if (fileHandler.fileIsNotEmpty("/Users/evy/Documents/GradeTracker-new/src/main/view/UserInfo/StudentInfo/" + set.getUsername() + "/" + set.getFinalClassList().get(0) + ".txt")) {
+                    //load it
+                    studentStatCollect.addLoadedBoxes();
+                    // JPanel loadedPanel = fileHandler.loadTextboxes(window, "/Users/evy/Documents/GradeTracker-new/src/main/view/UserInfo/StudentInfo/" + set.getUsername() + "/" + set.getFinalClassList().get(0) + ".txt", set);
+                    // int numberOfComponents = loadedPanel.getComponentCount();
+                    // //numOfBoxes += numberOfComponents;
+                    // for (int i = 0; i < numberOfComponents; i++) {
+                    //     southContainer.add(loadedPanel.getComponent(0));
+                    // }
+                }
+                //window.add(southContainer);
+
+                //if (set.getFinalClassList().get(0))
             }
         });
         backNextButtonsPanel = creator.makeBackNextButtonsPanel(backButtonPanel, saveButtonPanel, nextButtonPanel);
