@@ -439,6 +439,6 @@ public class Creator {
                 }
             }
             System.out.println("none of these" +component.getClass().getName());
-            return "something went wrong StudentStatCollect";
+            return "something went wrong goIntoPanel";
         }
 }

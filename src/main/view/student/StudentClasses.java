@@ -134,7 +134,7 @@ public class StudentClasses extends JFrame {
                 //check if there is a file under the next index
                 //need command to check if there are other files in this username folder
                 StudentStatCollect studentStatCollect = new StudentStatCollect(set);
-                if (fileHandler.fileIsNotEmpty("/Users/evy/Documents/GradeTracker-new/src/main/view/UserInfo/StudentInfo/" + set.getUsername() + "/" + set.getFinalClassList().get(0) + ".txt")) {
+                 if (fileHandler.fileIsNotEmpty("/Users/evy/Documents/GradeTracker-new/src/main/view/UserInfo/StudentInfo/" + set.getUsername() + "/" + set.getFinalClassList().get(0) + ".txt")) {
                     //load it
                     studentStatCollect.addLoadedBoxes();
                     // JPanel loadedPanel = fileHandler.loadTextboxes(window, "/Users/evy/Documents/GradeTracker-new/src/main/view/UserInfo/StudentInfo/" + set.getUsername() + "/" + set.getFinalClassList().get(0) + ".txt", set);
@@ -143,6 +143,10 @@ public class StudentClasses extends JFrame {
                     // for (int i = 0; i < numberOfComponents; i++) {
                     //     southContainer.add(loadedPanel.getComponent(0));
                     // }
+                 }
+
+                else {
+                    studentStatCollect.DisplayClasses();
                 }
                 //window.add(southContainer);
 

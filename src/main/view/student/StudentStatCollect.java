@@ -50,7 +50,7 @@ public class StudentStatCollect extends JFrame {
         fileHandler = new FileHandler();
         createNewTypeButton();
         buttonSetUpAction();
-        DisplayClasses();
+        //DisplayClasses();
         window.setTitle("StudentStatCollect");
         window.setPreferredSize(new Dimension(1000, 1000));
     }
@@ -120,6 +120,7 @@ public class StudentStatCollect extends JFrame {
             textBoxPanel.add(testPanel.getComponent(0));
         }
         classLabelPanel.add(textBoxPanel);
+        window.add(classLabelPanel);
         creator.windowFix(window);    
     }
 
@@ -238,7 +239,7 @@ public class StudentStatCollect extends JFrame {
         }
     }
     //read classes array, first five classes
-    private void DisplayClasses() {
+    public void DisplayClasses() {
         set.getUsername();
         ArrayList<String> typeList = set.getCurrentPanelList();
         readClass(typeList);
