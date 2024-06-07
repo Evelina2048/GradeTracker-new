@@ -17,12 +17,12 @@ public class EditOrResults extends JFrame {
     private Set set;
 
     public EditOrResults(JFrame main, String studentOrTeacher, String existingOrNew, Set set) {
-        this.set = set;
+        this.set = Set.getInstance();
         System.out.println("in print student grades");
         editOrResultsLaunch(main);
         //createNewTypeButton();
         buttonSetUpAction(main, studentOrTeacher, existingOrNew);
-        creator = new Creator(set);
+        creator = new Creator();
     }
 
     public void editOrResultsLaunch(JFrame main) {

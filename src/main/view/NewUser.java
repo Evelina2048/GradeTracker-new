@@ -40,8 +40,8 @@ public class NewUser extends JFrame {
 
     Decorator decorator = new Decorator();
 
-    public NewUser(Set set) {
-        this.set = set;
+    public NewUser() {
+        this.set = Set.getInstance();
        newUserSetup();
     }
 
@@ -166,7 +166,7 @@ public class NewUser extends JFrame {
 
                 if (gatherFrame == null) {
                     // Create a new instance of Gather if it doesn't exist
-                    gatherFrame = new Gather(set);
+                    gatherFrame = new Gather();
                     gatherFrame.gatherLaunch();
                     System.out.println("gatherframe is null");
                 } else {

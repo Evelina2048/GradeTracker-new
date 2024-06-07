@@ -36,17 +36,16 @@ public class StudentClasses extends JFrame {
 
     //JTextField textField = decorate.decorateTextBox();
 
-    public StudentClasses(Set set) {
-        //studentClassesLaunch(main, newUser, studentOrTeacher, existingOrNew, set);
+    public StudentClasses() {
         //createNewClassButton();
         // westPanelCreate();
         // buttonSetUpAction(main, newUser, studentOrTeacher, existingOrNew);
     }
 
-    public void studentClassesLaunch(Set set) {
+    public void studentClassesLaunch() {
+        this.set = Set.getInstance();
         this.window = set.getWindow();
-        creator = new Creator(set);
-        this.set = set;
+        creator = new Creator();
         System.out.println("in student classes");
         window.setTitle("StudentClasses");
         window.setLayout(new BorderLayout());
@@ -89,7 +88,7 @@ public class StudentClasses extends JFrame {
         backButton.setPreferredSize(new Dimension(87, 29));
         backButton.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent e) {
-                Gather gather = new Gather(set);
+                Gather gather = new Gather();
                 gather.setTextToUsername();
                 gather.showWindow(window.getX(), window.getY());
                 hideWindow(); 
@@ -135,11 +134,10 @@ public class StudentClasses extends JFrame {
                 
                 //check if there is a file under the next index
                 //need command to check if there are other files in this username folder
-                StudentStatCollect studentStatCollect = new StudentStatCollect(set);
+                StudentStatCollect studentStatCollect = new StudentStatCollect();
                  if (fileHandler.fileIsNotEmpty("/Users/evy/Documents/GradeTracker-new/src/main/view/UserInfo/StudentInfo/" + set.getUsername() + "/" + set.getFinalClassList().get(0) + ".txt")) {
                     //load it
                     studentStatCollect.addLoadedBoxes();
-                    // JPanel loadedPanel = fileHandler.loadTextboxes(window, "/Users/evy/Documents/GradeTracker-new/src/main/view/UserInfo/StudentInfo/" + set.getUsername() + "/" + set.getFinalClassList().get(0) + ".txt", set);
                     // int numberOfComponents = loadedPanel.getComponentCount();
                     // //numOfBoxes += numberOfComponents;
                     // for (int i = 0; i < numberOfComponents; i++) {

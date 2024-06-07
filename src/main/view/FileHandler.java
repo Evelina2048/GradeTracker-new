@@ -10,6 +10,11 @@ import javax.swing.JPanel;
 import java.awt.FlowLayout;
 
 public class FileHandler {
+        private Set set;
+
+        public FileHandler() {
+            set = Set.getInstance();
+        }
 
         public ArrayList<String> readFileToList(String filePath) {
             String line;
@@ -57,8 +62,8 @@ public class FileHandler {
     }
 
 
-        public JPanel loadTextboxes(JFrame window, String filePath, Set set) {
-            Creator creator = new Creator(set);
+        public JPanel loadTextboxes(JFrame window, String filePath) {
+            Creator creator = new Creator();
             ArrayList<String> arrayList = readFileToList(filePath);
             JPanel bigPanel = new JPanel(new FlowLayout(FlowLayout.LEFT));
             System.out.println("arrayList"+arrayList);
@@ -68,19 +73,7 @@ public class FileHandler {
 
             }
             set.setTextFieldPanel(bigPanel);
-            //set.setEmptiedState(textField);
-            //creator.windowFix(window);
             return bigPanel;
-
-            // Creator creator = new Creator(set);
-            // JPanel bigPanel = new JPanel();
-            // JPanel containerPanel = new JPanel(new FlowLayout(FlowLayout.LEFT));
-            // bigPanel.add(creator.boxCreate(window, "testing", "JTextField"));
-            // bigPanel.add(creator.boxCreate(window, "test", "JTextField"));
-            // bigPanel.add(creator.boxCreate(window, "tester", "JTextField"));
-            // bigPanel.add(creator.boxCreate(window, "tests", "JTextField"));
-            // bigPanel.add(creator.boxCreate(window, "testy", "JTextField"));
-            // return bigPanel;
     
         }
 }

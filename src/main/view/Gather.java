@@ -61,13 +61,13 @@ public class Gather {
     JPanel nextButtonPanel;
     JPanel saveButtonPanel;
 
-    public Gather(Set set) {
-        this.set = set;
+    public Gather() {
+        this.set = Set.getInstance();
         existingOrNew = set.getExistingOrNew();
         studentOrTeacher = set.getStudentOrTeacher();
         this.window = set.getWindow();
-        creator = new Creator(set);
-        newUser = new NewUser(set);
+        creator = new Creator();
+        newUser = new NewUser();
         gatherLaunch();
 
     }
@@ -344,7 +344,7 @@ private void writeUsername(String filePath) {
         writeUsername(filePath);
         //move on to studentclasses class
         hideWindow();
-        StudentClasses studentClasses = new StudentClasses(set);
-        studentClasses.studentClassesLaunch(set);
+        StudentClasses studentClasses = new StudentClasses();
+        studentClasses.studentClassesLaunch();
     }
 }

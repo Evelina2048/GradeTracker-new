@@ -151,7 +151,7 @@ private void doNextButtonProcedure() {
 
     if (moveOnPossible) {
         setUserInfo();
-        NewUser newUser = new NewUser(set);
+        NewUser newUser = new NewUser();
         if (set.getExistingOrNew() != null) {
             newUser.setButtonSelected();
         }

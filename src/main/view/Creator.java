@@ -48,8 +48,8 @@ public class Creator {
     
     private JPanel textFieldContainer = new JPanel(new FlowLayout(FlowLayout.LEFT));
     
-    public Creator(Set set) {
-        this.set = set;
+    public Creator() {
+        this.set = Set.getInstance();
     }
 
     public JButton backButtonCreate() {
