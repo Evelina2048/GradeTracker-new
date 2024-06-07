@@ -139,7 +139,7 @@ public class NewUser extends JFrame {
                 set.setWindow(window);
                 decorator.hideWindow(instructionsPanel, choicesPanel, backNextButtonsPanel);     
                 MainWindow main = (MainWindow) set.getWindow();
-                main.MainWindowLaunch(set);
+                main.MainWindowLaunch();
                 main.setButtonSelected();
             }
         });

@@ -8,9 +8,10 @@ public class Launcher {
         SwingUtilities.invokeLater(new Runnable() {
             @Override
             public void run() {
-                Set set = new Set();
+                Set set;
+                set = Set.getInstance();
                 set.setWindow(new JFrame());
-                MainWindow main = new MainWindow(new Set());
+                MainWindow main = new MainWindow();
                 main.show(0,0);
             }
         });

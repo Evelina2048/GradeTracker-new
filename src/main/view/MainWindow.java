@@ -39,14 +39,14 @@ JFrame window;
 
 Decorator decorator = new Decorator();
 
-public MainWindow(Set set) {
+public MainWindow() {
     //window = window2;
-    MainWindowLaunch(set);
+    MainWindowLaunch();
 
 }
 
-public void MainWindowLaunch(Set set) {
-    this.set = set;
+public void MainWindowLaunch() {
+    this.set = Set.getInstance();
     windowSetUp();
 
     InstructionsWordsWindow();
