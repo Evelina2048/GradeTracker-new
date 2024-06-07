@@ -21,9 +21,21 @@ public class Set {
     private String studentOrTeacher;
     private JFrame window;
 
-    public Set () {
+    //Below is for singleton design pattern
+    // Static variable to hold the single instance of the class
+    private static Set instance;
 
+    // Private constructor to prevent instantiation
+    private Set() {}
+
+    // Public method to provide access to the single instance
+    public static Set getInstance() {
+        if (instance == null) {
+            instance = new Set();
+        }
+        return instance;
     }
+    //
 
     public void setUsername(String my_username) {
        username = my_username;
