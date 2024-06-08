@@ -62,7 +62,7 @@ public class StudentClasses extends JFrame {
             ArrayList<String> myList = fileHandler.readFileToList(filePath);
             System.out.println("classList<3"+set.getFinalClassList());
             for (int index=0; index<myList.size(); index++) {
-                creator.createTextBox(window, myList.get(index), 10, 50, true);
+                creator.createTextBox(myList.get(index), 10, 50, true);
             }
             set.setClassList(myList);
             set.setFinalClassList(set.getCurrentPanelList());
@@ -72,7 +72,7 @@ public class StudentClasses extends JFrame {
         }
 
         else {
-            creator.createTextBox(window, "Enter Class Name", 50, 50, true);
+            creator.createTextBox("Enter Class Name", 50, 50, true);
         }
         //textField.setVisible(true);
         westPanelCreate();
@@ -90,7 +90,7 @@ public class StudentClasses extends JFrame {
             public void actionPerformed(ActionEvent e) {
                 Gather gather = new Gather();
                 gather.setTextToUsername();
-                gather.showWindow(window.getX(), window.getY());
+                //gather.showWindow(window.getX(), window.getY());
                 hideWindow(); 
                //backButtonAction(main, newUser, studentOrTeacher, existingOrNew);
             }
@@ -167,7 +167,7 @@ public class StudentClasses extends JFrame {
         newClassButton.setPreferredSize(new Dimension(87, 50));
         newClassButton.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent e) {
-                creator.createTextBox(window, "Enter Class Name", 50, 50, false);
+                creator.createTextBox("Enter Class Name", 50, 50, false);
                 System.out.println("class list in new class button"+ set.getCurrentPanelList());
                 
         }
@@ -178,11 +178,12 @@ public class StudentClasses extends JFrame {
     }
 
     private void deleteClassButton() {
-        deleteClassButton = new JButton("Delete Class");
-        deleteClassButton.setPreferredSize(new Dimension(100, 50));
+        deleteClassButton = new JButton("Delete Class Mode");
+        deleteClassButton.setPreferredSize(new Dimension(150, 50));
         deleteClassButton.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent e) {
-                creator.deleteTextBox(window, creator.getTextFieldContainer());
+                //decorator.errorMessageSetUp(window, button);
+                creator.deleteTextBox(creator.getTextFieldContainer());
                 saveButton.setEnabled(true);
             }
         });

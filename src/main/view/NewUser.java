@@ -19,6 +19,7 @@ import java.awt.event.ActionEvent;
 
 //key listening
 import java.awt.event.KeyEvent;
+
 public class NewUser extends JFrame {
     private JFrame window;
     private JFrame main;
@@ -46,10 +47,10 @@ public class NewUser extends JFrame {
     }
 
     public void newUserSetup() {
-        main = set.getWindow();
+        window = set.getWindow();
         studentOrTeacher = set.getStudentOrTeacher();
-        main.setTitle("New User");
-        this.window = main;
+        window.setTitle("New User");
+        //window = main;
 
         instructionsWordsWindow();
 
@@ -68,7 +69,7 @@ public class NewUser extends JFrame {
     private void instructionsWordsWindow() {
         //instructions (north section for borderlayout)
         JLabel instructionsWords = new JLabel("You are a "+studentOrTeacher+". Are you a new user?");
-        instructionsPanel = decorator.InstructionsPanelDecorate(window, instructionsPanel, instructionsWords);
+        instructionsPanel = decorator.InstructionsPanelDecorate(instructionsPanel, instructionsWords);
     }
 
     private void radioButtonSetUp() {
@@ -138,7 +139,8 @@ public class NewUser extends JFrame {
                 set.setExistingOrNew(existingOrNew);
                 set.setWindow(window);
                 decorator.hideWindow(instructionsPanel, choicesPanel, backNextButtonsPanel);     
-                MainWindow main = (MainWindow) set.getWindow();
+                //MainWindow main = (MainWindow) set.getWindow();
+                MainWindow main = new MainWindow();
                 main.MainWindowLaunch();
                 main.setButtonSelected();
             }
@@ -152,6 +154,7 @@ public class NewUser extends JFrame {
         nextButton.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent e) {
                 doNextButtonProcedure();
+                set.setWindow(window);
                 set.setExistingOrNew(existingOrNew);
             }
         });
@@ -176,7 +179,7 @@ public class NewUser extends JFrame {
                 }    
             }
             else if (!moveOnPossible) {
-                decorator.errorMessageSetUp(window, newUserButton);
+                decorator.errorMessageSetUp(newUserButton);
             }            
     }
 
@@ -195,14 +198,14 @@ public class NewUser extends JFrame {
 
     public void showWindow(int windowX, int windowY) {
     if (windowX != 0 && windowY != 0) {
-        window.setLocation(windowX, windowY);
+        //window.setLocation(windowX, windowY);
         // decorator.setWindowX(windowX);
         // decorator.setWindowY(windowY);
 
     }
 
     else {
-        window.setLocation(window.getX(), window.getY());
+        //window.setLocation(window.getX(), window.getY());
     }
 
     window.setVisible(true);

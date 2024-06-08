@@ -25,7 +25,7 @@ public class PrintStudentGrades extends JFrame {
         //createNewTypeButton();
         JLabel instructionsWords = new JLabel("Grades");
         JPanel instructionsPanel = new JPanel();
-        instructionsPanel = decorator.InstructionsPanelDecorate(window, instructionsPanel, instructionsWords );
+        instructionsPanel = decorator.InstructionsPanelDecorate(instructionsPanel, instructionsWords );
         window.add(instructionsPanel);
         buttonSetUpAction(main, studentOrTeacher, existingOrNew);
     }

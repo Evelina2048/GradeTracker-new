@@ -62,14 +62,13 @@ public class FileHandler {
     }
 
 
-        public JPanel loadTextboxes(JFrame window, String filePath) {
+        public JPanel loadTextboxes(String filePath) {
             Creator creator = new Creator();
             ArrayList<String> arrayList = readFileToList(filePath);
             JPanel bigPanel = new JPanel(new FlowLayout(FlowLayout.LEFT));
             System.out.println("arrayList"+arrayList);
             for (int i = 0; i<arrayList.size(); i++) {
-                //creator.createTextBox(window, arrayList.get(i), 10, 50);
-                bigPanel.add(creator.boxCreate(window, arrayList.get(i), "JTextField", true));
+                bigPanel.add(creator.boxCreate(arrayList.get(i), "JTextField", true));
 
             }
             set.setTextFieldPanel(bigPanel);

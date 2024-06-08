@@ -112,9 +112,9 @@ public class StudentStatCollect extends JFrame {
     }
 
     public void addLoadedBoxes() {
-        textBoxPanel.add(creator.boxCreate(window, set.getFinalClassList().get(0), "JLabel", true));
+        textBoxPanel.add(creator.boxCreate(set.getFinalClassList().get(0), "JLabel", true));
         String filePath = "/Users/evy/Documents/GradeTracker-new/src/main/view/UserInfo/StudentInfo/"+set.getUsername()+"/"+set.getFinalClassList().get(set.getClassListIndex())+".txt";
-        JPanel testPanel = fileHandler.loadTextboxes(window, filePath);
+        JPanel testPanel = fileHandler.loadTextboxes(filePath);
         int numberOfComponents = testPanel.getComponentCount();
         numOfBoxes += numberOfComponents;
         for (int i = 0; i < numberOfComponents; i++) {
@@ -122,7 +122,7 @@ public class StudentStatCollect extends JFrame {
         }
         classLabelPanel.add(textBoxPanel);
         window.add(classLabelPanel);
-        creator.windowFix(window);    
+        creator.windowFix();    
     }
 
     private void saveAction(JButton saveButton) {
@@ -165,7 +165,7 @@ public class StudentStatCollect extends JFrame {
         if (fileHandler.fileIsNotEmpty(filePath)) {
             textBoxPanelReset();
             boxManageCreate(set.getFinalClassList().get(set.getClassListIndex()), "JLabel"); //displays class label 
-            JPanel testPanel = fileHandler.loadTextboxes(window, filePath);
+            JPanel testPanel = fileHandler.loadTextboxes(filePath);
             int numberOfComponents = testPanel.getComponentCount();
             for (int i = 0; i < numberOfComponents; i++) {
                 textBoxPanel.add(testPanel.getComponent(0));
@@ -175,7 +175,7 @@ public class StudentStatCollect extends JFrame {
                 boxManageCreate("Credits (optional)", "JTextField");
                 newSet();
             }
-            creator.windowFix(window);
+            creator.windowFix();
         }
         else { //first time visiting next class
             hideWindow();
@@ -206,18 +206,18 @@ public class StudentStatCollect extends JFrame {
        newDelContainer.add(delTypeButtonPanel);
        newDelContainerFlow.add(newDelContainer);
        window.add(newDelContainerFlow, BorderLayout.EAST);
-       creator.windowFix(window);
+       creator.windowFix();
    }
 
    private JPanel deleteButtonPanel() {
-    JButton delTypeButton = new JButton("Delete Type");
-        delTypeButton.setPreferredSize(new Dimension(90, 50));
-        delTypeButton.addActionListener(new ActionListener() {
+    JButton deleteTypeButton = new JButton("Delete Type");
+        deleteTypeButton.setPreferredSize(new Dimension(90, 50));
+        deleteTypeButton.addActionListener(new ActionListener() {
         public void actionPerformed(ActionEvent e) {
             if (textBoxPanel.getComponentCount() >= 8) {
-                creator.deleteTextBox(window, textBoxPanel);
-                creator.deleteTextBox(window, textBoxPanel);
-                creator.deleteTextBox(window, textBoxPanel);
+                creator.deleteTextBox(textBoxPanel);
+                creator.deleteTextBox(textBoxPanel);
+                creator.deleteTextBox(textBoxPanel);
                 numOfBoxes = numOfBoxes - 3;
                 typeNumber--;
                 
@@ -226,7 +226,7 @@ public class StudentStatCollect extends JFrame {
     }
     });  
     JPanel delTypeButtonPanel = new JPanel(new BorderLayout());
-    delTypeButtonPanel.add(delTypeButton,BorderLayout.NORTH);
+    delTypeButtonPanel.add(deleteTypeButton,BorderLayout.NORTH);
     return delTypeButtonPanel;
    }
 
@@ -260,7 +260,7 @@ public class StudentStatCollect extends JFrame {
         newSet();
         container.add(classLabelPanel);
         window.add(classLabelPanel, BorderLayout.CENTER);
-        creator.windowFix(window);
+        creator.windowFix();
     }
 
     private void hideWindow() {
@@ -272,9 +272,9 @@ public class StudentStatCollect extends JFrame {
 
     private void boxManageCreate(String placeholder, String type) {
         if (numOfBoxes <= maxBoxes) {
-            textBoxPanel.add(creator.boxCreate(window, placeholder, type, false));
+            textBoxPanel.add(creator.boxCreate(placeholder, type, false));
             classLabelPanel.add(textBoxPanel);
-            creator.windowFix(window);
+            creator.windowFix();
             numOfBoxes++;
         }
     }

@@ -47,6 +47,7 @@ public MainWindow() {
 
 public void MainWindowLaunch() {
     this.set = Set.getInstance();
+    window = set.getWindow();
     windowSetUp();
 
     InstructionsWordsWindow();
@@ -57,24 +58,25 @@ public void MainWindowLaunch() {
 
     EnterAction enterAction = new EnterAction();
 
-    this.getRootPane().getInputMap(JComponent.WHEN_IN_FOCUSED_WINDOW).put(KeyStroke.getKeyStroke(KeyEvent.VK_ENTER, 0), "enterAction");
-    this.getRootPane().getActionMap().put("enterAction", enterAction);
+    window.getRootPane().getInputMap(JComponent.WHEN_IN_FOCUSED_WINDOW).put(KeyStroke.getKeyStroke(KeyEvent.VK_ENTER, 0), "enterAction");
+    window.getRootPane().getActionMap().put("enterAction", enterAction);
 
-    this.requestFocusInWindow();
+    window.requestFocusInWindow();
 }
 
 private void windowSetUp() {
     //window set up
-    this.setTitle("Launcher");
-    this.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
-    this.setLayout(new BorderLayout());
-    this.setSize(windowWidth, windowHeight);
+    window.setTitle("Launcher");
+    window.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
+    window.setLayout(new BorderLayout());
+    window.setSize(windowWidth, windowHeight);
 }
  
 private void InstructionsWordsWindow() {
         JLabel instructionsWords = new JLabel("Welcome! Are you a student or a teacher?");
-        instructionsPanel = decorator.InstructionsPanelDecorate(this, instructionsPanel, instructionsWords );
+        instructionsPanel = decorator.InstructionsPanelDecorate(instructionsPanel, instructionsWords);
     }
+
 
 private void radioButtonSetUp() {
     teacherStudentGroup = new ButtonGroup();
@@ -105,7 +107,7 @@ private void radioButtonSetUp() {
 
     addToChoicesPanel(teacherStudentGroup, teacherButton, studentButton, choicesPanel);
 
-    this.add(choicesPanel);
+    window.add(choicesPanel);
 }
 
 private void choicesButtonDecorate(JRadioButton button) {
@@ -135,7 +137,7 @@ private void backNextButton() {
     //next
     nextButton = new JButton("Next >");
     backNextButtonsPanel.add(nextButton, BorderLayout.EAST);
-    this.add(backNextButtonsPanel, BorderLayout.SOUTH);
+    window.add(backNextButtonsPanel, BorderLayout.SOUTH);
 
 
 
@@ -151,6 +153,7 @@ private void doNextButtonProcedure() {
 
     if (moveOnPossible) {
         setUserInfo();
+        set.setWindow(window);
         NewUser newUser = new NewUser();
         if (set.getExistingOrNew() != null) {
             newUser.setButtonSelected();
@@ -158,7 +161,7 @@ private void doNextButtonProcedure() {
         decorator.hideWindow(instructionsPanel, choicesPanel, backNextButtonsPanel);
     }
     else if (!moveOnPossible) {
-        decorator.errorMessageSetUp(this, studentButton);
+        decorator.errorMessageSetUp(studentButton);
     }
 }
 
@@ -186,15 +189,15 @@ public void setExistingOrNew(String existingOrNew2) {
 
 public void show(int windowX, int windowY) {
    if (windowX != 0 && windowY != 0) {
-       this.setLocation(windowX, windowY);
+       window.setLocation(windowX, windowY);
 
    }
 
    else {
-    this.setLocationRelativeTo(null);
+    window.setLocationRelativeTo(null);
    }
 
-    this.setVisible(true);
+    window.setVisible(true);
 }
 
 public class EnterAction extends AbstractAction {

@@ -126,7 +126,7 @@ public class Gather {
 
         textFieldEmptied.set(false);
 
-        creator.textFieldFocusListener(window, textField, "Enter user name");
+        creator.textFieldFocusListener(textField, "Enter user name");
 
         GridBagConstraints constraints = new GridBagConstraints();
         constraints.gridx = 0;
@@ -211,7 +211,7 @@ private void backButtonAction() {
             
 }
 private void errorMessageSetUp(String labelWords, int width, int height) {
-    JDialog dialog = new JDialog(window, null, true);
+    JDialog dialog = new JDialog(window, true);
     dialog.setLayout(new FlowLayout());
     JLabel label = new JLabel(labelWords);
     label.setHorizontalAlignment(SwingConstants.CENTER);

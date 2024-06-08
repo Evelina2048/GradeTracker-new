@@ -26,12 +26,17 @@ import java.awt.Dimension;
 //key listening
 
 public class Decorator {
+    JFrame window;
+    Set set;
     
     public Decorator() {
-
+        set = Set.getInstance();
+        window = set.getWindow();
     }
+    
 
-    public JPanel InstructionsPanelDecorate(JFrame window, JPanel instructionsPanel, JLabel instructionsWords) {
+    public JPanel InstructionsPanelDecorate(JPanel instructionsPanel, JLabel instructionsWords) {
+        JFrame window = set.getWindow();
         instructionsPanel= new JPanel();
         Color instructionsColor = Color.decode("#7A6D6D");
         instructionsPanel.setBackground(instructionsColor);
@@ -45,6 +50,7 @@ public class Decorator {
         Font instructionsFont = new Font("Roboto", Font.PLAIN, 30); // Change the font and size here
         instructionsWords.setFont(instructionsFont);
 
+        
         return instructionsPanel;
     }
 
@@ -60,8 +66,8 @@ public class Decorator {
         return gbc;
     }
 
-    public void errorMessageSetUp(JFrame window, JRadioButton button) {
-        JDialog dialog = new JDialog(window, null, true);
+    public void errorMessageSetUp(JRadioButton button) {
+        JDialog dialog = new JDialog(window, true);
         dialog.setLayout(new FlowLayout());
         JLabel label = new JLabel("<html><center>Please choose an option");
         label.setHorizontalAlignment(SwingConstants.CENTER);

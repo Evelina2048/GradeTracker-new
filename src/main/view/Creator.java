@@ -34,6 +34,7 @@ import java.awt.Container;
 
 
 public class Creator {
+    private JFrame window;
     private JPanel backNextButtonsPanel;
     private JPanel textFieldPanel= new JPanel(new FlowLayout(FlowLayout.LEFT));
     private JTextField previousTextbox;
@@ -45,11 +46,11 @@ public class Creator {
     private ArrayList<String> classList = new ArrayList<>();
     private JButton saveButton;
     private ArrayList<String>textFieldPanelText = new ArrayList<>();
-    
     private JPanel textFieldContainer = new JPanel(new FlowLayout(FlowLayout.LEFT));
     
     public Creator() {
         this.set = Set.getInstance();
+        this.window = set.getWindow();
     }
 
     public JButton backButtonCreate() {
@@ -86,7 +87,7 @@ public class Creator {
     }
 
     
-    public void textFieldFocusListener(JFrame window, JTextField textField, String placeholder) { 
+    public void textFieldFocusListener(JTextField textField, String placeholder) { 
 
         textField.addFocusListener(new FocusAdapter() {
             @Override
@@ -137,10 +138,10 @@ public class Creator {
             }
         });
 
-        focusLost(window, textField, placeholder);
+        focusLost(textField, placeholder);
     }
 
-    private void focusLost(JFrame window, JTextField textField, String placeholder) {
+    private void focusLost(JTextField textField, String placeholder) {
         window.getContentPane().addMouseListener(new MouseAdapter() {
             @Override
             public void mouseClicked(MouseEvent e) {
@@ -262,7 +263,7 @@ public class Creator {
         }
     }
 
-    public JTextField createTextBox(JFrame window, String placeholder, int width, int height, Boolean loaded) { //something here is causing the issue
+    public JTextField createTextBox(String placeholder, int width, int height, Boolean loaded) { //something here is causing the issue
         debugPanelComponentCount();
         textboxCounter++;
         if (textboxCounter <= 30) {
@@ -275,8 +276,8 @@ public class Creator {
             textFieldPanelText.add(textField.getText());
             textField.setPreferredSize(new Dimension(width, height));
             window.add(textFieldPanel);
-            textFieldFocusListener(window, textField, placeholder);
-            windowFix(window);
+            textFieldFocusListener(textField, placeholder);
+            windowFix();
         }
         if (loaded) {
             set.setEmptiedState(textField, true);
@@ -317,7 +318,7 @@ public class Creator {
 
     }
 
-    public void deleteTextBox(JFrame window, JPanel container) {
+    public void deleteTextBox(JPanel container) {
         int componentsCount = container.getComponentCount();
         if (componentsCount > 0) {
             Component lastComponent = container.getComponent(componentsCount - 1);
@@ -325,12 +326,12 @@ public class Creator {
 
             set.removeClassFromClassList();
 
-            windowFix(window);
+            windowFix();
             textboxCounter--;
         }
     }
 
-    public void windowFix(JFrame window) {
+    public void windowFix() {
         window.revalidate(); 
         window.repaint();
     }
@@ -391,13 +392,13 @@ public class Creator {
         saveButton.setEnabled(true);
     }
     
-    public JPanel typeBox(JFrame window, String placeholder, String my_type, Boolean loaded) {
+    public JPanel typeBox(String placeholder, String my_type, Boolean loaded) {
             JPanel northTypePanel = new JPanel(new BorderLayout());
             JPanel gradeTypePanel = new JPanel(new BorderLayout());
 
 
             if (my_type.equals("JTextField")) {
-                JTextField toAddType = createTextBox(window, placeholder, 10, 10, loaded);
+                JTextField toAddType = createTextBox(placeholder, 10, 10, loaded);
                 gradeTypePanel.add(toAddType);
             }
 
@@ -408,15 +409,15 @@ public class Creator {
             }
             gradeTypePanel.setPreferredSize(new Dimension( 155,50));
             northTypePanel.add(gradeTypePanel, BorderLayout.NORTH);
-            windowFix(window);
+            windowFix();
 
             return northTypePanel;
     }
 
-	public JPanel boxCreate(JFrame window, String placeholder, String type, Boolean loaded) {
+	public JPanel boxCreate(String placeholder, String type, Boolean loaded) {
         hideContainer();
-        JPanel bigPanel = typeBox(window, placeholder, type, loaded);
-        windowFix(window);
+        JPanel bigPanel = typeBox(placeholder, type, loaded);
+        windowFix();
         return bigPanel;
 	}
 
