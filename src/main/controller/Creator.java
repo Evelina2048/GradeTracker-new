@@ -1,4 +1,4 @@
-package main.view;
+package main.controller;
 
 import javax.swing.BorderFactory;
 import javax.swing.JButton;
@@ -26,7 +26,8 @@ import java.awt.Component;
 import java.awt.Dimension;
 import java.awt.FlowLayout;
 
-import main.view.Creator;
+import main.controller.Creator;
+import main.model.Set;
 import javax.swing.event.DocumentEvent;
 import javax.swing.event.DocumentListener;
 

@@ -1,4 +1,4 @@
-package main.view;
+package main.controller;
 
 import java.io.BufferedReader;
 import java.io.FileNotFoundException;
@@ -8,6 +8,8 @@ import java.util.ArrayList;
 import javax.swing.JFrame;
 import javax.swing.JPanel;
 import java.awt.FlowLayout;
+
+import main.model.Set;
 
 public class FileHandler {
         private Set set;

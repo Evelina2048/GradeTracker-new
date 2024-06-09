@@ -83,7 +83,7 @@ public class Decorator {
         noButton.setVisible(true);
         dialog.add(noButton);
 
-        dialog.setSize(250,110);
+        dialog.setSize(250,120);
 
         yesButton.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent e) {

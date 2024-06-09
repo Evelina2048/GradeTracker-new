@@ -1,4 +1,4 @@
-// package main.view;
+// package main.model;
 
 // import javax.swing.BorderFactory;
 // import javax.swing.ButtonGroup;

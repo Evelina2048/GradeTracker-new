@@ -10,8 +10,8 @@ import javax.swing.JLabel;
 
 import java.awt.event.ActionListener;
 import java.awt.event.ActionEvent;
-import main.view.Creator;
-import main.view.Decorator;
+import main.controller.Creator;
+import main.controller.Decorator;
 
 public class PrintStudentGrades extends JFrame {
     private JFrame window;

@@ -20,6 +20,9 @@ import java.awt.event.ActionEvent;
 //key listening
 import java.awt.event.KeyEvent;
 
+import main.model.Set;
+import main.controller.Decorator;
+
 public class NewUser extends JFrame {
     private JFrame window;
     private JFrame main;

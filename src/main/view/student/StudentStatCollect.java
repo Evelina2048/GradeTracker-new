@@ -10,12 +10,13 @@ import java.awt.event.ActionListener;
 import java.awt.event.ActionEvent;
 import java.awt.FlowLayout;
 import java.util.ArrayList;
-import main.view.Creator;
-import main.view.Set;
-import main.view.FileHandler;
 
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
+
+import main.model.Set;
+import main.controller.Creator;
+import main.controller.FileHandler;
 
 public class StudentStatCollect extends JFrame {
     private JFrame window;

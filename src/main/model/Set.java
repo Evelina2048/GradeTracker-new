@@ -1,4 +1,4 @@
-package main.view;
+package main.model;
 
 import java.util.ArrayList;
 import java.util.HashMap;

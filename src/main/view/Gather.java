@@ -30,6 +30,10 @@ import java.io.BufferedReader;
 
 import java.io.FileReader;
 
+import main.model.Set;
+import main.controller.Creator;
+import main.controller.Decorator;
+
 //import class files
 
 public class Gather {
@@ -275,7 +279,9 @@ private void writeUsername(String filePath) {
             e.printStackTrace();
         } finally {
             try {
-                reader.close();
+                if (reader != null) {
+                    reader.close();
+                }
             } catch (IOException e) {
                 e.printStackTrace();
             }

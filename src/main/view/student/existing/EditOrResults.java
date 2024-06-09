@@ -6,8 +6,8 @@ import java.awt.BorderLayout;
 import javax.swing.JPanel;
 import java.awt.event.ActionListener;
 import java.awt.event.ActionEvent;
-import main.view.Creator;
-import main.view.Set;
+import main.controller.Creator;
+import main.model.Set;
 
 
 public class EditOrResults extends JFrame {

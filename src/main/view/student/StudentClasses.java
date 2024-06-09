@@ -13,10 +13,10 @@ import java.awt.event.ActionListener;
 import java.awt.event.ActionEvent;
 import java.util.ArrayList;
 import java.util.concurrent.atomic.AtomicBoolean;
-import main.view.Set;
-import main.view.Creator;
-import main.view.Decorator;
-import main.view.FileHandler;
+import main.model.Set;
+import main.controller.Creator;
+import main.controller.Decorator;
+import main.controller.FileHandler;
 import main.view.Gather;
 
 
