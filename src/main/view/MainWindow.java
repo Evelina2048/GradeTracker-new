@@ -20,6 +20,9 @@ import java.awt.event.ActionEvent;
 //key listening
 import java.awt.event.KeyEvent;
 
+import main.model.Set;
+import main.controller.Decorator;
+
 public class MainWindow extends JFrame {
 //private JFrame window;
 private String studentOrTeacher;
@@ -162,6 +165,7 @@ private void doNextButtonProcedure() {
     }
     else if (!moveOnPossible) {
         decorator.errorMessageSetUp(studentButton);
+        //decorator.areYouSureMessageSetUp(studentButton);
     }
 }
 
