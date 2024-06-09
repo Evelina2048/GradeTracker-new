@@ -8,6 +8,11 @@ import javax.swing.JLabel;
 import java.awt.BorderLayout;
 import java.awt.Dimension;
 import javax.swing.JPanel;
+import javax.swing.JTextField;
+import java.awt.Component;
+
+import java.awt.event.MouseEvent;
+
 import java.awt.GridLayout;
 import java.awt.event.ActionListener;
 import java.awt.event.ActionEvent;
@@ -18,6 +23,8 @@ import main.controller.Creator;
 import main.controller.Decorator;
 import main.controller.FileHandler;
 import main.view.Gather;
+
+import java.awt.event.MouseAdapter;
 
 
 
@@ -183,7 +190,8 @@ public class StudentClasses extends JFrame {
         deleteClassButton.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent e) {
                 //decorator.errorMessageSetUp(window, button);
-                creator.deleteTextBox(creator.getTextFieldContainer());
+                //creator.deleteTextBox(creator.getTextFieldContainer());
+                deleteMode();
                 saveButton.setEnabled(true);
             }
         });
@@ -213,6 +221,32 @@ public class StudentClasses extends JFrame {
         creator.writeFolderToFile(textFieldEmptied);
         creator.setClassList();
         creator.writeTextToFile("/Users/evy/Documents/GradeTracker-new/src/main/view/UserInfo/StudentInfo/" + set.getUsername() + "/class.txt", creator.getTextFieldContainer());
+    }
+
+    private void deleteMode() {
+        System.out.println("in delete mode");
+        deleteClassButton.setText("Leave Delete Mode");
+        for (int i = 0; i < set.getTextFieldPanel().getComponentCount(); i++) {
+            Component textField = set.getTextFieldPanel().getComponent(i);
+            if (textField instanceof JTextField) {
+                textField.addMouseListener(new MouseAdapter() {
+                    @Override
+                    public void mouseClicked(MouseEvent e) {
+                        System.out.println("clicked");
+                    }
+                });
+                }
+            else {
+                System.out.println(textField.getClass().getName());
+            }
+    
+        }
+
+        // textField.addMouseListener(new MouseAdapter() { 
+        //     public void mousePressed(MouseEvent me) { 
+        //       System.out.println(me); 
+        //     } 
+        //   }); 
     }
 
     //create JButton "New Class"

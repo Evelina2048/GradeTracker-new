@@ -307,6 +307,7 @@ public class Creator {
         @Override
         public void changedUpdate(DocumentEvent e) {
             //saveButton.setEnabled(true);
+            System.out.println("changedUpdate");
         }
         });
     }
