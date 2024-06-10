@@ -235,10 +235,19 @@ public class StudentClasses extends JFrame {
                     public void mouseClicked(MouseEvent e) {
                         System.out.println("clicked");
                         Border borderHiglighted = BorderFactory.createLineBorder(Color.decode("#FF6961"), 2);
+                        textField.setForeground(Color.decode("#FF6961"));
                         selectedTextBox = textField;
                         textField.setBorder(borderHiglighted);
                         deleteClassButton.setText("Delete?");
-                        decorator.areYouSureMessageSetUp(deleteClassButton);
+                        deleteClassButton.addActionListener(new ActionListener() {
+                            public void actionPerformed(ActionEvent e) {
+                                decorator.areYouSureMessageSetUp(deleteClassButton, selectedTextBox);
+                                selectedTextBox.setForeground(Color.GRAY);
+                                Border borderRegular = BorderFactory.createLineBorder(Color.GRAY, 2);
+                                selectedTextBox.setBorder(borderRegular);
+                                //selectedTextBox = null;
+                            }
+                        });
 
                     }
                 });

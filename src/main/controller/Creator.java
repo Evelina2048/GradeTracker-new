@@ -40,7 +40,7 @@ public class Creator {
     private JPanel textFieldPanel= new JPanel(new FlowLayout(FlowLayout.LEFT));
     private JTextField previousTextbox;
     private Set set;
-    private Decorator decorate = new Decorator();
+    //private Decorator decorate = new Decorator();
     private int textboxCounter;
     private JTextField textField;
     private String placeholder;
@@ -270,6 +270,7 @@ public class Creator {
 
     public JTextField createTextBox(String placeholder, int width, int height, Boolean loaded) { //something here is causing the issue
         debugPanelComponentCount();
+        Decorator decorate = new Decorator();
         textboxCounter++;
         if (textboxCounter <= 30) {
             textField = decorate.decorateTextBox(placeholder);

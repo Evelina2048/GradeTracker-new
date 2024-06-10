@@ -68,7 +68,8 @@ public class Decorator {
         return gbc;
     }
 
-    public void areYouSureMessageSetUp(JButton button) {
+    public void areYouSureMessageSetUp(JButton button, JTextField textField) {
+        Creator creator = new Creator();
         JDialog dialog = new JDialog(window, true);
         dialog.setLayout(new FlowLayout());
         JLabel label = new JLabel("<html><center>Deleting this class will delete <br>its loaded information.<br>Do you wish to continue?");
@@ -84,15 +85,23 @@ public class Decorator {
         dialog.add(noButton);
 
         dialog.setSize(250,120);
+        JPanel panel = new JPanel();
+        System.out.println("does textfield be null?: "+textField==null+ "textfield text"+ textField.getText());
+        panel.add(textField);
 
         yesButton.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent e) {
+                textField.setVisible(false);
+                creator.deleteTextBox(panel);
                 dialog.setVisible(false);
                 dialog.dispose(); 
+                
             }
         });
         noButton.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent e) {
+                dialog.setVisible(false);
+                dialog.dispose(); 
             }
         });
         
