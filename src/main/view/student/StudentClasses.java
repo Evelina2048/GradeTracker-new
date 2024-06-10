@@ -27,6 +27,7 @@ import main.view.Gather;
 public class StudentClasses extends JFrame {
     private JFrame window;
     private Creator creator;
+    private Decorator decorator;
     private JPanel backNextButtonsPanel;
     private JButton saveButton;
     private JTextField selectedTextBox;
@@ -50,6 +51,7 @@ public class StudentClasses extends JFrame {
         this.set = Set.getInstance();
         this.window = set.getWindow();
         creator = new Creator();
+        decorator = new Decorator();
         System.out.println("in student classes");
         window.setTitle("StudentClasses");
         window.setLayout(new BorderLayout());
@@ -235,6 +237,8 @@ public class StudentClasses extends JFrame {
                         Border borderHiglighted = BorderFactory.createLineBorder(Color.decode("#FF6961"), 2);
                         selectedTextBox = textField;
                         textField.setBorder(borderHiglighted);
+                        deleteClassButton.setText("Delete?");
+                        decorator.areYouSureMessageSetUp(deleteClassButton);
 
                     }
                 });

@@ -68,7 +68,7 @@ public class Decorator {
         return gbc;
     }
 
-    public void areYouSureMessageSetUp(JRadioButton button) {
+    public void areYouSureMessageSetUp(JButton button) {
         JDialog dialog = new JDialog(window, true);
         dialog.setLayout(new FlowLayout());
         JLabel label = new JLabel("<html><center>Deleting this class will delete <br>its loaded information.<br>Do you wish to continue?");
