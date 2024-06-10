@@ -96,8 +96,8 @@ public class Decorator {
             }
         });
         
-        dialog.setLocationRelativeTo(button);
-        dialog.setLocation(dialog.getX(), dialog.getY() + 15); 
+        dialog.setLocationRelativeTo(window);
+        //dialog.setLocation(null); 
         dialog.setVisible(true);
     }
 
