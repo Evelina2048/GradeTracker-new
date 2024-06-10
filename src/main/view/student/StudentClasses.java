@@ -3,16 +3,14 @@ package main.view.student;
 import javax.swing.BorderFactory;
 import javax.swing.JButton;
 import javax.swing.JFrame;
-import javax.swing.JLabel;
-
 import java.awt.BorderLayout;
 import java.awt.Dimension;
 import javax.swing.JPanel;
 import javax.swing.JTextField;
-import java.awt.Component;
-
+import javax.swing.border.Border;
 import java.awt.event.MouseEvent;
-
+import java.awt.Color;
+import java.awt.event.MouseAdapter;
 import java.awt.GridLayout;
 import java.awt.event.ActionListener;
 import java.awt.event.ActionEvent;
@@ -24,8 +22,6 @@ import main.controller.Decorator;
 import main.controller.FileHandler;
 import main.view.Gather;
 
-import java.awt.event.MouseAdapter;
-
 
 
 public class StudentClasses extends JFrame {
@@ -33,6 +29,7 @@ public class StudentClasses extends JFrame {
     private Creator creator;
     private JPanel backNextButtonsPanel;
     private JButton saveButton;
+    private JTextField selectedTextBox;
     JPanel southContainer = new JPanel(new GridLayout(2,1,0,0));
     AtomicBoolean textFieldEmptied = new AtomicBoolean(false);;
     JButton newClassButton;
@@ -227,17 +224,23 @@ public class StudentClasses extends JFrame {
         System.out.println("in delete mode");
         deleteClassButton.setText("Leave Delete Mode");
         for (int i = 0; i < set.getTextFieldPanel().getComponentCount(); i++) {
-            Component textField = set.getTextFieldPanel().getComponent(i);
+            JTextField textField = (JTextField) set.getTextFieldPanel().getComponent(i);
+            textField.setEditable(false);
+            textField.setFocusable(false);
             if (textField instanceof JTextField) {
                 textField.addMouseListener(new MouseAdapter() {
                     @Override
                     public void mouseClicked(MouseEvent e) {
                         System.out.println("clicked");
+                        Border borderHiglighted = BorderFactory.createLineBorder(Color.decode("#FF6961"), 2);
+                        selectedTextBox = textField;
+                        textField.setBorder(borderHiglighted);
+
                     }
                 });
                 }
             else {
-                System.out.println(textField.getClass().getName());
+                System.out.println("There was an issue in delete mode. student classes" + textField.getClass().getName());
             }
     
         }
