@@ -48,6 +48,7 @@ public class Creator {
     private JButton saveButton;
     private ArrayList<String>textFieldPanelText = new ArrayList<>();
     private JPanel textFieldContainer = new JPanel(new FlowLayout(FlowLayout.LEFT));
+    private Boolean focusGranted = true;
     
     public Creator() {
         this.set = Set.getInstance();
@@ -93,33 +94,36 @@ public class Creator {
         textField.addFocusListener(new FocusAdapter() {
             @Override
             public void focusGained(FocusEvent e) {
-                if (previousTextbox != null) {
-                    previousTextbox.setForeground(Color.LIGHT_GRAY);
+                if (focusGranted) {
+                    System.out.println("focusGranted");
+                    if (previousTextbox != null) {
+                        previousTextbox.setForeground(Color.LIGHT_GRAY);
 
-                }
-                if (textField.getText().equals(placeholder) && set.getEmptiedState(textField) == false) {
-                    textField.setText("");
-                    set.setEmptiedState(textField, true);
-                    textField.setForeground(Color.BLACK);
-                }
+                    }
+                    if (textField.getText().equals(placeholder) && set.getEmptiedState(textField) == false) {
+                        textField.setText("");
+                        set.setEmptiedState(textField, true);
+                        textField.setForeground(Color.BLACK);
+                    }
 
-                else if (!textField.getText().equals(placeholder) && !textField.getText().isEmpty() && set.getEmptiedState(textField) == true) {
-                    textField.setForeground(Color.BLACK);
-                    set.setEmptiedState(textField, true);
-                }
+                    else if (!textField.getText().equals(placeholder) && !textField.getText().isEmpty() && set.getEmptiedState(textField) == true) {
+                        textField.setForeground(Color.BLACK);
+                        set.setEmptiedState(textField, true);
+                    }
 
-                else if (textField.getText().equals(placeholder) && set.getEmptiedState(textField) == true) {
-                    textField.setText(""); // Clear the placeholder text when the field gains focus
-                    textField.setForeground(Color.BLACK);
-                    set.setEmptiedState(textField, true);
-                    set.setSaveable(true);
-                }
+                    else if (textField.getText().equals(placeholder) && set.getEmptiedState(textField) == true) {
+                        textField.setText(""); // Clear the placeholder text when the field gains focus
+                        textField.setForeground(Color.BLACK);
+                        set.setEmptiedState(textField, true);
+                        set.setSaveable(true);
+                    }
 
-                else {
-                    System.out.println("something went wrong in Creator class, focus gained");
+                    else {
+                        System.out.println("something went wrong in Creator class, focus gained");
 
+                    }
+                    previousTextbox = textField;
                 }
-                previousTextbox = textField;
             }
 
             @Override
@@ -444,4 +448,8 @@ public class Creator {
             System.out.println("none of these" +component.getClass().getName());
             return "something went wrong goIntoPanel";
         }
+
+    // public void disableFocusListener() {
+    //     focusGranted = false;
+    // }
 }
