@@ -258,9 +258,16 @@ public class StudentClasses extends JFrame {
                 JTextField textField = (JTextField) set.getTextFieldPanel().getComponent(i);
                 textField.setEditable(true);
                 textField.setFocusable(true);
-                for (MouseListener listener : textField.getMouseListeners()) {
-                    textField.removeMouseListener(listener);
+                // for (MouseListener listener : textField.getMouseListeners()) {
+                //     textField.removeMouseListener(listener);
+                // }
+                MouseListener[] listeners = textField.getMouseListeners();
+                if (listeners.length > 0) {
+                    MouseListener lastListener = listeners[listeners.length - 1];
+                    textField.removeMouseListener(lastListener);
+                    System.out.println("Most recent mouse listener removed.");
                 }
+
             
             }
             //break out of rest of function;
@@ -291,7 +298,6 @@ public class StudentClasses extends JFrame {
                                 selectedTextBox.setForeground(Color.GRAY);
                                 Border borderRegular = BorderFactory.createLineBorder(Color.GRAY, 2);
                                 selectedTextBox.setBorder(borderRegular);
-                                //selectedTextBox = null;
                             }
                         });
 
