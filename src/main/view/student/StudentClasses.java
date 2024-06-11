@@ -241,40 +241,8 @@ public class StudentClasses extends JFrame {
     }
 
     private void deleteMode() {
-        for (ActionListener listener : deleteClassButton.getActionListeners()) {
-            deleteClassButton.removeActionListener(listener);
-        }
-        deleteClassButton.setText("Leave Delete Mode");
-        System.out.println("in delete mode");
-        // for (ActionListener listener : deleteClassButton.getActionListeners()) {
-        //     deleteClassButton.removeActionListener(listener);
-        // }
-
-        deleteClassButton.addActionListener(new ActionListener() {
-            public void actionPerformed(ActionEvent e) {
-            //to fill in 
-            backToDefaultDeleteButton();
-            for (int i = 0; i < set.getTextFieldPanel().getComponentCount(); i++) {
-                JTextField textField = (JTextField) set.getTextFieldPanel().getComponent(i);
-                textField.setEditable(true);
-                textField.setFocusable(true);
-                // for (MouseListener listener : textField.getMouseListeners()) {
-                //     textField.removeMouseListener(listener);
-                // }
-                MouseListener[] listeners = textField.getMouseListeners();
-                if (listeners.length > 0) {
-                    MouseListener lastListener = listeners[listeners.length - 1];
-                    textField.removeMouseListener(lastListener);
-                    System.out.println("Most recent mouse listener removed.");
-                }
-
-            
-            }
-            //break out of rest of function;
-            return;
-
-            }
-        });
+        newClassButton.setEnabled(false);
+        leaveDeleteMode();
         for (int i = 0; i < set.getTextFieldPanel().getComponentCount(); i++) {
             JTextField textField = (JTextField) set.getTextFieldPanel().getComponent(i);
             textField.setEditable(false);
@@ -298,6 +266,8 @@ public class StudentClasses extends JFrame {
                                 selectedTextBox.setForeground(Color.GRAY);
                                 Border borderRegular = BorderFactory.createLineBorder(Color.GRAY, 2);
                                 selectedTextBox.setBorder(borderRegular);
+                                leaveDeleteMode();
+
                             }
                         });
 
@@ -317,6 +287,36 @@ public class StudentClasses extends JFrame {
         //   }); 
     }
 
+    private void leaveDeleteMode() {
+        for (ActionListener listener : deleteClassButton.getActionListeners()) {
+            deleteClassButton.removeActionListener(listener);
+        }
+        deleteClassButton.setText("Leave Delete Mode");
+        System.out.println("in delete mode");
+
+        deleteClassButton.addActionListener(new ActionListener() {
+            public void actionPerformed(ActionEvent e) {
+            //to fill in 
+            backToDefaultDeleteButton();
+            for (int i = 0; i < set.getTextFieldPanel().getComponentCount(); i++) {
+                JTextField textField = (JTextField) set.getTextFieldPanel().getComponent(i);
+                textField.setEditable(true);
+                textField.setFocusable(true);
+                MouseListener[] listeners = textField.getMouseListeners();
+                if (listeners.length > 0) {
+                    MouseListener lastListener = listeners[listeners.length - 1];
+                    textField.removeMouseListener(lastListener);
+                    System.out.println("Most recent mouse listener removed.");
+                }
+
+            
+            }
+            //break out of rest of function;
+            return;
+
+            }
+        });
+    }
     //create JButton "New Class"
     private void hideWindow() {
         backNextButtonsPanel.setVisible(false);
