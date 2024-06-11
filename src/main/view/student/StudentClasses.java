@@ -9,6 +9,7 @@ import javax.swing.JPanel;
 import javax.swing.JTextField;
 import javax.swing.border.Border;
 import java.awt.event.MouseEvent;
+import java.awt.event.MouseListener;
 import java.awt.Color;
 import java.awt.event.MouseAdapter;
 import java.awt.GridLayout;
@@ -190,6 +191,7 @@ public class StudentClasses extends JFrame {
             public void actionPerformed(ActionEvent e) {
                 //decorator.errorMessageSetUp(window, button);
                 //creator.deleteTextBox(creator.getTextFieldContainer());
+                System.out.println("deleteClass Mode hit");
                 deleteMode();
                 saveButton.setEnabled(true);
             }
@@ -222,9 +224,50 @@ public class StudentClasses extends JFrame {
         creator.writeTextToFile("/Users/evy/Documents/GradeTracker-new/src/main/view/UserInfo/StudentInfo/" + set.getUsername() + "/class.txt", creator.getTextFieldContainer());
     }
 
+    private void backToDefaultDeleteButton() {
+        for (ActionListener listener : deleteClassButton.getActionListeners()) {
+            deleteClassButton.removeActionListener(listener);
+        }
+        deleteClassButton.setText("Delete Class Mode");
+        deleteClassButton.addActionListener(new ActionListener() {
+            public void actionPerformed(ActionEvent e) {
+                //decorator.errorMessageSetUp(window, button);
+                //creator.deleteTextBox(creator.getTextFieldContainer());
+                System.out.println("clicked delete class mode");
+                deleteMode();
+                saveButton.setEnabled(true);
+            }
+        });
+    }
+
     private void deleteMode() {
-        System.out.println("in delete mode");
+        for (ActionListener listener : deleteClassButton.getActionListeners()) {
+            deleteClassButton.removeActionListener(listener);
+        }
         deleteClassButton.setText("Leave Delete Mode");
+        System.out.println("in delete mode");
+        // for (ActionListener listener : deleteClassButton.getActionListeners()) {
+        //     deleteClassButton.removeActionListener(listener);
+        // }
+
+        deleteClassButton.addActionListener(new ActionListener() {
+            public void actionPerformed(ActionEvent e) {
+            //to fill in 
+            backToDefaultDeleteButton();
+            for (int i = 0; i < set.getTextFieldPanel().getComponentCount(); i++) {
+                JTextField textField = (JTextField) set.getTextFieldPanel().getComponent(i);
+                textField.setEditable(true);
+                textField.setFocusable(true);
+                for (MouseListener listener : textField.getMouseListeners()) {
+                    textField.removeMouseListener(listener);
+                }
+            
+            }
+            //break out of rest of function;
+            return;
+
+            }
+        });
         for (int i = 0; i < set.getTextFieldPanel().getComponentCount(); i++) {
             JTextField textField = (JTextField) set.getTextFieldPanel().getComponent(i);
             textField.setEditable(false);
@@ -238,6 +281,9 @@ public class StudentClasses extends JFrame {
                         textField.setForeground(Color.decode("#FF6961"));
                         selectedTextBox = textField;
                         textField.setBorder(borderHiglighted);
+                        for (ActionListener listener : deleteClassButton.getActionListeners()) {
+                            deleteClassButton.removeActionListener(listener);
+                        }
                         deleteClassButton.setText("Delete?");
                         deleteClassButton.addActionListener(new ActionListener() {
                             public void actionPerformed(ActionEvent e) {

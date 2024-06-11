@@ -94,6 +94,9 @@ public class Decorator {
         yesButton.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent e) {     
                 textField.setVisible(false);
+                for (MouseListener listener : textField.getMouseListeners()) {
+                    textField.removeMouseListener(listener);
+                }
                 
                 creator.deleteTextBox(panel);
                 dialog.setVisible(false);
