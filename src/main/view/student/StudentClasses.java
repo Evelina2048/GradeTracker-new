@@ -79,7 +79,7 @@ public class StudentClasses extends JFrame {
         }
 
         else {
-            creator.createTextBox("Enter Class Name", 50, 50, true);
+            creator.createTextBox("Enter Class Name", 50, 50, false);
         }
         //textField.setVisible(true);
         westPanelCreate();
@@ -108,12 +108,7 @@ public class StudentClasses extends JFrame {
         JPanel saveButtonPanel = new JPanel();
         saveButtonPanel.add(saveButton);
 
-        saveButton.addActionListener(new ActionListener() {
-            public void actionPerformed(ActionEvent e) {
-                writeType();
-                saveButton.setEnabled(false);
-            }
-        });
+        saveButtonAction();
 
         JButton nextButton = creator.nextButtonCreate();
         JPanel nextButtonPanel = new JPanel();
@@ -166,6 +161,15 @@ public class StudentClasses extends JFrame {
         System.out.println("3classList<3"+set.getFinalClassList());
         //set.setTextFieldPanel();
         window.add(southContainer, BorderLayout.SOUTH);
+    }
+
+    private void saveButtonAction() {
+        saveButton.addActionListener(new ActionListener() {
+            public void actionPerformed(ActionEvent e) {
+                writeType();
+                saveButton.setEnabled(false);
+            }
+        });
     }
 
     //create textbox "Class" placeholder
@@ -241,8 +245,9 @@ public class StudentClasses extends JFrame {
     }
 
     private void deleteMode() {
+        saveButtonAction();
         newClassButton.setEnabled(false);
-        leaveDeleteMode();
+        leaveDeleteModeButton();
         for (int i = 0; i < set.getTextFieldPanel().getComponentCount(); i++) {
             JTextField textField = (JTextField) set.getTextFieldPanel().getComponent(i);
             textField.setEditable(false);
@@ -262,11 +267,21 @@ public class StudentClasses extends JFrame {
                         deleteClassButton.setText("Delete?");
                         deleteClassButton.addActionListener(new ActionListener() {
                             public void actionPerformed(ActionEvent e) {
-                                decorator.areYouSureMessageSetUp(deleteClassButton, selectedTextBox);
-                                selectedTextBox.setForeground(Color.GRAY);
-                                Border borderRegular = BorderFactory.createLineBorder(Color.GRAY, 2);
-                                selectedTextBox.setBorder(borderRegular);
-                                leaveDeleteMode();
+                                if (set.getLoadedState(selectedTextBox)) {
+                                    System.out.println("text: "+ selectedTextBox.getText()+" loaded state: "+ set.getLoadedState(textField));
+                                    decorator.areYouSureMessageSetUp(deleteClassButton, selectedTextBox);
+                                
+                                    selectedTextBox.setForeground(Color.GRAY);
+                                    Border borderRegular = BorderFactory.createLineBorder(Color.GRAY, 2);
+                                    selectedTextBox.setBorder(borderRegular);
+                                }
+
+                                else {
+                                    JPanel selectedBoxPanel = new JPanel();
+                                    selectedBoxPanel.add(selectedTextBox);
+                                    creator.deleteTextBox(selectedBoxPanel);
+                                }
+                                leaveDeleteModeButton();
 
                             }
                         });
@@ -287,7 +302,7 @@ public class StudentClasses extends JFrame {
         //   }); 
     }
 
-    private void leaveDeleteMode() {
+    private void leaveDeleteModeButton() {
         for (ActionListener listener : deleteClassButton.getActionListeners()) {
             deleteClassButton.removeActionListener(listener);
         }
@@ -296,8 +311,8 @@ public class StudentClasses extends JFrame {
 
         deleteClassButton.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent e) {
-            //to fill in 
             backToDefaultDeleteButton();
+            newClassButton.setEnabled(true);
             for (int i = 0; i < set.getTextFieldPanel().getComponentCount(); i++) {
                 JTextField textField = (JTextField) set.getTextFieldPanel().getComponent(i);
                 textField.setEditable(true);

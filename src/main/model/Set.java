@@ -15,6 +15,7 @@ public class Set {
     private Boolean saveable;
     private JPanel textFieldPanel;
     private HashMap<JTextField, Boolean> textFieldEmptiedMap = new HashMap<>();
+    private HashMap<JTextField, Boolean> textFieldLoadedMap = new HashMap<>();
     private int classListIndex = 0;
     private ArrayList<String> finalClassList;
     private String existingOrNew;
@@ -108,6 +109,14 @@ public class Set {
 
     public void setEmptiedState(JTextField textField, boolean state) {
         textFieldEmptiedMap.put(textField, state);
+    }
+
+    public boolean getLoadedState(JTextField textField) {
+        return textFieldLoadedMap.getOrDefault(textField, false);
+    }
+
+    public void setLoadedState(JTextField textField, boolean state) {
+        textFieldLoadedMap.put(textField, state);
     }
 
     public void incrementClassListIndex() {

@@ -287,6 +287,11 @@ public class Creator {
         }
         if (loaded) {
             set.setEmptiedState(textField, true);
+            set.setLoadedState(textField, true);
+        }
+
+        else if (loaded == false) {
+            set.setLoadedState(textField, false);
         }
 
         set.setTextFieldPanel(textFieldPanel);

@@ -71,7 +71,6 @@ public class FileHandler {
             System.out.println("arrayList"+arrayList);
             for (int i = 0; i<arrayList.size(); i++) {
                 bigPanel.add(creator.boxCreate(arrayList.get(i), "JTextField", true));
-
             }
             set.setTextFieldPanel(bigPanel);
             return bigPanel;
