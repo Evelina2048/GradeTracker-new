@@ -9,6 +9,8 @@ import javax.swing.SwingConstants;
 import java.awt.BorderLayout;
 import java.awt.Color;
 import java.awt.Font;
+import java.awt.event.MouseListener;
+
 import javax.swing.JPanel;
 import javax.swing.JLabel;
 import java.awt.Insets;
@@ -90,8 +92,9 @@ public class Decorator {
         panel.add(textField);
 
         yesButton.addActionListener(new ActionListener() {
-            public void actionPerformed(ActionEvent e) {
+            public void actionPerformed(ActionEvent e) {     
                 textField.setVisible(false);
+                
                 creator.deleteTextBox(panel);
                 dialog.setVisible(false);
                 dialog.dispose(); 
