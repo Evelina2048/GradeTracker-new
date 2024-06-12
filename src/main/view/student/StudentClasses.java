@@ -32,6 +32,7 @@ public class StudentClasses extends JFrame {
     private JPanel backNextButtonsPanel;
     private JButton saveButton;
     private JTextField selectedTextBox;
+    Border borderRegular = BorderFactory.createLineBorder(Color.GRAY, 2);
     JPanel southContainer = new JPanel(new GridLayout(2,1,0,0));
     AtomicBoolean textFieldEmptied = new AtomicBoolean(false);;
     JButton newClassButton;
@@ -261,10 +262,14 @@ public class StudentClasses extends JFrame {
             @Override
             public void mouseClicked(MouseEvent e) {
                 System.out.println("clicked");
-                Border borderHiglighted = BorderFactory.createLineBorder(Color.decode("#FF6961"), 2);
+                if (selectedTextBox != null) {
+                    selectedTextBox.setForeground(Color.GRAY);
+                    selectedTextBox.setBorder(borderRegular);
+                }
+                Border borderHighlighted = BorderFactory.createLineBorder(Color.decode("#FF6961"), 2);
                 textField.setForeground(Color.decode("#FF6961"));
                 selectedTextBox = textField;
-                textField.setBorder(borderHiglighted);
+                textField.setBorder(borderHighlighted);
                 removeActionListeners();
                 deleteQuestionButtonAndAction();
                 }}); 
@@ -285,7 +290,6 @@ public class StudentClasses extends JFrame {
                     decorator.areYouSureMessageSetUp(deleteClassButton, selectedTextBox);
                 
                     selectedTextBox.setForeground(Color.GRAY);
-                    Border borderRegular = BorderFactory.createLineBorder(Color.GRAY, 2);
                     selectedTextBox.setBorder(borderRegular);
                 }
 
