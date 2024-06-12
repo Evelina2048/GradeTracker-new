@@ -68,13 +68,12 @@ public class StudentClasses extends JFrame {
         if (fileHandler.fileIsNotEmpty(filePath)) {//case for if existing file
             System.out.println("I have info to load!");
             ArrayList<String> myList = fileHandler.readFileToList(filePath);
-            System.out.println("classList<3"+set.getFinalClassList());
             for (int index=0; index<myList.size(); index++) {
                 creator.createTextBox(myList.get(index), 10, 50, true);
             }
             set.setClassList(myList);
             set.setFinalClassList(set.getCurrentPanelList());
-            System.out.println("classList<3``````"+set.getFinalClassList());
+            prepareTextboxForDeleteMode();
             
         }
 
@@ -236,24 +235,26 @@ public class StudentClasses extends JFrame {
         saveButtonAction();
         newClassButton.setEnabled(false);
         leaveDeleteModeButton();
-        for (int i = 0; i < set.getTextFieldPanel().getComponentCount(); i++) {
-            prepareTextboxForDeleteMode(i);
-        }
+        // for (int i = 0; i < set.getTextFieldPanel().getComponentCount(); i++) {
+        prepareTextboxForDeleteMode();
+        // }
     }
 
-    private void prepareTextboxForDeleteMode(int i) {
-        if (set.getTextFieldPanel().getComponent(i) instanceof JTextField) {
-            JTextField textField = (JTextField) set.getTextFieldPanel().getComponent(i);
-            addMouseListenerToTextbox(textField);
-        }
-        else if (set.getTextFieldPanel().getComponent(i) instanceof JPanel) {
-            JTextField textField = creator.goIntoPanelReturnTextbox((JPanel) set.getTextFieldPanel().getComponent(i), 0);
-            addMouseListenerToTextbox(textField);
-        }
-        
-        else {
-            System.out.println("There was an issue in delete mode. student classes" + set.getTextFieldPanel().getComponent(i).getClass().getName());
-        }
+    private void prepareTextboxForDeleteMode() {
+        for (int i = 0; i < set.getTextFieldPanel().getComponentCount(); i++) { 
+            if (set.getTextFieldPanel().getComponent(i) instanceof JTextField) {
+                JTextField textField = (JTextField) set.getTextFieldPanel().getComponent(i);
+                addMouseListenerToTextbox(textField);
+            }
+            else if (set.getTextFieldPanel().getComponent(i) instanceof JPanel) {
+                JTextField textField = creator.goIntoPanelReturnTextbox((JPanel) set.getTextFieldPanel().getComponent(i), 0);
+                addMouseListenerToTextbox(textField);
+            }
+            
+            else {
+                System.out.println("There was an issue in delete mode. student classes" + set.getTextFieldPanel().getComponent(i).getClass().getName());
+            }
+    }
     }
 
     private void addMouseListenerToTextbox(JTextField textField) {
@@ -324,7 +325,9 @@ public class StudentClasses extends JFrame {
             backToDefaultDeleteButton();
             newClassButton.setEnabled(true);
             for (int i = 0; i < set.getTextFieldPanel().getComponentCount(); i++) {
-                JTextField textField = (JTextField) set.getTextFieldPanel().getComponent(i);
+                //JTextField textField = (JTextField) set.getTextFieldPanel().getComponent(i);
+                JTextField textField = creator.goIntoPanelReturnTextbox((JPanel) set.getTextFieldPanel().getComponent(i), 0);
+                System.out.println("about to make editable");
                 textField.setEditable(true);
                 textField.setFocusable(true);
                 MouseListener[] listeners = textField.getMouseListeners();
