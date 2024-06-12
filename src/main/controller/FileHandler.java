@@ -5,7 +5,6 @@ import java.io.FileNotFoundException;
 import java.io.FileReader;
 import java.io.IOException;
 import java.util.ArrayList;
-import javax.swing.JFrame;
 import javax.swing.JPanel;
 import java.awt.FlowLayout;
 

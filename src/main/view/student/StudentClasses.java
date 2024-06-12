@@ -57,6 +57,12 @@ public class StudentClasses extends JFrame {
         window.setTitle("StudentClasses");
         window.setLayout(new BorderLayout());
 
+        loadIfNeeded();
+        westPanelCreate();
+        buttonSetUpAction();
+    }
+
+    private void loadIfNeeded() {
         String filePath = "/Users/evy/Documents/GradeTracker-new/src/main/view/UserInfo/StudentInfo/"+set.getUsername()+"/class.txt";
         if (fileHandler.fileIsNotEmpty(filePath)) {//case for if existing file
             System.out.println("I have info to load!");
@@ -74,8 +80,26 @@ public class StudentClasses extends JFrame {
         else {
             creator.createTextBox("Enter Class Name", 50, 50, false);
         }
-        westPanelCreate();
-        buttonSetUpAction();
+    }
+
+    private void westPanelCreate() {
+        createNewClassButton();
+        System.out.println("before creating delete class button"+set.getCurrentPanelList());
+        deleteClassButton();
+
+
+        JPanel buttonsPanel = new JPanel(new BorderLayout());
+
+        buttonsPanel.setBorder(BorderFactory.createEmptyBorder(0, 10, 0, 10));
+
+        buttonsPanel.setPreferredSize(new Dimension(100,0));
+        buttonsPanel.add(newClassButton,BorderLayout.WEST);
+        buttonsPanel.add(deleteClassButton, BorderLayout.EAST);
+    
+        southContainer.add(buttonsPanel,BorderLayout.CENTER);
+
+        window.add(southContainer, BorderLayout.SOUTH);
+
     }
 
     public void buttonSetUpAction() {
@@ -186,26 +210,6 @@ public class StudentClasses extends JFrame {
         });
     }
 
-    private void westPanelCreate() {
-        createNewClassButton();
-        System.out.println("before creating delete class button"+set.getCurrentPanelList());
-        deleteClassButton();
-
-
-        JPanel buttonsPanel = new JPanel(new BorderLayout());
-
-        buttonsPanel.setBorder(BorderFactory.createEmptyBorder(0, 10, 0, 10));
-
-        buttonsPanel.setPreferredSize(new Dimension(100,0));
-        buttonsPanel.add(newClassButton,BorderLayout.WEST);
-        buttonsPanel.add(deleteClassButton, BorderLayout.EAST);
-    
-        southContainer.add(buttonsPanel,BorderLayout.CENTER);
-
-        window.add(southContainer, BorderLayout.SOUTH);
-
-    }
-
     private void writeType() {
         creator.writeFolderToFile(textFieldEmptied);
         creator.setClassList();
@@ -239,23 +243,20 @@ public class StudentClasses extends JFrame {
     private void prepareTextboxForDeleteMode(int i) {
         if (set.getTextFieldPanel().getComponent(i) instanceof JTextField) {
             JTextField textField = (JTextField) set.getTextFieldPanel().getComponent(i);
-            textField.setEditable(false);
-            textField.setFocusable(false);
             addMouseListenerToTextbox(textField);
         }
         else if (set.getTextFieldPanel().getComponent(i) instanceof JPanel) {
             JTextField textField = creator.goIntoPanelReturnTextbox((JPanel) set.getTextFieldPanel().getComponent(i), 0);
-            textField.setEditable(false);
-            textField.setFocusable(false);
             addMouseListenerToTextbox(textField);
         }
         
         else {
-                System.out.println("There was an issue in delete mode. student classes" + set.getTextFieldPanel().getComponent(i).getClass().getName());
+            System.out.println("There was an issue in delete mode. student classes" + set.getTextFieldPanel().getComponent(i).getClass().getName());
         }
     }
 
     private void addMouseListenerToTextbox(JTextField textField) {
+        turnOffEditability(textField);
         textField.addMouseListener(new MouseAdapter() {
             @Override
             public void mouseClicked(MouseEvent e) {
@@ -267,6 +268,11 @@ public class StudentClasses extends JFrame {
                 removeActionListeners();
                 deleteQuestionButtonAndAction();
                 }}); 
+    }
+
+    private void turnOffEditability(JTextField textField) {
+        textField.setEditable(false);
+        textField.setFocusable(false);
     }
 
 
