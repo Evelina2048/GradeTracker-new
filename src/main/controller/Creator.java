@@ -455,6 +455,21 @@ public class Creator {
             return "something went wrong goIntoPanel";
         }
 
+        public JTextField goIntoPanelReturnTextbox(JPanel panel, int index) {
+            Container container = panel;
+            Component component = container.getComponent(index);
+            if (component instanceof JTextField) {
+                    JTextField textField = (JTextField) component;
+                    return textField;
+                } 
+            else if (component instanceof JPanel) {
+                    JPanel jpanel = (JPanel) component;
+                    goIntoPanel(jpanel, 0);
+                }
+                System.out.println("none of these" +component.getClass().getName());
+                return textField;
+            }
+
     // public void disableFocusListener() {
     //     focusGranted = false;
     // }

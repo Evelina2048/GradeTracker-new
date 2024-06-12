@@ -68,6 +68,7 @@ public class StudentClasses extends JFrame {
             set.setClassList(myList);
             set.setFinalClassList(set.getCurrentPanelList());
             System.out.println("classList<3``````"+set.getFinalClassList());
+            
         }
 
         else {
@@ -212,9 +213,8 @@ public class StudentClasses extends JFrame {
     }
 
     private void backToDefaultDeleteButton() {
-        for (ActionListener listener : deleteClassButton.getActionListeners()) {
-            deleteClassButton.removeActionListener(listener);
-        }
+        //if (set.getTextFieldPanel().getComponent(0).get) {}
+        removeActionListeners();
         deleteClassButton.setText("Delete Class Mode");
         deleteClassButton.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent e) {
@@ -237,25 +237,38 @@ public class StudentClasses extends JFrame {
     }
 
     private void prepareTextboxForDeleteMode(int i) {
-        JTextField textField = (JTextField) set.getTextFieldPanel().getComponent(i);
+        if (set.getTextFieldPanel().getComponent(i) instanceof JTextField) {
+            JTextField textField = (JTextField) set.getTextFieldPanel().getComponent(i);
             textField.setEditable(false);
             textField.setFocusable(false);
-            if (textField instanceof JTextField) {
-                textField.addMouseListener(new MouseAdapter() {
-                    @Override
-                    public void mouseClicked(MouseEvent e) {
-                        System.out.println("clicked");
-                        Border borderHiglighted = BorderFactory.createLineBorder(Color.decode("#FF6961"), 2);
-                        textField.setForeground(Color.decode("#FF6961"));
-                        selectedTextBox = textField;
-                        textField.setBorder(borderHiglighted);
-                        removeActionListeners();
-                        deleteQuestionButtonAndAction();
-                        }}); }
-            else {
-                System.out.println("There was an issue in delete mode. student classes" + textField.getClass().getName());
-            }
+            addMouseListenerToTextbox(textField);
+        }
+        else if (set.getTextFieldPanel().getComponent(i) instanceof JPanel) {
+            JTextField textField = creator.goIntoPanelReturnTextbox((JPanel) set.getTextFieldPanel().getComponent(i), 0);
+            textField.setEditable(false);
+            textField.setFocusable(false);
+            addMouseListenerToTextbox(textField);
+        }
+        
+        else {
+                System.out.println("There was an issue in delete mode. student classes" + set.getTextFieldPanel().getComponent(i).getClass().getName());
+        }
     }
+
+    private void addMouseListenerToTextbox(JTextField textField) {
+        textField.addMouseListener(new MouseAdapter() {
+            @Override
+            public void mouseClicked(MouseEvent e) {
+                System.out.println("clicked");
+                Border borderHiglighted = BorderFactory.createLineBorder(Color.decode("#FF6961"), 2);
+                textField.setForeground(Color.decode("#FF6961"));
+                selectedTextBox = textField;
+                textField.setBorder(borderHiglighted);
+                removeActionListeners();
+                deleteQuestionButtonAndAction();
+                }}); 
+    }
+
 
     private void deleteQuestionButtonAndAction() {
         deleteClassButton.setText("Delete?");
