@@ -18,12 +18,18 @@ import java.awt.GridBagConstraints;
 import java.awt.event.ActionListener;
 import java.awt.event.ActionEvent;
 import java.awt.FlowLayout;
-///
+
 import javax.swing.BorderFactory;
 import javax.swing.JTextField;
 import java.awt.Dimension;
 
 import main.model.Set;
+
+//files
+import java.nio.file.Files;
+import java.nio.file.Path;
+import java.nio.file.Paths;
+import java.io.IOException;
 
 ///
 
@@ -99,6 +105,15 @@ public class Decorator {
                 }
                 
                 creator.deleteTextBox(panel);
+                //Files.deleteIfExists("/Users/evy/Documents/GradeTracker-new/src/main/view/UserInfo/StudentInfo/Username/e.txt");
+                Path filePath = Paths.get("/Users/evy/Documents/GradeTracker-new/src/main/view/UserInfo/StudentInfo/"+set.getUsername()+"/"+textField.getText()+".txt");
+                
+                try {
+                    Files.deleteIfExists(filePath);
+                } catch (IOException e1) {
+                    e1.printStackTrace();
+                }
+
                 dialog.setVisible(false);
                 dialog.dispose(); 
                 
