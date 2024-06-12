@@ -123,7 +123,10 @@ public class StudentStatCollect extends JFrame {
         }
         classLabelPanel.add(textBoxPanel);
         window.add(classLabelPanel);
-        creator.windowFix();    
+        creator.windowFix();
+        if (numOfBoxes == 0) {
+            boxStarterPack();
+        }    
     }
 
     private void saveAction(JButton saveButton) {
@@ -163,7 +166,7 @@ public class StudentStatCollect extends JFrame {
     private void visitNextStudentClass() {
         //readClass(finalClassList);
         String filePath = "/Users/evy/Documents/GradeTracker-new/src/main/view/UserInfo/StudentInfo/"+set.getUsername()+"/"+set.getFinalClassList().get(set.getClassListIndex())+".txt";
-        if (fileHandler.fileIsNotEmpty(filePath)) {
+        if (fileHandler.fileExists(filePath)) {
             textBoxPanelReset();
             boxManageCreate(set.getFinalClassList().get(set.getClassListIndex()), "JLabel"); //displays class label 
             JPanel testPanel = fileHandler.loadTextboxes(filePath);
@@ -173,8 +176,7 @@ public class StudentStatCollect extends JFrame {
             }
             classLabelPanel.add(textBoxPanel);
             if (textBoxPanel.getComponentCount() <= 1) { //The reason it is <=1 and not 0, is to account for the classLabel
-                boxManageCreate("Credits (optional)", "JTextField");
-                newSet();
+                boxStarterPack();
             }
             creator.windowFix();
         }
@@ -184,6 +186,11 @@ public class StudentStatCollect extends JFrame {
             studentStatCollect.DisplayClasses();
         }
 
+    }
+
+    private void boxStarterPack() {
+        boxManageCreate("Credits (optional)", "JTextField");
+        newSet();
     }
 
    private void createNewTypeButton() {

@@ -65,7 +65,7 @@ public class StudentClasses extends JFrame {
 
     private void loadIfNeeded() {
         String filePath = "/Users/evy/Documents/GradeTracker-new/src/main/view/UserInfo/StudentInfo/"+set.getUsername()+"/class.txt";
-        if (fileHandler.fileIsNotEmpty(filePath)) {//case for if existing file
+        if (fileHandler.fileExists(filePath)) {//case for if existing file
             System.out.println("I have info to load!");
             ArrayList<String> myList = fileHandler.readFileToList(filePath);
             for (int index=0; index<myList.size(); index++) {
@@ -172,7 +172,7 @@ public class StudentClasses extends JFrame {
             creator.hideContainer();
             set.setFinalClassList(set.getCurrentPanelList());
             StudentStatCollect studentStatCollect = new StudentStatCollect();
-             if (fileHandler.fileIsNotEmpty("/Users/evy/Documents/GradeTracker-new/src/main/view/UserInfo/StudentInfo/" + set.getUsername() + "/" + set.getFinalClassList().get(0) + ".txt")) {
+             if (fileHandler.fileExists("/Users/evy/Documents/GradeTracker-new/src/main/view/UserInfo/StudentInfo/" + set.getUsername() + "/" + set.getFinalClassList().get(0) + ".txt")) {
                 studentStatCollect.addLoadedBoxes();
             }
 
@@ -284,9 +284,14 @@ public class StudentClasses extends JFrame {
 
     private void deleteQuestionButtonAndAction() {
         deleteClassButton.setText("Delete?");
+        String filePath = "/Users/evy/Documents/GradeTracker-new/src/main/view/UserInfo/StudentInfo/"+set.getUsername()+"/"+selectedTextBox.getText()+".txt";
         deleteClassButton.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent e) {
-                if (set.getLoadedState(selectedTextBox)) {
+                //if (set.getLoadedState(selectedTextBox) && (filePath.isEmpty() == false)) {
+                //String filePath = "/Users/evy/Documents/GradeTracker-new/src/main/view/UserInfo/StudentInfo/" + set.getUsername() + "/" + set.getFinalClassList().get(0) + ".txt";
+                //if (fileHandler.fileExists(filePath) && fileHandler.fileIsNotEmpty(filePath)) {
+                
+                if (set.getLoadedState(selectedTextBox) && (fileHandler.fileExists(filePath)) && fileHandler.fileIsNotEmpty(filePath)) {
                     //System.out.println("text: "+ selectedTextBox.getText()+" loaded state: "+ set.getLoadedState(textField));
                     decorator.areYouSureMessageSetUp(deleteClassButton, selectedTextBox);
                 

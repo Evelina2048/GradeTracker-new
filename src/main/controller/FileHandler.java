@@ -4,6 +4,9 @@ import java.io.BufferedReader;
 import java.io.FileNotFoundException;
 import java.io.FileReader;
 import java.io.IOException;
+import java.nio.file.Files;
+import java.nio.file.Path;
+import java.nio.file.Paths;
 import java.util.ArrayList;
 import javax.swing.JPanel;
 import java.awt.FlowLayout;
@@ -38,7 +41,7 @@ public class FileHandler {
         }
 
 
-        public boolean fileIsNotEmpty(String filePath) {
+        public boolean fileExists(String filePath) {
             try {
                 BufferedReader reader = new BufferedReader(new FileReader(filePath));
                 System.out.println("File exists"); 
@@ -60,7 +63,25 @@ public class FileHandler {
                 return false;
             }
         
-    }
+        }
+
+        public boolean fileIsNotEmpty(String filePath) {
+            Path path = Paths.get(filePath);
+            try {
+                if(Files.size(path) > 0) {
+                    return true;
+                }
+
+                else if(Files.size(path) <= 0) {
+                    return false;
+                }
+
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
+            System.out.println("something went wrong in the file is not empty function");
+            return true;
+        }
 
 
         public JPanel loadTextboxes(String filePath) {
