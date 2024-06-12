@@ -57,12 +57,6 @@ public class StudentClasses extends JFrame {
         window.setTitle("StudentClasses");
         window.setLayout(new BorderLayout());
 
-    
-        
-        // if (set.getFinalClassList() != null) {//case for if existing file
-        //     System.out.println("I have info to load!");
-
-        // }
         String filePath = "/Users/evy/Documents/GradeTracker-new/src/main/view/UserInfo/StudentInfo/"+set.getUsername()+"/class.txt";
         if (fileHandler.fileIsNotEmpty(filePath)) {//case for if existing file
             System.out.println("I have info to load!");
@@ -74,93 +68,49 @@ public class StudentClasses extends JFrame {
             set.setClassList(myList);
             set.setFinalClassList(set.getCurrentPanelList());
             System.out.println("classList<3``````"+set.getFinalClassList());
-
-
         }
 
         else {
             creator.createTextBox("Enter Class Name", 50, 50, false);
         }
-        //textField.setVisible(true);
         westPanelCreate();
         buttonSetUpAction();
     }
 
     public void buttonSetUpAction() {
+        JPanel backButtonPanel = makeBackButtonPanel();
+
+        JPanel saveButtonPanel = makeSaveButtonPanel();
+
+        JPanel nextButtonPanel = makeNextButtonPanel();
+
+        backNextButtonsPanel = creator.makeBackNextButtonsPanel(backButtonPanel, saveButtonPanel, nextButtonPanel);
+        southContainer.add(backNextButtonsPanel, BorderLayout.SOUTH);
+        window.add(southContainer, BorderLayout.SOUTH);
+    }
+
+    private JPanel makeBackButtonPanel() {
         JButton backButton = creator.backButtonCreate();
-        ///
         JPanel backButtonPanel = new JPanel();
         backButtonPanel.add(backButton);
-        ////
         backButton.setPreferredSize(new Dimension(87, 29));
         backButton.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent e) {
                 Gather gather = new Gather();
                 gather.setTextToUsername();
-                //gather.showWindow(window.getX(), window.getY());
                 hideWindow(); 
-               //backButtonAction(main, newUser, studentOrTeacher, existingOrNew);
-            }
-        });
+        }});
+        return backButtonPanel;
+    }
 
+    private JPanel makeSaveButtonPanel() {
         saveButton = creator.saveButtonCreate();
         saveButton.setEnabled(false);
         JPanel saveButtonPanel = new JPanel();
         saveButtonPanel.add(saveButton);
-
         saveButtonAction();
 
-        JButton nextButton = creator.nextButtonCreate();
-        JPanel nextButtonPanel = new JPanel();
-        nextButtonPanel.add(nextButton);
-        nextButton.setPreferredSize(new Dimension(87, 29));
-        nextButton.addActionListener(new ActionListener() {
-            public void actionPerformed(ActionEvent e) {
-                ArrayList<String> classList;
-                classList = set.getCurrentPanelList();
-                System.out.println("aaaaaaaa: "+classList);
-                //ArrayList<String> classList = set.getFinalClassList();
-                System.out.println("|||before class list set in nexttttttt:<3<3 "+ classList+ "......"+set.getCurrentPanelList());
-                set.setClassList(classList);
-                writeType();
-                System.out.println("nextbuttonhit");
-                creator.writeFolderToFile(textFieldEmptied);
-                creator.writeTextToFile("/Users/evy/Documents/GradeTracker-new/src/main/view/UserInfo/StudentInfo/" + set.getUsername() + "/class.txt", creator.getTextFieldContainer());
-                set.setFinalClassList(classList); //lookie
-                System.out.println("|||after right before class list set in nexttttttt:<3<3 "+ classList+ "......"+set.getCurrentPanelList());
-                
-                hideWindow();
-                creator.hideContainer();
-                System.out.println("before stat collect called: "+set.getCurrentPanelList()+" "+set.getFinalClassList());
-                set.setFinalClassList(set.getCurrentPanelList());
-                
-                //check if there is a file under the next index
-                //need command to check if there are other files in this username folder
-                StudentStatCollect studentStatCollect = new StudentStatCollect();
-                 if (fileHandler.fileIsNotEmpty("/Users/evy/Documents/GradeTracker-new/src/main/view/UserInfo/StudentInfo/" + set.getUsername() + "/" + set.getFinalClassList().get(0) + ".txt")) {
-                    //load it
-                    studentStatCollect.addLoadedBoxes();
-                    // int numberOfComponents = loadedPanel.getComponentCount();
-                    // //numOfBoxes += numberOfComponents;
-                    // for (int i = 0; i < numberOfComponents; i++) {
-                    //     southContainer.add(loadedPanel.getComponent(0));
-                    // }
-                 }
-
-                else {
-                    studentStatCollect.DisplayClasses();
-                }
-                //window.add(southContainer);
-
-                //if (set.getFinalClassList().get(0))
-            }
-        });
-        backNextButtonsPanel = creator.makeBackNextButtonsPanel(backButtonPanel, saveButtonPanel, nextButtonPanel);
-        southContainer.add(backNextButtonsPanel, BorderLayout.SOUTH);
-
-        System.out.println("3classList<3"+set.getFinalClassList());
-        //set.setTextFieldPanel();
-        window.add(southContainer, BorderLayout.SOUTH);
+        return saveButtonPanel;
     }
 
     private void saveButtonAction() {
@@ -172,7 +122,40 @@ public class StudentClasses extends JFrame {
         });
     }
 
-    //create textbox "Class" placeholder
+    private JPanel makeNextButtonPanel() {
+        JButton nextButton = creator.nextButtonCreate();
+        JPanel nextButtonPanel = new JPanel();
+        nextButtonPanel.add(nextButton);
+        nextButton.setPreferredSize(new Dimension(87, 29));
+        nextButton.addActionListener(new ActionListener() {
+            public void actionPerformed(ActionEvent e) {
+                nextButtonAction();
+            }
+        });
+        return nextButtonPanel;
+    }
+    private void nextButtonAction() {
+            ArrayList<String> classList;
+            classList = set.getCurrentPanelList();
+            set.setClassList(classList);
+            writeType();
+            System.out.println("nextbuttonhit");
+            creator.writeFolderToFile(textFieldEmptied);
+            creator.writeTextToFile("/Users/evy/Documents/GradeTracker-new/src/main/view/UserInfo/StudentInfo/" + set.getUsername() + "/class.txt", creator.getTextFieldContainer());
+            set.setFinalClassList(classList); //lookie
+            hideWindow();
+            creator.hideContainer();
+            set.setFinalClassList(set.getCurrentPanelList());
+            StudentStatCollect studentStatCollect = new StudentStatCollect();
+             if (fileHandler.fileIsNotEmpty("/Users/evy/Documents/GradeTracker-new/src/main/view/UserInfo/StudentInfo/" + set.getUsername() + "/" + set.getFinalClassList().get(0) + ".txt")) {
+                studentStatCollect.addLoadedBoxes();
+            }
+
+            else {
+                studentStatCollect.DisplayClasses();
+            }
+    }
+
     private void createNewClassButton() {
         newClassButton = new JButton("New Class");
         newClassButton.setPreferredSize(new Dimension(87, 50));
@@ -249,7 +232,12 @@ public class StudentClasses extends JFrame {
         newClassButton.setEnabled(false);
         leaveDeleteModeButton();
         for (int i = 0; i < set.getTextFieldPanel().getComponentCount(); i++) {
-            JTextField textField = (JTextField) set.getTextFieldPanel().getComponent(i);
+            prepareTextboxForDeleteMode(i);
+        }
+    }
+
+    private void prepareTextboxForDeleteMode(int i) {
+        JTextField textField = (JTextField) set.getTextFieldPanel().getComponent(i);
             textField.setEditable(false);
             textField.setFocusable(false);
             if (textField instanceof JTextField) {
@@ -261,45 +249,41 @@ public class StudentClasses extends JFrame {
                         textField.setForeground(Color.decode("#FF6961"));
                         selectedTextBox = textField;
                         textField.setBorder(borderHiglighted);
-                        for (ActionListener listener : deleteClassButton.getActionListeners()) {
-                            deleteClassButton.removeActionListener(listener);
-                        }
-                        deleteClassButton.setText("Delete?");
-                        deleteClassButton.addActionListener(new ActionListener() {
-                            public void actionPerformed(ActionEvent e) {
-                                if (set.getLoadedState(selectedTextBox)) {
-                                    System.out.println("text: "+ selectedTextBox.getText()+" loaded state: "+ set.getLoadedState(textField));
-                                    decorator.areYouSureMessageSetUp(deleteClassButton, selectedTextBox);
-                                
-                                    selectedTextBox.setForeground(Color.GRAY);
-                                    Border borderRegular = BorderFactory.createLineBorder(Color.GRAY, 2);
-                                    selectedTextBox.setBorder(borderRegular);
-                                }
-
-                                else {
-                                    JPanel selectedBoxPanel = new JPanel();
-                                    selectedBoxPanel.add(selectedTextBox);
-                                    creator.deleteTextBox(selectedBoxPanel);
-                                }
-                                leaveDeleteModeButton();
-
-                            }
-                        });
-
-                    }
-                });
-                }
+                        removeActionListeners();
+                        deleteQuestionButtonAndAction();
+                        }}); }
             else {
                 System.out.println("There was an issue in delete mode. student classes" + textField.getClass().getName());
             }
-    
-        }
+    }
 
-        // textField.addMouseListener(new MouseAdapter() { 
-        //     public void mousePressed(MouseEvent me) { 
-        //       System.out.println(me); 
-        //     } 
-        //   }); 
+    private void deleteQuestionButtonAndAction() {
+        deleteClassButton.setText("Delete?");
+        deleteClassButton.addActionListener(new ActionListener() {
+            public void actionPerformed(ActionEvent e) {
+                if (set.getLoadedState(selectedTextBox)) {
+                    //System.out.println("text: "+ selectedTextBox.getText()+" loaded state: "+ set.getLoadedState(textField));
+                    decorator.areYouSureMessageSetUp(deleteClassButton, selectedTextBox);
+                
+                    selectedTextBox.setForeground(Color.GRAY);
+                    Border borderRegular = BorderFactory.createLineBorder(Color.GRAY, 2);
+                    selectedTextBox.setBorder(borderRegular);
+                }
+
+                else {
+                    JPanel selectedBoxPanel = new JPanel();
+                    selectedBoxPanel.add(selectedTextBox);
+                    creator.deleteTextBox(selectedBoxPanel);
+                }
+                leaveDeleteModeButton();
+
+            } });
+    }
+
+    private void removeActionListeners() {
+        for (ActionListener listener : deleteClassButton.getActionListeners()) {
+            deleteClassButton.removeActionListener(listener);
+        }
     }
 
     private void leaveDeleteModeButton() {
@@ -307,8 +291,11 @@ public class StudentClasses extends JFrame {
             deleteClassButton.removeActionListener(listener);
         }
         deleteClassButton.setText("Leave Delete Mode");
-        System.out.println("in delete mode");
 
+        leaveDeleteModeAction();
+    }
+
+    private void leaveDeleteModeAction() {
         deleteClassButton.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent e) {
             backToDefaultDeleteButton();
@@ -321,18 +308,13 @@ public class StudentClasses extends JFrame {
                 if (listeners.length > 0) {
                     MouseListener lastListener = listeners[listeners.length - 1];
                     textField.removeMouseListener(lastListener);
-                    System.out.println("Most recent mouse listener removed.");
                 }
-
-            
             }
-            //break out of rest of function;
             return;
-
             }
         });
     }
-    //create JButton "New Class"
+
     private void hideWindow() {
         backNextButtonsPanel.setVisible(false);
         newClassButton.setVisible(false);
@@ -340,7 +322,6 @@ public class StudentClasses extends JFrame {
         southContainer.setVisible(false);
         creator.getTextFieldContainer().setVisible(false);
 
-        //textField.setVisible(false);
     }
 
     }
