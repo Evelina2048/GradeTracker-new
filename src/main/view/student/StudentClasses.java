@@ -42,8 +42,7 @@ public class StudentClasses extends JFrame {
     Decorator decorate = new Decorator();
     FileHandler fileHandler = new FileHandler();
     Set set;
-    JPanel instructionsPanel = new JPanel();
-    JLabel instructionsWords = new JLabel();
+    JPanel instructionsPanel;
 
     //JTextField textField = decorate.decorateTextBox();
 
@@ -61,7 +60,6 @@ public class StudentClasses extends JFrame {
         System.out.println("in student classes");
         window.setTitle("StudentClasses");
         window.setLayout(new BorderLayout());
-
         instructionsWordsAndPanel("Edit Textbox Mode");
         loadIfNeeded();
         westPanelCreate();
@@ -242,13 +240,18 @@ public class StudentClasses extends JFrame {
         newClassButton.setEnabled(false);
         leaveDeleteModeButton();
         prepareTextboxForDeleteMode();
+
+        window.remove(instructionsPanel);
         instructionsWordsAndPanel("Click on a box to select it");
         
     }
 
     private void instructionsWordsAndPanel(String text) {
-        instructionsWords = new JLabel(text);
+        instructionsPanel = new JPanel();
+        //instructionsWords = new JLabel();
+        JLabel instructionsWords = new JLabel(text);
         instructionsPanel = decorator.InstructionsPanelDecorate(instructionsPanel, instructionsWords);
+        creator.windowFix();
     }
 
     private void prepareTextboxForDeleteMode() {
@@ -295,10 +298,15 @@ public class StudentClasses extends JFrame {
 
     private void deleteQuestionButtonAndAction() {
         deleteClassButton.setText("Delete?");
+        window.remove(instructionsPanel);
         instructionsWordsAndPanel("Hit Delete Button to Delete");
         String filePath = "/Users/evy/Documents/GradeTracker-new/src/main/view/UserInfo/StudentInfo/"+set.getUsername()+"/"+selectedTextBox.getText()+".txt";
+        removeActionListeners();
+        System.out.println("is this even being run");
         deleteClassButton.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent e) {
+                System.out.println("letssss gooooo");
+                System.out.println("count:" + set.getTextFieldPanel().getComponentCount());
                 saveButtonAction();
                 
                 if (set.getLoadedState(selectedTextBox) && (fileHandler.fileExists(filePath)) && fileHandler.fileIsNotEmpty(filePath)) {
@@ -314,9 +322,32 @@ public class StudentClasses extends JFrame {
                     selectedBoxPanel.add(selectedTextBox);
                     creator.deleteTextBox(selectedBoxPanel);
                 }
-                leaveDeleteModeButton();
 
-            } });
+
+                pickAppropriateInstructionWordsAndPanels();
+
+                leaveDeleteModeButton();
+            }
+            });
+    }
+
+    private void pickAppropriateInstructionWordsAndPanels() {
+        window.remove(instructionsPanel);
+        if (set.getTextFieldPanel().getComponentCount() > 0) {
+            instructionsWordsAndPanel("Box deleted");
+            System.out.println("boxdeleted");
+            
+        }
+
+        else if (set.getTextFieldPanel().getComponentCount() == 0) {
+            instructionsWordsAndPanel("All boxes deleted. Leave delete mode to edit.");
+            System.out.println("all boxes deleted");
+            
+        }
+
+        else {
+            System.out.println("an error");
+        }
     }
 
     private void removeActionListeners() {
@@ -335,33 +366,38 @@ public class StudentClasses extends JFrame {
     }
 
     private void leaveDeleteModeAction() {
+        removeActionListeners();
         deleteClassButton.addActionListener(new ActionListener() {
+            //instructionsWordsAndPanel("<3");
+            //instructionsWordsAndPanel("h");
             public void actionPerformed(ActionEvent e) {
-            backToDefaultDeleteButton();
-            newClassButton.setEnabled(true);
-            for (int i = 0; i < set.getTextFieldPanel().getComponentCount(); i++) {
-                //JTextField textField = (JTextField) set.getTextFieldPanel().getComponent(i);
-                System.out.println("look: "+set.getTextFieldPanel().getComponent(i).getClass().getName());
+                window.remove(instructionsPanel);
+                instructionsWordsAndPanel("Left Delete Mode. In Edit Mode");
+                backToDefaultDeleteButton();
+                newClassButton.setEnabled(true);
+                for (int i = 0; i < set.getTextFieldPanel().getComponentCount(); i++) {
+                    //JTextField textField = (JTextField) set.getTextFieldPanel().getComponent(i);
+                    System.out.println("look: "+set.getTextFieldPanel().getComponent(i).getClass().getName());
 
-                JTextField textField = new JTextField();
-                if (set.getTextFieldPanel().getComponent(i) instanceof JTextField) {
-                    textField = (JTextField) set.getTextFieldPanel().getComponent(i);
-                }
+                    JTextField textField = new JTextField();
+                    if (set.getTextFieldPanel().getComponent(i) instanceof JTextField) {
+                        textField = (JTextField) set.getTextFieldPanel().getComponent(i);
+                    }
 
-                else {
-                    textField = creator.goIntoPanelReturnTextbox((JPanel) set.getTextFieldPanel().getComponent(i), 0);
+                    else {
+                        textField = creator.goIntoPanelReturnTextbox((JPanel) set.getTextFieldPanel().getComponent(i), 0);
+                    }
+                    System.out.println("about to make editable");
+                    textField.setEditable(true);
+                    textField.setFocusable(true);
+                    MouseListener[] listeners = textField.getMouseListeners();
+                    if (listeners.length > 0) {
+                        MouseListener lastListener = listeners[listeners.length - 1];
+                        textField.removeMouseListener(lastListener);
+                    }
                 }
-                System.out.println("about to make editable");
-                textField.setEditable(true);
-                textField.setFocusable(true);
-                MouseListener[] listeners = textField.getMouseListeners();
-                if (listeners.length > 0) {
-                    MouseListener lastListener = listeners[listeners.length - 1];
-                    textField.removeMouseListener(lastListener);
+                return;
                 }
-            }
-            return;
-            }
         });
     }
 
