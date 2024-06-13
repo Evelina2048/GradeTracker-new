@@ -3,6 +3,8 @@ package main.view.student;
 import javax.swing.BorderFactory;
 import javax.swing.JButton;
 import javax.swing.JFrame;
+import javax.swing.JLabel;
+
 import java.awt.BorderLayout;
 import java.awt.Dimension;
 import javax.swing.JPanel;
@@ -40,6 +42,8 @@ public class StudentClasses extends JFrame {
     Decorator decorate = new Decorator();
     FileHandler fileHandler = new FileHandler();
     Set set;
+    JPanel instructionsPanel = new JPanel();
+    JLabel instructionsWords = new JLabel();
 
     //JTextField textField = decorate.decorateTextBox();
 
@@ -58,6 +62,7 @@ public class StudentClasses extends JFrame {
         window.setTitle("StudentClasses");
         window.setLayout(new BorderLayout());
 
+        instructionsWordsAndPanel("Edit Textbox Mode");
         loadIfNeeded();
         westPanelCreate();
         buttonSetUpAction();
@@ -133,18 +138,19 @@ public class StudentClasses extends JFrame {
         saveButton.setEnabled(false);
         JPanel saveButtonPanel = new JPanel();
         saveButtonPanel.add(saveButton);
-        saveButtonAction();
+        //saveButtonAction();
+        saveButton.addActionListener(new ActionListener() {
+            public void actionPerformed(ActionEvent e) {
+                saveButtonAction();
+            }
+        });
 
         return saveButtonPanel;
     }
 
     private void saveButtonAction() {
-        saveButton.addActionListener(new ActionListener() {
-            public void actionPerformed(ActionEvent e) {
-                writeType();
-                saveButton.setEnabled(false);
-            }
-        });
+        writeType();
+        saveButton.setEnabled(false);
     }
 
     private JPanel makeNextButtonPanel() {
@@ -235,9 +241,14 @@ public class StudentClasses extends JFrame {
         saveButtonAction();
         newClassButton.setEnabled(false);
         leaveDeleteModeButton();
-        // for (int i = 0; i < set.getTextFieldPanel().getComponentCount(); i++) {
         prepareTextboxForDeleteMode();
-        // }
+        instructionsWordsAndPanel("Click on a box to select it");
+        
+    }
+
+    private void instructionsWordsAndPanel(String text) {
+        instructionsWords = new JLabel(text);
+        instructionsPanel = decorator.InstructionsPanelDecorate(instructionsPanel, instructionsWords);
     }
 
     private void prepareTextboxForDeleteMode() {
@@ -284,12 +295,11 @@ public class StudentClasses extends JFrame {
 
     private void deleteQuestionButtonAndAction() {
         deleteClassButton.setText("Delete?");
+        instructionsWordsAndPanel("Hit Delete Button to Delete");
         String filePath = "/Users/evy/Documents/GradeTracker-new/src/main/view/UserInfo/StudentInfo/"+set.getUsername()+"/"+selectedTextBox.getText()+".txt";
         deleteClassButton.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent e) {
-                //if (set.getLoadedState(selectedTextBox) && (filePath.isEmpty() == false)) {
-                //String filePath = "/Users/evy/Documents/GradeTracker-new/src/main/view/UserInfo/StudentInfo/" + set.getUsername() + "/" + set.getFinalClassList().get(0) + ".txt";
-                //if (fileHandler.fileExists(filePath) && fileHandler.fileIsNotEmpty(filePath)) {
+                saveButtonAction();
                 
                 if (set.getLoadedState(selectedTextBox) && (fileHandler.fileExists(filePath)) && fileHandler.fileIsNotEmpty(filePath)) {
                     //System.out.println("text: "+ selectedTextBox.getText()+" loaded state: "+ set.getLoadedState(textField));
@@ -331,7 +341,16 @@ public class StudentClasses extends JFrame {
             newClassButton.setEnabled(true);
             for (int i = 0; i < set.getTextFieldPanel().getComponentCount(); i++) {
                 //JTextField textField = (JTextField) set.getTextFieldPanel().getComponent(i);
-                JTextField textField = creator.goIntoPanelReturnTextbox((JPanel) set.getTextFieldPanel().getComponent(i), 0);
+                System.out.println("look: "+set.getTextFieldPanel().getComponent(i).getClass().getName());
+
+                JTextField textField = new JTextField();
+                if (set.getTextFieldPanel().getComponent(i) instanceof JTextField) {
+                    textField = (JTextField) set.getTextFieldPanel().getComponent(i);
+                }
+
+                else {
+                    textField = creator.goIntoPanelReturnTextbox((JPanel) set.getTextFieldPanel().getComponent(i), 0);
+                }
                 System.out.println("about to make editable");
                 textField.setEditable(true);
                 textField.setFocusable(true);
