@@ -258,11 +258,11 @@ public class StudentClasses extends JFrame {
         for (int i = 0; i < set.getTextFieldPanel().getComponentCount(); i++) { 
             if (set.getTextFieldPanel().getComponent(i) instanceof JTextField) {
                 JTextField textField = (JTextField) set.getTextFieldPanel().getComponent(i);
-                addMouseListenerToTextbox(textField);
+                addMouseListenerToTextboxAndFrame(textField);
             }
             else if (set.getTextFieldPanel().getComponent(i) instanceof JPanel) {
                 JTextField textField = creator.goIntoPanelReturnTextbox((JPanel) set.getTextFieldPanel().getComponent(i), 0);
-                addMouseListenerToTextbox(textField);
+                addMouseListenerToTextboxAndFrame(textField);
             }
             
             else {
@@ -271,7 +271,7 @@ public class StudentClasses extends JFrame {
     }
     }
 
-    private void addMouseListenerToTextbox(JTextField textField) {
+    private void addMouseListenerToTextboxAndFrame(JTextField textField) {
         turnOffEditability(textField);
         textField.addMouseListener(new MouseAdapter() {
             @Override
@@ -288,6 +288,8 @@ public class StudentClasses extends JFrame {
                 removeActionListeners();
                 deleteQuestionButtonAndAction();
                 }}); 
+
+        windowMouseListener();
     }
 
     private void turnOffEditability(JTextField textField) {
@@ -401,12 +403,28 @@ public class StudentClasses extends JFrame {
         });
     }
 
+    private void windowMouseListener() {
+        window.getContentPane().addMouseListener(new MouseAdapter() {
+            @Override
+            public void mouseClicked(MouseEvent e) {
+                System.out.println("in frame");
+                if (selectedTextBox != null) {
+                    selectedTextBox.setForeground(Color.GRAY);
+                    selectedTextBox.setBorder(borderRegular);
+                }
+                
+            }
+        });
+
+    }
+
     private void hideWindow() {
         backNextButtonsPanel.setVisible(false);
         newClassButton.setVisible(false);
         deleteClassButton.setVisible(false);
         southContainer.setVisible(false);
         creator.getTextFieldContainer().setVisible(false);
+        instructionsPanel.setVisible(false);
 
     }
 
