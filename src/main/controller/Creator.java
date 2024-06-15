@@ -268,22 +268,29 @@ public class Creator {
         }
     }
 
-    public JTextField createTextBox(String placeholder, int width, int height, Boolean loaded) { //something here is causing the issue
+    public JTextField createTextBox(String placeholder, Boolean loaded) { //something here is causing the issue
         debugPanelComponentCount();
         Decorator decorate = new Decorator();
         textboxCounter++;
+        JPanel panelForSize = new JPanel();
         if (textboxCounter <= 30) {
             textField = decorate.decorateTextBox(placeholder);
+            System.out.println("############"+textField.getSize());
             set.setEmptiedState(textField, false);
             addDocumentListener(textField);
-            debugPanelComponentCount();
+            //debugPanelComponentCount();
             textFieldPanel.add(textField); 
-            debugPanelComponentCount();
+            //debugPanelComponentCount();
+            System.out.println("%%%%%%%%%%%"+textField.getSize());
             textFieldPanelText.add(textField.getText());
-            textField.setPreferredSize(new Dimension(width, height));
             window.add(textFieldPanel);
+            System.out.println("^^^^^^^^^^^"+textField.getSize());
             textFieldFocusListener(textField, placeholder);
+            System.out.println("&&&&&&&&&&&&"+textField.getSize());///
+            //panelForSize.add(textField);
             windowFix();
+            //panelForSize.setSize(new Dimension(140, 100));
+            System.out.println("$$$$$$$$$$$"+textField.getSize());////
         }
         if (loaded) {
             set.setEmptiedState(textField, true);
@@ -295,7 +302,7 @@ public class Creator {
         }
 
         set.setTextFieldPanel(textFieldPanel);
-
+        System.out.println("@@@@@@@@@@"+textField.getSize());
         return textField;
     }
 
@@ -410,7 +417,7 @@ public class Creator {
 
 
             if (my_type.equals("JTextField")) {
-                JTextField toAddType = createTextBox(placeholder, 10, 10, loaded);
+                JTextField toAddType = createTextBox(placeholder, loaded);
                 gradeTypePanel.add(toAddType);
             }
 

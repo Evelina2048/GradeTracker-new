@@ -53,7 +53,7 @@ public class StudentStatCollect extends JFrame {
         buttonSetUpAction();
         //DisplayClasses();
         window.setTitle("StudentStatCollect");
-        window.setPreferredSize(new Dimension(1000, 1000));
+        //window.setPreferredSize(new Dimension(800, 1000));
     }
 
     public void buttonSetUpAction() {
