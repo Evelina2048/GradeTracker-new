@@ -72,7 +72,7 @@ public class StudentClasses extends JFrame {
             System.out.println("I have info to load!");
             ArrayList<String> myList = fileHandler.readFileToList(filePath);
             for (int index=0; index<myList.size(); index++) {
-                creator.createTextBox(myList.get(index), true);
+                creator.createTextBox(myList.get(index), 10, 50, true);
             }
             set.setClassList(myList);
             set.setFinalClassList(set.getCurrentPanelList());
@@ -81,7 +81,7 @@ public class StudentClasses extends JFrame {
         }
 
         else {
-            creator.createTextBox("Enter Class Name", false);
+            creator.createTextBox("Enter Class Name", 50, 50, false);
         }
     }
 
@@ -190,7 +190,7 @@ public class StudentClasses extends JFrame {
         newClassButton.setPreferredSize(new Dimension(87, 50));
         newClassButton.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent e) {
-                creator.createTextBox("Enter Class Name", false);
+                creator.createTextBox("Enter Class Name", 50, 50, false);
                 System.out.println("class list in new class button"+ set.getCurrentPanelList());
                 
         }
