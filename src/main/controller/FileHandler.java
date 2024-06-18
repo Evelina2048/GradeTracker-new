@@ -90,7 +90,7 @@ public class FileHandler {
             JPanel bigPanel = new JPanel(new FlowLayout(FlowLayout.LEFT));
             System.out.println("arrayList"+arrayList);
             for (int i = 0; i<arrayList.size(); i++) {
-                bigPanel.add(creator.boxCreate(arrayList.get(i), "JTextField", true));
+                bigPanel.add(creator.typeBox(arrayList.get(i), "JTextField", true));
             }
             set.setTextFieldPanel(bigPanel);
             return bigPanel;

@@ -116,7 +116,7 @@ public class StudentStatCollect extends JFrame {
     }
 
     public void addLoadedBoxes() {
-        textBoxPanel.add(creator.boxCreate(set.getFinalClassList().get(0), "JLabel", true));
+        textBoxPanel.add(creator.typeBox(set.getFinalClassList().get(0), "JLabel", true));
         String filePath = "/Users/evy/Documents/GradeTracker-new/src/main/view/UserInfo/StudentInfo/"+set.getUsername()+"/"+set.getFinalClassList().get(set.getClassListIndex())+".txt";
         JPanel testPanel = fileHandler.loadTextboxes(filePath);
         int numberOfComponents = testPanel.getComponentCount();
@@ -293,7 +293,7 @@ public class StudentStatCollect extends JFrame {
 
     private void boxManageCreate(String placeholder, String type) {
         if (numOfBoxes <= maxBoxes) {
-            textBoxPanel.add(creator.boxCreate(placeholder, type, false));
+            textBoxPanel.add(creator.typeBox(placeholder, type, false));
             classLabelPanel.add(textBoxPanel);
             creator.windowFix();
             numOfBoxes++;

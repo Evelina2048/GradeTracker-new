@@ -170,7 +170,13 @@ public class Decorator {
     public JTextField decorateTextBox(String placeholderText) {
        JTextField textField = new JTextField(); //prev 10
        //textField.setSize(new Dimension(10, 50)); // Set the height to 50 pixels
-       textField.setPreferredSize(new Dimension(144, 50));
+       if (set.getCurrentClass() == "StudentStatCollect.java") {
+        textField.setSize(new Dimension(144, 50));
+       }
+       else {
+        textField.setPreferredSize(new Dimension(144, 50));
+       }
+
        textField.setFont(new Font("Roboto", Font.PLAIN, 14));
        textField.setForeground(Color.gray);
        textField.setBorder(BorderFactory.createLineBorder(Color.gray, 2));

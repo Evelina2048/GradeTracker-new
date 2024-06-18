@@ -423,6 +423,7 @@ public class Creator {
     }
     
     public JPanel typeBox(String placeholder, String my_type, Boolean loaded) {
+            hideContainer();
             JPanel northTypePanel = new JPanel(new BorderLayout());
             JPanel gradeTypePanel = new JPanel(new BorderLayout());
 
@@ -444,12 +445,12 @@ public class Creator {
             return northTypePanel;
     }
 
-	public JPanel boxCreate(String placeholder, String type, Boolean loaded) {
-        hideContainer();
-        JPanel bigPanel = typeBox(placeholder, type, loaded);
-        windowFix();
-        return bigPanel;
-	}
+	// public JPanel boxCreate(String placeholder, String type, Boolean loaded) {
+    //     hideContainer();
+    //     JPanel bigPanel = typeBox(placeholder, type, loaded);
+    //     windowFix();
+    //     return bigPanel;
+	// }
 
     public String goIntoPanel(JPanel panel, int index) {
         Container container = panel;
