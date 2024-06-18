@@ -131,10 +131,10 @@ public class Decorator {
         dialog.setVisible(true);
     }
 
-    public void errorMessageSetUp(JRadioButton button) {
+    public JDialog genericPopUpMessage(String text) {
         JDialog dialog = new JDialog(window, true);
         dialog.setLayout(new FlowLayout());
-        JLabel label = new JLabel("<html><center>Please choose an option");
+        JLabel label = new JLabel(text);
         label.setHorizontalAlignment(SwingConstants.CENTER);
         dialog.add(label);
         JButton okButton = new JButton("OK");
@@ -147,6 +147,12 @@ public class Decorator {
                 dialog.dispose(); 
             }
         });
+        return dialog;
+        
+    }
+
+    public void errorMessageSetUp(JRadioButton button) {
+        JDialog dialog = genericPopUpMessage("<html><center>Please choose an option");
         
         dialog.setLocationRelativeTo(button);
         dialog.setLocation(dialog.getX(), dialog.getY() + 15); 

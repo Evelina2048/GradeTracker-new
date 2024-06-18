@@ -2,6 +2,8 @@ package main.view.student;
 
 import javax.swing.JButton;
 import javax.swing.JFrame;
+import javax.swing.JLabel;
+
 import java.awt.BorderLayout;
 import java.awt.GridLayout;
 import java.awt.Dimension;
@@ -42,6 +44,7 @@ public class StudentStatCollect extends JFrame {
 
     public void studentStatCollectLaunch() {
         this.set = Set.getInstance();
+        set.setCurrentClass("StudentStatCollect.java");
         this.window = set.getWindow();
         finalClassList = set.getFinalClassList();
         System.out.println("final class list issssss before: "+ finalClassList);
@@ -144,7 +147,17 @@ public class StudentStatCollect extends JFrame {
         correctGradeFormatChecker(pattern);
 
         set.setTextFieldPanel(textBoxPanel);
+        JPanel test = (JPanel) textBoxPanel.getComponent(0);
+        JPanel testTwo = (JPanel) test.getComponent(0);
+        JLabel testThree = (JLabel) testTwo.getComponent(0);
+        String testText = testThree.getText();
+        System.out.println("textBoxPanelComponens: "+ textBoxPanel.getComponentCount() +"..."+ testText);
+        
+        //if (textBoxPanel.getComponentCount() == 5 || 8 || 11 || 14 || 17 || 20 || 23 || 26 || 29 || 32) {
+        //if ((textBoxPanel.getComponentCount() - 5) % 3 == 0) { //only want to write if 
+        System.out.println("testtesttest: "+ set.getCurrentClass());
         creator.writeTextToFile("/Users/evy/Documents/GradeTracker-new/src/main/view/UserInfo/StudentInfo/" + set.getUsername() +"/"+finalClassList.get(set.getClassListIndex())+ ".txt", set.getTextFieldPanel());
+       // }
     }
 
     private void nextButtonAction(JButton nextButton) {

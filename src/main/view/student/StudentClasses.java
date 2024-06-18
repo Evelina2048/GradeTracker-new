@@ -54,6 +54,7 @@ public class StudentClasses extends JFrame {
 
     public void studentClassesLaunch() {
         this.set = Set.getInstance();
+        set.setCurrentClass("StudentClasses.java");
         this.window = set.getWindow();
         creator = new Creator();
         decorator = new Decorator();
@@ -72,7 +73,7 @@ public class StudentClasses extends JFrame {
             System.out.println("I have info to load!");
             ArrayList<String> myList = fileHandler.readFileToList(filePath);
             for (int index=0; index<myList.size(); index++) {
-                creator.createTextBox(myList.get(index), 10, 50, true);
+                creator.createTextBox(myList.get(index), true);
             }
             set.setClassList(myList);
             set.setFinalClassList(set.getCurrentPanelList());
@@ -81,7 +82,7 @@ public class StudentClasses extends JFrame {
         }
 
         else {
-            creator.createTextBox("Enter Class Name", 50, 50, false);
+            creator.createTextBox("Enter Class Name", false);
         }
     }
 
@@ -89,7 +90,6 @@ public class StudentClasses extends JFrame {
         createNewClassButton();
         System.out.println("before creating delete class button"+set.getCurrentPanelList());
         deleteClassButton();
-
 
         JPanel buttonsPanel = new JPanel(new BorderLayout());
 
@@ -190,7 +190,7 @@ public class StudentClasses extends JFrame {
         newClassButton.setPreferredSize(new Dimension(87, 50));
         newClassButton.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent e) {
-                creator.createTextBox("Enter Class Name", 50, 50, false);
+                creator.createTextBox("Enter Class Name", false);
                 System.out.println("class list in new class button"+ set.getCurrentPanelList());
                 
         }

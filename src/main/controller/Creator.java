@@ -2,6 +2,7 @@ package main.controller;
 
 import javax.swing.BorderFactory;
 import javax.swing.JButton;
+import javax.swing.JDialog;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JTextField;
@@ -207,17 +208,17 @@ public class Creator {
         System.out.println("Step4: begin writeTextToFile."+ set.getCurrentPanelList());
         debugPrintPanel();
         set.getUsername();
+        Decorator decorator = new Decorator();
         try (BufferedWriter writer = new BufferedWriter(new FileWriter(filePath))) {
             if (!classList.isEmpty()) {
                classList.clear();
             }
             for (Component component : textFieldPanel.getComponents()) {
                 System.out.println("textFieldPanel:::"+textFieldPanel.getComponentCount());
-                System.out.println("textFieldPanel:::"+textFieldPanel.getComponentCount());
-                System.out.println("textFieldPanel:::"+textFieldPanel.getComponentCount());
                 if (component instanceof JTextField ) {
-                    System.out.println("made it past first test. Is it emptied?"+ set.getEmptiedState(textField));
+
                     JTextField textField = (JTextField) component;
+                    System.out.println("made it past first test. Is it emptied? "+ set.getEmptiedState(textField)+ "text: "+ textField.getText());
                     if (set.getEmptiedState(textField) == true) {
                         String text = textField.getText().trim();
                         classList.add(text);
@@ -228,7 +229,8 @@ public class Creator {
                     }
                 }
 
-                if (component instanceof JPanel) {
+                else if (component instanceof JPanel) {
+                    System.out.println("JPanel");
                     writeTextToFileWithAppend(filePath, (JPanel) component);
                 }
 
@@ -241,22 +243,35 @@ public class Creator {
         }
         System.out.println("in write text to file: "+set.getCurrentPanelList());
         set.setClassList(classList);
-        
     }
+
     private void writeTextToFileWithAppend(String filePath, JPanel textFieldPanel) {
+        System.out.println("in writeTextToFileWithAppend");
+        Decorator decorator = new Decorator();
         try (BufferedWriter writer = new BufferedWriter(new FileWriter(filePath, true))) {
             for (Component component : textFieldPanel.getComponents()) {
                 if (component instanceof JTextField) {
+                    System.out.println("is a textfield in write text to file with append");
                     JTextField textField = (JTextField) component;
+
                     if (set.getEmptiedState(textField) == true) {
                     String text = textField.getText().trim();
                     classList.add(text);
-                    
-                    if (!text.isEmpty()) {
-                        writer.write(text + "\n");                             
-                        System.out.println("should be writing");
+                        if (!text.isEmpty()) {
+                            writer.write(text + "\n");                             
+                            System.out.println("should be writing");
+                        }
                     }
-                }
+                    else if (set.getEmptiedState(textField) == false && set.getCurrentClass() == "StudentStatCollect.java" && !textField.getText().equals("Credits (Optional)")) {
+                        System.out.println("made it");
+                        JDialog dialog = decorator.genericPopUpMessage("Must fill in placeholder");
+                        //window.add(jdialog);
+                        dialog.setLocationRelativeTo(window);
+                        dialog.setLocation(dialog.getX(), dialog.getY() + 15); 
+                        dialog.setVisible(true);
+                        //break;
+                        return;
+                    }
                 }
 
                 if (component instanceof JPanel) {
@@ -268,8 +283,10 @@ public class Creator {
         }
     }
 
-    public JTextField createTextBox(String placeholder, int width, int height, Boolean loaded) { //something here is causing the issue
+    public JTextField createTextBox(String placeholder, Boolean loaded) { //something here is causing the issue
         debugPanelComponentCount();
+        int width = 144;
+        int height = 50;
         Decorator decorate = new Decorator();
         textboxCounter++;
         if (textboxCounter <= 30) {
@@ -277,9 +294,10 @@ public class Creator {
             set.setEmptiedState(textField, false);
             addDocumentListener(textField);
             debugPanelComponentCount();
-            textFieldPanel.add(textField);
+            textFieldPanel.add(textField); 
             debugPanelComponentCount();
             textFieldPanelText.add(textField.getText());
+            textField.setPreferredSize(new Dimension(width, height));
             window.add(textFieldPanel);
             textFieldFocusListener(textField, placeholder);
             windowFix();
@@ -307,7 +325,8 @@ public class Creator {
 
         @Override
         public void removeUpdate(DocumentEvent e) {
-            System.out.println("removeUpdate");
+            System.out.println("removeUpdate/// "+ textField.getWidth());
+
             // if (false) {
             //     saveButtonEnable();
             // }
@@ -409,16 +428,16 @@ public class Creator {
 
 
             if (my_type.equals("JTextField")) {
-                JTextField toAddType = createTextBox(placeholder, 10, 10, loaded);
+                JTextField toAddType = createTextBox(placeholder, loaded);
                 gradeTypePanel.add(toAddType);
             }
 
             else if(my_type.equals("JLabel")) {
                 JLabel toAddType = new JLabel(placeholder);
-                //JLabel toAddType = new JLabel(placeholder); 
+                //JLabel toAddType = new JLabel(placeholder);
                 gradeTypePanel.add(toAddType);
             }
-            gradeTypePanel.setPreferredSize(new Dimension( 155,50)); //needed to set size for student stat boxes
+            gradeTypePanel.setPreferredSize(new Dimension( 155,50));
             northTypePanel.add(gradeTypePanel, BorderLayout.NORTH);
             windowFix();
 
@@ -468,8 +487,8 @@ public class Creator {
                 System.out.println("none of these" +component.getClass().getName());
                 return textField;
             }
-
-    // public void disableFocusListener() {
-    //     focusGranted = false;
-    // }
 }
+// else if (set.getEmptiedState(textField) == false && set.getCurrentClass() == "StudentStatCollect.java" && !textField.getText().equals("Credits (Optional)")) {
+                    //     System.out.println("made it");
+                    //     decorator.genericPopUpMessage("Must fill in placeholder");
+                    // }

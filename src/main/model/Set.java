@@ -21,6 +21,7 @@ public class Set {
     private String existingOrNew;
     private String studentOrTeacher;
     private JFrame window;
+    private String currentClass;
 
     //Below is for singleton design pattern
     // Static variable to hold the single instance of the class
@@ -156,5 +157,13 @@ public class Set {
 
     public JFrame getWindow() {
         return window;
+    }
+
+    public void setCurrentClass(String myClass) {
+        currentClass = myClass;
+    }
+
+    public String getCurrentClass() {
+        return currentClass;
     }
 }
