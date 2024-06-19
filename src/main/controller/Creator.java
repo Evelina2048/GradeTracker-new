@@ -283,13 +283,16 @@ public class Creator {
         }
     }
 
-    public JTextField createTextBox(String placeholder, Boolean loaded) { //something here is causing the issue
+    public JTextField createTextBox(String placeholder, String my_type, Boolean loaded) {
+        JPanel northTypePanel = new JPanel(new BorderLayout());
+        JPanel gradeTypePanel = new JPanel(new BorderLayout()); //second border layout so things not cut out
+
         debugPanelComponentCount();
         int width = 144;
         int height = 50;
         Decorator decorate = new Decorator();
         textboxCounter++;
-        if (textboxCounter <= 30) {
+        if (textboxCounter <= 30 && my_type.equals("JTextField")) {
             textField = decorate.decorateTextBox(placeholder);
             set.setEmptiedState(textField, false);
             addDocumentListener(textField);
@@ -302,6 +305,15 @@ public class Creator {
             textFieldFocusListener(textField, placeholder);
             windowFix();
         }
+        else if (my_type.equals("JLabel")) {
+            JLabel toAddType = new JLabel(placeholder);
+                //JLabel toAddType = new JLabel(placeholder);
+                textFieldPanel.add(toAddType);
+            }
+            // gradeTypePanel.setPreferredSize(new Dimension( 155,50));
+            // northTypePanel.add(gradeTypePanel, BorderLayout.NORTH);
+            // windowFix();
+
         if (loaded) {
             set.setEmptiedState(textField, true);
             set.setLoadedState(textField, true);
@@ -312,6 +324,28 @@ public class Creator {
         }
 
         set.setTextFieldPanel(textFieldPanel);
+
+
+
+        /////
+        //hideContainer();
+
+            // if (my_type.equals("JTextField")) {
+            //     JTextField toAddType = createTextBox(placeholder, "JTextField", loaded);
+            //     gradeTypePanel.add(toAddType);
+            //     //northTypePanel.add(toAddType); 
+            // }
+
+            // else if(my_type.equals("JLabel")) {
+            //     JLabel toAddType = new JLabel(placeholder);
+            //     //JLabel toAddType = new JLabel(placeholder);
+            //     gradeTypePanel.add(toAddType);
+            // }
+            // gradeTypePanel.setPreferredSize(new Dimension( 155,50));
+            // northTypePanel.add(gradeTypePanel, BorderLayout.NORTH);
+            // windowFix();
+
+        /////
 
         return textField;
     }
@@ -425,12 +459,13 @@ public class Creator {
     public JPanel typeBox(String placeholder, String my_type, Boolean loaded) {
             hideContainer();
             JPanel northTypePanel = new JPanel(new BorderLayout());
-            JPanel gradeTypePanel = new JPanel(new BorderLayout());
+            JPanel gradeTypePanel = new JPanel(new BorderLayout()); //second border layout so things not cut out
 
 
             if (my_type.equals("JTextField")) {
-                JTextField toAddType = createTextBox(placeholder, loaded);
+                JTextField toAddType = createTextBox(placeholder, "JTextField", loaded);
                 gradeTypePanel.add(toAddType);
+                //northTypePanel.add(toAddType); 
             }
 
             else if(my_type.equals("JLabel")) {
