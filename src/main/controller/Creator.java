@@ -203,46 +203,46 @@ public class Creator {
         }
     }
 
-    public void writeTextToFile(String filePath, JPanel textFieldPanel) {
-        System.out.println("Step4: begin writeTextToFile."+ set.getCurrentPanelList());
-        debugPrintPanel();
-        set.getUsername();
-        Decorator decorator = new Decorator();
-        try (BufferedWriter writer = new BufferedWriter(new FileWriter(filePath))) {
-            if (!classList.isEmpty()) {
-               classList.clear();
-            }
-            for (Component component : textFieldPanel.getComponents()) {
-                System.out.println("textFieldPanel:::"+textFieldPanel.getComponentCount());
-                if (component instanceof JTextField ) {
+    // public void writeTextToFile(String filePath, JPanel textFieldPanel) {
+    //     System.out.println("Step4: begin writeTextToFile."+ set.getCurrentPanelList());
+    //     debugPrintPanel();
+    //     set.getUsername();
+    //     Decorator decorator = new Decorator();
+    //     try (BufferedWriter writer = new BufferedWriter(new FileWriter(filePath))) {
+    //         if (!classList.isEmpty()) {
+    //            classList.clear();
+    //         }
+    //         for (Component component : textFieldPanel.getComponents()) {
+    //             System.out.println("textFieldPanel:::"+textFieldPanel.getComponentCount());
+    //             if (component instanceof JTextField ) {
 
-                    JTextField textField = (JTextField) component;
-                    System.out.println("made it past first test. Is it emptied? "+ set.getEmptiedState(textField)+ "text: "+ textField.getText());
-                    if (set.getEmptiedState(textField) == true) {
-                        String text = textField.getText().trim();
-                        classList.add(text);
-                        if (!text.isEmpty()) {
-                            writer.write(text + "\n");                             
-                            System.out.println("should be writing");
-                        }
-                    }
-                }
+    //                 JTextField textField = (JTextField) component;
+    //                 System.out.println("made it past first test. Is it emptied? "+ set.getEmptiedState(textField)+ "text: "+ textField.getText());
+    //                 if (set.getEmptiedState(textField) == true) {
+    //                     String text = textField.getText().trim();
+    //                     classList.add(text);
+    //                     if (!text.isEmpty()) {
+    //                         writer.write(text + "\n");                             
+    //                         System.out.println("should be writing");
+    //                     }
+    //                 }
+    //             }
 
-                else if (component instanceof JPanel) {
-                    System.out.println("JPanel");
-                    writeTextToFileWithAppend(filePath, (JPanel) component);
-                }
+    //             else if (component instanceof JPanel) {
+    //                 System.out.println("JPanel");
+    //                 writeTextToFileWithAppend(filePath, (JPanel) component);
+    //             }
 
-                else {
-                    System.out.println("component is something else. Something went wrong"+ component.getClass().getName());
-                }
-            }
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
-        System.out.println("in write text to file: "+set.getCurrentPanelList());
-        set.setClassList(classList);
-    }
+    //             else {
+    //                 System.out.println("component is something else. Something went wrong"+ component.getClass().getName());
+    //             }
+    //         }
+    //     } catch (IOException e) {
+    //         e.printStackTrace();
+    //     }
+    //     System.out.println("in write text to file: "+set.getCurrentPanelList());
+    //     set.setClassList(classList);
+    // }
 
     public void writeTextToFileWithAppend(String filePath, JPanel textFieldPanel) {
         System.out.println("in writeTextToFileWithAppend");

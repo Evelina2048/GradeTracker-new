@@ -209,7 +209,7 @@ public class StudentClasses extends JFrame {
                 //creator.deleteTextBox(creator.getTextFieldContainer());
                 System.out.println("deleteClass Mode hit");
                 deleteMode();
-                saveButton.setEnabled(true);
+                //saveButton.setEnabled(true);
             }
         });
     }
@@ -327,7 +327,7 @@ public class StudentClasses extends JFrame {
 
 
                 pickAppropriateInstructionWordsAndPanels();
-
+                saveButton.setEnabled(true);
                 leaveDeleteModeButton();
             }
             });
