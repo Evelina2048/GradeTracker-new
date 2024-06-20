@@ -91,7 +91,6 @@ public class Creator {
 
     
     public void textFieldFocusListener(JTextField textField, String placeholder) { 
-
         textField.addFocusListener(new FocusAdapter() {
             @Override
             public void focusGained(FocusEvent e) {
@@ -245,10 +244,10 @@ public class Creator {
         set.setClassList(classList);
     }
 
-    private void writeTextToFileWithAppend(String filePath, JPanel textFieldPanel) {
+    public void writeTextToFileWithAppend(String filePath, JPanel textFieldPanel) {
         System.out.println("in writeTextToFileWithAppend");
         Decorator decorator = new Decorator();
-        try (BufferedWriter writer = new BufferedWriter(new FileWriter(filePath, true))) {
+        try (BufferedWriter writer = new BufferedWriter(new FileWriter(filePath))) {
             for (Component component : textFieldPanel.getComponents()) {
                 if (component instanceof JTextField) {
                     System.out.println("is a textfield in write text to file with append");
@@ -270,20 +269,36 @@ public class Creator {
                         dialog.setLocation(dialog.getX(), dialog.getY() + 15); 
                         dialog.setVisible(true);
                         //break;
-                        return;
+                        //return;
                     }
                 }
 
                 if (component instanceof JPanel) {
                     writeTextToFileWithAppend(filePath, (JPanel) component);
+                    return;
+
                 }
+
+                // else if (component instanceof JTextField ) {
+                //     JTextField textField = (JTextField) component;
+                //     System.out.println("made it past first test. Is it emptied? "+ set.getEmptiedState(textField)+ "text: "+ textField.getText());
+                //     if (set.getEmptiedState(textField) == true) {
+                //         String text = textField.getText().trim();
+                //         classList.add(text);
+                //         if (!text.isEmpty()) {
+                //             writer.write(text + "\n");                             
+                //             System.out.println("should be writing");
+                //         }
+                //     }
+                // }
+
             }
         } catch (IOException e) {
             e.printStackTrace();
         }
     }
 
-    public JTextField createTextBox(String placeholder, String my_type, Boolean loaded) {
+    public JTextField createTextBox(String placeholder, String my_type, Boolean loaded) { //just box
         JPanel northTypePanel = new JPanel(new BorderLayout());
         JPanel gradeTypePanel = new JPanel(new BorderLayout()); //second border layout so things not cut out
 
@@ -305,11 +320,12 @@ public class Creator {
             textFieldFocusListener(textField, placeholder);
             windowFix();
         }
-        else if (my_type.equals("JLabel")) {
-            JLabel toAddType = new JLabel(placeholder);
-                //JLabel toAddType = new JLabel(placeholder);
-                textFieldPanel.add(toAddType);
-            }
+        // else if (my_type.equals("JLabel")) {
+        //     JLabel toAddType = new JLabel(placeholder);
+        //         //JLabel toAddType = new JLabel(placeholder);
+        //         textFieldPanel.add(toAddType);
+        //     }
+
             // gradeTypePanel.setPreferredSize(new Dimension( 155,50));
             // northTypePanel.add(gradeTypePanel, BorderLayout.NORTH);
             // windowFix();
@@ -473,6 +489,7 @@ public class Creator {
                 //JLabel toAddType = new JLabel(placeholder);
                 gradeTypePanel.add(toAddType);
             }
+
             gradeTypePanel.setPreferredSize(new Dimension( 155,50));
             northTypePanel.add(gradeTypePanel, BorderLayout.NORTH);
             windowFix();

@@ -170,13 +170,13 @@ public class StudentClasses extends JFrame {
             writeType();
             System.out.println("nextbuttonhit");
             creator.writeFolderToFile(textFieldEmptied);
-            creator.writeTextToFile("/Users/evy/Documents/GradeTracker-new/src/main/view/UserInfo/StudentInfo/" + set.getUsername() + "/class.txt", creator.getTextFieldContainer());
+            creator.writeTextToFileWithAppend("/Users/evy/Documents/GradeTracker-new/src/main/view/UserInfo/StudentInfo/" + set.getUsername() + "/class.txt", creator.getTextFieldContainer());
             set.setFinalClassList(classList); //lookie
             hideWindow();
             creator.hideContainer();
             set.setFinalClassList(set.getCurrentPanelList());
             StudentStatCollect studentStatCollect = new StudentStatCollect();
-             if (fileHandler.fileExists("/Users/evy/Documents/GradeTracker-new/src/main/view/UserInfo/StudentInfo/" + set.getUsername() + "/" + set.getFinalClassList().get(0) + ".txt")) {
+            if (fileHandler.fileExists("/Users/evy/Documents/GradeTracker-new/src/main/view/UserInfo/StudentInfo/" + set.getUsername() + "/" + set.getFinalClassList().get(0) + ".txt")) {
                 studentStatCollect.addLoadedBoxes();
             }
 
@@ -217,7 +217,7 @@ public class StudentClasses extends JFrame {
     private void writeType() {
         creator.writeFolderToFile(textFieldEmptied);
         creator.setClassList();
-        creator.writeTextToFile("/Users/evy/Documents/GradeTracker-new/src/main/view/UserInfo/StudentInfo/" + set.getUsername() + "/class.txt", creator.getTextFieldContainer());
+        creator.writeTextToFileWithAppend("/Users/evy/Documents/GradeTracker-new/src/main/view/UserInfo/StudentInfo/" + set.getUsername() + "/class.txt", creator.getTextFieldContainer());
     }
 
     private void backToDefaultDeleteButton() {

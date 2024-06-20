@@ -111,12 +111,14 @@ public class StudentStatCollect extends JFrame {
         textBoxPanelReset();
         new JPanel(new GridLayout(0,4,5,5));
         new JPanel(new FlowLayout(FlowLayout.LEFT));
-        //boxManageCreate(set.getFinalClassList().get(set.getClassListIndex()), "JLabel"); //displays class label 
         addLoadedBoxes();
     }
 
     public void addLoadedBoxes() {
-        textBoxPanel.add(creator.typeBox(set.getFinalClassList().get(0), "JLabel", true));
+        //textBoxPanel.add(creator.typeBox(set.getFinalClassList().get(0), "JLabel", true));
+        //System.out.println(set.getFinalClassList().get(0));
+        textBoxPanel.add(creator.createTextBox(set.getFinalClassList().get(0), "JLabel", true));
+    
         String filePath = "/Users/evy/Documents/GradeTracker-new/src/main/view/UserInfo/StudentInfo/"+set.getUsername()+"/"+set.getFinalClassList().get(set.getClassListIndex())+".txt";
         JPanel testPanel = fileHandler.loadTextboxes(filePath);
         int numberOfComponents = testPanel.getComponentCount();
@@ -147,16 +149,16 @@ public class StudentStatCollect extends JFrame {
         correctGradeFormatChecker(pattern);
 
         set.setTextFieldPanel(textBoxPanel);
-        JPanel test = (JPanel) textBoxPanel.getComponent(0);
-        JPanel testTwo = (JPanel) test.getComponent(0);
-        JLabel testThree = (JLabel) testTwo.getComponent(0);
-        String testText = testThree.getText();
-        System.out.println("textBoxPanelComponens: "+ textBoxPanel.getComponentCount() +"..."+ testText);
+        // JPanel test = (JPanel) textBoxPanel.getComponent(0);
+        // JPanel testTwo = (JPanel) test.getComponent(0);
+        // JLabel testThree = (JLabel) testTwo.getComponent(0);
+        // String testText = testThree.getText();
+        // System.out.println("textBoxPanelComponens: "+ textBoxPanel.getComponentCount() +"..."+ testText);
         
         //if (textBoxPanel.getComponentCount() == 5 || 8 || 11 || 14 || 17 || 20 || 23 || 26 || 29 || 32) {
         //if ((textBoxPanel.getComponentCount() - 5) % 3 == 0) { //only want to write if 
         System.out.println("testtesttest: "+ set.getCurrentClass());
-        creator.writeTextToFile("/Users/evy/Documents/GradeTracker-new/src/main/view/UserInfo/StudentInfo/" + set.getUsername() +"/"+finalClassList.get(set.getClassListIndex())+ ".txt", set.getTextFieldPanel());
+        creator.writeTextToFileWithAppend("/Users/evy/Documents/GradeTracker-new/src/main/view/UserInfo/StudentInfo/" + set.getUsername() +"/"+finalClassList.get(set.getClassListIndex())+ ".txt", set.getTextFieldPanel());
        // }
     }
 
