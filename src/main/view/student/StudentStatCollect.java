@@ -117,7 +117,7 @@ public class StudentStatCollect extends JFrame {
     public void addLoadedBoxes() {
         //textBoxPanel.add(creator.typeBox(set.getFinalClassList().get(0), "JLabel", true));
         //System.out.println(set.getFinalClassList().get(0));
-        textBoxPanel.add(creator.createTextBox(set.getFinalClassList().get(0), "JLabel", true));
+        textBoxPanel.add(creator.typeBox(set.getFinalClassList().get(0), "JLabel", true));
     
         String filePath = "/Users/evy/Documents/GradeTracker-new/src/main/view/UserInfo/StudentInfo/"+set.getUsername()+"/"+set.getFinalClassList().get(set.getClassListIndex())+".txt";
         JPanel testPanel = fileHandler.loadTextboxes(filePath);
@@ -158,7 +158,7 @@ public class StudentStatCollect extends JFrame {
         //if (textBoxPanel.getComponentCount() == 5 || 8 || 11 || 14 || 17 || 20 || 23 || 26 || 29 || 32) {
         //if ((textBoxPanel.getComponentCount() - 5) % 3 == 0) { //only want to write if 
         System.out.println("testtesttest: "+ set.getCurrentClass());
-        creator.writeTextToFileWithAppend("/Users/evy/Documents/GradeTracker-new/src/main/view/UserInfo/StudentInfo/" + set.getUsername() +"/"+finalClassList.get(set.getClassListIndex())+ ".txt", set.getTextFieldPanel());
+        creator.writeTextToFileWithoutAppend("/Users/evy/Documents/GradeTracker-new/src/main/view/UserInfo/StudentInfo/" + set.getUsername() +"/"+finalClassList.get(set.getClassListIndex())+ ".txt", set.getTextFieldPanel());
        // }
     }
 
@@ -170,8 +170,9 @@ public class StudentStatCollect extends JFrame {
                 if (set.getClassListIndex()+1 <= set.getFinalClassList().size()) {
                     visitNextStudentClass();
                 }
-                else {
+                if (set.getClassListIndex()+1 > set.getFinalClassList().size() && creator.getHasPlaceholder() == false) {
                     hideWindow();
+                    System.out.println("test 1 dont want: "+ creator.getHasPlaceholder());
                     new PrintStudentGrades(set.getWindow(), set.getStudentOrTeacher(), set.getExistingOrNew());
                 }
             }

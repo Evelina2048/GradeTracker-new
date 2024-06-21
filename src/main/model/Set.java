@@ -22,6 +22,7 @@ public class Set {
     private String studentOrTeacher;
     private JFrame window;
     private String currentClass;
+    private Boolean canContinue = true;
 
     //Below is for singleton design pattern
     // Static variable to hold the single instance of the class
@@ -166,4 +167,13 @@ public class Set {
     public String getCurrentClass() {
         return currentClass;
     }
+
+    public void setCanContinue(boolean myCanContinue) {
+        canContinue = myCanContinue;
+    }
+
+    public Boolean getCanContinue() {
+        return canContinue;
+    }
+
 }

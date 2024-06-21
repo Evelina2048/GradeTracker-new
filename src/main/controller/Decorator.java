@@ -32,6 +32,9 @@ import java.nio.file.Paths;
 import java.io.IOException;
 
 ///
+import java.awt.event.WindowAdapter;
+import java.awt.event.WindowEvent;
+
 
 //key listening
 
@@ -141,10 +144,17 @@ public class Decorator {
         okButton.setVisible(true);
         dialog.add(okButton);
         dialog.setSize(200,90);
+        set.setCanContinue(false);
         okButton.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent e) {
                 dialog.setVisible(false);
                 dialog.dispose(); 
+            }
+        });
+        dialog.addWindowListener(new WindowAdapter() {
+            @Override
+            public void windowClosing(WindowEvent e) {
+                dialog.dispose();
             }
         });
         return dialog;

@@ -73,7 +73,7 @@ public class StudentClasses extends JFrame {
             System.out.println("I have info to load!");
             ArrayList<String> myList = fileHandler.readFileToList(filePath);
             for (int index=0; index<myList.size(); index++) {
-                creator.createTextBox(myList.get(index), "JTextField", true);
+                creator.regularCreateTextBox(myList.get(index), "JTextField", true);
             }
             set.setClassList(myList);
             set.setFinalClassList(set.getCurrentPanelList());
@@ -82,7 +82,7 @@ public class StudentClasses extends JFrame {
         }
 
         else {
-            creator.createTextBox("Enter Class Name", "JTextField", false);
+            creator.regularCreateTextBox("Enter Class Name", "JTextField", false);
         }
     }
 
@@ -170,7 +170,7 @@ public class StudentClasses extends JFrame {
             writeType();
             System.out.println("nextbuttonhit");
             creator.writeFolderToFile(textFieldEmptied);
-            creator.writeTextToFileWithAppend("/Users/evy/Documents/GradeTracker-new/src/main/view/UserInfo/StudentInfo/" + set.getUsername() + "/class.txt", creator.getTextFieldContainer());
+            creator.writeTextToFileWithoutAppend("/Users/evy/Documents/GradeTracker-new/src/main/view/UserInfo/StudentInfo/" + set.getUsername() + "/class.txt", creator.getTextFieldContainer());
             set.setFinalClassList(classList); //lookie
             hideWindow();
             creator.hideContainer();
@@ -190,14 +190,11 @@ public class StudentClasses extends JFrame {
         newClassButton.setPreferredSize(new Dimension(87, 50));
         newClassButton.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent e) {
-                creator.createTextBox("Enter Class Name", "JTextField",false);
+                creator.regularCreateTextBox("Enter Class Name", "JTextField",false);
                 System.out.println("class list in new class button"+ set.getCurrentPanelList());
                 
         }
     });
-        // westPanel.add(newClassButton, BorderLayout.SOUTH);
-
-        // window.add(westPanel,BorderLayout.WEST);
     }
 
     private void deleteClassButton() {
@@ -217,7 +214,7 @@ public class StudentClasses extends JFrame {
     private void writeType() {
         creator.writeFolderToFile(textFieldEmptied);
         creator.setClassList();
-        creator.writeTextToFileWithAppend("/Users/evy/Documents/GradeTracker-new/src/main/view/UserInfo/StudentInfo/" + set.getUsername() + "/class.txt", creator.getTextFieldContainer());
+        creator.writeTextToFileWithoutAppend("/Users/evy/Documents/GradeTracker-new/src/main/view/UserInfo/StudentInfo/" + set.getUsername() + "/class.txt", creator.getTextFieldContainer());
     }
 
     private void backToDefaultDeleteButton() {

@@ -50,6 +50,9 @@ public class Creator {
     private ArrayList<String>textFieldPanelText = new ArrayList<>();
     private JPanel textFieldContainer = new JPanel(new FlowLayout(FlowLayout.LEFT));
     private Boolean focusGranted = true;
+    private Boolean canContinue = true;
+    private JButton nextButton;
+    private boolean hasPlaceholder = false; 
     
     public Creator() {
         this.set = Set.getInstance();
@@ -71,8 +74,6 @@ public class Creator {
     }
 
     public JButton nextButtonCreate() {
-        JButton nextButton;
-
         nextButton = new JButton("Next >");
         nextButton.setPreferredSize(new Dimension(87, 29));
 
@@ -203,57 +204,83 @@ public class Creator {
         }
     }
 
-    // public void writeTextToFile(String filePath, JPanel textFieldPanel) {
-    //     System.out.println("Step4: begin writeTextToFile."+ set.getCurrentPanelList());
-    //     debugPrintPanel();
-    //     set.getUsername();
-    //     Decorator decorator = new Decorator();
-    //     try (BufferedWriter writer = new BufferedWriter(new FileWriter(filePath))) {
-    //         if (!classList.isEmpty()) {
-    //            classList.clear();
-    //         }
-    //         for (Component component : textFieldPanel.getComponents()) {
-    //             System.out.println("textFieldPanel:::"+textFieldPanel.getComponentCount());
-    //             if (component instanceof JTextField ) {
-
-    //                 JTextField textField = (JTextField) component;
-    //                 System.out.println("made it past first test. Is it emptied? "+ set.getEmptiedState(textField)+ "text: "+ textField.getText());
-    //                 if (set.getEmptiedState(textField) == true) {
-    //                     String text = textField.getText().trim();
-    //                     classList.add(text);
-    //                     if (!text.isEmpty()) {
-    //                         writer.write(text + "\n");                             
-    //                         System.out.println("should be writing");
-    //                     }
-    //                 }
-    //             }
-
-    //             else if (component instanceof JPanel) {
-    //                 System.out.println("JPanel");
-    //                 writeTextToFileWithAppend(filePath, (JPanel) component);
-    //             }
-
-    //             else {
-    //                 System.out.println("component is something else. Something went wrong"+ component.getClass().getName());
-    //             }
-    //         }
-    //     } catch (IOException e) {
-    //         e.printStackTrace();
-    //     }
-    //     System.out.println("in write text to file: "+set.getCurrentPanelList());
-    //     set.setClassList(classList);
-    // }
-
-    public void writeTextToFileWithAppend(String filePath, JPanel textFieldPanel) {
-        System.out.println("in writeTextToFileWithAppend");
+    //necessary for when just dumping contents from panel. WriteTextWithAppend is necessary for when running into panels that just 
+    //need to be added to file
+    public void writeTextToFileWithoutAppend(String filePath, JPanel textFieldPanel) {
+        //nextButton.setEnabled(true);
+        System.out.println("Step4: begin writeTextToFile."+ set.getCurrentPanelList());
+        debugPrintPanel();
+        set.getUsername();
         Decorator decorator = new Decorator();
         try (BufferedWriter writer = new BufferedWriter(new FileWriter(filePath))) {
+            if (!classList.isEmpty()) {
+               classList.clear();
+            }
             for (Component component : textFieldPanel.getComponents()) {
-                if (component instanceof JTextField) {
-                    System.out.println("is a textfield in write text to file with append");
-                    JTextField textField = (JTextField) component;
+                System.out.println("textFieldPanel:::"+textFieldPanel.getComponentCount());
+                if (component instanceof JTextField ) {
 
+                    JTextField textField = (JTextField) component;
+                    System.out.println("made it past first test. Is it emptied? "+ set.getEmptiedState(textField)+ "text: "+ textField.getText());
                     if (set.getEmptiedState(textField) == true) {
+                        String text = textField.getText().trim();
+                        classList.add(text);
+                        if (!text.isEmpty()) {
+                            writer.write(text + "\n");                             
+                            System.out.println("should be writing");
+                        }
+                    }
+                    else {
+                        System.out.println("test2");
+                        hasPlaceholder = true;
+                    }
+
+                }
+
+                else if (component instanceof JPanel) {
+                    System.out.println("JPanel");
+                    writeTextToFileWithAppend(filePath, (JPanel) component);
+                    if (set.getCanContinue()) {
+                        JDialog dialog = decorator.genericPopUpMessage("Must fill in placeholder");
+                        dialog.setLocationRelativeTo(window);
+                        dialog.setLocation(dialog.getX(), dialog.getY() + 15); 
+                        dialog.setVisible(true);
+                        //nextButton.setEnabled(false);
+                    }
+                    hasPlaceholder = true;
+                    break;
+                    // System.out.println(continueMessage);
+                    // if (continueMessage == "Cannot continue") {
+                    //     System.out.println("Theres an issue");
+                    //     return;
+                    // }
+                }
+
+                else {
+                    System.out.println("component is something else. Something went wrong"+ component.getClass().getName());
+                }
+            }
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+        System.out.println("in write text to file: "+set.getCurrentPanelList());
+        set.setClassList(classList);
+    }
+
+
+    private void writeTextToFileWithAppend(String filePath, JPanel textFieldPanel) {
+        System.out.println("in writeTextToFileWithAppend");
+        Decorator decorator = new Decorator();
+        try (BufferedWriter writer = new BufferedWriter(new FileWriter(filePath, true))) {
+            for (Component component : textFieldPanel.getComponents()) {
+                //System.out.println("is a textfield in write text to file with append: "+ component.getText());
+                if (component instanceof JTextField) {
+                    JTextField textField = (JTextField) component;
+                    System.out.println("is a textfield in write text to file with append "+ textField.getText());
+                    boolean isNotPlaceholder = set.getEmptiedState(textField);
+
+                    System.out.println(set.getEmptiedState(textField)+" ,,, "+ set.getCurrentClass()+",,,"+ textField.getText());
+                    if (isNotPlaceholder == true) {
                     String text = textField.getText().trim();
                     classList.add(text);
                         if (!text.isEmpty()) {
@@ -261,44 +288,42 @@ public class Creator {
                             System.out.println("should be writing");
                         }
                     }
-                    else if (set.getEmptiedState(textField) == false && set.getCurrentClass() == "StudentStatCollect.java" && !textField.getText().equals("Credits (Optional)")) {
-                        System.out.println("made it");
-                        JDialog dialog = decorator.genericPopUpMessage("Must fill in placeholder");
-                        //window.add(jdialog);
-                        dialog.setLocationRelativeTo(window);
-                        dialog.setLocation(dialog.getX(), dialog.getY() + 15); 
-                        dialog.setVisible(true);
-                        //break;
-                        //return;
+                    else if (isNotPlaceholder == false && set.getCurrentClass() == "StudentStatCollect.java" && !textField.getText().equals("Credits (Optional)")) {
+                        hasPlaceholder = true;
+
+                        System.out.println("should exist test 2 has a placeholder");
+                    //     JDialog dialog = decorator.genericPopUpMessage("Must fill in placeholder");
+                    //     //window.add(jdialog);
+                    //     dialog.setLocationRelativeTo(window);
+                    //     dialog.setLocation(dialog.getX(), dialog.getY() + 15); 
+                    //     dialog.setVisible(true);
+                    //     throw new RuntimeException("Clearing the stack");
+                    }
+
+                    else {
+                        hasPlaceholder = true;
+                        System.out.println("should not be printing");
                     }
                 }
 
-                if (component instanceof JPanel) {
+                else if (component instanceof JPanel) {
                     writeTextToFileWithAppend(filePath, (JPanel) component);
-                    return;
 
                 }
 
-                // else if (component instanceof JTextField ) {
-                //     JTextField textField = (JTextField) component;
-                //     System.out.println("made it past first test. Is it emptied? "+ set.getEmptiedState(textField)+ "text: "+ textField.getText());
-                //     if (set.getEmptiedState(textField) == true) {
-                //         String text = textField.getText().trim();
-                //         classList.add(text);
-                //         if (!text.isEmpty()) {
-                //             writer.write(text + "\n");                             
-                //             System.out.println("should be writing");
-                //         }
-                //     }
-                // }
+                else {
+                    System.out.println("ERROR. Component is "+component.getClass().getName());
 
+                }
             }
-        } catch (IOException e) {
+        }
+        catch (IOException e) {
             e.printStackTrace();
         }
     }
 
-    public JTextField createTextBox(String placeholder, String my_type, Boolean loaded) { //just box
+    //way to create box on without leaving space for side buttons
+    public JTextField regularCreateTextBox(String placeholder, String my_type, Boolean loaded) {
         JPanel northTypePanel = new JPanel(new BorderLayout());
         JPanel gradeTypePanel = new JPanel(new BorderLayout()); //second border layout so things not cut out
 
@@ -479,7 +504,7 @@ public class Creator {
 
 
             if (my_type.equals("JTextField")) {
-                JTextField toAddType = createTextBox(placeholder, "JTextField", loaded);
+                JTextField toAddType = regularCreateTextBox(placeholder, "JTextField", loaded);
                 gradeTypePanel.add(toAddType);
                 //northTypePanel.add(toAddType); 
             }
@@ -539,7 +564,11 @@ public class Creator {
                 }
                 System.out.println("none of these" +component.getClass().getName());
                 return textField;
-            }
+        }
+        public Boolean getHasPlaceholder() {
+            return hasPlaceholder;
+        }
+
 }
 // else if (set.getEmptiedState(textField) == false && set.getCurrentClass() == "StudentStatCollect.java" && !textField.getText().equals("Credits (Optional)")) {
                     //     System.out.println("made it");

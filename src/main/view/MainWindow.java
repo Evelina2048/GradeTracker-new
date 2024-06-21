@@ -165,7 +165,6 @@ private void doNextButtonProcedure() {
     }
     else if (!moveOnPossible) {
         decorator.errorMessageSetUp(studentButton);
-        //decorator.areYouSureMessageSetUp(studentButton);
     }
 }
 
@@ -194,7 +193,6 @@ public void setExistingOrNew(String existingOrNew2) {
 public void show(int windowX, int windowY) {
    if (windowX != 0 && windowY != 0) {
        window.setLocation(windowX, windowY);
-
    }
 
    else {
