@@ -149,12 +149,14 @@ public class Decorator {
             public void actionPerformed(ActionEvent e) {
                 dialog.setVisible(false);
                 dialog.dispose(); 
+                set.setCanContinue(false);
             }
         });
         dialog.addWindowListener(new WindowAdapter() {
             @Override
             public void windowClosing(WindowEvent e) {
                 dialog.dispose();
+                set.setCanContinue(false);
             }
         });
         return dialog;
