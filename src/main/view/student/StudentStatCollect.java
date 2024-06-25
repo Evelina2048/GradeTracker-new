@@ -88,14 +88,16 @@ public class StudentStatCollect extends JFrame {
     private void backAction(JButton backButton) {
         backButton.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent e) {
-                if (set.getClassListIndex() == 0) { //case for back to classes
-                    hideWindow();
-                    StudentClasses studentClasses = new StudentClasses();
-                    studentClasses.studentClassesLaunch();
-                    saveButtonAction();
-                }
-                else if (set.getClassListIndex() > 0) {
-                    goToPreviousClasses();              
+                if(set.getCanContinue()) {
+                    if (set.getClassListIndex() == 0) { //case for back to classes
+                        hideWindow();
+                        StudentClasses studentClasses = new StudentClasses();
+                        studentClasses.studentClassesLaunch();
+                        saveButtonAction();
+                    }
+                    else if (set.getClassListIndex() > 0) {
+                        goToPreviousClasses();              
+                    }
                 }
             }
         });
@@ -164,13 +166,15 @@ public class StudentStatCollect extends JFrame {
         nextButton.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent e) {
                 saveButtonAction();
-                set.incrementClassListIndex();
-                if (set.getClassListIndex()+1 <= set.getFinalClassList().size()) {
-                    visitNextStudentClass();
-                }
-                else {
-                    hideWindow();
-                    new PrintStudentGrades(set.getWindow(), set.getStudentOrTeacher(), set.getExistingOrNew());
+                if(set.getCanContinue()) {
+                    set.incrementClassListIndex();
+                    if (set.getClassListIndex()+1 <= set.getFinalClassList().size()) {
+                        visitNextStudentClass();
+                    }
+                    else {
+                        hideWindow();
+                        new PrintStudentGrades(set.getWindow(), set.getStudentOrTeacher(), set.getExistingOrNew());
+                    }
                 }
             }
         });
