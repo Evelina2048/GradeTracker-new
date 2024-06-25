@@ -1,8 +1,10 @@
 package main.controller;
 
 import java.io.BufferedReader;
+import java.io.BufferedWriter;
 import java.io.FileNotFoundException;
 import java.io.FileReader;
+import java.io.FileWriter;
 import java.io.IOException;
 import java.nio.file.Files;
 import java.nio.file.Path;
@@ -95,5 +97,16 @@ public class FileHandler {
             set.setTextFieldPanel(bigPanel);
             return bigPanel;
     
+        }
+
+        public void writeArrayListToFile(String filePath, ArrayList<String> lines) {
+            try (BufferedWriter writer = new BufferedWriter(new FileWriter(filePath))) {
+                for (String line : lines) {
+                    writer.write(line);
+                    writer.newLine();
+                }
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
         }
 }

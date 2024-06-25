@@ -41,6 +41,7 @@ public class Creator {
     private JPanel textFieldPanel= new JPanel(new FlowLayout(FlowLayout.LEFT));
     private JTextField previousTextbox;
     private Set set;
+    private FileHandler fileHandler = new FileHandler();
     //private Decorator decorate = new Decorator();
     private int textboxCounter;
     private JTextField textField;
@@ -267,11 +268,11 @@ public class Creator {
                         System.out.println("made it");
                         if (set.getCanContinue()) {
                             JDialog dialog = decorator.genericPopUpMessage("Must fill in placeholder");
-                            //window.add(jdialog);
                             dialog.setLocationRelativeTo(window);
                             dialog.setLocation(dialog.getX(), dialog.getY() + 15); 
                             dialog.setVisible(true);
-                            //break;
+                            //clearFile(filePath);
+                            deleteLines(filePath);
                             return;
                         }
                     }
@@ -284,6 +285,27 @@ public class Creator {
         } catch (IOException e) {
             e.printStackTrace();
         }
+    }
+
+    public void clearFile(String filePath) {
+        // Clear the file content or reset relevant fields/variables
+        try (BufferedWriter writer = new BufferedWriter(new FileWriter(filePath))) {
+            writer.write(""); // Write empty string to clear the file
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+    }
+
+    public void deleteLines(String filePath) {
+        //ArrayList lines = new ArrayList<>(); 
+        String line;
+        //read to array list
+        ArrayList lines = fileHandler.readFileToList(filePath);
+        //remove line(s) ***will update to work for multiple lines***
+        if (!lines.isEmpty()) {
+            lines.remove(lines.size() -1);
+        }
+        fileHandler.writeArrayListToFile(filePath, lines);
     }
 
     public JTextField createTextBox(String placeholder, String my_type, Boolean loaded) {
