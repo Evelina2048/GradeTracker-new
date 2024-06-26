@@ -281,12 +281,12 @@ public class Creator {
 
     private void writeTextToFileWithAppend(String filePath, JPanel textFieldPanel) {
         System.out.println("in writeTextToFileWithAppend");
+        Decorator decorator = new Decorator();
         try (BufferedWriter writer = new BufferedWriter(new FileWriter(filePath, true))) {
             for (Component component : textFieldPanel.getComponents()) {
                 if (component instanceof JTextField) {
-                    decideToWriteOrNot(writer, component);
+                    decideIfWrite(component, writer);
                 }
-                
 
                 if (component instanceof JPanel) {
                     writeTextToFileWithAppend(filePath, (JPanel) component);
@@ -296,29 +296,26 @@ public class Creator {
             e.printStackTrace();
         }
     }
-
-    private void decideToWriteOrNot(BufferedWriter writer, Component component) {
+    public void decideIfWrite(Component component, BufferedWriter writer) {
         Decorator decorator = new Decorator();
         System.out.println("is a textfield in write text to file with append");
         JTextField textField = (JTextField) component;
 
-        if (set.getEmptiedState(textField) == true && attachedBoxes == maxAttachedBoxes) {
+        //if (set.getEmptiedState(textField) == true) {
         String text = textField.getText().trim();
         classList.add(text);
-            if (!text.isEmpty()) {
+            //if (!text.isEmpty()) {
                     try {
                         writer.write(text + "\n");
                     } catch (IOException e) {
-                        // TODO Auto-generated catch block
                         e.printStackTrace();
                     }                             
                     System.out.println("should be writing");
-            }
-        }
-        else if (set.getEmptiedState(textField) == false && set.getCurrentClass() == "StudentStatCollect.java" && !textField.getText().equals("Credits (Optional)")) {
-            System.out.println("made it");
+            //}
+        //}
+        //else if (set.getEmptiedState(textField) == false && set.getCurrentClass() == "StudentStatCollect.java" && !textField.getText().equals("Credits (Optional)")) {
                 System.out.println("textfield is a placeholder 1");
-                String text = textField.getText();
+                //String text = textField.getText();
                 if (text.contains("Grade Type")) {
                     //dont write next two
                     System.out.println("contains grade type 2");
@@ -343,7 +340,7 @@ public class Creator {
                     System.out.println("boxes number not equal 3 4");
                     attachedBoxes++;
                 }
-            }
+            
             if (set.getCanContinue()) {
                 JDialog dialog = decorator.genericPopUpMessage("Must fill in placeholder");
                 dialog.setLocationRelativeTo(window);
@@ -351,9 +348,10 @@ public class Creator {
                 dialog.setVisible(true);
                 ////clearFile(filePath);
                 ////deleteLines(filePath, textField.getText());
-                String text = textField.getText();
+                //String text = textField.getText();
                 return;
             }
+        //}
     }
 
     public void clearFile(String filePath) {
