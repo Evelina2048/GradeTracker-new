@@ -225,29 +225,37 @@ public class Creator {
                     System.out.println("made it past first test. Is it emptied? "+ set.getEmptiedState(textField)+ "text: "+ textField.getText());
                     if (set.getEmptiedState(textField) == true && attachedBoxes == maxAttachedBoxes) {
                         String text = textField.getText().trim();
-                        classList.add(text);
                         if (!text.isEmpty()) {
                             if (attachedBoxes == maxAttachedBoxes) {
+                                classList.add(text);
                                 writer.write(text + "\n");                             
                                 System.out.println("should be writing");
+                            }
+                            else {
+                                attachedBoxes++;
                             }
                     }
                     
                     else if (set.getEmptiedState(textField) == false) {
-                        System.out.println("textfield is a placeholder 1");
-                        if (text.contains("Grade Type")) {
+                        System.out.println("textfield is a placeholder 1.1");
+                        if (text.contains("Grade Type") && attachedBoxes == maxAttachedBoxes) {
                             //dont write next two
-                            System.out.println("contains grade type 2");
+                            //System.out.println("contains grade type 2.1");
                             attachedBoxes = 0;
                             maxAttachedBoxes = 2;
                         }
 
-                        else if (text.equals("Percentage of Grade")) {
-                            System.out.println("hellohello");
+                        else if (text.equals("Percentage of Grade") && attachedBoxes == maxAttachedBoxes) {
+                            System.out.println("Percentage of Grade 2.1");
+                            deleteLines(filePath, text);
+                            attachedBoxes = 0;
+                            maxAttachedBoxes = 1;
                         }
 
-                        else if (text.equals("Grades(format:# # #")) {
-                            System.out.println("hellohello");
+                        else if (text.equals("Grades(format:# # #)") && attachedBoxes == maxAttachedBoxes) {
+                            System.out.println("grades");
+                            deleteLines(filePath, text);
+                            deleteLines(filePath, text);
                         }
 
                         // else if (attachedBoxes == maxAttachedBoxes) {
@@ -256,7 +264,7 @@ public class Creator {
                         // }
 
                         else {
-                            System.out.println("boxes number not equal 3 4");
+                            System.out.println("boxes number not equal 3.1 4.1");
                             attachedBoxes++;
                         }
                     }
@@ -285,7 +293,7 @@ public class Creator {
         try (BufferedWriter writer = new BufferedWriter(new FileWriter(filePath, true))) {
             for (Component component : textFieldPanel.getComponents()) {
                 if (component instanceof JTextField) {
-                    decideIfWrite(component, writer);
+                    decideIfWrite(component, writer, filePath);
                 }
 
                 if (component instanceof JPanel) {
@@ -296,39 +304,51 @@ public class Creator {
             e.printStackTrace();
         }
     }
-    public void decideIfWrite(Component component, BufferedWriter writer) {
+    public void decideIfWrite(Component component, BufferedWriter writer, String filePath) {
         Decorator decorator = new Decorator();
         System.out.println("is a textfield in write text to file with append");
         JTextField textField = (JTextField) component;
 
-        //if (set.getEmptiedState(textField) == true) {
+        if (set.getEmptiedState(textField) == true) {
         String text = textField.getText().trim();
-        classList.add(text);
-            //if (!text.isEmpty()) {
+            if (!text.isEmpty()) {
                     try {
-                        writer.write(text + "\n");
+                        if (attachedBoxes == maxAttachedBoxes) {
+                            System.out.println("writing in decide if write: "+text);
+                            classList.add(text);
+                            writer.write(text + "\n");
+                        }
+                        else {
+                            attachedBoxes++;
+                        }
                     } catch (IOException e) {
                         e.printStackTrace();
                     }                             
                     System.out.println("should be writing");
-            //}
-        //}
-        //else if (set.getEmptiedState(textField) == false && set.getCurrentClass() == "StudentStatCollect.java" && !textField.getText().equals("Credits (Optional)")) {
+            }
+        }
+        else if (set.getEmptiedState(textField) == false && set.getCurrentClass() == "StudentStatCollect.java" && !textField.getText().equals("Credits (Optional)")) {
                 System.out.println("textfield is a placeholder 1");
-                //String text = textField.getText();
-                if (text.contains("Grade Type")) {
+                String text = textField.getText();
+                if (text.contains("Grade Type") && attachedBoxes == maxAttachedBoxes) {
                     //dont write next two
                     System.out.println("contains grade type 2");
                     attachedBoxes = 0;
                     maxAttachedBoxes = 2;
                 }
 
-                else if (text.equals("Percentage of Grade")) {
-                    System.out.println("hellohello");
+                else if (text.equals("Percentage of Grade") && attachedBoxes == maxAttachedBoxes) {
+                    System.out.println("Percentage of grade 2");
+                    //deleteLines(filePath, text);
+                    attachedBoxes = 0;
+                    maxAttachedBoxes = 1;
+                    deleteLines(filePath, text);
                 }
 
-                else if (text.equals("Grades(format:# # #")) {
-                    System.out.println("hellohello");
+                else if (text.equals("Grades(format:# # #)") && attachedBoxes == maxAttachedBoxes) {
+                    System.out.println("grades");
+                    deleteLines(filePath, text);
+                    deleteLines(filePath, text);
                 }
 
                 // else if (attachedBoxes == maxAttachedBoxes) {
@@ -351,7 +371,7 @@ public class Creator {
                 //String text = textField.getText();
                 return;
             }
-        //}
+        }
     }
 
     public void clearFile(String filePath) {
@@ -370,13 +390,14 @@ public class Creator {
         ArrayList lines = fileHandler.readFileToList(filePath);
         //remove line(s) ***will update to work for multiple lines***
         if (!lines.isEmpty()) {
-            if (text.contains("Grade Type")) {
-                System.out.println("say hi");
+            //if (text.contains("Grade Type")) {
+            //    System.out.println("say hi");
                 //remove this line
                 //and the next two
                 
             lines.remove(lines.size() -1);
-        }
+            classList.remove(classList.size() -1);
+        //}
     }
         fileHandler.writeArrayListToFile(filePath, lines);
     }
