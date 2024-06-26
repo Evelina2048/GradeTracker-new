@@ -51,6 +51,8 @@ public class Creator {
     private ArrayList<String>textFieldPanelText = new ArrayList<>();
     private JPanel textFieldContainer = new JPanel(new FlowLayout(FlowLayout.LEFT));
     private Boolean focusGranted = true;
+    private int attachedBoxes = 0;
+    private int maxAttachedBoxes = 0;
     
     public Creator() {
         this.set = Set.getInstance();
@@ -221,13 +223,43 @@ public class Creator {
 
                     JTextField textField = (JTextField) component;
                     System.out.println("made it past first test. Is it emptied? "+ set.getEmptiedState(textField)+ "text: "+ textField.getText());
-                    if (set.getEmptiedState(textField) == true) {
+                    if (set.getEmptiedState(textField) == true && attachedBoxes == maxAttachedBoxes) {
                         String text = textField.getText().trim();
                         classList.add(text);
                         if (!text.isEmpty()) {
-                            writer.write(text + "\n");                             
-                            System.out.println("should be writing");
+                            if (attachedBoxes == maxAttachedBoxes) {
+                                writer.write(text + "\n");                             
+                                System.out.println("should be writing");
+                            }
+                    }
+                    
+                    else if (set.getEmptiedState(textField) == false) {
+                        System.out.println("textfield is a placeholder 1");
+                        if (text.contains("Grade Type")) {
+                            //dont write next two
+                            System.out.println("contains grade type 2");
+                            attachedBoxes = 0;
+                            maxAttachedBoxes = 2;
                         }
+
+                        else if (text.equals("Percentage of Grade")) {
+                            System.out.println("hellohello");
+                        }
+
+                        else if (text.equals("Grades(format:# # #")) {
+                            System.out.println("hellohello");
+                        }
+
+                        // else if (attachedBoxes == maxAttachedBoxes) {
+                        //     writer.write(text + "\n");                             
+                        //     System.out.println("should be writing");
+                        // }
+
+                        else {
+                            System.out.println("boxes number not equal 3 4");
+                            attachedBoxes++;
+                        }
+                    }
                     }
                 }
 
@@ -249,34 +281,12 @@ public class Creator {
 
     private void writeTextToFileWithAppend(String filePath, JPanel textFieldPanel) {
         System.out.println("in writeTextToFileWithAppend");
-        Decorator decorator = new Decorator();
         try (BufferedWriter writer = new BufferedWriter(new FileWriter(filePath, true))) {
             for (Component component : textFieldPanel.getComponents()) {
                 if (component instanceof JTextField) {
-                    System.out.println("is a textfield in write text to file with append");
-                    JTextField textField = (JTextField) component;
-
-                    if (set.getEmptiedState(textField) == true) {
-                    String text = textField.getText().trim();
-                    classList.add(text);
-                        if (!text.isEmpty()) {
-                            writer.write(text + "\n");                             
-                            System.out.println("should be writing");
-                        }
-                    }
-                    else if (set.getEmptiedState(textField) == false && set.getCurrentClass() == "StudentStatCollect.java" && !textField.getText().equals("Credits (Optional)")) {
-                        System.out.println("made it");
-                        if (set.getCanContinue()) {
-                            JDialog dialog = decorator.genericPopUpMessage("Must fill in placeholder");
-                            dialog.setLocationRelativeTo(window);
-                            dialog.setLocation(dialog.getX(), dialog.getY() + 15); 
-                            dialog.setVisible(true);
-                            //clearFile(filePath);
-                            deleteLines(filePath);
-                            return;
-                        }
-                    }
+                    decideToWriteOrNot(writer, component);
                 }
+                
 
                 if (component instanceof JPanel) {
                     writeTextToFileWithAppend(filePath, (JPanel) component);
@@ -285,6 +295,65 @@ public class Creator {
         } catch (IOException e) {
             e.printStackTrace();
         }
+    }
+
+    private void decideToWriteOrNot(BufferedWriter writer, Component component) {
+        Decorator decorator = new Decorator();
+        System.out.println("is a textfield in write text to file with append");
+        JTextField textField = (JTextField) component;
+
+        if (set.getEmptiedState(textField) == true && attachedBoxes == maxAttachedBoxes) {
+        String text = textField.getText().trim();
+        classList.add(text);
+            if (!text.isEmpty()) {
+                    try {
+                        writer.write(text + "\n");
+                    } catch (IOException e) {
+                        // TODO Auto-generated catch block
+                        e.printStackTrace();
+                    }                             
+                    System.out.println("should be writing");
+            }
+        }
+        else if (set.getEmptiedState(textField) == false && set.getCurrentClass() == "StudentStatCollect.java" && !textField.getText().equals("Credits (Optional)")) {
+            System.out.println("made it");
+                System.out.println("textfield is a placeholder 1");
+                String text = textField.getText();
+                if (text.contains("Grade Type")) {
+                    //dont write next two
+                    System.out.println("contains grade type 2");
+                    attachedBoxes = 0;
+                    maxAttachedBoxes = 2;
+                }
+
+                else if (text.equals("Percentage of Grade")) {
+                    System.out.println("hellohello");
+                }
+
+                else if (text.equals("Grades(format:# # #")) {
+                    System.out.println("hellohello");
+                }
+
+                // else if (attachedBoxes == maxAttachedBoxes) {
+                //     writer.write(text + "\n");                             
+                //     System.out.println("should be writing");
+                // }
+
+                else {
+                    System.out.println("boxes number not equal 3 4");
+                    attachedBoxes++;
+                }
+            }
+            if (set.getCanContinue()) {
+                JDialog dialog = decorator.genericPopUpMessage("Must fill in placeholder");
+                dialog.setLocationRelativeTo(window);
+                dialog.setLocation(dialog.getX(), dialog.getY() + 15); 
+                dialog.setVisible(true);
+                ////clearFile(filePath);
+                ////deleteLines(filePath, textField.getText());
+                String text = textField.getText();
+                return;
+            }
     }
 
     public void clearFile(String filePath) {
@@ -296,15 +365,21 @@ public class Creator {
         }
     }
 
-    public void deleteLines(String filePath) {
-        //ArrayList lines = new ArrayList<>(); 
+    public void deleteLines(String filePath, String text) {
+        //ArrayList lines = new ArrayList<>();
         String line;
         //read to array list
         ArrayList lines = fileHandler.readFileToList(filePath);
         //remove line(s) ***will update to work for multiple lines***
         if (!lines.isEmpty()) {
+            if (text.contains("Grade Type")) {
+                System.out.println("say hi");
+                //remove this line
+                //and the next two
+                
             lines.remove(lines.size() -1);
         }
+    }
         fileHandler.writeArrayListToFile(filePath, lines);
     }
 
