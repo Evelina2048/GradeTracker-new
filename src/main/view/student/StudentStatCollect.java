@@ -20,6 +20,11 @@ import main.model.Set;
 import main.controller.Creator;
 import main.controller.FileHandler;
 
+import javax.swing.AbstractAction;
+import javax.swing.JComponent;
+import javax.swing.KeyStroke;
+import java.awt.event.KeyEvent;
+
 public class StudentStatCollect extends JFrame {
     private JFrame window;
     private Creator creator;
@@ -46,6 +51,12 @@ public class StudentStatCollect extends JFrame {
         this.set = Set.getInstance();
         set.setCurrentClass("StudentStatCollect.java");
         this.window = set.getWindow();
+
+        ///
+        EnterAction enterAction = new EnterAction();
+        window.getRootPane().getInputMap(JComponent.WHEN_IN_FOCUSED_WINDOW).put(KeyStroke.getKeyStroke(KeyEvent.VK_ENTER, 0), "enterAction");
+        window.getRootPane().getActionMap().put("enterAction", enterAction);
+        ///
         finalClassList = set.getFinalClassList();
         System.out.println("final class list issssss before: "+ finalClassList);
         finalClassList = set.getFinalClassList();
@@ -165,19 +176,23 @@ public class StudentStatCollect extends JFrame {
     private void nextButtonAction(JButton nextButton) {
         nextButton.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent e) {
-                saveButtonAction();
-                if(set.getCanContinue()) {
-                    set.incrementClassListIndex();
-                    if (set.getClassListIndex()+1 <= set.getFinalClassList().size()) {
-                        visitNextStudentClass();
-                    }
-                    else {
-                        hideWindow();
-                        new PrintStudentGrades(set.getWindow(), set.getStudentOrTeacher(), set.getExistingOrNew());
-                    }
-                }
+                doNextButtonProcedure();
             }
         });
+    }
+
+    private void doNextButtonProcedure() {
+        saveButtonAction();
+        if(set.getCanContinue()) {
+            set.incrementClassListIndex();
+            if (set.getClassListIndex()+1 <= set.getFinalClassList().size()) {
+                visitNextStudentClass();
+            }
+            else {
+                hideWindow();
+                new PrintStudentGrades(set.getWindow(), set.getStudentOrTeacher(), set.getExistingOrNew());
+            }
+        }
     }
 
     private void visitNextStudentClass() {
@@ -316,4 +331,10 @@ public class StudentStatCollect extends JFrame {
     // }
 
     ////
+    public class EnterAction extends AbstractAction {
+        @Override
+        public void actionPerformed(ActionEvent e) {
+            doNextButtonProcedure();
+        }
+    }
     }

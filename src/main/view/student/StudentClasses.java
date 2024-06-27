@@ -1,7 +1,9 @@
 package main.view.student;
 
+import javax.swing.AbstractAction;
 import javax.swing.BorderFactory;
 import javax.swing.JButton;
+import javax.swing.JComponent;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
 
@@ -9,6 +11,7 @@ import java.awt.BorderLayout;
 import java.awt.Dimension;
 import javax.swing.JPanel;
 import javax.swing.JTextField;
+import javax.swing.KeyStroke;
 import javax.swing.border.Border;
 import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
@@ -24,6 +27,10 @@ import main.controller.Creator;
 import main.controller.Decorator;
 import main.controller.FileHandler;
 import main.view.Gather;
+
+import main.view.student.StudentClasses;
+
+import java.awt.event.KeyEvent;
 
 
 
@@ -59,6 +66,11 @@ public class StudentClasses extends JFrame {
         creator = new Creator();
         decorator = new Decorator();
         System.out.println("in student classes");
+
+        EnterAction enterAction = new EnterAction();
+        window.getRootPane().getInputMap(JComponent.WHEN_IN_FOCUSED_WINDOW).put(KeyStroke.getKeyStroke(KeyEvent.VK_ENTER, 0), "enterAction");
+        window.getRootPane().getActionMap().put("enterAction", enterAction);
+        
         window.setTitle("StudentClasses");
         window.setLayout(new BorderLayout());
         instructionsWordsAndPanel("Edit Textbox Mode");
@@ -158,12 +170,12 @@ public class StudentClasses extends JFrame {
         nextButton.setPreferredSize(new Dimension(87, 29));
         nextButton.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent e) {
-                nextButtonAction();
+                doNextButtonProcedure();
             }
         });
         return nextButtonPanel;
     }
-    private void nextButtonAction() {
+    private void doNextButtonProcedure() {
             ArrayList<String> classList;
             classList = set.getCurrentPanelList();
             set.setClassList(classList);
@@ -426,6 +438,13 @@ public class StudentClasses extends JFrame {
         creator.getTextFieldContainer().setVisible(false);
         instructionsPanel.setVisible(false);
 
+    }
+
+    public class EnterAction extends AbstractAction {
+        @Override
+        public void actionPerformed(ActionEvent e) {
+            doNextButtonProcedure();
+        }
     }
 
     }

@@ -1,11 +1,14 @@
 package main.view;
 
+import javax.swing.AbstractAction;
 import javax.swing.ButtonGroup;
 import javax.swing.JButton;
+import javax.swing.JComponent;
 import javax.swing.JDialog;
 import javax.swing.JFrame;
 import javax.swing.JRadioButton;
 import javax.swing.JTextField;
+import javax.swing.KeyStroke;
 import javax.swing.SwingConstants;
 
 import main.view.student.StudentClasses;
@@ -33,6 +36,7 @@ import java.io.FileReader;
 import main.model.Set;
 import main.controller.Creator;
 import main.controller.Decorator;
+import java.awt.event.KeyEvent;
 
 //import class files
 
@@ -50,6 +54,8 @@ public class Gather {
     JRadioButton studentButton;
     JRadioButton teacherButton;
     ButtonGroup teacherStudentGroup;
+
+    JButton nextButton;
     int windowWidth = 800;
     int windowHeight = 500;
 
@@ -79,7 +85,14 @@ public class Gather {
         this.window = set.getWindow();
         creator = new Creator();
         newUser = new NewUser();
+
+        //
+        EnterAction enterAction = new EnterAction();
+        window.getRootPane().getInputMap(JComponent.WHEN_IN_FOCUSED_WINDOW).put(KeyStroke.getKeyStroke(KeyEvent.VK_ENTER, 0), "enterAction");
+        window.getRootPane().getActionMap().put("enterAction", enterAction);
+        //
         gatherLaunch();
+        
 
     }
 
@@ -184,18 +197,24 @@ public class Gather {
     }
 
     private void makeNextButton() {
-        JButton nextButton = creator.nextButtonCreate();
+        nextButton = creator.nextButtonCreate();
         nextButtonPanel.add(nextButton);
+        nextButtonAddActionListener();
+    }
+
+    private void nextButtonAddActionListener() {
         nextButton.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent e) {
-                set.setUsername(textField.getText());
-                System.out.println("nextbutton action in gather");
-                nextButtonAction();
+                doNextButtonProcedure();
             }
         });
     }
 
-
+    private void doNextButtonProcedure() {
+        set.setUsername(textField.getText());
+        System.out.println("nextbutton action in gather");
+        nextButtonAction();
+    }
 
     private void nextButtonAction() {
         boolean textFieldEmpty = textField.getText().trim().isEmpty();
@@ -215,16 +234,16 @@ public class Gather {
             System.out.println("Something went wrong in username input");
             errorMessageSetUp("<html><center>Something went wrong in username input",200,90);
         }
-}
+    }
+
 private void backButtonAction() {
     System.out.println("backbuttonaction for gather");
     hideWindow(); 
     newUser.newUserSetup();
     newUser.showWindow(window.getX(),window.getY());
-    newUser.setButtonSelected();
- 
-            
+    newUser.setButtonSelected();          
 }
+
 private void errorMessageSetUp(String labelWords, int width, int height) {
     JDialog dialog = new JDialog(window, true);
     dialog.setLayout(new FlowLayout());
@@ -363,5 +382,12 @@ private void writeUsername(String filePath) {
         hideWindow();
         StudentClasses studentClasses = new StudentClasses();
         studentClasses.studentClassesLaunch();
+    }
+
+    public class EnterAction extends AbstractAction {
+        @Override
+        public void actionPerformed(ActionEvent e) {
+            doNextButtonProcedure();
+        }
     }
 }
