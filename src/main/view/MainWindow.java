@@ -146,12 +146,13 @@ private void backNextButton() {
     JPanel nextButtonPanel = new JPanel();
     nextButtonPanel.add(nextButton);
     //next
-    nextButton = new JButton("Next >");
+    //nextButton = new JButton("Next >");
 
     //backNextButtonsPanel.add(nextButton, BorderLayout.EAST);
     //window.add(backNextButtonsPanel, BorderLayout.SOUTH);
     nextButton.addActionListener(new ActionListener() {
         public void actionPerformed(ActionEvent e) {
+            System.out.println("mainwindow nextbutton action");
             doNextButtonProcedure();
             set.setStudentOrTeacher(studentOrTeacher);
         }

@@ -180,6 +180,7 @@ public class Gather {
         nextButtonPanel.add(nextButton);
         nextButton.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent e) {
+                System.out.println("nextbutton action in gather");
                 nextButtonAction();
             }
         });
@@ -207,10 +208,11 @@ public class Gather {
         }
 }
 private void backButtonAction() {
+    System.out.println("backbuttonaction for gather");
+    hideWindow(); 
     newUser.newUserSetup();
     newUser.showWindow(window.getX(),window.getY());
     newUser.setButtonSelected();
-    hideWindow(); 
  
             
 }

@@ -144,7 +144,6 @@ public class NewUser extends JFrame {
     // backNextButtonsPanel.add(backButton, BorderLayout.WEST);
     Creator creator = new Creator();
     JButton backButton = creator.backButtonCreate();
-    backButton.setEnabled(false);
     JPanel backButtonPanel = new JPanel();
     backButtonPanel.add(backButton);
 
@@ -152,12 +151,13 @@ public class NewUser extends JFrame {
     JPanel nextButtonPanel = new JPanel();
     nextButtonPanel.add(nextButton);
     //next
-    nextButton = new JButton("Next >");
+    //nextButton = new JButton("Next >");
 
     //backNextButtonsPanel.add(nextButton, BorderLayout.EAST);
     //window.add(backNextButtonsPanel, BorderLayout.SOUTH);
     nextButton.addActionListener(new ActionListener() {
         public void actionPerformed(ActionEvent e) {
+            System.out.println("new user nextbutton aciton");
             doNextButtonProcedure();
             set.setStudentOrTeacher(studentOrTeacher);
         }
@@ -184,6 +184,7 @@ public class NewUser extends JFrame {
         
         nextButton.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent e) {
+                System.out.println("nextbutton action in newuser");
                 doNextButtonProcedure();
                 set.setWindow(window);
                 set.setExistingOrNew(existingOrNew);
@@ -192,6 +193,7 @@ public class NewUser extends JFrame {
     }
 
     private void doNextButtonProcedure(){
+        System.out.println("in the do next button procedure in new user");
         int windowX = window.getX();
             int windowY = window.getY();
             if (moveOnPossible) {
