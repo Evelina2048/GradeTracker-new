@@ -21,6 +21,7 @@ import java.awt.event.ActionEvent;
 import java.awt.event.KeyEvent;
 
 import main.model.Set;
+import main.controller.Creator;
 import main.controller.Decorator;
 
 public class NewUser extends JFrame {
@@ -130,12 +131,39 @@ public class NewUser extends JFrame {
     }
 
     private void buttonSetUp() {
-        JButton backButton;
-        JButton nextButton;
-        //buttons
+        // JButton backButton;
+        // JButton nextButton;
+        // //buttons
+        // backNextButtonsPanel = new JPanel(new BorderLayout());
+        // backButton = new JButton("< Back");
+        // backNextButtonsPanel.add(backButton, BorderLayout.WEST);
         backNextButtonsPanel = new JPanel(new BorderLayout());
-        backButton = new JButton("< Back");
-        backNextButtonsPanel.add(backButton, BorderLayout.WEST);
+
+    // backButton = new JButton("< Back");
+    // backButton.setEnabled(false);
+    // backNextButtonsPanel.add(backButton, BorderLayout.WEST);
+    Creator creator = new Creator();
+    JButton backButton = creator.backButtonCreate();
+    backButton.setEnabled(false);
+    JPanel backButtonPanel = new JPanel();
+    backButtonPanel.add(backButton);
+
+    JButton nextButton = creator.nextButtonCreate();
+    JPanel nextButtonPanel = new JPanel();
+    nextButtonPanel.add(nextButton);
+    //next
+    nextButton = new JButton("Next >");
+
+    //backNextButtonsPanel.add(nextButton, BorderLayout.EAST);
+    //window.add(backNextButtonsPanel, BorderLayout.SOUTH);
+    nextButton.addActionListener(new ActionListener() {
+        public void actionPerformed(ActionEvent e) {
+            doNextButtonProcedure();
+            set.setStudentOrTeacher(studentOrTeacher);
+        }
+    });
+    backNextButtonsPanel = creator.makeBackNextButtonsPanel(backButtonPanel, new JPanel(), nextButtonPanel);
+    window.add(backNextButtonsPanel, BorderLayout.SOUTH);
 
         backButton.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent e) {
@@ -150,9 +178,9 @@ public class NewUser extends JFrame {
         });
         
         //next
-        nextButton = new JButton("Next >");
-        backNextButtonsPanel.add(nextButton, BorderLayout.EAST);
-        window.add(backNextButtonsPanel, BorderLayout.SOUTH);
+        // nextButton = new JButton("Next >");
+        // backNextButtonsPanel.add(nextButton, BorderLayout.EAST);
+        // window.add(backNextButtonsPanel, BorderLayout.SOUTH);
         
         nextButton.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent e) {

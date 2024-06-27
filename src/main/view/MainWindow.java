@@ -21,6 +21,7 @@ import java.awt.event.ActionEvent;
 import java.awt.event.KeyEvent;
 
 import main.model.Set;
+import main.controller.Creator;
 import main.controller.Decorator;
 
 public class MainWindow extends JFrame {
@@ -80,7 +81,6 @@ private void InstructionsWordsWindow() {
         instructionsPanel = decorator.InstructionsPanelDecorate(instructionsPanel, instructionsWords);
     }
 
-
 private void radioButtonSetUp() {
     teacherStudentGroup = new ButtonGroup();
     Color choicesPanelColor = Color.decode("#AFA2A2");
@@ -128,32 +128,39 @@ private void addToChoicesPanel(ButtonGroup teacherStudentGroup, JRadioButton tea
 }
 
 private void backNextButton() {
-    JButton backButton;
-    JButton nextButton;
+    //JButton backButton;
+    //JButton nextButton;
     //buttons
     backNextButtonsPanel = new JPanel(new BorderLayout());
 
-    backButton = new JButton("< Back");
+    // backButton = new JButton("< Back");
+    // backButton.setEnabled(false);
+    // backNextButtonsPanel.add(backButton, BorderLayout.WEST);
+    Creator creator = new Creator();
+    JButton backButton = creator.backButtonCreate();
     backButton.setEnabled(false);
-    backNextButtonsPanel.add(backButton, BorderLayout.WEST);
+    JPanel backButtonPanel = new JPanel();
+    backButtonPanel.add(backButton);
 
+    JButton nextButton = creator.nextButtonCreate();
+    JPanel nextButtonPanel = new JPanel();
+    nextButtonPanel.add(nextButton);
     //next
     nextButton = new JButton("Next >");
-    backNextButtonsPanel.add(nextButton, BorderLayout.EAST);
-    window.add(backNextButtonsPanel, BorderLayout.SOUTH);
 
-
-
+    //backNextButtonsPanel.add(nextButton, BorderLayout.EAST);
+    //window.add(backNextButtonsPanel, BorderLayout.SOUTH);
     nextButton.addActionListener(new ActionListener() {
         public void actionPerformed(ActionEvent e) {
             doNextButtonProcedure();
             set.setStudentOrTeacher(studentOrTeacher);
         }
     });
+    backNextButtonsPanel = creator.makeBackNextButtonsPanel(backButtonPanel, new JPanel(), nextButtonPanel);
+    window.add(backNextButtonsPanel, BorderLayout.SOUTH);
 }
 
 private void doNextButtonProcedure() {
-
     if (moveOnPossible) {
         setUserInfo();
         set.setWindow(window);
