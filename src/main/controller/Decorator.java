@@ -34,6 +34,7 @@ import java.io.IOException;
 ///
 import java.awt.event.WindowAdapter;
 import java.awt.event.WindowEvent;
+import java.awt.event.FocusListener;
 
 
 //key listening
@@ -145,6 +146,7 @@ public class Decorator {
         dialog.add(okButton);
         dialog.setSize(200,90);
         set.setCanContinue(false);
+        window.requestFocusInWindow();
         okButton.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent e) {
                 dialog.setVisible(false);
@@ -155,12 +157,22 @@ public class Decorator {
         dialog.addWindowListener(new WindowAdapter() {
             @Override
             public void windowClosing(WindowEvent e) {
+                window.requestFocusInWindow();
                 dialog.dispose();
                 set.setCanContinue(false);
+
+                //
+                //
             }
         });
         return dialog;
         
+    }
+
+    public void removeFocusListeners(JTextField textField) {
+        for (FocusListener listener : textField.getFocusListeners()) {
+            textField.removeFocusListener(listener);
+        }
     }
 
     public void errorMessageSetUp(JRadioButton button) {
