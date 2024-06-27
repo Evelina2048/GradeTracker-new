@@ -54,7 +54,7 @@ public class Gather {
     int windowHeight = 500;
 
     Decorator decorate = new Decorator();
-    JTextField textField = decorate.decorateTextBox("Enter user name");
+    JTextField textField;
 
     //panels
     JPanel instructionsPanel;
@@ -67,6 +67,13 @@ public class Gather {
 
     public Gather() {
         this.set = Set.getInstance();
+        if (set.getUsername() == null) {
+            textField = decorate.decorateTextBox("Enter user name");
+        }
+        else {
+            textField = decorate.decorateTextBox(set.getUsername());
+        }
+
         existingOrNew = set.getExistingOrNew();
         studentOrTeacher = set.getStudentOrTeacher();
         this.window = set.getWindow();
@@ -160,6 +167,7 @@ public class Gather {
         backButtonPanel.add(backButton);
         backButton.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent e) {
+               set.setUsername(textField.getText());
                backButtonAction();
             }
         });
@@ -180,6 +188,7 @@ public class Gather {
         nextButtonPanel.add(nextButton);
         nextButton.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent e) {
+                set.setUsername(textField.getText());
                 System.out.println("nextbutton action in gather");
                 nextButtonAction();
             }
