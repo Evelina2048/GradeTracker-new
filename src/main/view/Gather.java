@@ -33,9 +33,17 @@ import java.io.BufferedReader;
 
 import java.io.FileReader;
 
+import java.awt.event.MouseEvent;
+import java.awt.event.MouseAdapter;
+
+import java.awt.event.FocusAdapter;
+import java.awt.event.FocusEvent;
+
 import main.model.Set;
 import main.controller.Creator;
 import main.controller.Decorator;
+import main.controller.FileHandler;
+
 import java.awt.event.KeyEvent;
 
 //import class files
@@ -73,12 +81,7 @@ public class Gather {
 
     public Gather() {
         this.set = Set.getInstance();
-        if (set.getUsername() == null) {
-            textField = decorate.decorateTextBox("Enter user name");
-        }
-        else {
-            textField = decorate.decorateTextBox(set.getUsername());
-        }
+        whatToSetTextFieldTo();
 
         existingOrNew = set.getExistingOrNew();
         studentOrTeacher = set.getStudentOrTeacher();
@@ -93,6 +96,39 @@ public class Gather {
         //
         gatherLaunch();
         
+
+    }
+
+    private void whatToSetTextFieldTo() {
+        if (set.getUsername() == null) {
+            textField = decorate.decorateTextBox("Enter user name");
+        }
+        else {
+            textField = decorate.decorateTextBox(set.getUsername());
+            textFieldMouseListener();
+        }
+    }
+
+    private void textFieldMouseListener() {
+        //check if file path to original username's class.txt exists and is not empty, if true,
+        FileHandler fileHandler = new FileHandler();
+        String filePath = "/Users/evy/Documents/GradeTracker-new/src/main/view/UserInfo/StudentInfo/"+set.getUsername()+"/class.txt";
+        if (fileHandler.fileExists(filePath) && fileHandler.fileIsNotEmpty(filePath)) {
+
+        //add focus listener to textbox
+        decorate.removeFocusListeners(textField);
+        textField.addFocusListener(new FocusAdapter() {
+        @Override
+        public void focusGained(FocusEvent e) {
+            //generic pop up message : "Editing the username will not carry over class information"
+            System.out.println("focused");
+            JDialog dialog = decorate.genericPopUpMessage("Editing the username will not carry over class information");
+            dialog.setLocationRelativeTo(window);
+            dialog.setLocation(dialog.getX(), dialog.getY() + 15); 
+            dialog.setVisible(true);
+        }
+        });
+        }
 
     }
 
