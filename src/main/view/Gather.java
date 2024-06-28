@@ -116,19 +116,28 @@ public class Gather {
         if (fileHandler.fileExists(filePath) && fileHandler.fileIsNotEmpty(filePath)) {
 
         //add focus listener to textbox
-        decorate.removeFocusListeners(textField);
+        //decorate.removeFocusListeners(textField);
+        // //
+        set.setCanContinue(true);
         textField.addFocusListener(new FocusAdapter() {
         @Override
         public void focusGained(FocusEvent e) {
             //generic pop up message : "Editing the username will not carry over class information"
             System.out.println("focused");
-            JDialog dialog = decorate.genericPopUpMessage("Editing the username will not carry over class information");
-            dialog.setLocationRelativeTo(window);
-            dialog.setLocation(dialog.getX(), dialog.getY() + 15); 
-            dialog.setVisible(true);
+        //     JDialog dialog = decorate.genericPopUpMessage("Editing the username will not carry over class information");
+        //     dialog.setLocationRelativeTo(window);
+        //     dialog.setLocation(dialog.getX(), dialog.getY() + 15); 
+        //     dialog.setVisible(true);
+            if (set.getCanContinue() == true ) {
+                set.setCanContinue(false);
+                window.requestFocusInWindow();
+                decorate.areYouSureMessageDelete(textField, "editing username");
         }
+        }
+           // decorate.areYouSureMessageSetUp(nextButton, textField, filePath);
         });
         }
+        // //
 
     }
 

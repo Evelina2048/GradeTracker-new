@@ -146,7 +146,7 @@ private void backNextButton() {
     JPanel nextButtonPanel = new JPanel();
     nextButtonPanel.add(nextButton);
     //next
-    //nextButton = new JButton("Next >");
+    nextButton = new JButton("Next >");
 
     //backNextButtonsPanel.add(nextButton, BorderLayout.EAST);
     //window.add(backNextButtonsPanel, BorderLayout.SOUTH);
@@ -172,7 +172,7 @@ private void doNextButtonProcedure() {
         decorator.hideWindow(instructionsPanel, choicesPanel, backNextButtonsPanel);
     }
     else if (!moveOnPossible) {
-        decorator.errorMessageSetUp(studentButton);
+        //decorator.errorMessageSetUp(studentButton);
     }
 }
 

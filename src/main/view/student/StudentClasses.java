@@ -321,11 +321,13 @@ public class StudentClasses extends JFrame {
             public void actionPerformed(ActionEvent e) {
                 System.out.println("letssss gooooo");
                 System.out.println("count:" + set.getTextFieldPanel().getComponentCount());
-                saveButtonAction();
+                newClassButton.setEnabled(true);
+                //saveButtonAction();
+                //saveButton.setEnabled(rootPaneCheckingEnabled);
                 
                 if (set.getLoadedState(selectedTextBox) && (fileHandler.fileExists(filePath)) && fileHandler.fileIsNotEmpty(filePath)) {
                     //System.out.println("text: "+ selectedTextBox.getText()+" loaded state: "+ set.getLoadedState(textField));
-                    decorator.areYouSureMessageSetUp(deleteClassButton, selectedTextBox);
+                    decorator.areYouSureMessageDelete(selectedTextBox, "deleting");
                 
                     selectedTextBox.setForeground(Color.GRAY);
                     selectedTextBox.setBorder(borderRegular);
@@ -437,6 +439,10 @@ public class StudentClasses extends JFrame {
         southContainer.setVisible(false);
         creator.getTextFieldContainer().setVisible(false);
         instructionsPanel.setVisible(false);
+        //window.remove(window.getMouseListeners());
+        for (MouseListener listener : deleteClassButton.getMouseListeners()) {
+            window.removeMouseListener(listener);
+        }
 
     }
 

@@ -142,6 +142,7 @@ public class Creator {
                     textField.setForeground(Color.gray);
                 }
                 else {
+                    //textField.requestFocus();
                     System.out.println("something went wrong in focus lost");
                 }
             }
@@ -172,6 +173,7 @@ public class Creator {
                 Rectangle newBounds = new Rectangle(x, y, width, height);
 
                 boolean pointNotInTextbox = !newBounds.contains(e.getPoint());
+                boolean pointInTextbox = newBounds.contains(e.getPoint());
 
                 if (pointNotInTextbox && textField.getText().isEmpty()) {
                     textField.setText(placeholder);
@@ -187,6 +189,10 @@ public class Creator {
                 else if (pointNotInTextbox) {
                     window.requestFocusInWindow();
 
+                }
+
+                else if (pointInTextbox) {
+                    textField.requestFocus();
                 }
 
                 else {

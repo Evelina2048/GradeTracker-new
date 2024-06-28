@@ -80,7 +80,7 @@ public class Decorator {
         return gbc;
     }
 
-    public void areYouSureMessageSetUp(JButton button, JTextField textField) {
+    public void areYouSureMessageDelete(JTextField textField, String reason) {
         Creator creator = new Creator();
         JDialog dialog = new JDialog(window, true);
         dialog.setLayout(new FlowLayout());
@@ -97,34 +97,51 @@ public class Decorator {
         dialog.add(noButton);
 
         dialog.setSize(250,120);
-        JPanel panel = new JPanel();
-        System.out.println("does textfield be null?: "+textField==null+ "textfield text"+ textField.getText());
-        panel.add(textField);
 
-        yesButton.addActionListener(new ActionListener() {
-            public void actionPerformed(ActionEvent e) {     
-                textField.setVisible(false);
-                for (MouseListener listener : textField.getMouseListeners()) {
-                    textField.removeMouseListener(listener);
-                }
-                
-                creator.deleteTextBox(panel);
-                //Files.deleteIfExists("/Users/evy/Documents/GradeTracker-new/src/main/view/UserInfo/StudentInfo/Username/e.txt");
-                Path filePath = Paths.get("/Users/evy/Documents/GradeTracker-new/src/main/view/UserInfo/StudentInfo/"+set.getUsername()+"/"+textField.getText()+".txt");
-                
-                try {
-                    Files.deleteIfExists(filePath);
-                } catch (IOException e1) {
-                    e1.printStackTrace();
-                }
+        // yesButton.addActionListener(new ActionListener() {
+        //     public void actionPerformed(ActionEvent e) { 
+        //         if (reason == "deleting") {   
+        //             textField.setVisible(false);
+        //             // for (MouseListener listener : textField.getMouseListeners()) {
+        //             //     textField.removeMouseListener(listener);
+        //             // }
+        //             JPanel panelForDeleting = new JPanel();
+        //             System.out.println("does textfield be null?: "+textField==null+ "textfield text"+ textField.getText());
+        //             panelForDeleting.add(textField);
+        //             creator.deleteTextBox(panelForDeleting);
+        //             //Files.deleteIfExists("/Users/evy/Documents/GradeTracker-new/src/main/view/UserInfo/StudentInfo/Username/e.txt");
+        //             Path filePath = Paths.get("/Users/evy/Documents/GradeTracker-new/src/main/view/UserInfo/StudentInfo/"+set.getUsername()+"/"+textField.getText()+".txt");
+                    
+        //             try {
+        //                 Files.deleteIfExists(filePath);
+        //             } catch (IOException e1) {
+        //                 e1.printStackTrace();
+        //             }
+        //         }  
+        //         else {
+        //             //textField.requestFocus();
+        //             System.out.println("in else");
 
-                dialog.setVisible(false);
-                dialog.dispose(); 
-                
-            }
-        });
+        //             FocusListener[] listeners = textField.getFocusListeners();
+        //             int listenerCount = listeners.length;
+        //             System.out.println("focuslistenercount: "+listenerCount);
+
+        //             FocusListener[] mouselisteners = textField.getFocusListeners();
+        //             int mouselistenerCount = mouselisteners.length;
+        //             System.out.println("mouselistenercount: "+mouselistenerCount);
+
+        //             //removeFocusListeners(textField);
+        //             //textField.requestFocus();
+        //             //textField.setEditable(true);
+        //         }
+        //         dialog.setVisible(false);
+        //         dialog.dispose(); 
+        //         set.setCanContinue(true);
+        //     }
+        // });
         noButton.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent e) {
+                set.setCanContinue(true);
                 dialog.setVisible(false);
                 dialog.dispose(); 
             }
@@ -133,7 +150,68 @@ public class Decorator {
         dialog.setLocationRelativeTo(window);
         //dialog.setLocation(null); 
         dialog.setVisible(true);
+        window.requestFocusInWindow();
     }
+        
+
+    // public void areYouSureMessageEditUsername(JTextField textField) {
+    //     Creator creator = new Creator();
+    //     JDialog dialog = new JDialog(window, true);
+    //     dialog.setLayout(new FlowLayout());
+    //     JLabel label = new JLabel("<html><center>Deleting this class will delete <br>its loaded information.<br>Do you wish to continue?");
+    //     label.setHorizontalAlignment(SwingConstants.CENTER);
+    //     dialog.add(label);
+
+    //     JButton yesButton = new JButton("Yes");
+    //     yesButton.setVisible(true);
+    //     dialog.add(yesButton);
+
+    //     JButton noButton = new JButton("Cancel");
+    //     noButton.setVisible(true);
+    //     dialog.add(noButton);
+
+    //     dialog.setSize(250,120);
+    //     JPanel panel = new JPanel();
+    //     System.out.println("does textfield be null?: "+textField==null+ "textfield text"+ textField.getText());
+    //     panel.add(textField);
+    //     window.requestFocusInWindow();
+
+    //     yesButton.addActionListener(new ActionListener() {
+    //         public void actionPerformed(ActionEvent e) {    
+    //                 textField.setVisible(false);
+    //                 for (MouseListener listener : textField.getMouseListeners()) {
+    //                     textField.removeMouseListener(listener);
+    //                 }
+                    
+    //                 creator.deleteTextBox(panel);
+    //                 //Files.deleteIfExists("/Users/evy/Documents/GradeTracker-new/src/main/view/UserInfo/StudentInfo/Username/e.txt");
+    //                 Path filePath = Paths.get("/Users/evy/Documents/GradeTracker-new/src/main/view/UserInfo/StudentInfo/"+set.getUsername()+"/"+textField.getText()+".txt");
+                    
+    //                 try {
+    //                     Files.deleteIfExists(filePath);
+    //                 } catch (IOException e1) {
+    //                     e1.printStackTrace();
+    //                 }
+
+    //                 dialog.setVisible(false);
+    //                 dialog.dispose();   
+    //             // else {
+    //             //     removeFocusListeners(textField);
+    //             //     textField.requestFocus();
+    //             // }
+    //         }
+    //     });
+    //     noButton.addActionListener(new ActionListener() {
+    //         public void actionPerformed(ActionEvent e) {
+    //             dialog.setVisible(false);
+    //             dialog.dispose(); 
+    //         }
+    //     });
+        
+    //     dialog.setLocationRelativeTo(window);
+    //     //dialog.setLocation(null); 
+    //     dialog.setVisible(true);
+    // }
 
     public JDialog genericPopUpMessage(String text) {
         JDialog dialog = new JDialog(window, true);
@@ -146,18 +224,21 @@ public class Decorator {
         dialog.add(okButton);
         dialog.setSize(200,90);
         set.setCanContinue(false);
-        window.requestFocusInWindow();
         okButton.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent e) {
                 dialog.setVisible(false);
                 dialog.dispose(); 
                 set.setCanContinue(false);
+                //textField.getFocusListeners.Count()
+                // FocusListener[] listeners = textField.getFocusListeners();
+                // int listenerCount = listeners.length;
+                // System.out.println("listenercount: "+listenerCount);
             }
         });
         dialog.addWindowListener(new WindowAdapter() {
             @Override
             public void windowClosing(WindowEvent e) {
-                window.requestFocusInWindow();
+                //window.requestFocusInWindow();
                 dialog.dispose();
                 set.setCanContinue(false);
 
@@ -170,12 +251,16 @@ public class Decorator {
     }
 
     public void removeFocusListeners(JTextField textField) {
-        for (FocusListener listener : textField.getFocusListeners()) {
-            textField.removeFocusListener(listener);
-        }
+        // FocusListener[] listeners = textField.getFocusListeners();
+        // int listenerCount = listeners.length;
+        
+        // // Iterate through all listeners except the last one
+        // for (int i = 0; i < listenerCount - 1; i++) {
+        //     textField.removeFocusListener(listeners[i]);
+        // }
     }
 
-    public void errorMessageSetUp(JRadioButton button) {
+    public void errorMessageSetUp(JRadioButton button, JTextField textField) {
         JDialog dialog = genericPopUpMessage("<html><center>Please choose an option");
         
         dialog.setLocationRelativeTo(button);

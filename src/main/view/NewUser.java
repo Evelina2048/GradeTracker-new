@@ -212,7 +212,7 @@ public class NewUser extends JFrame {
                 }    
             }
             else if (!moveOnPossible) {
-                decorator.errorMessageSetUp(newUserButton);
+                //decorator.errorMessageSetUp(newUserButton);
             }            
     }
 
