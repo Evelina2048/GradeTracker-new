@@ -98,59 +98,69 @@ public class Decorator {
 
         dialog.setSize(250,120);
 
-        // yesButton.addActionListener(new ActionListener() {
-        //     public void actionPerformed(ActionEvent e) { 
-        //         if (reason == "deleting") {   
-        //             textField.setVisible(false);
-        //             // for (MouseListener listener : textField.getMouseListeners()) {
-        //             //     textField.removeMouseListener(listener);
-        //             // }
-        //             JPanel panelForDeleting = new JPanel();
-        //             System.out.println("does textfield be null?: "+textField==null+ "textfield text"+ textField.getText());
-        //             panelForDeleting.add(textField);
-        //             creator.deleteTextBox(panelForDeleting);
-        //             //Files.deleteIfExists("/Users/evy/Documents/GradeTracker-new/src/main/view/UserInfo/StudentInfo/Username/e.txt");
-        //             Path filePath = Paths.get("/Users/evy/Documents/GradeTracker-new/src/main/view/UserInfo/StudentInfo/"+set.getUsername()+"/"+textField.getText()+".txt");
+        yesButton.addActionListener(new ActionListener() {
+            public void actionPerformed(ActionEvent e) { 
+                if (reason == "deleting") {   
+                    textField.setVisible(false);
+                    // for (MouseListener listener : textField.getMouseListeners()) {
+                    //     textField.removeMouseListener(listener);
+                    // }
+                    JPanel panelForDeleting = new JPanel();
+                    System.out.println("does textfield be null?: "+textField==null+ "textfield text"+ textField.getText());
+                    panelForDeleting.add(textField);
+                    creator.deleteTextBox(panelForDeleting);
+                    //Files.deleteIfExists("/Users/evy/Documents/GradeTracker-new/src/main/view/UserInfo/StudentInfo/Username/e.txt");
+                    Path filePath = Paths.get("/Users/evy/Documents/GradeTracker-new/src/main/view/UserInfo/StudentInfo/"+set.getUsername()+"/"+textField.getText()+".txt");
                     
-        //             try {
-        //                 Files.deleteIfExists(filePath);
-        //             } catch (IOException e1) {
-        //                 e1.printStackTrace();
-        //             }
-        //         }  
-        //         else {
-        //             //textField.requestFocus();
-        //             System.out.println("in else");
+                    try {
+                        Files.deleteIfExists(filePath);
+                    } catch (IOException e1) {
+                        e1.printStackTrace();
+                    }
+                    dialog.setVisible(false);
+                    dialog.dispose(); 
+                }  
+                else {
+                    System.out.println("in else");
 
-        //             FocusListener[] listeners = textField.getFocusListeners();
-        //             int listenerCount = listeners.length;
-        //             System.out.println("focuslistenercount: "+listenerCount);
+                    FocusListener[] listeners = textField.getFocusListeners();
+                    int listenerCount = listeners.length;
+                    System.out.println("focuslistenercount: "+listenerCount);
 
-        //             FocusListener[] mouselisteners = textField.getFocusListeners();
-        //             int mouselistenerCount = mouselisteners.length;
-        //             System.out.println("mouselistenercount: "+mouselistenerCount);
+                    MouseListener[] mouselisteners = textField.getMouseListeners();
+                    int mouselistenerCount = mouselisteners.length;
+                    System.out.println("mouselistenercount: "+mouselistenerCount);
 
-        //             //removeFocusListeners(textField);
-        //             //textField.requestFocus();
-        //             //textField.setEditable(true);
-        //         }
-        //         dialog.setVisible(false);
-        //         dialog.dispose(); 
-        //         set.setCanContinue(true);
-        //     }
-        // });
+                    // for (int i = 0; i < listenerCount - 1; i++) {
+                    //     textField.removeFocusListener(listeners[i]);
+                    // }
+            
+                    // // Remove all mouse listeners except the last one
+                    // for (int i = 0; i < mouselistenerCount - 1; i++) {
+                    //     textField.removeMouseListener(mouselisteners[i]);
+                    // }
+                    //removeFocusListeners(textField);
+                    //textField.requestFocus();
+                    //textField.setEditable(true);
+                    set.setCanContinue(false);
+                    dialog.setVisible(false);
+                    dialog.dispose(); 
+                    textField.requestFocus();
+                }
+            }
+        });
         noButton.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent e) {
                 set.setCanContinue(true);
                 dialog.setVisible(false);
-                dialog.dispose(); 
+                dialog.dispose();
+                window.requestFocusInWindow(); 
             }
         });
         
         dialog.setLocationRelativeTo(window);
         //dialog.setLocation(null); 
         dialog.setVisible(true);
-        window.requestFocusInWindow();
     }
         
 

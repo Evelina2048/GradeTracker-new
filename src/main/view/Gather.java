@@ -132,7 +132,10 @@ public class Gather {
                 set.setCanContinue(false);
                 window.requestFocusInWindow();
                 decorate.areYouSureMessageDelete(textField, "editing username");
-        }
+
+                //textField.requestFocus();
+            } 
+        
         }
            // decorate.areYouSureMessageSetUp(nextButton, textField, filePath);
         });
