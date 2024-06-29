@@ -44,7 +44,6 @@ JFrame window;
 Decorator decorator = new Decorator();
 
 public MainWindow() {
-    //window = window2;
     MainWindowLaunch();
 
 }
@@ -128,14 +127,7 @@ private void addToChoicesPanel(ButtonGroup teacherStudentGroup, JRadioButton tea
 }
 
 private void backNextButton() {
-    //JButton backButton;
-    //JButton nextButton;
-    //buttons
     backNextButtonsPanel = new JPanel(new BorderLayout());
-
-    // backButton = new JButton("< Back");
-    // backButton.setEnabled(false);
-    // backNextButtonsPanel.add(backButton, BorderLayout.WEST);
     Creator creator = new Creator();
     JButton backButton = creator.backButtonCreate();
     backButton.setEnabled(false);
@@ -145,11 +137,6 @@ private void backNextButton() {
     JButton nextButton = creator.nextButtonCreate();
     JPanel nextButtonPanel = new JPanel();
     nextButtonPanel.add(nextButton);
-    //next
-    nextButton = new JButton("Next >");
-
-    //backNextButtonsPanel.add(nextButton, BorderLayout.EAST);
-    //window.add(backNextButtonsPanel, BorderLayout.SOUTH);
     nextButton.addActionListener(new ActionListener() {
         public void actionPerformed(ActionEvent e) {
             System.out.println("mainwindow nextbutton action");
@@ -172,7 +159,7 @@ private void doNextButtonProcedure() {
         decorator.hideWindow(instructionsPanel, choicesPanel, backNextButtonsPanel);
     }
     else if (!moveOnPossible) {
-        //decorator.errorMessageSetUp(studentButton);
+        decorator.errorMessageSetUp(studentButton);
     }
 }
 
@@ -193,9 +180,6 @@ public void setButtonSelected() {
         teacherButton.setSelected(true);
         moveOnPossible = true;
     }
-}
-
-public void setExistingOrNew(String existingOrNew2) {
 }
 
 public void show(int windowX, int windowY) {

@@ -53,7 +53,7 @@ public class Gather {
     private NewUser newUser;
     private int windowX;
     private int windowY;
-    private AtomicBoolean textFieldEmptied = new AtomicBoolean(false); 
+    //private AtomicBoolean textFieldEmptied = new AtomicBoolean(false); 
     private Set set;
     private Creator creator;
     private String existingOrNew;
@@ -131,7 +131,7 @@ public class Gather {
             if (set.getCanContinue() == true ) {
                 set.setCanContinue(false);
                 window.requestFocusInWindow();
-                decorate.areYouSureMessageDelete(textField, "editing username");
+                decorate.areYouSureMessageDelete(textField, "editing username", "<html><center>Editing this username will create or <br>login to an account under this name. <br>Do you wish to continue?");
 
                 //textField.requestFocus();
             } 
@@ -196,7 +196,8 @@ public class Gather {
         choicesPanel= new JPanel(new GridBagLayout());
         choicesPanel.setBackground(choicesPanelColor);
 
-        textFieldEmptied.set(false);
+        //textFieldEmptied.set(false);
+        set.setEmptiedState(textField, false);
 
         creator.textFieldFocusListener(textField, "Enter user name");
 
@@ -266,9 +267,10 @@ public class Gather {
 
     private void nextButtonAction() {
         boolean textFieldEmpty = textField.getText().trim().isEmpty();
-        boolean textFieldHasntChanged = textField.getText().equals("Enter user name") && !textFieldEmptied.get();
+        boolean textFieldHasntChanged = textField.getText().equals("Enter user name") &&  !set.getEmptiedState(textField);
         boolean textFieldFilled = textField.getText().trim().isEmpty() == false;
         //check if the username is not empty
+        System.out.println(textFieldEmpty || textFieldHasntChanged);
         if (textFieldEmpty || textFieldHasntChanged) {
             errorMessageSetUp("<html><center>Please choose an option",200,90);
         }
