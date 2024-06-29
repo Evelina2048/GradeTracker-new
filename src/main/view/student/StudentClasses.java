@@ -89,7 +89,6 @@ public class StudentClasses extends JFrame {
             }
             set.setClassList(myList);
             set.setFinalClassList(set.getCurrentPanelList());
-            prepareTextboxForDeleteMode();
             
         }
 
@@ -248,10 +247,10 @@ public class StudentClasses extends JFrame {
     }
 
     private void deleteMode() {
+        prepareTextboxForDeleteMode();
         saveButtonAction();
         newClassButton.setEnabled(false);
         leaveDeleteModeButton();
-        prepareTextboxForDeleteMode();
 
         window.remove(instructionsPanel);
         instructionsWordsAndPanel("Click on a box to select it");
@@ -327,7 +326,7 @@ public class StudentClasses extends JFrame {
                 
                 if (set.getLoadedState(selectedTextBox) && (fileHandler.fileExists(filePath)) && fileHandler.fileIsNotEmpty(filePath)) {
                     //System.out.println("text: "+ selectedTextBox.getText()+" loaded state: "+ set.getLoadedState(textField));
-                    decorator.areYouSureMessageDelete(selectedTextBox, "deleting");
+                    decorator.areYouSureMessageDelete(selectedTextBox, "deleting","<html><center>Deleting this class will delete <br>its loaded information.<br>Do you wish to continue?");
                 
                     selectedTextBox.setForeground(Color.GRAY);
                     selectedTextBox.setBorder(borderRegular);
