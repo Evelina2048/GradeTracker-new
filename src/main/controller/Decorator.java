@@ -5,6 +5,7 @@ import javax.swing.JDialog;
 import javax.swing.JFrame;
 import javax.swing.JRadioButton;
 import javax.swing.SwingConstants;
+import javax.swing.SwingUtilities;
 
 import java.awt.BorderLayout;
 import java.awt.Color;
@@ -23,18 +24,23 @@ import javax.swing.BorderFactory;
 import javax.swing.JTextField;
 import java.awt.Dimension;
 
-import main.model.Set;
+import java.awt.event.MouseAdapter;
+import java.awt.event.MouseEvent;
 
+import java.io.IOException;
+import main.model.Set;
 //files
 import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
-import java.io.IOException;
-
 ///
 import java.awt.event.WindowAdapter;
 import java.awt.event.WindowEvent;
 import java.awt.event.FocusListener;
+
+import java.awt.event.FocusAdapter;
+import java.awt.event.FocusEvent;
+
 
 
 //key listening
@@ -81,6 +87,7 @@ public class Decorator {
     }
 
     public void areYouSureMessageDelete(JTextField textField, String reason) {
+        int caretPosition = textField.getCaretPosition();
         Creator creator = new Creator();
         JDialog dialog = new JDialog(window, true);
         dialog.setLayout(new FlowLayout());
@@ -121,7 +128,7 @@ public class Decorator {
                     dialog.dispose(); 
                 }  
                 else {
-                    System.out.println("in else");
+                    // System.out.println("in else");
 
                     FocusListener[] listeners = textField.getFocusListeners();
                     int listenerCount = listeners.length;
@@ -129,23 +136,90 @@ public class Decorator {
 
                     MouseListener[] mouselisteners = textField.getMouseListeners();
                     int mouselistenerCount = mouselisteners.length;
-                    System.out.println("mouselistenercount: "+mouselistenerCount);
+                    // System.out.println("mouselistenercount: "+mouselistenerCount);
 
-                    // for (int i = 0; i < listenerCount - 1; i++) {
-                    //     textField.removeFocusListener(listeners[i]);
-                    // }
-            
-                    // // Remove all mouse listeners except the last one
-                    // for (int i = 0; i < mouselistenerCount - 1; i++) {
+                    // Remove all mouse listeners except the last one
+                    // for (int i = mouselistenerCount; i == mouselistenerCount -2; i--) {
                     //     textField.removeMouseListener(mouselisteners[i]);
                     // }
-                    //removeFocusListeners(textField);
-                    //textField.requestFocus();
-                    //textField.setEditable(true);
+
+                    // textField.addMouseListener(new MouseAdapter() {
+                    //     @Override
+                    //     public void mouseClicked(MouseEvent e) {
+                    //         //textField.setCaretPosition(0);
+                    // }}); 
+
+                    //for (int i = listenerCount-1; i == listenerCount-5; i--) {
+                        //textField.removeFocusListener(listeners[listenerCount-1]);
+                    //}
+            
+                    // //removeFocusListeners(textField);
+                    // //textField.requestFocus();
+                    // //textField.setEditable(true);
                     set.setCanContinue(false);
                     dialog.setVisible(false);
                     dialog.dispose(); 
-                    textField.requestFocus();
+                    // textField.setSelectionStart(0);
+                    // textField.setSelectionEnd(0);
+
+                    if (textField.getText().length() >=28) {
+                        textField.grabFocus();
+                    }
+
+                    else{
+                        textField.setCaretPosition(0); // Initially place caret at the beginning
+                        removeFocusListeners(textField);
+
+
+
+                        // Add custom focus listener
+                        textField.addFocusListener(new FocusAdapter() {
+                        @Override
+                        public void focusGained(FocusEvent e) {
+                            SwingUtilities.invokeLater(() -> {
+                                // Move the caret to the end of the text or where it was last placed
+                                //if (!textField.getText().isEmpty()) {
+                                //    textField.setCaretPosition(textField.getText().length());
+                                //} else {
+                                    textField.requestFocus();
+                                    textField.setCaretPosition(caretPosition);
+                                //}
+                            });
+                        }
+                        });
+                        textField.requestFocus();
+                        
+                        // //window.requestFocusInWindow();
+                        // //removeFocusListeners(textField);
+                        // textField.grabFocus();
+                        // //textField.select(1, 1);
+                        // //textField.setSelectionStart(textField.getCaretPosition());
+                        // //textField.setSelectionEnd(textField.getCaretPosition());
+                        // textField.select(textField.getText().length(), textField.getText().length());
+                        // //textField.moveCaretPosition(1);
+                        // //textField.moveCaretPosition(0);
+                        // System.out.println("caret position: " + caretPosition);
+                        // //textField.setCaretPosition(1);
+                        // setCaretPositionToZero(textField);
+
+
+                    }
+                    //textField.grabFocus();
+
+                    // SwingUtilities.invokeLater(() -> {
+                    //     textField.grabFocus();
+                    //     textField.getTextField().deselect();
+                    //     textField.selectedEnd();
+                    // });
+
+                    // SwingUtilities.invokeLater(() -> {
+                    //     // Set caret position to the end and ensure no selection
+                    //     textField.setCaretPosition(textField.getText().length());
+                    //     textField.setSelectionStart(textField.getText().length());
+                    //     textField.setSelectionEnd(textField.getText().length());
+                    //     textField.requestFocus();
+                    // });
+                    // //textField.setCaretPosition(textField.getText().length()/2);
                 }
             }
         });
@@ -162,7 +236,14 @@ public class Decorator {
         //dialog.setLocation(null); 
         dialog.setVisible(true);
     }
-        
+       
+    public void setCaretPositionToZero(JTextField textField) {
+        textField.setCaretPosition(1);
+        textField.setSelectionStart(0);
+        textField.setSelectionEnd(0);
+
+        textField.moveCaretPosition(textField.getCaretPosition());
+    }
 
     // public void areYouSureMessageEditUsername(JTextField textField) {
     //     Creator creator = new Creator();
@@ -261,13 +342,22 @@ public class Decorator {
     }
 
     public void removeFocusListeners(JTextField textField) {
-        // FocusListener[] listeners = textField.getFocusListeners();
-        // int listenerCount = listeners.length;
+        FocusListener[] listeners = textField.getFocusListeners();
+        int listenerCount = listeners.length;
         
-        // // Iterate through all listeners except the last one
-        // for (int i = 0; i < listenerCount - 1; i++) {
+        // Iterate through all listeners except the last one
+        // for (int i = listenerCount-1; listenerCount-x; i++) {
         //     textField.removeFocusListener(listeners[i]);
         // }
+
+        // for (int i = listenerCount-1; listenerCount-x; i++) {
+        //     textField.removeFocusListener(listeners[i]);
+        // }
+
+        // textField.removeFocusListener(listeners[listenerCount-1]);
+        // textField.removeFocusListener(listeners[listenerCount-2]);
+        // textField.removeFocusListener(listeners[listenerCount-3]);
+        //textField.removeFocusListener(listeners[listenerCount-4]);
     }
 
     public void errorMessageSetUp(JRadioButton button, JTextField textField) {

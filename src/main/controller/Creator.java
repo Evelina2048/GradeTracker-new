@@ -191,9 +191,9 @@ public class Creator {
 
                 }
 
-                else if (pointInTextbox) {
-                    textField.requestFocus();
-                }
+                // else if (pointInTextbox) {
+                //     textField.requestFocus();
+                // }
 
                 else {
                     System.out.println("something went wrong");
