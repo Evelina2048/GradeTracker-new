@@ -6,6 +6,7 @@ import javax.swing.JFrame;
 import javax.swing.JRadioButton;
 import javax.swing.SwingConstants;
 import javax.swing.SwingUtilities;
+import javax.swing.UIManager;
 
 import java.awt.BorderLayout;
 import java.awt.Color;
@@ -134,6 +135,7 @@ public class Decorator {
                         textField.grabFocus();
                     }
                     else{
+                        textField.setSelectionColor(Color.white);
                         textField.setCaretPosition(0); // Initially place caret at the beginning
                         removeFocusListeners(textField);
 
@@ -144,10 +146,14 @@ public class Decorator {
                             SwingUtilities.invokeLater(() -> {
                                     textField.requestFocus();
                                     textField.setCaretPosition(caretPosition);
+                                    //System.out.println("textfield background color: "+textField.getBackground()+ textField.getdefaultselectioncolor());
                             });
                         }
                         });
                         textField.requestFocus();
+                        Color defaultSelectionColor = UIManager.getColor("TextField.selectionBackground");
+                        textField.setSelectionColor(defaultSelectionColor);
+
                     }
                 }
             }
