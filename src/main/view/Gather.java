@@ -81,8 +81,6 @@ public class Gather {
 
     public Gather() {
         this.set = Set.getInstance();
-        whatToSetTextFieldTo();
-
         existingOrNew = set.getExistingOrNew();
         studentOrTeacher = set.getStudentOrTeacher();
         this.window = set.getWindow();
@@ -94,20 +92,32 @@ public class Gather {
         window.getRootPane().getInputMap(JComponent.WHEN_IN_FOCUSED_WINDOW).put(KeyStroke.getKeyStroke(KeyEvent.VK_ENTER, 0), "enterAction");
         window.getRootPane().getActionMap().put("enterAction", enterAction);
         //
+        makeUsernameBox();
         gatherLaunch();
         
 
     }
 
-    private void whatToSetTextFieldTo() {
-        if (set.getUsername() == null) {
+    private void makeUsernameBox() {
+        System.out.println("username: "+set.getUsername()+"haschanged? "+set.getExistingOrNewChanged());
+        if (set.getUsername() == null && set.getExistingOrNewChanged() == false) {
+            System.out.println("whatToSetTextFieldTo opt 1");
+            textField = decorate.decorateTextBox("Enter user name");
+        }
+        else if (set.getUsername() == null && set.getExistingOrNewChanged() == true) { //user came back to gather after changing newuser setting
+            System.out.println("whatToSetTextFieldTo opt 2");
             textField = decorate.decorateTextBox("Enter user name");
         }
         else {
+            System.out.println("whatToSetTextFieldTo opt 3");
             textField = decorate.decorateTextBox(set.getUsername());
             set.setLoadedState(textField, true);
             textFieldMouseListener();
         }
+    }
+
+    private void setTextToProperPlaceholder() {
+
     }
 
     private void textFieldMouseListener() {
@@ -150,7 +160,12 @@ public class Gather {
         window.setTitle("Gather");
         this.window = set.getWindow();
 
+        //System.out.println();
+
         instructionsWordsWindow();
+
+        //whatToSetTextFieldTo();
+        makeUsernameBox();
         
         inputName();
 
@@ -160,18 +175,30 @@ public class Gather {
     
     private void instructionsWordsWindow() {
         JLabel instructionsWordsLabel;
-        //instructions (north section for borderlayout)
-        if (existingOrNew == "New User") {
+        Boolean newUser = (existingOrNew == "New User");
+        Boolean existingUser = (existingOrNew == "Existing");
+        Boolean previousSettingsNotChanged = (set.getExistingOrNewChanged() == false);
+        Boolean previousSettingsChanged = (set.getExistingOrNewChanged() == true);
+        if (newUser && previousSettingsNotChanged) {
+            System.out.println("instruction words option 1");
             instructionsWordsLabel = new JLabel("You are a new user. Create a user name.");
         }
-        else if (existingOrNew == "Existing") {
+        else if (existingUser && previousSettingsNotChanged) {
+            System.out.println("instruction words option 2");
             instructionsWordsLabel = new JLabel("You are an existing user. Type in your user name");
         }
-
+        else if (newUser && set.getUsername() == null && previousSettingsChanged) {
+            System.out.println("instruction words option 3");
+            instructionsWordsLabel = new JLabel("<html><center>You changed your NewUser/Existing settings. <br> You are a new user. Create a user name.");
+        }
+        else if (existingUser && set.getUsername() == null && previousSettingsChanged) {
+            System.out.println("instruction words option 4");
+            instructionsWordsLabel = new JLabel("<html><center>You changed your NewUser/Existing settings. <br> You are an existing user. Type in your user name");
+        }
         else {
+            System.out.println("instruction words option 5");
             instructionsWordsLabel = new JLabel("Error");
         }
-
         decorateInstructions(instructionsWordsLabel);
     }
 
@@ -197,10 +224,10 @@ public class Gather {
         choicesPanel= new JPanel(new GridBagLayout());
         choicesPanel.setBackground(choicesPanelColor);
 
-        //textFieldEmptied.set(false);
         set.setEmptiedState(textField, false);
 
-        creator.textFieldFocusListener(textField, "Enter user name");
+        //creator.textFieldFocusListener(textField, "Enter user name");
+        makeUsernameBox();
 
         GridBagConstraints constraints = new GridBagConstraints();
         constraints.gridx = 0;
@@ -234,6 +261,14 @@ public class Gather {
                backButtonAction();
             }
         });
+    }
+
+    private void backButtonAction() {
+        System.out.println("backbuttonaction for gather");
+        hideWindow(); 
+        newUser.newUserSetup();
+        newUser.showWindow(window.getX(),window.getY());
+        newUser.setButtonSelected();          
     }
 
     private void makeSaveButton() {
@@ -286,14 +321,6 @@ public class Gather {
             errorMessageSetUp("<html><center>Something went wrong in username input",200,90);
         }
     }
-
-private void backButtonAction() {
-    System.out.println("backbuttonaction for gather");
-    hideWindow(); 
-    newUser.newUserSetup();
-    newUser.showWindow(window.getX(),window.getY());
-    newUser.setButtonSelected();          
-}
 
 private void errorMessageSetUp(String labelWords, int width, int height) {
     JDialog dialog = new JDialog(window, true);
@@ -422,10 +449,10 @@ private void writeUsername(String filePath) {
         backNextButtonsPanel.setVisible(false);
     }
 
-    public void setTextToUsername() {
-        String username = set.getUsername();
-        textField.setText(username);
-    }
+    // public void setTextToUsername() {
+    //     String username = set.getUsername();
+    //     textField.setText(username);
+    // }
 
     private void goToStudentClasses(String filePath) {
         writeUsername(filePath);

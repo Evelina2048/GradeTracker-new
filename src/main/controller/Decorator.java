@@ -330,6 +330,9 @@ public class Decorator {
 
        textField.setHorizontalAlignment(JTextField.CENTER);
        textField.setText(placeholderText);
+
+       Creator creator = new Creator();
+       creator.textFieldFocusListener(textField, placeholderText);
        return textField;
     }
 }

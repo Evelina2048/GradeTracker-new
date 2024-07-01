@@ -136,7 +136,8 @@ public class StudentClasses extends JFrame {
         backButton.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent e) {
                 Gather gather = new Gather();
-                gather.setTextToUsername();
+                //gather.setTextToUsername();
+                gather.gatherLaunch();
                 hideWindow(); 
         }});
         return backButtonPanel;

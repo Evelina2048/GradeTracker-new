@@ -107,17 +107,20 @@ public class Creator {
                     if (textField.getText().equals(placeholder) && set.getEmptiedState(textField) == false && set.getLoadedState(textField) == false) {
                         textField.setText("");
                         set.setEmptiedState(textField, true);
-                        textField.setForeground(Color.BLACK);
+                        //textField.setForeground(Color.BLACK);
+                        textField.setForeground(Color.gray);
                     }
 
                     else if (!textField.getText().equals(placeholder) && !textField.getText().isEmpty() && set.getEmptiedState(textField) == true) {
-                        textField.setForeground(Color.BLACK);
+                        //textField.setForeground(Color.BLACK);
+                        textField.setForeground(Color.gray);
                         set.setEmptiedState(textField, true);
                     }
 
                     else if (textField.getText().equals(placeholder) && set.getEmptiedState(textField) == true && set.getLoadedState(textField) == false) {
                         textField.setText(""); // Clear the placeholder text when the field gains focus
-                        textField.setForeground(Color.BLACK);
+                        //textField.setForeground(Color.BLACK);
+                        textField.setForeground(Color.gray);
                         set.setEmptiedState(textField, true);
                         set.setSaveable(true);
                     }

@@ -23,6 +23,7 @@ public class Set {
     private JFrame window;
     private String currentClass;
     private Boolean canContinue = true;
+    private Boolean existingOrNewHasChanged = false;
 
     //Below is for singleton design pattern
     // Static variable to hold the single instance of the class
@@ -174,6 +175,16 @@ public class Set {
 
     public Boolean getCanContinue() {
         return canContinue;
+    }
+
+    public void setExistingOrNewChanged(boolean changed) {
+        System.out.println("setexistingornewchanged: "+ changed);
+        existingOrNewHasChanged = changed;
+    }
+
+    public Boolean getExistingOrNewChanged() {
+        System.out.println("recievingexistingornewchanged: "+ existingOrNewHasChanged);
+        return existingOrNewHasChanged;
     }
 
 }

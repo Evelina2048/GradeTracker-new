@@ -44,6 +44,7 @@ public class NewUser extends JFrame {
     JPanel backNextButtonsPanel;
 
     Decorator decorator = new Decorator();
+    private String originalExistingOrNew;
 
     public NewUser() {
         this.set = Set.getInstance();
@@ -55,6 +56,10 @@ public class NewUser extends JFrame {
         studentOrTeacher = set.getStudentOrTeacher();
         window.setTitle("New User");
         //window = main;
+
+        if (set.getUsername() != null) {
+            originalExistingOrNew = set.getExistingOrNew();
+        }
 
         instructionsWordsWindow();
 
@@ -100,11 +105,13 @@ public class NewUser extends JFrame {
             public void actionPerformed(ActionEvent e) {
             existingOrNew = existingButton.getText();
             moveOnPossible = true;
+            System.out.println("1111 existingaction");
+            checkIfExistingChangedWithUsername();
             }
             
         });
     }
-
+    
     private void newUserButton() {
         newUserButton = new JRadioButton("New User");
         choicesButtonDecorate(newUserButton);
@@ -112,8 +119,20 @@ public class NewUser extends JFrame {
             public void actionPerformed(ActionEvent e) {
                 existingOrNew = newUserButton.getText();
                 moveOnPossible = true;
+                checkIfExistingChangedWithUsername();
+                System.out.println("1111newuser");
             }
-        });
+            });
+        }
+    
+    private void checkIfExistingChangedWithUsername() {
+        if (set.getUsername() != null && existingOrNew.equals(originalExistingOrNew)) { //user has already been in gather frame and theyre the same
+            set.setExistingOrNewChanged(false);
+        }
+
+        else if((set.getUsername() != null && !existingOrNew.equals(originalExistingOrNew))) { //user has already been in gather frame and theyre different
+            set.setExistingOrNewChanged(true);
+        }
     }
 
     private void choicesButtonDecorate(JRadioButton button) {
@@ -185,9 +204,15 @@ public class NewUser extends JFrame {
         nextButton.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent e) {
                 System.out.println("nextbutton action in newuser");
+                System.out.println("2222");
                 doNextButtonProcedure();
                 set.setWindow(window);
                 set.setExistingOrNew(existingOrNew);
+                if (originalExistingOrNew != existingOrNew) { //user changed the existing or new
+                    System.out.println("3333");
+                    set.setUsername(null);
+                    System.out.println("right after setting username to null: "+set.getUsername());
+                }
             }
         });
     }
@@ -217,6 +242,7 @@ public class NewUser extends JFrame {
     }
 
     public void setButtonSelected() {
+        originalExistingOrNew = set.getExistingOrNew();
         existingOrNew = set.getExistingOrNew().trim();
         if (existingOrNew == "New User") {
             newUserButton.setSelected(true);
