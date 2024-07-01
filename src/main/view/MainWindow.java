@@ -93,6 +93,7 @@ private void radioButtonSetUp() {
     teacherButton.addActionListener(new ActionListener() {
         public void actionPerformed(ActionEvent e) {
            studentOrTeacher = teacherButton.getText();
+           set.setStudentOrTeacher(studentOrTeacher);
            moveOnPossible = true;
         }
         
@@ -103,6 +104,7 @@ private void radioButtonSetUp() {
     studentButton.addActionListener(new ActionListener() {
         public void actionPerformed(ActionEvent e) {
             studentOrTeacher = studentButton.getText();
+            set.setStudentOrTeacher(studentOrTeacher);
             moveOnPossible = true;
         }
     });
@@ -141,7 +143,7 @@ private void backNextButton() {
         public void actionPerformed(ActionEvent e) {
             System.out.println("mainwindow nextbutton action");
             doNextButtonProcedure();
-            set.setStudentOrTeacher(studentOrTeacher);
+            //set.setStudentOrTeacher(studentOrTeacher);
         }
     });
     backNextButtonsPanel = creator.makeBackNextButtonsPanel(backButtonPanel, new JPanel(), nextButtonPanel);
@@ -161,11 +163,13 @@ private void doNextButtonProcedure() {
     else if (!moveOnPossible) {
         decorator.errorMessageSetUp(studentButton);
     }
+    System.out.println("studnet or teacher: "+studentOrTeacher);
+    //set.setStudentOrTeacher(studentOrTeacher);
 }
 
 private void setUserInfo() {
     set.setWindow(this);
-    set.setStudentOrTeacher(studentOrTeacher);
+    //set.setStudentOrTeacher(studentOrTeacher);
 }
 
 

@@ -178,7 +178,7 @@ public class NewUser extends JFrame {
         public void actionPerformed(ActionEvent e) {
             System.out.println("new user nextbutton aciton");
             doNextButtonProcedure();
-            set.setStudentOrTeacher(studentOrTeacher);
+            //set.setStudentOrTeacher(studentOrTeacher);
         }
     });
     backNextButtonsPanel = creator.makeBackNextButtonsPanel(backButtonPanel, new JPanel(), nextButtonPanel);
