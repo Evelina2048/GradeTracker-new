@@ -104,7 +104,7 @@ public class Creator {
                         previousTextbox.setForeground(Color.LIGHT_GRAY);
 
                     }
-                    if (textField.getText().equals(placeholder) && set.getEmptiedState(textField) == false) {
+                    if (textField.getText().equals(placeholder) && set.getEmptiedState(textField) == false && set.getLoadedState(textField) == false) {
                         textField.setText("");
                         set.setEmptiedState(textField, true);
                         textField.setForeground(Color.BLACK);
@@ -115,7 +115,7 @@ public class Creator {
                         set.setEmptiedState(textField, true);
                     }
 
-                    else if (textField.getText().equals(placeholder) && set.getEmptiedState(textField) == true) {
+                    else if (textField.getText().equals(placeholder) && set.getEmptiedState(textField) == true && set.getLoadedState(textField) == false) {
                         textField.setText(""); // Clear the placeholder text when the field gains focus
                         textField.setForeground(Color.BLACK);
                         set.setEmptiedState(textField, true);

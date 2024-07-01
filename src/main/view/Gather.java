@@ -105,6 +105,7 @@ public class Gather {
         }
         else {
             textField = decorate.decorateTextBox(set.getUsername());
+            set.setLoadedState(textField, true);
             textFieldMouseListener();
         }
     }
@@ -270,8 +271,8 @@ public class Gather {
         boolean textFieldHasntChanged = textField.getText().equals("Enter user name") &&  !set.getEmptiedState(textField);
         boolean textFieldFilled = textField.getText().trim().isEmpty() == false;
         //check if the username is not empty
-        System.out.println(textFieldEmpty || textFieldHasntChanged);
-        if (textFieldEmpty || textFieldHasntChanged) {
+        System.out.println(textFieldEmpty || textFieldHasntChanged && set.getLoadedState(textField) == false);
+        if (textFieldEmpty || textFieldHasntChanged && set.getLoadedState(textField) == false) {
             errorMessageSetUp("<html><center>Please choose an option",200,90);
         }
         else if (textFieldFilled) { //good case
