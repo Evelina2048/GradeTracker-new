@@ -86,6 +86,7 @@ public class Decorator {
     }
 
     public String areYouSureMessageDelete(JTextField importedTextField, String myReason, String text) {
+        reason = myReason;
         textField = importedTextField;
         dialog = new JDialog(window, true);
         dialog.setLayout(new FlowLayout());

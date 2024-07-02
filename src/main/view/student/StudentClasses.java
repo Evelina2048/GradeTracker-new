@@ -322,6 +322,7 @@ public class StudentClasses extends JFrame {
                 //creator.enableSaveButton();
                 if (set.getLoadedState(selectedTextBox) && (fileHandler.fileExists(filePath)) && fileHandler.fileIsNotEmpty(filePath)) {
                     //System.out.println("text: "+ selectedTextBox.getText()+" loaded state: "+ set.getLoadedState(textField));
+                    System.out.println(".9.9.9.9");
                      String yesOrNoDialog = decorator.areYouSureMessageDelete(selectedTextBox, "deleting","<html><center>Deleting this class will optiondelete <br>its loaded information.<br>Do you wish to continue?");
                 
                     if (yesOrNoDialog == "yes") {
