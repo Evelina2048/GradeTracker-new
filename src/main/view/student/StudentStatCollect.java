@@ -115,17 +115,19 @@ public class StudentStatCollect extends JFrame {
     }
 
     private void goToPreviousClasses() {
-        System.out.println("there are previous classes");
         saveButtonAction();
-        set.decrementClassListIndex();
-        classLabelPanel.removeAll();
-        classLabelPanel.revalidate();
-        classLabelPanel.repaint();
-        textBoxPanelReset();
-        new JPanel(new GridLayout(0,4,5,5));
-        new JPanel(new FlowLayout(FlowLayout.LEFT));
-        //boxManageCreate(set.getFinalClassList().get(set.getClassListIndex()), "JLabel"); //displays class label 
-        addLoadedBoxes();
+        if (set.getCanContinue()) {
+            System.out.println("there are previous classes");
+            set.decrementClassListIndex();
+            classLabelPanel.removeAll();
+            classLabelPanel.revalidate();
+            classLabelPanel.repaint();
+            textBoxPanelReset();
+            new JPanel(new GridLayout(0,4,5,5));
+            new JPanel(new FlowLayout(FlowLayout.LEFT));
+            //boxManageCreate(set.getFinalClassList().get(set.getClassListIndex()), "JLabel"); //displays class label 
+            addLoadedBoxes();
+        }
     }
 
     public void addLoadedBoxes() {

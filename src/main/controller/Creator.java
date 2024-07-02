@@ -247,6 +247,13 @@ public class Creator {
                     
                     else if (set.getEmptiedState(textField) == false) {
                         System.out.println("textfield is a placeholder 1.1");
+                        if (set.getCanContinue()) {
+                            JDialog dialog = decorator.genericPopUpMessage("Must fill in placeholder");
+                            dialog.setLocationRelativeTo(window);
+                            dialog.setLocation(dialog.getX(), dialog.getY() + 15); 
+                            dialog.setVisible(true);
+                            return;
+                        }
                         if (text.contains("Grade Type") && attachedBoxes == maxAttachedBoxes) {
                             //dont write next two
                             //System.out.println("contains grade type 2.1");
@@ -373,9 +380,6 @@ public class Creator {
                 dialog.setLocationRelativeTo(window);
                 dialog.setLocation(dialog.getX(), dialog.getY() + 15); 
                 dialog.setVisible(true);
-                ////clearFile(filePath);
-                ////deleteLines(filePath, textField.getText());
-                //String text = textField.getText();
                 return;
             }
         }
@@ -652,5 +656,5 @@ public class Creator {
 }
 // else if (set.getEmptiedState(textField) == false && set.getCurrentClass() == "StudentStatCollect.java" && !textField.getText().equals("Credits (Optional)")) {
                     //     System.out.println("made it");
-                    //     decorator.genericPopUpMessage("Must fill in placeholder");
+                    //     decorator.genericPopUpMessage(" in placeholder");
                     // }

@@ -103,11 +103,12 @@ public class Decorator {
         dialog.add(noButton);
         dialog.setSize(250,120);
         
-        System.out.println("1111are");
         yesButtonActionListener(yesButton);
         noButtonActionListener(noButton);
+        dialogCloseActionListener();
         dialog.setLocationRelativeTo(window);
         dialog.setVisible(true);
+
         return yesOrNoDialog;
     }
 
@@ -116,18 +117,19 @@ public class Decorator {
         System.out.println("2222yes");
         yesButton.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent e) { 
-                //creator.saveButtonEnable();
-                System.out.println("3333act");
-                if (reason == "deleting") {   
-                    System.out.println("4444delete");
-                    reasonIsDeletingAction();
-                }  
-                else {
-                    reasonIsChangingUsername();
-                }
+               yesButtonAction();
             }
         });
         yesOrNoDialog = "yes";
+    }
+
+    private void yesButtonAction() {
+         if (reason == "deleting") {   
+            reasonIsDeletingAction();
+         }  
+         else {
+            reasonIsChangingUsername();
+         }
     }
 
     private void reasonIsDeletingAction() {
@@ -189,15 +191,19 @@ public class Decorator {
     private void noButtonActionListener(JButton noButton) {
         noButton.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent e) {
-                set.setCanContinue(true);
-                dialog.setVisible(false);
-                dialog.dispose();
-                window.requestFocusInWindow(); 
+                noButtonAction();
             }
         });
         yesOrNoDialog = "no";
     }
        
+    private void noButtonAction() {
+        set.setCanContinue(true);
+        dialog.setVisible(false);
+        dialog.dispose();
+        window.requestFocusInWindow(); 
+    }
+
     public void setCaretPositionToZero(JTextField importedTextField) {
         textField = importedTextField;
         textField.setCaretPosition(1);
@@ -205,6 +211,15 @@ public class Decorator {
         textField.setSelectionEnd(0);
 
         textField.moveCaretPosition(textField.getCaretPosition());
+    }
+
+    private void dialogCloseActionListener() {
+        dialog.addWindowListener(new WindowAdapter() {
+            @Override
+            public void windowClosing(WindowEvent e) {
+                noButtonAction();
+            }
+        });
     }
 
     // public void areYouSureMessageEditUsername(JTextField textField) {
