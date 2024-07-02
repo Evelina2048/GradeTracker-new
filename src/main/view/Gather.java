@@ -28,13 +28,9 @@ import java.awt.FlowLayout;
 
 import java.io.FileWriter;
 import java.io.IOException;
-import java.util.concurrent.atomic.AtomicBoolean;
 import java.io.BufferedReader;
 
 import java.io.FileReader;
-
-import java.awt.event.MouseEvent;
-import java.awt.event.MouseAdapter;
 
 import java.awt.event.FocusAdapter;
 import java.awt.event.FocusEvent;
@@ -53,7 +49,6 @@ public class Gather {
     private NewUser newUser;
     private int windowX;
     private int windowY;
-    //private AtomicBoolean textFieldEmptied = new AtomicBoolean(false); 
     private Set set;
     private Creator creator;
     private String existingOrNew;
@@ -87,11 +82,10 @@ public class Gather {
         creator = new Creator();
         newUser = new NewUser();
 
-        //
         EnterAction enterAction = new EnterAction();
         window.getRootPane().getInputMap(JComponent.WHEN_IN_FOCUSED_WINDOW).put(KeyStroke.getKeyStroke(KeyEvent.VK_ENTER, 0), "enterAction");
         window.getRootPane().getActionMap().put("enterAction", enterAction);
-        //
+
         makeUsernameBox();
         gatherLaunch();
         
@@ -116,10 +110,6 @@ public class Gather {
         }
     }
 
-    private void setTextToProperPlaceholder() {
-
-    }
-
     private void textFieldMouseListener() {
         //check if file path to original username's class.txt exists and is not empty, if true,
         FileHandler fileHandler = new FileHandler();
@@ -127,31 +117,21 @@ public class Gather {
         if (fileHandler.fileExists(filePath) && fileHandler.fileIsNotEmpty(filePath)) {
 
         //add focus listener to textbox
-        //decorate.removeFocusListeners(textField);
-        // //
         set.setCanContinue(true);
         textField.addFocusListener(new FocusAdapter() {
         @Override
         public void focusGained(FocusEvent e) {
             //generic pop up message : "Editing the username will not carry over class information"
             System.out.println("focused");
-        //     JDialog dialog = decorate.genericPopUpMessage("Editing the username will not carry over class information");
-        //     dialog.setLocationRelativeTo(window);
-        //     dialog.setLocation(dialog.getX(), dialog.getY() + 15); 
-        //     dialog.setVisible(true);
             if (set.getCanContinue() == true ) {
                 set.setCanContinue(false);
                 window.requestFocusInWindow();
                 decorate.areYouSureMessageDelete(textField, "editing username", "<html><center>Editing this username will create or <br>login to an account under this name. <br>Do you wish to continue?");
-
-                //textField.requestFocus();
             } 
         
         }
-           // decorate.areYouSureMessageSetUp(nextButton, textField, filePath);
         });
         }
-        // //
 
     }
 
@@ -160,11 +140,8 @@ public class Gather {
         window.setTitle("Gather");
         this.window = set.getWindow();
 
-        //System.out.println();
-
         instructionsWordsWindow();
 
-        //whatToSetTextFieldTo();
         makeUsernameBox();
         
         inputName();
@@ -226,7 +203,6 @@ public class Gather {
 
         set.setEmptiedState(textField, false);
 
-        //creator.textFieldFocusListener(textField, "Enter user name");
         makeUsernameBox();
 
         GridBagConstraints constraints = new GridBagConstraints();
@@ -275,8 +251,6 @@ public class Gather {
         JButton saveButton = creator.saveButtonCreate();
         saveButton.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent e) {
-                //writeToFile();
-                //nextButtonAction(existingOrNew, studentOrTeacher);
             }
         });
     }
@@ -448,11 +422,6 @@ private void writeUsername(String filePath) {
         choicesPanel.setVisible(false);
         backNextButtonsPanel.setVisible(false);
     }
-
-    // public void setTextToUsername() {
-    //     String username = set.getUsername();
-    //     textField.setText(username);
-    // }
 
     private void goToStudentClasses(String filePath) {
         writeUsername(filePath);

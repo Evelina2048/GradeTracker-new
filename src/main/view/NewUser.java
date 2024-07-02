@@ -55,7 +55,6 @@ public class NewUser extends JFrame {
         window = set.getWindow();
         studentOrTeacher = set.getStudentOrTeacher();
         window.setTitle("New User");
-        //window = main;
 
         if (set.getUsername() != null) {
             originalExistingOrNew = set.getExistingOrNew();
@@ -120,7 +119,6 @@ public class NewUser extends JFrame {
                 existingOrNew = newUserButton.getText();
                 moveOnPossible = true;
                 checkIfExistingChangedWithUsername();
-                System.out.println("1111newuser");
             }
             });
         }

@@ -25,7 +25,6 @@ import main.controller.Creator;
 import main.controller.Decorator;
 
 public class MainWindow extends JFrame {
-//private JFrame window;
 private String studentOrTeacher;
 private boolean moveOnPossible = false;
 private Set set;
@@ -143,7 +142,6 @@ private void backNextButton() {
         public void actionPerformed(ActionEvent e) {
             System.out.println("mainwindow nextbutton action");
             doNextButtonProcedure();
-            //set.setStudentOrTeacher(studentOrTeacher);
         }
     });
     backNextButtonsPanel = creator.makeBackNextButtonsPanel(backButtonPanel, new JPanel(), nextButtonPanel);
@@ -163,13 +161,10 @@ private void doNextButtonProcedure() {
     else if (!moveOnPossible) {
         decorator.errorMessageSetUp(studentButton);
     }
-    System.out.println("studnet or teacher: "+studentOrTeacher);
-    //set.setStudentOrTeacher(studentOrTeacher);
 }
 
 private void setUserInfo() {
     set.setWindow(this);
-    //set.setStudentOrTeacher(studentOrTeacher);
 }
 
 

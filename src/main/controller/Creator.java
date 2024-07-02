@@ -279,12 +279,10 @@ public class Creator {
                     }
                     }
                 }
-
                 else if (component instanceof JPanel) {
                     System.out.println("JPanel");
                     writeTextToFileWithAppend(filePath, (JPanel) component);
                 }
-
                 else {
                     System.out.println("component is something else. Something went wrong"+ component.getClass().getName());
                 }

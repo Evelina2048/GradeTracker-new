@@ -11,7 +11,6 @@ import javax.swing.UIManager;
 import java.awt.BorderLayout;
 import java.awt.Color;
 import java.awt.Font;
-import java.awt.event.MouseListener;
 
 import javax.swing.JPanel;
 import javax.swing.JLabel;
@@ -24,9 +23,6 @@ import java.awt.FlowLayout;
 import javax.swing.BorderFactory;
 import javax.swing.JTextField;
 import java.awt.Dimension;
-
-import java.awt.event.MouseAdapter;
-import java.awt.event.MouseEvent;
 
 import java.io.IOException;
 import main.model.Set;
@@ -42,13 +38,15 @@ import java.awt.event.FocusListener;
 import java.awt.event.FocusAdapter;
 import java.awt.event.FocusEvent;
 
-
-
 //key listening
 
 public class Decorator {
     JFrame window;
     Set set;
+    JDialog dialog;
+    String reason;
+    JTextField textField = new JTextField();;
+    String yesOrNoDialog;
     
     public Decorator() {
         set = Set.getInstance();
@@ -87,10 +85,9 @@ public class Decorator {
         return gbc;
     }
 
-    public void areYouSureMessageDelete(JTextField textField, String reason,String text) {
-        int caretPosition = textField.getCaretPosition();
-        Creator creator = new Creator();
-        JDialog dialog = new JDialog(window, true);
+    public String areYouSureMessageDelete(JTextField importedTextField, String myReason, String text) {
+        textField = importedTextField;
+        dialog = new JDialog(window, true);
         dialog.setLayout(new FlowLayout());
         JLabel label = new JLabel(text);
         label.setHorizontalAlignment(SwingConstants.CENTER);
@@ -103,61 +100,92 @@ public class Decorator {
         JButton noButton = new JButton("Cancel");
         noButton.setVisible(true);
         dialog.add(noButton);
-
         dialog.setSize(250,120);
+        
+        System.out.println("1111are");
+        yesButtonActionListener(yesButton);
+        noButtonActionListener(noButton);
+        dialog.setLocationRelativeTo(window);
+        dialog.setVisible(true);
+        return yesOrNoDialog;
+    }
 
+    private void yesButtonActionListener(JButton yesButton) {
+        Creator creator = new Creator();
+        System.out.println("2222yes");
         yesButton.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent e) { 
+                //creator.saveButtonEnable();
+                System.out.println("3333act");
                 if (reason == "deleting") {   
-                    textField.setVisible(false);
-                    JPanel panelForDeleting = new JPanel();
-                    System.out.println("does textfield be null?: "+textField==null+ "textfield text"+ textField.getText());
-                    panelForDeleting.add(textField);
-                    creator.deleteTextBox(panelForDeleting);
-                    Path filePath = Paths.get("/Users/evy/Documents/GradeTracker-new/src/main/view/UserInfo/StudentInfo/"+set.getUsername()+"/"+textField.getText()+".txt");
-                    
-                    try {
-                        Files.deleteIfExists(filePath);
-                    } catch (IOException e1) {
-                        e1.printStackTrace();
-                    }
-                    dialog.setVisible(false);
-                    dialog.dispose(); 
+                    System.out.println("4444delete");
+                    reasonIsDeletingAction();
                 }  
                 else {
-
-                    set.setCanContinue(false);
-                    dialog.setVisible(false);
-                    dialog.dispose(); 
-
-
-                    if (textField.getText().length() >=28) {
-                        textField.grabFocus();
-                    }
-                    else{
-                        textField.setSelectionColor(Color.white);
-                        textField.setCaretPosition(0); // Initially place caret at the beginning
-                        removeFocusListeners(textField);
-
-                        // Add custom focus listener
-                        textField.addFocusListener(new FocusAdapter() {
-                        @Override
-                        public void focusGained(FocusEvent e) {
-                            SwingUtilities.invokeLater(() -> {
-                                    textField.requestFocus();
-                                    textField.setCaretPosition(caretPosition);
-                                    //System.out.println("textfield background color: "+textField.getBackground()+ textField.getdefaultselectioncolor());
-                            });
-                        }
-                        });
-                        textField.requestFocus();
-                        Color defaultSelectionColor = UIManager.getColor("TextField.selectionBackground");
-                        textField.setSelectionColor(defaultSelectionColor);
-
-                    }
+                    reasonIsChangingUsername();
                 }
             }
         });
+        yesOrNoDialog = "yes";
+    }
+
+    private void reasonIsDeletingAction() {
+        System.out.println("5555reason");
+        Creator create = new Creator();
+        textField.setVisible(false);
+        JPanel panelForDeleting = new JPanel();
+        System.out.println("does textfield be null?: "+textField==null+ "textfield text"+ textField.getText());
+        panelForDeleting.add(textField);
+        System.out.println(panelForDeleting.getComponentCount() + " :beforeselectedBoxPanelComponenents");
+        create.deleteTextBox(panelForDeleting);
+        System.out.println(panelForDeleting.getComponentCount() + " :afterselectedBoxPanelComponenents");
+        System.out.println("6666after");
+        Path filePath = Paths.get("/Users/evy/Documents/GradeTracker-new/src/main/view/UserInfo/StudentInfo/"+set.getUsername()+"/"+textField.getText()+".txt");
+        
+        try {
+            Files.deleteIfExists(filePath);
+        } catch (IOException e1) {
+            e1.printStackTrace();
+        }
+        dialog.setVisible(false);
+        dialog.dispose(); 
+
+        // create.windowFix();
+    }
+
+    private void reasonIsChangingUsername() {
+        int caretPosition = textField.getCaretPosition();
+        set.setCanContinue(false);
+        dialog.setVisible(false);
+        dialog.dispose(); 
+
+
+        if (textField.getText().length() >=28) {
+            textField.grabFocus();
+        }
+        else{
+            textField.setSelectionColor(Color.white);
+            textField.setCaretPosition(0); // Initially place caret at the beginning
+            removeFocusListeners(textField);
+
+            // Add custom focus listener
+            textField.addFocusListener(new FocusAdapter() {
+            @Override
+            public void focusGained(FocusEvent e) {
+                SwingUtilities.invokeLater(() -> {
+                        textField.requestFocus();
+                        textField.setCaretPosition(caretPosition);
+                        //System.out.println("textfield background color: "+textField.getBackground()+ textField.getdefaultselectioncolor());
+                });
+            }
+            });
+            textField.requestFocus();
+            Color defaultSelectionColor = UIManager.getColor("TextField.selectionBackground");
+            textField.setSelectionColor(defaultSelectionColor);
+        }
+    }
+
+    private void noButtonActionListener(JButton noButton) {
         noButton.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent e) {
                 set.setCanContinue(true);
@@ -166,13 +194,11 @@ public class Decorator {
                 window.requestFocusInWindow(); 
             }
         });
-        
-        dialog.setLocationRelativeTo(window);
-        //dialog.setLocation(null); 
-        dialog.setVisible(true);
+        yesOrNoDialog = "no";
     }
        
-    public void setCaretPositionToZero(JTextField textField) {
+    public void setCaretPositionToZero(JTextField importedTextField) {
+        textField = importedTextField;
         textField.setCaretPosition(1);
         textField.setSelectionStart(0);
         textField.setSelectionEnd(0);
@@ -240,7 +266,7 @@ public class Decorator {
     // }
 
     public JDialog genericPopUpMessage(String text) {
-        JDialog dialog = new JDialog(window, true);
+        dialog = new JDialog(window, true);
         dialog.setLayout(new FlowLayout());
         JLabel label = new JLabel(text);
         label.setHorizontalAlignment(SwingConstants.CENTER);
@@ -276,7 +302,8 @@ public class Decorator {
         
     }
 
-    public void removeFocusListeners(JTextField textField) {
+    public void removeFocusListeners(JTextField importedTextField) {
+        textField = importedTextField;
         FocusListener[] listeners = textField.getFocusListeners();
         int listenerCount = listeners.length;
         
@@ -296,7 +323,7 @@ public class Decorator {
     }
 
     public void errorMessageSetUp(JRadioButton button) {
-        JDialog dialog = genericPopUpMessage("<html><center>Please choose an option");
+        dialog = genericPopUpMessage("<html><center>Please choose an option");
         
         dialog.setLocationRelativeTo(button);
         dialog.setLocation(dialog.getX(), dialog.getY() + 15); 
@@ -312,7 +339,7 @@ public class Decorator {
     }
 
     public JTextField decorateTextBox(String placeholderText) {
-       JTextField textField = new JTextField(); //prev 10
+       //JTextField textField = new JTextField(); //prev 10
        //textField.setSize(new Dimension(10, 50)); // Set the height to 50 pixels
        if (set.getCurrentClass() == "StudentStatCollect.java") {
         textField.setSize(new Dimension(144, 50));
@@ -335,4 +362,6 @@ public class Decorator {
        creator.textFieldFocusListener(textField, placeholderText);
        return textField;
     }
+
+    
 }

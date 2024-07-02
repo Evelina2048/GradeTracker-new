@@ -136,7 +136,6 @@ public class StudentClasses extends JFrame {
         backButton.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent e) {
                 Gather gather = new Gather();
-                //gather.setTextToUsername();
                 gather.gatherLaunch();
                 hideWindow(); 
         }});
@@ -221,7 +220,7 @@ public class StudentClasses extends JFrame {
                 //creator.deleteTextBox(creator.getTextFieldContainer());
                 System.out.println("deleteClass Mode hit");
                 deleteMode();
-                saveButton.setEnabled(true);
+                //saveButton.setEnabled(true);
             }
         });
     }
@@ -233,13 +232,10 @@ public class StudentClasses extends JFrame {
     }
 
     private void backToDefaultDeleteButton() {
-        //if (set.getTextFieldPanel().getComponent(0).get) {}
         removeActionListeners();
         deleteClassButton.setText("Delete Class Mode");
         deleteClassButton.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent e) {
-                //decorator.errorMessageSetUp(window, button);
-                //creator.deleteTextBox(creator.getTextFieldContainer());
                 System.out.println("clicked delete class mode");
                 deleteMode();
                 saveButton.setEnabled(true);
@@ -323,12 +319,15 @@ public class StudentClasses extends JFrame {
                 System.out.println("count:" + set.getTextFieldPanel().getComponentCount());
                 newClassButton.setEnabled(true);
                 //saveButtonAction();
-                //saveButton.setEnabled(rootPaneCheckingEnabled);
-                
+                //creator.enableSaveButton();
                 if (set.getLoadedState(selectedTextBox) && (fileHandler.fileExists(filePath)) && fileHandler.fileIsNotEmpty(filePath)) {
                     //System.out.println("text: "+ selectedTextBox.getText()+" loaded state: "+ set.getLoadedState(textField));
-                    decorator.areYouSureMessageDelete(selectedTextBox, "deleting","<html><center>Deleting this class will delete <br>its loaded information.<br>Do you wish to continue?");
+                     String yesOrNoDialog = decorator.areYouSureMessageDelete(selectedTextBox, "deleting","<html><center>Deleting this class will optiondelete <br>its loaded information.<br>Do you wish to continue?");
                 
+                    if (yesOrNoDialog == "yes") {
+                        saveButton.setEnabled(true);
+                    }
+
                     selectedTextBox.setForeground(Color.GRAY);
                     selectedTextBox.setBorder(borderRegular);
                 }
@@ -336,7 +335,9 @@ public class StudentClasses extends JFrame {
                 else {
                     JPanel selectedBoxPanel = new JPanel();
                     selectedBoxPanel.add(selectedTextBox);
+                    System.out.println(selectedBoxPanel.getComponentCount() + " :beforeselectedBoxPanelComponenents");
                     creator.deleteTextBox(selectedBoxPanel);
+                    System.out.println(selectedBoxPanel.getComponentCount() + " :afterselectedBoxPanelComponenents");
                 }
 
 
