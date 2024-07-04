@@ -244,7 +244,10 @@ public class Gather {
         hideWindow(); 
         newUser.newUserSetup();
         newUser.showWindow(window.getX(),window.getY());
-        newUser.setButtonSelected();          
+        if (set.getExistingOrNew() != null) {
+            newUser.setButtonSelected();
+        }
+        // newUser.setButtonSelected();          
     }
 
     private void makeSaveButton() {
@@ -287,7 +290,10 @@ public class Gather {
         else if (textFieldFilled) { //good case
             String filePath = "somethingwentwrong";//if not overwritten, somethingwent wrong
             if (existingOrNew.trim().equals("New User")) { //if new user,
-                goToStudentClasses(filePath);
+                //goToStudentClasses(filePath);
+                hideWindow();
+                MainWindow main = new MainWindow();
+                main.show(0,0);
             }
         }
         else {
@@ -318,73 +324,73 @@ private void errorMessageSetUp(String labelWords, int width, int height) {
     dialog.setVisible(true);
 }
 
-private void writeUsername(String filePath) {
-    //and username not taken
-    String usernamePath = "somethingwentwrong.txt";
-    String username = textField.getText().trim();
-    set.setUsername(username);
-    if ("Student".equals(studentOrTeacher)) {
-        usernamePath = "/Users/evy/Documents/GradeTracker-new/src/main/view/UserInfo/studentUsername.txt";
-    }
+// private void writeUsername(String filePath) {
+//     //and username not taken
+//     String usernamePath = "somethingwentwrong.txt";
+//     String username = textField.getText().trim();
+//     set.setUsername(username);
+//     if ("Student".equals(studentOrTeacher)) {
+//         usernamePath = "/Users/evy/Documents/GradeTracker-new/src/main/view/UserInfo/studentUsername.txt";
+//     }
 
-    else if ("Teacher".equals(studentOrTeacher)) {
-        usernamePath = "/Users/evy/Documents/GradeTracker-new/src/main/view/UserInfo/teacherUsername.txt";
-    }
+//     else if ("Teacher".equals(studentOrTeacher)) {
+//         usernamePath = "/Users/evy/Documents/GradeTracker-new/src/main/view/UserInfo/teacherUsername.txt";
+//     }
 
-    checkIfExisting(usernamePath, username);
-}
+//     checkIfExisting(usernamePath, username);
+// }
 
-    private void checkIfExisting(String filePath, String username) {
-        boolean usernametaken = false;
+    // private void checkIfExisting(String filePath, String username) {
+    //     boolean usernametaken = false;
 
-        readNames(filePath, username, usernametaken);
-        if (usernametaken == false) {
-            writeNewName(filePath, username);    
-        }
-    }
+    //     readNames(filePath, username, usernametaken);
+    //     if (usernametaken == false) {
+    //         writeNewName(filePath, username);    
+    //     }
+    // }
 
-    private void writeNewName(String filePath, String username) {
-            try (FileWriter writer = new FileWriter(filePath, true)) {
-                writer.write(username + "\n");
+    // private void writeNewName(String filePath, String username) {
+    //         try (FileWriter writer = new FileWriter(filePath, true)) {
+    //             writer.write(username + "\n");
 
-            } catch (IOException e1) {
-                e1.printStackTrace();
-            }
-    }
+    //         } catch (IOException e1) {
+    //             e1.printStackTrace();
+    //         }
+    // }
 
-    private boolean readNames(String filePath, String username, Boolean usernametaken) {
-        BufferedReader reader = null;
-        try {
-            reader = new BufferedReader(new FileReader(filePath));
-            readLine(reader, username, usernametaken);
-        } catch (IOException e) {
-            e.printStackTrace();
-        } finally {
-            try {
-                if (reader != null) {
-                    reader.close();
-                }
-            } catch (IOException e) {
-                e.printStackTrace();
-            }
-        }
-        return usernametaken;
-    }
+    // private boolean readNames(String filePath, String username, Boolean usernametaken) {
+    //     BufferedReader reader = null;
+    //     try {
+    //         reader = new BufferedReader(new FileReader(filePath));
+    //         readLine(reader, username, usernametaken);
+    //     } catch (IOException e) {
+    //         e.printStackTrace();
+    //     } finally {
+    //         try {
+    //             if (reader != null) {
+    //                 reader.close();
+    //             }
+    //         } catch (IOException e) {
+    //             e.printStackTrace();
+    //         }
+    //     }
+    //     return usernametaken;
+    // }
 
-    private boolean readLine(BufferedReader reader, String username, boolean usernametaken){
-        String line;
-        try {
-            while ((line = reader.readLine()) != null) {
-                if (line.equals(username) && set.getUsername() == null) {//if matches username
-                    errorMessageSetUp("<html><center>Username already exists.<br> Please choose another.",200,100);
-                    usernametaken = true;
-                    break;
-                }
-            }
-        } catch (IOException e) { 
-            e.printStackTrace();
-        } return usernametaken;
-    }
+    // private boolean readLine(BufferedReader reader, String username, boolean usernametaken){
+    //     String line;
+    //     try {
+    //         while ((line = reader.readLine()) != null) {
+    //             if (line.equals(username) && set.getUsername() == null) {//if matches username
+    //                 errorMessageSetUp("<html><center>Username already exists.<br> Please choose another.",200,100);
+    //                 usernametaken = true;
+    //                 break;
+    //             }
+    //         }
+    //     } catch (IOException e) { 
+    //         e.printStackTrace();
+    //     } return usernametaken;
+    // }
 
     private void setWindowX(int newWindowX) {
         windowX = newWindowX;
@@ -421,14 +427,18 @@ private void writeUsername(String filePath) {
         instructionsPanel.setVisible(false);
         choicesPanel.setVisible(false);
         backNextButtonsPanel.setVisible(false);
+
+        //textField.setVisible(false);
+        // backNextButtonsPanel.setVisible(false);
+        // instructionsPanel.setVisible(false);
     }
 
     private void goToStudentClasses(String filePath) {
-        writeUsername(filePath);
-        //move on to studentclasses class
-        hideWindow();
-        StudentClasses studentClasses = new StudentClasses();
-        studentClasses.studentClassesLaunch();
+        //writeUsername(filePath);
+        ////move on to studentclasses class
+        // hideWindow();
+        // StudentClasses studentClasses = new StudentClasses();
+        // studentClasses.studentClassesLaunch();
     }
 
     public class EnterAction extends AbstractAction {

@@ -23,6 +23,7 @@ import java.awt.event.KeyEvent;
 import main.model.Set;
 import main.controller.Creator;
 import main.controller.Decorator;
+import javax.swing.SwingUtilities;
 
 public class NewUser extends JFrame {
     private JFrame window;
@@ -35,7 +36,7 @@ public class NewUser extends JFrame {
     JRadioButton newUserButton;
     JRadioButton existingButton;
     ButtonGroup teacherStudentGroup;
-    int windowWidth = 800;
+    int windowWidth = 750;
     int windowHeight = 500;
 
     //panel
@@ -48,7 +49,12 @@ public class NewUser extends JFrame {
 
     public NewUser() {
         this.set = Set.getInstance();
-       newUserSetup();
+        window = set.getWindow();
+        window.setTitle("Launcher");
+        window.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
+        window.setLayout(new BorderLayout());
+        window.setSize(windowWidth, windowHeight);
+        newUserSetup();
     }
 
     public void newUserSetup() {
@@ -72,6 +78,13 @@ public class NewUser extends JFrame {
         window.getRootPane().getActionMap().put("enterAction", enterAction);
 
         window.requestFocusInWindow();
+        //window.setLocation(0, 0);
+        window.setLocationRelativeTo(null);
+
+        SwingUtilities.invokeLater(() -> {
+            window.setVisible(true);
+        });
+    
     }
     
     private void instructionsWordsWindow() {
@@ -182,18 +195,18 @@ public class NewUser extends JFrame {
     backNextButtonsPanel = creator.makeBackNextButtonsPanel(backButtonPanel, new JPanel(), nextButtonPanel);
     window.add(backNextButtonsPanel, BorderLayout.SOUTH);
 
-        backButton.addActionListener(new ActionListener() {
-            public void actionPerformed(ActionEvent e) {
-                set.setExistingOrNew(existingOrNew);
-                set.setWindow(window);
-                decorator.hideWindow(instructionsPanel, choicesPanel, backNextButtonsPanel);     
-                //MainWindow main = (MainWindow) set.getWindow();
-                MainWindow main = new MainWindow();
-                main.MainWindowLaunch();
-                main.setButtonSelected();
-            }
-        });
-        
+        // backButton.addActionListener(new ActionListener() {
+        //     public void actionPerformed(ActionEvent e) {
+        //         set.setExistingOrNew(existingOrNew);
+        //         set.setWindow(window);
+        //         decorator.hideWindow(instructionsPanel, choicesPanel, backNextButtonsPanel);     
+        //         //MainWindow main = (MainWindow) set.getWindow();
+        //         MainWindow main = new MainWindow();
+        //         main.MainWindowLaunch();
+        //         main.setButtonSelected();
+        //     }
+        // });
+        backButton.setEnabled(false);
         //next
         // nextButton = new JButton("Next >");
         // backNextButtonsPanel.add(nextButton, BorderLayout.EAST);
@@ -202,12 +215,10 @@ public class NewUser extends JFrame {
         nextButton.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent e) {
                 System.out.println("nextbutton action in newuser");
-                System.out.println("2222");
                 doNextButtonProcedure();
                 set.setWindow(window);
                 set.setExistingOrNew(existingOrNew);
                 if (originalExistingOrNew != existingOrNew) { //user changed the existing or new
-                    System.out.println("3333");
                     set.setUsername(null);
                     System.out.println("right after setting username to null: "+set.getUsername());
                 }
@@ -254,18 +265,28 @@ public class NewUser extends JFrame {
     }
 
     public void showWindow(int windowX, int windowY) {
-    if (windowX != 0 && windowY != 0) {
-        //window.setLocation(windowX, windowY);
-        // decorator.setWindowX(windowX);
-        // decorator.setWindowY(windowY);
+        // if (windowX != 0 && windowY != 0) {
+        //     window.setLocation(windowX, windowY);
+        // }
+     
+        // else {
+        //     window.setLocationRelativeTo(null);
+        // }
+     
+        //////window.setVisible(true);
+    
+    // if (windowX != 0 && windowY != 0) {
+    //     //window.setLocation(windowX, windowY);
+    //     // decorator.setWindowX(windowX);
+    //     // decorator.setWindowY(windowY);
 
-    }
+    // }
 
-    else {
-        //window.setLocation(window.getX(), window.getY());
-    }
+    // else {
+    //     //window.setLocation(window.getX(), window.getY());
+    // }
 
-    window.setVisible(true);
+    // window.setVisible(true);
     }
 
     public class EnterAction extends AbstractAction {

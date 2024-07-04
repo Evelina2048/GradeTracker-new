@@ -13,8 +13,10 @@ public class Launcher {
                 Set set;
                 set = Set.getInstance();
                 set.setWindow(new JFrame());
-                MainWindow main = new MainWindow();
-                main.show(0,0);
+                // MainWindow main = new MainWindow();
+                // main.show(0,0);
+                NewUser newUser = new NewUser();
+                //newUser.show();
             }
         });
     }

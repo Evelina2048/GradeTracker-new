@@ -19,10 +19,20 @@ import java.awt.event.ActionEvent;
 
 //key listening
 import java.awt.event.KeyEvent;
+import java.io.BufferedReader;
+import java.io.FileReader;
+import java.io.FileWriter;
+import java.io.IOException;
 
 import main.model.Set;
+import main.view.student.StudentClasses;
 import main.controller.Creator;
 import main.controller.Decorator;
+
+import javax.swing.JDialog;
+import javax.swing.SwingConstants;
+
+import java.awt.FlowLayout;
 
 public class MainWindow extends JFrame {
 private String studentOrTeacher;
@@ -110,6 +120,7 @@ private void radioButtonSetUp() {
 
     addToChoicesPanel(teacherStudentGroup, teacherButton, studentButton, choicesPanel);
 
+    //choicesPanel.setVisible(true);
     window.add(choicesPanel);
 }
 
@@ -131,7 +142,15 @@ private void backNextButton() {
     backNextButtonsPanel = new JPanel(new BorderLayout());
     Creator creator = new Creator();
     JButton backButton = creator.backButtonCreate();
-    backButton.setEnabled(false);
+    //backButton.setEnabled(false);
+    backButton.addActionListener(new ActionListener() {
+        public void actionPerformed(ActionEvent e) {
+            System.out.println("mainwindow nextbutton action");
+            //hideWindow()
+            decorator.hideWindow(instructionsPanel, choicesPanel, backNextButtonsPanel);     
+            doBackButtonProcedure();
+        }
+    });
     JPanel backButtonPanel = new JPanel();
     backButtonPanel.add(backButton);
 
@@ -148,24 +167,131 @@ private void backNextButton() {
     window.add(backNextButtonsPanel, BorderLayout.SOUTH);
 }
 
+private void doBackButtonProcedure() {
+    hideWindow(); 
+    Gather gather = new Gather();
+    gather.gatherLaunch();
+}
+
 private void doNextButtonProcedure() {
     if (moveOnPossible) {
-        setUserInfo();
+        //setUserInfo();
         set.setWindow(window);
         NewUser newUser = new NewUser();
-        if (set.getExistingOrNew() != null) {
-            newUser.setButtonSelected();
-        }
-        decorator.hideWindow(instructionsPanel, choicesPanel, backNextButtonsPanel);
+        // if (set.getExistingOrNew() != null) {
+        //     newUser.setButtonSelected();
+        // }
+        String filePath = "somethingwentwrong";//if not overwritten, somethingwent wrong
+            if (set.getExistingOrNew().trim().equals("New User")) { //if new user,
+                goToStudentClasses(filePath);
+                decorator.hideWindow(instructionsPanel, choicesPanel, backNextButtonsPanel);
+                //hideWindow();
+            }
     }
     else if (!moveOnPossible) {
         decorator.errorMessageSetUp(studentButton);
     }
 }
 
-private void setUserInfo() {
-    set.setWindow(this);
+private void goToStudentClasses(String filePath) {
+    writeUsername(filePath);
+    //move on to studentclasses class
+    //hideWindow();
+    decorator.hideWindow(instructionsPanel, choicesPanel, backNextButtonsPanel);
+    StudentClasses studentClasses = new StudentClasses();
+    studentClasses.studentClassesLaunch();
 }
+
+private void writeUsername(String filePath) {
+    //and username not taken
+    String usernamePath = "somethingwentwrong.txt";
+    String username = set.getUsername();//textField.getText().trim();
+    set.setUsername(username);
+    if ("Student".equals(studentOrTeacher)) {
+        usernamePath = "/Users/evy/Documents/GradeTracker-new/src/main/view/UserInfo/studentUsername.txt";
+    }
+
+    else if ("Teacher".equals(studentOrTeacher)) {
+        usernamePath = "/Users/evy/Documents/GradeTracker-new/src/main/view/UserInfo/teacherUsername.txt";
+    }
+
+    checkIfExisting(usernamePath, username);
+}
+
+private void checkIfExisting(String filePath, String username) {
+    boolean usernametaken = false;
+
+    readNames(filePath, username, usernametaken);
+    if (usernametaken == false) {
+        writeNewName(filePath, username);    
+    }
+}
+
+private boolean readNames(String filePath, String username, Boolean usernametaken) {
+    BufferedReader reader = null;
+    try {
+        reader = new BufferedReader(new FileReader(filePath));
+        readLine(reader, username, usernametaken);
+    } catch (IOException e) {
+        e.printStackTrace();
+    } finally {
+        try {
+            if (reader != null) {
+                reader.close();
+            }
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+    }
+    return usernametaken;
+}
+
+private boolean readLine(BufferedReader reader, String username, boolean usernametaken){
+    String line;
+    try {
+        while ((line = reader.readLine()) != null) {
+            if (line.equals(username) && set.getUsername() == null) {//if matches username
+                errorMessageSetUp("<html><center>Username already exists.<br> Please choose another.",200,100);
+                usernametaken = true;
+                break;
+            }
+        }
+    } catch (IOException e) { 
+        e.printStackTrace();
+    } return usernametaken;
+}
+
+private void errorMessageSetUp(String labelWords, int width, int height) {
+    JDialog dialog = new JDialog(window, true);
+    dialog.setLayout(new FlowLayout());
+    JLabel label = new JLabel(labelWords);
+    label.setHorizontalAlignment(SwingConstants.CENTER);
+    dialog.add(label);
+    JButton okButton = new JButton("OK");
+    okButton.setVisible(true);
+    dialog.add(okButton);
+    dialog.setSize(width,height);
+    okButton.addActionListener(new ActionListener() {
+        public void actionPerformed(ActionEvent e) {
+            dialog.setVisible(false);
+            dialog.dispose(); 
+        }
+    });
+    
+    dialog.setLocationRelativeTo(studentButton);
+    dialog.setLocation(dialog.getX(), dialog.getY() + 15); 
+    dialog.setVisible(true);
+}
+
+private void writeNewName(String filePath, String username) {
+            try (FileWriter writer = new FileWriter(filePath, true)) {
+                writer.write(username + "\n");
+
+            } catch (IOException e1) {
+                e1.printStackTrace();
+            }
+    }
+
 
 
 public void setButtonSelected() {
@@ -190,7 +316,12 @@ public void show(int windowX, int windowY) {
     window.setLocationRelativeTo(null);
    }
 
+
     window.setVisible(true);
+}
+
+public void hideWindow() {
+
 }
 
 public class EnterAction extends AbstractAction {

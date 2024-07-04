@@ -27,7 +27,7 @@ import main.controller.Creator;
 import main.controller.Decorator;
 import main.controller.FileHandler;
 import main.view.Gather;
-
+import main.view.MainWindow;
 import main.view.student.StudentClasses;
 
 import java.awt.event.KeyEvent;
@@ -135,9 +135,16 @@ public class StudentClasses extends JFrame {
         backButton.setPreferredSize(new Dimension(87, 29));
         backButton.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent e) {
-                Gather gather = new Gather();
-                gather.gatherLaunch();
+                // Gather gather = new Gather();
+                // gather.gatherLaunch();
                 hideWindow(); 
+                //set.setExistingOrNew(existingOrNew);
+                set.setWindow(window);
+                //decorator.hideWindow(instructionsPanel, choicesPanel, backNextButtonsPanel);     
+                //MainWindow main = (MainWindow) set.getWindow();
+                MainWindow main = new MainWindow();
+                main.MainWindowLaunch();
+                main.setButtonSelected();
         }});
         return backButtonPanel;
     }
