@@ -7,15 +7,18 @@ import javax.swing.JComponent;
 import javax.swing.JFrame;
 import javax.swing.JRadioButton;
 import javax.swing.KeyStroke;
+import javax.swing.JPanel;
+import javax.swing.JLabel;
+import javax.swing.JDialog;
+import javax.swing.SwingConstants;
 
 import java.awt.BorderLayout;
 import java.awt.Color;
 import java.awt.Font;
-import javax.swing.JPanel;
-import javax.swing.JLabel;
 import java.awt.GridBagLayout;
 import java.awt.event.ActionListener;
 import java.awt.event.ActionEvent;
+import java.awt.FlowLayout;
 
 //key listening
 import java.awt.event.KeyEvent;
@@ -28,11 +31,6 @@ import main.model.Set;
 import main.view.student.StudentClasses;
 import main.controller.Creator;
 import main.controller.Decorator;
-
-import javax.swing.JDialog;
-import javax.swing.SwingConstants;
-
-import java.awt.FlowLayout;
 
 public class MainWindow extends JFrame {
 private String studentOrTeacher;
@@ -60,6 +58,7 @@ public MainWindow() {
 public void MainWindowLaunch() {
     this.set = Set.getInstance();
     window = set.getWindow();
+
     windowSetUp();
 
     InstructionsWordsWindow();
@@ -93,7 +92,7 @@ private void radioButtonSetUp() {
     teacherStudentGroup = new ButtonGroup();
     Color choicesPanelColor = Color.decode("#AFA2A2");
 
-    choicesPanel= new JPanel(new GridBagLayout());
+    choicesPanel = new JPanel(new GridBagLayout());
     choicesPanel.setBackground(choicesPanelColor);
 
     //initialize buttons with color
@@ -104,9 +103,7 @@ private void radioButtonSetUp() {
            studentOrTeacher = teacherButton.getText();
            set.setStudentOrTeacher(studentOrTeacher);
            moveOnPossible = true;
-        }
-        
-    });
+        }});
 
     studentButton = new JRadioButton("Student");
     choicesButtonDecorate(studentButton);
@@ -115,12 +112,10 @@ private void radioButtonSetUp() {
             studentOrTeacher = studentButton.getText();
             set.setStudentOrTeacher(studentOrTeacher);
             moveOnPossible = true;
-        }
-    });
+        }});
 
     addToChoicesPanel(teacherStudentGroup, teacherButton, studentButton, choicesPanel);
 
-    //choicesPanel.setVisible(true);
     window.add(choicesPanel);
 }
 
@@ -142,11 +137,8 @@ private void backNextButton() {
     backNextButtonsPanel = new JPanel(new BorderLayout());
     Creator creator = new Creator();
     JButton backButton = creator.backButtonCreate();
-    //backButton.setEnabled(false);
     backButton.addActionListener(new ActionListener() {
         public void actionPerformed(ActionEvent e) {
-            System.out.println("mainwindow nextbutton action");
-            //hideWindow()
             decorator.hideWindow(instructionsPanel, choicesPanel, backNextButtonsPanel);     
             doBackButtonProcedure();
         }
@@ -159,7 +151,6 @@ private void backNextButton() {
     nextButtonPanel.add(nextButton);
     nextButton.addActionListener(new ActionListener() {
         public void actionPerformed(ActionEvent e) {
-            System.out.println("mainwindow nextbutton action");
             doNextButtonProcedure();
         }
     });
@@ -175,17 +166,12 @@ private void doBackButtonProcedure() {
 
 private void doNextButtonProcedure() {
     if (moveOnPossible) {
-        //setUserInfo();
         set.setWindow(window);
-        NewUser newUser = new NewUser();
-        // if (set.getExistingOrNew() != null) {
-        //     newUser.setButtonSelected();
-        // }
+        new NewUser();
         String filePath = "somethingwentwrong";//if not overwritten, somethingwent wrong
             if (set.getExistingOrNew().trim().equals("New User")) { //if new user,
                 goToStudentClasses(filePath);
                 decorator.hideWindow(instructionsPanel, choicesPanel, backNextButtonsPanel);
-                //hideWindow();
             }
     }
     else if (!moveOnPossible) {
@@ -196,7 +182,6 @@ private void doNextButtonProcedure() {
 private void goToStudentClasses(String filePath) {
     writeUsername(filePath);
     //move on to studentclasses class
-    //hideWindow();
     decorator.hideWindow(instructionsPanel, choicesPanel, backNextButtonsPanel);
     StudentClasses studentClasses = new StudentClasses();
     studentClasses.studentClassesLaunch();

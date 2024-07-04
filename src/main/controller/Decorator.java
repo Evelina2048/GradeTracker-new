@@ -290,7 +290,7 @@ public class Decorator {
         JButton okButton = new JButton("OK");
         okButton.setVisible(true);
         dialog.add(okButton);
-        dialog.setSize(200,90);
+        dialog.setSize(275,100);
         set.setCanContinue(false);
         okButton.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent e) {

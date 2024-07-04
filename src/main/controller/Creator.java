@@ -248,7 +248,7 @@ public class Creator {
                     else if (set.getEmptiedState(textField) == false) {
                         System.out.println("textfield is a placeholder 1.1");
                         if (set.getCanContinue()) {
-                            JDialog dialog = decorator.genericPopUpMessage("Must fill in placeholder");
+                            JDialog dialog = decorator.genericPopUpMessage("<html><center>Must fill in placeholder.<br>Will not save sections with placeholders");
                             dialog.setLocationRelativeTo(window);
                             dialog.setLocation(dialog.getX(), dialog.getY() + 15); 
                             dialog.setVisible(true);
@@ -376,7 +376,7 @@ public class Creator {
                 }
             
             if (set.getCanContinue()) {
-                JDialog dialog = decorator.genericPopUpMessage("Must fill in placeholder");
+                JDialog dialog = decorator.genericPopUpMessage("<html><center>Must fill in placeholder.<br>Will not save sections with placeholders");
                 dialog.setLocationRelativeTo(window);
                 dialog.setLocation(dialog.getX(), dialog.getY() + 15); 
                 dialog.setVisible(true);
