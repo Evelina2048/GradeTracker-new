@@ -102,6 +102,17 @@ public class Gather {
             System.out.println("whatToSetTextFieldTo opt 2");
             textField = decorate.decorateTextBox("Enter user name");
         }
+
+        // else if (set.getUsername() != null && set.getExistingOrNewChanged() == false) { //user came back to gather after changing newuser setting
+        //     System.out.println("whatToSetTextFieldTo opt 2");
+        //     // textField = decorate.decorateTextBox("Enter user name");
+        // }
+
+        // else if (set.getUsername() != null && set.getExistingOrNewChanged() == true) { //user came back to gather after changing newuser setting
+        //     System.out.println("whatToSetTextFieldTo opt 2");
+        //     textField = decorate.decorateTextBox("Enter user name");
+        // }
+
         else {
             System.out.println("whatToSetTextFieldTo opt 3");
             textField = decorate.decorateTextBox(set.getUsername());
@@ -160,18 +171,42 @@ public class Gather {
             System.out.println("instruction words option 1");
             instructionsWordsLabel = new JLabel("You are a new user. Create a user name.");
         }
-        else if (existingUser && previousSettingsNotChanged) {
-            System.out.println("instruction words option 2");
-            instructionsWordsLabel = new JLabel("You are an existing user. Type in your user name");
-        }
+
         else if (newUser && set.getUsername() == null && previousSettingsChanged) {
             System.out.println("instruction words option 3");
             instructionsWordsLabel = new JLabel("<html><center>You changed your NewUser/Existing settings. <br> You are a new user. Create a user name.");
         }
+
+        else if (existingUser && previousSettingsNotChanged) {
+            System.out.println("instruction words option 2");
+            instructionsWordsLabel = new JLabel("You are an existing user. Type in your user name");
+        }
+
         else if (existingUser && set.getUsername() == null && previousSettingsChanged) {
             System.out.println("instruction words option 4");
             instructionsWordsLabel = new JLabel("<html><center>You changed your NewUser/Existing settings. <br> You are an existing user. Type in your user name");
         }
+
+        else if (newUser && set.getUsername() != null && previousSettingsChanged) {
+            System.out.println("instruction words option 3");
+            instructionsWordsLabel = new JLabel("<html><center>You changed your NewUser/Existing settings. <br> You are a new user. Create a user name.");
+        }
+
+        else if (existingUser && set.getUsername() != null && previousSettingsChanged) {
+                    System.out.println("instruction words option 4");
+                    instructionsWordsLabel = new JLabel("<html><center>You changed your NewUser/Existing settings. <br> You are an existing user. Type in your user name");
+        }
+
+        else if ((newUser || existingUser) && set.getUsername() != null && previousSettingsNotChanged) {
+            System.out.println("instruction words option 3");
+            instructionsWordsLabel = new JLabel("<html><center>Welcome back!");
+        }
+
+        // else if (existingUser && set.getUsername() != null && previousSettingsNotChanged) {
+        //     System.out.println("instruction words option 4");
+        //     instructionsWordsLabel = new JLabel("<html><center>Welcome back!");
+        //     }
+
         else {
             System.out.println("instruction words option 5");
             instructionsWordsLabel = new JLabel("Error");

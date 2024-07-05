@@ -210,7 +210,6 @@ public class StudentClasses extends JFrame {
             public void actionPerformed(ActionEvent e) {
                 creator.createTextBox("Enter Class Name", "JTextField",false);
                 System.out.println("class list in new class button"+ set.getCurrentPanelList());
-                
         }
     });
         // westPanel.add(newClassButton, BorderLayout.SOUTH);

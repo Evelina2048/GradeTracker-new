@@ -44,7 +44,7 @@ public class Creator {
     private FileHandler fileHandler = new FileHandler();
     //private Decorator decorate = new Decorator();
     private int textboxCounter;
-    private JTextField textField;
+    private JTextField textField = new JTextField();
     private String placeholder;
     private ArrayList<String> classList = new ArrayList<>();
     private JButton saveButton;
@@ -53,6 +53,10 @@ public class Creator {
     private Boolean focusGranted = true;
     private int attachedBoxes = 0;
     private int maxAttachedBoxes = 0;
+    private boolean loaded;
+    private String filePath;
+    //private BufferedWriter writer = new BufferedWriter(new FileWriter(filePath,true));
+    private String text = textField.getText().trim();
     
     public Creator() {
         this.set = Set.getInstance();
@@ -92,8 +96,8 @@ public class Creator {
         return backNextButtonsPanel;
     }
 
-    
-    public void textFieldFocusListener(JTextField textField, String placeholder) { 
+    public void textFieldFocusListener(JTextField importedTextField, String placeholder) { 
+        textField = importedTextField;
 
         textField.addFocusListener(new FocusAdapter() {
             @Override
@@ -102,55 +106,40 @@ public class Creator {
                     System.out.println("focusGranted");
                     if (previousTextbox != null) {
                         previousTextbox.setForeground(Color.LIGHT_GRAY);
-
-                    }
-                    if (textField.getText().equals(placeholder) && set.getEmptiedState(textField) == false && set.getLoadedState(textField) == false) {
+                    }if (textField.getText().equals(placeholder) && set.getEmptiedState(textField) == false && set.getLoadedState(textField) == false) {
                         textField.setText("");
                         set.setEmptiedState(textField, true);
-                        //textField.setForeground(Color.BLACK);
                         textField.setForeground(Color.gray);
-                    }
-
-                    else if (!textField.getText().equals(placeholder) && !textField.getText().isEmpty() && set.getEmptiedState(textField) == true) {
-                        //textField.setForeground(Color.BLACK);
+                    }else if (!textField.getText().equals(placeholder) && !textField.getText().isEmpty() && set.getEmptiedState(textField) == true) {
                         textField.setForeground(Color.gray);
                         set.setEmptiedState(textField, true);
-                    }
-
-                    else if (textField.getText().equals(placeholder) && set.getEmptiedState(textField) == true && set.getLoadedState(textField) == false) {
+                    }else if (textField.getText().equals(placeholder) && set.getEmptiedState(textField) == true && set.getLoadedState(textField) == false) {
                         textField.setText(""); // Clear the placeholder text when the field gains focus
-                        //textField.setForeground(Color.BLACK);
                         textField.setForeground(Color.gray);
                         set.setEmptiedState(textField, true);
                         set.setSaveable(true);
-                    }
-
-                    else {
+                    }else {
                         System.out.println("something went wrong in Creator class, focus gained");
-
                     }
                     previousTextbox = textField;
                 }
             }
-
             @Override
             public void focusLost(FocusEvent e) {
                 if (textField.getText().isEmpty()) {
-                    textField.setForeground(Color.GRAY);
+                    textField.setForeground(Color.LIGHT_GRAY);
                     textField.setText(placeholder);
                     set.setEmptiedState(textField, false);
                 }
                 
                 else if (!textField.getText().isEmpty() && set.getEmptiedState(textField) == true){
-                    textField.setForeground(Color.gray);
+                    textField.setForeground(Color.LIGHT_GRAY);
                 }
                 else {
-                    //textField.requestFocus();
                     System.out.println("something went wrong in focus lost");
                 }
             }
         });
-
         focusLost(textField, placeholder);
     }
 
@@ -176,7 +165,6 @@ public class Creator {
                 Rectangle newBounds = new Rectangle(x, y, width, height);
 
                 boolean pointNotInTextbox = !newBounds.contains(e.getPoint());
-                boolean pointInTextbox = newBounds.contains(e.getPoint());
 
                 if (pointNotInTextbox && textField.getText().isEmpty()) {
                     textField.setText(placeholder);
@@ -184,27 +172,18 @@ public class Creator {
                     set.setEmptiedState(textField, false);
                     window.requestFocusInWindow();
                 }
-
                 else if (pointNotInTextbox &&  set.getEmptiedState(textField) == true && !textField.getText().isEmpty()) {
                     window.requestFocusInWindow();
                 }
-
                 else if (pointNotInTextbox) {
                     window.requestFocusInWindow();
 
                 }
-
-                // else if (pointInTextbox) {
-                //     textField.requestFocus();
-                // }
-
                 else {
                     System.out.println("something went wrong");
                 }
-
             }
         });
-
     }
 
     public void writeFolderToFile(AtomicBoolean textFieldEmptied) {
@@ -216,75 +195,26 @@ public class Creator {
         }
     }
 
-    public void writeTextToFile(String filePath, JPanel textFieldPanel) {
+    public void writeTextToFile(String importedFilePath, JPanel textFieldPanel) {
+        filePath = importedFilePath;
         set.setCanContinue(true);
         System.out.println("Step4: begin writeTextToFile."+ set.getCurrentPanelList());
         debugPrintPanel();
         set.getUsername();
-        Decorator decorator = new Decorator();
+        tryToWriteWithoutAppend();
+        System.out.println("in write text to file: "+set.getCurrentPanelList());
+        set.setClassList(classList);
+    }
+
+    private void tryToWriteWithoutAppend() {
+        //writer = new BufferedWriter(new FileWriter(filePath));
         try (BufferedWriter writer = new BufferedWriter(new FileWriter(filePath))) {
             if (!classList.isEmpty()) {
                classList.clear();
             }
             for (Component component : textFieldPanel.getComponents()) {
-                System.out.println("textFieldPanel:::"+textFieldPanel.getComponentCount());
                 if (component instanceof JTextField ) {
-
-                    JTextField textField = (JTextField) component;
-                    System.out.println("made it past first test. Is it emptied? "+ set.getEmptiedState(textField)+ "text: "+ textField.getText());
-                    if (set.getEmptiedState(textField) == true && attachedBoxes == maxAttachedBoxes) {
-                        String text = textField.getText().trim();
-                        if (!text.isEmpty()) {
-                            if (attachedBoxes == maxAttachedBoxes) {
-                                classList.add(text);
-                                writer.write(text + "\n");                             
-                                System.out.println("should be writing");
-                            }
-                            else {
-                                attachedBoxes++;
-                            }
-                    }
-                    
-                    else if (set.getEmptiedState(textField) == false) {
-                        System.out.println("textfield is a placeholder 1.1");
-                        if (set.getCanContinue()) {
-                            JDialog dialog = decorator.genericPopUpMessage("<html><center>Must fill in placeholder.<br>Will not save sections with placeholders");
-                            dialog.setLocationRelativeTo(window);
-                            dialog.setLocation(dialog.getX(), dialog.getY() + 15); 
-                            dialog.setVisible(true);
-                            return;
-                        }
-                        if (text.contains("Grade Type") && attachedBoxes == maxAttachedBoxes) {
-                            //dont write next two
-                            //System.out.println("contains grade type 2.1");
-                            attachedBoxes = 0;
-                            maxAttachedBoxes = 2;
-                        }
-
-                        else if (text.equals("Percentage of Grade") && attachedBoxes == maxAttachedBoxes) {
-                            System.out.println("Percentage of Grade 2.1");
-                            deleteLines(filePath, text);
-                            attachedBoxes = 0;
-                            maxAttachedBoxes = 1;
-                        }
-
-                        else if (text.equals("Grades(format:# # #)") && attachedBoxes == maxAttachedBoxes) {
-                            System.out.println("grades");
-                            deleteLines(filePath, text);
-                            deleteLines(filePath, text);
-                        }
-
-                        // else if (attachedBoxes == maxAttachedBoxes) {
-                        //     writer.write(text + "\n");                             
-                        //     System.out.println("should be writing");
-                        // }
-
-                        else {
-                            System.out.println("boxes number not equal 3.1 4.1");
-                            attachedBoxes++;
-                        }
-                    }
-                    }
+                    tryToWriteTextFieldWithoutAppend(component, writer);
                 }
                 else if (component instanceof JPanel) {
                     System.out.println("JPanel");
@@ -297,13 +227,61 @@ public class Creator {
         } catch (IOException e) {
             e.printStackTrace();
         }
-        System.out.println("in write text to file: "+set.getCurrentPanelList());
-        set.setClassList(classList);
     }
 
-    private void writeTextToFileWithAppend(String filePath, JPanel textFieldPanel) {
-        System.out.println("in writeTextToFileWithAppend");
+    private void tryToWriteTextFieldWithoutAppend(Component component, BufferedWriter writer) {
+        JTextField textField = (JTextField) component;
+        if (set.getEmptiedState(textField) == true && attachedBoxes == maxAttachedBoxes) {
+            text = textField.getText().trim();
+            if (!text.isEmpty()) {
+                if (attachedBoxes == maxAttachedBoxes) {
+                    classList.add(text);
+                    try {
+                        writer.write(text + "\n");
+                    } catch (IOException e) {
+                        e.printStackTrace();
+                    }                             
+                    System.out.println("should be writing");
+                }
+                else {
+                    attachedBoxes++;
+                }
+        }
+        else if (set.getEmptiedState(textField) == false) {
+            seeHowManyPlaceholdersToSkip();
+        }}
+    }
+
+    private void seeHowManyPlaceholdersToSkip() {
         Decorator decorator = new Decorator();
+        if (set.getCanContinue()) {
+            JDialog dialog = decorator.genericPopUpMessage("<html><center>Must fill in placeholder.<br>Will not save sections with placeholders");
+            dialog.setLocationRelativeTo(window);
+            dialog.setLocation(dialog.getX(), dialog.getY() + 15); 
+            dialog.setVisible(true);
+            return;
+        }
+        if (text.contains("Grade Type") && attachedBoxes == maxAttachedBoxes) {
+            attachedBoxes = 0;
+            maxAttachedBoxes = 2;
+        }
+        else if (text.equals("Percentage of Grade") && attachedBoxes == maxAttachedBoxes) {
+            deleteLines(filePath, text);
+            attachedBoxes = 0;
+            maxAttachedBoxes = 1;
+        }
+        else if (text.equals("Grades(format:# # #)") && attachedBoxes == maxAttachedBoxes) {
+            deleteLines(filePath, text);
+            deleteLines(filePath, text);
+        }
+        else {
+            attachedBoxes++;
+        }
+    }
+
+    private void writeTextToFileWithAppend(String importedFilePath, JPanel textFieldPanel) {
+        String filePath = importedFilePath;
+        System.out.println("in writeTextToFileWithAppend");
         try (BufferedWriter writer = new BufferedWriter(new FileWriter(filePath, true))) {
             for (Component component : textFieldPanel.getComponents()) {
                 if (component instanceof JTextField) {
@@ -318,62 +296,18 @@ public class Creator {
             e.printStackTrace();
         }
     }
+
     public void decideIfWrite(Component component, BufferedWriter writer, String filePath) {
         Decorator decorator = new Decorator();
         System.out.println("is a textfield in write text to file with append");
         JTextField textField = (JTextField) component;
+        Boolean studentStatNonWritablePlaceholder = set.getEmptiedState(textField) == false && set.getCurrentClass() == "StudentStatCollect.java" && !textField.getText().equals("Credits (Optional)");
 
         if (set.getEmptiedState(textField) == true) {
-        String text = textField.getText().trim();
-            if (!text.isEmpty()) {
-                    try {
-                        if (attachedBoxes == maxAttachedBoxes) {
-                            System.out.println("writing in decide if write: "+text);
-                            classList.add(text);
-                            writer.write(text + "\n");
-                        }
-                        else {
-                            attachedBoxes++;
-                        }
-                    } catch (IOException e) {
-                        e.printStackTrace();
-                    }                             
-                    System.out.println("should be writing");
-            }
+            tryToWrite(writer);
         }
-        else if (set.getEmptiedState(textField) == false && set.getCurrentClass() == "StudentStatCollect.java" && !textField.getText().equals("Credits (Optional)")) {
-                System.out.println("textfield is a placeholder 1");
-                String text = textField.getText();
-                if (text.contains("Grade Type") && attachedBoxes == maxAttachedBoxes) {
-                    //dont write next two
-                    System.out.println("contains grade type 2");
-                    attachedBoxes = 0;
-                    maxAttachedBoxes = 2;
-                }
-
-                else if (text.equals("Percentage of Grade") && attachedBoxes == maxAttachedBoxes) {
-                    System.out.println("Percentage of grade 2");
-                    //deleteLines(filePath, text);
-                    attachedBoxes = 0;
-                    maxAttachedBoxes = 1;
-                    deleteLines(filePath, text);
-                }
-
-                else if (text.equals("Grades(format:# # #)") && attachedBoxes == maxAttachedBoxes) {
-                    System.out.println("grades");
-                    deleteLines(filePath, text);
-                    deleteLines(filePath, text);
-                }
-
-                // else if (attachedBoxes == maxAttachedBoxes) {
-                //     writer.write(text + "\n");                             
-                //     System.out.println("should be writing");
-                // }
-
-                else {
-                    System.out.println("boxes number not equal 3 4");
-                    attachedBoxes++;
-                }
+        else if (studentStatNonWritablePlaceholder) {
+            removeUnwritablePlaceholders();
             
             if (set.getCanContinue()) {
                 JDialog dialog = decorator.genericPopUpMessage("<html><center>Must fill in placeholder.<br>Will not save sections with placeholders");
@@ -382,6 +316,49 @@ public class Creator {
                 dialog.setVisible(true);
                 return;
             }
+        }
+    }
+    public void tryToWrite(BufferedWriter writer) {
+        String text = textField.getText().trim();
+        if (!text.isEmpty()) {
+            try {
+                if (attachedBoxes == maxAttachedBoxes) {
+                    System.out.println("writing in decide if write: "+text);
+                    classList.add(text);
+                    writer.write(text + "\n");
+                }
+                else {
+                    attachedBoxes++;
+                }
+            } catch (IOException e) {
+                e.printStackTrace();
+            }                             
+            System.out.println("should be writing");
+        }
+    }
+
+    private void removeUnwritablePlaceholders() {
+        System.out.println("textfield is a placeholder 1");
+        String text = textField.getText();
+        if (text.contains("Grade Type") && attachedBoxes == maxAttachedBoxes) {
+            //dont write next two
+            attachedBoxes = 0;
+            maxAttachedBoxes = 2;
+        }
+
+        else if (text.equals("Percentage of Grade") && attachedBoxes == maxAttachedBoxes) {
+            attachedBoxes = 0;
+            maxAttachedBoxes = 1;
+            deleteLines(filePath, text);
+        }
+
+        else if (text.equals("Grades(format:# # #)") && attachedBoxes == maxAttachedBoxes) {
+            deleteLines(filePath, text);
+            deleteLines(filePath, text);
+        }
+
+        else {
+            attachedBoxes++;
         }
     }
 
@@ -394,30 +371,19 @@ public class Creator {
         }
     }
 
-    public void deleteLines(String filePath, String text) {
-        //ArrayList lines = new ArrayList<>();
-        String line;
+    public void deleteLines(String importedFilePath, String text) {
+        filePath = importedFilePath;
         //read to array list
-        ArrayList lines = fileHandler.readFileToList(filePath);
-        //remove line(s) ***will update to work for multiple lines***
-        if (!lines.isEmpty()) {
-            //if (text.contains("Grade Type")) {
-            //    System.out.println("say hi");
-                //remove this line
-                //and the next two
-                
+        ArrayList<String> lines = fileHandler.readFileToList(filePath);
+        if (!lines.isEmpty()) {            
             lines.remove(lines.size() -1);
             classList.remove(classList.size() -1);
-        //}
     }
         fileHandler.writeArrayListToFile(filePath, lines);
     }
 
-    public JTextField createTextBox(String placeholder, String my_type, Boolean loaded) {
-        JPanel northTypePanel = new JPanel(new BorderLayout());
-        JPanel gradeTypePanel = new JPanel(new BorderLayout()); //second border layout so things not cut out
-
-        debugPanelComponentCount();
+    public JTextField createTextBox(String placeholder, String my_type, Boolean boxLoaded) {
+        loaded = boxLoaded;
         int width = 144;
         int height = 50;
         Decorator decorate = new Decorator();
@@ -426,9 +392,7 @@ public class Creator {
             textField = decorate.decorateTextBox(placeholder);
             set.setEmptiedState(textField, false);
             addDocumentListener(textField);
-            debugPanelComponentCount();
             textFieldPanel.add(textField); 
-            debugPanelComponentCount();
             textFieldPanelText.add(textField.getText());
             textField.setPreferredSize(new Dimension(width, height));
             window.add(textFieldPanel);
@@ -437,47 +401,21 @@ public class Creator {
         }
         else if (my_type.equals("JLabel")) {
             JLabel toAddType = new JLabel(placeholder);
-                //JLabel toAddType = new JLabel(placeholder);
-                textFieldPanel.add(toAddType);
-            }
-            // gradeTypePanel.setPreferredSize(new Dimension( 155,50));
-            // northTypePanel.add(gradeTypePanel, BorderLayout.NORTH);
-            // windowFix();
+            textFieldPanel.add(toAddType);
+        }
+        checkIfLoadedAndAction();
+        set.setTextFieldPanel(textFieldPanel);
+        return textField;
+    }
 
+    private void checkIfLoadedAndAction() {
         if (loaded) {
             set.setEmptiedState(textField, true);
             set.setLoadedState(textField, true);
         }
-
         else if (loaded == false) {
             set.setLoadedState(textField, false);
         }
-
-        set.setTextFieldPanel(textFieldPanel);
-
-
-
-        /////
-        //hideContainer();
-
-            // if (my_type.equals("JTextField")) {
-            //     JTextField toAddType = createTextBox(placeholder, "JTextField", loaded);
-            //     gradeTypePanel.add(toAddType);
-            //     //northTypePanel.add(toAddType); 
-            // }
-
-            // else if(my_type.equals("JLabel")) {
-            //     JLabel toAddType = new JLabel(placeholder);
-            //     //JLabel toAddType = new JLabel(placeholder);
-            //     gradeTypePanel.add(toAddType);
-            // }
-            // gradeTypePanel.setPreferredSize(new Dimension( 155,50));
-            // northTypePanel.add(gradeTypePanel, BorderLayout.NORTH);
-            // windowFix();
-
-        /////
-
-        return textField;
     }
 
     private void addDocumentListener(JTextField textField2) {
@@ -490,15 +428,10 @@ public class Creator {
         @Override
         public void removeUpdate(DocumentEvent e) {
             System.out.println("removeUpdate/// "+ textField.getWidth());
-
-            // if (false) {
-            //     saveButtonEnable();
-            // }
         }
 
         @Override
         public void changedUpdate(DocumentEvent e) {
-            //saveButton.setEnabled(true);
             System.out.println("changedUpdate");
         }
         });
@@ -552,7 +485,8 @@ public class Creator {
         System.out.println(textFieldPanel.getComponentCount());
     }
 
-    public void traversePanelAndWrite(String filePath, Container container) {
+    public void traversePanelAndWrite(String importedFilePath, Container container) {
+        filePath = importedFilePath;
         try (BufferedWriter writer = new BufferedWriter(new FileWriter(filePath, true))) {
             System.out.println("final filepath: "+ filePath);
             traverseComponents(writer, container);
@@ -587,35 +521,26 @@ public class Creator {
     }
     
     public JPanel typeBox(String placeholder, String my_type, Boolean loaded) {
-            hideContainer();
-            JPanel northTypePanel = new JPanel(new BorderLayout());
-            JPanel gradeTypePanel = new JPanel(new BorderLayout()); //second border layout so things not cut out
+        hideContainer();
+        JPanel northTypePanel = new JPanel(new BorderLayout());
+        JPanel gradeTypePanel = new JPanel(new BorderLayout()); //second border layout so things not cut out
 
 
-            if (my_type.equals("JTextField")) {
-                JTextField toAddType = createTextBox(placeholder, "JTextField", loaded);
-                gradeTypePanel.add(toAddType);
-                //northTypePanel.add(toAddType); 
-            }
+        if (my_type.equals("JTextField")) {
+            JTextField toAddType = createTextBox(placeholder, "JTextField", loaded);
+            gradeTypePanel.add(toAddType);
+        }
 
-            else if(my_type.equals("JLabel")) {
-                JLabel toAddType = new JLabel(placeholder);
-                //JLabel toAddType = new JLabel(placeholder);
-                gradeTypePanel.add(toAddType);
-            }
-            gradeTypePanel.setPreferredSize(new Dimension( 155,50));
-            northTypePanel.add(gradeTypePanel, BorderLayout.NORTH);
-            windowFix();
+        else if(my_type.equals("JLabel")) {
+            JLabel toAddType = new JLabel(placeholder);
+            gradeTypePanel.add(toAddType);
+        }
+        gradeTypePanel.setPreferredSize(new Dimension( 155,50));
+        northTypePanel.add(gradeTypePanel, BorderLayout.NORTH);
+        windowFix();
 
-            return northTypePanel;
+        return northTypePanel;
     }
-
-	// public JPanel boxCreate(String placeholder, String type, Boolean loaded) {
-    //     hideContainer();
-    //     JPanel bigPanel = typeBox(placeholder, type, loaded);
-    //     windowFix();
-    //     return bigPanel;
-	// }
 
     public String goIntoPanel(JPanel panel, int index) {
         Container container = panel;
@@ -653,8 +578,20 @@ public class Creator {
                 System.out.println("none of these" +component.getClass().getName());
                 return textField;
             }
+        
+            public Boolean checkIfHasPlaceholder(JPanel textFieldPanel2) {
+                JTextField textField = new JTextField();
+                for (int i = 0; i < textFieldPanel2.getComponentCount()-1; i++) {
+                    Component component = textFieldPanel2.getComponent(i);
+                    if (component instanceof JTextField) {
+                        textField = (JTextField) component;
+                    } 
+                    else if (component instanceof JPanel) {
+                        textField = (JTextField) goIntoPanelReturnTextbox(textFieldPanel2, i);
+                    }
+                    if (set.getEmptiedState(textField) == false) {
+                        return false;
+                    }}
+                    return true;
+            }
 }
-// else if (set.getEmptiedState(textField) == false && set.getCurrentClass() == "StudentStatCollect.java" && !textField.getText().equals("Credits (Optional)")) {
-                    //     System.out.println("made it");
-                    //     decorator.genericPopUpMessage(" in placeholder");
-                    // }
