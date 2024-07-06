@@ -50,18 +50,16 @@ public class NewUser extends JFrame {
     public NewUser() {
         this.set = Set.getInstance();
         window = set.getWindow();
-        System.out.println("2222 window location in new user: "+ window.getLocation());
         newUserSetup();
     }
 
     public void newUserSetup() {
         window = set.getWindow();
-        window.setTitle("Launcher");
         window.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
         window.setLayout(new BorderLayout());
         window.setSize(windowWidth, windowHeight);
+        window.setLocationRelativeTo(null);
         
-        System.out.println("3333 window location in new user: "+ window.getLocation());
         studentOrTeacher = set.getStudentOrTeacher();
         window.setTitle("New User");
 
@@ -73,7 +71,6 @@ public class NewUser extends JFrame {
 
         radioButtonSetUp();
 
-        System.out.println("4444.2" + window.getLocation());
         buttonSetUp();
 
         EnterAction enterAction = new EnterAction();
@@ -82,11 +79,6 @@ public class NewUser extends JFrame {
         window.getRootPane().getActionMap().put("enterAction", enterAction);
 
         window.requestFocusInWindow();
-        //window.setLocation(0, 0);
-        System.out.println("4444.31" + window.getLocation());
-        window.setLocationRelativeTo(null);
-        //window.setLocation(0,0);
-        System.out.println("4444.4 window location in new user after setting to null: "+ window.getLocation());
         
 
         SwingUtilities.invokeLater(() -> {
@@ -125,7 +117,6 @@ public class NewUser extends JFrame {
             public void actionPerformed(ActionEvent e) {
             existingOrNew = existingButton.getText();
             moveOnPossible = true;
-            System.out.println("1111 existingaction");
             checkIfExistingChangedWithUsername();
             }
             
@@ -171,7 +162,6 @@ public class NewUser extends JFrame {
     private void buttonSetUp() {
         backNextButtonsPanel = new JPanel(new BorderLayout());
 
-        System.out.println("4444.3" + window.getLocation());
         Creator creator = new Creator();
         JButton backButton = creator.backButtonCreate();
         JPanel backButtonPanel = new JPanel();
@@ -181,8 +171,6 @@ public class NewUser extends JFrame {
         JPanel nextButtonPanel = new JPanel();
         nextButton.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent e) {
-                System.out.println("4444.31" + window.getLocation());
-                System.out.println("nextbutton action in newuser");
                 doNextButtonProcedure();
             }
         });
@@ -197,7 +185,6 @@ public class NewUser extends JFrame {
 
     private void doNextButtonProcedure(){
         System.out.println("in the do next button procedure in new user");
-        System.out.println("4444.1 window location in new user right after button click: "+ window.getLocation());
             // set.setWindow(window);
             //int windowX = window.getX();
             //int windowY = window.getY();

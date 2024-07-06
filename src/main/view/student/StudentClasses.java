@@ -271,7 +271,6 @@ public class StudentClasses extends JFrame {
     }
 
     private void prepareTextboxForDeleteMode() {
-        System.out.println("1111preparing boxes for deleting");
         for (int i = 0; i < set.getTextFieldPanel().getComponentCount(); i++) { 
             if (set.getTextFieldPanel().getComponent(i) instanceof JTextField) {
                 JTextField textField = (JTextField) set.getTextFieldPanel().getComponent(i);
@@ -289,7 +288,6 @@ public class StudentClasses extends JFrame {
     }
 
     private void addMouseListenerToTextboxAndFrame(JTextField textField) {
-        System.out.println("3333 adding mouse listeners");
         turnOffEditability(textField);
         textField.addMouseListener(new MouseAdapter() {
             @Override
