@@ -62,7 +62,7 @@ public class StudentClasses extends JFrame {
     public void studentClassesLaunch() {
         this.set = Set.getInstance();
         set.setCurrentClass("StudentClasses.java");
-        this.window = set.getWindow();
+        window = set.getWindow();
         creator = new Creator();
         decorator = new Decorator();
         System.out.println("in student classes");

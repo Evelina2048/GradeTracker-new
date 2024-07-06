@@ -78,9 +78,9 @@ public class Gather {
         this.set = Set.getInstance();
         existingOrNew = set.getExistingOrNew();
         studentOrTeacher = set.getStudentOrTeacher();
-        this.window = set.getWindow();
+        window = set.getWindow();
         creator = new Creator();
-        newUser = new NewUser();
+        // newUser = new NewUser();
 
         EnterAction enterAction = new EnterAction();
         window.getRootPane().getInputMap(JComponent.WHEN_IN_FOCUSED_WINDOW).put(KeyStroke.getKeyStroke(KeyEvent.VK_ENTER, 0), "enterAction");
@@ -149,7 +149,9 @@ public class Gather {
     public void gatherLaunch () {
         
         window.setTitle("Gather");
-        this.window = set.getWindow();
+        window = set.getWindow();
+
+        System.out.println("5555 window location in gather: "+ window.getLocation());
 
         instructionsWordsWindow();
 
@@ -278,7 +280,7 @@ public class Gather {
         System.out.println("backbuttonaction for gather");
         hideWindow(); 
         newUser.newUserSetup();
-        newUser.showWindow(window.getX(),window.getY());
+        //newUser.showWindow(window.getX(),window.getY());
         if (set.getExistingOrNew() != null) {
             newUser.setButtonSelected();
         }
@@ -309,6 +311,7 @@ public class Gather {
 
     private void doNextButtonProcedure() {
         set.setUsername(textField.getText());
+        set.setWindow(window);
         System.out.println("nextbutton action in gather");
         nextButtonAction();
     }
@@ -328,7 +331,7 @@ public class Gather {
                 //goToStudentClasses(filePath);
                 hideWindow();
                 MainWindow main = new MainWindow();
-                main.show(0,0);
+                //main.show(0,0);
             }
         }
         else {
@@ -444,16 +447,16 @@ private void errorMessageSetUp(String labelWords, int width, int height) {
     }
 
     public void showWindow(int windowX, int windowY) {
-    if (windowX != 0 && windowY != 0) {
-        window.setLocation(windowX, windowY);
-        setWindowX(windowX);
-        setWindowY(windowY);
+    // if (windowX != 0 && windowY != 0) {
+    //     window.setLocation(windowX, windowY);
+    //     setWindowX(windowX);
+    //     setWindowY(windowY);
 
-    }
+    // }
 
-    else {
-        window.setLocation(window.getX(), window.getY());
-    }
+    // else {
+    //     window.setLocation(window.getX(), window.getY());
+    // }
 
     window.setVisible(true);
     }

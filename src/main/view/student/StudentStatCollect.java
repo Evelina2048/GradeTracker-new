@@ -50,7 +50,7 @@ public class StudentStatCollect extends JFrame {
     public void studentStatCollectLaunch() {
         this.set = Set.getInstance();
         set.setCurrentClass("StudentStatCollect.java");
-        this.window = set.getWindow();
+        window = set.getWindow();
 
         ///
         EnterAction enterAction = new EnterAction();

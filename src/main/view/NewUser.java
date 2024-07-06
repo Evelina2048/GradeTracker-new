@@ -50,15 +50,18 @@ public class NewUser extends JFrame {
     public NewUser() {
         this.set = Set.getInstance();
         window = set.getWindow();
-        window.setTitle("Launcher");
-        window.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
-        window.setLayout(new BorderLayout());
-        window.setSize(windowWidth, windowHeight);
+        System.out.println("2222 window location in new user: "+ window.getLocation());
         newUserSetup();
     }
 
     public void newUserSetup() {
         window = set.getWindow();
+        window.setTitle("Launcher");
+        window.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
+        window.setLayout(new BorderLayout());
+        window.setSize(windowWidth, windowHeight);
+        
+        System.out.println("3333 window location in new user: "+ window.getLocation());
         studentOrTeacher = set.getStudentOrTeacher();
         window.setTitle("New User");
 
@@ -70,6 +73,7 @@ public class NewUser extends JFrame {
 
         radioButtonSetUp();
 
+        System.out.println("4444.2" + window.getLocation());
         buttonSetUp();
 
         EnterAction enterAction = new EnterAction();
@@ -79,7 +83,11 @@ public class NewUser extends JFrame {
 
         window.requestFocusInWindow();
         //window.setLocation(0, 0);
+        System.out.println("4444.31" + window.getLocation());
         window.setLocationRelativeTo(null);
+        //window.setLocation(0,0);
+        System.out.println("4444.4 window location in new user after setting to null: "+ window.getLocation());
+        
 
         SwingUtilities.invokeLater(() -> {
             window.setVisible(true);
@@ -161,77 +169,42 @@ public class NewUser extends JFrame {
     }
 
     private void buttonSetUp() {
-        // JButton backButton;
-        // JButton nextButton;
-        // //buttons
-        // backNextButtonsPanel = new JPanel(new BorderLayout());
-        // backButton = new JButton("< Back");
-        // backNextButtonsPanel.add(backButton, BorderLayout.WEST);
         backNextButtonsPanel = new JPanel(new BorderLayout());
 
-    // backButton = new JButton("< Back");
-    // backButton.setEnabled(false);
-    // backNextButtonsPanel.add(backButton, BorderLayout.WEST);
-    Creator creator = new Creator();
-    JButton backButton = creator.backButtonCreate();
-    JPanel backButtonPanel = new JPanel();
-    backButtonPanel.add(backButton);
+        System.out.println("4444.3" + window.getLocation());
+        Creator creator = new Creator();
+        JButton backButton = creator.backButtonCreate();
+        JPanel backButtonPanel = new JPanel();
+        backButtonPanel.add(backButton);
 
-    JButton nextButton = creator.nextButtonCreate();
-    JPanel nextButtonPanel = new JPanel();
-    nextButtonPanel.add(nextButton);
-    //next
-    //nextButton = new JButton("Next >");
-
-    //backNextButtonsPanel.add(nextButton, BorderLayout.EAST);
-    //window.add(backNextButtonsPanel, BorderLayout.SOUTH);
-    nextButton.addActionListener(new ActionListener() {
-        public void actionPerformed(ActionEvent e) {
-            System.out.println("new user nextbutton aciton");
-            doNextButtonProcedure();
-            //set.setStudentOrTeacher(studentOrTeacher);
-        }
-    });
-    backNextButtonsPanel = creator.makeBackNextButtonsPanel(backButtonPanel, new JPanel(), nextButtonPanel);
-    window.add(backNextButtonsPanel, BorderLayout.SOUTH);
-
-        // backButton.addActionListener(new ActionListener() {
-        //     public void actionPerformed(ActionEvent e) {
-        //         set.setExistingOrNew(existingOrNew);
-        //         set.setWindow(window);
-        //         decorator.hideWindow(instructionsPanel, choicesPanel, backNextButtonsPanel);     
-        //         //MainWindow main = (MainWindow) set.getWindow();
-        //         MainWindow main = new MainWindow();
-        //         main.MainWindowLaunch();
-        //         main.setButtonSelected();
-        //     }
-        // });
-        backButton.setEnabled(false);
-        //next
-        // nextButton = new JButton("Next >");
-        // backNextButtonsPanel.add(nextButton, BorderLayout.EAST);
-        // window.add(backNextButtonsPanel, BorderLayout.SOUTH);
-        
+        JButton nextButton = creator.nextButtonCreate();
+        JPanel nextButtonPanel = new JPanel();
         nextButton.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent e) {
+                System.out.println("4444.31" + window.getLocation());
                 System.out.println("nextbutton action in newuser");
                 doNextButtonProcedure();
-                set.setWindow(window);
-                set.setExistingOrNew(existingOrNew);
-                if (originalExistingOrNew != existingOrNew) { //user changed the existing or new
-                    set.setUsername(null);
-                    System.out.println("right after setting username to null: "+set.getUsername());
-                }
             }
         });
+        nextButtonPanel.add(nextButton);
+        
+        backNextButtonsPanel = creator.makeBackNextButtonsPanel(backButtonPanel, new JPanel(), nextButtonPanel);
+        window.add(backNextButtonsPanel, BorderLayout.SOUTH);
+
+            
+            backButton.setEnabled(false);
     }
 
     private void doNextButtonProcedure(){
         System.out.println("in the do next button procedure in new user");
-        int windowX = window.getX();
-            int windowY = window.getY();
+        System.out.println("4444.1 window location in new user right after button click: "+ window.getLocation());
+            // set.setWindow(window);
+            //int windowX = window.getX();
+            //int windowY = window.getY();
             if (moveOnPossible) {
+                set.setWindow(window);
                 decorator.hideWindow(instructionsPanel, choicesPanel, backNextButtonsPanel);
+
                 set.setExistingOrNew(existingOrNew);
 
                 if (gatherFrame == null) {
@@ -239,15 +212,22 @@ public class NewUser extends JFrame {
                     gatherFrame = new Gather();
                     gatherFrame.gatherLaunch();
                     System.out.println("gatherframe is null");
-                } else {
+                } 
+                else {
                     // Update the existing Gather window panels
                     gatherFrame.gatherLaunch();
-                    gatherFrame.showWindow(windowX, windowY);  // Show the Gather window
+                    // gatherFrame.showWindow(windowX, windowY);  // Show the Gather window
                 }    
             }
             else if (!moveOnPossible) {
                 decorator.errorMessageSetUp(newUserButton);
-            }            
+            }  
+            
+            set.setExistingOrNew(existingOrNew);
+            if (originalExistingOrNew != existingOrNew) { //user changed the existing or new
+                set.setUsername(null);
+                System.out.println("right after setting username to null: "+set.getUsername());
+            }
     }
 
     public void setButtonSelected() {
@@ -288,6 +268,11 @@ public class NewUser extends JFrame {
 
     // window.setVisible(true);
     }
+
+    // private void hideWindow() {
+    //     backButton.setVisible(false);
+    //     nextButton.setVisible(false);
+    // }
 
     public class EnterAction extends AbstractAction {
         @Override

@@ -167,7 +167,6 @@ private void doBackButtonProcedure() {
 private void doNextButtonProcedure() {
     if (moveOnPossible) {
         set.setWindow(window);
-        new NewUser();
         String filePath = "somethingwentwrong";//if not overwritten, somethingwent wrong
             if (set.getExistingOrNew().trim().equals("New User")) { //if new user,
                 goToStudentClasses(filePath);
@@ -293,13 +292,13 @@ public void setButtonSelected() {
 }
 
 public void show(int windowX, int windowY) {
-   if (windowX != 0 && windowY != 0) {
-       window.setLocation(windowX, windowY);
-   }
+//    if (windowX != 0 && windowY != 0) {
+//        window.setLocation(windowX, windowY);
+//    }
 
-   else {
-    window.setLocationRelativeTo(null);
-   }
+//    else {
+//     window.setLocationRelativeTo(null);
+//    }
 
 
     window.setVisible(true);

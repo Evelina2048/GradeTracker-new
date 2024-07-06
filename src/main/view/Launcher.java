@@ -12,7 +12,9 @@ public class Launcher {
             public void run() {
                 Set set;
                 set = Set.getInstance();
-                set.setWindow(new JFrame());
+                JFrame window = new JFrame();
+                set.setWindow(window);
+                System.out.println("1111 window location: "+ window.getLocation());
                 // MainWindow main = new MainWindow();
                 // main.show(0,0);
                 NewUser newUser = new NewUser();
