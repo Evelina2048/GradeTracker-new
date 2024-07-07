@@ -279,6 +279,7 @@ public class Gather {
     private void backButtonAction() {
         System.out.println("backbuttonaction for gather");
         hideWindow(); 
+        NewUser newUser = new NewUser();
         newUser.newUserSetup();
         //newUser.showWindow(window.getX(),window.getY());
         if (set.getExistingOrNew() != null) {

@@ -11,6 +11,7 @@ import javax.swing.JPanel;
 import javax.swing.JLabel;
 import javax.swing.JDialog;
 import javax.swing.SwingConstants;
+import javax.swing.Timer;
 
 import java.awt.BorderLayout;
 import java.awt.Color;
@@ -308,10 +309,25 @@ public void hideWindow() {
 
 }
 
+// public class EnterAction extends AbstractAction {
+//     @Override
+//     public void actionPerformed(ActionEvent e) {
+//         doNextButtonProcedure();
+//     }
+// }
+
 public class EnterAction extends AbstractAction {
     @Override
     public void actionPerformed(ActionEvent e) {
-        doNextButtonProcedure();
+        // Introduce a small delay before calling doNextButtonProcedure()
+        Timer timer = new Timer(10, new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent evt) {
+                doNextButtonProcedure();
+            }
+        });
+        timer.setRepeats(false); // Only execute once
+        timer.start();
     }
 }
 

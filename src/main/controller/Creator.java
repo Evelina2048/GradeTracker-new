@@ -238,7 +238,7 @@ public class Creator {
     private void tryToWriteTextFieldWithoutAppend(Component component, BufferedWriter writer) {
         JTextField textField = (JTextField) component;
         if (set.getEmptiedState(textField) == true && attachedBoxes == maxAttachedBoxes) {
-            text = textField.getText().trim();
+            String text = textField.getText().trim();
             if (!text.isEmpty()) {
                 if (attachedBoxes == maxAttachedBoxes) {
                     classList.add(text);
@@ -353,7 +353,7 @@ public class Creator {
 
     private void removeUnwritablePlaceholders() {
         System.out.println("textfield is a placeholder 1");
-        String text = textField.getText();
+        text = textField.getText();
         if (text.contains("Grade Type") && attachedBoxes == maxAttachedBoxes) {
             //dont write next two
             attachedBoxes = 0;

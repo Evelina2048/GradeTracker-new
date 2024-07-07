@@ -17,7 +17,7 @@ public class Launcher {
                 // MainWindow main = new MainWindow();
                 // main.show(0,0);
                 NewUser newUser = new NewUser();
-                //newUser.show();
+                newUser.showWindow();
             }
         });
     }
