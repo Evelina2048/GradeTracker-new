@@ -76,6 +76,7 @@ public class Gather {
 
     public Gather() {
         this.set = Set.getInstance();
+        System.out.println(5555+set.getExistingOrNew());
         existingOrNew = set.getExistingOrNew();
         studentOrTeacher = set.getStudentOrTeacher();
         window = set.getWindow();
@@ -93,12 +94,12 @@ public class Gather {
     }
 
     private void makeUsernameBox() {
-        System.out.println("username: "+set.getUsername()+"haschanged? "+set.getExistingOrNewChanged());
-        if (set.getUsername() == null && set.getExistingOrNewChanged() == false) {
+        System.out.println("username: "+set.getUsername()+"haschanged? "+set.getNewOrExistingChanged());
+        if (set.getUsername() == null && set.getNewOrExistingChanged() == false) {
             System.out.println("whatToSetTextFieldTo opt 1");
             textField = decorate.decorateTextBox("Enter user name");
         }
-        else if (set.getUsername() == null && set.getExistingOrNewChanged() == true) { //user came back to gather after changing newuser setting
+        else if (set.getUsername() == null && set.getNewOrExistingChanged() == true) { //user came back to gather after changing newuser setting
             System.out.println("whatToSetTextFieldTo opt 2");
             textField = decorate.decorateTextBox("Enter user name");
         }
@@ -147,11 +148,10 @@ public class Gather {
     }
 
     public void gatherLaunch () {
+        System.out.println(7777+set.getExistingOrNew());
         
         window.setTitle("Gather");
         window = set.getWindow();
-
-        System.out.println("5555 window location in gather: "+ window.getLocation());
 
         instructionsWordsWindow();
 
@@ -164,11 +164,13 @@ public class Gather {
     }
     
     private void instructionsWordsWindow() {
+        System.out.println(8888+set.getExistingOrNew());
         JLabel instructionsWordsLabel;
         Boolean newUser = (existingOrNew == "New User");
         Boolean existingUser = (existingOrNew == "Existing");
-        Boolean previousSettingsNotChanged = (set.getExistingOrNewChanged() == false);
-        Boolean previousSettingsChanged = (set.getExistingOrNewChanged() == true);
+        Boolean previousSettingsNotChanged = (set.getNewOrExistingChanged() == false);
+        Boolean previousSettingsChanged = (set.getNewOrExistingChanged() == true);
+        System.out.println("******"+existingOrNew+" "+previousSettingsNotChanged);
         if (newUser && previousSettingsNotChanged) {
             System.out.println("instruction words option 1");
             instructionsWordsLabel = new JLabel("You are a new user. Create a user name.");

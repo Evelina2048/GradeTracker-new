@@ -8,14 +8,19 @@ import java.util.Map;
 import java.util.TreeMap;
 import java.util.TreeSet;
 
+import main.model.Set;
+
 public class CompositeActionListenerWithPriorities implements ActionListener {
   private Map<Integer, ArrayList<ActionListener>> listeners = 
-      new TreeMap<Integer,ArrayList<ActionListener>>();
+    new TreeMap<Integer,ArrayList<ActionListener>>();
     private boolean isProcessing = false;
+    private Set set = Set.getInstance();
+    //this.set = Set.getInstance();
 
 
   @Override
   public void actionPerformed(ActionEvent e) {
+    System.out.println("%%%"+set.getExistingOrNew());
     if (isProcessing) {
       return; // Prevent re-entry
     }
@@ -45,19 +50,24 @@ public class CompositeActionListenerWithPriorities implements ActionListener {
   }
 
   public void addClassActionListener(ActionListener a, int priority){
-    System.out.println(2222);
     deleteActionListener(a);
     if(!listeners.containsKey(priority)){
       listeners.put(priority,new ArrayList<ActionListener>());
     }
-    System.out.println(3333+"listeners amount: "+listeners.size());
     listeners.get(priority).add(a);
-    System.out.println(4444+"listeners amount: "+listeners.size());
 
     if (listeners.size() == 2) {
      //performAllActions();
      actionPerformed(new ActionEvent(this, ActionEvent.ACTION_PERFORMED, "PerformAllActions"));
     }
+  }
+
+  // public void clearListeners() {
+
+  // }
+
+  public void DEBUGLISTENERSIZE() {
+    System.out.println(listeners.size());
   }
 
   private void performAllActions() {

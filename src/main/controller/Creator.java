@@ -195,8 +195,7 @@ public class Creator {
         }
     }
 
-    public void writeTextToFile(String importedFilePath, JPanel textFieldPanel) {
-        System.out.println("2222");
+    public void writeTextToFile(String importedFilePath, JPanel textFieldPanel) {;
         filePath = importedFilePath;
         set.setCanContinue(true);
         System.out.println("Step4: begin writeTextToFile."+ set.getCurrentPanelList());
@@ -210,19 +209,15 @@ public class Creator {
     private void tryToWriteWithoutAppend() {
         //writer = new BufferedWriter(new FileWriter(filePath));
         textFieldPanel = set.getTextFieldPanel();
-        System.out.println("3333");
         try (BufferedWriter writer = new BufferedWriter(new FileWriter(filePath))) {
-            System.out.println("4444 textFieldPanel component count: "+textFieldPanel.getComponentCount());
             if (!classList.isEmpty()) {
                classList.clear();
             }
             for (Component component : textFieldPanel.getComponents()) {
-                System.out.println("5555");
                 if (component instanceof JTextField ) {
                     tryToWriteTextFieldWithoutAppend(component, writer);
                 }
                 else if (component instanceof JPanel) {
-                    System.out.println("6666");
                     System.out.println("JPanel");
                     writeTextToFileWithAppend(filePath, (JPanel) component);
                 }
@@ -286,15 +281,11 @@ public class Creator {
     }
 
     private void writeTextToFileWithAppend(String importedFilePath, JPanel textFieldPanel) {
-        System.out.println("7777");
         String filePath = importedFilePath;
         System.out.println("in writeTextToFileWithAppend");
         try (BufferedWriter writer = new BufferedWriter(new FileWriter(filePath, true))) {
-            System.out.println("8888");
             for (Component component : textFieldPanel.getComponents()) {
-                System.out.println("9999");
                 if (component instanceof JTextField) {
-                    System.out.println("10 10 10 10");
                     decideIfWrite(component, writer, filePath);
                 }
 

@@ -132,7 +132,6 @@ public class Decorator {
     }
 
     private void reasonIsDeletingAction() {
-        System.out.println("5555reason");
         Creator create = new Creator();
         textField.setVisible(false);
         JPanel panelForDeleting = new JPanel();
@@ -141,7 +140,6 @@ public class Decorator {
         System.out.println(panelForDeleting.getComponentCount() + " :beforeselectedBoxPanelComponenents");
         create.deleteTextBox(panelForDeleting);
         System.out.println(panelForDeleting.getComponentCount() + " :afterselectedBoxPanelComponenents");
-        System.out.println("6666after");
         Path filePath = Paths.get("/Users/evy/Documents/GradeTracker-new/src/main/view/UserInfo/StudentInfo/"+set.getUsername()+"/"+textField.getText()+".txt");
         
         try {

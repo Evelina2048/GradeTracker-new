@@ -32,7 +32,7 @@ import javax.swing.SwingUtilities;
 public class NewUser extends JFrame {
     private JFrame window;
     private JFrame main;
-    private String studentOrTeacher;
+    //private String studentOrTeacher;
     private String existingOrNew;
     private boolean moveOnPossible = false;
     private Gather gatherFrame;
@@ -69,12 +69,12 @@ public class NewUser extends JFrame {
         window = set.getWindow();
 
         CompositeActionListenerWithPriorities actionPriorities = new CompositeActionListenerWithPriorities();
+        actionPriorities.DEBUGLISTENERSIZE();
 
         window.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
         window.setLayout(new BorderLayout());
         window.setSize(windowWidth, windowHeight);
         
-        studentOrTeacher = set.getStudentOrTeacher();
         window.setTitle("New User");
 
         if (set.getUsername() != null) {
@@ -90,12 +90,19 @@ public class NewUser extends JFrame {
         SwingUtilities.invokeLater(() -> {
             window.setVisible(true);
         });
+
+        EnterAction enterAction = new EnterAction();
+
+        window.getRootPane().getInputMap(JComponent.WHEN_IN_FOCUSED_WINDOW).put(KeyStroke.getKeyStroke(KeyEvent.VK_ENTER, 0), "enterAction");
+        window.getRootPane().getActionMap().put("enterAction", enterAction);
+
+        window.requestFocusInWindow();
     
     }
     
     private void instructionsWordsWindow() {
         //instructions (north section for borderlayout)
-        JLabel instructionsWords = new JLabel("You are a "+studentOrTeacher+". Are you a new user?");
+        JLabel instructionsWords = new JLabel("Welcome! Are you a new user?");
         instructionsPanel = decorator.InstructionsPanelDecorate(instructionsPanel, instructionsWords);
     }
 
@@ -119,82 +126,77 @@ public class NewUser extends JFrame {
         //initialize buttons with color
         existingButton = new JRadioButton("Existing");
         choicesButtonDecorate(existingButton);
-        existingButton.addActionListener(new ActionListener() {
-            public void actionPerformed(ActionEvent e) {
-            existingOrNew = existingButton.getText();
-            moveOnPossible = true;
-            checkIfExistingChangedWithUsername();
-            }
-            
-        });
+        // existingButton.addActionListener(new ActionListener() {
+        //     public void actionPerformed(ActionEvent e) {
+        //         existingOrNew = existingButton.getText();
+        //         set.setExistingOrNew(existingOrNew);
+        //         moveOnPossible = true;
+        //         checkIfExistingChangedWithUsername();
+        //     } 
+        // });
+
+        existingButton.addActionListener(e -> {
+            actionPriorities.addClassActionListener(b -> {
+                existingOrNew = existingButton.getText();
+                set.setExistingOrNew(existingOrNew);
+                moveOnPossible = true;
+                checkIfExistingChangedWithUsername();
+        },1);
+     });
+    
+        // newUserButton.addActionListener(e -> {
+        //     actionPriorities.addClassActionListener(b -> {
+        //         //clickTimeMillis = System.currentTimeMillis();
+        //     }, 1);
+        // });
     }
     
     private void newUserButton() {
         newUserButton = new JRadioButton("New User");
         choicesButtonDecorate(newUserButton);
-        //newUserButton.addActionListener(new ActionListener() {
+
+            // newUserButton.addActionListener(new ActionListener() {
             // public void actionPerformed(ActionEvent e) {
-            //     actionPriorities.addClassActionListener(e, 1);
-            //     newUserActionStarted = true;
-            //     // try {
-            //     //     SwingUtilities.invokeAndWait(new Runnable() {
-            //     //         @Override
-            //     //         public void run() {
-            //                 //decorator.errorMessageSetUp(newUserButton);              
+            // actionPriorities.addClassActionListener(new ActionListener() {
+            //     @Override
+            //     public void actionPerformed(ActionEvent b) {
+            //         System.out.println(1);
+            //         // Perform actions for this listener with priority 1
             //         clickTimeMillis = System.currentTimeMillis();
             //         moveOnPossible = true;
             //         existingOrNew = newUserButton.getText();
+            //         System.out.println(1111.1+ existingOrNew);
+            //         set.setExistingOrNew(existingOrNew);
+            //         System.out.println(1111.2+ set.getExistingOrNew());
             //         checkIfExistingChangedWithUsername();
             //         newUserActionCompleted = true;
 
-            //     //         } 
-            //     //     });
-            //     // } catch (InvocationTargetException e1) {
-            //     //     //Auto-generated catch block
-            //     //     e1.printStackTrace();
-            //     // } catch (InterruptedException e1) {
-            //     //     //Auto-generated catch block
-            //     //     e1.printStackTrace();
-            //     // }
+
+            //         //actionPriorities.actionPerformed(b);
+            //     }
+            // }, 1);  // Add this ActionListener with priority 1
             // }
             // });
 
-            newUserButton.addActionListener(new ActionListener() {
-            public void actionPerformed(ActionEvent e) {
-            actionPriorities.addClassActionListener(new ActionListener() {
-                @Override
-                public void actionPerformed(ActionEvent b) {
-                    System.out.println(5555);
-                    // Perform actions for this listener with priority 1
-                    clickTimeMillis = System.currentTimeMillis();
+            newUserButton.addActionListener(e -> {
+                actionPriorities.addClassActionListener(b -> {
+                    //clickTimeMillis = System.currentTimeMillis();
                     moveOnPossible = true;
                     existingOrNew = newUserButton.getText();
+                    set.setExistingOrNew(existingOrNew);
                     checkIfExistingChangedWithUsername();
-                    newUserActionCompleted = true;
-
-
-                    //actionPriorities.actionPerformed(b);
-                }
-            }, 1);  // Add this ActionListener with priority 1
-
-            }
+                    //newUserActionCompleted = true;
+                }, 1);
             });
-
-            EnterAction enterAction = new EnterAction();
-
-            window.getRootPane().getInputMap(JComponent.WHEN_IN_FOCUSED_WINDOW).put(KeyStroke.getKeyStroke(KeyEvent.VK_ENTER, 0), "enterAction");
-            window.getRootPane().getActionMap().put("enterAction", enterAction);
-    
-            window.requestFocusInWindow();
         }
     
     private void checkIfExistingChangedWithUsername() {
         if (set.getUsername() != null && existingOrNew.equals(originalExistingOrNew)) { //user has already been in gather frame and theyre the same
-            set.setExistingOrNewChanged(false);
+            set.setNewOrExistingChanged(false);
         }
 
         else if((set.getUsername() != null && !existingOrNew.equals(originalExistingOrNew))) { //user has already been in gather frame and theyre different
-            set.setExistingOrNewChanged(true);
+            set.setNewOrExistingChanged(true);
         }
     }
 
@@ -222,11 +224,15 @@ public class NewUser extends JFrame {
 
         JButton nextButton = creator.nextButtonCreate();
         JPanel nextButtonPanel = new JPanel();
-        nextButton.addActionListener(new ActionListener() {
-            public void actionPerformed(ActionEvent e) {
-                doNextButtonProcedure();
-            }
-        });
+        // nextButton.addActionListener(new ActionListener() {
+        //     public void actionPerformed(ActionEvent e) {
+        //         System.out.println("nextbutton 2222"+set.getExistingOrNew());
+        //         doNextButtonProcedure();
+        //     }
+        // });
+
+        nextButton.addActionListener(e -> doNextButtonProcedure());
+
         nextButtonPanel.add(nextButton);
         
         backNextButtonsPanel = creator.makeBackNextButtonsPanel(backButtonPanel, new JPanel(), nextButtonPanel);
@@ -238,67 +244,46 @@ public class NewUser extends JFrame {
 
     private void doNextButtonProcedure(){
         System.out.println("in the do next button procedure in new user");
-        System.out.println(7777);
-            // set.setWindow(window);
-            //int windowX = window.getX();
-            //int windowY = window.getY();
+        if (newUserButton.isSelected() || existingButton.isSelected()){//moveOnPossible) {
+            System.out.println("move on possible 3333 "+set.getExistingOrNew());
+            set.setWindow(window);
+            decorator.hideWindow(instructionsPanel, choicesPanel, backNextButtonsPanel);
 
-        //SwingUtilities.invokeLater(new Runnable() {
-                //@Override
-                //public void run() {
-                    if (newUserButton.isSelected() || existingButton.isSelected()){//moveOnPossible) {
-                        System.out.println(8888);
-                        System.out.println("move on possible");
-                        set.setWindow(window);
-                        decorator.hideWindow(instructionsPanel, choicesPanel, backNextButtonsPanel);
+            if (gatherFrame == null) {
+                // Create a new instance of Gather if it doesn't exist
+                gatherFrame = new Gather();
+                gatherFrame.gatherLaunch();
+                System.out.println("gatherframe is null 4444"+ set.getExistingOrNew());
+            } 
+            else {
+                // Update the existing Gather window panels
+                gatherFrame.gatherLaunch();
+            }    
+        }
+        else if ((!newUserButton.isSelected() && !existingButton.isSelected())) {
+            getErrorMessage();
+        }  
+
+        else{
+            System.out.println("something went wrong in new users nextbutton procedure");
+        }
         
-                        set.setExistingOrNew(existingOrNew);
-        
-                        if (gatherFrame == null) {
-                            // Create a new instance of Gather if it doesn't exist
-                            gatherFrame = new Gather();
-                            gatherFrame.gatherLaunch();
-                            System.out.println("gatherframe is null");
-                        } 
-                        else {
-                            // Update the existing Gather window panels
-                            gatherFrame.gatherLaunch();
-                            // gatherFrame.showWindow(windowX, windowY);  // Show the Gather window
-                        }    
-                    }
-                    else if ((!newUserButton.isSelected() && !existingButton.isSelected())) {
-                        System.out.println("move on not possible"+ newUserButton.isSelected());
-                        getErrorMessage();
-                        // decorator.errorMessageSetUp(newUserButton);
-                    }  
-
-                    else{
-                        System.out.println("something went wrong in new users nextbutton procedure");
-                    }
-                    
-                    set.setExistingOrNew(existingOrNew);
-                    if (originalExistingOrNew != existingOrNew) { //user changed the existing or new
-                        set.setUsername(null);
-                        System.out.println("right after setting username to null: "+set.getUsername());
-                    }
-
-            //}
-            //});
+        if (originalExistingOrNew != existingOrNew) { //user changed the existing or new
+            set.setUsername(null);
+            System.out.println("right after setting username to null: "+set.getUsername());
+        }
     }
 
     private void getErrorMessage() {
-        // SwingUtilities.invokeLater(new Runnable() {
-        //    @Override
-        //         public void run() {
-                    decorator.errorMessageSetUp(newUserButton);
-        //     }
-        // });
+        decorator.errorMessageSetUp(newUserButton);
     }
 
     public void setButtonSelected() {
-        originalExistingOrNew = set.getExistingOrNew();
+        //TODO add original exisitng or new
+        //originalExistingOrNew = set.getOriginalExistingOrNew();
         existingOrNew = set.getExistingOrNew().trim();
         if (existingOrNew == "New User") {
+            addNewUserActionListener();
             newUserButton.setSelected(true);
             moveOnPossible = true;
         }
@@ -311,99 +296,252 @@ public class NewUser extends JFrame {
 
     public void showWindow() {
         window.setLocationRelativeTo(null);
-        // if (windowX != 0 && windowY != 0) {
-        //     window.setLocation(windowX, windowY);
-        // }
-     
-        // else {
-        //     window.setLocationRelativeTo(null);
-        // }
-     
-        //////window.setVisible(true);
-    
-    // if (windowX != 0 && windowY != 0) {
-    //     //window.setLocation(windowX, windowY);
-    //     // decorator.setWindowX(windowX);
-    //     // decorator.setWindowY(windowY);
-
-    // }
-
-    // else {
-    //     //window.setLocation(window.getX(), window.getY());
-    // }
-
-    // window.setVisible(true);
     }
 
-    // private void hideWindow() {
-    //     backButton.setVisible(false);
-    //     nextButton.setVisible(false);
-    // }
+    private void addNewUserActionListener() {
+        actionPriorities.addClassActionListener(b -> {
+            //clickTimeMillis = System.currentTimeMillis();
+            moveOnPossible = true;
+            existingOrNew = newUserButton.getText();
+            set.setExistingOrNew(existingOrNew);
+            checkIfExistingChangedWithUsername();
+            //newUserActionCompleted = true;
+        }, 1);
+    }
 
     public class EnterAction extends AbstractAction {
-        //SwingUtilities.invokeLater(new Runnable() {
-                //@Override
         @Override
         public void actionPerformed(ActionEvent e) {
-                //public void run() {
-                    System.out.println(newUserActionStarted+" "+ newUserActionCompleted);
-                    System.out.println(1111);
-                    //decorator.errorMessageSetUp(newUserButton);
+            System.out.println("clicktime millis: "+ clickTimeMillis);
+            actionPriorities.addClassActionListener(new ActionListener() {
+                @Override
+                public void actionPerformed(ActionEvent e) {
+                    System.out.println(2);
+                    doNextButtonProcedure();
+                }
+            }, 2);  // Add this ActionListener with priority 1
 
-                    //if (newUserButton.isSelected()) {
-                        //doNextButtonProcedure();
-                        //SwingUtilities.invokeLater(() -> {
-                            // doNextButtonProcedure();
-                        //});
-                   //}
-
-                //     else {
-                //         // SwingUtilities.invokeLater(new Runnable() {
-                //         //     @Override
-                //         //     public void run() {
-                //                 decorator.errorMessageSetUp(newUserButton);              
-                // // } 
-                // //         });
-                //     }
-                    System.out.println("clicktime millis: "+ clickTimeMillis);
-
-
-                    actionPriorities.addClassActionListener(new ActionListener() {
-                        @Override
-                        public void actionPerformed(ActionEvent e) {
-                            System.out.println(6666);
-                            // // Perform actions for this listener with priority 1
-                            // clickTimeMillis = System.currentTimeMillis();
-                            // moveOnPossible = true;
-                            // existingOrNew = newUserButton.getText();
-                            // checkIfExistingChangedWithUsername();
-                            // newUserActionCompleted = true;
+        // public void actionPerformed(ActionEvent e) {
+        //     actionPriorities.addClassActionListener(e1 -> doNextButtonProcedure(), 2);
+        // }
         
         
-                            // actionPriorities.actionPerformed(e);
-                            doNextButtonProcedure();
-                        }
-                    }, 2);  // Add this ActionListener with priority 1
-
-                //}
-            //});
-        }
     }
-    // public class EnterAction extends AbstractAction {
-    //     @Override
-    //     public void actionPerformed(ActionEvent e) {
-    //         // Introduce a small delay before calling doNextButtonProcedure()
-    //             @Override
-    //             public void actionPerformed(ActionEvent evt) {
-    //                 //SwingUtilities.invokeLater(new Runnable() {
-    //                     doNextButtonProcedure();
-    //                 //});
-    //             }
-    // }
-    
 
-    // private void processEnterAction() {
-    //     doNextButtonProcedure();
-    // }
-}
+        // newUserButton.addActionListener(new ActionListener() {
+        //     public void actionPerformed(ActionEvent e) {
+        //     actionPriorities.addClassActionListener(new ActionListener() {
+        //         @Override
+        //         public void actionPerformed(ActionEvent b) {
+        //             System.out.println(2);
+        //             // Perform actions for this listener with priority 1
+        //             clickTimeMillis = System.currentTimeMillis();
+        //             moveOnPossible = true;
+        //             existingOrNew = newUserButton.getText();
+        //             System.out.println(1111.1+ existingOrNew);
+        //             set.setExistingOrNew(existingOrNew);
+        //             System.out.println(1111.2+ set.getExistingOrNew());
+        //             checkIfExistingChangedWithUsername();
+        //             newUserActionCompleted = true;
 
+
+        //             //actionPriorities.actionPerformed(b);
+        //         }
+        //     }, 1);  // Add this ActionListener with priority 1
+
+        //     }
+        //     });
+    }
+    }
+
+
+
+// package main.view;
+
+// import javax.swing.*;
+// import java.awt.*;
+// import java.awt.event.ActionEvent;
+// import java.awt.event.ActionListener;
+// import java.awt.event.KeyEvent;
+// import main.model.Set;
+// import main.controller.Creator;
+// import main.controller.Decorator;
+// import main.controller.CompositeActionListenerWithPriorities;
+
+// public class NewUser extends JFrame {
+//     private JFrame window;
+//     private Set set;
+//     private String existingOrNew;
+//     private boolean moveOnPossible = false;
+//     private Gather gatherFrame;
+//     private CompositeActionListenerWithPriorities actionPriorities = new CompositeActionListenerWithPriorities();
+//     private String originalExistingOrNew;
+//     private JRadioButton newUserButton;
+//     private JRadioButton existingButton;
+//     private ButtonGroup teacherStudentGroup;
+//     private int windowWidth = 750;
+//     private int windowHeight = 500;
+//     private JPanel instructionsPanel;
+//     private JPanel choicesPanel;
+//     private JPanel backNextButtonsPanel;
+//     private Decorator decorator = new Decorator();
+
+//     public NewUser() {
+//         this.set = Set.getInstance();
+//         window = set.getWindow();
+//         newUserSetup();
+//     }
+
+//     public void newUserSetup() {
+//         window.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
+//         window.setLayout(new BorderLayout());
+//         window.setSize(windowWidth, windowHeight);
+//         window.setTitle("New User");
+
+//         if (set.getUsername() != null) {
+//             originalExistingOrNew = set.getExistingOrNew();
+//         }
+
+//         instructionsWordsWindow();
+//         radioButtonSetUp();
+//         buttonSetUp();
+
+//         SwingUtilities.invokeLater(() -> window.setVisible(true));
+//     }
+
+//     private void instructionsWordsWindow() {
+//         JLabel instructionsWords = new JLabel("Welcome! Are you a new user?");
+//         instructionsPanel = decorator.InstructionsPanelDecorate(new JPanel(), instructionsWords);
+//         window.add(instructionsPanel, BorderLayout.NORTH);
+//     }
+
+//     private void radioButtonSetUp() {
+//         teacherStudentGroup = new ButtonGroup();
+//         choicesPanel = new JPanel(new GridBagLayout());
+//         choicesPanel.setBackground(Color.decode("#AFA2A2"));
+
+//         existingButton();
+//         newUserButton();
+//         addToChoicesPanel(teacherStudentGroup, existingButton, newUserButton, choicesPanel);
+
+//         window.add(choicesPanel);
+//     }
+
+//     private void existingButton() {
+//         existingButton = new JRadioButton("Existing");
+//         choicesButtonDecorate(existingButton);
+//         existingButton.addActionListener(e -> {
+//             existingOrNew = existingButton.getText();
+//             set.setExistingOrNew(existingOrNew);
+//             moveOnPossible = true;
+//             checkIfExistingChangedWithUsername();
+//         });
+//     }
+
+//     private void newUserButton() {
+//         newUserButton = new JRadioButton("New User");
+//         choicesButtonDecorate(newUserButton);
+//         newUserButton.addActionListener(e -> {
+//             actionPriorities.addClassActionListener(b -> {
+//                 //clickTimeMillis = System.currentTimeMillis();
+//                 moveOnPossible = true;
+//                 existingOrNew = newUserButton.getText();
+//                 set.setExistingOrNew(existingOrNew);
+//                 checkIfExistingChangedWithUsername();
+//                 //newUserActionCompleted = true;
+//             }, 1);
+//         });
+
+//         EnterAction enterAction = new EnterAction();
+//         window.getRootPane().getInputMap(JComponent.WHEN_IN_FOCUSED_WINDOW).put(KeyStroke.getKeyStroke(KeyEvent.VK_ENTER, 0), "enterAction");
+//         window.getRootPane().getActionMap().put("enterAction", enterAction);
+
+//         window.requestFocusInWindow();
+//     }
+
+//     private void checkIfExistingChangedWithUsername() {
+//         if (set.getUsername() != null && existingOrNew.equals(originalExistingOrNew)) {
+//             set.setNewOrExistingChanged(false);
+//         } else if (set.getUsername() != null && !existingOrNew.equals(originalExistingOrNew)) {
+//             set.setNewOrExistingChanged(true);
+//         }
+//     }
+
+//     private void choicesButtonDecorate(JRadioButton button) {
+//         Font buttonFont = new Font("Roboto", Font.PLAIN, 25);
+//         button.setForeground(Color.WHITE);
+//         button.setFont(buttonFont);
+//     }
+
+//     private void addToChoicesPanel(ButtonGroup teacherStudentGroup, JRadioButton existingButton, JRadioButton newUserButton, JPanel choicesPanel) {
+//         teacherStudentGroup.add(existingButton);
+//         teacherStudentGroup.add(newUserButton);
+//         choicesPanel.add(existingButton, decorator.choiceGbc());
+//         choicesPanel.add(newUserButton, decorator.choiceGbc());
+//     }
+
+//     private void buttonSetUp() {
+//         backNextButtonsPanel = new JPanel(new BorderLayout());
+//         Creator creator = new Creator();
+//         JButton backButton = creator.backButtonCreate();
+//         JPanel backButtonPanel = new JPanel();
+//         backButtonPanel.add(backButton);
+
+//         JButton nextButton = creator.nextButtonCreate();
+//         JPanel nextButtonPanel = new JPanel();
+//         nextButton.addActionListener(e -> doNextButtonProcedure());
+//         nextButtonPanel.add(nextButton);
+
+//         backNextButtonsPanel = creator.makeBackNextButtonsPanel(backButtonPanel, new JPanel(), nextButtonPanel);
+//         window.add(backNextButtonsPanel, BorderLayout.SOUTH);
+
+//         backButton.setEnabled(false);
+//     }
+
+//     private void doNextButtonProcedure() {
+//         if (newUserButton.isSelected() || existingButton.isSelected()) {
+//             set.setWindow(window);
+//             decorator.hideWindow(instructionsPanel, choicesPanel, backNextButtonsPanel);
+
+//             if (gatherFrame == null) {
+//                 gatherFrame = new Gather();
+//                 gatherFrame.gatherLaunch();
+//             } else {
+//                 gatherFrame.gatherLaunch();
+//             }
+//         } else {
+//             getErrorMessage();
+//         }
+
+//         if (!existingOrNew.equals(originalExistingOrNew)) {
+//             set.setUsername(null);
+//         }
+//     }
+
+//     private void getErrorMessage() {
+//         decorator.errorMessageSetUp(newUserButton);
+//     }
+
+//     public void setButtonSelected() {
+//         originalExistingOrNew = set.getExistingOrNew();
+//         existingOrNew = set.getExistingOrNew().trim();
+//         if ("New User".equals(existingOrNew)) {
+//             newUserButton.setSelected(true);
+//             moveOnPossible = true;
+//         } else if ("Existing".equals(existingOrNew)) {
+//             existingButton.setSelected(true);
+//             moveOnPossible = true;
+//         }
+//     }
+
+//     public void showWindow() {
+//         window.setLocationRelativeTo(null);
+//     }
+
+//     public class EnterAction extends AbstractAction {
+//         @Override
+//         public void actionPerformed(ActionEvent e) {
+//             actionPriorities.addClassActionListener(e1 -> doNextButtonProcedure(), 2);
+//         }
+//     }
+// }
