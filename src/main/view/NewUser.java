@@ -136,12 +136,7 @@ public class NewUser extends JFrame {
         // });
 
         existingButton.addActionListener(e -> {
-            actionPriorities.addClassActionListener(b -> {
-                existingOrNew = existingButton.getText();
-                set.setExistingOrNew(existingOrNew);
-                moveOnPossible = true;
-                checkIfExistingChangedWithUsername();
-        },1);
+            addExistingUserActionListener();
      });
     
         // newUserButton.addActionListener(e -> {
@@ -257,6 +252,7 @@ public class NewUser extends JFrame {
         }
         
         else if(existingOrNew == "Existing") {
+            addExistingUserActionListener();
             existingButton.setSelected(true);
             moveOnPossible = true;
         }
@@ -274,6 +270,15 @@ public class NewUser extends JFrame {
             set.setExistingOrNew(existingOrNew);
             checkIfExistingChangedWithUsername();
             //newUserActionCompleted = true;
+        }, 2);
+    }
+
+    private void addExistingUserActionListener() {
+        actionPriorities.addClassActionListener(b -> {
+            existingOrNew = existingButton.getText();
+            set.setExistingOrNew(existingOrNew);
+            moveOnPossible = true;
+            checkIfExistingChangedWithUsername();
         }, 2);
     }
 
