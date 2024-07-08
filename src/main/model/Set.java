@@ -140,8 +140,8 @@ public class Set {
     }
 
     public void setExistingOrNew(String myExistingOrNew) {
-        System.out.println(3333.0+myExistingOrNew);
         existingOrNew = myExistingOrNew;
+        System.out.println(2222+existingOrNew);
     }
 
     public String getExistingOrNew() {

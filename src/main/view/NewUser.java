@@ -155,38 +155,8 @@ public class NewUser extends JFrame {
         newUserButton = new JRadioButton("New User");
         choicesButtonDecorate(newUserButton);
 
-            // newUserButton.addActionListener(new ActionListener() {
-            // public void actionPerformed(ActionEvent e) {
-            // actionPriorities.addClassActionListener(new ActionListener() {
-            //     @Override
-            //     public void actionPerformed(ActionEvent b) {
-            //         System.out.println(1);
-            //         // Perform actions for this listener with priority 1
-            //         clickTimeMillis = System.currentTimeMillis();
-            //         moveOnPossible = true;
-            //         existingOrNew = newUserButton.getText();
-            //         System.out.println(1111.1+ existingOrNew);
-            //         set.setExistingOrNew(existingOrNew);
-            //         System.out.println(1111.2+ set.getExistingOrNew());
-            //         checkIfExistingChangedWithUsername();
-            //         newUserActionCompleted = true;
-
-
-            //         //actionPriorities.actionPerformed(b);
-            //     }
-            // }, 1);  // Add this ActionListener with priority 1
-            // }
-            // });
-
             newUserButton.addActionListener(e -> {
-                actionPriorities.addClassActionListener(b -> {
-                    //clickTimeMillis = System.currentTimeMillis();
-                    moveOnPossible = true;
-                    existingOrNew = newUserButton.getText();
-                    set.setExistingOrNew(existingOrNew);
-                    checkIfExistingChangedWithUsername();
-                    //newUserActionCompleted = true;
-                }, 1);
+                addNewUserActionListener();
             });
         }
     
@@ -224,14 +194,14 @@ public class NewUser extends JFrame {
 
         JButton nextButton = creator.nextButtonCreate();
         JPanel nextButtonPanel = new JPanel();
-        // nextButton.addActionListener(new ActionListener() {
-        //     public void actionPerformed(ActionEvent e) {
-        //         System.out.println("nextbutton 2222"+set.getExistingOrNew());
-        //         doNextButtonProcedure();
-        //     }
-        // });
 
-        nextButton.addActionListener(e -> doNextButtonProcedure());
+        nextButton.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                nextButtonActionListenerWithPriorities();
+            }
+        });
+        
 
         nextButtonPanel.add(nextButton);
         
@@ -245,7 +215,6 @@ public class NewUser extends JFrame {
     private void doNextButtonProcedure(){
         System.out.println("in the do next button procedure in new user");
         if (newUserButton.isSelected() || existingButton.isSelected()){//moveOnPossible) {
-            System.out.println("move on possible 3333 "+set.getExistingOrNew());
             set.setWindow(window);
             decorator.hideWindow(instructionsPanel, choicesPanel, backNextButtonsPanel);
 
@@ -253,7 +222,6 @@ public class NewUser extends JFrame {
                 // Create a new instance of Gather if it doesn't exist
                 gatherFrame = new Gather();
                 gatherFrame.gatherLaunch();
-                System.out.println("gatherframe is null 4444"+ set.getExistingOrNew());
             } 
             else {
                 // Update the existing Gather window panels
@@ -306,20 +274,25 @@ public class NewUser extends JFrame {
             set.setExistingOrNew(existingOrNew);
             checkIfExistingChangedWithUsername();
             //newUserActionCompleted = true;
-        }, 1);
+        }, 2);
+    }
+
+    private void nextButtonActionListenerWithPriorities() {
+        actionPriorities.addClassActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                //System.out.println(2);
+                System.out.println("enteraction");
+                System.out.println(3333+existingOrNew);
+                doNextButtonProcedure();
+            }
+        }, 1);  // Add this ActionListener with priority 1
     }
 
     public class EnterAction extends AbstractAction {
         @Override
         public void actionPerformed(ActionEvent e) {
-            System.out.println("clicktime millis: "+ clickTimeMillis);
-            actionPriorities.addClassActionListener(new ActionListener() {
-                @Override
-                public void actionPerformed(ActionEvent e) {
-                    System.out.println(2);
-                    doNextButtonProcedure();
-                }
-            }, 2);  // Add this ActionListener with priority 1
+            nextButtonActionListenerWithPriorities();
 
         // public void actionPerformed(ActionEvent e) {
         //     actionPriorities.addClassActionListener(e1 -> doNextButtonProcedure(), 2);
@@ -327,221 +300,5 @@ public class NewUser extends JFrame {
         
         
     }
-
-        // newUserButton.addActionListener(new ActionListener() {
-        //     public void actionPerformed(ActionEvent e) {
-        //     actionPriorities.addClassActionListener(new ActionListener() {
-        //         @Override
-        //         public void actionPerformed(ActionEvent b) {
-        //             System.out.println(2);
-        //             // Perform actions for this listener with priority 1
-        //             clickTimeMillis = System.currentTimeMillis();
-        //             moveOnPossible = true;
-        //             existingOrNew = newUserButton.getText();
-        //             System.out.println(1111.1+ existingOrNew);
-        //             set.setExistingOrNew(existingOrNew);
-        //             System.out.println(1111.2+ set.getExistingOrNew());
-        //             checkIfExistingChangedWithUsername();
-        //             newUserActionCompleted = true;
-
-
-        //             //actionPriorities.actionPerformed(b);
-        //         }
-        //     }, 1);  // Add this ActionListener with priority 1
-
-        //     }
-        //     });
     }
     }
-
-
-
-// package main.view;
-
-// import javax.swing.*;
-// import java.awt.*;
-// import java.awt.event.ActionEvent;
-// import java.awt.event.ActionListener;
-// import java.awt.event.KeyEvent;
-// import main.model.Set;
-// import main.controller.Creator;
-// import main.controller.Decorator;
-// import main.controller.CompositeActionListenerWithPriorities;
-
-// public class NewUser extends JFrame {
-//     private JFrame window;
-//     private Set set;
-//     private String existingOrNew;
-//     private boolean moveOnPossible = false;
-//     private Gather gatherFrame;
-//     private CompositeActionListenerWithPriorities actionPriorities = new CompositeActionListenerWithPriorities();
-//     private String originalExistingOrNew;
-//     private JRadioButton newUserButton;
-//     private JRadioButton existingButton;
-//     private ButtonGroup teacherStudentGroup;
-//     private int windowWidth = 750;
-//     private int windowHeight = 500;
-//     private JPanel instructionsPanel;
-//     private JPanel choicesPanel;
-//     private JPanel backNextButtonsPanel;
-//     private Decorator decorator = new Decorator();
-
-//     public NewUser() {
-//         this.set = Set.getInstance();
-//         window = set.getWindow();
-//         newUserSetup();
-//     }
-
-//     public void newUserSetup() {
-//         window.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
-//         window.setLayout(new BorderLayout());
-//         window.setSize(windowWidth, windowHeight);
-//         window.setTitle("New User");
-
-//         if (set.getUsername() != null) {
-//             originalExistingOrNew = set.getExistingOrNew();
-//         }
-
-//         instructionsWordsWindow();
-//         radioButtonSetUp();
-//         buttonSetUp();
-
-//         SwingUtilities.invokeLater(() -> window.setVisible(true));
-//     }
-
-//     private void instructionsWordsWindow() {
-//         JLabel instructionsWords = new JLabel("Welcome! Are you a new user?");
-//         instructionsPanel = decorator.InstructionsPanelDecorate(new JPanel(), instructionsWords);
-//         window.add(instructionsPanel, BorderLayout.NORTH);
-//     }
-
-//     private void radioButtonSetUp() {
-//         teacherStudentGroup = new ButtonGroup();
-//         choicesPanel = new JPanel(new GridBagLayout());
-//         choicesPanel.setBackground(Color.decode("#AFA2A2"));
-
-//         existingButton();
-//         newUserButton();
-//         addToChoicesPanel(teacherStudentGroup, existingButton, newUserButton, choicesPanel);
-
-//         window.add(choicesPanel);
-//     }
-
-//     private void existingButton() {
-//         existingButton = new JRadioButton("Existing");
-//         choicesButtonDecorate(existingButton);
-//         existingButton.addActionListener(e -> {
-//             existingOrNew = existingButton.getText();
-//             set.setExistingOrNew(existingOrNew);
-//             moveOnPossible = true;
-//             checkIfExistingChangedWithUsername();
-//         });
-//     }
-
-//     private void newUserButton() {
-//         newUserButton = new JRadioButton("New User");
-//         choicesButtonDecorate(newUserButton);
-//         newUserButton.addActionListener(e -> {
-//             actionPriorities.addClassActionListener(b -> {
-//                 //clickTimeMillis = System.currentTimeMillis();
-//                 moveOnPossible = true;
-//                 existingOrNew = newUserButton.getText();
-//                 set.setExistingOrNew(existingOrNew);
-//                 checkIfExistingChangedWithUsername();
-//                 //newUserActionCompleted = true;
-//             }, 1);
-//         });
-
-//         EnterAction enterAction = new EnterAction();
-//         window.getRootPane().getInputMap(JComponent.WHEN_IN_FOCUSED_WINDOW).put(KeyStroke.getKeyStroke(KeyEvent.VK_ENTER, 0), "enterAction");
-//         window.getRootPane().getActionMap().put("enterAction", enterAction);
-
-//         window.requestFocusInWindow();
-//     }
-
-//     private void checkIfExistingChangedWithUsername() {
-//         if (set.getUsername() != null && existingOrNew.equals(originalExistingOrNew)) {
-//             set.setNewOrExistingChanged(false);
-//         } else if (set.getUsername() != null && !existingOrNew.equals(originalExistingOrNew)) {
-//             set.setNewOrExistingChanged(true);
-//         }
-//     }
-
-//     private void choicesButtonDecorate(JRadioButton button) {
-//         Font buttonFont = new Font("Roboto", Font.PLAIN, 25);
-//         button.setForeground(Color.WHITE);
-//         button.setFont(buttonFont);
-//     }
-
-//     private void addToChoicesPanel(ButtonGroup teacherStudentGroup, JRadioButton existingButton, JRadioButton newUserButton, JPanel choicesPanel) {
-//         teacherStudentGroup.add(existingButton);
-//         teacherStudentGroup.add(newUserButton);
-//         choicesPanel.add(existingButton, decorator.choiceGbc());
-//         choicesPanel.add(newUserButton, decorator.choiceGbc());
-//     }
-
-//     private void buttonSetUp() {
-//         backNextButtonsPanel = new JPanel(new BorderLayout());
-//         Creator creator = new Creator();
-//         JButton backButton = creator.backButtonCreate();
-//         JPanel backButtonPanel = new JPanel();
-//         backButtonPanel.add(backButton);
-
-//         JButton nextButton = creator.nextButtonCreate();
-//         JPanel nextButtonPanel = new JPanel();
-//         nextButton.addActionListener(e -> doNextButtonProcedure());
-//         nextButtonPanel.add(nextButton);
-
-//         backNextButtonsPanel = creator.makeBackNextButtonsPanel(backButtonPanel, new JPanel(), nextButtonPanel);
-//         window.add(backNextButtonsPanel, BorderLayout.SOUTH);
-
-//         backButton.setEnabled(false);
-//     }
-
-//     private void doNextButtonProcedure() {
-//         if (newUserButton.isSelected() || existingButton.isSelected()) {
-//             set.setWindow(window);
-//             decorator.hideWindow(instructionsPanel, choicesPanel, backNextButtonsPanel);
-
-//             if (gatherFrame == null) {
-//                 gatherFrame = new Gather();
-//                 gatherFrame.gatherLaunch();
-//             } else {
-//                 gatherFrame.gatherLaunch();
-//             }
-//         } else {
-//             getErrorMessage();
-//         }
-
-//         if (!existingOrNew.equals(originalExistingOrNew)) {
-//             set.setUsername(null);
-//         }
-//     }
-
-//     private void getErrorMessage() {
-//         decorator.errorMessageSetUp(newUserButton);
-//     }
-
-//     public void setButtonSelected() {
-//         originalExistingOrNew = set.getExistingOrNew();
-//         existingOrNew = set.getExistingOrNew().trim();
-//         if ("New User".equals(existingOrNew)) {
-//             newUserButton.setSelected(true);
-//             moveOnPossible = true;
-//         } else if ("Existing".equals(existingOrNew)) {
-//             existingButton.setSelected(true);
-//             moveOnPossible = true;
-//         }
-//     }
-
-//     public void showWindow() {
-//         window.setLocationRelativeTo(null);
-//     }
-
-//     public class EnterAction extends AbstractAction {
-//         @Override
-//         public void actionPerformed(ActionEvent e) {
-//             actionPriorities.addClassActionListener(e1 -> doNextButtonProcedure(), 2);
-//         }
-//     }
-// }

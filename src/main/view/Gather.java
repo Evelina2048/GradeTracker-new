@@ -76,8 +76,8 @@ public class Gather {
 
     public Gather() {
         this.set = Set.getInstance();
-        System.out.println(5555+set.getExistingOrNew());
         existingOrNew = set.getExistingOrNew();
+        System.out.println(4444+set.getExistingOrNew());
         studentOrTeacher = set.getStudentOrTeacher();
         window = set.getWindow();
         creator = new Creator();
@@ -148,7 +148,7 @@ public class Gather {
     }
 
     public void gatherLaunch () {
-        System.out.println(7777+set.getExistingOrNew());
+        System.out.println(6666+set.getExistingOrNew());
         
         window.setTitle("Gather");
         window = set.getWindow();
@@ -164,7 +164,7 @@ public class Gather {
     }
     
     private void instructionsWordsWindow() {
-        System.out.println(8888+set.getExistingOrNew());
+        System.out.println(7777+set.getExistingOrNew());
         JLabel instructionsWordsLabel;
         Boolean newUser = (existingOrNew == "New User");
         Boolean existingUser = (existingOrNew == "Existing");
