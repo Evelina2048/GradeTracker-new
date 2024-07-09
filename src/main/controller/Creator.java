@@ -186,7 +186,7 @@ public class Creator {
         });
     }
 
-    public void writeFolderToFile(AtomicBoolean textFieldEmptied) {
+    public void writeFolderToFile() {
         String username = set.getUsername();
         String folderPath = "/Users/evy/Documents/GradeTracker-new/src/main/view/UserInfo/StudentInfo/"+username; //+ username;
         File folder = new File(folderPath);
@@ -321,6 +321,11 @@ public class Creator {
             }
         }
     }
+
+    public void makeUsernameFile() {
+
+    }
+
     private void tryToWrite(BufferedWriter writer) {
         System.out.println("13 13 13 13");
         text = textField.getText().trim();

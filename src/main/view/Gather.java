@@ -316,6 +316,7 @@ public class Gather {
         set.setWindow(window);
         System.out.println("nextbutton action in gather");
         nextButtonAction();
+        creator.writeFolderToFile();
     }
 
     private void nextButtonAction() {
