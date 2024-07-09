@@ -113,7 +113,6 @@ public class Decorator {
     }
 
     private void yesButtonActionListener(JButton yesButton) {
-        Creator creator = new Creator();
         yesButton.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent e) { 
                yesButtonAction();

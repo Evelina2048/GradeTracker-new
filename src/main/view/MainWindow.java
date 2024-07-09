@@ -85,7 +85,7 @@ private void windowSetUp() {
 }
  
 private void InstructionsWordsWindow() {
-        JLabel instructionsWords = new JLabel("Welcome! Are you a student or a teacher?");
+        JLabel instructionsWords = new JLabel("Hello "+set.getUsername() + "! Are you a student or a teacher?");
         instructionsPanel = decorator.InstructionsPanelDecorate(instructionsPanel, instructionsWords);
     }
 

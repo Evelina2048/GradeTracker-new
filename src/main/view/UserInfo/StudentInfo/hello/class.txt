@@ -1,3 +1,2 @@
 english
 math
-science

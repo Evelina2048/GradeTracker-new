@@ -61,8 +61,10 @@ public class Set {
 
     public void removeClassFromClassList() {
         int lastIndex = classList.size() - 1;
+        System.out.println("CLASSLISTSIZE: "+classList.size());
         if (lastIndex >= 0) {
             classList.remove(lastIndex);
+            System.out.println("CLASSLISTSIZE: "+classList.size());
         } else {
             System.out.println("ArrayList is empty. Nothing to remove.");
         }

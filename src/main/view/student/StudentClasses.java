@@ -73,7 +73,7 @@ public class StudentClasses extends JFrame {
         
         window.setTitle("StudentClasses");
         window.setLayout(new BorderLayout());
-        instructionsWordsAndPanel("Edit Textbox Mode");
+        instructionsWordsAndPanel("Edit Classes Mode "+"(for " +set.getStudentOrTeacher()+"s)");
         loadIfNeeded();
         westPanelCreate();
         buttonSetUpAction();
@@ -323,15 +323,11 @@ public class StudentClasses extends JFrame {
         System.out.println("is this even being run");
         deleteClassButton.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent e) {
-                System.out.println("letssss gooooo");
                 System.out.println("count:" + set.getTextFieldPanel().getComponentCount());
                 newClassButton.setEnabled(true);
-                //saveButtonAction();
-                //creator.enableSaveButton();
-                if (set.getLoadedState(selectedTextBox) && (fileHandler.fileExists(filePath)) && fileHandler.fileIsNotEmpty(filePath)) {
-                    //System.out.println("text: "+ selectedTextBox.getText()+" loaded state: "+ set.getLoadedState(textField));
+                if (set.getLoadedState(selectedTextBox) && (fileHandler.fileExists(filePath)) && fileHandler.fileIsNotEmpty(filePath)) { //if the file has loaded information attached
                     System.out.println(".9.9.9.9");
-                     String yesOrNoDialog = decorator.areYouSureMessageDelete(selectedTextBox, "deleting","<html><center>Deleting this class will optiondelete <br>its loaded information.<br>Do you wish to continue?");
+                    String yesOrNoDialog = decorator.areYouSureMessageDelete(selectedTextBox, "deleting","<html><center>Deleting this class will optiondelete <br>its loaded information.<br>Do you wish to continue?");
                 
                     if (yesOrNoDialog == "yes") {
                         saveButton.setEnabled(true);
@@ -346,6 +342,7 @@ public class StudentClasses extends JFrame {
                     selectedBoxPanel.add(selectedTextBox);
                     System.out.println(selectedBoxPanel.getComponentCount() + " :beforeselectedBoxPanelComponenents");
                     creator.deleteTextBox(selectedBoxPanel);
+                    saveButton.setEnabled(true);
                     System.out.println(selectedBoxPanel.getComponentCount() + " :afterselectedBoxPanelComponenents");
                 }
 

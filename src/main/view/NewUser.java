@@ -242,8 +242,7 @@ public class NewUser extends JFrame {
     }
 
     public void setButtonSelected() {
-        //TODO add original exisitng or new
-        //originalExistingOrNew = set.getOriginalExistingOrNew();
+       //originalExistingOrNew = set.getOriginalExistingOrNewStatus();
         existingOrNew = set.getExistingOrNew().trim();
         if (existingOrNew == "New User") {
             addNewUserActionListener();

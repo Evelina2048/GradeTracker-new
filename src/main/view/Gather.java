@@ -83,13 +83,29 @@ public class Gather {
         creator = new Creator();
         // newUser = new NewUser();
 
-        EnterAction enterAction = new EnterAction();
-        window.getRootPane().getInputMap(JComponent.WHEN_IN_FOCUSED_WINDOW).put(KeyStroke.getKeyStroke(KeyEvent.VK_ENTER, 0), "enterAction");
-        window.getRootPane().getActionMap().put("enterAction", enterAction);
-
         makeUsernameBox();
         gatherLaunch();
         
+
+    }
+
+    public void gatherLaunch () {
+        System.out.println(6666+set.getExistingOrNew());
+        
+        window.setTitle("Gather");
+        window = set.getWindow();
+
+        instructionsWordsWindow();
+
+        makeUsernameBox();
+        
+        inputName();
+
+        buttonSetUpAction();
+
+        EnterAction enterAction = new EnterAction();
+        window.getRootPane().getInputMap(JComponent.WHEN_IN_FOCUSED_WINDOW).put(KeyStroke.getKeyStroke(KeyEvent.VK_ENTER, 0), "enterAction");
+        window.getRootPane().getActionMap().put("enterAction", enterAction);
 
     }
 
@@ -146,22 +162,6 @@ public class Gather {
         }
 
     }
-
-    public void gatherLaunch () {
-        System.out.println(6666+set.getExistingOrNew());
-        
-        window.setTitle("Gather");
-        window = set.getWindow();
-
-        instructionsWordsWindow();
-
-        makeUsernameBox();
-        
-        inputName();
-
-        buttonSetUpAction();
-
-    }
     
     private void instructionsWordsWindow() {
         System.out.println(7777+set.getExistingOrNew());
@@ -209,8 +209,7 @@ public class Gather {
         // else if (existingUser && set.getUsername() != null && previousSettingsNotChanged) {
         //     System.out.println("instruction words option 4");
         //     instructionsWordsLabel = new JLabel("<html><center>Welcome back!");
-        //     }
-
+ 
         else {
             System.out.println("instruction words option 5");
             instructionsWordsLabel = new JLabel("Error");
