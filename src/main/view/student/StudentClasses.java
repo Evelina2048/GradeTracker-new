@@ -240,7 +240,7 @@ public class StudentClasses extends JFrame {
     }
 
     private void backToDefaultDeleteButton() {
-        removeActionListeners();
+        removeDeleteClassButtonActionListeners();//deleteClassButton.getActionListeners().length);
         deleteClassButton.setText("Delete Class Mode");
         deleteClassButton.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent e) {
@@ -297,11 +297,11 @@ public class StudentClasses extends JFrame {
                     selectedTextBox.setForeground(Color.GRAY);
                     selectedTextBox.setBorder(borderRegular);
                 }
-                Border borderHighlighted = BorderFactory.createLineBorder(Color.decode("#FF6961"), 2);
+                Border borderHighlighted = BorderFactory.createLineBorder(Color.decode("#FF6961"), 2); //red
                 textField.setForeground(Color.decode("#FF6961"));
                 selectedTextBox = textField;
                 textField.setBorder(borderHighlighted);
-                removeActionListeners();
+                removeDeleteClassButtonActionListeners();//deleteClassButton.getActionListeners().length);
                 deleteQuestionButtonAndAction();
                 }}); 
 
@@ -315,11 +315,15 @@ public class StudentClasses extends JFrame {
 
 
     private void deleteQuestionButtonAndAction() {
+        //String yesOrNoDialog = "nothing yet";
+        final String[] yesOrNoDialog = new String[1];
+        yesOrNoDialog[0] = "nothing yet";
+
         deleteClassButton.setText("Delete?");
         window.remove(instructionsPanel);
         instructionsWordsAndPanel("Hit Delete Button to Delete");
         String filePath = "/Users/evy/Documents/GradeTracker-new/src/main/view/UserInfo/StudentInfo/"+set.getUsername()+"/"+selectedTextBox.getText()+".txt";
-        removeActionListeners();
+        removeDeleteClassButtonActionListeners();//deleteClassButton.getActionListeners().length);
         System.out.println("is this even being run");
         deleteClassButton.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent e) {
@@ -327,11 +331,12 @@ public class StudentClasses extends JFrame {
                 newClassButton.setEnabled(true);
                 if (set.getLoadedState(selectedTextBox) && (fileHandler.fileExists(filePath)) && fileHandler.fileIsNotEmpty(filePath)) { //if the file has loaded information attached
                     System.out.println(".9.9.9.9");
-                    String yesOrNoDialog = decorator.areYouSureMessageDelete(selectedTextBox, "deleting","<html><center>Deleting this class will optiondelete <br>its loaded information.<br>Do you wish to continue?");
+                    //yesOrNoDialog = decorator.areYouSureMessageDelete(selectedTextBox, "deleting","<html><center>Deleting this class will optiondelete <br>its loaded information.<br>Do you wish to continue?");
                 
-                    if (yesOrNoDialog == "yes") {
-                        saveButton.setEnabled(true);
-                    }
+                    yesOrNoDialog[0] = decorator.areYouSureMessageDelete(selectedTextBox, "deleting", "<html><center>Deleting this class will optiondelete <br>its loaded information.<br>Do you wish to continue?");
+                    //if (yesOrNoDialog.equals("yes") {
+                    //    saveButton.setEnabled(true);
+                    //}
 
                     selectedTextBox.setForeground(Color.GRAY);
                     selectedTextBox.setBorder(borderRegular);
@@ -344,6 +349,10 @@ public class StudentClasses extends JFrame {
                     creator.deleteTextBox(selectedBoxPanel);
                     saveButton.setEnabled(true);
                     System.out.println(selectedBoxPanel.getComponentCount() + " :afterselectedBoxPanelComponenents");
+                }
+
+                if (yesOrNoDialog[0].equals("yes") || yesOrNoDialog[0].equals("nothing yet")) {
+                    saveButton.setEnabled(true);
                 }
 
 
@@ -373,8 +382,10 @@ public class StudentClasses extends JFrame {
         }
     }
 
-    private void removeActionListeners() {
+    private void removeDeleteClassButtonActionListeners() {//int amountToDelete) {
         for (ActionListener listener : deleteClassButton.getActionListeners()) {
+        //for(int i = 0; i < amountToDelete; i++) {
+            //ActionListener listener = deleteClassButton.getActionListeners()[i];
             deleteClassButton.removeActionListener(listener);
         }
     }
@@ -389,7 +400,7 @@ public class StudentClasses extends JFrame {
     }
 
     private void leaveDeleteModeAction() {
-        removeActionListeners();
+        removeDeleteClassButtonActionListeners();//deleteClassButton.getActionListeners().length);
         deleteClassButton.addActionListener(new ActionListener() {
             //instructionsWordsAndPanel("<3");
             //instructionsWordsAndPanel("h");
@@ -428,12 +439,14 @@ public class StudentClasses extends JFrame {
         window.getContentPane().addMouseListener(new MouseAdapter() {
             @Override
             public void mouseClicked(MouseEvent e) {
-                System.out.println("in frame");
+                System.out.println(" clicked in frame");
                 if (selectedTextBox != null) {
                     selectedTextBox.setForeground(Color.GRAY);
                     selectedTextBox.setBorder(borderRegular);
+                    selectedTextBox = null;
+                    //removeDeleteClassButtonActionListeners(1);
+                    leaveDeleteModeButton();
                 }
-                
             }
         });
 
