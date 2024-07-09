@@ -34,6 +34,7 @@ import java.io.FileReader;
 
 import java.awt.event.FocusAdapter;
 import java.awt.event.FocusEvent;
+import java.awt.event.FocusListener;
 
 import main.model.Set;
 import main.controller.Creator;
@@ -41,6 +42,7 @@ import main.controller.Decorator;
 import main.controller.FileHandler;
 
 import java.awt.event.KeyEvent;
+import java.awt.event.MouseListener;
 
 //import class files
 
@@ -81,6 +83,7 @@ public class Gather {
         studentOrTeacher = set.getStudentOrTeacher();
         window = set.getWindow();
         creator = new Creator();
+
         // newUser = new NewUser();
 
         makeUsernameBox();
@@ -135,34 +138,76 @@ public class Gather {
             textField = decorate.decorateTextBox(set.getUsername());
             set.setLoadedState(textField, true);
             textFieldMouseListener();
+
+            //set.setCanContinue(true);
         }
     }
 
     private void textFieldMouseListener() {
-        //check if file path to original username's class.txt exists and is not empty, if true,
-        FileHandler fileHandler = new FileHandler();
-        String filePath = "/Users/evy/Documents/GradeTracker-new/src/main/view/UserInfo/StudentInfo/"+set.getUsername()+"/class.txt";
-        if (fileHandler.fileExists(filePath) && fileHandler.fileIsNotEmpty(filePath)) {
+        FocusAdapter textfieldFocusListener;
+         // Check if file path to original username's class.txt exists and is not empty
+         FileHandler fileHandler = new FileHandler();
+         String filePath = "/Users/evy/Documents/GradeTracker-new/src/main/view/UserInfo/StudentInfo/" + set.getUsername() + "/class.txt";
+         if (fileHandler.fileExists(filePath) && fileHandler.fileIsNotEmpty(filePath)) {
+             // Add focus listener to textField
+            //  textField.addFocusListener( FocusAdapter textfieldfocuslistener = new FocusAdapter() {
+            //      @Override
+            //      public void focusGained(FocusEvent e) {
+            //          // Display confirmation message
+            //         decorate.areYouSureMessageListener();
+            //      }
+            //  });
+            
+            deleteAllFocusListeners();
+            //deleteAllMouseListeners();
+            JTextField test = new JTextField();
+            System.out.println(test.getFocusListeners().length+" ... "+textField.getFocusListeners().length);
+            //System.out.println()
 
-        //add focus listener to textbox
-        set.setCanContinue(true);
-        textField.addFocusListener(new FocusAdapter() {
-        @Override
-        public void focusGained(FocusEvent e) {
-            //generic pop up message : "Editing the username will not carry over class information"
-            System.out.println("focused");
-            if (set.getCanContinue() == true ) {
-                set.setCanContinue(false);
-                window.requestFocusInWindow();
-                decorate.areYouSureMessageDelete(textField, "editing username", "<html><center>Editing this username will create or <br>login to an account under this name. <br>Do you wish to continue?");
-            } 
-        
-        }
-        });
-        }
+            textfieldFocusListener = new FocusAdapter() {
+                @Override
+                public void focusGained(FocusEvent e) {
+                    // Display confirmation message
 
+                    //LESSON: focus needs to be broken before calling otherwise focus will keep being gained.
+                    window.requestFocusInWindow();
+                    decorate.areYouSureMessageListener();
+                    window.requestFocusInWindow();
+
+                    //textField.removeFocusListener();
+                }
+
+                // @Override
+                // public void focusLost(FocusEvent e) {
+                //     System.out.println
+                //     textField.removeFocusListener(textField.getFocusListeners()[textField.getFocusListeners().length-1]);
+                // }
+            };
+
+            
+            set.setDialogFocusListener(textfieldFocusListener);
+            textField.addFocusListener(textfieldFocusListener);
+
+         }
     }
     
+    private void deleteAllMouseListeners() {
+        MouseListener[] mouseListeners = textField.getMouseListeners();
+        // for (MouseListener listener : mouseListeners) {
+        //     textField.removeMouseListener(listener);
+        // }
+        for (int i = mouseListeners.length-1; i >= 3; i--) {
+            textField.removeMouseListener(mouseListeners[i]);
+        }
+    }
+
+    private void deleteAllFocusListeners() {
+        FocusListener[] focusListeners = textField.getFocusListeners();
+        for (FocusListener listener : focusListeners) {
+            textField.removeFocusListener(listener);
+        }
+    }
+
     private void instructionsWordsWindow() {
         System.out.println(7777+set.getExistingOrNew());
         JLabel instructionsWordsLabel;
