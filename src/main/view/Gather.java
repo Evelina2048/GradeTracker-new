@@ -55,6 +55,8 @@ public class Gather {
     private Creator creator;
     private String existingOrNew;
     private String studentOrTeacher;
+
+    private Boolean firstTimeInTextbox = true;
     
     JRadioButton studentButton;
     JRadioButton teacherButton;
@@ -93,7 +95,6 @@ public class Gather {
     }
 
     public void gatherLaunch () {
-        System.out.println(6666+set.getExistingOrNew());
         
         window.setTitle("Gather");
         window = set.getWindow();
@@ -148,47 +149,30 @@ public class Gather {
          // Check if file path to original username's class.txt exists and is not empty
          FileHandler fileHandler = new FileHandler();
          String filePath = "/Users/evy/Documents/GradeTracker-new/src/main/view/UserInfo/StudentInfo/" + set.getUsername() + "/class.txt";
+         System.out.println("1111 "+textField.getFocusListeners().length);
          if (fileHandler.fileExists(filePath) && fileHandler.fileIsNotEmpty(filePath)) {
-             // Add focus listener to textField
-            //  textField.addFocusListener( FocusAdapter textfieldfocuslistener = new FocusAdapter() {
-            //      @Override
-            //      public void focusGained(FocusEvent e) {
-            //          // Display confirmation message
-            //         decorate.areYouSureMessageListener();
-            //      }
-            //  });
-            
-            deleteAllFocusListeners();
-            //deleteAllMouseListeners();
-            JTextField test = new JTextField();
-            System.out.println(test.getFocusListeners().length+" ... "+textField.getFocusListeners().length);
-            //System.out.println()
-
             textfieldFocusListener = new FocusAdapter() {
                 @Override
                 public void focusGained(FocusEvent e) {
-                    // Display confirmation message
-
-                    //LESSON: focus needs to be broken before calling otherwise focus will keep being gained.
-                    window.requestFocusInWindow();
-                    decorate.areYouSureMessageListener();
-                    window.requestFocusInWindow();
-
-                    //textField.removeFocusListener();
+                        System.out.println("5555 "+textField.getFocusListeners().length);
+                        decorate.areYouSureMessageListener();
+                        firstTimeInTextbox = false;
+                        
                 }
-
-                // @Override
-                // public void focusLost(FocusEvent e) {
-                //     System.out.println
-                //     textField.removeFocusListener(textField.getFocusListeners()[textField.getFocusListeners().length-1]);
-                // }
             };
 
-            
             set.setDialogFocusListener(textfieldFocusListener);
-            textField.addFocusListener(textfieldFocusListener);
+            //deleteAllFocusListeners();
 
-         }
+            System.out.println("2222 "+textField.getFocusListeners().length);
+            decorate.deleteFocusListeners(textField.getFocusListeners().length-2);//textField.getFocusListeners().length-1);
+            System.out.println("3333.should be one "+textField.getFocusListeners().length);
+
+            textField.addFocusListener(textfieldFocusListener);
+            System.out.println("4444 "+textField.getFocusListeners().length);
+            //deleteFocusListeners(1);
+
+        }
     }
     
     private void deleteAllMouseListeners() {
@@ -196,7 +180,9 @@ public class Gather {
         // for (MouseListener listener : mouseListeners) {
         //     textField.removeMouseListener(listener);
         // }
+
         for (int i = mouseListeners.length-1; i >= 3; i--) {
+        //for (int i = 0; i <= 1; i++) {
             textField.removeMouseListener(mouseListeners[i]);
         }
     }
@@ -207,6 +193,17 @@ public class Gather {
             textField.removeFocusListener(listener);
         }
     }
+
+    // private void deleteFocusListeners(int amount) {
+    //     FocusListener[] listeners = textField.getFocusListeners();
+    //     //for (FocusListener listener : focusListeners) {
+    //     //    textField.removeFocusListener(listener);
+    //     //}
+    //     for (int i = 0; i <= amount; i++) {
+    //         textField.removeFocusListener(listeners[listeners.length-1]);
+    //     }
+
+    // }
 
     private void instructionsWordsWindow() {
         System.out.println(7777+set.getExistingOrNew());

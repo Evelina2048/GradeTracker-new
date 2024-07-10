@@ -156,39 +156,39 @@ public class Decorator {
     private void reasonIsChangingUsernameYes() {
         int caretPosition = textField.getCaretPosition();
         //set.setCanContinue(false);
+        System.out.println("6666 "+textField.getFocusListeners().length);
+
+        //deleteFocusListeners(1);
+        textField.removeFocusListener(set.getDialogFocusListener());
+        System.out.println("7777 "+textField.getFocusListeners().length);
+        textField.grabFocus();
+        System.out.println("8888 "+textField.getFocusListeners().length);
         dialog.setVisible(false);
         dialog.dispose(); 
 
         set.setDialogBeingDisplayed(false);
-        if (textField.getText().length() >=28) {
-            textField.grabFocus();
-        }
-        else{
-            textField.setSelectionColor(Color.white);
-            textField.setCaretPosition(0); // Initially place caret at the beginning
+        // if (textField.getText().length() >=28) {
+        //textField.grabFocus();
+        // }
+        // else{
+        //     textField.setSelectionColor(Color.white);
+        //     textField.setCaretPosition(0); // Initially place caret at the beginning
+        // }
+    
+        //removeLastFocusListener(textField);
 
-            //textField.requestFocus();
-            textField.grabFocus();
-            System.out.println("focus should be grabbed");
-        }
+    }
+
+    public void deleteFocusListeners(int amount) {
+        FocusListener[] listeners = textField.getFocusListeners();
+        //for (FocusListener listener : focusListeners) {
+        //    textField.removeFocusListener(listener);
+        //}
+        for (int i = 0; i < amount; i++) {
+            textField.removeFocusListener(listeners[listeners.length-1-i]);
         }
 
-            //removeFocusListeners(textField);
-
-                // Add custom focus listener
-            // textField.addFocusListener(new FocusAdapter() {
-            // @Override
-            public void focusGained(FocusEvent e) {
-                SwingUtilities.invokeLater(() -> {
-                        textField.requestFocus();
-                        //textField.setCaretPosition(caretPosition);
-                        //System.out.println("textfield background color: "+textField.getBackground()+ textField.getdefaultselectioncolor());
-                        Color defaultSelectionColor = UIManager.getColor("TextField.selectionBackground");
-                        //textField.setSelectionColor(defaultSelectionColor);
-            
-                        //removeLastFocusListener(textField);
-                    });
-            }
+    }
 
     private void noButtonActionListener(JButton noButton) {
         set.setDialogBeingDisplayed(false);
@@ -204,7 +204,7 @@ public class Decorator {
         //set.setCanContinue(false);
         dialog.setVisible(false);
         dialog.dispose();
-        window.requestFocusInWindow(); 
+        //window.requestFocusInWindow(); 
     }
 
     public void setCaretPositionToZero(JTextField importedTextField) {
