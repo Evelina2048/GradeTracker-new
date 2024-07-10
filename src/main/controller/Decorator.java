@@ -161,19 +161,62 @@ public class Decorator {
         //deleteFocusListeners(1);
         textField.removeFocusListener(set.getDialogFocusListener());
         System.out.println("7777 "+textField.getFocusListeners().length);
-        textField.grabFocus();
+        //textField.grabFocus();
+
+        // if (textField.getText().length() >=28) {
+        // textField.grabFocus();
+        // }
+        // else{
+        //     System.out.println("hiiiii");
+        //     FocusListener customFocusListener = new FocusAdapter() {
+        //         @Override
+        //         public void focusGained(FocusEvent e) {
+        //             // Custom behavior on focus gained
+        //             System.out.println("Custom focus listener triggered");
+        //         }
+        //     };
+        //     textField.addFocusListener(customFocusListener);
+        // }
+
+        ///
+        if (textField.getText().length() >=28) {
+            textField.grabFocus();
+        }
+
+        else{
+            textField.setCaretPosition(0); // Initially place caret at the beginning
+            //removeFocusListeners(textField);
+            
+            //deleteFocusListeners(textField.getFocusListeners().length-1);
+
+            // Add custom focus listener
+            textField.addFocusListener(new FocusAdapter() {
+            @Override
+            public void focusGained(FocusEvent e) {
+                SwingUtilities.invokeLater(() -> {
+                    // Move the caret to the end of the text or where it was last placed
+                    //if (!textField.getText().isEmpty()) {
+                    //    textField.setCaretPosition(textField.getText().length());
+                    //} else {
+                        textField.requestFocus();
+                        textField.setCaretPosition(caretPosition);
+                    //}
+                });
+            }
+            });
+            textField.requestFocus();
+        }
+        ///
+            textField.grabFocus();
+            //textField.setSelectionColor(Color.white);
+            textField.setCaretPosition(0); // Initially place caret at the beginning
+        
+
         System.out.println("8888 "+textField.getFocusListeners().length);
         dialog.setVisible(false);
         dialog.dispose(); 
 
         set.setDialogBeingDisplayed(false);
-        // if (textField.getText().length() >=28) {
-        //textField.grabFocus();
-        // }
-        // else{
-        //     textField.setSelectionColor(Color.white);
-        //     textField.setCaretPosition(0); // Initially place caret at the beginning
-        // }
     
         //removeLastFocusListener(textField);
 
