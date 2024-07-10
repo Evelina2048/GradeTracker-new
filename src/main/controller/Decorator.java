@@ -105,7 +105,7 @@ public class Decorator {
         
         yesButtonActionListener(yesButton);
         noButtonActionListener(noButton);
-        dialogCloseActionListener();
+        //dialogCloseActionListener();
         dialog.setLocationRelativeTo(window);
         dialog.setVisible(true);
 
@@ -116,6 +116,7 @@ public class Decorator {
         yesButton.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent e) { 
                yesButtonAction();
+               //dialog.dispose(); 
             }
         });
         yesOrNoDialog = "yes";
@@ -123,14 +124,14 @@ public class Decorator {
 
     private void yesButtonAction() {
          if (reason == "deleting") {   
-            reasonIsDeletingAction();
+            reasonIsDeletingActionYes();
          }  
          else {
-            reasonIsChangingUsername();
+            reasonIsChangingUsernameYes();
          }
     }
 
-    private void reasonIsDeletingAction() {
+    private void reasonIsDeletingActionYes() {
         Creator create = new Creator();
         textField.setVisible(false);
         JPanel panelForDeleting = new JPanel();
@@ -152,39 +153,45 @@ public class Decorator {
         // create.windowFix();
     }
 
-    private void reasonIsChangingUsername() {
+    private void reasonIsChangingUsernameYes() {
         int caretPosition = textField.getCaretPosition();
-        set.setCanContinue(false);
+        //set.setCanContinue(false);
         dialog.setVisible(false);
         dialog.dispose(); 
 
-
+        set.setDialogBeingDisplayed(false);
         if (textField.getText().length() >=28) {
             textField.grabFocus();
         }
         else{
             textField.setSelectionColor(Color.white);
             textField.setCaretPosition(0); // Initially place caret at the beginning
-            removeFocusListeners(textField);
 
-            // Add custom focus listener
-            textField.addFocusListener(new FocusAdapter() {
-            @Override
+            //textField.requestFocus();
+            textField.grabFocus();
+            System.out.println("focus should be grabbed");
+        }
+        }
+
+            //removeFocusListeners(textField);
+
+                // Add custom focus listener
+            // textField.addFocusListener(new FocusAdapter() {
+            // @Override
             public void focusGained(FocusEvent e) {
                 SwingUtilities.invokeLater(() -> {
                         textField.requestFocus();
-                        textField.setCaretPosition(caretPosition);
+                        //textField.setCaretPosition(caretPosition);
                         //System.out.println("textfield background color: "+textField.getBackground()+ textField.getdefaultselectioncolor());
-                });
+                        Color defaultSelectionColor = UIManager.getColor("TextField.selectionBackground");
+                        //textField.setSelectionColor(defaultSelectionColor);
+            
+                        //removeLastFocusListener(textField);
+                    });
             }
-            });
-            textField.requestFocus();
-            Color defaultSelectionColor = UIManager.getColor("TextField.selectionBackground");
-            textField.setSelectionColor(defaultSelectionColor);
-        }
-    }
 
     private void noButtonActionListener(JButton noButton) {
+        set.setDialogBeingDisplayed(false);
         noButton.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent e) {
                 noButtonAction();
@@ -194,7 +201,7 @@ public class Decorator {
     }
        
     private void noButtonAction() {
-        set.setCanContinue(true);
+        //set.setCanContinue(false);
         dialog.setVisible(false);
         dialog.dispose();
         window.requestFocusInWindow(); 
@@ -373,6 +380,15 @@ public class Decorator {
        Creator creator = new Creator();
        creator.textFieldFocusListener(textField, placeholderText);
        return textField;
+    }
+
+    public void areYouSureMessageListener() {
+        areYouSureMessageDelete(textField, "editing username", "<html><center>Editing this username will create or <br>login to an account under this name. <br>Do you wish to continue?");
+    }
+
+    private void removeLastFocusListener(JTextField textField) {
+        FocusListener[] listeners = textField.getFocusListeners();
+        textField.removeFocusListener(listeners[listeners.length-1]);
     }
 
     

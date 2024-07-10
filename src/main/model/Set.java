@@ -7,6 +7,7 @@ import javax.swing.JFrame;
 import javax.swing.JPanel;
 import javax.swing.JTextField;
 import java.awt.Component;
+import java.awt.event.FocusAdapter;
 
 public class Set {
     private String username;
@@ -26,6 +27,10 @@ public class Set {
     //private Boolean existingOrNewHasChanged = false;
     private Boolean studentOrTeacherHasChanged = false;
     private Boolean newOrExistingHasChanged = false;
+
+    private Boolean dialogBeingDisplayed = false;
+
+    private FocusAdapter textfieldFocusListener;
 
     //Below is for singleton design pattern
     // Static variable to hold the single instance of the class
@@ -143,7 +148,6 @@ public class Set {
 
     public void setExistingOrNew(String myExistingOrNew) {
         existingOrNew = myExistingOrNew;
-        System.out.println(2222+existingOrNew);
     }
 
     public String getExistingOrNew() {
@@ -190,6 +194,24 @@ public class Set {
     public Boolean getNewOrExistingChanged() {
         //System.out.println("recievingexistingornewchanged: "+ studentOrTeacherHasChanged);
         return newOrExistingHasChanged;
+    }
+
+    public void setDialogBeingDisplayed(boolean displayed) {
+        //System.out.println("setexistingornewchanged: "+ changed);
+        dialogBeingDisplayed = displayed;
+    }
+
+    public Boolean getDialogBeingDisplayed() {
+        //System.out.println("recievingexistingornewchanged: "+ studentOrTeacherHasChanged);
+        return dialogBeingDisplayed;
+    }
+
+    public void setDialogFocusListener(FocusAdapter thisTextfieldFocusListener) {
+        textfieldFocusListener = thisTextfieldFocusListener;
+    }
+
+    public FocusAdapter getDialogFocusListener() {
+        return textfieldFocusListener;
     }
 
 }

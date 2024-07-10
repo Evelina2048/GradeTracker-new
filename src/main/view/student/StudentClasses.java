@@ -182,26 +182,25 @@ public class StudentClasses extends JFrame {
         return nextButtonPanel;
     }
     private void doNextButtonProcedure() {
-            ArrayList<String> classList;
-            classList = set.getCurrentPanelList();
-            set.setClassList(classList);
-            writeType();
-            System.out.println("nextbuttonhit");
-            //TODO write folder to file
-            //creator.writeFolderToFile();
-            creator.writeTextToFile("/Users/evy/Documents/GradeTracker-new/src/main/view/UserInfo/StudentInfo/" + set.getUsername() + "/class.txt", creator.getTextFieldContainer());
-            set.setFinalClassList(classList); //lookie
-            hideWindow();
-            creator.hideContainer();
-            set.setFinalClassList(set.getCurrentPanelList());
-            StudentStatCollect studentStatCollect = new StudentStatCollect();
-             if (fileHandler.fileExists("/Users/evy/Documents/GradeTracker-new/src/main/view/UserInfo/StudentInfo/" + set.getUsername() + "/" + set.getFinalClassList().get(0) + ".txt")) {
-                studentStatCollect.addLoadedBoxes();
-            }
+        ArrayList<String> classList;
+        classList = set.getCurrentPanelList();
+        set.setClassList(classList);
+        writeType();
+        System.out.println("nextbuttonhit");
+        //creator.writeFolderToFile();
+        creator.writeTextToFile("/Users/evy/Documents/GradeTracker-new/src/main/view/UserInfo/StudentInfo/" + set.getUsername() + "/class.txt", creator.getTextFieldContainer());
+        set.setFinalClassList(classList); //lookie
+        hideWindow();
+        creator.hideContainer();
+        set.setFinalClassList(set.getCurrentPanelList());
+        StudentStatCollect studentStatCollect = new StudentStatCollect();
+            if (fileHandler.fileExists("/Users/evy/Documents/GradeTracker-new/src/main/view/UserInfo/StudentInfo/" + set.getUsername() + "/" + set.getFinalClassList().get(0) + ".txt")) {
+            studentStatCollect.addLoadedBoxes();
+        }
 
-            else {
-                studentStatCollect.DisplayClasses();
-            }
+        else {
+            studentStatCollect.DisplayClasses();
+        }
     }
 
     private void createNewClassButton() {

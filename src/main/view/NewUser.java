@@ -63,6 +63,13 @@ public class NewUser extends JFrame {
         window = set.getWindow();
         //window.setLocationRelativeTo(null);
         newUserSetup();
+
+        EnterAction enterAction = new EnterAction();
+
+        window.getRootPane().getInputMap(JComponent.WHEN_IN_FOCUSED_WINDOW).put(KeyStroke.getKeyStroke(KeyEvent.VK_ENTER, 0), "enterAction");
+        window.getRootPane().getActionMap().put("enterAction", enterAction);
+
+        window.requestFocusInWindow();
     }
 
     public void newUserSetup() {
@@ -90,13 +97,6 @@ public class NewUser extends JFrame {
         SwingUtilities.invokeLater(() -> {
             window.setVisible(true);
         });
-
-        EnterAction enterAction = new EnterAction();
-
-        window.getRootPane().getInputMap(JComponent.WHEN_IN_FOCUSED_WINDOW).put(KeyStroke.getKeyStroke(KeyEvent.VK_ENTER, 0), "enterAction");
-        window.getRootPane().getActionMap().put("enterAction", enterAction);
-
-        window.requestFocusInWindow();
     
     }
     
@@ -287,7 +287,6 @@ public class NewUser extends JFrame {
             public void actionPerformed(ActionEvent e) {
                 //System.out.println(2);
                 System.out.println("enteraction");
-                System.out.println(3333+existingOrNew);
                 doNextButtonProcedure();
             }
         }, 1);  // Add this ActionListener with priority 1
