@@ -103,19 +103,20 @@ public class Creator {
             @Override
             public void focusGained(FocusEvent e) {
                 if (focusGranted) {
+                    textField.setForeground(Color.gray);
                     System.out.println("focusGranted");
                     if (previousTextbox != null) {
-                        previousTextbox.setForeground(Color.LIGHT_GRAY);
+                        //previousTextbox.setForeground(Color.LIGHT_GRAY);
                     }if (textField.getText().equals(placeholder) && set.getEmptiedState(textField) == false && set.getLoadedState(textField) == false) {
                         textField.setText("");
                         set.setEmptiedState(textField, true);
-                        textField.setForeground(Color.gray);
+                        //textField.setForeground(Color.gray);
                     }else if (!textField.getText().equals(placeholder) && !textField.getText().isEmpty() && set.getEmptiedState(textField) == true) {
-                        textField.setForeground(Color.gray);
+                        //textField.setForeground(Color.gray);
                         set.setEmptiedState(textField, true);
                     }else if (textField.getText().equals(placeholder) && set.getEmptiedState(textField) == true && set.getLoadedState(textField) == false) {
                         textField.setText(""); // Clear the placeholder text when the field gains focus
-                        textField.setForeground(Color.gray);
+                        //textField.setForeground(Color.gray);
                         set.setEmptiedState(textField, true);
                         set.setSaveable(true);
                     }
@@ -129,14 +130,15 @@ public class Creator {
             }
             @Override
             public void focusLost(FocusEvent e) {
+                textField.setForeground(Color.lightGray);
                 if (textField.getText().isEmpty()) {
-                    textField.setForeground(Color.LIGHT_GRAY);
+                    //textField.setForeground(Color.LIGHT_GRAY);
                     textField.setText(placeholder);
                     set.setEmptiedState(textField, false);
                 }
                 
                 else if (!textField.getText().isEmpty() && set.getEmptiedState(textField) == true){
-                    textField.setForeground(Color.LIGHT_GRAY);
+                    //textField.setForeground(Color.LIGHT_GRAY);
                 }
 
                 // else if (!textField.getText().isEmpty()) {
@@ -429,6 +431,8 @@ public class Creator {
         if (loaded) {
             set.setEmptiedState(textField, true);
             set.setLoadedState(textField, true);
+            //textField.setForeground(Color.pink);
+            textField.setForeground(Color.lightGray);
         }
         else if (loaded == false) {
             set.setLoadedState(textField, false);
