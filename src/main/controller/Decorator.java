@@ -155,71 +155,37 @@ public class Decorator {
 
     private void reasonIsChangingUsernameYes() {
         int caretPosition = textField.getCaretPosition();
-        //set.setCanContinue(false);
         System.out.println("6666 "+textField.getFocusListeners().length);
 
-        //deleteFocusListeners(1);
         textField.removeFocusListener(set.getDialogFocusListener());
         System.out.println("7777 "+textField.getFocusListeners().length);
-        //textField.grabFocus();
-
-        // if (textField.getText().length() >=28) {
-        // textField.grabFocus();
-        // }
-        // else{
-        //     System.out.println("hiiiii");
-        //     FocusListener customFocusListener = new FocusAdapter() {
-        //         @Override
-        //         public void focusGained(FocusEvent e) {
-        //             // Custom behavior on focus gained
-        //             System.out.println("Custom focus listener triggered");
-        //         }
-        //     };
-        //     textField.addFocusListener(customFocusListener);
-        // }
-
-        ///
-        if (textField.getText().length() >=28) {
-            textField.grabFocus();
-        }
-
-        else{
-            textField.setCaretPosition(0); // Initially place caret at the beginning
-            //removeFocusListeners(textField);
-            
-            //deleteFocusListeners(textField.getFocusListeners().length-1);
-
-            // Add custom focus listener
-            textField.addFocusListener(new FocusAdapter() {
+        
+        FocusListener customFocusListener = new FocusAdapter() {
             @Override
             public void focusGained(FocusEvent e) {
                 SwingUtilities.invokeLater(() -> {
-                    // Move the caret to the end of the text or where it was last placed
-                    //if (!textField.getText().isEmpty()) {
-                    //    textField.setCaretPosition(textField.getText().length());
-                    //} else {
-                        textField.requestFocus();
-                        textField.setCaretPosition(caretPosition);
-                    //}
+                    System.out.println("focusered");
+                    textField.setCaretPosition(caretPosition);
                 });
             }
-            });
-            textField.requestFocus();
-        }
-        ///
-            textField.grabFocus();
-            //textField.setSelectionColor(Color.white);
-            textField.setCaretPosition(0); // Initially place caret at the beginning
+        };
+        textField.addFocusListener(customFocusListener);
         
+        //textField.customFocusListener.requestFocusInWindow();
 
-        System.out.println("8888 "+textField.getFocusListeners().length);
+        
         dialog.setVisible(false);
         dialog.dispose(); 
 
-        set.setDialogBeingDisplayed(false);
+        SwingUtilities.invokeLater(() -> {
+            textField.requestFocusInWindow();
+            if (textField.getText().length() >= 28) {
+                textField.setCaretPosition(textField.getText().length());
+            } else {
+                textField.setCaretPosition(0); // Initially place caret at the beginning
+            }
+        });
     
-        //removeLastFocusListener(textField);
-
     }
 
     public void deleteFocusListeners(int amount) {
@@ -245,9 +211,34 @@ public class Decorator {
        
     private void noButtonAction() {
         //set.setCanContinue(false);
+
+        // textField.removeFocusListener(set.getDialogFocusListener());
+        // window.requestFocusInWindow(); 
+        // dialog.setVisible(false);
+        // dialog.dispose();
+        // window.requestFocusInWindow(); 
+
+        deleteFocusListeners(textField.getFocusListeners().length-1);//textField.getFocusListeners().length);
+
+        window.requestFocusInWindow(); 
         dialog.setVisible(false);
+        window.requestFocusInWindow(); 
         dialog.dispose();
-        //window.requestFocusInWindow(); 
+        window.requestFocusInWindow(); 
+        
+
+        textField.addFocusListener(new FocusAdapter() {
+                @Override
+                public void focusGained(FocusEvent e) {
+                    window.requestFocusInWindow();
+                    areYouSureMessageDelete(textField, "editing username", "<html><center>Editing this username will create or <br>login to an account under this name. <br>Do you wish to continue?");
+                    
+                    //window.requestFocusInWindow();
+                }
+                
+            });
+
+        //textField.addFocusListener(set.getDialogFocusListener());
     }
 
     public void setCaretPositionToZero(JTextField importedTextField) {
@@ -427,6 +418,7 @@ public class Decorator {
 
     public void areYouSureMessageListener() {
         areYouSureMessageDelete(textField, "editing username", "<html><center>Editing this username will create or <br>login to an account under this name. <br>Do you wish to continue?");
+        window.requestFocusInWindow();
     }
 
     private void removeLastFocusListener(JTextField textField) {

@@ -154,6 +154,7 @@ public class Gather {
             textfieldFocusListener = new FocusAdapter() {
                 @Override
                 public void focusGained(FocusEvent e) {
+                        window.requestFocusInWindow();
                         System.out.println("5555 "+textField.getFocusListeners().length);
                         decorate.areYouSureMessageListener();
                         firstTimeInTextbox = false;
@@ -171,6 +172,15 @@ public class Gather {
             textField.addFocusListener(textfieldFocusListener);
             System.out.println("4444 "+textField.getFocusListeners().length);
             //deleteFocusListeners(1);
+
+            // textField.addFocusListener(new FocusAdapter() {
+            //     @Override
+            //     public void focusGained(FocusEvent e) {
+            //         decorate.areYouSureMessageDelete(textField, "editing username", "<html><center>Editing this username will create or <br>login to an account under this name. <br>Do you wish to continue?");
+            //         //window.requestFocusInWindow();
+            //     }
+                
+            // });
 
         }
     }
