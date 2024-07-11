@@ -188,7 +188,8 @@ public class StudentClasses extends JFrame {
         writeType();
         System.out.println("nextbuttonhit");
         //creator.writeFolderToFile();
-        creator.writeTextToFile("/Users/evy/Documents/GradeTracker-new/src/main/view/UserInfo/StudentInfo/" + set.getUsername() + "/class.txt", creator.getTextFieldContainer());
+        //set.setFilePath("/Users/evy/Documents/GradeTracker-new/src/main/view/UserInfo/StudentInfo/" + set.getUsername() + "/class.txt");
+        creator.writeTextToFile(creator.getTextFieldContainer());
         set.setFinalClassList(classList); //lookie
         hideWindow();
         creator.hideContainer();
@@ -235,7 +236,8 @@ public class StudentClasses extends JFrame {
         //creator.writeFolderToFile();
         creator.setClassList();
         //if (set.getHasPlace) {
-        creator.writeTextToFile("/Users/evy/Documents/GradeTracker-new/src/main/view/UserInfo/StudentInfo/" + set.getUsername() + "/class.txt", creator.getTextFieldContainer());
+        set.setFilePath("/Users/evy/Documents/GradeTracker-new/src/main/view/UserInfo/StudentInfo/" + set.getUsername() + "/class.txt");
+        creator.writeTextToFile(creator.getTextFieldContainer());
     
     }
 
