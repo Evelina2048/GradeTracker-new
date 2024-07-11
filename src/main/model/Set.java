@@ -27,6 +27,7 @@ public class Set {
     //private Boolean existingOrNewHasChanged = false;
     private Boolean studentOrTeacherHasChanged = false;
     private Boolean newOrExistingHasChanged = false;
+    private String filePath;
 
     private Boolean dialogBeingDisplayed = false;
 
@@ -212,6 +213,14 @@ public class Set {
 
     public FocusAdapter getDialogFocusListener() {
         return textfieldFocusListener;
+    }
+
+    public void setFilePath(String thisFilePath) {
+        filePath = thisFilePath;
+    }
+
+    public String getFilePath() {
+        return filePath;
     }
 
 }
