@@ -1,5 +1,6 @@
 package main.controller;
 
+import java.awt.Color;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.util.ArrayList;
@@ -7,6 +8,9 @@ import java.util.Iterator;
 import java.util.Map;
 import java.util.TreeMap;
 import java.util.TreeSet;
+
+import javax.swing.JRadioButton;
+import javax.swing.Timer;
 
 import main.model.Set;
 
@@ -49,16 +53,59 @@ public class CompositeActionListenerWithPriorities implements ActionListener {
     return false;
   }
 
-  public void addClassActionListener(ActionListener a, int priority){
-    deleteActionListener(a);
+  public void addClassActionListener(ActionListener a, int priority, String keyCause, JRadioButton button){
+    System.out.println(1111);
+    
+    //deleteActionListener(a);
     if(!listeners.containsKey(priority)){
       listeners.put(priority,new ArrayList<ActionListener>());
     }
     listeners.get(priority).add(a);
 
     if (listeners.size() == 2) {
-     //performAllActions();
      actionPerformed(new ActionEvent(this, ActionEvent.ACTION_PERFORMED, "PerformAllActions"));
+    }
+
+    //if (a isinstanceof EnterKey) {
+      //set timer for 1 sec
+      // if listeners.size() ==2 {
+        //actionPerformed(new ActionEvent(this, ActionEvent.ACTION_PERFORMED, "PerformAllActions"));
+      //}
+    //}
+
+    System.out.println(2222);
+    if (keyCause == "EnterAction" || keyCause == "nextButton") {
+      System.out.println(3333);
+      Timer timer = new Timer(1, new ActionListener() {
+        @Override
+        public void actionPerformed(ActionEvent e) {
+            Decorator decorate = new Decorator();
+            if (listeners.size() == 2) {
+                // Correctly reference the outer class for the action event
+                CompositeActionListenerWithPriorities.this.actionPerformed(
+                    new ActionEvent(CompositeActionListenerWithPriorities.this, ActionEvent.ACTION_PERFORMED, "PerformAllActions"));
+            } else if (listeners.size() == 1) {
+                System.out.println("4444 time to call the dialog thingy!!!");
+                //errorMessageSetUp("<html><center>Username already exists.<br> Please choose another.",200,100);
+                button.setEnabled(false);
+
+                //button.setForeground(Color.white);
+
+                //TODO setPaint
+                //paint(Graphics g);
+                
+                //button.setColor(Color.white);
+                decorate.errorMessageSetUp(button);
+
+            } else {
+                System.out.println("Something went wrong in CompositeActionListenerWithPriorities addClassActionListener \u00AF\\_(\u30C4)_/\u00AF");
+            }
+        }
+    });
+    timer.setRepeats(false);
+    timer.start();
+      timer.setRepeats(false);
+      timer.start();
     }
   }
 
@@ -72,6 +119,9 @@ public class CompositeActionListenerWithPriorities implements ActionListener {
 
   private void performAllActions() {
     actionPerformed(new ActionEvent(this, ActionEvent.ACTION_PERFORMED, "PerformAllActions"));
+  }
+
+  public interface EnterKeyListener extends ActionListener {
   }
 
 }
