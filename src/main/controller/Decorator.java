@@ -155,10 +155,8 @@ public class Decorator {
 
     private void reasonIsChangingUsernameYes() {
         int caretPosition = textField.getCaretPosition();
-        System.out.println("6666 "+textField.getFocusListeners().length);
 
         textField.removeFocusListener(set.getDialogFocusListener());
-        System.out.println("7777 "+textField.getFocusListeners().length);
         
         FocusListener customFocusListener = new FocusAdapter() {
             @Override
@@ -318,7 +316,7 @@ public class Decorator {
     //     dialog.setVisible(true);
     // }
 
-    public JDialog genericPopUpMessage(String text) {
+    public JDialog genericPopUpMessage(String text,JRadioButton button) {
         dialog = new JDialog(window, true);
         dialog.setLayout(new FlowLayout());
         JLabel label = new JLabel(text);
@@ -327,13 +325,15 @@ public class Decorator {
         JButton okButton = new JButton("OK");
         okButton.setVisible(true);
         dialog.add(okButton);
-        dialog.setSize(275,100);
+        dialog.setSize(200,100);
         set.setCanContinue(false);
         okButton.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent e) {
+                
                 dialog.setVisible(false);
                 dialog.dispose(); 
                 set.setCanContinue(false);
+                button.setEnabled(true);
                 //textField.getFocusListeners.Count()
                 // FocusListener[] listeners = textField.getFocusListeners();
                 // int listenerCount = listeners.length;
@@ -376,7 +376,7 @@ public class Decorator {
     }
 
     public void errorMessageSetUp(JRadioButton button) {
-        dialog = genericPopUpMessage("<html><center>Please choose an option");
+        dialog = genericPopUpMessage("<html><center>Please choose an option", button);
         
         dialog.setLocationRelativeTo(button);
         dialog.setLocation(dialog.getX(), dialog.getY() + 15); 
@@ -425,6 +425,28 @@ public class Decorator {
         FocusListener[] listeners = textField.getFocusListeners();
         textField.removeFocusListener(listeners[listeners.length-1]);
     }
+
+    // public void errorMessageSetUp(String labelWords, int width, int height, JRadioButton setRelativeTo) {
+    //     JDialog dialog = new JDialog(window, true);
+    //     dialog.setLayout(new FlowLayout());
+    //     JLabel label = new JLabel(labelWords);
+    //     label.setHorizontalAlignment(SwingConstants.CENTER);
+    //     dialog.add(label);
+    //     JButton okButton = new JButton("OK");
+    //     okButton.setVisible(true);
+    //     dialog.add(okButton);
+    //     dialog.setSize(width,height);
+    //     okButton.addActionListener(new ActionListener() {
+    //         public void actionPerformed(ActionEvent e) {
+    //             dialog.setVisible(false);
+    //             dialog.dispose(); 
+    //         }
+    //     });
+        
+    //     dialog.setLocationRelativeTo(setRelativeTo);//studentButton);
+    //     dialog.setLocation(dialog.getX(), dialog.getY() + 15); 
+    //     dialog.setVisible(true);
+    // }
 
     
 }

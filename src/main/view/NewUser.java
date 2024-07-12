@@ -193,7 +193,7 @@ public class NewUser extends JFrame {
         nextButton.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                nextButtonActionListenerWithPriorities();
+                nextButtonActionListenerWithPriorities("nextButton");
             }
         });
         
@@ -269,7 +269,7 @@ public class NewUser extends JFrame {
             set.setExistingOrNew(existingOrNew);
             checkIfExistingChangedWithUsername();
             //newUserActionCompleted = true;
-        }, 2);
+        }, 2, "click", newUserButton);
     }
 
     private void addExistingUserActionListener() {
@@ -278,10 +278,10 @@ public class NewUser extends JFrame {
             set.setExistingOrNew(existingOrNew);
             moveOnPossible = true;
             checkIfExistingChangedWithUsername();
-        }, 2);
+        }, 2, "click", newUserButton);
     }
 
-    private void nextButtonActionListenerWithPriorities() {
+    private void nextButtonActionListenerWithPriorities(String keyCause) {
         actionPriorities.addClassActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
@@ -289,13 +289,13 @@ public class NewUser extends JFrame {
                 System.out.println("enteraction");
                 doNextButtonProcedure();
             }
-        }, 1);  // Add this ActionListener with priority 1
+        }, 1, keyCause, newUserButton);  // Add this ActionListener with priority 1
     }
 
-    public class EnterAction extends AbstractAction {
+    public class EnterAction extends AbstractAction  {
         @Override
         public void actionPerformed(ActionEvent e) {
-            nextButtonActionListenerWithPriorities();
+            nextButtonActionListenerWithPriorities("EnterAction");
 
         // public void actionPerformed(ActionEvent e) {
         //     actionPriorities.addClassActionListener(e1 -> doNextButtonProcedure(), 2);

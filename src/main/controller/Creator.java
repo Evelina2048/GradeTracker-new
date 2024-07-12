@@ -19,7 +19,6 @@ import java.awt.event.FocusEvent;
 import java.io.FileWriter;
 import java.io.IOException;
 import java.util.ArrayList;
-import java.util.concurrent.atomic.AtomicBoolean;
 import java.io.BufferedWriter;
 import java.io.File;
 import java.awt.Component;
@@ -218,7 +217,7 @@ public class Creator {
             removeUnwritablePlaceholders();
             
             if (set.getCanContinue()) {
-                JDialog dialog = decorator.genericPopUpMessage("<html><center>Must fill in placeholder.<br>Will not save sections with placeholders");
+                JDialog dialog = decorator.genericPopUpMessage("<html><center>Must fill in placeholder.<br>Will not save sections with placeholders",null);
                 dialog.setLocationRelativeTo(window);
                 dialog.setLocation(dialog.getX(), dialog.getY() + 15); 
                 dialog.setVisible(true);
@@ -312,7 +311,7 @@ public class Creator {
     private void seeHowManyPlaceholdersToSkip() {
         Decorator decorator = new Decorator();
         if (set.getCanContinue()) {
-            JDialog dialog = decorator.genericPopUpMessage("<html><center>Must fill in placeholder.<br>Will not save sections with placeholders");
+            JDialog dialog = decorator.genericPopUpMessage("<html><center>Must fill in placeholder.<br>Will not save sections with placeholders", null);
             dialog.setLocationRelativeTo(window);
             dialog.setLocation(dialog.getX(), dialog.getY() + 15); 
             dialog.setVisible(true);

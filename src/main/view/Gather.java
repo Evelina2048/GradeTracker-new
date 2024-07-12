@@ -81,7 +81,6 @@ public class Gather {
     public Gather() {
         this.set = Set.getInstance();
         existingOrNew = set.getExistingOrNew();
-        System.out.println(4444+set.getExistingOrNew());
         studentOrTeacher = set.getStudentOrTeacher();
         window = set.getWindow();
         creator = new Creator();
@@ -149,13 +148,11 @@ public class Gather {
          // Check if file path to original username's class.txt exists and is not empty
          FileHandler fileHandler = new FileHandler();
          String filePath = "/Users/evy/Documents/GradeTracker-new/src/main/view/UserInfo/StudentInfo/" + set.getUsername() + "/class.txt";
-         System.out.println("1111 "+textField.getFocusListeners().length);
          if (fileHandler.fileExists(filePath) && fileHandler.fileIsNotEmpty(filePath)) {
             textfieldFocusListener = new FocusAdapter() {
                 @Override
                 public void focusGained(FocusEvent e) {
                         window.requestFocusInWindow();
-                        System.out.println("5555 "+textField.getFocusListeners().length);
                         decorate.areYouSureMessageListener();
                         firstTimeInTextbox = false;
                         
@@ -165,12 +162,9 @@ public class Gather {
             set.setDialogFocusListener(textfieldFocusListener);
             //deleteAllFocusListeners();
 
-            System.out.println("2222 "+textField.getFocusListeners().length);
             decorate.deleteFocusListeners(textField.getFocusListeners().length-2);//textField.getFocusListeners().length-1);
-            System.out.println("3333.should be one "+textField.getFocusListeners().length);
 
             textField.addFocusListener(textfieldFocusListener);
-            System.out.println("4444 "+textField.getFocusListeners().length);
             //deleteFocusListeners(1);
 
             // textField.addFocusListener(new FocusAdapter() {
@@ -216,7 +210,6 @@ public class Gather {
     // }
 
     private void instructionsWordsWindow() {
-        System.out.println(7777+set.getExistingOrNew());
         JLabel instructionsWordsLabel;
         Boolean newUser = (existingOrNew == "New User");
         Boolean existingUser = (existingOrNew == "Existing");
@@ -395,27 +388,28 @@ public class Gather {
         }
     }
 
-private void errorMessageSetUp(String labelWords, int width, int height) {
-    JDialog dialog = new JDialog(window, true);
-    dialog.setLayout(new FlowLayout());
-    JLabel label = new JLabel(labelWords);
-    label.setHorizontalAlignment(SwingConstants.CENTER);
-    dialog.add(label);
-    JButton okButton = new JButton("OK");
-    okButton.setVisible(true);
-    dialog.add(okButton);
-    dialog.setSize(width,height);
-    okButton.addActionListener(new ActionListener() {
-        public void actionPerformed(ActionEvent e) {
-            dialog.setVisible(false);
-            dialog.dispose(); 
-        }
-    });
+// private void errorMessageSetUp(String labelWords, int width, int height) {
+//     JDialog dialog = new JDialog(window, true);
+//     dialog.setLayout(new FlowLayout());
+//     JLabel label = new JLabel(labelWords);
+//     label.setHorizontalAlignment(SwingConstants.CENTER);
+//     dialog.add(label);
+//     JButton okButton = new JButton("OK");
+//     okButton.setVisible(true);
+//     dialog.add(okButton);
+//     dialog.setSize(width,height);
+//     okButton.addActionListener(new ActionListener() {
+//         public void actionPerformed(ActionEvent e) {
+//             dialog.setVisible(false);
+//             dialog.dispose(); 
+//         }
+//     });
     
-    dialog.setLocationRelativeTo(studentButton);
-    dialog.setLocation(dialog.getX(), dialog.getY() + 15); 
-    dialog.setVisible(true);
-}
+//     dialog.setLocationRelativeTo(studentButton);
+//     dialog.setLocation(dialog.getX(), dialog.getY() + 15); 
+//     dialog.setVisible(true);
+// }
+
 
 // private void writeUsername(String filePath) {
 //     //and username not taken
@@ -470,23 +464,45 @@ private void errorMessageSetUp(String labelWords, int width, int height) {
     //     return usernametaken;
     // }
 
-    // private boolean readLine(BufferedReader reader, String username, boolean usernametaken){
-    //     String line;
-    //     try {
-    //         while ((line = reader.readLine()) != null) {
-    //             if (line.equals(username) && set.getUsername() == null) {//if matches username
-    //                 errorMessageSetUp("<html><center>Username already exists.<br> Please choose another.",200,100);
-    //                 usernametaken = true;
-    //                 break;
-    //             }
-    //         }
-    //     } catch (IOException e) { 
-    //         e.printStackTrace();
-    //     } return usernametaken;
-    // }
+    private boolean readLine(BufferedReader reader, String username, boolean usernametaken){
+        String line;
+        try {
+            while ((line = reader.readLine()) != null) {
+                if (line.equals(username) && set.getUsername() == null) {//if matches username
+                    errorMessageSetUp("<html><center>Username already exists.<br> Please choose another.",200,100);
+                    usernametaken = true;
+                    break;
+                }
+            }
+        } catch (IOException e) { 
+            e.printStackTrace();
+        } return usernametaken;
+    }
 
     private void setWindowX(int newWindowX) {
         windowX = newWindowX;
+    }
+
+    public void errorMessageSetUp(String labelWords, int width, int height) {
+        JDialog dialog = new JDialog(window, true);
+        dialog.setLayout(new FlowLayout());
+        JLabel label = new JLabel(labelWords);
+        label.setHorizontalAlignment(SwingConstants.CENTER);
+        dialog.add(label);
+        JButton okButton = new JButton("OK");
+        okButton.setVisible(true);
+        dialog.add(okButton);
+        dialog.setSize(width,height);
+        okButton.addActionListener(new ActionListener() {
+            public void actionPerformed(ActionEvent e) {
+                dialog.setVisible(false);
+                dialog.dispose(); 
+            }
+        });
+        
+        dialog.setLocationRelativeTo(studentButton);
+        dialog.setLocation(dialog.getX(), dialog.getY() + 15); 
+        dialog.setVisible(true);
     }
 
     public int getWindowX() {
