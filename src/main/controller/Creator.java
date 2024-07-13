@@ -516,8 +516,10 @@ public class Creator {
         saveButton.setEnabled(true);
     }
     
-    public JPanel typeBox(String placeholder, String my_type, Boolean loaded) {
-        hideContainer();
+    public JPanel typeBox(String placeholder, String my_type, Boolean boxLoaded) {
+        hideContainer(); //needed unless jlabels will be missing
+        loaded = boxLoaded;
+        //System.out.println("");
         JPanel northTypePanel = new JPanel(new BorderLayout());
         JPanel gradeTypePanel = new JPanel(new BorderLayout()); //second border layout so things not cut out
 
@@ -528,7 +530,9 @@ public class Creator {
         }
 
         else if(my_type.equals("JLabel")) {
+            System.out.println("hi creating jlabel for "+placeholder+" which is loaded? "+boxLoaded);
             JLabel toAddType = new JLabel(placeholder);
+            //set.setDEBUGBOX(toAddType);
             gradeTypePanel.add(toAddType);
         }
         gradeTypePanel.setPreferredSize(new Dimension( 155,50));

@@ -85,25 +85,18 @@ public class StudentClasses extends JFrame {
     private void loadIfNeeded() {
         String filePath = "/Users/evy/Documents/GradeTracker-new/src/main/view/UserInfo/StudentInfo/"+set.getUsername()+"/class.txt";
         if (fileHandler.fileExists(filePath)) {//case for if existing file
-            //♡
             System.out.println("I have info to load!");
             ArrayList<String> myList = fileHandler.readFileToList(filePath);
             for (int index=0; index<myList.size(); index++) {
-                //JTextField DEBUGTESTTEXTFIELD = 
                 creator.createTextBox(myList.get(index), "JTextField", true);
-                //DEBUGTESTTEXTFIELD.setVisible(false);
-                //set.getTextFieldPanel().setVisible(false);
-                System.out.println("1111 "+ set.getDEBUGBOX().isVisible());
             }
             set.setClassList(myList);
             set.setFinalClassList(set.getCurrentPanelList());
-            //♡
             
         }
 
         else {
             DEBUGMARKEDBOX = creator.createTextBox("Enter Class Name", "JTextField", false);
-            set.setDEBUGBOX(DEBUGMARKEDBOX);
         }
     }
 
@@ -186,14 +179,12 @@ public class StudentClasses extends JFrame {
         nextButton.setPreferredSize(new Dimension(87, 29));
         nextButton.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent e) {
-                System.out.println("2222"+set.getDEBUGBOX().isVisible());
                 doNextButtonProcedure();
             }
         });
         return nextButtonPanel;
     }
     private void doNextButtonProcedure() {
-        System.out.println("3333"+set.getDEBUGBOX().isVisible());
         ArrayList<String> classList;
         classList = set.getCurrentPanelList();
         set.setClassList(classList);
@@ -210,7 +201,7 @@ public class StudentClasses extends JFrame {
             //♡
             creator.hideContainer();
             studentStatCollect.addLoadedBoxes();
-            creator.hideContainer();
+            //creator.hideContainer();
             //♡
 
         }

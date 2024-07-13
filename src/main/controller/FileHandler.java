@@ -88,9 +88,9 @@ public class FileHandler {
             JPanel bigPanel = new JPanel(new FlowLayout(FlowLayout.LEFT));
             bigPanel.setName("bigPanel in loadtextboxes");
             System.out.println("arrayList"+arrayList);
+            bigPanel.add(creator.typeBox(set.getFinalClassList().get(set.getClassListIndex())+"CAT", "JLabel", true));
             for (int i = 0; i<arrayList.size(); i++) {
                 bigPanel.add(creator.typeBox(arrayList.get(i), "JTextField", true));
-                System.out.println("heyo");
             }
             set.setTextFieldPanel(bigPanel);
             return bigPanel;

@@ -4,6 +4,7 @@ import java.util.ArrayList;
 import java.util.HashMap;
 
 import javax.swing.JFrame;
+import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.JTextField;
 import java.awt.Component;
@@ -37,7 +38,7 @@ public class Set {
     // Static variable to hold the single instance of the class
     private static Set instance;
 
-    private JTextField DEBUGMARKEDBOX;
+    private JLabel DEBUGMARKEDBOX;
 
     // Private constructor to prevent instantiation
     private Set() {}
@@ -225,11 +226,11 @@ public class Set {
         return filePath;
     }
 
-    public void setDEBUGBOX(JTextField MYDEBUGMARKEDBOX) {
+    public void setDEBUGBOX(JLabel MYDEBUGMARKEDBOX) {
         DEBUGMARKEDBOX = MYDEBUGMARKEDBOX;
     }
 
-    public JTextField getDEBUGBOX() {
+    public JLabel getDEBUGBOX() {
         return DEBUGMARKEDBOX;
     }
 }

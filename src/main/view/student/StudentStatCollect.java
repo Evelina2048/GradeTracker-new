@@ -67,15 +67,17 @@ public class StudentStatCollect extends JFrame {
         creator = new Creator();
 
         creator.hideContainer();
-        set.getDEBUGBOX().setVisible(false);
-        System.out.println("4444.5"+set.getDEBUGBOX().isVisible());
 
         fileHandler = new FileHandler();
         createNewTypeButton();
         buttonSetUpAction();
-        //DisplayClasses();
+
+        // if (!fileHandler.fileExists( "/Users/evy/Documents/GradeTracker-new/src/main/view/UserInfo/StudentInfo/"+set.getUsername()+"/"+set.getFinalClassList().get(set.getClassListIndex())+".txt")) {
+        //     System.out.println("flag");
+        //     DisplayClasses();
+        // }
+        //display classes is called in student classes
         window.setTitle("StudentStatCollect");
-        //window.setPreferredSize(new Dimension(800, 1000));
     }
 
     public void buttonSetUpAction() {
@@ -105,20 +107,19 @@ public class StudentStatCollect extends JFrame {
     }
     
     private void backAction(JButton backButton) {
+        //System.out.println(1111);
         backButton.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent e) {
                 if(set.getCanContinue()) {
+                    //System.out.println(2222);
                     if (set.getClassListIndex() == 0) { //case for back to classes
-                        System.out.println("5555"+set.getDEBUGBOX().isVisible());
                         hideWindow();
-                        System.out.println("6666"+set.getDEBUGBOX().isVisible());
                         StudentClasses studentClasses = new StudentClasses();
-                        System.out.println("7777"+set.getDEBUGBOX().isVisible());
                         studentClasses.studentClassesLaunch();
-                        System.out.println("8888"+set.getDEBUGBOX().isVisible());
                         saveButtonAction();
                     }
                     else if (set.getClassListIndex() > 0) {
+                        //System.out.println(3333);
                         goToPreviousClasses();              
                     }
                 }
@@ -127,8 +128,10 @@ public class StudentStatCollect extends JFrame {
     }
 
     private void goToPreviousClasses() {
+        //System.out.println(4444);
         saveButtonAction();
         if (set.getCanContinue()) {
+            ///System.out.println(5555);
             System.out.println("there are previous classes");
             set.decrementClassListIndex();
             classLabelPanel.removeAll();
@@ -146,17 +149,23 @@ public class StudentStatCollect extends JFrame {
     }
 
     public void addLoadedBoxes() {
-        textBoxPanel.add(creator.typeBox(set.getFinalClassList().get(0), "JLabel", true));
+        //System.out.println(6666);
+
+
+        //textBoxPanel.add(creator.typeBox(set.getFinalClassList().get(0)+"BAT", "JLabel", true));
+
+
+        //textBoxPanel.add(creator.typeBox(set.getFinalClassList().get(set.getClassListIndex()), "JLabel",  true));
         String filePath = "/Users/evy/Documents/GradeTracker-new/src/main/view/UserInfo/StudentInfo/"+set.getUsername()+"/"+set.getFinalClassList().get(set.getClassListIndex())+".txt";
         
         JPanel testPanel = fileHandler.loadTextboxes(filePath);
         int numberOfComponents = testPanel.getComponentCount();
         numOfBoxes += numberOfComponents;
         for (int i = 0; i < numberOfComponents; i++) {
+            //System.out.println(7777);
             textBoxPanel.add(testPanel.getComponent(0));
         }
         classLabelPanel.add(textBoxPanel);
-        //System.out.println("heyo");
         window.add(classLabelPanel);
         
         creator.windowFix();
@@ -199,6 +208,7 @@ public class StudentStatCollect extends JFrame {
     private void nextButtonAction(JButton nextButton) {
         nextButton.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent e) {
+                System.out.println(1111.1);
                 doNextButtonProcedure();
             }
         });
@@ -207,8 +217,10 @@ public class StudentStatCollect extends JFrame {
     private void doNextButtonProcedure() {
         saveButtonAction();
         if(set.getCanContinue()) {
+            System.out.println(2222.1);
             set.incrementClassListIndex();
             if (set.getClassListIndex()+1 <= set.getFinalClassList().size()) {
+                System.out.println(3333.1);
                 visitNextStudentClass();
             }
             else {
@@ -222,22 +234,29 @@ public class StudentStatCollect extends JFrame {
         //readClass(finalClassList);
         String filePath = "/Users/evy/Documents/GradeTracker-new/src/main/view/UserInfo/StudentInfo/"+set.getUsername()+"/"+set.getFinalClassList().get(set.getClassListIndex())+".txt";
         if (fileHandler.fileExists(filePath)) {
-            // ♡
+            System.out.println(4444.1 + "::: "+set.getFinalClassList().get(set.getClassListIndex())+"::: should be math");
             textBoxPanelReset();
-            boxManageCreate(set.getFinalClassList().get(set.getClassListIndex()), "JLabel"); //displays class label 
+            //TODO note label
+            //boxManageCreate(set.getFinalClassList().get(set.getClassListIndex()), "JLabel", true); //displays class label 
             
-            JPanel testPanel = fileHandler.loadTextboxes(filePath);
-            int numberOfComponents = testPanel.getComponentCount();
-            for (int i = 0; i < numberOfComponents; i++) {
-              textBoxPanel.add(testPanel.getComponent(0));
-            }
+            textBoxPanel = fileHandler.loadTextboxes(filePath);
+            //int numberOfComponents = testPanel.getComponentCount();
+            // for (int i = 0; i < numberOfComponents; i++) {
+            //     System.out.println("5555.1" + testPanel.getComponent(0));
+            //   textBoxPanel.add(testPanel.getComponent(0));
+            // }
+
+            //creator.hideContainer();
+            //StudentStatCollect studentStatCollect = new StudentStatCollect();
+            //studentStatCollect.
+
+            //addLoadedBoxes();
             
             classLabelPanel.add(textBoxPanel);
             if (textBoxPanel.getComponentCount() <= 1) { //The reason it is <=1 and not 0, is to account for the classLabel
                 boxStarterPack();
             }
             creator.windowFix();
-            // ♡
         }
         else { //first time visiting next class
             hideWindow();
@@ -248,7 +267,7 @@ public class StudentStatCollect extends JFrame {
     }
 
     private void boxStarterPack() {
-        boxManageCreate("Credits (optional)", "JTextField");
+        boxManageCreate("Credits (optional)", "JTextField", false);
         newSet();
     }
 
@@ -325,8 +344,8 @@ public class StudentStatCollect extends JFrame {
 
     private void readClass(ArrayList<String> typeList) { 
         System.out.println("readclass test:"+ set.getFinalClassList()+"index: "+set.getClassListIndex());
-        boxManageCreate(set.getFinalClassList().get(set.getClassListIndex()), "JLabel");
-        boxManageCreate("Credits (optional)", "JTextField");
+        boxManageCreate(set.getFinalClassList().get(set.getClassListIndex())+"AHC", "JLabel", false); //necessary
+        boxManageCreate("Credits (optional)", "JTextField", false);
         newSet();
         container.add(classLabelPanel);
         container.setName("container in readclass");
@@ -344,20 +363,24 @@ public class StudentStatCollect extends JFrame {
         
     }
 
-    private void boxManageCreate(String placeholder, String type) {
+    private void boxManageCreate(String placeholder, String type, Boolean boxLoaded) {
         if (numOfBoxes <= maxBoxes) {
-            textBoxPanel.add(creator.typeBox(placeholder, type, false));
+            System.out.println("test.1 "+ placeholder +" "+type+ "textboxpanel components"+textBoxPanel.getComponentCount());
+            textBoxPanel.add(creator.typeBox(placeholder, type, boxLoaded));//false));
+            System.out.println("test.2 "+ placeholder +" "+type+ "textboxpanel components"+textBoxPanel.getComponentCount());
             classLabelPanel.add(textBoxPanel);
             creator.windowFix();
+            //System.out.println("visibility"+set.getDEBUGBOX().isVisible());
             numOfBoxes++;
+            //window.add(classLabelPanel);
         }
     }
 
     private void newSet() {
         typeNumber++;
-        boxManageCreate("Grade Type "+typeNumber, "JTextField");
-        boxManageCreate("Percentage of Grade", "JTextField");
-        boxManageCreate("Grades(format:# # #)", "JTextField");
+        boxManageCreate("Grade Type "+typeNumber, "JTextField",false);
+        boxManageCreate("Percentage of Grade", "JTextField",false);
+        boxManageCreate("Grades(format:# # #)", "JTextField",false);
     }
 
     // private void calculate() {
