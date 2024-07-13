@@ -50,6 +50,7 @@ public class StudentClasses extends JFrame {
     FileHandler fileHandler = new FileHandler();
     Set set;
     JPanel instructionsPanel;
+    JTextField DEBUGMARKEDBOX;
 
     //JTextField textField = decorate.decorateTextBox();
 
@@ -60,9 +61,11 @@ public class StudentClasses extends JFrame {
     }
 
     public void studentClassesLaunch() {
+        southContainer.setName("SouthContainer");
         this.set = Set.getInstance();
         set.setCurrentClass("StudentClasses.java");
         window = set.getWindow();
+        window.setName("window");
         creator = new Creator();
         decorator = new Decorator();
         System.out.println("in student classes");
@@ -82,18 +85,25 @@ public class StudentClasses extends JFrame {
     private void loadIfNeeded() {
         String filePath = "/Users/evy/Documents/GradeTracker-new/src/main/view/UserInfo/StudentInfo/"+set.getUsername()+"/class.txt";
         if (fileHandler.fileExists(filePath)) {//case for if existing file
+            //♡
             System.out.println("I have info to load!");
             ArrayList<String> myList = fileHandler.readFileToList(filePath);
             for (int index=0; index<myList.size(); index++) {
+                //JTextField DEBUGTESTTEXTFIELD = 
                 creator.createTextBox(myList.get(index), "JTextField", true);
+                //DEBUGTESTTEXTFIELD.setVisible(false);
+                //set.getTextFieldPanel().setVisible(false);
+                System.out.println("1111 "+ set.getDEBUGBOX().isVisible());
             }
             set.setClassList(myList);
             set.setFinalClassList(set.getCurrentPanelList());
+            //♡
             
         }
 
         else {
-            creator.createTextBox("Enter Class Name", "JTextField", false);
+            DEBUGMARKEDBOX = creator.createTextBox("Enter Class Name", "JTextField", false);
+            set.setDEBUGBOX(DEBUGMARKEDBOX);
         }
     }
 
@@ -176,27 +186,33 @@ public class StudentClasses extends JFrame {
         nextButton.setPreferredSize(new Dimension(87, 29));
         nextButton.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent e) {
+                System.out.println("2222"+set.getDEBUGBOX().isVisible());
                 doNextButtonProcedure();
             }
         });
         return nextButtonPanel;
     }
     private void doNextButtonProcedure() {
+        System.out.println("3333"+set.getDEBUGBOX().isVisible());
         ArrayList<String> classList;
         classList = set.getCurrentPanelList();
         set.setClassList(classList);
         writeType();
         System.out.println("nextbuttonhit");
-        //creator.writeFolderToFile();
-        //set.setFilePath("/Users/evy/Documents/GradeTracker-new/src/main/view/UserInfo/StudentInfo/" + set.getUsername() + "/class.txt");
-        creator.writeTextToFile(creator.getTextFieldContainer());
+        creator.writeTextToFile();//creator.getTextFieldContainer());
         set.setFinalClassList(classList); //lookie
         hideWindow();
         creator.hideContainer();
+
         set.setFinalClassList(set.getCurrentPanelList());
         StudentStatCollect studentStatCollect = new StudentStatCollect();
-            if (fileHandler.fileExists("/Users/evy/Documents/GradeTracker-new/src/main/view/UserInfo/StudentInfo/" + set.getUsername() + "/" + set.getFinalClassList().get(0) + ".txt")) {
+        if (fileHandler.fileExists("/Users/evy/Documents/GradeTracker-new/src/main/view/UserInfo/StudentInfo/" + set.getUsername() + "/" + set.getFinalClassList().get(0) + ".txt")) {
+            //♡
+            creator.hideContainer();
             studentStatCollect.addLoadedBoxes();
+            creator.hideContainer();
+            //♡
+
         }
 
         else {
@@ -237,7 +253,7 @@ public class StudentClasses extends JFrame {
         creator.setClassList();
         //if (set.getHasPlace) {
         set.setFilePath("/Users/evy/Documents/GradeTracker-new/src/main/view/UserInfo/StudentInfo/" + set.getUsername() + "/class.txt");
-        creator.writeTextToFile(creator.getTextFieldContainer());
+        creator.writeTextToFile();//creator.getTextFieldContainer());
     
     }
 
@@ -461,6 +477,13 @@ public class StudentClasses extends JFrame {
         southContainer.setVisible(false);
         creator.getTextFieldContainer().setVisible(false);
         instructionsPanel.setVisible(false);
+        creator.hideContainer();
+        //textBoxPanel.setVisible(false);
+        //classLabelPanel.removeAll();
+        // if (DEBUGMARKEDBOX != null) {
+        // //DEBUGMARKEDBOX.setVisible(false);
+        // }
+
         //window.remove(window.getMouseListeners());
         for (MouseListener listener : deleteClassButton.getMouseListeners()) {
             window.removeMouseListener(listener);

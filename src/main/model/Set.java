@@ -37,6 +37,8 @@ public class Set {
     // Static variable to hold the single instance of the class
     private static Set instance;
 
+    private JTextField DEBUGMARKEDBOX;
+
     // Private constructor to prevent instantiation
     private Set() {}
 
@@ -223,4 +225,11 @@ public class Set {
         return filePath;
     }
 
+    public void setDEBUGBOX(JTextField MYDEBUGMARKEDBOX) {
+        DEBUGMARKEDBOX = MYDEBUGMARKEDBOX;
+    }
+
+    public JTextField getDEBUGBOX() {
+        return DEBUGMARKEDBOX;
+    }
 }

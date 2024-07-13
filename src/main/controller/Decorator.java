@@ -392,8 +392,6 @@ public class Decorator {
     }
 
     public JTextField decorateTextBox(String placeholderText) {
-       //JTextField textField = new JTextField(); //prev 10
-       //textField.setSize(new Dimension(10, 50)); // Set the height to 50 pixels
        if (set.getCurrentClass() == "StudentStatCollect.java") {
         textField.setSize(new Dimension(144, 50));
        }

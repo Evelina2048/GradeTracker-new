@@ -37,7 +37,7 @@ import java.awt.Container;
 public class Creator {
     private JFrame window;
     private JPanel backNextButtonsPanel;
-    private JPanel textFieldPanel= new JPanel(new FlowLayout(FlowLayout.LEFT));
+    private JPanel textFieldPanel = new JPanel(new FlowLayout(FlowLayout.LEFT));
     private JTextField previousTextbox;
     private Set set;
     private FileHandler fileHandler = new FileHandler();
@@ -60,6 +60,8 @@ public class Creator {
     public Creator() {
         this.set = Set.getInstance();
         this.window = set.getWindow();
+        textFieldPanel.setName("textFieldPanel");
+        textFieldContainer.setName("textFieldContainer");
     }
 
     public JButton backButtonCreate() {
@@ -249,7 +251,7 @@ public class Creator {
         }
     }
 
-    public void writeTextToFile(JPanel textFieldPanel) {//(String importedFilePath, JPanel textFieldPanel) {;
+    public void writeTextToFile(){//JPanel textFieldPanel) {//(String importedFilePath, JPanel textFieldPanel) {;
         //filePath = importedFilePath;
         set.setCanContinue(true);
         System.out.println("Step4: begin writeTextToFile."+ set.getCurrentPanelList());
@@ -262,7 +264,10 @@ public class Creator {
 
     private void tryToWriteWithoutAppend() {
         //writer = new BufferedWriter(new FileWriter(filePath));
-        textFieldPanel = set.getTextFieldPanel();
+
+        //TODO look at textfieldpanel
+       //textFieldPanel = set.getTextFieldPanel();
+        filePath = set.getFilePath();
         try (BufferedWriter writer = new BufferedWriter(new FileWriter(filePath))) {
             if (!classList.isEmpty()) {
                classList.clear();
@@ -335,11 +340,11 @@ public class Creator {
         }
     }
 
-    private void writeTextToFileWithAppend(JPanel textFieldPanel) {
+    private void writeTextToFileWithAppend(JPanel panel) {
         //String filePath = importedFilePath;
         System.out.println("in writeTextToFileWithAppend");
         try (BufferedWriter writer = new BufferedWriter(new FileWriter(filePath, true))) {
-            for (Component component : textFieldPanel.getComponents()) {
+            for (Component component : panel.getComponents()) {
                 if (component instanceof JTextField) {
                     decideIfWrite(component, writer);
                 }
@@ -405,7 +410,7 @@ public class Creator {
         textboxCounter++;
         if (textboxCounter <= 30 && my_type.equals("JTextField")) {
             textField = decorate.decorateTextBox(placeholder);
-            set.setEmptiedState(textField, false);
+            //set.setEmptiedState(textField, false);
             addDocumentListener();
             textFieldPanel.add(textField); 
             textFieldPanelText.add(textField.getText());
@@ -444,7 +449,8 @@ public class Creator {
 
         @Override
         public void removeUpdate(DocumentEvent e) {
-            System.out.println("removeUpdate/// "+ textField.getWidth());
+            //System.out.println("removeUpdate/// "+ textField.getWidth()+ textField.getParent().getParent().getParent().getParent().getParent().getName());
+            //textField.getParent();
         }
 
         @Override
@@ -452,6 +458,10 @@ public class Creator {
             System.out.println("changedUpdate");
         }
         });
+    }
+
+    public void setTextFieldContainer(JPanel thisTextFieldPanel) {
+        textFieldPanel = thisTextFieldPanel;
     }
 
     public JPanel getTextFieldContainer() {

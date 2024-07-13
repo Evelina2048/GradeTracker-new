@@ -57,10 +57,6 @@ public class FileHandler {
             }
     
             catch (IOException e) {
-                // long fileSize = Files.size(path);
-                // if (fileSize != 0) {
-                //     return false;
-                // }
                 System.err.println("an error occured in creator.java in isFileEmpty");
                 return false;
             }
@@ -90,9 +86,11 @@ public class FileHandler {
             Creator creator = new Creator();
             ArrayList<String> arrayList = readFileToList(filePath);
             JPanel bigPanel = new JPanel(new FlowLayout(FlowLayout.LEFT));
+            bigPanel.setName("bigPanel in loadtextboxes");
             System.out.println("arrayList"+arrayList);
             for (int i = 0; i<arrayList.size(); i++) {
                 bigPanel.add(creator.typeBox(arrayList.get(i), "JTextField", true));
+                System.out.println("heyo");
             }
             set.setTextFieldPanel(bigPanel);
             return bigPanel;
@@ -108,5 +106,9 @@ public class FileHandler {
             } catch (IOException e) {
                 e.printStackTrace();
             }
+        }
+
+        public void hideLoadedBoxes() {
+            //bigPanel.setVisible(false);
         }
 }

@@ -54,7 +54,6 @@ public class CompositeActionListenerWithPriorities implements ActionListener {
   }
 
   public void addClassActionListener(ActionListener a, int priority, String keyCause, JRadioButton button){
-    System.out.println(1111);
     
     //deleteActionListener(a);
     if(!listeners.containsKey(priority)){
@@ -73,9 +72,7 @@ public class CompositeActionListenerWithPriorities implements ActionListener {
       //}
     //}
 
-    System.out.println(2222);
     if (keyCause == "EnterAction" || keyCause == "nextButton") {
-      System.out.println(3333);
       Timer timer = new Timer(1, new ActionListener() {
         @Override
         public void actionPerformed(ActionEvent e) {
@@ -83,9 +80,8 @@ public class CompositeActionListenerWithPriorities implements ActionListener {
             if (listeners.size() == 2) {
                 // Correctly reference the outer class for the action event
                 CompositeActionListenerWithPriorities.this.actionPerformed(
-                    new ActionEvent(CompositeActionListenerWithPriorities.this, ActionEvent.ACTION_PERFORMED, "PerformAllActions"));
+                new ActionEvent(CompositeActionListenerWithPriorities.this, ActionEvent.ACTION_PERFORMED, "PerformAllActions"));
             } else if (listeners.size() == 1) {
-                System.out.println("4444 time to call the dialog thingy!!!");
                 //errorMessageSetUp("<html><center>Username already exists.<br> Please choose another.",200,100);
                 button.setEnabled(false);
 
