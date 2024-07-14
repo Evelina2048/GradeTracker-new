@@ -16,6 +16,7 @@ import javax.swing.Timer;
 import java.awt.BorderLayout;
 import java.awt.Color;
 import java.awt.Font;
+import java.awt.FontMetrics;
 import java.awt.GridBagLayout;
 import java.awt.event.ActionListener;
 import java.awt.event.ActionEvent;
@@ -87,9 +88,84 @@ private void windowSetUp() {
 }
  
 private void InstructionsWordsWindow() {
+        //JLabel instructionsWords = new JLabel("Hello 1234567890! Are you a student or a teacher?");
+        System.out.println(1111);
         JLabel instructionsWords = new JLabel("Hello "+set.getUsername() + "! Are you a student or a teacher?");
         instructionsPanel = decorator.InstructionsPanelDecorate(instructionsPanel, instructionsWords);
+        truncateLabelText(instructionsWords,"Hello ", "! Are you a student or a teacher?", window.getWidth());
     }
+
+private void truncateLabelText(JLabel instructionsWords, String prefix, String suffix, int maxWidth) {
+    FontMetrics fontMetrics = instructionsWords.getFontMetrics(instructionsWords.getFont());
+    System.out.println(2222);
+    JLabel usernameLabel = new JLabel(set.getUsername());
+    String fullText = prefix + usernameLabel.getText() + suffix;
+    //FontMetrics fontMetrics = usernameLabel.getFontMetrics(usernameLabel.getFont());
+
+    // if (fontMetrics.stringWidth(fullText)+ fontMetrics.stringWidth(set.getUsername()) <= maxWidth) {
+    //     System.out.println("should not print with long text");
+    //     usernameLabel.setText(fullText);
+    //     return;
+    // }
+
+    System.out.println(3333);
+   //String username = usernameLabel.getText();
+    String username = set.getUsername();
+    String ellipsis = "...";
+    int prefixWidth = fontMetrics.stringWidth(prefix);
+    int suffixWidth = fontMetrics.stringWidth(suffix);
+    int usernameWidth = fontMetrics.stringWidth(username);
+    int ellipsisWidth = fontMetrics.stringWidth(ellipsis);
+    int availableWidth = maxWidth - prefixWidth - suffixWidth - ellipsisWidth;
+    System.out.println("6666 "+ maxWidth +" "+prefixWidth+" "+suffixWidth+" "+ellipsisWidth+" ");
+
+
+    System.out.println("usernamewidth: "+ usernameWidth+ ": available width: "+availableWidth);
+    int endIndex = 1;
+    String currentUsernamePermittedAmount = set.getUsername().substring(0, endIndex);
+    System.out.println("currentUsernamePermittedAmount "+currentUsernamePermittedAmount);
+    //need to find sweet spot where is not less than max
+
+    //while (!(fontMetrics.stringWidth(username.substring(0, endIndex)) <= availableWidth && fontMetrics.stringWidth(username.substring(0, endIndex+1)) >= availableWidth)) {
+    while (fontMetrics.stringWidth(username.substring(0, endIndex+1)) <= availableWidth) {    
+        System.out.println("it works "+ fontMetrics.stringWidth(username.substring(0, endIndex+1))+" "+availableWidth);
+        endIndex++;
+        //currentUsernamePermittedAmount = set.getUsername().substring(0, endIndex);
+        System.out.println("it works2: "+currentUsernamePermittedAmount+" "+set.getUsername().substring(0, endIndex));
+        instructionsWords =  new JLabel("Hello "+ username.substring(0, endIndex+1) + "...! Are you a student or a teacher?");
+    }
+
+    // if (fontMetrics.stringWidth(set.getUsername().substring(0, endIndex)) <= availableWidth && fontMetrics.stringWidth(set.getUsername().substring(0, endIndex+1)) <= availableWidth) {//if (current amount +1 is greater than max && current amount less than max)
+    //     System.out.println("it works");
+    //     endIndex++;
+    //     System.out.println("it works2: "+currentUsernamePermittedAmount+" "+set.getUsername().substring(0, endIndex));
+    // }
+
+    // else if (fontMetrics.stringWidth(set.getUsername().substring(0, endIndex)) <= availableWidth && fontMetrics.stringWidth(set.getUsername().substring(0, endIndex+1)) >= availableWidth) {
+    //     System.out.println("success case");
+    // }
+
+
+    // else {
+    //     endIndex++;
+    //     currentUsernamePermittedAmount = set.getUsername().substring(0, endIndex);
+    //     System.out.println("it works2: "+currentUsernamePermittedAmount);
+
+    // }
+
+    //else add 1
+
+
+    // for (int i = username.length() - 1; i > 0; i--) {
+    //     System.out.println(4444);
+    //     if (fontMetrics.stringWidth(username.substring(0, i)) >= availableWidth) {
+    //         System.out.println(5555);
+    //         usernameLabel.setText(prefix + username.substring(0, i) + ellipsis + suffix);
+    //         break;
+    //     }
+    // }
+}
+
 
 private void radioButtonSetUp() {
     teacherStudentGroup = new ButtonGroup();

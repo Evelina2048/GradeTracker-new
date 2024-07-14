@@ -232,7 +232,6 @@ public class StudentStatCollect extends JFrame {
             addLoadedBoxes();
             //int numberOfComponents = testPanel.getComponentCount();
             // for (int i = 0; i < numberOfComponents; i++) {
-            //     System.out.println("5555.1" + testPanel.getComponent(0));
             //   textBoxPanel.add(testPanel.getComponent(0));
             // }
 

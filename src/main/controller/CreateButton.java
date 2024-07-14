@@ -36,9 +36,7 @@ public class CreateButton {
     }
 
     public JButton saveButtonCreate() {
-        System.out.println("1111"+ (saveButton != null));
         saveButton = new JButton("Save");
-        System.out.println("1111.5"+ (saveButton != null));
         set.setCurrentSaveButton(saveButton);
 
         return saveButton;
@@ -85,7 +83,6 @@ public class CreateButton {
         textField.getDocument().addDocumentListener(new DocumentListener() {
         @Override
         public void insertUpdate(DocumentEvent e) {
-            System.out.println("2222"+ (saveButton != null));
             saveButtonEnable(); 
         }
 
@@ -103,7 +100,6 @@ public class CreateButton {
     }
 
     public void saveButtonEnable() {
-        System.out.println("3333"+ (saveButton != null));
         set.getCurrentSaveButton().setEnabled(true);
         //saveButton.setEnabled(true);
     }
