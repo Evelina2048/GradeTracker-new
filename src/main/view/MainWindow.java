@@ -40,6 +40,9 @@ private String studentOrTeacher;
 private boolean moveOnPossible = false;
 private Set set;
 private CreateButton createButton = new CreateButton();
+
+JLabel instructionsWords;
+
 JRadioButton studentButton;
 JRadioButton teacherButton;
 ButtonGroup teacherStudentGroup;
@@ -90,12 +93,14 @@ private void windowSetUp() {
 private void InstructionsWordsWindow() {
         //JLabel instructionsWords = new JLabel("Hello 1234567890! Are you a student or a teacher?");
         System.out.println(1111);
-        JLabel instructionsWords = new JLabel("Hello "+set.getUsername() + "! Are you a student or a teacher?");
+        instructionsWords = new JLabel("Hello "+set.getUsername() + "! Are you a student or a teacher?");
         instructionsPanel = decorator.InstructionsPanelDecorate(instructionsPanel, instructionsWords);
-        truncateLabelText(instructionsWords,"Hello ", "! Are you a student or a teacher?", window.getWidth());
+        truncateLabelText("Hello ", "! Are you a student or a teacher?", window.getWidth());
+        //System.out.println
+        instructionsPanel = decorator.InstructionsPanelDecorate(instructionsPanel, instructionsWords);
     }
 
-private void truncateLabelText(JLabel instructionsWords, String prefix, String suffix, int maxWidth) {
+private void truncateLabelText(String prefix, String suffix, int maxWidth) {
     FontMetrics fontMetrics = instructionsWords.getFontMetrics(instructionsWords.getFont());
     System.out.println(2222);
     JLabel usernameLabel = new JLabel(set.getUsername());
@@ -132,8 +137,9 @@ private void truncateLabelText(JLabel instructionsWords, String prefix, String s
         endIndex++;
         //currentUsernamePermittedAmount = set.getUsername().substring(0, endIndex);
         System.out.println("it works2: "+currentUsernamePermittedAmount+" "+set.getUsername().substring(0, endIndex));
-        instructionsWords =  new JLabel("Hello "+ username.substring(0, endIndex+1) + "...! Are you a student or a teacher?");
     }
+    System.out.println("it works3: "+currentUsernamePermittedAmount+" "+set.getUsername().substring(0, endIndex));
+    instructionsWords =  new JLabel("Hello "+ set.getUsername().substring(0, endIndex) + "...! Are you a student or a teacher?");
 
     // if (fontMetrics.stringWidth(set.getUsername().substring(0, endIndex)) <= availableWidth && fontMetrics.stringWidth(set.getUsername().substring(0, endIndex+1)) <= availableWidth) {//if (current amount +1 is greater than max && current amount less than max)
     //     System.out.println("it works");
