@@ -79,11 +79,14 @@ public class Gather {
     JPanel backButtonPanel;
     JPanel nextButtonPanel;
     JPanel saveButtonPanel;
+    String pathToUsernameFolder;
+    FileHandler fileHandler = new FileHandler();
 
     public Gather() {
         this.set = Set.getInstance();
         existingOrNew = set.getExistingOrNew();
         studentOrTeacher = set.getStudentOrTeacher();
+        pathToUsernameFolder = "/Users/evy/Documents/GradeTracker-new/src/main/view/UserInfo/StudentInfo/" + set.getUsername();
         window = set.getWindow();
         creator = new Creator();
 
@@ -150,7 +153,7 @@ public class Gather {
         FocusAdapter textfieldFocusListener;
          // Check if file path to original username's class.txt exists and is not empty
          FileHandler fileHandler = new FileHandler();
-         String filePath = "/Users/evy/Documents/GradeTracker-new/src/main/view/UserInfo/StudentInfo/" + set.getUsername() + "/class.txt";
+         String filePath = pathToUsernameFolder + "/class.txt";
          if (fileHandler.fileExists(filePath) && fileHandler.fileIsNotEmpty(filePath)) {
             textfieldFocusListener = new FocusAdapter() {
                 @Override
@@ -219,9 +222,18 @@ public class Gather {
         Boolean previousSettingsNotChanged = (set.getNewOrExistingChanged() == false);
         Boolean previousSettingsChanged = (set.getNewOrExistingChanged() == true);
         System.out.println("******"+existingOrNew+" "+previousSettingsNotChanged);
-        if (newUser && previousSettingsNotChanged) {
+        if (newUser && set.getUsername() == null && previousSettingsNotChanged) {
             System.out.println("instruction words option 1");
             instructionsWordsLabel = new JLabel("You are a new user. Create a user name.");
+        }
+        else if (newUser && set.getUsername() != null && previousSettingsNotChanged && fileHandler.folderExists(pathToUsernameFolder)){//readNames(pathToUsernameFolder, set.getUsername())){ //checkIfExisting(pathToUsernameFolder, set.getUsername())){//fileHandler.fileExists("/Users/evy/Documents/GradeTracker-new/src/main/view/UserInfo/StudentInfo/" + set.getUsername())){//fileHandler.fileExists(pathToUsernameFolder)) { //file name exists
+            System.out.println("instruction words option 3");
+            instructionsWordsLabel = new JLabel("<html><center>Welcome back!<br> Already created account. Click to edit.");
+        }
+
+        else if (existingUser && set.getUsername() != null && previousSettingsNotChanged) {
+            System.out.println("instruction words option 3");
+            instructionsWordsLabel = new JLabel("<html><center>Welcome back!");
         }
 
         else if (newUser && set.getUsername() == null && previousSettingsChanged) {
@@ -245,13 +257,8 @@ public class Gather {
         }
 
         else if (existingUser && set.getUsername() != null && previousSettingsChanged) {
-                    System.out.println("instruction words option 4");
-                    instructionsWordsLabel = new JLabel("<html><center>You changed your NewUser/Existing settings. <br> You are an existing user. Type in your user name");
-        }
-
-        else if ((newUser || existingUser) && set.getUsername() != null && previousSettingsNotChanged) {
-            System.out.println("instruction words option 3");
-            instructionsWordsLabel = new JLabel("<html><center>Welcome back!");
+            System.out.println("instruction words option 4");
+            instructionsWordsLabel = new JLabel("<html><center>You changed your NewUser/Existing settings. <br> You are an existing user. Type in your user name");
         }
 
         // else if (existingUser && set.getUsername() != null && previousSettingsNotChanged) {
@@ -259,7 +266,7 @@ public class Gather {
         //     instructionsWordsLabel = new JLabel("<html><center>Welcome back!");
  
         else {
-            System.out.println("instruction words option 5");
+            System.out.println("instruction words option 5. new user: "+ newUser+" username: "+ set.getUsername()+" previoussettingsnotchanged: "+ previousSettingsNotChanged+ " fileExists? " +fileHandler.fileExists(pathToUsernameFolder));
             instructionsWordsLabel = new JLabel("Error");
         }
         decorateInstructions(instructionsWordsLabel);
@@ -431,12 +438,12 @@ public class Gather {
 // }
 
     // private void checkIfExisting(String filePath, String username) {
-    //     boolean usernametaken = false;
+    //     //boolean usernametaken = false;
 
-    //     readNames(filePath, username, usernametaken);
-    //     if (usernametaken == false) {
-    //         writeNewName(filePath, username);    
-    //     }
+    //     readNames(filePath, username);
+    //     // if (usernametaken == false) {
+    //     //     writeNewName(filePath, username);    
+    //     // }
     // }
 
     // private void writeNewName(String filePath, String username) {
@@ -448,11 +455,12 @@ public class Gather {
     //         }
     // }
 
-    // private boolean readNames(String filePath, String username, Boolean usernametaken) {
+    // private boolean readNames(String filePath, String username) {
     //     BufferedReader reader = null;
+    //     Boolean usernametaken = null;
     //     try {
     //         reader = new BufferedReader(new FileReader(filePath));
-    //         readLine(reader, username, usernametaken);
+    //         usernametaken = readLine(reader, username);
     //     } catch (IOException e) {
     //         e.printStackTrace();
     //     } finally {
@@ -464,23 +472,31 @@ public class Gather {
     //             e.printStackTrace();
     //         }
     //     }
+    //     if (usernametaken != null) {
     //     return usernametaken;
+    //     }
+    //     else {
+    //         return false;
+    //     }
     // }
 
-    private boolean readLine(BufferedReader reader, String username, boolean usernametaken){
-        String line;
-        try {
-            while ((line = reader.readLine()) != null) {
-                if (line.equals(username) && set.getUsername() == null) {//if matches username
-                    errorMessageSetUp("<html><center>Username already exists.<br> Please choose another.",200,100);
-                    usernametaken = true;
-                    break;
-                }
-            }
-        } catch (IOException e) { 
-            e.printStackTrace();
-        } return usernametaken;
-    }
+    // private boolean readLine(BufferedReader reader, String username){
+    //     String line;
+    //     Boolean usernametaken;
+    //     try {
+    //         while ((line = reader.readLine()) != null) {
+    //             if (line.equals(username) && set.getUsername() == null) {//if matches username
+    //                 errorMessageSetUp("<html><center>Username already exists.<br> Please choose another.",200,100);
+    //                 usernametaken = true;
+    //                 //break;
+    //                 return true;
+    //             }
+    //         }
+    //     } catch (IOException e) { 
+    //         e.printStackTrace();
+    //     } //return usernametaken;
+    //     return false;
+    // }
 
     private void setWindowX(int newWindowX) {
         windowX = newWindowX;

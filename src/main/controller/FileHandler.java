@@ -2,6 +2,7 @@ package main.controller;
 
 import java.io.BufferedReader;
 import java.io.BufferedWriter;
+import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.FileReader;
 import java.io.FileWriter;
@@ -63,6 +64,18 @@ public class FileHandler {
                 return false;
             }
         
+        }
+
+        public boolean folderExists(String folderPath) {
+            File folder = new File(folderPath);
+
+            if (folder.exists() && folder.isDirectory()) {
+                System.out.println("The directory exists.");
+                return true;
+            } else {
+                System.out.println("The directory does not exist.");
+                return false;
+            }
         }
 
         public boolean fileIsNotEmpty(String filePath) {
