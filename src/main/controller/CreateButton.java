@@ -64,18 +64,18 @@ public class CreateButton {
     }
 
     
-    public void setTextFieldContainer(JPanel thisTextFieldPanel) {
-        textFieldPanel = thisTextFieldPanel;
-    }
+    // public void setTextFieldContainer(JPanel thisTextFieldPanel) {
+    //     textFieldPanel = thisTextFieldPanel;
+    // }
 
-    public JPanel getTextFieldContainer() {
-        return textFieldPanel;
-    }
+    // public JPanel getTextFieldContainer() {
+    //     return textFieldPanel;
+    // }
 
-    public void hideContainer() {
-        textFieldContainer.setVisible(false);
-        textFieldPanel.setVisible(false);
-    }
+    // public void hideContainer() {
+    //     textFieldContainer.setVisible(false);
+    //     textFieldPanel.setVisible(false);
+    // }
 
     public void setTextFieldPanel(JPanel myPanel) {
         textFieldPanel = myPanel;

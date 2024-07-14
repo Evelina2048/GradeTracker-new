@@ -198,13 +198,13 @@ public class StudentClasses extends JFrame {
         creator.writeTextToFile();//creator.getTextFieldContainer());
         set.setFinalClassList(classList); //lookie
         hideWindow();
-        createButton.hideContainer();
+        creator.hideContainer();
 
         set.setFinalClassList(set.getCurrentPanelList());
         StudentStatCollect studentStatCollect = new StudentStatCollect();
         if (fileHandler.fileExists("/Users/evy/Documents/GradeTracker-new/src/main/view/UserInfo/StudentInfo/" + set.getUsername() + "/" + set.getFinalClassList().get(0) + ".txt")) {
             //♡
-            createButton.hideContainer();
+            creator.hideContainer();
             studentStatCollect.addLoadedBoxes();
             //creator.hideContainer();
             //♡
@@ -467,9 +467,9 @@ public class StudentClasses extends JFrame {
         newClassButton.setVisible(false);
         deleteClassButton.setVisible(false);
         southContainer.setVisible(false);
-        createButton.getTextFieldContainer().setVisible(false);
+        creator.getTextFieldContainer().setVisible(false);
         instructionsPanel.setVisible(false);
-        createButton.hideContainer();
+        creator.hideContainer();
         //textBoxPanel.setVisible(false);
         //classLabelPanel.removeAll();
         // if (DEBUGMARKEDBOX != null) {

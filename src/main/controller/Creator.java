@@ -61,8 +61,8 @@ public class Creator {
     public Creator() {
         this.set = Set.getInstance();
         this.window = set.getWindow();
-        textFieldPanel.setName("textFieldPanel");
-        textFieldContainer.setName("textFieldContainer");
+        //textFieldPanel.setName("textFieldPanel");
+        //textFieldContainer.setName("textFieldContainer");
     }
 
     // public JButton backButtonCreate() {
@@ -437,13 +437,13 @@ public class Creator {
         }
     }
 
-    // public void setTextFieldContainer(JPanel thisTextFieldPanel) {
-    //     textFieldPanel = thisTextFieldPanel;
-    // }
+    public void setTextFieldContainer(JPanel thisTextFieldPanel) {
+        textFieldPanel = thisTextFieldPanel;
+    }
 
-    // public JPanel getTextFieldContainer() {
-    //     return textFieldPanel;
-    // }
+    public JPanel getTextFieldContainer() {
+        return textFieldPanel;
+    }
 
     // public void resetTextFieldContainer() {
 
@@ -468,10 +468,10 @@ public class Creator {
         window.repaint();
     }
 
-    // public void hideContainer() {
-    //     textFieldContainer.setVisible(false);
-    //     textFieldPanel.setVisible(false);
-    // }
+    public void hideContainer() {
+        textFieldContainer.setVisible(false);
+        textFieldPanel.setVisible(false);
+    }
 
     public void debugPrintPanel() {
         for (Component component : textFieldPanel.getComponents()) {
@@ -495,7 +495,7 @@ public class Creator {
     // }
     
     public JPanel typeBox(String placeholder, String my_type, Boolean boxLoaded) {
-        createButton.hideContainer(); //needed unless jlabels will be missing
+        hideContainer(); //needed unless jlabels will be missing
         loaded = boxLoaded;
         //System.out.println("");
         JPanel northTypePanel = new JPanel(new BorderLayout());

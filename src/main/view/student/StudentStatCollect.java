@@ -68,7 +68,7 @@ public class StudentStatCollect extends JFrame {
         System.out.println("final class list issssss: "+ finalClassList);
         creator = new Creator();
 
-        createButton.hideContainer();
+        creator.hideContainer();
 
         fileHandler = new FileHandler();
         createNewTypeButton();
@@ -193,7 +193,7 @@ public class StudentStatCollect extends JFrame {
         System.out.println("testtesttest: "+ set.getCurrentClass());
         set.setFilePath("/Users/evy/Documents/GradeTracker-new/src/main/view/UserInfo/StudentInfo/" + set.getUsername() +"/"+finalClassList.get(set.getClassListIndex())+ ".txt");
         
-        createButton.setTextFieldContainer(set.getTextFieldPanel());
+        creator.setTextFieldContainer(set.getTextFieldPanel());
         creator.writeTextToFile();
        // }
     }
@@ -344,7 +344,7 @@ public class StudentStatCollect extends JFrame {
     }
 
     private void hideWindow() {
-        createButton.hideContainer();
+        creator.hideContainer();
         backNextButtonsPanel.setVisible(false);
         newDelContainerFlow.setVisible(false);
         classLabelPanel.setVisible(false);
