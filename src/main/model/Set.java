@@ -3,6 +3,7 @@ package main.model;
 import java.util.ArrayList;
 import java.util.HashMap;
 
+import javax.swing.JButton;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
@@ -25,6 +26,7 @@ public class Set {
     private JFrame window;
     private String currentClass;
     private Boolean canContinue = true;
+    private JButton saveButton;
     //private Boolean existingOrNewHasChanged = false;
     private Boolean studentOrTeacherHasChanged = false;
     private Boolean newOrExistingHasChanged = false;
@@ -232,5 +234,13 @@ public class Set {
 
     public JLabel getDEBUGBOX() {
         return DEBUGMARKEDBOX;
+    }
+
+    public void setCurrentSaveButton(JButton thisSaveButton) {
+        saveButton = thisSaveButton;
+    }
+
+    public JButton getCurrentSaveButton() {
+        return saveButton;
     }
 }

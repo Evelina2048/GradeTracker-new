@@ -46,7 +46,7 @@ public class Creator {
     private JTextField textField = new JTextField();
     // private String placeholder;
     private ArrayList<String> classList = new ArrayList<>();
-    private JButton saveButton;
+    //private JButton saveButton;
     private ArrayList<String>textFieldPanelText = new ArrayList<>();
     private JPanel textFieldContainer = new JPanel(new FlowLayout(FlowLayout.LEFT));
     private Boolean focusGranted = true;
@@ -56,6 +56,7 @@ public class Creator {
     private String filePath;
     //private BufferedWriter writer = new BufferedWriter(new FileWriter(filePath,true));
     private String text = textField.getText().trim();
+    private CreateButton createButton = new CreateButton();
     
     public Creator() {
         this.set = Set.getInstance();
@@ -64,38 +65,38 @@ public class Creator {
         textFieldContainer.setName("textFieldContainer");
     }
 
-    public JButton backButtonCreate() {
-        JButton backButton;
-        backButton = new JButton("< Back");
-        backButton.setPreferredSize(new Dimension(87, 29));
+    // public JButton backButtonCreate() {
+    //     JButton backButton;
+    //     backButton = new JButton("< Back");
+    //     backButton.setPreferredSize(new Dimension(87, 29));
 
-        return backButton;
+    //     return backButton;
         
-    }
+    // }
 
-    public JButton saveButtonCreate() {
-        saveButton = new JButton("Save");
-        return saveButton;
-    }
+    // public JButton saveButtonCreate() {
+    //     saveButton = new JButton("Save");
+    //     return saveButton;
+    // }
 
-    public JButton nextButtonCreate() {
-        JButton nextButton;
+    // public JButton nextButtonCreate() {
+    //     JButton nextButton;
 
-        nextButton = new JButton("Next >");
-        nextButton.setPreferredSize(new Dimension(87, 29));
+    //     nextButton = new JButton("Next >");
+    //     nextButton.setPreferredSize(new Dimension(87, 29));
 
-        return nextButton;
-    }
+    //     return nextButton;
+    // }
 
-    public JPanel makeBackNextButtonsPanel(JPanel backButton, JPanel saveButtonPanel, JPanel nextButton) {
-        backNextButtonsPanel = new JPanel(new BorderLayout());
-        backNextButtonsPanel.add(backButton, BorderLayout.WEST);
-        backNextButtonsPanel.add(saveButtonPanel, BorderLayout.CENTER);
-        backNextButtonsPanel.add(nextButton, BorderLayout.EAST);
-        backNextButtonsPanel.setBorder(BorderFactory.createEmptyBorder(0, 0, 0, 0));
+    // public JPanel makeBackNextButtonsPanel(JPanel backButton, JPanel saveButtonPanel, JPanel nextButton) {
+    //     backNextButtonsPanel = new JPanel(new BorderLayout());
+    //     backNextButtonsPanel.add(backButton, BorderLayout.WEST);
+    //     backNextButtonsPanel.add(saveButtonPanel, BorderLayout.CENTER);
+    //     backNextButtonsPanel.add(nextButton, BorderLayout.EAST);
+    //     backNextButtonsPanel.setBorder(BorderFactory.createEmptyBorder(0, 0, 0, 0));
 
-        return backNextButtonsPanel;
-    }
+    //     return backNextButtonsPanel;
+    // }
 
     public void textFieldFocusListener(JTextField importedTextField, String placeholder) { 
         textField = importedTextField;
@@ -153,7 +154,6 @@ public class Creator {
         focusLost(placeholder);//(textField, placeholder);
     }
 
-    //TODO could likely cause bug with focus
     private void focusLost(String placeholder){//(JTextField textField, String placeholder) {
         window.getContentPane().addMouseListener(new MouseAdapter() {
             @Override
@@ -264,9 +264,6 @@ public class Creator {
 
     private void tryToWriteWithoutAppend() {
         //writer = new BufferedWriter(new FileWriter(filePath));
-
-        //TODO look at textfieldpanel
-       //textFieldPanel = set.getTextFieldPanel();
         filePath = set.getFilePath();
         try (BufferedWriter writer = new BufferedWriter(new FileWriter(filePath))) {
             if (!classList.isEmpty()) {
@@ -411,7 +408,7 @@ public class Creator {
         if (textboxCounter <= 30 && my_type.equals("JTextField")) {
             textField = decorate.decorateTextBox(placeholder);
             //set.setEmptiedState(textField, false);
-            addDocumentListener();
+            createButton.addDocumentListenerForSaving(textField);
             textFieldPanel.add(textField); 
             textFieldPanelText.add(textField.getText());
             textField.setPreferredSize(new Dimension(width, height));
@@ -440,37 +437,17 @@ public class Creator {
         }
     }
 
-    private void addDocumentListener() {
-        textField.getDocument().addDocumentListener(new DocumentListener() {
-        @Override
-        public void insertUpdate(DocumentEvent e) {
-                saveButtonEnable(); 
-        }
+    // public void setTextFieldContainer(JPanel thisTextFieldPanel) {
+    //     textFieldPanel = thisTextFieldPanel;
+    // }
 
-        @Override
-        public void removeUpdate(DocumentEvent e) {
-            //System.out.println("removeUpdate/// "+ textField.getWidth()+ textField.getParent().getParent().getParent().getParent().getParent().getName());
-            //textField.getParent();
-        }
+    // public JPanel getTextFieldContainer() {
+    //     return textFieldPanel;
+    // }
 
-        @Override
-        public void changedUpdate(DocumentEvent e) {
-            System.out.println("changedUpdate");
-        }
-        });
-    }
+    // public void resetTextFieldContainer() {
 
-    public void setTextFieldContainer(JPanel thisTextFieldPanel) {
-        textFieldPanel = thisTextFieldPanel;
-    }
-
-    public JPanel getTextFieldContainer() {
-        return textFieldPanel;
-    }
-
-    public void resetTextFieldContainer() {
-
-    }
+    // }
 
     public void deleteTextBox(JPanel container) {
         int componentsCount = container.getComponentCount();
@@ -478,7 +455,8 @@ public class Creator {
             Component lastComponent = container.getComponent(componentsCount - 1);
             container.remove(lastComponent); 
 
-            set.removeClassFromClassList();
+            //TODO remove from classlist
+            //set.removeClassFromClassList();
 
             windowFix();
             textboxCounter--;
@@ -490,10 +468,10 @@ public class Creator {
         window.repaint();
     }
 
-    public void hideContainer() {
-        textFieldContainer.setVisible(false);
-        textFieldPanel.setVisible(false);
-    }
+    // public void hideContainer() {
+    //     textFieldContainer.setVisible(false);
+    //     textFieldPanel.setVisible(false);
+    // }
 
     public void debugPrintPanel() {
         for (Component component : textFieldPanel.getComponents()) {
@@ -504,20 +482,20 @@ public class Creator {
         }
     }
 
-    public void setTextFieldPanel(JPanel myPanel) {
-        textFieldPanel = myPanel;
-    }
+    // public void setTextFieldPanel(JPanel myPanel) {
+    //     textFieldPanel = myPanel;
+    // }
 
     public void setClassList() {
         set.setClassList(classList);
     }
 
-    public void saveButtonEnable() {
-        saveButton.setEnabled(true);
-    }
+    // public void saveButtonEnable() {
+    //     saveButton.setEnabled(true);
+    // }
     
     public JPanel typeBox(String placeholder, String my_type, Boolean boxLoaded) {
-        hideContainer(); //needed unless jlabels will be missing
+        createButton.hideContainer(); //needed unless jlabels will be missing
         loaded = boxLoaded;
         //System.out.println("");
         JPanel northTypePanel = new JPanel(new BorderLayout());

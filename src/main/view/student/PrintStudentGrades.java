@@ -12,12 +12,14 @@ import java.awt.event.ActionListener;
 import java.awt.event.ActionEvent;
 import main.controller.Creator;
 import main.controller.Decorator;
+import main.controller.CreateButton;
 
 public class PrintStudentGrades extends JFrame {
     private JFrame window;
     private JPanel backNextButtonsPanel;
     private Decorator decorator = new Decorator();
     private Creator creator;
+    private CreateButton createButton = new CreateButton();
 
     public PrintStudentGrades(JFrame main, String studentOrTeacher, String existingOrNew) {
         System.out.println("in print student grades");
@@ -37,7 +39,7 @@ public class PrintStudentGrades extends JFrame {
     }
 
     public void buttonSetUpAction(JFrame main, String studentOrTeacher, String existingOrNew) {
-        JButton backButton = creator.backButtonCreate();
+        JButton backButton = createButton.backButtonCreate();
         JPanel backButtonPanel = new JPanel();
         backButtonPanel.add(backButton);
         backButton.addActionListener(new ActionListener() {
@@ -46,7 +48,7 @@ public class PrintStudentGrades extends JFrame {
             }
         });
 
-        JButton saveButton = creator.saveButtonCreate();
+        JButton saveButton = createButton.saveButtonCreate();
         JPanel saveButtonPanel = new JPanel();
         saveButtonPanel.add(saveButton);
         saveButton.addActionListener(new ActionListener() {
@@ -55,11 +57,11 @@ public class PrintStudentGrades extends JFrame {
             }
         });
 
-        JButton nextButton = creator.nextButtonCreate();
+        JButton nextButton = createButton.nextButtonCreate();
         JPanel nextButtonPanel = new JPanel();
         nextButtonPanel.add(nextButton);
         nextButton.setEnabled(false);
-        backNextButtonsPanel = creator.makeBackNextButtonsPanel(backButtonPanel, saveButtonPanel, nextButtonPanel);
+        backNextButtonsPanel = createButton.makeBackNextButtonsPanel(backButtonPanel, saveButtonPanel, nextButtonPanel);
         window.add(backNextButtonsPanel, BorderLayout.SOUTH);
     }
 

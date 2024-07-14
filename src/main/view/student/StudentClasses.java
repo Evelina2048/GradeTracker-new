@@ -23,6 +23,7 @@ import java.awt.event.ActionEvent;
 import java.util.ArrayList;
 import java.util.concurrent.atomic.AtomicBoolean;
 import main.model.Set;
+import main.controller.CreateButton;
 import main.controller.Creator;
 import main.controller.Decorator;
 import main.controller.FileHandler;
@@ -38,6 +39,7 @@ public class StudentClasses extends JFrame {
     private JFrame window;
     private Creator creator;
     private Decorator decorator;
+    private CreateButton createButton;
     private JPanel backNextButtonsPanel;
     private JButton saveButton;
     private JTextField selectedTextBox;
@@ -46,7 +48,8 @@ public class StudentClasses extends JFrame {
     AtomicBoolean textFieldEmptied = new AtomicBoolean(false);;
     JButton newClassButton;
     JButton deleteClassButton;
-    Decorator decorate = new Decorator();
+    //Decorator decorate = new Decorator();
+    //CreateButton createButton = new CreateButton();
     FileHandler fileHandler = new FileHandler();
     Set set;
     JPanel instructionsPanel;
@@ -68,6 +71,7 @@ public class StudentClasses extends JFrame {
         window.setName("window");
         creator = new Creator();
         decorator = new Decorator();
+        createButton = new CreateButton();
         System.out.println("in student classes");
 
         EnterAction enterAction = new EnterAction();
@@ -126,13 +130,13 @@ public class StudentClasses extends JFrame {
 
         JPanel nextButtonPanel = makeNextButtonPanel();
 
-        backNextButtonsPanel = creator.makeBackNextButtonsPanel(backButtonPanel, saveButtonPanel, nextButtonPanel);
+        backNextButtonsPanel = createButton.makeBackNextButtonsPanel(backButtonPanel, saveButtonPanel, nextButtonPanel);
         southContainer.add(backNextButtonsPanel, BorderLayout.SOUTH);
         window.add(southContainer, BorderLayout.SOUTH);
     }
 
     private JPanel makeBackButtonPanel() {
-        JButton backButton = creator.backButtonCreate();
+        JButton backButton = createButton.backButtonCreate();
         JPanel backButtonPanel = new JPanel();
         backButtonPanel.add(backButton);
         backButton.setPreferredSize(new Dimension(87, 29));
@@ -153,7 +157,8 @@ public class StudentClasses extends JFrame {
     }
 
     private JPanel makeSaveButtonPanel() {
-        saveButton = creator.saveButtonCreate();
+        System.out.println("0000.1");
+        saveButton = createButton.saveButtonCreate();
         saveButton.setEnabled(false);
         JPanel saveButtonPanel = new JPanel();
         saveButtonPanel.add(saveButton);
@@ -173,7 +178,7 @@ public class StudentClasses extends JFrame {
     }
 
     private JPanel makeNextButtonPanel() {
-        JButton nextButton = creator.nextButtonCreate();
+        JButton nextButton = createButton.nextButtonCreate();
         JPanel nextButtonPanel = new JPanel();
         nextButtonPanel.add(nextButton);
         nextButton.setPreferredSize(new Dimension(87, 29));
@@ -193,13 +198,13 @@ public class StudentClasses extends JFrame {
         creator.writeTextToFile();//creator.getTextFieldContainer());
         set.setFinalClassList(classList); //lookie
         hideWindow();
-        creator.hideContainer();
+        createButton.hideContainer();
 
         set.setFinalClassList(set.getCurrentPanelList());
         StudentStatCollect studentStatCollect = new StudentStatCollect();
         if (fileHandler.fileExists("/Users/evy/Documents/GradeTracker-new/src/main/view/UserInfo/StudentInfo/" + set.getUsername() + "/" + set.getFinalClassList().get(0) + ".txt")) {
             //♡
-            creator.hideContainer();
+            createButton.hideContainer();
             studentStatCollect.addLoadedBoxes();
             //creator.hideContainer();
             //♡
@@ -254,6 +259,7 @@ public class StudentClasses extends JFrame {
         deleteClassButton.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent e) {
                 System.out.println("clicked delete class mode");
+                requestFocusInWindow();
                 deleteMode();
                 saveButton.setEnabled(true);
             }
@@ -287,6 +293,7 @@ public class StudentClasses extends JFrame {
             }
             else if (set.getTextFieldPanel().getComponent(i) instanceof JPanel) {
                 JTextField textField = creator.goIntoPanelReturnTextbox((JPanel) set.getTextFieldPanel().getComponent(i), 0);
+                //TODO
                 addMouseListenerToTextboxAndFrame(textField);
             }
             
@@ -333,19 +340,13 @@ public class StudentClasses extends JFrame {
         instructionsWordsAndPanel("Hit Delete Button to Delete");
         String filePath = "/Users/evy/Documents/GradeTracker-new/src/main/view/UserInfo/StudentInfo/"+set.getUsername()+"/"+selectedTextBox.getText()+".txt";
         removeDeleteClassButtonActionListeners();//deleteClassButton.getActionListeners().length);
-        System.out.println("is this even being run");
         deleteClassButton.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent e) {
-                System.out.println("count:" + set.getTextFieldPanel().getComponentCount());
                 newClassButton.setEnabled(true);
-                if (set.getLoadedState(selectedTextBox) && (fileHandler.fileExists(filePath)) && fileHandler.fileIsNotEmpty(filePath)) { //if the file has loaded information attached
-                    System.out.println(".9.9.9.9");
-                    //yesOrNoDialog = decorator.areYouSureMessageDelete(selectedTextBox, "deleting","<html><center>Deleting this class will optiondelete <br>its loaded information.<br>Do you wish to continue?");
+                //if the file has loaded information attached
+                if (set.getLoadedState(selectedTextBox) && (fileHandler.fileExists(filePath)) && fileHandler.fileIsNotEmpty(filePath)) {
                 
                     yesOrNoDialog[0] = decorator.areYouSureMessageDelete(selectedTextBox, "deleting", "<html><center>Deleting this class will optiondelete <br>its loaded information.<br>Do you wish to continue?");
-                    //if (yesOrNoDialog.equals("yes") {
-                    //    saveButton.setEnabled(true);
-                    //}
 
                     selectedTextBox.setForeground(Color.GRAY);
                     selectedTextBox.setBorder(borderRegular);
@@ -353,7 +354,7 @@ public class StudentClasses extends JFrame {
 
                 else {
                     JPanel selectedBoxPanel = new JPanel();
-                    selectedBoxPanel.add(selectedTextBox);
+                    selectedBoxPanel.add(selectedTextBox); //this also makes the selected textbox invisible
                     System.out.println(selectedBoxPanel.getComponentCount() + " :beforeselectedBoxPanelComponenents");
                     creator.deleteTextBox(selectedBoxPanel);
                     saveButton.setEnabled(true);
@@ -450,7 +451,7 @@ public class StudentClasses extends JFrame {
             public void mouseClicked(MouseEvent e) {
                 System.out.println(" clicked in frame");
                 if (selectedTextBox != null) {
-                    selectedTextBox.setForeground(Color.GRAY);
+                    selectedTextBox.setForeground(Color.lightGray);
                     selectedTextBox.setBorder(borderRegular);
                     selectedTextBox = null;
                     //removeDeleteClassButtonActionListeners(1);
@@ -466,9 +467,9 @@ public class StudentClasses extends JFrame {
         newClassButton.setVisible(false);
         deleteClassButton.setVisible(false);
         southContainer.setVisible(false);
-        creator.getTextFieldContainer().setVisible(false);
+        createButton.getTextFieldContainer().setVisible(false);
         instructionsPanel.setVisible(false);
-        creator.hideContainer();
+        createButton.hideContainer();
         //textBoxPanel.setVisible(false);
         //classLabelPanel.removeAll();
         // if (DEBUGMARKEDBOX != null) {

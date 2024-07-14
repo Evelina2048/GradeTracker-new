@@ -24,6 +24,7 @@ import javax.swing.AbstractAction;
 import javax.swing.JComponent;
 import javax.swing.KeyStroke;
 import java.awt.event.KeyEvent;
+import main.controller.CreateButton;
 
 public class StudentStatCollect extends JFrame {
     private JFrame window;
@@ -31,6 +32,7 @@ public class StudentStatCollect extends JFrame {
     private JPanel backNextButtonsPanel;
     private JButton newTypeButton;
     private Set set;
+    private CreateButton createButton = new CreateButton();
     private JPanel container = new JPanel(new FlowLayout(FlowLayout.LEFT));
     private JPanel newDelContainerFlow;
     private JPanel classLabelPanel = new JPanel(new FlowLayout(FlowLayout.LEFT));
@@ -66,7 +68,7 @@ public class StudentStatCollect extends JFrame {
         System.out.println("final class list issssss: "+ finalClassList);
         creator = new Creator();
 
-        creator.hideContainer();
+        createButton.hideContainer();
 
         fileHandler = new FileHandler();
         createNewTypeButton();
@@ -81,22 +83,22 @@ public class StudentStatCollect extends JFrame {
     }
 
     public void buttonSetUpAction() {
-        JButton backButton = creator.backButtonCreate();
+        JButton backButton = createButton.backButtonCreate();
         JPanel backButtonPanel = new JPanel();
         backButtonPanel.add(backButton);
         backAction(backButton);
-        JButton saveButton = creator.saveButtonCreate();
+        JButton saveButton = createButton.saveButtonCreate();
         JPanel saveButtonPanel = new JPanel();
         saveButton.setEnabled(false);
         saveButtonPanel.add(saveButton);
         saveAction(saveButton);
         saveButton.setEnabled(false);
         
-        JButton nextButton = creator.nextButtonCreate();
+        JButton nextButton = createButton.nextButtonCreate();
         JPanel nextButtonPanel = new JPanel();
         nextButtonPanel.add(nextButton);
         nextButtonAction(nextButton);
-        backNextButtonsPanel = creator.makeBackNextButtonsPanel(backButtonPanel, saveButtonPanel, nextButtonPanel);
+        backNextButtonsPanel = createButton.makeBackNextButtonsPanel(backButtonPanel, saveButtonPanel, nextButtonPanel);
         window.add(backNextButtonsPanel, BorderLayout.SOUTH);
     }
 
@@ -107,11 +109,9 @@ public class StudentStatCollect extends JFrame {
     }
     
     private void backAction(JButton backButton) {
-        //System.out.println(1111);
         backButton.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent e) {
                 if(set.getCanContinue()) {
-                    //System.out.println(2222);
                     if (set.getClassListIndex() == 0) { //case for back to classes
                         hideWindow();
                         StudentClasses studentClasses = new StudentClasses();
@@ -119,7 +119,6 @@ public class StudentStatCollect extends JFrame {
                         saveButtonAction();
                     }
                     else if (set.getClassListIndex() > 0) {
-                        //System.out.println(3333);
                         goToPreviousClasses();              
                     }
                 }
@@ -128,10 +127,8 @@ public class StudentStatCollect extends JFrame {
     }
 
     private void goToPreviousClasses() {
-        //System.out.println(4444);
         saveButtonAction();
         if (set.getCanContinue()) {
-            ///System.out.println(5555);
             System.out.println("there are previous classes");
             set.decrementClassListIndex();
             classLabelPanel.removeAll();
@@ -149,9 +146,6 @@ public class StudentStatCollect extends JFrame {
     }
 
     public void addLoadedBoxes() {
-        //System.out.println(6666);
-
-
         //textBoxPanel.add(creator.typeBox(set.getFinalClassList().get(0)+"BAT", "JLabel", true));
 
 
@@ -162,7 +156,6 @@ public class StudentStatCollect extends JFrame {
         int numberOfComponents = testPanel.getComponentCount();
         numOfBoxes += numberOfComponents;
         for (int i = 0; i < numberOfComponents; i++) {
-            //System.out.println(7777);
             textBoxPanel.add(testPanel.getComponent(0));
         }
         classLabelPanel.add(textBoxPanel);
@@ -200,7 +193,7 @@ public class StudentStatCollect extends JFrame {
         System.out.println("testtesttest: "+ set.getCurrentClass());
         set.setFilePath("/Users/evy/Documents/GradeTracker-new/src/main/view/UserInfo/StudentInfo/" + set.getUsername() +"/"+finalClassList.get(set.getClassListIndex())+ ".txt");
         
-        creator.setTextFieldContainer(set.getTextFieldPanel());
+        createButton.setTextFieldContainer(set.getTextFieldPanel());
         creator.writeTextToFile();
        // }
     }
@@ -208,7 +201,6 @@ public class StudentStatCollect extends JFrame {
     private void nextButtonAction(JButton nextButton) {
         nextButton.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent e) {
-                System.out.println(1111.1);
                 doNextButtonProcedure();
             }
         });
@@ -217,10 +209,8 @@ public class StudentStatCollect extends JFrame {
     private void doNextButtonProcedure() {
         saveButtonAction();
         if(set.getCanContinue()) {
-            System.out.println(2222.1);
             set.incrementClassListIndex();
             if (set.getClassListIndex()+1 <= set.getFinalClassList().size()) {
-                System.out.println(3333.1);
                 visitNextStudentClass();
             }
             else {
@@ -234,12 +224,12 @@ public class StudentStatCollect extends JFrame {
         //readClass(finalClassList);
         String filePath = "/Users/evy/Documents/GradeTracker-new/src/main/view/UserInfo/StudentInfo/"+set.getUsername()+"/"+set.getFinalClassList().get(set.getClassListIndex())+".txt";
         if (fileHandler.fileExists(filePath)) {
-            System.out.println(4444.1 + "::: "+set.getFinalClassList().get(set.getClassListIndex())+"::: should be math");
             textBoxPanelReset();
-            //TODO note label
             //boxManageCreate(set.getFinalClassList().get(set.getClassListIndex()), "JLabel", true); //displays class label 
             
-            textBoxPanel = fileHandler.loadTextboxes(filePath);
+            //textBoxPanel = fileHandler.loadTextboxes(filePath);
+
+            addLoadedBoxes();
             //int numberOfComponents = testPanel.getComponentCount();
             // for (int i = 0; i < numberOfComponents; i++) {
             //     System.out.println("5555.1" + testPanel.getComponent(0));
@@ -310,7 +300,7 @@ public class StudentStatCollect extends JFrame {
                 numOfBoxes = numOfBoxes - 3;
                 typeNumber--;
                 
-                creator.saveButtonEnable();
+                createButton.saveButtonEnable();
             }
     }
     });  
@@ -354,7 +344,7 @@ public class StudentStatCollect extends JFrame {
     }
 
     private void hideWindow() {
-        creator.hideContainer();
+        createButton.hideContainer();
         backNextButtonsPanel.setVisible(false);
         newDelContainerFlow.setVisible(false);
         classLabelPanel.setVisible(false);

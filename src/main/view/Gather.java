@@ -37,6 +37,7 @@ import java.awt.event.FocusEvent;
 import java.awt.event.FocusListener;
 
 import main.model.Set;
+import main.controller.CreateButton;
 import main.controller.Creator;
 import main.controller.Decorator;
 import main.controller.FileHandler;
@@ -57,6 +58,7 @@ public class Gather {
     private String studentOrTeacher;
 
     private Boolean firstTimeInTextbox = true;
+    private CreateButton createButton = new CreateButton();
     
     JRadioButton studentButton;
     JRadioButton teacherButton;
@@ -84,6 +86,7 @@ public class Gather {
         studentOrTeacher = set.getStudentOrTeacher();
         window = set.getWindow();
         creator = new Creator();
+
 
         // newUser = new NewUser();
 
@@ -307,12 +310,12 @@ public class Gather {
         makeSaveButton();
         
         makeNextButton();
-        backNextButtonsPanel = creator.makeBackNextButtonsPanel(backButtonPanel,saveButtonPanel, nextButtonPanel);
+        backNextButtonsPanel = createButton.makeBackNextButtonsPanel(backButtonPanel,saveButtonPanel, nextButtonPanel);
         window.add(backNextButtonsPanel, BorderLayout.SOUTH);
     }
 
     private void makeBackButton() {
-        JButton backButton = creator.backButtonCreate();
+        JButton backButton = createButton.backButtonCreate();
         backButtonPanel.add(backButton);
         backButton.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent e) {
@@ -335,7 +338,7 @@ public class Gather {
     }
 
     private void makeSaveButton() {
-        JButton saveButton = creator.saveButtonCreate();
+        JButton saveButton = createButton.saveButtonCreate();
         saveButton.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent e) {
             }
@@ -343,7 +346,7 @@ public class Gather {
     }
 
     private void makeNextButton() {
-        nextButton = creator.nextButtonCreate();
+        nextButton = createButton.nextButtonCreate();
         nextButtonPanel.add(nextButton);
         nextButtonAddActionListener();
     }

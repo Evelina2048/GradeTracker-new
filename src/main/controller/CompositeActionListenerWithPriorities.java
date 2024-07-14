@@ -86,9 +86,6 @@ public class CompositeActionListenerWithPriorities implements ActionListener {
                 button.setEnabled(false);
 
                 //button.setForeground(Color.white);
-
-                //TODO setPaint
-                //paint(Graphics g);
                 
                 //button.setColor(Color.white);
                 decorate.errorMessageSetUp(button);

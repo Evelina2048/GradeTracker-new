@@ -12,7 +12,9 @@ import java.nio.file.Paths;
 import java.util.ArrayList;
 import javax.swing.JPanel;
 import java.awt.FlowLayout;
-
+import java.nio.file.attribute.BasicFileAttributes;
+import java.nio.file.FileVisitResult;
+import java.nio.file.SimpleFileVisitor;
 import main.model.Set;
 
 public class FileHandler {
@@ -110,5 +112,21 @@ public class FileHandler {
 
         public void hideLoadedBoxes() {
             //bigPanel.setVisible(false);
+        }
+
+        public static void deleteClass(Path filePath) throws IOException {
+            Files.walkFileTree(filePath, new SimpleFileVisitor<Path>() {
+                @Override
+                public FileVisitResult visitFile(Path file, BasicFileAttributes attrs) throws IOException {
+                    Files.delete(file);
+                    return FileVisitResult.CONTINUE;
+                }
+    
+                @Override
+                public FileVisitResult postVisitDirectory(Path dir, IOException exc) throws IOException {
+                    Files.delete(dir);
+                    return FileVisitResult.CONTINUE;
+                }
+            });
         }
 }

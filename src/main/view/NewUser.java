@@ -8,6 +8,7 @@ import javax.swing.JComponent;
 import javax.swing.JFrame;
 import javax.swing.JRadioButton;
 import javax.swing.KeyStroke;
+import javax.swing.SwingUtilities;
 
 import java.awt.BorderLayout;
 import java.awt.Color;
@@ -26,8 +27,8 @@ import main.model.Set;
 import main.controller.Creator;
 import main.controller.Decorator;
 import main.controller.CompositeActionListenerWithPriorities;
+import main.controller.CreateButton;
 
-import javax.swing.SwingUtilities;
 
 public class NewUser extends JFrame {
     private JFrame window;
@@ -37,6 +38,7 @@ public class NewUser extends JFrame {
     private boolean moveOnPossible = false;
     private Gather gatherFrame;
     private Set set;
+    private CreateButton createButton = new CreateButton();
     long clickTimeMillis;
     CompositeActionListenerWithPriorities actionPriorities = new CompositeActionListenerWithPriorities();
 
@@ -183,11 +185,11 @@ public class NewUser extends JFrame {
         backNextButtonsPanel = new JPanel(new BorderLayout());
 
         Creator creator = new Creator();
-        JButton backButton = creator.backButtonCreate();
+        JButton backButton = createButton.backButtonCreate();
         JPanel backButtonPanel = new JPanel();
         backButtonPanel.add(backButton);
 
-        JButton nextButton = creator.nextButtonCreate();
+        JButton nextButton = createButton.nextButtonCreate();
         JPanel nextButtonPanel = new JPanel();
 
         nextButton.addActionListener(new ActionListener() {
@@ -200,7 +202,7 @@ public class NewUser extends JFrame {
 
         nextButtonPanel.add(nextButton);
         
-        backNextButtonsPanel = creator.makeBackNextButtonsPanel(backButtonPanel, new JPanel(), nextButtonPanel);
+        backNextButtonsPanel = createButton.makeBackNextButtonsPanel(backButtonPanel, new JPanel(), nextButtonPanel);
         window.add(backNextButtonsPanel, BorderLayout.SOUTH);
 
             

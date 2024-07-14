@@ -8,6 +8,7 @@ import java.awt.event.ActionListener;
 import java.awt.event.ActionEvent;
 import main.controller.Creator;
 import main.model.Set;
+import main.controller.CreateButton;
 
 
 public class EditOrResults extends JFrame {
@@ -15,6 +16,7 @@ public class EditOrResults extends JFrame {
     private JPanel backNextButtonsPanel;
     private Creator creator;
     private Set set;
+    private CreateButton createButton = new CreateButton();
 
     public EditOrResults(JFrame main, String studentOrTeacher, String existingOrNew, Set set) {
         this.set = Set.getInstance();
@@ -32,7 +34,7 @@ public class EditOrResults extends JFrame {
     }
 
     public void buttonSetUpAction(JFrame main, String studentOrTeacher, String existingOrNew) {
-        JButton backButton = creator.backButtonCreate();
+        JButton backButton = createButton.backButtonCreate();
         JPanel backButtonPanel = new JPanel();
         backButtonPanel.add(backButton);
         backButton.addActionListener(new ActionListener() {
@@ -41,7 +43,7 @@ public class EditOrResults extends JFrame {
             }
         });
 
-        JButton saveButton = creator.saveButtonCreate();
+        JButton saveButton = createButton.saveButtonCreate();
         JPanel saveButtonPanel = new JPanel();
         saveButtonPanel.add(saveButton);
         saveButton.addActionListener(new ActionListener() {
@@ -50,11 +52,11 @@ public class EditOrResults extends JFrame {
             }
         });
         
-        JButton nextButton = creator.nextButtonCreate();
+        JButton nextButton = createButton.nextButtonCreate();
         JPanel nextButtonPanel = new JPanel();
         nextButtonPanel.add(nextButton);
         nextButton.setEnabled(false);
-        backNextButtonsPanel = creator.makeBackNextButtonsPanel(backButtonPanel, saveButtonPanel, nextButtonPanel);
+        backNextButtonsPanel = createButton.makeBackNextButtonsPanel(backButtonPanel, saveButtonPanel, nextButtonPanel);
         window.add(backNextButtonsPanel, BorderLayout.SOUTH);
     }
 

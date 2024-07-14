@@ -32,11 +32,13 @@ import main.model.Set;
 import main.view.student.StudentClasses;
 import main.controller.Creator;
 import main.controller.Decorator;
+import main.controller.CreateButton;
 
 public class MainWindow extends JFrame {
 private String studentOrTeacher;
 private boolean moveOnPossible = false;
 private Set set;
+private CreateButton createButton = new CreateButton();
 JRadioButton studentButton;
 JRadioButton teacherButton;
 ButtonGroup teacherStudentGroup;
@@ -137,7 +139,7 @@ private void addToChoicesPanel(ButtonGroup teacherStudentGroup, JRadioButton tea
 private void backNextButton() {
     backNextButtonsPanel = new JPanel(new BorderLayout());
     Creator creator = new Creator();
-    JButton backButton = creator.backButtonCreate();
+    JButton backButton = createButton.backButtonCreate();
     backButton.addActionListener(new ActionListener() {
         public void actionPerformed(ActionEvent e) {
             decorator.hideWindow(instructionsPanel, choicesPanel, backNextButtonsPanel);     
@@ -147,7 +149,7 @@ private void backNextButton() {
     JPanel backButtonPanel = new JPanel();
     backButtonPanel.add(backButton);
 
-    JButton nextButton = creator.nextButtonCreate();
+    JButton nextButton = createButton.nextButtonCreate();
     JPanel nextButtonPanel = new JPanel();
     nextButtonPanel.add(nextButton);
     nextButton.addActionListener(new ActionListener() {
@@ -155,7 +157,7 @@ private void backNextButton() {
             doNextButtonProcedure();
         }
     });
-    backNextButtonsPanel = creator.makeBackNextButtonsPanel(backButtonPanel, new JPanel(), nextButtonPanel);
+    backNextButtonsPanel = createButton.makeBackNextButtonsPanel(backButtonPanel, new JPanel(), nextButtonPanel);
     window.add(backNextButtonsPanel, BorderLayout.SOUTH);
 }
 
