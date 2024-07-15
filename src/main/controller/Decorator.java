@@ -158,17 +158,20 @@ public class Decorator {
 
         textField.removeFocusListener(set.getDialogFocusListener());
         
-        FocusListener customFocusListener = new FocusAdapter() {
+        FocusListener yesFocusListener = new FocusAdapter() {
             @Override
             public void focusGained(FocusEvent e) {
+                System.out.println("focuslistener#3");
                 SwingUtilities.invokeLater(() -> {
                     System.out.println("focusered");
                     textField.setCaretPosition(caretPosition);
                 });
             }
         };
-        textField.addFocusListener(customFocusListener);
-        
+        //textField.removeFocusListener(set.getDialogFocusListener());
+
+        textField.addFocusListener(yesFocusListener);
+        set.setYesFocusListener(yesFocusListener);        
         //textField.customFocusListener.requestFocusInWindow();
 
         
@@ -216,7 +219,7 @@ public class Decorator {
         // dialog.dispose();
         // window.requestFocusInWindow(); 
 
-        deleteFocusListeners(textField.getFocusListeners().length-1);//textField.getFocusListeners().length);
+        //deleteFocusListeners(textField.getFocusListeners().length-1);//textField.getFocusListeners().length);
 
         window.requestFocusInWindow(); 
         dialog.setVisible(false);
@@ -225,16 +228,47 @@ public class Decorator {
         window.requestFocusInWindow(); 
         
 
-        textField.addFocusListener(new FocusAdapter() {
+        // FocusListener yesFocusListener = new FocusAdapter() {
+        //     @Override
+        //     public void focusGained(FocusEvent e) {
+        //         SwingUtilities.invokeLater(() -> {
+        //             System.out.println("focusered");
+        //             textField.setCaretPosition(caretPosition);
+        //         });
+        //     }
+        // };
+        // textField.addFocusListener(yesFocusListener);
+        // set.setYesFocusListener(yesFocusListener);
+
+        //TODO no button action listener
+        //textField.addFocusListener(new FocusAdapter() {
+        FocusListener noFocusListener = new FocusAdapter() {
                 @Override
                 public void focusGained(FocusEvent e) {
+                    System.out.println("focuslistener#4");
                     window.requestFocusInWindow();
-                    areYouSureMessageDelete(textField, "editing username", "<html><center>Editing this username will create or <br>login to an account under this name. <br>Do you wish to continue?");
-                    
+                    //below is necessary 
+                    //
+                    // areYouSureMessageDelete(textField, "editing username", "<html><center>Editing this username will create or <br>login to an account under this name. <br>Do you wish to continue?");
+                    //
+
                     //window.requestFocusInWindow();
+
+                    //textField.removeFocusListener(noFocusListener);
+
+                    SwingUtilities.invokeLater(new Runnable() {
+                        public void run() {
+                            textField.requestFocusInWindow();
+                        }
+                    });
+                    
+                    textField.removeFocusListener(this);
                 }
                 
-            });
+        };
+        textField.addFocusListener(noFocusListener);
+        set.setNoFocusListener(noFocusListener);
+        textField.removeFocusListener(set.getDialogFocusListener());
 
         //textField.addFocusListener(set.getDialogFocusListener());
     }

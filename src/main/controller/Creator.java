@@ -104,6 +104,7 @@ public class Creator {
         textField.addFocusListener(new FocusAdapter() {
             @Override
             public void focusGained(FocusEvent e) {
+                System.out.println("focuslistener#1");
                 if (focusGranted) {
                     textField.setForeground(Color.gray);
                     System.out.println("focusGranted");

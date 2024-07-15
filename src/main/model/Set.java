@@ -10,6 +10,7 @@ import javax.swing.JPanel;
 import javax.swing.JTextField;
 import java.awt.Component;
 import java.awt.event.FocusAdapter;
+import java.awt.event.FocusListener;
 
 public class Set {
     private String username;
@@ -41,6 +42,9 @@ public class Set {
     private static Set instance;
 
     private JLabel DEBUGMARKEDBOX;
+
+    private FocusListener yesFocusListener;
+    private FocusListener noFocusListener;
 
     // Private constructor to prevent instantiation
     private Set() {}
@@ -242,5 +246,21 @@ public class Set {
 
     public JButton getCurrentSaveButton() {
         return saveButton;
+    }
+
+    public void setYesFocusListener(FocusListener thisYesFocusListener) {
+        yesFocusListener = thisYesFocusListener;
+    }
+
+    public FocusListener getYesFocusListener() {
+        return yesFocusListener;
+    }
+
+    public void setNoFocusListener(FocusListener thisNoFocusListener) {
+        noFocusListener = thisNoFocusListener;
+    }
+
+    public FocusListener getNoFocusListener() {
+        return noFocusListener;
     }
 }

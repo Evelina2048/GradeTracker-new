@@ -92,7 +92,6 @@ private void windowSetUp() {
  
 private void InstructionsWordsWindow() {
         //JLabel instructionsWords = new JLabel("Hello 1234567890! Are you a student or a teacher?");
-        System.out.println(1111);
         instructionsWords = new JLabel("Hello "+set.getUsername() + "! Are you a student or a teacher?");
         instructionsPanel = decorator.InstructionsPanelDecorate(instructionsPanel, instructionsWords);
         truncateLabelText("Hello ", "! Are you a student or a teacher?", window.getWidth());
@@ -102,7 +101,6 @@ private void InstructionsWordsWindow() {
 
 private void truncateLabelText(String prefix, String suffix, int maxWidth) {
     FontMetrics fontMetrics = instructionsWords.getFontMetrics(instructionsWords.getFont());
-    System.out.println(2222);
     JLabel usernameLabel = new JLabel(set.getUsername());
     String fullText = prefix + usernameLabel.getText() + suffix;
     //FontMetrics fontMetrics = usernameLabel.getFontMetrics(usernameLabel.getFont());
@@ -113,7 +111,6 @@ private void truncateLabelText(String prefix, String suffix, int maxWidth) {
     //     return;
     // }
 
-    System.out.println(3333);
    //String username = usernameLabel.getText();
     String username = set.getUsername();
     String ellipsis = "...";
@@ -122,7 +119,7 @@ private void truncateLabelText(String prefix, String suffix, int maxWidth) {
     int usernameWidth = fontMetrics.stringWidth(username);
     int ellipsisWidth = fontMetrics.stringWidth(ellipsis);
     int availableWidth = maxWidth - prefixWidth - suffixWidth - ellipsisWidth;
-    System.out.println("6666 "+ maxWidth +" "+prefixWidth+" "+suffixWidth+" "+ellipsisWidth+" ");
+    //System.out.println("6666 "+ maxWidth +" "+prefixWidth+" "+suffixWidth+" "+ellipsisWidth+" ");
 
 
     System.out.println("usernamewidth: "+ usernameWidth+ ": available width: "+availableWidth);
@@ -131,6 +128,11 @@ private void truncateLabelText(String prefix, String suffix, int maxWidth) {
     System.out.println("currentUsernamePermittedAmount "+currentUsernamePermittedAmount);
     //need to find sweet spot where is not less than max
 
+    if (fontMetrics.stringWidth(username) <= availableWidth) {//if is already less than max with username
+    //then return. because no changes necessary;
+    return;
+    }
+
     //while (!(fontMetrics.stringWidth(username.substring(0, endIndex)) <= availableWidth && fontMetrics.stringWidth(username.substring(0, endIndex+1)) >= availableWidth)) {
     while (fontMetrics.stringWidth(username.substring(0, endIndex+1)) <= availableWidth) {    
         System.out.println("it works "+ fontMetrics.stringWidth(username.substring(0, endIndex+1))+" "+availableWidth);
@@ -138,38 +140,7 @@ private void truncateLabelText(String prefix, String suffix, int maxWidth) {
         //currentUsernamePermittedAmount = set.getUsername().substring(0, endIndex);
         System.out.println("it works2: "+currentUsernamePermittedAmount+" "+set.getUsername().substring(0, endIndex));
     }
-    System.out.println("it works3: "+currentUsernamePermittedAmount+" "+set.getUsername().substring(0, endIndex));
     instructionsWords =  new JLabel("Hello "+ set.getUsername().substring(0, endIndex) + "...! Are you a student or a teacher?");
-
-    // if (fontMetrics.stringWidth(set.getUsername().substring(0, endIndex)) <= availableWidth && fontMetrics.stringWidth(set.getUsername().substring(0, endIndex+1)) <= availableWidth) {//if (current amount +1 is greater than max && current amount less than max)
-    //     System.out.println("it works");
-    //     endIndex++;
-    //     System.out.println("it works2: "+currentUsernamePermittedAmount+" "+set.getUsername().substring(0, endIndex));
-    // }
-
-    // else if (fontMetrics.stringWidth(set.getUsername().substring(0, endIndex)) <= availableWidth && fontMetrics.stringWidth(set.getUsername().substring(0, endIndex+1)) >= availableWidth) {
-    //     System.out.println("success case");
-    // }
-
-
-    // else {
-    //     endIndex++;
-    //     currentUsernamePermittedAmount = set.getUsername().substring(0, endIndex);
-    //     System.out.println("it works2: "+currentUsernamePermittedAmount);
-
-    // }
-
-    //else add 1
-
-
-    // for (int i = username.length() - 1; i > 0; i--) {
-    //     System.out.println(4444);
-    //     if (fontMetrics.stringWidth(username.substring(0, i)) >= availableWidth) {
-    //         System.out.println(5555);
-    //         usernameLabel.setText(prefix + username.substring(0, i) + ellipsis + suffix);
-    //         break;
-    //     }
-    // }
 }
 
 

@@ -45,6 +45,7 @@ import main.controller.FileHandler;
 import java.awt.event.KeyEvent;
 import java.awt.event.MouseListener;
 
+
 //import class files
 
 public class Gather {
@@ -89,6 +90,7 @@ public class Gather {
         pathToUsernameFolder = "/Users/evy/Documents/GradeTracker-new/src/main/view/UserInfo/StudentInfo/" + set.getUsername();
         window = set.getWindow();
         creator = new Creator();
+
 
 
         // newUser = new NewUser();
@@ -158,7 +160,22 @@ public class Gather {
             textfieldFocusListener = new FocusAdapter() {
                 @Override
                 public void focusGained(FocusEvent e) {
+                    System.out.println("focuslistener#5");
                         window.requestFocusInWindow();
+                        // if (textField.hasFocusListener(set.getYesFocusListener())) {
+                        //     textField.removeFocusListener(set.getYesFocusListener());
+                        // }
+                        // for (FocusListener listener : textField.getFocusListeners()) {
+                        //     if (listener == set.getYesFocusListener()) {
+                        //         textField.removeFocusListener(set.getYesFocusListener());
+                        //         break;
+                        //     }
+
+                        //     else if (listener == set.getNoFocusListener()) {
+                        //       textField.removeFocusListener(set.getNoFocusListener());
+                        //        break;
+                        //     }
+                        // }
                         decorate.areYouSureMessageListener();
                         firstTimeInTextbox = false;
                         
@@ -167,6 +184,7 @@ public class Gather {
 
             set.setDialogFocusListener(textfieldFocusListener);
             //deleteAllFocusListeners();
+            // textField.removeFocusListener(set.getDialogFocusListener());
 
             decorate.deleteFocusListeners(textField.getFocusListeners().length-2);//textField.getFocusListeners().length-1);
 
