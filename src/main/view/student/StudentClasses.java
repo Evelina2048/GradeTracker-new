@@ -28,29 +28,12 @@ import main.controller.CreateButton;
 import main.controller.Creator;
 import main.controller.Decorator;
 import main.controller.FileHandler;
-import main.view.Gather;
 import main.view.MainWindow;
 import main.view.student.StudentClasses;
 
 import java.awt.event.KeyEvent;
 
-import javax.swing.BoxLayout;
-import java.awt.Dimension;
-import java.awt.Graphics;
 import java.awt.Point;
-import java.awt.event.MouseAdapter;
-import java.awt.event.MouseEvent;
-import java.util.ArrayList;
-
-import javax.swing.JFrame;
-import javax.swing.JTextField;
-import javax.swing.JLayeredPane;
-import javax.swing.SwingUtilities;
-
-import java.awt.Color;
-import java.awt.Point;
-import java.awt.event.MouseAdapter;
-import java.awt.event.MouseEvent;
 import java.awt.event.MouseMotionAdapter;
 
 
@@ -69,19 +52,11 @@ public class StudentClasses extends JFrame {
     AtomicBoolean textFieldEmptied = new AtomicBoolean(false);;
     JButton newClassButton;
     JButton deleteClassButton;
-    //Decorator decorate = new Decorator();
-    //CreateButton createButton = new CreateButton();
     FileHandler fileHandler = new FileHandler();
     Set set;
     JPanel instructionsPanel;
-    JTextField DEBUGMARKEDBOX;
-
-    //JTextField textField = decorate.decorateTextBox();
 
     public StudentClasses() {
-        //createNewClassButton();
-        // westPanelCreate();
-        // buttonSetUpAction(main, newUser, studentOrTeacher, existingOrNew);
     }
 
     public void studentClassesLaunch() {
@@ -121,13 +96,12 @@ public class StudentClasses extends JFrame {
         }
 
         else {
-            DEBUGMARKEDBOX = creator.createTextBox("Enter Class Name", "JTextField", false);
+           creator.createTextBox("Enter Class Name", "JTextField", false);
         }
     }
 
     private void westPanelCreate() {
         createNewClassButton();
-        System.out.println("before creating delete class button"+set.getCurrentPanelList());
         deleteClassButton();
 
         JPanel buttonsPanel = new JPanel(new BorderLayout());
@@ -163,13 +137,8 @@ public class StudentClasses extends JFrame {
         backButton.setPreferredSize(new Dimension(87, 29));
         backButton.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent e) {
-                // Gather gather = new Gather();
-                // gather.gatherLaunch();
                 hideWindow(); 
-                //set.setExistingOrNew(existingOrNew);
                 set.setWindow(window);
-                //decorator.hideWindow(instructionsPanel, choicesPanel, backNextButtonsPanel);     
-                //MainWindow main = (MainWindow) set.getWindow();
                 MainWindow main = new MainWindow();
                 main.MainWindowLaunch();
                 main.setButtonSelected();
@@ -178,12 +147,10 @@ public class StudentClasses extends JFrame {
     }
 
     private JPanel makeSaveButtonPanel() {
-        System.out.println("0000.1");
         saveButton = createButton.saveButtonCreate();
         saveButton.setEnabled(false);
         JPanel saveButtonPanel = new JPanel();
         saveButtonPanel.add(saveButton);
-        //saveButtonAction();
         saveButton.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent e) {
                 saveButtonAction();
@@ -216,20 +183,16 @@ public class StudentClasses extends JFrame {
         set.setClassList(classList);
         writeType();
         System.out.println("nextbuttonhit");
-        creator.writeTextToFile();//creator.getTextFieldContainer());
-        set.setFinalClassList(classList); //lookie
+        creator.writeTextToFile();
+        set.setFinalClassList(classList);
         hideWindow();
         creator.hideContainer();
 
         set.setFinalClassList(set.getCurrentPanelList());
         StudentStatCollect studentStatCollect = new StudentStatCollect();
         if (fileHandler.fileExists("/Users/evy/Documents/GradeTracker-new/src/main/view/UserInfo/StudentInfo/" + set.getUsername() + "/" + set.getFinalClassList().get(0) + ".txt")) {
-            //♡
             creator.hideContainer();
             studentStatCollect.addLoadedBoxes();
-            //creator.hideContainer();
-            //♡
-
         }
 
         else {
@@ -246,9 +209,6 @@ public class StudentClasses extends JFrame {
                 System.out.println("class list in new class button"+ set.getCurrentPanelList());
         }
     });
-        // westPanel.add(newClassButton, BorderLayout.SOUTH);
-
-        // window.add(westPanel,BorderLayout.WEST);
     }
 
     private void deleteClassButton() {
@@ -256,26 +216,20 @@ public class StudentClasses extends JFrame {
         deleteClassButton.setPreferredSize(new Dimension(150, 50));
         deleteClassButton.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent e) {
-                //decorator.errorMessageSetUp(window, button);
-                //creator.deleteTextBox(creator.getTextFieldContainer());
                 System.out.println("deleteClass Mode hit");
                 deleteMode();
-                //saveButton.setEnabled(true);
             }
         });
     }
 
     private void writeType() {
-        //creator.writeFolderToFile();
         creator.setClassList();
-        //if (set.getHasPlace) {
         set.setFilePath("/Users/evy/Documents/GradeTracker-new/src/main/view/UserInfo/StudentInfo/" + set.getUsername() + "/class.txt");
-        creator.writeTextToFile();//creator.getTextFieldContainer());
-    
+        creator.writeTextToFile();
     }
 
     private void backToDefaultDeleteButton() {
-        removeDeleteClassButtonActionListeners();//deleteClassButton.getActionListeners().length);
+        removeDeleteClassButtonActionListeners();
         deleteClassButton.setText("Delete Class Mode");
         deleteClassButton.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent e) {
@@ -300,7 +254,6 @@ public class StudentClasses extends JFrame {
 
     private void instructionsWordsAndPanel(String text) {
         instructionsPanel = new JPanel();
-        //instructionsWords = new JLabel();
         JLabel instructionsWords = new JLabel(text);
         instructionsPanel = decorator.InstructionsPanelDecorate(instructionsPanel, instructionsWords);
         creator.windowFix();
@@ -318,24 +271,14 @@ public class StudentClasses extends JFrame {
             }
             else if (set.getTextFieldPanel().getComponent(i) instanceof JPanel) {
                 textField = creator.goIntoPanelReturnTextbox((JPanel) set.getTextFieldPanel().getComponent(i), 0);
-                //TODO
                 
                 addMouseListenerToTextboxAndFrame(textField);
             }
             
             else {
-                //
-                //
                 System.out.println("There was an issue in delete mode. student classes" + set.getTextFieldPanel().getComponent(i).getClass().getName());
             }
 
-            //>
-            // textField.addMouseListener(new MouseAdapter() {
-            //     public void mousePressed(MouseEvent e) {
-                    
-            //     }
-            // });
-            
             textField.addMouseMotionListener(new MouseMotionAdapter() {
                 public void mouseDragged(MouseEvent e) {
                     initialClick = e.getPoint();
@@ -347,7 +290,6 @@ public class StudentClasses extends JFrame {
                     tempTextField[0].setEditable(false);
                     tempTextField[0].setFocusable(false);
                     
-                    //layeredPane.add(tempTextField, JLayeredPane.DRAG_LAYER);
                     layeredPane.add(tempTextField[0], Integer.valueOf(JLayeredPane.DRAG_LAYER));
                     layeredPane.repaint();
                     if (tempTextField[0] != null) {
@@ -374,38 +316,6 @@ public class StudentClasses extends JFrame {
                     }
                 }
             });
-            //textField.setEditable(false);
-
-        // textField.addMouseListener(new MouseAdapter() {
-        //     public void mousePressed(MouseEvent e) {
-        //         System.out.println(1111);
-        //         initialClick = e.getPoint();
-        //         draggedTextField = (JTextField) e.getSource();
-        //         //System.out.println("1111.1 "+(draggedTextField == textField));
-        //     }
-        // });
-
-        // textField.addMouseMotionListener(new MouseAdapter() {
-        //     public void mouseDragged(MouseEvent e) {
-        //             System.out.println("2222"+ " mouse dragged");
-        //             Point location = draggedTextField.getLocation();
-        //             int x = location.x - initialClick.x + e.getX();
-        //             int y = location.y - initialClick.y + e.getY();
-        //             System.out.println("dragged field location "+ draggedTextField.getLocation());
-        //             draggedTextField.setLocation(x, y);
-        //             System.out.println("dragged field location2 "+ draggedTextField.getLocation());
-        //             System.out.println();
-        //             creator.windowFix();
-        //     }
-        // });
-
-        // textField.addMouseListener(new MouseAdapter() {
-        //     public void mouseReleased(MouseEvent e) {
-        //         System.out.println("dragged field location3 "+ draggedTextField.getLocation());
-        //         draggedTextField = null;
-        //     }
-        // });
-            //>
     }
     }
 
@@ -424,7 +334,7 @@ public class StudentClasses extends JFrame {
                 textField.setForeground(Color.decode("#FF6961"));
                 selectedTextBox = textField;
                 textField.setBorder(borderHighlighted);
-                removeDeleteClassButtonActionListeners();//deleteClassButton.getActionListeners().length);
+                removeDeleteClassButtonActionListeners();
                 deleteQuestionButtonAndAction();
                 }}); 
 
@@ -438,7 +348,6 @@ public class StudentClasses extends JFrame {
 
 
     private void deleteQuestionButtonAndAction() {
-        //String yesOrNoDialog = "nothing yet";
         final String[] yesOrNoDialog = new String[1];
         yesOrNoDialog[0] = "nothing yet";
 
@@ -462,10 +371,8 @@ public class StudentClasses extends JFrame {
                 else {
                     JPanel selectedBoxPanel = new JPanel();
                     selectedBoxPanel.add(selectedTextBox); //this also makes the selected textbox invisible
-                    System.out.println(selectedBoxPanel.getComponentCount() + " :beforeselectedBoxPanelComponenents");
                     creator.deleteTextBox(selectedBoxPanel);
                     saveButton.setEnabled(true);
-                    System.out.println(selectedBoxPanel.getComponentCount() + " :afterselectedBoxPanelComponenents");
                 }
 
                 if (yesOrNoDialog[0].equals("yes") || yesOrNoDialog[0].equals("nothing yet")) {
@@ -501,8 +408,6 @@ public class StudentClasses extends JFrame {
 
     private void removeDeleteClassButtonActionListeners() {//int amountToDelete) {
         for (ActionListener listener : deleteClassButton.getActionListeners()) {
-        //for(int i = 0; i < amountToDelete; i++) {
-            //ActionListener listener = deleteClassButton.getActionListeners()[i];
             deleteClassButton.removeActionListener(listener);
         }
     }
@@ -517,18 +422,14 @@ public class StudentClasses extends JFrame {
     }
 
     private void leaveDeleteModeAction() {
-        removeDeleteClassButtonActionListeners();//deleteClassButton.getActionListeners().length);
+        removeDeleteClassButtonActionListeners();
         deleteClassButton.addActionListener(new ActionListener() {
-            //instructionsWordsAndPanel("<3");
-            //instructionsWordsAndPanel("h");
             public void actionPerformed(ActionEvent e) {
                 window.remove(instructionsPanel);
                 instructionsWordsAndPanel("Left Delete Mode. In Edit Mode");
                 backToDefaultDeleteButton();
                 newClassButton.setEnabled(true);
                 for (int i = 0; i < set.getTextFieldPanel().getComponentCount(); i++) {
-                    //JTextField textField = (JTextField) set.getTextFieldPanel().getComponent(i);
-                    System.out.println("look: "+set.getTextFieldPanel().getComponent(i).getClass().getName());
 
                     JTextField textField = new JTextField();
                     if (set.getTextFieldPanel().getComponent(i) instanceof JTextField) {
@@ -538,7 +439,6 @@ public class StudentClasses extends JFrame {
                     else {
                         textField = creator.goIntoPanelReturnTextbox((JPanel) set.getTextFieldPanel().getComponent(i), 0);
                     }
-                    System.out.println("about to make editable");
                     textField.setEditable(true);
                     textField.setFocusable(true);
                     MouseListener[] listeners = textField.getMouseListeners();
@@ -556,13 +456,10 @@ public class StudentClasses extends JFrame {
         window.getContentPane().addMouseListener(new MouseAdapter() {
             @Override
             public void mouseClicked(MouseEvent e) {
-                System.out.println("mouselistener #3");
-                System.out.println(" clicked in frame");
                 if (selectedTextBox != null) {
                     selectedTextBox.setForeground(Color.lightGray);
                     selectedTextBox.setBorder(borderRegular);
                     selectedTextBox = null;
-                    //removeDeleteClassButtonActionListeners(1);
                     leaveDeleteModeButton();
                 }
             }
@@ -578,13 +475,7 @@ public class StudentClasses extends JFrame {
         creator.getTextFieldContainer().setVisible(false);
         instructionsPanel.setVisible(false);
         creator.hideContainer();
-        //textBoxPanel.setVisible(false);
-        //classLabelPanel.removeAll();
-        // if (DEBUGMARKEDBOX != null) {
-        // //DEBUGMARKEDBOX.setVisible(false);
-        // }
-
-        //window.remove(window.getMouseListeners());
+        
         for (MouseListener listener : deleteClassButton.getMouseListeners()) {
             window.removeMouseListener(listener);
         }

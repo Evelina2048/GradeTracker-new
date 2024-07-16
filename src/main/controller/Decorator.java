@@ -358,7 +358,7 @@ public class Decorator {
         JButton okButton = new JButton("OK");
         okButton.setVisible(true);
         dialog.add(okButton);
-        dialog.setSize(200,100);
+        dialog.setSize(200,90);
         set.setCanContinue(false);
         okButton.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent e) {
@@ -457,27 +457,4 @@ public class Decorator {
         textField.removeFocusListener(listeners[listeners.length-1]);
     }
 
-    // public void errorMessageSetUp(String labelWords, int width, int height, JRadioButton setRelativeTo) {
-    //     JDialog dialog = new JDialog(window, true);
-    //     dialog.setLayout(new FlowLayout());
-    //     JLabel label = new JLabel(labelWords);
-    //     label.setHorizontalAlignment(SwingConstants.CENTER);
-    //     dialog.add(label);
-    //     JButton okButton = new JButton("OK");
-    //     okButton.setVisible(true);
-    //     dialog.add(okButton);
-    //     dialog.setSize(width,height);
-    //     okButton.addActionListener(new ActionListener() {
-    //         public void actionPerformed(ActionEvent e) {
-    //             dialog.setVisible(false);
-    //             dialog.dispose(); 
-    //         }
-    //     });
-        
-    //     dialog.setLocationRelativeTo(setRelativeTo);//studentButton);
-    //     dialog.setLocation(dialog.getX(), dialog.getY() + 15); 
-    //     dialog.setVisible(true);
-    // }
-
-    
 }
