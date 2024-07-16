@@ -11,6 +11,7 @@ import java.util.TreeSet;
 
 import javax.swing.JRadioButton;
 import javax.swing.Timer;
+import javax.swing.UIManager;
 
 import main.model.Set;
 
@@ -83,7 +84,11 @@ public class CompositeActionListenerWithPriorities implements ActionListener {
                 new ActionEvent(CompositeActionListenerWithPriorities.this, ActionEvent.ACTION_PERFORMED, "PerformAllActions"));
             } else if (listeners.size() == 1) {
                 //errorMessageSetUp("<html><center>Username already exists.<br> Please choose another.",200,100);
-                button.setEnabled(false);
+                
+                //button.setEnabled(false);
+                //button.setForeground(Color.WHITE); // Set the foreground color to white
+                //UIManager.put("RadioButton.disabledText", Color.WHITE);
+                listeners.clear();
 
                 //button.setForeground(Color.white);
                 
