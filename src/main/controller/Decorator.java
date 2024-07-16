@@ -240,7 +240,6 @@ public class Decorator {
         // textField.addFocusListener(yesFocusListener);
         // set.setYesFocusListener(yesFocusListener);
 
-        //TODO no button action listener
         //textField.addFocusListener(new FocusAdapter() {
         FocusListener noFocusListener = new FocusAdapter() {
                 @Override

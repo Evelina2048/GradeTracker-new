@@ -98,49 +98,55 @@ public class Creator {
     //     return backNextButtonsPanel;
     // }
 
-    public void textFieldFocusListener(JTextField importedTextField, String placeholder) { 
-        textField = importedTextField;
+    public void textFieldFocusListener(JTextField focusTextField, String placeholder) { 
+        //textField = importedTextField; //cant use that line because then focus listeners might be shared. 
 
-        textField.addFocusListener(new FocusAdapter() {
+        //System.out.println("print the text and stuff. Textfield "+textField.getText()+" imported "+importedTextField.getText());
+
+        focusTextField.addFocusListener(new FocusAdapter() {
             @Override
             public void focusGained(FocusEvent e) {
                 System.out.println("focuslistener#1");
                 if (focusGranted) {
-                    textField.setForeground(Color.gray);
-                    System.out.println("focusGranted");
-                    if (previousTextbox != null) {
-                        //previousTextbox.setForeground(Color.LIGHT_GRAY);
-                    }if (textField.getText().equals(placeholder) && set.getEmptiedState(textField) == false && set.getLoadedState(textField) == false) {
-                        textField.setText("");
+                    focusTextField.setForeground(Color.gray);
+                    System.out.println("focusGranted: "+ focusTextField.getText());
+                    // if (previousTextbox != null) {
+                    //     //previousTextbox.setForeground(Col
+                    if (focusTextField.getText().equals(placeholder) && set.getEmptiedState(focusTextField) == false && set.getLoadedState(textField) == false) {
+                        System.out.println("focuslistener#1.1");
+                        focusTextField.setText("");
                         set.setEmptiedState(textField, true);
                         //textField.setForeground(Color.gray);
-                    }else if (!textField.getText().equals(placeholder) && !textField.getText().isEmpty() && set.getEmptiedState(textField) == true) {
+                    }else if (!focusTextField.getText().equals(placeholder) && !focusTextField.getText().isEmpty() && set.getEmptiedState(textField) == true) {
+                        System.out.println("focuslistener#1.2 text "+focusTextField.getText());
                         //textField.setForeground(Color.gray);
-                        set.setEmptiedState(textField, true);
-                    }else if (textField.getText().equals(placeholder) && set.getEmptiedState(textField) == true && set.getLoadedState(textField) == false) {
-                        textField.setText(""); // Clear the placeholder text when the field gains focus
+                        set.setEmptiedState(focusTextField, true);
+                    }else if (focusTextField.getText().equals(placeholder) && set.getEmptiedState(textField) == true && set.getLoadedState(textField) == false) {
+                        System.out.println("focuslistener#1.3");
+                        focusTextField.setText(""); // Clear the placeholder text when the field gains focus
                         //textField.setForeground(Color.gray);
-                        set.setEmptiedState(textField, true);
+                        set.setEmptiedState(focusTextField, true);
                         set.setSaveable(true);
                     }
                     //else if (textField.getText)
                     
                     else {
                         System.out.println("something went wrong in Creator class, focus gained");
+                        System.out.println("focuslistener#1.4");
                     }
-                    previousTextbox = textField;
+                    //previousTextbox = textField;
                 }
             }
             @Override
             public void focusLost(FocusEvent e) {
-                textField.setForeground(Color.lightGray);
-                if (textField.getText().isEmpty()) {
+                focusTextField.setForeground(Color.lightGray);
+                if (focusTextField.getText().isEmpty()) {
                     //textField.setForeground(Color.LIGHT_GRAY);
-                    textField.setText(placeholder);
-                    set.setEmptiedState(textField, false);
+                    focusTextField.setText(placeholder);
+                    set.setEmptiedState(focusTextField, false);
                 }
                 
-                else if (!textField.getText().isEmpty() && set.getEmptiedState(textField) == true){
+                else if (!focusTextField.getText().isEmpty() && set.getEmptiedState(textField) == true){
                     //textField.setForeground(Color.LIGHT_GRAY);
                 }
 
@@ -159,6 +165,7 @@ public class Creator {
         window.getContentPane().addMouseListener(new MouseAdapter() {
             @Override
             public void mouseClicked(MouseEvent e) {
+                //System.out.println("mouselistener #1");
                 int topLeftX = 332;
                 int topLeftY = 221;
                 int topRightX = 467;
@@ -431,6 +438,7 @@ public class Creator {
             set.setEmptiedState(textField, true);
             set.setLoadedState(textField, true);
             //textField.setForeground(Color.pink);
+
             textField.setForeground(Color.lightGray);
         }
         else if (loaded == false) {

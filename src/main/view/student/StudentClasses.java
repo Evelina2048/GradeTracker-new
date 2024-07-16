@@ -414,6 +414,7 @@ public class StudentClasses extends JFrame {
         textField.addMouseListener(new MouseAdapter() {
             @Override
             public void mouseClicked(MouseEvent e) {
+                System.out.println("mouselistener #2");
                 System.out.println("clicked");
                 if (selectedTextBox != null) {
                     selectedTextBox.setForeground(Color.GRAY);
@@ -555,6 +556,7 @@ public class StudentClasses extends JFrame {
         window.getContentPane().addMouseListener(new MouseAdapter() {
             @Override
             public void mouseClicked(MouseEvent e) {
+                System.out.println("mouselistener #3");
                 System.out.println(" clicked in frame");
                 if (selectedTextBox != null) {
                     selectedTextBox.setForeground(Color.lightGray);
