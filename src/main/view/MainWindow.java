@@ -122,17 +122,33 @@ private void truncateLabelText(String prefix, String suffix, int maxWidth) {
     int availableWidth = maxWidth - prefixWidth - suffixWidth - ellipsisWidth;
     //System.out.println("6666 "+ maxWidth +" "+prefixWidth+" "+suffixWidth+" "+ellipsisWidth+" ");
 
+        // char widestChar = 'a';
+        // int maxCharWidth = 0;
+        // for (char c = 32; c < 127; c++) {
+        //     int charWidth = fontMetrics.charWidth(c);
+        //     if (charWidth > maxCharWidth) {
+        //         maxCharWidth = charWidth;
+        //         widestChar = c;
+        //     }
+        // } //answer for this font is "~"
+
+        //how many ~ to get to max width?
+        System.out.println("~ width "+ fontMetrics.stringWidth("~")+" max width "+ maxWidth);
+
+        //System.out.println("widestchar "+widestChar);
 
     System.out.println("usernamewidth: "+ usernameWidth+ ": available width: "+availableWidth);
-    int endIndex = 1;
-    String currentUsernamePermittedAmount = set.getUsername().substring(0, endIndex);
-    System.out.println("currentUsernamePermittedAmount "+currentUsernamePermittedAmount);
+
     //need to find sweet spot where is not less than max
 
     if (fontMetrics.stringWidth(username) <= availableWidth) {//if is already less than max with username
     //then return. because no changes necessary;
     return;
     }
+
+    int endIndex = 7;
+    String currentUsernamePermittedAmount = set.getUsername().substring(0, endIndex);
+    System.out.println("currentUsernamePermittedAmount "+currentUsernamePermittedAmount);
 
     //while (!(fontMetrics.stringWidth(username.substring(0, endIndex)) <= availableWidth && fontMetrics.stringWidth(username.substring(0, endIndex+1)) >= availableWidth)) {
     while (fontMetrics.stringWidth(username.substring(0, endIndex+1)) <= availableWidth) {    

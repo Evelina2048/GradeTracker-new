@@ -71,7 +71,6 @@ public class Decorator {
         Font instructionsFont = new Font("Roboto", Font.PLAIN, 30); // Change the font and size here
         instructionsWords.setFont(instructionsFont);
 
-        
         return instructionsPanel;
     }
 
