@@ -1,5 +1,0 @@
-english
-math
-science
-band
-history

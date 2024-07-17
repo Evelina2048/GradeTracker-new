@@ -28,6 +28,7 @@ import main.controller.CreateButton;
 import main.controller.Creator;
 import main.controller.Decorator;
 import main.controller.FileHandler;
+import main.controller.FileWriting;
 import main.view.MainWindow;
 import main.view.student.StudentClasses;
 
@@ -47,12 +48,14 @@ public class StudentClasses extends JFrame {
     private JTextField selectedTextBox;
     private Point initialClick;
     private JTextField draggedTextField = null;
+    private FileWriting fileWrite = new FileWriting();
     Border borderRegular = BorderFactory.createLineBorder(Color.GRAY, 2);
     JPanel southContainer = new JPanel(new GridLayout(2,1,0,0));
     AtomicBoolean textFieldEmptied = new AtomicBoolean(false);;
     JButton newClassButton;
     JButton deleteClassButton;
     FileHandler fileHandler = new FileHandler();
+    
     Set set;
     JPanel instructionsPanel;
 
@@ -183,7 +186,7 @@ public class StudentClasses extends JFrame {
         set.setClassList(classList);
         writeType();
         System.out.println("nextbuttonhit");
-        creator.writeTextToFile();
+        fileWrite.writeTextToFile();
         set.setFinalClassList(classList);
         hideWindow();
         creator.hideContainer();
@@ -228,7 +231,7 @@ public class StudentClasses extends JFrame {
         System.out.println("5555 back in writetype");
         set.setFilePath("/Users/evy/Documents/GradeTracker-new/src/main/view/UserInfo/StudentInfo/" + set.getUsername() + "/class.txt");
        //creator.writeTextToFile();
-       creator.writeTextToFileWithAppend(set.getTextFieldPanel());
+       fileWrite.writeTextToFileWithAppend(set.getTextFieldPanel());
     }
 
     private void backToDefaultDeleteButton() {
@@ -365,7 +368,7 @@ public class StudentClasses extends JFrame {
                 //if the file has loaded information attached
                 if (set.getLoadedState(selectedTextBox) && (fileHandler.fileExists(filePath)) && fileHandler.fileIsNotEmpty(filePath)) {
                 
-                    yesOrNoDialog[0] = decorator.areYouSureMessageDelete(selectedTextBox, "deleting", "<html><center>Deleting this class will optiondelete <br>its loaded information.<br>Do you wish to continue?");
+                    yesOrNoDialog[0] = decorator.areYouSureMessage(selectedTextBox, "deleting", "<html><center>Deleting this class will optiondelete <br>its loaded information.<br>Do you wish to continue?");
 
                     selectedTextBox.setForeground(Color.GRAY);
                     selectedTextBox.setBorder(borderRegular);

@@ -19,6 +19,7 @@ import java.util.regex.Pattern;
 import main.model.Set;
 import main.controller.Creator;
 import main.controller.FileHandler;
+import main.controller.FileWriting;
 
 import javax.swing.AbstractAction;
 import javax.swing.JComponent;
@@ -33,6 +34,7 @@ public class StudentStatCollect extends JFrame {
     private JButton newTypeButton;
     private Set set;
     private CreateButton createButton = new CreateButton();
+    private FileWriting fileWrite = new FileWriting();
     private JPanel container = new JPanel(new FlowLayout(FlowLayout.LEFT));
     private JPanel newDelContainerFlow;
     private JPanel classLabelPanel = new JPanel(new FlowLayout(FlowLayout.LEFT));
@@ -194,7 +196,7 @@ public class StudentStatCollect extends JFrame {
         set.setFilePath("/Users/evy/Documents/GradeTracker-new/src/main/view/UserInfo/StudentInfo/" + set.getUsername() +"/"+finalClassList.get(set.getClassListIndex())+ ".txt");
         
         creator.setTextFieldContainer(set.getTextFieldPanel());
-        creator.writeTextToFile();
+        fileWrite.writeTextToFile();
        // }
     }
 
@@ -220,26 +222,13 @@ public class StudentStatCollect extends JFrame {
         }
     }
 
-    private void visitNextStudentClass() {
+    public void visitNextStudentClass() {
         //readClass(finalClassList);
         String filePath = "/Users/evy/Documents/GradeTracker-new/src/main/view/UserInfo/StudentInfo/"+set.getUsername()+"/"+set.getFinalClassList().get(set.getClassListIndex())+".txt";
         if (fileHandler.fileExists(filePath)) {
             textBoxPanelReset();
-            //boxManageCreate(set.getFinalClassList().get(set.getClassListIndex()), "JLabel", true); //displays class label 
-            
-            //textBoxPanel = fileHandler.loadTextboxes(filePath);
 
             addLoadedBoxes();
-            //int numberOfComponents = testPanel.getComponentCount();
-            // for (int i = 0; i < numberOfComponents; i++) {
-            //   textBoxPanel.add(testPanel.getComponent(0));
-            // }
-
-            //creator.hideContainer();
-            //StudentStatCollect studentStatCollect = new StudentStatCollect();
-            //studentStatCollect.
-
-            //addLoadedBoxes();
             
             classLabelPanel.add(textBoxPanel);
             if (textBoxPanel.getComponentCount() <= 1) { //The reason it is <=1 and not 0, is to account for the classLabel

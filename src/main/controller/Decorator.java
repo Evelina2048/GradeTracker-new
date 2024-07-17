@@ -26,6 +26,8 @@ import java.awt.Dimension;
 
 import java.io.IOException;
 import main.model.Set;
+import main.view.student.StudentStatCollect;
+
 //files
 import java.nio.file.Files;
 import java.nio.file.Path;
@@ -85,7 +87,7 @@ public class Decorator {
         return gbc;
     }
 
-    public String areYouSureMessageDelete(JTextField importedTextField, String myReason, String text) {
+    public String areYouSureMessage(JTextField importedTextField, String myReason, String text) {
         reason = myReason;
         textField = importedTextField;
         dialog = new JDialog(window, true);
@@ -126,6 +128,11 @@ public class Decorator {
          if (reason == "deleting") {   
             reasonIsDeletingActionYes();
          }  
+
+         else if (reason == "studentStatsEmpty") {
+            reasonIsStudentStatsEmptyYes();
+         }
+
          else {
             reasonIsChangingUsernameYes();
          }
@@ -187,6 +194,12 @@ public class Decorator {
             }
         });
     
+    }
+
+    private void reasonIsStudentStatsEmptyYes() {
+        //go to next class or print class
+        StudentStatCollect studentStat = new StudentStatCollect();
+        studentStat.visitNextStudentClass();
     }
 
     public void deleteFocusListeners(int amount) {
@@ -290,65 +303,6 @@ public class Decorator {
         });
     }
 
-    // public void areYouSureMessageEditUsername(JTextField textField) {
-    //     Creator creator = new Creator();
-    //     JDialog dialog = new JDialog(window, true);
-    //     dialog.setLayout(new FlowLayout());
-    //     JLabel label = new JLabel("<html><center>Deleting this class will delete <br>its loaded information.<br>Do you wish to continue?");
-    //     label.setHorizontalAlignment(SwingConstants.CENTER);
-    //     dialog.add(label);
-
-    //     JButton yesButton = new JButton("Yes");
-    //     yesButton.setVisible(true);
-    //     dialog.add(yesButton);
-
-    //     JButton noButton = new JButton("Cancel");
-    //     noButton.setVisible(true);
-    //     dialog.add(noButton);
-
-    //     dialog.setSize(250,120);
-    //     JPanel panel = new JPanel();
-    //     System.out.println("does textfield be null?: "+textField==null+ "textfield text"+ textField.getText());
-    //     panel.add(textField);
-    //     window.requestFocusInWindow();
-
-    //     yesButton.addActionListener(new ActionListener() {
-    //         public void actionPerformed(ActionEvent e) {    
-    //                 textField.setVisible(false);
-    //                 for (MouseListener listener : textField.getMouseListeners()) {
-    //                     textField.removeMouseListener(listener);
-    //                 }
-                    
-    //                 creator.deleteTextBox(panel);
-    //                 //Files.deleteIfExists("/Users/evy/Documents/GradeTracker-new/src/main/view/UserInfo/StudentInfo/Username/e.txt");
-    //                 Path filePath = Paths.get("/Users/evy/Documents/GradeTracker-new/src/main/view/UserInfo/StudentInfo/"+set.getUsername()+"/"+textField.getText()+".txt");
-                    
-    //                 try {
-    //                     Files.deleteIfExists(filePath);
-    //                 } catch (IOException e1) {
-    //                     e1.printStackTrace();
-    //                 }
-
-    //                 dialog.setVisible(false);
-    //                 dialog.dispose();   
-    //             // else {
-    //             //     removeFocusListeners(textField);
-    //             //     textField.requestFocus();
-    //             // }
-    //         }
-    //     });
-    //     noButton.addActionListener(new ActionListener() {
-    //         public void actionPerformed(ActionEvent e) {
-    //             dialog.setVisible(false);
-    //             dialog.dispose(); 
-    //         }
-    //     });
-        
-    //     dialog.setLocationRelativeTo(window);
-    //     //dialog.setLocation(null); 
-    //     dialog.setVisible(true);
-    // }
-
     public JDialog genericPopUpMessage(String text,JRadioButton button) {
         dialog = new JDialog(window, true);
         dialog.setLayout(new FlowLayout());
@@ -447,10 +401,12 @@ public class Decorator {
        return textField;
     }
 
-    public void areYouSureMessageListener() {
-        areYouSureMessageDelete(textField, "editing username", "<html><center>Editing this username will create or <br>login to an account under this name. <br>Do you wish to continue?");
+    public void areYouSureMessageListenerForEditingUsername() {
+        areYouSureMessage(textField, "editing username", "<html><center>Editing this username will create or <br>login to an account under this name. <br>Do you wish to continue?");
         window.requestFocusInWindow();
     }
+
+
 
     private void removeLastFocusListener(JTextField textField) {
         FocusListener[] listeners = textField.getFocusListeners();

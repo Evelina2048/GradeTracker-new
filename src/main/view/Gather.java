@@ -42,6 +42,7 @@ import main.controller.CreateButton;
 import main.controller.Creator;
 import main.controller.Decorator;
 import main.controller.FileHandler;
+import main.controller.FileWriting;
 
 import java.awt.event.KeyEvent;
 import java.awt.event.MouseListener;
@@ -56,6 +57,7 @@ public class Gather {
     private int windowY;
     private Set set;
     private Creator creator;
+    private FileWriting fileWrite = new FileWriting();
     private String existingOrNew;
     private String studentOrTeacher;
 
@@ -180,7 +182,7 @@ public class Gather {
                         //        break;
                         //     }
                         // }
-                        decorate.areYouSureMessageListener();
+                        decorate.areYouSureMessageListenerForEditingUsername();
                         firstTimeInTextbox = false;
                         
                 }
@@ -417,7 +419,7 @@ public class Gather {
         set.setWindow(window);
         System.out.println("nextbutton action in gather");
         nextButtonAction();
-        creator.writeFolderToFile();
+        fileWrite.writeFolderToFile();
     }
 
     private void nextButtonAction() {
