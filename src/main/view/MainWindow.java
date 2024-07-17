@@ -114,7 +114,7 @@ private void truncateLabelText(String prefix, String suffix, int maxWidth) {
 
    //String username = usernameLabel.getText();
     String username = set.getUsername();
-    String ellipsis = "...";
+    String ellipsis = " ...";
     int prefixWidth = fontMetrics.stringWidth(prefix);
     int suffixWidth = fontMetrics.stringWidth(suffix);
     int usernameWidth = fontMetrics.stringWidth(username);
@@ -141,7 +141,13 @@ private void truncateLabelText(String prefix, String suffix, int maxWidth) {
         //currentUsernamePermittedAmount = set.getUsername().substring(0, endIndex);
         System.out.println("it works2: "+currentUsernamePermittedAmount+" "+set.getUsername().substring(0, endIndex));
     }
-    instructionsWords =  new JLabel("Hello "+ set.getUsername().substring(0, endIndex) + "...! Are you a student or a teacher?");
+    if(currentUsernamePermittedAmount.charAt(currentUsernamePermittedAmount.length()-1)==' ' && currentUsernamePermittedAmount.charAt(currentUsernamePermittedAmount.length()-2)!=' ') {
+        instructionsWords =  new JLabel("Hello "+ set.getUsername().substring(0, endIndex-1) + " ...! Are you a student or a teacher?");
+    }
+    else {
+    instructionsWords =  new JLabel("Hello "+ set.getUsername().substring(0, endIndex) + " ...! Are you a student or a teacher?");
+    }
+
 }
 
 
