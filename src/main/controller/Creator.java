@@ -23,6 +23,7 @@ import java.awt.Component;
 
 import java.awt.Dimension;
 import java.awt.FlowLayout;
+import java.awt.FontMetrics;
 
 import main.controller.Creator;
 import main.model.Set;
@@ -57,22 +58,31 @@ public class Creator {
         focusTextField.addFocusListener(new FocusAdapter() {
             @Override
             public void focusGained(FocusEvent e) {
+                //focusTextField.setHorizontalAlignment(JTextField.LEFT);
+                //focusTextField.setText(focusTextField.getText());
+                focusTextField.setCaretPosition(focusTextField.getText().length());
+                //focusTextField.set
+
                 //System.out.println("focuslistener#1");
                 if (focusGranted) {
                     focusTextField.setForeground(Color.gray);
+                    //textField.setHorizontalAlignment(JTextField.LEFT);
                     //System.out.println("focusGranted: "+ focusTextField.getText());
                     // if (previousTextbox != null) {
                     //     //previousTextbox.setForeground(Col
                     if (focusTextField.getText().equals(placeholder) && set.getEmptiedState(focusTextField) == false && set.getLoadedState(textField) == false) {
                         //System.out.println("focuslistener#1.1");
+                        //textField.setHorizontalAlignment(JTextField.LEFT);
                         focusTextField.setText("");
                         set.setEmptiedState(textField, true);
                         //textField.setForeground(Color.gray);
                     }else if (!focusTextField.getText().equals(placeholder) && !focusTextField.getText().isEmpty() && set.getEmptiedState(textField) == true) {
+                        //textField.setHorizontalAlignment(JTextField.LEFT);
                         //System.out.println("focuslistener#1.2 text "+focusTextField.getText());
                         //textField.setForeground(Color.gray);
                         set.setEmptiedState(focusTextField, true);
                     }else if (focusTextField.getText().equals(placeholder) && set.getEmptiedState(textField) == true && set.getLoadedState(textField) == false) {
+                        //textField.setHorizontalAlignment(JTextField.LEFT);
                         //System.out.println("focuslistener#1.3");
                         focusTextField.setText(""); // Clear the placeholder text when the field gains focus
                         //textField.setForeground(Color.gray);
@@ -82,6 +92,7 @@ public class Creator {
                     //else if (textField.getText)
                     
                     else {
+                        //textField.setHorizontalAlignment(JTextField.LEFT);
                         //System.out.println("something went wrong in Creator class, focus gained");
                         //System.out.println("focuslistener#1.4");
                     }
@@ -90,7 +101,19 @@ public class Creator {
             }
             @Override
             public void focusLost(FocusEvent e) {
+                focusLostLeftAlign();
                 focusTextField.setForeground(Color.lightGray);
+                FontMetrics fontMetrics = textField.getFontMetrics(textField.getFont());
+                //if (fontmetrics greate than box) {
+                    //textField.setHorizontalAlignment(JTextField.LEFT);
+                //}
+                System.out.println("focus is lost "+fontMetrics.stringWidth(textField.getText())+ text);
+                if (fontMetrics.stringWidth(textField.getText()) >= textField.getWidth()) {//if is already less than max with username
+                    System.out.println("heyo");
+                    focusTextField.setCaretPosition(0);
+                    //textField.setHorizontalAlignment(JTextField.LEFT_ALIGNMENT);
+                    }
+                
                 if (focusTextField.getText().isEmpty()) {
                     //textField.setForeground(Color.LIGHT_GRAY);
                     focusTextField.setText(placeholder);
@@ -137,23 +160,36 @@ public class Creator {
                 boolean pointNotInTextbox = !newBounds.contains(e.getPoint());
 
                 if (pointNotInTextbox && textField.getText().isEmpty()) {
+                    //textField.setHorizontalAlignment(JTextField.LEFT);
+                    //textField.setCaretPosition(0);
                     textField.setText(placeholder);
                     textField.setForeground(Color.GRAY);
                     set.setEmptiedState(textField, false);
                     window.requestFocusInWindow();
                 }
                 else if (pointNotInTextbox &&  set.getEmptiedState(textField) == true && !textField.getText().isEmpty()) {
+                    //textField.setHorizontalAlignment(JTextField.LEFT);
+                    //textField.setCaretPosition(0);
                     window.requestFocusInWindow();
                 }
                 else if (pointNotInTextbox) {
+                    //textField.setHorizontalAlignment(JTextField.LEFT);
+                    //textField.setCaretPosition(0);
                     window.requestFocusInWindow();
 
                 }
                 else {
                     System.out.println("something went wrong");
+                    //textField.setHorizontalAlignment(JTextField.LEFT);
                 }
             }
         });
+    }
+
+    private void focusLostLeftAlign() {
+        textField.grabFocus();
+        textField.setCaretPosition(0);
+        window.requestFocusInWindow();
     }
 
     // public void writeFolderToFile() {

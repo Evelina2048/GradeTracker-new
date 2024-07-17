@@ -325,15 +325,13 @@ private void errorMessageSetUp(String labelWords, int width, int height) {
 }
 
 private void writeNewName(String filePath, String username) {
-            try (FileWriter writer = new FileWriter(filePath, true)) {
-                writer.write(username + "\n");
+    try (FileWriter writer = new FileWriter(filePath, true)) {
+        writer.write(username + "\n");
 
-            } catch (IOException e1) {
-                e1.printStackTrace();
-            }
+    } catch (IOException e1) {
+        e1.printStackTrace();
     }
-
-
+    }
 
 public void setButtonSelected() {
     String selectedButtonText = set.getStudentOrTeacher();

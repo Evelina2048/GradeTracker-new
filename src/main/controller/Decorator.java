@@ -394,6 +394,7 @@ public class Decorator {
        textField.setSelectedTextColor(defaultTextColor);
 
        textField.setHorizontalAlignment(JTextField.CENTER);
+       //textField.setHorizontalAlignment(JTextField.LEFT);
        textField.setText(placeholderText);
 
        Creator creator = new Creator();
