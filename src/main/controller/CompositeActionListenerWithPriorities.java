@@ -20,12 +20,19 @@ public class CompositeActionListenerWithPriorities implements ActionListener {
     new TreeMap<Integer,ArrayList<ActionListener>>();
     private boolean isProcessing = false;
     private Set set = Set.getInstance();
+    private static CompositeActionListenerWithPriorities instance;
     //this.set = Set.getInstance();
+    private CompositeActionListenerWithPriorities() {}
+    public static CompositeActionListenerWithPriorities getInstance() {
+      if (instance == null) {
+          instance = new CompositeActionListenerWithPriorities();
+      }
+      return instance;
+  }
 
 
   @Override
   public void actionPerformed(ActionEvent e) {
-    System.out.println("%%%"+set.getExistingOrNew());
     if (isProcessing) {
       return; // Prevent re-entry
     }
@@ -40,6 +47,7 @@ public class CompositeActionListenerWithPriorities implements ActionListener {
         a.actionPerformed(e);
       }
     }
+    reset();
   }
   
   public boolean deleteActionListener(ActionListener a){
@@ -82,20 +90,22 @@ public class CompositeActionListenerWithPriorities implements ActionListener {
                 // Correctly reference the outer class for the action event
                 CompositeActionListenerWithPriorities.this.actionPerformed(
                 new ActionEvent(CompositeActionListenerWithPriorities.this, ActionEvent.ACTION_PERFORMED, "PerformAllActions"));
-            } else if (listeners.size() == 1) {
-                //errorMessageSetUp("<html><center>Username already exists.<br> Please choose another.",200,100);
+            } 
+            // else if (listeners.size() == 1) {
+            //     //errorMessageSetUp("<html><center>Username already exists.<br> Please choose another.",200,100);
                 
-                //button.setEnabled(false);
-                //button.setForeground(Color.WHITE); // Set the foreground color to white
-                //UIManager.put("RadioButton.disabledText", Color.WHITE);
-                listeners.clear();
+            //     //button.setEnabled(false);
+            //     //button.setForeground(Color.WHITE); // Set the foreground color to white
+            //     //UIManager.put("RadioButton.disabledText", Color.WHITE);
+            //     listeners.clear();
 
-                //button.setForeground(Color.white);
+            //     //button.setForeground(Color.white);
                 
-                //button.setColor(Color.white);
-                decorate.errorMessageSetUp(button);
+            //     //button.setColor(Color.white);
+            //     decorate.errorMessageSetUp(button);
 
-            } else {
+            // } 
+            else {
                 System.out.println("Something went wrong in CompositeActionListenerWithPriorities addClassActionListener \u00AF\\_(\u30C4)_/\u00AF");
             }
         }
@@ -121,5 +131,10 @@ public class CompositeActionListenerWithPriorities implements ActionListener {
 
   public interface EnterKeyListener extends ActionListener {
   }
+
+  public void reset() {
+    listeners.clear();
+    isProcessing = false;
+}
 
 }

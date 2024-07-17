@@ -223,9 +223,12 @@ public class StudentClasses extends JFrame {
     }
 
     private void writeType() {
+        System.out.println("1111 in writetype");
         creator.setClassList();
+        System.out.println("5555 back in writetype");
         set.setFilePath("/Users/evy/Documents/GradeTracker-new/src/main/view/UserInfo/StudentInfo/" + set.getUsername() + "/class.txt");
-        creator.writeTextToFile();
+       //creator.writeTextToFile();
+       creator.writeTextToFileWithAppend(set.getTextFieldPanel());
     }
 
     private void backToDefaultDeleteButton() {

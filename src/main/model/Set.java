@@ -67,7 +67,9 @@ public class Set {
     }
 
     public void setClassList(ArrayList<String> newClassList) {
+        System.out.println("3333 in setclasslist"+" ,,, "+ newClassList);
         classList = newClassList;
+        System.out.println("4444 in setclasslist: "+ classList+ " ,,, "+newClassList);
     }
 
     public void setTypeList(ArrayList<String> newTypeList) {

@@ -88,7 +88,9 @@ public class CreateButton {
 
         @Override
         public void removeUpdate(DocumentEvent e) {
-            //System.out.println("removeUpdate/// "+ textField.getWidth()+ textField.getParent().getParent().getParent().getParent().getParent().getName());
+            System.out.println("removeUpdate/// "+ textField.getWidth()+ textField.getParent().getParent().getParent().getParent().getParent().getName());
+            //set.setEmptiedState(true);
+            set.setEmptiedState(textField, true);
             //textField.getParent();
         }
 

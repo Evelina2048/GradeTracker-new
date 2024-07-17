@@ -106,23 +106,23 @@ public class Creator {
         focusTextField.addFocusListener(new FocusAdapter() {
             @Override
             public void focusGained(FocusEvent e) {
-                System.out.println("focuslistener#1");
+                //System.out.println("focuslistener#1");
                 if (focusGranted) {
                     focusTextField.setForeground(Color.gray);
-                    System.out.println("focusGranted: "+ focusTextField.getText());
+                    //System.out.println("focusGranted: "+ focusTextField.getText());
                     // if (previousTextbox != null) {
                     //     //previousTextbox.setForeground(Col
                     if (focusTextField.getText().equals(placeholder) && set.getEmptiedState(focusTextField) == false && set.getLoadedState(textField) == false) {
-                        System.out.println("focuslistener#1.1");
+                        //System.out.println("focuslistener#1.1");
                         focusTextField.setText("");
                         set.setEmptiedState(textField, true);
                         //textField.setForeground(Color.gray);
                     }else if (!focusTextField.getText().equals(placeholder) && !focusTextField.getText().isEmpty() && set.getEmptiedState(textField) == true) {
-                        System.out.println("focuslistener#1.2 text "+focusTextField.getText());
+                        //System.out.println("focuslistener#1.2 text "+focusTextField.getText());
                         //textField.setForeground(Color.gray);
                         set.setEmptiedState(focusTextField, true);
                     }else if (focusTextField.getText().equals(placeholder) && set.getEmptiedState(textField) == true && set.getLoadedState(textField) == false) {
-                        System.out.println("focuslistener#1.3");
+                        //System.out.println("focuslistener#1.3");
                         focusTextField.setText(""); // Clear the placeholder text when the field gains focus
                         //textField.setForeground(Color.gray);
                         set.setEmptiedState(focusTextField, true);
@@ -131,8 +131,8 @@ public class Creator {
                     //else if (textField.getText)
                     
                     else {
-                        System.out.println("something went wrong in Creator class, focus gained");
-                        System.out.println("focuslistener#1.4");
+                        //System.out.println("something went wrong in Creator class, focus gained");
+                        //System.out.println("focuslistener#1.4");
                     }
                     //previousTextbox = textField;
                 }
@@ -220,10 +220,13 @@ public class Creator {
         textField = (JTextField) component;
         Boolean studentStatNonWritablePlaceholder = set.getEmptiedState(textField) == false && set.getCurrentClass() == "StudentStatCollect.java" && !textField.getText().equals("Credits (Optional)");
 
+        System.out.println("10 10 10 10 in decide if write "+textField.getText());
         if (set.getEmptiedState(textField) == true) {
+            System.out.println("11 11 11 11.1 in decide if write");
             tryToWrite(writer);
         }
         else if (studentStatNonWritablePlaceholder) {
+            System.out.println("11 11 11 11.2 in decide if write");
             removeUnwritablePlaceholders();
             
             if (set.getCanContinue()) {
@@ -245,7 +248,7 @@ public class Creator {
         if (!text.isEmpty()) {
             try {
                 if (attachedBoxes == maxAttachedBoxes) {
-                    System.out.println("writing in decide if write: "+text);
+                    //System.out.println("writing in decide if write: "+text);
                     classList.add(text);
                     writer.write(text + "\n");
                 }
@@ -255,35 +258,42 @@ public class Creator {
             } catch (IOException e) {
                 e.printStackTrace();
             }                             
-            System.out.println("should be writing");
+            //System.out.println("should be writing");
         }
     }
 
     public void writeTextToFile(){//JPanel textFieldPanel) {//(String importedFilePath, JPanel textFieldPanel) {;
         //filePath = importedFilePath;
+
+        System.out.println("6666 in write text to file");
         set.setCanContinue(true);
-        System.out.println("Step4: begin writeTextToFile."+ set.getCurrentPanelList());
+        //System.out.println("Step4: begin writeTextToFile."+ set.getCurrentPanelList());
         debugPrintPanel();
         set.getUsername();
         tryToWriteWithoutAppend();
-        System.out.println("in write text to file: "+set.getCurrentPanelList());
+        //System.out.println("in write text to file: "+set.getCurrentPanelList());
         set.setClassList(classList);
     }
 
     private void tryToWriteWithoutAppend() {
         //writer = new BufferedWriter(new FileWriter(filePath));
         filePath = set.getFilePath();
+        System.out.println("7777 in tryToWriteWithoutAppend");
         try (BufferedWriter writer = new BufferedWriter(new FileWriter(filePath))) {
+            System.out.println("8888 in trytowritewithoutappend");
             if (!classList.isEmpty()) {
                classList.clear();
             }
             for (Component component : textFieldPanel.getComponents()) {
+                System.out.println("9999 in trytowritewithoutappend");
                 if (component instanceof JTextField ) {
+                    System.out.println("10 10 10 10.1 in trytowritewithoutappend");
                     tryToWriteTextFieldWithoutAppend(component, writer);
                 }
                 else if (component instanceof JPanel) {
-                    System.out.println("JPanel");
+                    //System.out.println("JPanel");
                     //filePath =
+                    System.out.println("10 10 10 10.2 in trytowritewithoutappend");
                     writeTextToFileWithAppend((JPanel) component);
                 }
                 else {
@@ -295,9 +305,11 @@ public class Creator {
         }
     }
 
-    private void tryToWriteTextFieldWithoutAppend(Component component, BufferedWriter writer) {
+    private void tryToWriteTextFieldWithoutAppend(Component component, BufferedWriter writer) { //i think for student stat
+        System.out.println("11 11 11 11 in trytowritewithoutappend");
         JTextField textField = (JTextField) component;
         if (set.getEmptiedState(textField) == true && attachedBoxes == maxAttachedBoxes) {
+            System.out.println("12 12 12 12 in trytowritewithoutappend");
             String text = textField.getText().trim();
             if (!text.isEmpty()) {
                 if (attachedBoxes == maxAttachedBoxes) {
@@ -307,7 +319,7 @@ public class Creator {
                     } catch (IOException e) {
                         e.printStackTrace();
                     }                             
-                    System.out.println("should be writing");
+                    //System.out.println("should be writing");
                 }
                 else {
                     attachedBoxes++;
@@ -345,16 +357,21 @@ public class Creator {
         }
     }
 
-    private void writeTextToFileWithAppend(JPanel panel) {
+    public void writeTextToFileWithAppend(JPanel panel) {
         //String filePath = importedFilePath;
-        System.out.println("in writeTextToFileWithAppend");
+        filePath = set.getFilePath();
+        System.out.println("6666 in writeTextToFileWithAppend");
         try (BufferedWriter writer = new BufferedWriter(new FileWriter(filePath, true))) {
+            System.out.println("7777 in writeTextToFileWithAppend");
             for (Component component : panel.getComponents()) {
+                System.out.println("8888 in writeTextToFileWithAppend");
                 if (component instanceof JTextField) {
+                    System.out.println("9999.1 in writeTextToFileWithAppend");
                     decideIfWrite(component, writer);
                 }
 
                 if (component instanceof JPanel) {
+                    System.out.println("9999.2 in writeTextToFileWithAppend");
                     writeTextToFileWithAppend((JPanel) component);
                 }
             }
@@ -496,6 +513,7 @@ public class Creator {
     // }
 
     public void setClassList() {
+        System.out.println("2222 in setclasslist");
         set.setClassList(classList);
     }
 

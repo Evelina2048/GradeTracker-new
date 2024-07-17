@@ -63,6 +63,7 @@ public MainWindow() {
 }
 
 public void MainWindowLaunch() {
+    System.out.println("entering main window");
     this.set = Set.getInstance();
     window = set.getWindow();
 

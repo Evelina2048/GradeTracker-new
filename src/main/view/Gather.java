@@ -37,6 +37,7 @@ import java.awt.event.FocusEvent;
 import java.awt.event.FocusListener;
 
 import main.model.Set;
+import main.controller.CompositeActionListenerWithPriorities;
 import main.controller.CreateButton;
 import main.controller.Creator;
 import main.controller.Decorator;
@@ -82,16 +83,19 @@ public class Gather {
     JPanel saveButtonPanel;
     String pathToUsernameFolder;
     FileHandler fileHandler = new FileHandler();
+    //CompositeActionListenerWithPriorities actionPriorities;
 
     public Gather() {
+        System.out.println("entering gather");
         this.set = Set.getInstance();
+        
+        //this.actionPriorities = CompositeActionListenerWithPriorities.getInstance();
+
         existingOrNew = set.getExistingOrNew();
         studentOrTeacher = set.getStudentOrTeacher();
         pathToUsernameFolder = "/Users/evy/Documents/GradeTracker-new/src/main/view/UserInfo/StudentInfo/" + set.getUsername();
         window = set.getWindow();
         creator = new Creator();
-
-
 
         // newUser = new NewUser();
 
@@ -347,20 +351,43 @@ public class Gather {
                set.setUsername(textField.getText());
                backButtonAction();
             }
+            //actionPriorities.addClassActionListener(b -> {
+               // set.setUsername(textField.getText());
+                //backButtonAction();
+            //}, 2, "backButton", null);
+            //actionPerformed(new ActionEvent(this, ActionEvent.ACTION_PERFORMED, "PerformAllActions"));
+        //}
         });
+        //<>
+        // actionPriorities.addClassActionListener(b -> {
+        //     set.setUsername(textField.getText());
+        //     backButtonAction();
+        // }, 2, "click", null);
+        //<>
     }
 
     private void backButtonAction() {
-        System.out.println("backbuttonaction for gather");
-        hideWindow(); 
-        NewUser newUser = new NewUser();
-        newUser.newUserSetup();
-        //newUser.showWindow(window.getX(),window.getY());
-        if (set.getExistingOrNew() != null) {
-            newUser.setButtonSelected();
-        }
-        // newUser.setButtonSelected();          
-    }
+        //System.out.println(" 1111 backbuttonaction for gather");
+        // hideWindow(); 
+        // NewUser newUser = new NewUser();
+        // newUser.newUserSetup();
+        // if (set.getExistingOrNew() != null) {
+        //     newUser.setButtonSelected();
+        // }
+        //System.out.println(" 2222 backbuttonaction for gather complete");
+        //actionPriorities.addClassActionListener(b -> {
+            hideWindow(); 
+            //window.getRootPane().getInputMap().put(KeyStroke.getKeyStroke("ENTER"), "none");
+
+
+            NewUser newUser = new NewUser();
+            newUser.newUserSetup();
+            if (set.getExistingOrNew() != null) {
+                newUser.setButtonSelected();
+            }
+           // actionPriorities.actionPerformed(new ActionEvent(this, ActionEvent.ACTION_PERFORMED, "PerformAllActions"));       
+        //}, 2, "backButton", null); 
+    }   
 
     private void makeSaveButton() {
         JButton saveButton = createButton.saveButtonCreate();
@@ -385,6 +412,7 @@ public class Gather {
     }
 
     private void doNextButtonProcedure() {
+
         set.setUsername(textField.getText());
         set.setWindow(window);
         System.out.println("nextbutton action in gather");

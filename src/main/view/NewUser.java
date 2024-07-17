@@ -38,9 +38,11 @@ public class NewUser extends JFrame {
     private boolean moveOnPossible = false;
     private Gather gatherFrame;
     private Set set;
+    private CompositeActionListenerWithPriorities actionPriorities;
     private CreateButton createButton = new CreateButton();
     long clickTimeMillis;
-    CompositeActionListenerWithPriorities actionPriorities = new CompositeActionListenerWithPriorities();
+    //CompositeActionListenerWithPriorities actionPriorities = new CompositeActionListenerWithPriorities();
+    //this.actionPriorities = actionPriorities.getInstance();
 
     Boolean newUserActionStarted = false;
     Boolean newUserActionCompleted = false;
@@ -61,8 +63,17 @@ public class NewUser extends JFrame {
     private String originalExistingOrNew;
 
     public NewUser() {
+        //System.out.println("3333 entering new user");
         this.set = Set.getInstance();
+        this.actionPriorities = CompositeActionListenerWithPriorities.getInstance();
+        //this.actionPriorities = CompositeActionListenerWithPriorities.getInstance();
         window = set.getWindow();
+        //System.out.println("in new user, listenerreasons "+actionPriorities.getListenerReasons());
+
+        // if (actionPriorities.getListenerReasons().contains("backButton")) {
+        //     System.out.println("it does contain a listener from back button");
+        //     actionPriorities.actionPerformed(new ActionEvent(this, ActionEvent.ACTION_PERFORMED, "PerformAllActions"));
+        // }
         //window.setLocationRelativeTo(null);
         newUserSetup();
 
@@ -72,13 +83,15 @@ public class NewUser extends JFrame {
         window.getRootPane().getActionMap().put("enterAction", enterAction);
 
         window.requestFocusInWindow();
+        //System.out.println("4444 done loading new user");
     }
 
     public void newUserSetup() {
         window = set.getWindow();
 
-        CompositeActionListenerWithPriorities actionPriorities = new CompositeActionListenerWithPriorities();
-        actionPriorities.DEBUGLISTENERSIZE();
+        //CompositeActionListenerWithPriorities 
+        //actionPriorities = new CompositeActionListenerWithPriorities();
+        //actionPriorities.DEBUGLISTENERSIZE();
 
         window.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
         window.setLayout(new BorderLayout());
@@ -212,8 +225,8 @@ public class NewUser extends JFrame {
     private void doNextButtonProcedure(){
         System.out.println("in the do next button procedure in new user");
         if (newUserButton.isSelected() || existingButton.isSelected()){//moveOnPossible) {
-            set.setWindow(window);
             decorator.hideWindow(instructionsPanel, choicesPanel, backNextButtonsPanel);
+            set.setWindow(window);
 
             if (gatherFrame == null) {
                 // Create a new instance of Gather if it doesn't exist

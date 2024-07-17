@@ -135,11 +135,11 @@ public class Decorator {
         Creator create = new Creator();
         textField.setVisible(false);
         JPanel panelForDeleting = new JPanel();
-        System.out.println("does textfield be null?: "+textField==null+ "textfield text"+ textField.getText());
+        //System.out.println("does textfield be null?: "+textField==null+ "textfield text"+ textField.getText());
         panelForDeleting.add(textField);
-        System.out.println(panelForDeleting.getComponentCount() + " :beforeselectedBoxPanelComponenents");
+        //System.out.println(panelForDeleting.getComponentCount() + " :beforeselectedBoxPanelComponenents");
         create.deleteTextBox(panelForDeleting);
-        System.out.println(panelForDeleting.getComponentCount() + " :afterselectedBoxPanelComponenents");
+        //System.out.println(panelForDeleting.getComponentCount() + " :afterselectedBoxPanelComponenents");
         Path filePath = Paths.get("/Users/evy/Documents/GradeTracker-new/src/main/view/UserInfo/StudentInfo/"+set.getUsername()+"/"+textField.getText()+".txt");
         
         try {
@@ -161,7 +161,7 @@ public class Decorator {
         FocusListener yesFocusListener = new FocusAdapter() {
             @Override
             public void focusGained(FocusEvent e) {
-                System.out.println("focuslistener#3");
+                //System.out.println("focuslistener#3");
                 SwingUtilities.invokeLater(() -> {
                     System.out.println("focusered");
                     textField.setCaretPosition(caretPosition);

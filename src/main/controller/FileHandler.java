@@ -33,7 +33,7 @@ public class FileHandler {
             try {
                 BufferedReader reader = new BufferedReader(new FileReader(filePath));
                 while ((line = reader.readLine()) != null) {
-                    System.out.println("printing file..."+ line);
+                    //System.out.println("printing file..."+ line);
                     myList.add(line);                 
                 }
                 reader.close();
@@ -49,13 +49,13 @@ public class FileHandler {
         public boolean fileExists(String filePath) {
             try {
                 BufferedReader reader = new BufferedReader(new FileReader(filePath));
-                System.out.println("File exists"); 
+                //System.out.println("File exists"); 
                 reader.close();
                 return true;
             }
 
             catch (FileNotFoundException e) {
-                System.out.println("File does not exist"); 
+                //System.out.println("File does not exist"); 
                 return false;
             }
     
@@ -70,10 +70,10 @@ public class FileHandler {
             File folder = new File(folderPath);
 
             if (folder.exists() && folder.isDirectory()) {
-                System.out.println("The directory exists.");
+                //System.out.println("The directory exists.");
                 return true;
             } else {
-                System.out.println("The directory does not exist.");
+                //System.out.println("The directory does not exist.");
                 return false;
             }
         }
@@ -142,4 +142,6 @@ public class FileHandler {
                 }
             });
         }
+
+        //public void 
 }
