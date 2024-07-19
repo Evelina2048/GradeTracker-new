@@ -242,13 +242,21 @@ public class Gather {
         Boolean existingUser = (existingOrNew == "Existing");
         Boolean previousSettingsNotChanged = (set.getNewOrExistingChanged() == false);
         Boolean previousSettingsChanged = (set.getNewOrExistingChanged() == true);
-        System.out.println("******"+existingOrNew+" "+previousSettingsNotChanged);
-        if (newUser && set.getUsername() == null && previousSettingsNotChanged) {
+        System.out.println("{}"+textField.getText()+"{}");
+        Boolean didNotChangeUsernameFromDefault = (textField.getText().trim().equals("Enter user name")) && (set.getEmptiedState(textField)==false);
+        //Boolean didNotChangeUsernameFromDefault =  (textField.getText() == "Enter user name") && set.getEmptiedState(textField)==false;
+
+
+        System.out.println("!!!! "+(textField.getText().trim().equals("Enter user name"))+" "+(set.getEmptiedState(textField)==false));
+        System.out.println("******"+ (textField.getText())+"******");
+        //System.out.println("******^^^^^"+ (textField.getText()) +" "+(set.getEmptiedState(textField)==false));
+
+        if (newUser && (set.getUsername() == null || didNotChangeUsernameFromDefault) && previousSettingsNotChanged) {
             System.out.println("instruction words option 1");
             instructionsWordsLabel = new JLabel("You are a new user. Create a user name.");
         }
-        else if (newUser && set.getUsername() != null && previousSettingsNotChanged && fileHandler.folderExists(pathToUsernameFolder)){//readNames(pathToUsernameFolder, set.getUsername())){ //checkIfExisting(pathToUsernameFolder, set.getUsername())){//fileHandler.fileExists("/Users/evy/Documents/GradeTracker-new/src/main/view/UserInfo/StudentInfo/" + set.getUsername())){//fileHandler.fileExists(pathToUsernameFolder)) { //file name exists
-            System.out.println("instruction words option 3");
+        else if (newUser && set.getUsername() != null && previousSettingsNotChanged && fileHandler.folderExists(pathToUsernameFolder) && set.getEmptiedState(textField)){//readNames(pathToUsernameFolder, set.getUsername())){ //checkIfExisting(pathToUsernameFolder, set.getUsername())){//fileHandler.fileExists("/Users/evy/Documents/GradeTracker-new/src/main/view/UserInfo/StudentInfo/" + set.getUsername())){//fileHandler.fileExists(pathToUsernameFolder)) { //file name exists
+            System.out.println("instruction words option 2");
             instructionsWordsLabel = new JLabel("<html><center>Welcome back!<br> Already created account. Click to edit.");
         }
 
@@ -258,27 +266,27 @@ public class Gather {
         }
 
         else if (newUser && set.getUsername() == null && previousSettingsChanged) {
-            System.out.println("instruction words option 3");
+            System.out.println("instruction words option 4");
             instructionsWordsLabel = new JLabel("<html><center>You changed your NewUser/Existing settings. <br> You are a new user. Create a user name.");
         }
 
-        else if (existingUser && previousSettingsNotChanged) {
-            System.out.println("instruction words option 2");
+        else if (existingUser && previousSettingsNotChanged && didNotChangeUsernameFromDefault) {
+            System.out.println("instruction words option 5");
             instructionsWordsLabel = new JLabel("You are an existing user. Type in your user name");
         }
 
         else if (existingUser && set.getUsername() == null && previousSettingsChanged) {
-            System.out.println("instruction words option 4");
+            System.out.println("instruction words option 6");
             instructionsWordsLabel = new JLabel("<html><center>You changed your NewUser/Existing settings. <br> You are an existing user. Type in your user name");
         }
 
         else if (newUser && set.getUsername() != null && previousSettingsChanged) {
-            System.out.println("instruction words option 3");
+            System.out.println("instruction words option 7");
             instructionsWordsLabel = new JLabel("<html><center>You changed your NewUser/Existing settings. <br> You are a new user. Create a user name.");
         }
 
         else if (existingUser && set.getUsername() != null && previousSettingsChanged) {
-            System.out.println("instruction words option 4");
+            System.out.println("instruction words option 8");
             instructionsWordsLabel = new JLabel("<html><center>You changed your NewUser/Existing settings. <br> You are an existing user. Type in your user name");
         }
 
@@ -287,7 +295,7 @@ public class Gather {
         //     instructionsWordsLabel = new JLabel("<html><center>Welcome back!");
  
         else {
-            System.out.println("instruction words option 5. new user: "+ newUser+" username: "+ set.getUsername()+" previoussettingsnotchanged: "+ previousSettingsNotChanged+ " fileExists? " +fileHandler.fileExists(pathToUsernameFolder));
+            System.out.println("instruction words option 9. new user: "+ newUser+" username: "+ set.getUsername()+" previoussettingsnotchanged: "+ previousSettingsNotChanged+ " fileExists? " +fileHandler.fileExists(pathToUsernameFolder));
             instructionsWordsLabel = new JLabel("Error");
         }
         decorateInstructions(instructionsWordsLabel);
