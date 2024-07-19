@@ -47,7 +47,7 @@ public class StudentClasses extends JFrame {
     private JButton saveButton;
     private JTextField selectedTextBox;
     private Point initialClick;
-    private JTextField draggedTextField = null;
+    private JTextField draggedTextField = new JTextField();
     private FileWriting fileWrite = new FileWriting();
     Border borderRegular = BorderFactory.createLineBorder(Color.GRAY, 2);
     JPanel southContainer = new JPanel(new GridLayout(2,1,0,0));
@@ -55,9 +55,12 @@ public class StudentClasses extends JFrame {
     JButton newClassButton;
     JButton deleteClassButton;
     FileHandler fileHandler = new FileHandler();
+    JLayeredPane layeredPane = new JLayeredPane();
     
     Set set;
     JPanel instructionsPanel;
+
+    private static Boolean isDragging = false;
 
     public StudentClasses() {
     }
@@ -78,11 +81,25 @@ public class StudentClasses extends JFrame {
         window.getRootPane().getActionMap().put("enterAction", enterAction);
         
         window.setTitle("StudentClasses");
-        window.setLayout(new BorderLayout());
-        instructionsWordsAndPanel("Edit Classes Mode "+"(for " +set.getStudentOrTeacher()+"s)");
-        loadIfNeeded();
-        westPanelCreate();
-        buttonSetUpAction();
+        //window.setLayout(null);
+        //window.setLayout(new BorderLayout());
+
+// works below
+        JTextField waterfalls = new JTextField("Hi");
+        waterfalls.setOpaque(true);
+        waterfalls.setBounds(50, 50, 100, 30);
+        layeredPane.add(waterfalls);
+        layeredPane.setBackground(Color.pink);
+        layeredPane.setVisible(true);
+        layeredPane.setBounds(100,100,100,100);
+        layeredPane.setOpaque(true);
+        window.add(layeredPane);
+//
+        
+        // instructionsWordsAndPanel("Edit Classes Mode "+"(for " +set.getStudentOrTeacher()+"s)");
+        // loadIfNeeded();
+        // westPanelCreate();
+        // buttonSetUpAction();
     }
 
     private void loadIfNeeded() {
@@ -226,9 +243,7 @@ public class StudentClasses extends JFrame {
     }
 
     private void writeType() {
-        System.out.println("1111 in writetype");
         creator.setClassList();
-        System.out.println("5555 back in writetype");
         set.setFilePath("/Users/evy/Documents/GradeTracker-new/src/main/view/UserInfo/StudentInfo/" + set.getUsername() + "/class.txt");
        //creator.writeTextToFile();
        fileWrite.writeTextToFileWithAppend(set.getTextFieldPanel());
@@ -266,10 +281,81 @@ public class StudentClasses extends JFrame {
     }
 
     private void prepareTextboxForDeleteMode() {
-        JLayeredPane layeredPane = new JLayeredPane();
+    //     JTextField[] tempTextField = new JTextField[1];
+    //     for (int i = 0; i < set.getTextFieldPanel().getComponentCount(); i++) { 
+    //         //tempTextField = new JTextField[1];
+    //         JTextField textField = new JTextField();
+    //         if (set.getTextFieldPanel().getComponent(i) instanceof JTextField) {
+    //             textField = (JTextField) set.getTextFieldPanel().getComponent(i);
+    //             addMouseListenerToTextboxAndFrame(textField);
+    //         }
+    //         else if (set.getTextFieldPanel().getComponent(i) instanceof JPanel) {
+    //             textField = creator.goIntoPanelReturnTextbox((JPanel) set.getTextFieldPanel().getComponent(i), 0);
+                
+    //             addMouseListenerToTextboxAndFrame(textField);
+    //         }
+            
+    //         else {
+    //             System.out.println("There was an issue in delete mode. student classes" + set.getTextFieldPanel().getComponent(i).getClass().getName());
+    //         }
 
+    //         ////
+    //         //final JTextField finalTextField = textField;
+    //         //draggingListeners();//
+    //         //finalTextField.addMouseMotionListener(
+                
+    //         //});
+            
+    //         //finalTextField.addMouseListener(
+                
+    //         // addDraggingMouseReleasedListener(textField, tempTextField);
+    //         // System.out.println(1111);
+
+    //         ///
+
+    //         textField.addMouseMotionListener(new MouseMotionAdapter() {
+    //             public void mouseDragged(MouseEvent e) {
+    //                 initialClick = e.getPoint();
+    //                 draggedTextField = (JTextField) e.getSource();
+                    
+    //                 tempTextField[0] = new JTextField(draggedTextField.getText());
+    //                 tempTextField[0].setBounds(draggedTextField.getBounds());
+    //                 tempTextField[0].setBackground(new Color(200, 200, 200, 150)); // Light color with transparency
+    //                 tempTextField[0].setEditable(false);
+    //                 tempTextField[0].setFocusable(false);
+                    
+    //                 layeredPane.add(tempTextField[0], Integer.valueOf(JLayeredPane.DRAG_LAYER));
+    //                 layeredPane.repaint();
+    //                 if (tempTextField[0] != null) {
+    //                     int thisX = tempTextField[0].getLocation().x;
+    //                     int thisY = tempTextField[0].getLocation().y;
+                        
+    //                     int xMoved = e.getX() - initialClick.x;
+    //                     int yMoved = e.getY() - initialClick.y;
+                        
+    //                     int X = thisX + xMoved;
+    //                     int Y = thisY + yMoved;
+                        
+    //                     tempTextField[0].setLocation(X, Y);
+    //                 }
+    //             }
+    //         });
+            
+    //         //textField.addMouseListener(new MouseAdapter() {
+    //         tempTextField[0].addMouseListener(new MouseAdapter() {
+    //             public void mouseReleased(MouseEvent e) {
+    //                 System.out.println(3333);
+    //                     layeredPane.remove(tempTextField[0]);
+    //                     tempTextField[0] = null;
+    //                     layeredPane.repaint();
+    //             }
+    //         });
+    // }
+    //JTextField tempTextField = new JTextField();
+    JTextField[] tempTextField = new JTextField[1];
+    tempTextField[0] = new JTextField("ERROR"); //if not overwritten will show error
         for (int i = 0; i < set.getTextFieldPanel().getComponentCount(); i++) { 
-            final JTextField[] tempTextField = new JTextField[1];
+            //tempTextField = new JTextField[1];
             JTextField textField = new JTextField();
             if (set.getTextFieldPanel().getComponent(i) instanceof JTextField) {
                 textField = (JTextField) set.getTextFieldPanel().getComponent(i);
@@ -285,44 +371,182 @@ public class StudentClasses extends JFrame {
                 System.out.println("There was an issue in delete mode. student classes" + set.getTextFieldPanel().getComponent(i).getClass().getName());
             }
 
+            ////
+            //final JTextField finalTextField = textField;
+            //draggingListeners();//
+            //finalTextField.addMouseMotionListener(
+                
+            //});
+            
+            //finalTextField.addMouseListener(
+                
+            // addDraggingMouseReleasedListener(textField, tempTextField);
+            // System.out.println(1111);
+
+            ///
+            // MouseAdapter mouseReleasedForDragging = new MouseAdapter() {
+            //     public void mouseReleased(MouseEvent e) {
+            //         System.out.println(3333);
+            //     }
+            // };
+
             textField.addMouseMotionListener(new MouseMotionAdapter() {
                 public void mouseDragged(MouseEvent e) {
-                    initialClick = e.getPoint();
+                    //
                     draggedTextField = (JTextField) e.getSource();
+                    //System.out.println("draggedtextfield: "+ draggedTextField.getText());
                     
                     tempTextField[0] = new JTextField(draggedTextField.getText());
-                    tempTextField[0].setBounds(draggedTextField.getBounds());
-                    tempTextField[0].setBackground(new Color(200, 200, 200, 150)); // Light color with transparency
+                    //tempTextField[0].setBounds(draggedTextField.getBounds());
+                    tempTextField[0].setBounds(0,0,100,100);
+                    tempTextField[0].setSize(draggedTextField.getWidth(), draggedTextField.getHeight());
+                    tempTextField[0].setLocation(0, 0);
+                    tempTextField[0].setForeground(Color.pink);
+                    //tempTextField[0].setBackground(new Color(200, 200, 200, 150)); // Light color with transparency
                     tempTextField[0].setEditable(false);
                     tempTextField[0].setFocusable(false);
+
+                    System.out.println("temptextfield "+ tempTextField[0].getText());
+                    //tempTextField[0].mouseDragged() = true;
+                    //tempTextField[0].copy();
+                    //tempTextField[0].addMouseMotionListener(mouseReleasedForDragging);
+                    //textField.addMouseListener(mouseReleasedForDragging);
+                    layeredPane.add(tempTextField[0]);
+                    layeredPane.setVisible(true);
+                    tempTextField[0].setOpaque(true);
+                    tempTextField[0].setVisible(true);
+                    window.add(layeredPane);
+
+                
+                //     tempTextField[0].setBounds(draggedTextField.getBounds());
+                //     tempTextField[0].setBackground(new Color(200, 200, 200, 150)); // Light color with transparency
+                //     tempTextField[0].setEditable(false);
+                //     tempTextField[0].setFocusable(false);
                     
-                    layeredPane.add(tempTextField[0], Integer.valueOf(JLayeredPane.DRAG_LAYER));
-                    layeredPane.repaint();
-                    if (tempTextField[0] != null) {
-                        int thisX = tempTextField[0].getLocation().x;
-                        int thisY = tempTextField[0].getLocation().y;
+                //     layeredPane.add(tempTextField[0], Integer.valueOf(JLayeredPane.DRAG_LAYER));
+                //     layeredPane.repaint();
+                //     if (tempTextField[0] != null) {
+                //         int thisX = tempTextField[0].getLocation().x;
+                //         int thisY = tempTextField[0].getLocation().y;
                         
-                        int xMoved = e.getX() - initialClick.x;
-                        int yMoved = e.getY() - initialClick.y;
+                //         int xMoved = e.getX() - initialClick.x;
+                //         int yMoved = e.getY() - initialClick.y;
                         
-                        int X = thisX + xMoved;
-                        int Y = thisY + yMoved;
+                //         int X = thisX + xMoved;
+                //         int Y = thisY + yMoved;
                         
-                        tempTextField[0].setLocation(X, Y);
-                    }
+                //     tempTextField[0].setLocation(X, Y);
+                    
+                    
                 }
             });
             
             textField.addMouseListener(new MouseAdapter() {
-                public void mouseReleased(MouseEvent e) {
-                    if (tempTextField[0] != null) {
-                        layeredPane.remove(tempTextField[0]);
-                        tempTextField[0] = null;
-                        layeredPane.repaint();
+            //tempTextField[0].addMouseListener( new MouseAdapter() {
+                    public void mouseReleased(MouseEvent e) {
+                        System.out.println(3333);
                     }
-                }
             });
     }
+            
+
+            ////
+    }
+    
+
+    private void addDraggingMouseReleasedListener(JTextField textField, JTextField[] tempTextField) {
+        // System.out.println(2222);
+        // MouseAdapter draggingAdapter = new MouseAdapter() {
+        //     public void mouseDragged(MouseEvent e) {
+        //         initialClick = e.getPoint();
+        //         draggedTextField = (JTextField) e.getSource();
+                
+        //         tempTextField[0] = new JTextField(draggedTextField.getText());
+        //         tempTextField[0].setBounds(draggedTextField.getBounds());
+        //         tempTextField[0].setBackground(new Color(200, 200, 200, 150)); // Light color with transparency
+        //         tempTextField[0].setEditable(false);
+        //         tempTextField[0].setFocusable(false);
+                
+        //         layeredPane.add(tempTextField[0], Integer.valueOf(JLayeredPane.DRAG_LAYER));
+        //         layeredPane.repaint();
+        //         if (tempTextField != null) {
+        //             int thisX = tempTextField[0].getLocation().x;
+        //             int thisY = tempTextField[0].getLocation().y;
+                    
+        //             int xMoved = e.getX() - initialClick.x;
+        //             int yMoved = e.getY() - initialClick.y;
+                    
+        //             int X = thisX + xMoved;
+        //             int Y = thisY + yMoved;
+                    
+        //             tempTextField[0].setLocation(X, Y);
+        //         }
+        //     }
+        // };
+        // textField.addMouseMotionListener(draggingAdapter);
+        // MouseAdapter draggingMouseReleased = new MouseAdapter() {
+        // public void mouseReleased(MouseEvent e) {
+        //     //JTextField mouseTextField = textField;
+        //     System.out.println(3333);
+        //     System.out.println("temp ("+ tempTextField[0].getX()+" , "+ tempTextField[0].getY() + " ) textfield (" + draggedTextField.getX()+ " , "+ draggedTextField.getY()+")");
+        //     if (tempTextField[0] != null) {
+        //         layeredPane.remove(tempTextField[0]);
+        //         tempTextField[0] = null;
+        //         layeredPane.repaint();
+        //     }
+
+        //     if (tempTextField[0] != null && (tempTextField[0].getX() < draggedTextField.getX()) && (tempTextField[0].getY() < draggedTextField.getY())) {
+        //         System.out.println("temp is lower and to the right of the textfield");
+        //     }
+        // }
+        // };
+        // draggedTextField.addMouseMotionListener(draggingMouseReleased);
+
+        ///
+        
+
+        // textField.addMouseMotionListener(new MouseMotionAdapter() {
+        //     public void mouseDragged(MouseEvent e) {
+        //         initialClick = e.getPoint();
+        //         draggedTextField = (JTextField) e.getSource();
+                
+        //         tempTextField[0] = new JTextField(draggedTextField.getText());
+        //         tempTextField[0].setBounds(draggedTextField.getBounds());
+        //         tempTextField[0].setBackground(new Color(200, 200, 200, 150)); // Light color with transparency
+        //         tempTextField[0].setEditable(false);
+        //         tempTextField[0].setFocusable(false);
+                
+        //         layeredPane.add(tempTextField[0], Integer.valueOf(JLayeredPane.DRAG_LAYER));
+        //         layeredPane.repaint();
+        //         if (tempTextField[0] != null) {
+        //             int thisX = tempTextField[0].getLocation().x;
+        //             int thisY = tempTextField[0].getLocation().y;
+                    
+        //             int xMoved = e.getX() - initialClick.x;
+        //             int yMoved = e.getY() - initialClick.y;
+                    
+        //             int X = thisX + xMoved;
+        //             int Y = thisY + yMoved;
+                    
+        //             tempTextField[0].setLocation(X, Y);
+        //         }
+        //     }
+        // });
+        
+        // textField.addMouseListener(new MouseAdapter() {
+        //     public void mouseReleased(MouseEvent e) {
+        //         if (tempTextField[0] != null) {
+        //             layeredPane.remove(tempTextField[0]);
+        //             tempTextField[0] = null;
+        //             layeredPane.repaint();
+        //             System.out.println(3333);
+        //         }
+        //     }
+        // });
+}
+
+    private void draggingListeners() {
+        //
     }
 
     private void addMouseListenerToTextboxAndFrame(JTextField textField) {
