@@ -83,13 +83,10 @@ public void decideIfWrite(Component component, BufferedWriter writer) {
     textField = (JTextField) component;
     Boolean studentStatNonWritablePlaceholder = set.getEmptiedState(textField) == false && set.getCurrentClass() == "StudentStatCollect.java" && !textField.getText().equals("Credits (Optional)");
 
-    System.out.println("10 10 10 10 in decide if write "+textField.getText());
     if (set.getEmptiedState(textField) == true) {
-        System.out.println("11 11 11 11.1 in decide if write");
         tryToWrite(writer);
     }
     else if (studentStatNonWritablePlaceholder) {
-        System.out.println("11 11 11 11.2 in decide if write");
         removeUnwritablePlaceholders();
         
         if (set.getCanContinue()) {
@@ -144,22 +141,17 @@ public void writeTextToFile(){//JPanel textFieldPanel) {//(String importedFilePa
 private void tryToWriteWithoutAppend() {
     //writer = new BufferedWriter(new FileWriter(filePath));
     filePath = set.getFilePath();
-    System.out.println("7777 in tryToWriteWithoutAppend");
     try (BufferedWriter writer = new BufferedWriter(new FileWriter(filePath))) {
-        System.out.println("8888 in trytowritewithoutappend");
         if (!classList.isEmpty()) {
            classList.clear();
         }
         for (Component component : textFieldPanel.getComponents()) {
-            System.out.println("9999 in trytowritewithoutappend");
             if (component instanceof JTextField ) {
-                System.out.println("10 10 10 10.1 in trytowritewithoutappend");
                 tryToWriteTextFieldWithoutAppend(component, writer);
             }
             else if (component instanceof JPanel) {
                 //System.out.println("JPanel");
                 //filePath =
-                System.out.println("10 10 10 10.2 in trytowritewithoutappend");
                 writeTextToFileWithAppend((JPanel) component);
             }
             else {
@@ -172,10 +164,8 @@ private void tryToWriteWithoutAppend() {
 }
 
 private void tryToWriteTextFieldWithoutAppend(Component component, BufferedWriter writer) { //i think for student stat
-    System.out.println("11 11 11 11 in trytowritewithoutappend");
     JTextField textField = (JTextField) component;
     if (set.getEmptiedState(textField) == true && attachedBoxes == maxAttachedBoxes) {
-        System.out.println("12 12 12 12 in trytowritewithoutappend");
         String text = textField.getText().trim();
         if (!text.isEmpty()) {
             if (attachedBoxes == maxAttachedBoxes) {
@@ -226,18 +216,13 @@ private void seeHowManyPlaceholdersToSkip() {
 public void writeTextToFileWithAppend(JPanel panel) {
     //String filePath = importedFilePath;
     filePath = set.getFilePath();
-    System.out.println("6666 in writeTextToFileWithAppend");
     try (BufferedWriter writer = new BufferedWriter(new FileWriter(filePath, true))) {
-        System.out.println("7777 in writeTextToFileWithAppend");
         for (Component component : panel.getComponents()) {
-            System.out.println("8888 in writeTextToFileWithAppend");
             if (component instanceof JTextField) {
-                System.out.println("9999.1 in writeTextToFileWithAppend");
                 decideIfWrite(component, writer);
             }
 
             if (component instanceof JPanel) {
-                System.out.println("9999.2 in writeTextToFileWithAppend");
                 writeTextToFileWithAppend((JPanel) component);
             }
         }

@@ -369,14 +369,12 @@ public class Gather {
     }
 
     private void backButtonAction() {
-        //System.out.println(" 1111 backbuttonaction for gather");
         // hideWindow(); 
         // NewUser newUser = new NewUser();
         // newUser.newUserSetup();
         // if (set.getExistingOrNew() != null) {
         //     newUser.setButtonSelected();
         // }
-        //System.out.println(" 2222 backbuttonaction for gather complete");
         //actionPriorities.addClassActionListener(b -> {
             hideWindow(); 
             //window.getRootPane().getInputMap().put(KeyStroke.getKeyStroke("ENTER"), "none");

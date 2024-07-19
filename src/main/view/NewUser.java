@@ -63,7 +63,6 @@ public class NewUser extends JFrame {
     private String originalExistingOrNew;
 
     public NewUser() {
-        //System.out.println("3333 entering new user");
         this.set = Set.getInstance();
         this.actionPriorities = CompositeActionListenerWithPriorities.getInstance();
         //this.actionPriorities = CompositeActionListenerWithPriorities.getInstance();
@@ -83,7 +82,6 @@ public class NewUser extends JFrame {
         window.getRootPane().getActionMap().put("enterAction", enterAction);
 
         window.requestFocusInWindow();
-        //System.out.println("4444 done loading new user");
     }
 
     public void newUserSetup() {
@@ -94,7 +92,7 @@ public class NewUser extends JFrame {
         //actionPriorities.DEBUGLISTENERSIZE();
 
         window.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
-        window.setLayout(new BorderLayout());
+        //window.setLayout(null);
         window.setSize(windowWidth, windowHeight);
         
         window.setTitle("New User");

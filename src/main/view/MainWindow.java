@@ -87,7 +87,7 @@ private void windowSetUp() {
     //window set up
     window.setTitle("Launcher");
     window.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
-    window.setLayout(new BorderLayout());
+    //window.setLayout(null);
     window.setSize(windowWidth, windowHeight);
 }
  

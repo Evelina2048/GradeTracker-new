@@ -207,13 +207,10 @@ public class Creator {
     //     textField = (JTextField) component;
     //     Boolean studentStatNonWritablePlaceholder = set.getEmptiedState(textField) == false && set.getCurrentClass() == "StudentStatCollect.java" && !textField.getText().equals("Credits (Optional)");
 
-    //     System.out.println("10 10 10 10 in decide if write "+textField.getText());
     //     if (set.getEmptiedState(textField) == true) {
-    //         System.out.println("11 11 11 11.1 in decide if write");
     //         tryToWrite(writer);
     //     }
     //     else if (studentStatNonWritablePlaceholder) {
-    //         System.out.println("11 11 11 11.2 in decide if write");
     //         removeUnwritablePlaceholders();
             
     //         if (set.getCanContinue()) {
@@ -277,13 +274,11 @@ public class Creator {
     //         for (Component component : textFieldPanel.getComponents()) {
     //             System.out.println("9999 in trytowritewithoutappend");
     //             if (component instanceof JTextField ) {
-    //                 System.out.println("10 10 10 10.1 in trytowritewithoutappend");
     //                 tryToWriteTextFieldWithoutAppend(component, writer);
     //             }
     //             else if (component instanceof JPanel) {
     //                 //System.out.println("JPanel");
     //                 //filePath =
-    //                 System.out.println("10 10 10 10.2 in trytowritewithoutappend");
     //                 writeTextToFileWithAppend((JPanel) component);
     //             }
     //             else {
@@ -296,10 +291,8 @@ public class Creator {
     // }
 
     // private void tryToWriteTextFieldWithoutAppend(Component component, BufferedWriter writer) { //i think for student stat
-    //     System.out.println("11 11 11 11 in trytowritewithoutappend");
     //     JTextField textField = (JTextField) component;
     //     if (set.getEmptiedState(textField) == true && attachedBoxes == maxAttachedBoxes) {
-    //         System.out.println("12 12 12 12 in trytowritewithoutappend");
     //         String text = textField.getText().trim();
     //         if (!text.isEmpty()) {
     //             if (attachedBoxes == maxAttachedBoxes) {
@@ -426,7 +419,6 @@ public class Creator {
     // }
 
     public void setClassList() {
-        System.out.println("2222 in setclasslist");
         set.setClassList(classList);
     }
     
