@@ -206,24 +206,6 @@ public class Set {
         return newOrExistingHasChanged;
     }
 
-    public void setDialogBeingDisplayed(boolean displayed) {
-        //System.out.println("setexistingornewchanged: "+ changed);
-        dialogBeingDisplayed = displayed;
-    }
-
-    public Boolean getDialogBeingDisplayed() {
-        //System.out.println("recievingexistingornewchanged: "+ studentOrTeacherHasChanged);
-        return dialogBeingDisplayed;
-    }
-
-    public void setDialogFocusListener(FocusAdapter thisTextfieldFocusListener) {
-        textfieldFocusListener = thisTextfieldFocusListener;
-    }
-
-    public FocusAdapter getDialogFocusListener() {
-        return textfieldFocusListener;
-    }
-
     public void setFilePath(String thisFilePath) {
         filePath = thisFilePath;
     }
@@ -246,21 +228,5 @@ public class Set {
 
     public JButton getCurrentSaveButton() {
         return saveButton;
-    }
-
-    public void setYesFocusListener(FocusListener thisYesFocusListener) {
-        yesFocusListener = thisYesFocusListener;
-    }
-
-    public FocusListener getYesFocusListener() {
-        return yesFocusListener;
-    }
-
-    public void setNoFocusListener(FocusListener thisNoFocusListener) {
-        noFocusListener = thisNoFocusListener;
-    }
-
-    public FocusListener getNoFocusListener() {
-        return noFocusListener;
     }
 }

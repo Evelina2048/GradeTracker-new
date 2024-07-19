@@ -26,6 +26,7 @@ import java.awt.Dimension;
 
 import java.io.IOException;
 import main.model.Set;
+import main.model.SetListeners;
 import main.view.student.StudentStatCollect;
 
 //files
@@ -45,6 +46,7 @@ import java.awt.event.FocusEvent;
 public class Decorator {
     JFrame window;
     Set set;
+    SetListeners setListeners;
     JDialog dialog;
     String reason;
     JTextField textField = new JTextField();;
@@ -52,6 +54,7 @@ public class Decorator {
     
     public Decorator() {
         set = Set.getInstance();
+        setListeners = SetListeners.getInstance();
         window = set.getWindow();
     }
     
@@ -162,7 +165,8 @@ public class Decorator {
     private void reasonIsChangingUsernameYes() {
         int caretPosition = textField.getCaretPosition();
 
-        textField.removeFocusListener(set.getDialogFocusListener());
+        textField.removeFocusListener(setListeners.getDialogFocusListener());
+        textField.setSelectionColor(textField.getBackground());
         
         FocusListener yesFocusListener = new FocusAdapter() {
             @Override
@@ -177,7 +181,7 @@ public class Decorator {
         //textField.removeFocusListener(set.getDialogFocusListener());
 
         textField.addFocusListener(yesFocusListener);
-        set.setYesFocusListener(yesFocusListener);        
+        setListeners.setYesFocusListener(yesFocusListener);        
         //textField.customFocusListener.requestFocusInWindow();
 
         
@@ -189,8 +193,10 @@ public class Decorator {
             if (textField.getText().length() >= 28) {
                 textField.setCaretPosition(textField.getText().length());
             } else {
+                System.out.println("1111");
                 textField.setCaretPosition(0); // Initially place caret at the beginning
             }
+            textField.setSelectionColor(UIManager.getColor("TextField.selectionBackground"));
         });
     
     }
@@ -213,7 +219,7 @@ public class Decorator {
     }
 
     private void noButtonActionListener(JButton noButton) {
-        set.setDialogBeingDisplayed(false);
+        //set.setDialogBeingDisplayed(false);
         noButton.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent e) {
                 noButtonAction();
@@ -278,8 +284,8 @@ public class Decorator {
                 
         };
         textField.addFocusListener(noFocusListener);
-        set.setNoFocusListener(noFocusListener);
-        textField.removeFocusListener(set.getDialogFocusListener());
+        setListeners.setNoFocusListener(noFocusListener);
+        textField.removeFocusListener(setListeners.getDialogFocusListener());
 
         //textField.addFocusListener(set.getDialogFocusListener());
     }

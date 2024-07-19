@@ -26,17 +26,12 @@ import java.awt.event.ActionListener;
 import java.awt.event.ActionEvent;
 import java.awt.FlowLayout;
 
-import java.io.FileWriter;
-import java.io.IOException;
-import java.io.BufferedReader;
-
-import java.io.FileReader;
-
 import java.awt.event.FocusAdapter;
 import java.awt.event.FocusEvent;
 import java.awt.event.FocusListener;
 
 import main.model.Set;
+import main.model.SetListeners;
 import main.controller.CompositeActionListenerWithPriorities;
 import main.controller.CreateButton;
 import main.controller.Creator;
@@ -56,6 +51,7 @@ public class Gather {
     private int windowX;
     private int windowY;
     private Set set;
+    private SetListeners setListeners;
     private Creator creator;
     private FileWriting fileWrite = new FileWriting();
     private String existingOrNew;
@@ -90,6 +86,7 @@ public class Gather {
     public Gather() {
         System.out.println("entering gather");
         this.set = Set.getInstance();
+        this.setListeners = SetListeners.getInstance();
         
         //this.actionPriorities = CompositeActionListenerWithPriorities.getInstance();
 
@@ -188,7 +185,7 @@ public class Gather {
                 }
             };
 
-            set.setDialogFocusListener(textfieldFocusListener);
+            setListeners.setDialogFocusListener(textfieldFocusListener);
             //deleteAllFocusListeners();
             // textField.removeFocusListener(set.getDialogFocusListener());
 
