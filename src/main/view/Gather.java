@@ -81,12 +81,14 @@ public class Gather {
     JPanel saveButtonPanel;
     String pathToUsernameFolder;
     FileHandler fileHandler = new FileHandler();
+    CompositeActionListenerWithPriorities actionPriorities;
     //CompositeActionListenerWithPriorities actionPriorities;
 
     public Gather() {
         System.out.println("entering gather");
         this.set = Set.getInstance();
         this.setListeners = SetListeners.getInstance();
+        this.actionPriorities = CompositeActionListenerWithPriorities.getInstance();
         
         //this.actionPriorities = CompositeActionListenerWithPriorities.getInstance();
 
@@ -105,6 +107,8 @@ public class Gather {
     }
 
     public void gatherLaunch () {
+        set.setCurrentClass("Gather");
+        actionPriorities.setCurrentClassNumber(2); //needs to be set here as well because if going between classes really quick on multiple threads, want to make sure actionPriorities has the right class. And using integers that represent view order for comparison logic in class
         
         window.setTitle("Gather");
         window = set.getWindow();
@@ -555,6 +559,7 @@ public class Gather {
 
     public void errorMessageSetUp(String labelWords, int width, int height) {
         JDialog dialog = new JDialog(window, true);
+        dialog.setResizable(false);
         dialog.setLayout(new FlowLayout());
         JLabel label = new JLabel(labelWords);
         label.setHorizontalAlignment(SwingConstants.CENTER);

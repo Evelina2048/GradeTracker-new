@@ -224,6 +224,7 @@ public class Creator {
     }
 
     public void setClassList() {
+        System.out.println("2222 "+classList);
         set.setClassList(classList);
     }
     

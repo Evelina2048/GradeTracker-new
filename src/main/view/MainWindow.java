@@ -326,6 +326,7 @@ private boolean readLine(BufferedReader reader, String username, boolean usernam
 
 private void errorMessageSetUp(String labelWords, int width, int height) {
     JDialog dialog = new JDialog(window, true);
+    dialog.setResizable(false);
     dialog.setLayout(new FlowLayout());
     JLabel label = new JLabel(labelWords);
     label.setHorizontalAlignment(SwingConstants.CENTER);

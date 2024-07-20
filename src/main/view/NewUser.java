@@ -86,6 +86,8 @@ public class NewUser extends JFrame {
 
     public void newUserSetup() {
         window = set.getWindow();
+        set.setCurrentClass("NewUser");
+        actionPriorities.setCurrentClassNumber(1); //needs to be set here as well because if going between classes really quick on multiple threads, want to make sure actionPriorities has the right class. And using integers that represent view order for comparison logic in class
 
         //CompositeActionListenerWithPriorities 
         //actionPriorities = new CompositeActionListenerWithPriorities();

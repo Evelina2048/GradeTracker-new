@@ -93,6 +93,7 @@ public class Decorator {
         reason = myReason;
         textField = importedTextField;
         dialog = new JDialog(window, true);
+        dialog.setResizable(false);
         dialog.setLayout(new FlowLayout());
         JLabel label = new JLabel(text);
         label.setHorizontalAlignment(SwingConstants.CENTER);
@@ -193,7 +194,6 @@ public class Decorator {
             if (textField.getText().length() >= 28) {
                 textField.setCaretPosition(textField.getText().length());
             } else {
-                System.out.println("1111");
                 textField.setCaretPosition(0); // Initially place caret at the beginning
             }
             textField.setSelectionColor(UIManager.getColor("TextField.selectionBackground"));
@@ -310,6 +310,7 @@ public class Decorator {
 
     public JDialog genericPopUpMessage(String text,JRadioButton button) {
         dialog = new JDialog(window, true);
+        dialog.setResizable(false);
         dialog.setLayout(new FlowLayout());
         JLabel label = new JLabel(text);
         label.setHorizontalAlignment(SwingConstants.CENTER);
@@ -369,6 +370,7 @@ public class Decorator {
 
     public void errorMessageSetUp(JRadioButton button) {
         dialog = genericPopUpMessage("<html><center>Please choose an option", button);
+        dialog.setResizable(false);
         
         dialog.setLocationRelativeTo(button);
         dialog.setLocation(dialog.getX(), dialog.getY() + 15); 

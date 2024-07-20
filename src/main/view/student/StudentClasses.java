@@ -85,21 +85,21 @@ public class StudentClasses extends JFrame {
         //window.setLayout(new BorderLayout());
 
 // works below
-        JTextField waterfalls = new JTextField("Hi");
-        waterfalls.setOpaque(true);
-        waterfalls.setBounds(50, 50, 100, 30);
-        layeredPane.add(waterfalls);
-        layeredPane.setBackground(Color.pink);
-        layeredPane.setVisible(true);
-        layeredPane.setBounds(100,100,100,100);
-        layeredPane.setOpaque(true);
-        window.add(layeredPane);
+        // JTextField waterfalls = new JTextField("Hi");
+        // waterfalls.setOpaque(true);
+        // waterfalls.setBounds(50, 50, 100, 30);
+        // layeredPane.add(waterfalls);
+        // layeredPane.setBackground(Color.pink);
+        // layeredPane.setVisible(true);
+        // layeredPane.setBounds(100,100,100,100);
+        // layeredPane.setOpaque(true);
+        // window.add(layeredPane);
 //
         
-        // instructionsWordsAndPanel("Edit Classes Mode "+"(for " +set.getStudentOrTeacher()+"s)");
-        // loadIfNeeded();
-        // westPanelCreate();
-        // buttonSetUpAction();
+        instructionsWordsAndPanel("Edit Classes Mode "+"(for " +set.getStudentOrTeacher()+"s)");
+        loadIfNeeded();
+        westPanelCreate();
+        buttonSetUpAction();
     }
 
     private void loadIfNeeded() {
@@ -243,8 +243,10 @@ public class StudentClasses extends JFrame {
     }
 
     private void writeType() {
+        System.out.println(1111);
         creator.setClassList();
         set.setFilePath("/Users/evy/Documents/GradeTracker-new/src/main/view/UserInfo/StudentInfo/" + set.getUsername() + "/class.txt");
+        System.out.println("5555 filepath "+set.getFilePath());
        //creator.writeTextToFile();
        fileWrite.writeTextToFileWithAppend(set.getTextFieldPanel());
     }
@@ -344,7 +346,6 @@ public class StudentClasses extends JFrame {
     //         //textField.addMouseListener(new MouseAdapter() {
     //         tempTextField[0].addMouseListener(new MouseAdapter() {
     //             public void mouseReleased(MouseEvent e) {
-    //                 System.out.println(3333);
     //                     layeredPane.remove(tempTextField[0]);
     //                     tempTextField[0] = null;
     //                     layeredPane.repaint();
@@ -381,12 +382,10 @@ public class StudentClasses extends JFrame {
             //finalTextField.addMouseListener(
                 
             // addDraggingMouseReleasedListener(textField, tempTextField);
-            // System.out.println(1111);
 
             ///
             // MouseAdapter mouseReleasedForDragging = new MouseAdapter() {
             //     public void mouseReleased(MouseEvent e) {
-            //         System.out.println(3333);
             //     }
             // };
 
@@ -444,7 +443,7 @@ public class StudentClasses extends JFrame {
             textField.addMouseListener(new MouseAdapter() {
             //tempTextField[0].addMouseListener( new MouseAdapter() {
                     public void mouseReleased(MouseEvent e) {
-                        System.out.println(3333);
+                        System.out.println("mouselistener"+3333);
                     }
             });
     }
@@ -455,7 +454,6 @@ public class StudentClasses extends JFrame {
     
 
     private void addDraggingMouseReleasedListener(JTextField textField, JTextField[] tempTextField) {
-        // System.out.println(2222);
         // MouseAdapter draggingAdapter = new MouseAdapter() {
         //     public void mouseDragged(MouseEvent e) {
         //         initialClick = e.getPoint();
