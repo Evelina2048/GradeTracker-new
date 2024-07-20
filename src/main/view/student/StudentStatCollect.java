@@ -152,7 +152,7 @@ public class StudentStatCollect extends JFrame {
 
 
         //textBoxPanel.add(creator.typeBox(set.getFinalClassList().get(set.getClassListIndex()), "JLabel",  true));
-        String filePath = "/Users/evy/Documents/GradeTracker-new/src/main/view/UserInfo/StudentInfo/"+set.getUsername()+"/"+set.getFinalClassList().get(set.getClassListIndex())+".txt";
+        String filePath = "/Users/evy/Documents/GradeTracker-new/src/main/view/UserInfo/StudentInfo/"+set.getUsername()+"/ClassInformation/"+set.getFinalClassList().get(set.getClassListIndex())+".txt";
         
         JPanel testPanel = fileHandler.loadTextboxes(filePath);
         int numberOfComponents = testPanel.getComponentCount();
@@ -193,7 +193,7 @@ public class StudentStatCollect extends JFrame {
         //if (textBoxPanel.getComponentCount() == 5 || 8 || 11 || 14 || 17 || 20 || 23 || 26 || 29 || 32) {
         //if ((textBoxPanel.getComponentCount() - 5) % 3 == 0) { //only want to write if 
         System.out.println("testtesttest: "+ set.getCurrentClass());
-        set.setFilePath("/Users/evy/Documents/GradeTracker-new/src/main/view/UserInfo/StudentInfo/" + set.getUsername() +"/"+finalClassList.get(set.getClassListIndex())+ ".txt");
+        set.setFilePath("/Users/evy/Documents/GradeTracker-new/src/main/view/UserInfo/StudentInfo/" + set.getUsername() +"/ClassInformation/"+finalClassList.get(set.getClassListIndex())+ ".txt");
         
         creator.setTextFieldContainer(set.getTextFieldPanel());
         fileWrite.writeTextToFile();
@@ -224,7 +224,7 @@ public class StudentStatCollect extends JFrame {
 
     public void visitNextStudentClass() {
         //readClass(finalClassList);
-        String filePath = "/Users/evy/Documents/GradeTracker-new/src/main/view/UserInfo/StudentInfo/"+set.getUsername()+"/"+set.getFinalClassList().get(set.getClassListIndex())+".txt";
+        String filePath = "/Users/evy/Documents/GradeTracker-new/src/main/view/UserInfo/StudentInfo/"+set.getUsername()+"/ClassInformation/"+set.getFinalClassList().get(set.getClassListIndex())+".txt";
         if (fileHandler.fileExists(filePath)) {
             textBoxPanelReset();
 

@@ -141,7 +141,7 @@ public class Decorator {
          }
     }
 
-    private void reasonIsDeletingActionYes() {
+    private void reasonIsDeletingActionYes() { //for student classes
         Creator create = new Creator();
         textField.setVisible(false);
         JPanel panelForDeleting = new JPanel();
@@ -150,7 +150,7 @@ public class Decorator {
         //System.out.println(panelForDeleting.getComponentCount() + " :beforeselectedBoxPanelComponenents");
         create.deleteTextBox(panelForDeleting);
         //System.out.println(panelForDeleting.getComponentCount() + " :afterselectedBoxPanelComponenents");
-        Path filePath = Paths.get("/Users/evy/Documents/GradeTracker-new/src/main/view/UserInfo/StudentInfo/"+set.getUsername()+"/"+textField.getText()+".txt");
+        Path filePath = Paths.get("/Users/evy/Documents/GradeTracker-new/src/main/view/UserInfo/StudentInfo/"+set.getUsername()+"/"+"ClassInformation"+"/"+textField.getText()+".txt");
         
         try {
             Files.deleteIfExists(filePath);

@@ -58,7 +58,7 @@ public void decideIfWrite(Component component, BufferedWriter writer) {
             //JDialog dialog = decorator.genericPopUpMessage("<html><center>Must fill in placeholder.<br>Will not save sections with placeholders",null);
             
             //JDialog dialog = 
-            decorator.areYouSureMessage(null, "studentStatsEmpty", "Hello friends");
+            decorator.areYouSureMessage(null, "studentStatsEmpty", "Remove placeholders to continue"); //hello friends
             // dialog.setLocationRelativeTo(window);
             // dialog.setLocation(dialog.getX(), dialog.getY() + 15); 
             // dialog.setVisible(true);
@@ -185,6 +185,10 @@ public void writeTextToFileWithAppend(JPanel panel) {
         for (Component component : panel.getComponents()) {
             if (component instanceof JTextField) {
                 decideIfWrite(component, writer);
+
+                //if placeholder count == panel.length(){
+                // are you sure message that says "this class has grade parts that are completely empty. leave blank?"
+                //}
             }
 
             if (component instanceof JPanel) {
