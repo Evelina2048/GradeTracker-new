@@ -27,7 +27,7 @@ import main.model.Set;
 import main.controller.CreateButton;
 import main.controller.Creator;
 import main.controller.Decorator;
-import main.controller.FileHandler;
+import main.controller.FileHandling;
 import main.controller.FileWriting;
 import main.view.MainWindow;
 import main.view.student.StudentClasses;
@@ -54,7 +54,7 @@ public class StudentClasses extends JFrame {
     AtomicBoolean textFieldEmptied = new AtomicBoolean(false);;
     JButton newClassButton;
     JButton deleteClassButton;
-    FileHandler fileHandler = new FileHandler();
+    FileHandling fileHandler = new FileHandling();
     JLayeredPane layeredPane = new JLayeredPane();
     
     Set set;

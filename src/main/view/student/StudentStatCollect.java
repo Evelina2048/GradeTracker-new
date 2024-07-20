@@ -18,7 +18,7 @@ import java.util.regex.Pattern;
 
 import main.model.Set;
 import main.controller.Creator;
-import main.controller.FileHandler;
+import main.controller.FileHandling;
 import main.controller.FileWriting;
 
 import javax.swing.AbstractAction;
@@ -40,7 +40,7 @@ public class StudentStatCollect extends JFrame {
     private JPanel classLabelPanel = new JPanel(new FlowLayout(FlowLayout.LEFT));
     private JPanel allBoxesPanel = new JPanel();
     private ArrayList<String> finalClassList;
-    private FileHandler fileHandler;
+    private FileHandling fileHandler;
     private JPanel textBoxPanel = new JPanel(new GridLayout(0,4,5,5));
 
     private int typeNumber = 0;
@@ -72,7 +72,7 @@ public class StudentStatCollect extends JFrame {
 
         creator.hideContainer();
 
-        fileHandler = new FileHandler();
+        fileHandler = new FileHandling();
         createNewTypeButton();
         buttonSetUpAction();
 

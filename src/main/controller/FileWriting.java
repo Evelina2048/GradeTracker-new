@@ -20,7 +20,7 @@ public class FileWriting {
     private JFrame window;
     private JPanel textFieldPanel = new JPanel(new FlowLayout(FlowLayout.LEFT));
     private Set set;
-    private FileHandler fileHandler = new FileHandler();
+    private FileHandling fileHandler = new FileHandling();
     private JTextField textField = new JTextField();
     private ArrayList<String> classList = new ArrayList<>();
     private int attachedBoxes = 0;

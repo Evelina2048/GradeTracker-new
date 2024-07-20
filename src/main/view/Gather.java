@@ -36,7 +36,7 @@ import main.controller.CompositeActionListenerWithPriorities;
 import main.controller.CreateButton;
 import main.controller.Creator;
 import main.controller.Decorator;
-import main.controller.FileHandler;
+import main.controller.FileHandling;
 import main.controller.FileWriting;
 
 import java.awt.event.KeyEvent;
@@ -80,7 +80,7 @@ public class Gather {
     JPanel nextButtonPanel;
     JPanel saveButtonPanel;
     String pathToUsernameFolder;
-    FileHandler fileHandler = new FileHandler();
+    FileHandling fileHandler = new FileHandling();
     CompositeActionListenerWithPriorities actionPriorities;
     //CompositeActionListenerWithPriorities actionPriorities;
 
@@ -161,7 +161,7 @@ public class Gather {
     private void textFieldMouseListener() {
         FocusAdapter textfieldFocusListener;
          // Check if file path to original username's class.txt exists and is not empty
-         FileHandler fileHandler = new FileHandler();
+         FileHandling fileHandler = new FileHandling();
          String filePath = pathToUsernameFolder + "/class.txt";
          if (fileHandler.fileExists(filePath) && fileHandler.fileIsNotEmpty(filePath)) {
             textfieldFocusListener = new FocusAdapter() {

@@ -18,10 +18,10 @@ import java.nio.file.FileVisitResult;
 import java.nio.file.SimpleFileVisitor;
 import main.model.Set;
 
-public class FileHandler {
+public class FileHandling {
         private Set set;
 
-        public FileHandler() {
+        public FileHandling() {
             set = Set.getInstance();
         }
 

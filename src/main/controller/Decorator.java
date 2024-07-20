@@ -51,11 +51,13 @@ public class Decorator {
     String reason;
     JTextField textField = new JTextField();;
     String yesOrNoDialog;
+    TextFieldColorFocusListener colorFocusListener;
     
     public Decorator() {
         set = Set.getInstance();
         setListeners = SetListeners.getInstance();
         window = set.getWindow();
+        colorFocusListener = new TextFieldColorFocusListener();
     }
     
 
@@ -405,7 +407,7 @@ public class Decorator {
        textField.setText(placeholderText);
 
        Creator creator = new Creator();
-       creator.textFieldFocusListener(textField, placeholderText);
+       colorFocusListener.textFieldFocusListener(textField, placeholderText);
        return textField;
     }
 
