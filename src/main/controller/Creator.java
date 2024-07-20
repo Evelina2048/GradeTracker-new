@@ -168,6 +168,7 @@ public class Creator {
         }
         checkIfLoadedAndAction();
         set.setTextFieldPanel(textFieldPanel);
+        System.out.println("in create textbox. panel: "+set.getTextFieldPanel().getComponentCount());
         return textField;
     }
 
@@ -217,8 +218,8 @@ public class Creator {
     }
 
     public void setClassList() {
-        System.out.println("2222 "+classList);
-        set.setClassList(classList);
+        //System.out.println("2222 "+classList);
+        //set.setClassList(classList);
     }
     
     public JPanel typeBox(String placeholder, String my_type, Boolean boxLoaded) {

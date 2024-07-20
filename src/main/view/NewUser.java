@@ -59,7 +59,7 @@ public class NewUser extends JFrame {
     JPanel choicesPanel;
     JPanel backNextButtonsPanel;
 
-    Decorator decorator = new Decorator();
+    Decorator decorate = new Decorator();
     private String originalExistingOrNew;
 
     public NewUser() {
@@ -118,7 +118,7 @@ public class NewUser extends JFrame {
     private void instructionsWordsWindow() {
         //instructions (north section for borderlayout)
         JLabel instructionsWords = new JLabel("Welcome! Are you a new user?");
-        instructionsPanel = decorator.InstructionsPanelDecorate(instructionsPanel, instructionsWords);
+        instructionsPanel = decorate.InstructionsPanelDecorate(instructionsPanel, instructionsWords);
     }
 
     private void radioButtonSetUp() {
@@ -191,13 +191,13 @@ public class NewUser extends JFrame {
         teacherStudentGroup.add(newUserButton);
         choicesPanel.add(existingButton);
         choicesPanel.add(newUserButton);
-        choicesPanel.add(existingButton, decorator.choiceGbc());
+        choicesPanel.add(existingButton, decorate.choiceGbc());
     }
 
     private void buttonSetUp() {
         backNextButtonsPanel = new JPanel(new BorderLayout());
 
-        Creator creator = new Creator();
+        Creator create = new Creator();
         JButton backButton = createButton.backButtonCreate();
         JPanel backButtonPanel = new JPanel();
         backButtonPanel.add(backButton);
@@ -225,7 +225,7 @@ public class NewUser extends JFrame {
     private void doNextButtonProcedure(){
         System.out.println("in the do next button procedure in new user");
         if (newUserButton.isSelected() || existingButton.isSelected()){//moveOnPossible) {
-            decorator.hideWindow(instructionsPanel, choicesPanel, backNextButtonsPanel);
+            decorate.hideWindow(instructionsPanel, choicesPanel, backNextButtonsPanel);
             set.setWindow(window);
 
             if (gatherFrame == null) {
@@ -253,7 +253,7 @@ public class NewUser extends JFrame {
     }
 
     private void getErrorMessage() {
-        decorator.errorMessageSetUp(newUserButton);
+        decorate.errorMessageSetUp(newUserButton);
     }
 
     public void setButtonSelected() {

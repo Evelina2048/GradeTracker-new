@@ -40,8 +40,8 @@ import java.awt.event.MouseMotionAdapter;
 
 public class StudentClasses extends JFrame {
     private JFrame window;
-    private Creator creator;
-    private Decorator decorator;
+    private Creator create;
+    private Decorator decorate;
     private CreateButton createButton;
     private JPanel backNextButtonsPanel;
     private JButton saveButton;
@@ -71,8 +71,8 @@ public class StudentClasses extends JFrame {
         set.setCurrentClass("StudentClasses.java");
         window = set.getWindow();
         window.setName("window");
-        creator = new Creator();
-        decorator = new Decorator();
+        create = new Creator();
+        decorate = new Decorator();
         createButton = new CreateButton();
         System.out.println("in student classes");
 
@@ -108,7 +108,7 @@ public class StudentClasses extends JFrame {
             System.out.println("I have info to load!");
             ArrayList<String> myList = fileHandler.readFileToList(filePath);
             for (int index=0; index<myList.size(); index++) {
-                creator.createTextBox(myList.get(index), "JTextField", true);
+                create.createTextBox(myList.get(index), "JTextField", true);
             }
             set.setClassList(myList);
             set.setFinalClassList(set.getCurrentPanelList());
@@ -116,7 +116,7 @@ public class StudentClasses extends JFrame {
         }
 
         else {
-           creator.createTextBox("Enter Class Name", "JTextField", false);
+           create.createTextBox("Enter Class Name", "JTextField", false);
         }
     }
 
@@ -200,18 +200,19 @@ public class StudentClasses extends JFrame {
     private void doNextButtonProcedure() {
         ArrayList<String> classList;
         classList = set.getCurrentPanelList();
+        System.out.println("2222 classlist"+classList);
         set.setClassList(classList);
         writeType();
         System.out.println("nextbuttonhit");
         fileWrite.writeTextToFile();
         set.setFinalClassList(classList);
         hideWindow();
-        creator.hideContainer();
+        create.hideContainer();
 
         set.setFinalClassList(set.getCurrentPanelList());
         StudentStatCollect studentStatCollect = new StudentStatCollect();
         if (fileHandler.fileExists("/Users/evy/Documents/GradeTracker-new/src/main/view/UserInfo/StudentInfo/" + set.getUsername() + "/" +"ClassInformation"+"/"+set.getFinalClassList().get(0) + ".txt")) {
-            creator.hideContainer();
+            create.hideContainer();
             studentStatCollect.addLoadedBoxes();
         }
 
@@ -225,7 +226,7 @@ public class StudentClasses extends JFrame {
         newClassButton.setPreferredSize(new Dimension(87, 50));
         newClassButton.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent e) {
-                creator.createTextBox("Enter Class Name", "JTextField",false);
+                create.createTextBox("Enter Class Name", "JTextField",false);
                 System.out.println("class list in new class button"+ set.getCurrentPanelList());
         }
     });
@@ -243,12 +244,13 @@ public class StudentClasses extends JFrame {
     }
 
     private void writeType() {
-        System.out.println(1111);
-        creator.setClassList();
+        System.out.println(1111+"in write type");
+        //create.setClassList();
         set.setFilePath("/Users/evy/Documents/GradeTracker-new/src/main/view/UserInfo/StudentInfo/" + set.getUsername() + "/" + "ClassInformation" + "/class.txt");
-        System.out.println("5555 filepath "+set.getFilePath());
-       //creator.writeTextToFile();
+        System.out.println("2222 filepath "+set.getFilePath());
+       //create.writeTextToFile();
         fileWrite.writeTextToFile();
+        fileWrite.debugPrintPanel();
 
        //fileWrite.writeTextToFileWithAppend(set.getTextFieldPanel());
     }
@@ -280,8 +282,8 @@ public class StudentClasses extends JFrame {
     private void instructionsWordsAndPanel(String text) {
         instructionsPanel = new JPanel();
         JLabel instructionsWords = new JLabel(text);
-        instructionsPanel = decorator.InstructionsPanelDecorate(instructionsPanel, instructionsWords);
-        creator.windowFix();
+        instructionsPanel = decorate.InstructionsPanelDecorate(instructionsPanel, instructionsWords);
+        create.windowFix();
     }
 
     private void prepareTextboxForDeleteMode() {
@@ -294,7 +296,7 @@ public class StudentClasses extends JFrame {
     //             addMouseListenerToTextboxAndFrame(textField);
     //         }
     //         else if (set.getTextFieldPanel().getComponent(i) instanceof JPanel) {
-    //             textField = creator.goIntoPanelReturnTextbox((JPanel) set.getTextFieldPanel().getComponent(i), 0);
+    //             textField = create.goIntoPanelReturnTextbox((JPanel) set.getTextFieldPanel().getComponent(i), 0);
                 
     //             addMouseListenerToTextboxAndFrame(textField);
     //         }
@@ -365,7 +367,7 @@ public class StudentClasses extends JFrame {
                 addMouseListenerToTextboxAndFrame(textField);
             }
             else if (set.getTextFieldPanel().getComponent(i) instanceof JPanel) {
-                textField = creator.goIntoPanelReturnTextbox((JPanel) set.getTextFieldPanel().getComponent(i), 0);
+                textField = create.goIntoPanelReturnTextbox((JPanel) set.getTextFieldPanel().getComponent(i), 0);
                 
                 addMouseListenerToTextboxAndFrame(textField);
             }
@@ -592,7 +594,7 @@ public class StudentClasses extends JFrame {
                 //if the file has loaded information attached
                 if (set.getLoadedState(selectedTextBox) && (fileHandler.fileExists(filePath)) && fileHandler.fileIsNotEmpty(filePath)) {
                 
-                    yesOrNoDialog[0] = decorator.areYouSureMessage(selectedTextBox, "deleting", "<html><center>Deleting this class will optiondelete <br>its loaded information.<br>Do you wish to continue?");
+                    yesOrNoDialog[0] = decorate.areYouSureMessage(selectedTextBox, "deleting", "<html><center>Deleting this class will optiondelete <br>its loaded information.<br>Do you wish to continue?");
 
                     selectedTextBox.setForeground(Color.GRAY);
                     selectedTextBox.setBorder(borderRegular);
@@ -601,7 +603,7 @@ public class StudentClasses extends JFrame {
                 else {
                     JPanel selectedBoxPanel = new JPanel();
                     selectedBoxPanel.add(selectedTextBox); //this also makes the selected textbox invisible
-                    creator.deleteTextBox(selectedBoxPanel);
+                    create.deleteTextBox(selectedBoxPanel);
                     saveButton.setEnabled(true);
                 }
 
@@ -667,7 +669,7 @@ public class StudentClasses extends JFrame {
                     }
 
                     else {
-                        textField = creator.goIntoPanelReturnTextbox((JPanel) set.getTextFieldPanel().getComponent(i), 0);
+                        textField = create.goIntoPanelReturnTextbox((JPanel) set.getTextFieldPanel().getComponent(i), 0);
                     }
                     textField.setEditable(true);
                     textField.setFocusable(true);
@@ -702,9 +704,9 @@ public class StudentClasses extends JFrame {
         newClassButton.setVisible(false);
         deleteClassButton.setVisible(false);
         southContainer.setVisible(false);
-        creator.getTextFieldContainer().setVisible(false);
+        create.getTextFieldContainer().setVisible(false);
         instructionsPanel.setVisible(false);
-        creator.hideContainer();
+        create.hideContainer();
         
         for (MouseListener listener : deleteClassButton.getMouseListeners()) {
             window.removeMouseListener(listener);
@@ -715,6 +717,7 @@ public class StudentClasses extends JFrame {
     public class EnterAction extends AbstractAction {
         @Override
         public void actionPerformed(ActionEvent e) {
+            System.out.println("2.5");
             doNextButtonProcedure();
         }
     }

@@ -17,8 +17,8 @@ import main.controller.CreateButton;
 public class PrintStudentGrades extends JFrame {
     private JFrame window;
     private JPanel backNextButtonsPanel;
-    private Decorator decorator = new Decorator();
-    private Creator creator;
+    private Decorator decorate = new Decorator();
+    private Creator create;
     private CreateButton createButton = new CreateButton();
 
     public PrintStudentGrades(JFrame main, String studentOrTeacher, String existingOrNew) {
@@ -27,7 +27,7 @@ public class PrintStudentGrades extends JFrame {
         //createNewTypeButton();
         JLabel instructionsWords = new JLabel("Grades");
         JPanel instructionsPanel = new JPanel();
-        instructionsPanel = decorator.InstructionsPanelDecorate(instructionsPanel, instructionsWords );
+        instructionsPanel = decorate.InstructionsPanelDecorate(instructionsPanel, instructionsWords );
         window.add(instructionsPanel);
         buttonSetUpAction(main, studentOrTeacher, existingOrNew);
     }

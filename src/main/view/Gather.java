@@ -52,7 +52,7 @@ public class Gather {
     private int windowY;
     private Set set;
     private SetListeners setListeners;
-    private Creator creator;
+    private Creator create;
     private FileWriting fileWrite = new FileWriting();
     private String existingOrNew;
     private String studentOrTeacher;
@@ -96,7 +96,7 @@ public class Gather {
         studentOrTeacher = set.getStudentOrTeacher();
         pathToUsernameFolder = "/Users/evy/Documents/GradeTracker-new/src/main/view/UserInfo/StudentInfo/" + set.getUsername();
         window = set.getWindow();
-        creator = new Creator();
+        create = new Creator();
 
         // newUser = new NewUser();
 

@@ -60,7 +60,7 @@ public class FileHandling {
             }
     
             catch (IOException e) {
-                System.err.println("an error occured in creator.java in isFileEmpty");
+                System.err.println("an error occured in create.java in isFileEmpty");
                 return false;
             }
         
@@ -98,14 +98,14 @@ public class FileHandling {
 
 
         public JPanel loadTextboxes(String filePath) {
-            Creator creator = new Creator();
+            Creator create = new Creator();
             ArrayList<String> arrayList = readFileToList(filePath);
             JPanel bigPanel = new JPanel(new FlowLayout(FlowLayout.LEFT));
             bigPanel.setName("bigPanel in loadtextboxes");
             System.out.println("arrayList"+arrayList);
-            bigPanel.add(creator.typeBox(set.getFinalClassList().get(set.getClassListIndex())+"CAT", "JLabel", true));
+            bigPanel.add(create.typeBox(set.getFinalClassList().get(set.getClassListIndex())+"CAT", "JLabel", true));
             for (int i = 0; i<arrayList.size(); i++) {
-                bigPanel.add(creator.typeBox(arrayList.get(i), "JTextField", true));
+                bigPanel.add(create.typeBox(arrayList.get(i), "JTextField", true));
             }
             set.setTextFieldPanel(bigPanel);
             return bigPanel;

@@ -406,7 +406,7 @@ public class Decorator {
        //textField.setHorizontalAlignment(JTextField.LEFT);
        textField.setText(placeholderText);
 
-       Creator creator = new Creator();
+       Creator create = new Creator();
        colorFocusListener.textFieldFocusListener(textField, placeholderText);
        return textField;
     }

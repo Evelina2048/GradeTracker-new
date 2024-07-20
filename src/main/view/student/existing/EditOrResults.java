@@ -14,7 +14,7 @@ import main.controller.CreateButton;
 public class EditOrResults extends JFrame {
     private JFrame window;
     private JPanel backNextButtonsPanel;
-    private Creator creator;
+    private Creator create;
     private Set set;
     private CreateButton createButton = new CreateButton();
 
@@ -24,7 +24,7 @@ public class EditOrResults extends JFrame {
         editOrResultsLaunch(main);
         //createNewTypeButton();
         buttonSetUpAction(main, studentOrTeacher, existingOrNew);
-        creator = new Creator();
+        create = new Creator();
     }
 
     public void editOrResultsLaunch(JFrame main) {

@@ -55,7 +55,7 @@ JPanel choicesPanel;
 JPanel backNextButtonsPanel;
 JFrame window;
 
-Decorator decorator = new Decorator();
+Decorator decorate = new Decorator();
 
 public MainWindow() {
     MainWindowLaunch();
@@ -94,10 +94,10 @@ private void windowSetUp() {
 private void InstructionsWordsWindow() {
         //JLabel instructionsWords = new JLabel("Hello 1234567890! Are you a student or a teacher?");
         instructionsWords = new JLabel("Hello "+set.getUsername() + "! Are you a student or a teacher?");
-        instructionsPanel = decorator.InstructionsPanelDecorate(instructionsPanel, instructionsWords);
+        instructionsPanel = decorate.InstructionsPanelDecorate(instructionsPanel, instructionsWords);
         truncateLabelText("Hello ", "! Are you a student or a teacher?", window.getWidth());
         //System.out.println
-        instructionsPanel = decorator.InstructionsPanelDecorate(instructionsPanel, instructionsWords);
+        instructionsPanel = decorate.InstructionsPanelDecorate(instructionsPanel, instructionsWords);
     }
 
 private void truncateLabelText(String prefix, String suffix, int maxWidth) {
@@ -209,16 +209,16 @@ private void addToChoicesPanel(ButtonGroup teacherStudentGroup, JRadioButton tea
     teacherStudentGroup.add(studentButton);
     choicesPanel.add(teacherButton);
     choicesPanel.add(studentButton);
-    choicesPanel.add(teacherButton, decorator.choiceGbc());
+    choicesPanel.add(teacherButton, decorate.choiceGbc());
 }
 
 private void backNextButton() {
     backNextButtonsPanel = new JPanel(new BorderLayout());
-    Creator creator = new Creator();
+    Creator create = new Creator();
     JButton backButton = createButton.backButtonCreate();
     backButton.addActionListener(new ActionListener() {
         public void actionPerformed(ActionEvent e) {
-            decorator.hideWindow(instructionsPanel, choicesPanel, backNextButtonsPanel);     
+            decorate.hideWindow(instructionsPanel, choicesPanel, backNextButtonsPanel);     
             doBackButtonProcedure();
         }
     });
@@ -249,18 +249,18 @@ private void doNextButtonProcedure() {
         String filePath = "somethingwentwrong";//if not overwritten, somethingwent wrong
             if (set.getExistingOrNew().trim().equals("New User")) { //if new user,
                 goToStudentClasses(filePath);
-                decorator.hideWindow(instructionsPanel, choicesPanel, backNextButtonsPanel);
+                decorate.hideWindow(instructionsPanel, choicesPanel, backNextButtonsPanel);
             }
     }
     else if (!moveOnPossible) {
-        decorator.errorMessageSetUp(studentButton);
+        decorate.errorMessageSetUp(studentButton);
     }
 }
 
 private void goToStudentClasses(String filePath) {
     writeUsername(filePath);
     //move on to studentclasses class
-    decorator.hideWindow(instructionsPanel, choicesPanel, backNextButtonsPanel);
+    decorate.hideWindow(instructionsPanel, choicesPanel, backNextButtonsPanel);
     StudentClasses studentClasses = new StudentClasses();
     studentClasses.studentClassesLaunch();
 }
