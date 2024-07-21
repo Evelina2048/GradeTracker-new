@@ -70,6 +70,10 @@ public class Set {
         classList = newClassList;
     }
 
+    public ArrayList<String> getClassList() {
+        return classList;
+    }
+
     public void setTypeList(ArrayList<String> newTypeList) {
         typeList = newTypeList;
     }

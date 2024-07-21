@@ -263,6 +263,7 @@ public class StudentClasses extends JFrame {
 
     private void writeType() {
         //create.setClassList();
+        set.setFinalClassList(set.getClassList());
         set.setFilePath("/Users/evy/Documents/GradeTracker-new/src/main/view/UserInfo/StudentInfo/" + setUserInformation.getUsername() + "/" + "ClassInformation" + "/class.txt");
        //create.writeTextToFile();
         fileWrite.writeTextToFile();
