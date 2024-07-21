@@ -24,6 +24,8 @@ import java.awt.event.KeyEvent;
 import java.lang.reflect.InvocationTargetException;
 
 import main.model.Set;
+import main.model.SetUserInformation;
+
 import main.controller.Creator;
 import main.controller.Decorator;
 import main.controller.CompositeActionListenerWithPriorities;
@@ -38,6 +40,8 @@ public class NewUser extends JFrame {
     private boolean moveOnPossible = false;
     private Gather gatherFrame;
     private Set set;
+    private SetUserInformation setUserInformation;
+    
     private CompositeActionListenerWithPriorities actionPriorities;
     private CreateButton createButton = new CreateButton();
     long clickTimeMillis;
@@ -64,6 +68,8 @@ public class NewUser extends JFrame {
 
     public NewUser() {
         this.set = Set.getInstance();
+        this.setUserInformation = SetUserInformation.getInstance();
+
         this.actionPriorities = CompositeActionListenerWithPriorities.getInstance();
         //this.actionPriorities = CompositeActionListenerWithPriorities.getInstance();
         window = set.getWindow();
@@ -99,8 +105,8 @@ public class NewUser extends JFrame {
         
         window.setTitle("New User");
 
-        if (set.getUsername() != null) {
-            originalExistingOrNew = set.getExistingOrNew();
+        if (setUserInformation.getUsername() != null) {
+            originalExistingOrNew = setUserInformation.getExistingOrNew();
         }
 
         instructionsWordsWindow();
@@ -171,11 +177,11 @@ public class NewUser extends JFrame {
         }
     
     private void checkIfExistingChangedWithUsername() {
-        if (set.getUsername() != null && existingOrNew.equals(originalExistingOrNew)) { //user has already been in gather frame and theyre the same
+        if (setUserInformation.getUsername() != null && existingOrNew.equals(originalExistingOrNew)) { //user has already been in gather frame and theyre the same
             set.setNewOrExistingChanged(false);
         }
 
-        else if((set.getUsername() != null && !existingOrNew.equals(originalExistingOrNew))) { //user has already been in gather frame and theyre different
+        else if((setUserInformation.getUsername() != null && !existingOrNew.equals(originalExistingOrNew))) { //user has already been in gather frame and theyre different
             set.setNewOrExistingChanged(true);
         }
     }
@@ -247,8 +253,8 @@ public class NewUser extends JFrame {
         }
         
         if (originalExistingOrNew != existingOrNew) { //user changed the existing or new
-            set.setUsername(null);
-            System.out.println("right after setting username to null: "+set.getUsername());
+            setUserInformation.setUsername(null);
+            System.out.println("right after setting username to null: "+setUserInformation.getUsername());
         }
     }
 
@@ -258,7 +264,7 @@ public class NewUser extends JFrame {
 
     public void setButtonSelected() {
        //originalExistingOrNew = set.getOriginalExistingOrNewStatus();
-        existingOrNew = set.getExistingOrNew().trim();
+        existingOrNew = setUserInformation.getExistingOrNew().trim();
         if (existingOrNew == "New User") {
             addNewUserActionListener();
             newUserButton.setSelected(true);
@@ -281,7 +287,7 @@ public class NewUser extends JFrame {
             //clickTimeMillis = System.currentTimeMillis();
             moveOnPossible = true;
             existingOrNew = newUserButton.getText();
-            set.setExistingOrNew(existingOrNew);
+            setUserInformation.setExistingOrNew(existingOrNew);
             checkIfExistingChangedWithUsername();
             //newUserActionCompleted = true;
         }, 2, "click", newUserButton);
@@ -290,7 +296,7 @@ public class NewUser extends JFrame {
     private void addExistingUserActionListener() {
         actionPriorities.addClassActionListener(b -> {
             existingOrNew = existingButton.getText();
-            set.setExistingOrNew(existingOrNew);
+            setUserInformation.setExistingOrNew(existingOrNew);
             moveOnPossible = true;
             checkIfExistingChangedWithUsername();
         }, 2, "click", newUserButton);

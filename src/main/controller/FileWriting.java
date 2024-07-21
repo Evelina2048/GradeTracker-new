@@ -13,6 +13,7 @@ import java.awt.Component;
 import java.awt.FlowLayout;
 
 import main.model.Set;
+import main.model.SetUserInformation;
 
 import java.io.FileWriter;
 
@@ -20,6 +21,7 @@ public class FileWriting {
     private JFrame window;
     private JPanel textFieldPanel = new JPanel(new FlowLayout(FlowLayout.LEFT));
     private Set set;
+    private SetUserInformation setUserInformation;
     private FileHandling fileHandler = new FileHandling();
     private JTextField textField = new JTextField();
     private ArrayList<String> classList = new ArrayList<>();
@@ -30,11 +32,12 @@ public class FileWriting {
     
     public FileWriting() {
         this.set = Set.getInstance();
+        this.setUserInformation = SetUserInformation.getInstance();
         this.window = set.getWindow();
     }
 
 public void writeFolderToFile() {
-    String username = set.getUsername();
+    String username = setUserInformation.getUsername();
     String folderPath = "/Users/evy/Documents/GradeTracker-new/src/main/view/UserInfo/StudentInfo/"+username+"/ClassInformation/"; //+ username;
     File folder = new File(folderPath);
     if (!folder.exists()) {
@@ -97,7 +100,7 @@ public void writeTextToFile(){//JPanel textFieldPanel) {//(String importedFilePa
     set.setCanContinue(true);
     //System.out.println("Step4: begin writeTextToFile."+ set.getCurrentPanelList());
     debugPrintPanel();
-    set.getUsername();
+    setUserInformation.getUsername();
     tryToWriteWithoutAppend();
     //System.out.println("in write text to file: "+set.getCurrentPanelList());
     //set.setClassList(classList);

@@ -58,13 +58,13 @@ public class Set {
     }
     //
 
-    public void setUsername(String my_username) {
-       username = my_username;
-    }
+    // public void setUsername(String my_username) {
+    //    username = my_username;
+    // }
 
-    public String getUsername() {
-        return username;
-    }
+    // public String getUsername() {
+    //     return username;
+    // }
 
     public void setClassList(ArrayList<String> newClassList) {
         System.out.println("3333 newclasslist "+ newClassList);
@@ -158,21 +158,21 @@ public class Set {
     public void resetClassList() {
     }
 
-    public void setExistingOrNew(String myExistingOrNew) {
-        existingOrNew = myExistingOrNew;
-    }
+    // public void setExistingOrNew(String myExistingOrNew) {
+    //     existingOrNew = myExistingOrNew;
+    // }
 
-    public String getExistingOrNew() {
-        return existingOrNew;
-    }
+    // public String getExistingOrNew() {
+    //     return existingOrNew;
+    // }
 
-    public void setStudentOrTeacher(String myStudentOrTeacher) {
-        studentOrTeacher = myStudentOrTeacher;
-    }
+    // public void setStudentOrTeacher(String myStudentOrTeacher) {
+    //     studentOrTeacher = myStudentOrTeacher;
+    // }
 
-    public String getStudentOrTeacher() {
-        return studentOrTeacher;
-    }
+    // public String getStudentOrTeacher() {
+    //     return studentOrTeacher;
+    // }
 
     public void setWindow(JFrame myWindow) {
         window = myWindow;

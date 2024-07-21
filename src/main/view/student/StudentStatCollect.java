@@ -17,6 +17,8 @@ import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
 import main.model.Set;
+import main.model.SetUserInformation;
+
 import main.controller.Creator;
 import main.controller.FileHandling;
 import main.controller.FileWriting;
@@ -33,6 +35,9 @@ public class StudentStatCollect extends JFrame {
     private JPanel backNextButtonsPanel;
     private JButton newTypeButton;
     private Set set;
+    
+    private SetUserInformation setUserInformation;
+
     private CreateButton createButton = new CreateButton();
     private FileWriting fileWrite = new FileWriting();
     private JPanel container = new JPanel(new FlowLayout(FlowLayout.LEFT));
@@ -53,6 +58,8 @@ public class StudentStatCollect extends JFrame {
 
     public void studentStatCollectLaunch() {
         this.set = Set.getInstance();
+        this.setUserInformation = SetUserInformation.getInstance();
+
         set.setCurrentClass("StudentStatCollect.java");
         window = set.getWindow();
         container.setName("contianer");
@@ -152,7 +159,7 @@ public class StudentStatCollect extends JFrame {
 
 
         //textBoxPanel.add(create.typeBox(set.getFinalClassList().get(set.getClassListIndex()), "JLabel",  true));
-        String filePath = "/Users/evy/Documents/GradeTracker-new/src/main/view/UserInfo/StudentInfo/"+set.getUsername()+"/ClassInformation/"+set.getFinalClassList().get(set.getClassListIndex())+".txt";
+        String filePath = "/Users/evy/Documents/GradeTracker-new/src/main/view/UserInfo/StudentInfo/"+setUserInformation.getUsername()+"/ClassInformation/"+set.getFinalClassList().get(set.getClassListIndex())+".txt";
         
         JPanel testPanel = fileHandler.loadTextboxes(filePath);
         int numberOfComponents = testPanel.getComponentCount();
@@ -193,7 +200,7 @@ public class StudentStatCollect extends JFrame {
         //if (textBoxPanel.getComponentCount() == 5 || 8 || 11 || 14 || 17 || 20 || 23 || 26 || 29 || 32) {
         //if ((textBoxPanel.getComponentCount() - 5) % 3 == 0) { //only want to write if 
         System.out.println("testtesttest: "+ set.getCurrentClass());
-        set.setFilePath("/Users/evy/Documents/GradeTracker-new/src/main/view/UserInfo/StudentInfo/" + set.getUsername() +"/ClassInformation/"+finalClassList.get(set.getClassListIndex())+ ".txt");
+        set.setFilePath("/Users/evy/Documents/GradeTracker-new/src/main/view/UserInfo/StudentInfo/" + setUserInformation.getUsername() +"/ClassInformation/"+finalClassList.get(set.getClassListIndex())+ ".txt");
         
         create.setTextFieldContainer(set.getTextFieldPanel());
         fileWrite.writeTextToFile();
@@ -217,14 +224,14 @@ public class StudentStatCollect extends JFrame {
             }
             else {
                 hideWindow();
-                new PrintStudentGrades(set.getWindow(), set.getStudentOrTeacher(), set.getExistingOrNew());
+                new PrintStudentGrades(set.getWindow(), setUserInformation.getStudentOrTeacher(), setUserInformation.getExistingOrNew());
             }
         }
     }
 
     public void visitNextStudentClass() {
         //readClass(finalClassList);
-        String filePath = "/Users/evy/Documents/GradeTracker-new/src/main/view/UserInfo/StudentInfo/"+set.getUsername()+"/ClassInformation/"+set.getFinalClassList().get(set.getClassListIndex())+".txt";
+        String filePath = "/Users/evy/Documents/GradeTracker-new/src/main/view/UserInfo/StudentInfo/"+setUserInformation.getUsername()+"/ClassInformation/"+set.getFinalClassList().get(set.getClassListIndex())+".txt";
         if (fileHandler.fileExists(filePath)) {
             textBoxPanelReset();
 
@@ -315,7 +322,7 @@ public class StudentStatCollect extends JFrame {
     }
     //read classes array, first five classes
     public void DisplayClasses() {
-        set.getUsername();
+        setUserInformation.getUsername();
         ArrayList<String> typeList = set.getCurrentPanelList();
         readClass(typeList);
     }

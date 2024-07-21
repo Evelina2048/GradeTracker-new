@@ -30,6 +30,8 @@ import java.io.FileWriter;
 import java.io.IOException;
 
 import main.model.Set;
+import main.model.SetUserInformation;
+
 import main.view.student.StudentClasses;
 import main.controller.Creator;
 import main.controller.Decorator;
@@ -39,6 +41,8 @@ public class MainWindow extends JFrame {
 private String studentOrTeacher;
 private boolean moveOnPossible = false;
 private Set set;
+private SetUserInformation setUserInformation;
+
 private CreateButton createButton = new CreateButton();
 
 JLabel instructionsWords;
@@ -65,6 +69,8 @@ public MainWindow() {
 public void MainWindowLaunch() {
     System.out.println("entering main window");
     this.set = Set.getInstance();
+    this.setUserInformation = SetUserInformation.getInstance();
+
     window = set.getWindow();
 
     windowSetUp();
@@ -93,7 +99,7 @@ private void windowSetUp() {
  
 private void InstructionsWordsWindow() {
         //JLabel instructionsWords = new JLabel("Hello 1234567890! Are you a student or a teacher?");
-        instructionsWords = new JLabel("Hello "+set.getUsername() + "! Are you a student or a teacher?");
+        instructionsWords = new JLabel("Hello "+setUserInformation.getUsername() + "! Are you a student or a teacher?");
         instructionsPanel = decorate.InstructionsPanelDecorate(instructionsPanel, instructionsWords);
         truncateLabelText("Hello ", "! Are you a student or a teacher?", window.getWidth());
         //System.out.println
@@ -102,7 +108,7 @@ private void InstructionsWordsWindow() {
 
 private void truncateLabelText(String prefix, String suffix, int maxWidth) {
     FontMetrics fontMetrics = instructionsWords.getFontMetrics(instructionsWords.getFont());
-    JLabel usernameLabel = new JLabel(set.getUsername());
+    JLabel usernameLabel = new JLabel(setUserInformation.getUsername());
     String fullText = prefix + usernameLabel.getText() + suffix;
     //FontMetrics fontMetrics = usernameLabel.getFontMetrics(usernameLabel.getFont());
 
@@ -113,7 +119,7 @@ private void truncateLabelText(String prefix, String suffix, int maxWidth) {
     // }
 
    //String username = usernameLabel.getText();
-    String username = set.getUsername();
+    String username = setUserInformation.getUsername();
     String ellipsis = " ...";
     int prefixWidth = fontMetrics.stringWidth(prefix);
     int suffixWidth = fontMetrics.stringWidth(suffix);
@@ -147,7 +153,7 @@ private void truncateLabelText(String prefix, String suffix, int maxWidth) {
     }
 
     int endIndex = 7;
-    String currentUsernamePermittedAmount = set.getUsername().substring(0, endIndex);
+    String currentUsernamePermittedAmount = setUserInformation.getUsername().substring(0, endIndex);
     System.out.println("currentUsernamePermittedAmount "+currentUsernamePermittedAmount);
 
     //while (!(fontMetrics.stringWidth(username.substring(0, endIndex)) <= availableWidth && fontMetrics.stringWidth(username.substring(0, endIndex+1)) >= availableWidth)) {
@@ -155,13 +161,13 @@ private void truncateLabelText(String prefix, String suffix, int maxWidth) {
         System.out.println("it works "+ fontMetrics.stringWidth(username.substring(0, endIndex+1))+" "+availableWidth);
         endIndex++;
         //currentUsernamePermittedAmount = set.getUsername().substring(0, endIndex);
-        System.out.println("it works2: "+currentUsernamePermittedAmount+" "+set.getUsername().substring(0, endIndex));
+        System.out.println("it works2: "+currentUsernamePermittedAmount+" "+setUserInformation.getUsername().substring(0, endIndex));
     }
     if(currentUsernamePermittedAmount.charAt(currentUsernamePermittedAmount.length()-1)==' ' && currentUsernamePermittedAmount.charAt(currentUsernamePermittedAmount.length()-2)!=' ') {
-        instructionsWords =  new JLabel("Hello "+ set.getUsername().substring(0, endIndex-1) + " ...! Are you a student or a teacher?");
+        instructionsWords =  new JLabel("Hello "+ setUserInformation.getUsername().substring(0, endIndex-1) + " ...! Are you a student or a teacher?");
     }
     else {
-    instructionsWords =  new JLabel("Hello "+ set.getUsername().substring(0, endIndex) + " ...! Are you a student or a teacher?");
+    instructionsWords =  new JLabel("Hello "+ setUserInformation.getUsername().substring(0, endIndex) + " ...! Are you a student or a teacher?");
     }
 
 }
@@ -180,7 +186,7 @@ private void radioButtonSetUp() {
     teacherButton.addActionListener(new ActionListener() {
         public void actionPerformed(ActionEvent e) {
            studentOrTeacher = teacherButton.getText();
-           set.setStudentOrTeacher(studentOrTeacher);
+           setUserInformation.setStudentOrTeacher(studentOrTeacher);
            moveOnPossible = true;
         }});
 
@@ -189,7 +195,7 @@ private void radioButtonSetUp() {
     studentButton.addActionListener(new ActionListener() {
         public void actionPerformed(ActionEvent e) {
             studentOrTeacher = studentButton.getText();
-            set.setStudentOrTeacher(studentOrTeacher);
+            setUserInformation.setStudentOrTeacher(studentOrTeacher);
             moveOnPossible = true;
         }});
 
@@ -247,7 +253,7 @@ private void doNextButtonProcedure() {
     if (moveOnPossible) {
         set.setWindow(window);
         String filePath = "somethingwentwrong";//if not overwritten, somethingwent wrong
-            if (set.getExistingOrNew().trim().equals("New User")) { //if new user,
+            if (setUserInformation.getExistingOrNew().trim().equals("New User")) { //if new user,
                 goToStudentClasses(filePath);
                 decorate.hideWindow(instructionsPanel, choicesPanel, backNextButtonsPanel);
             }
@@ -268,8 +274,8 @@ private void goToStudentClasses(String filePath) {
 private void writeUsername(String filePath) {
     //and username not taken
     String usernamePath = "somethingwentwrong.txt";
-    String username = set.getUsername();//textField.getText().trim();
-    set.setUsername(username);
+    String username = setUserInformation.getUsername();//textField.getText().trim();
+    setUserInformation.setUsername(username);
     if ("Student".equals(studentOrTeacher)) {
         usernamePath = "/Users/evy/Documents/GradeTracker-new/src/main/view/UserInfo/studentUsername.txt";
     }
@@ -313,7 +319,7 @@ private boolean readLine(BufferedReader reader, String username, boolean usernam
     String line;
     try {
         while ((line = reader.readLine()) != null) {
-            if (line.equals(username) && set.getUsername() == null) {//if matches username
+            if (line.equals(username) && setUserInformation.getUsername() == null) {//if matches username
                 errorMessageSetUp("<html><center>Username already exists.<br> Please choose another.",200,100);
                 usernametaken = true;
                 break;
@@ -357,7 +363,7 @@ private void writeNewName(String filePath, String username) {
     }
 
 public void setButtonSelected() {
-    String selectedButtonText = set.getStudentOrTeacher();
+    String selectedButtonText = setUserInformation.getStudentOrTeacher();
     if (selectedButtonText == "Student") {
         studentButton.setSelected(true);
         moveOnPossible = true;

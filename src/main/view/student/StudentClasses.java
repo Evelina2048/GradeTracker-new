@@ -2,6 +2,7 @@ package main.view.student;
 
 import javax.swing.AbstractAction;
 import javax.swing.BorderFactory;
+import javax.swing.ImageIcon;
 import javax.swing.JButton;
 import javax.swing.JComponent;
 import javax.swing.JFrame;
@@ -10,9 +11,12 @@ import javax.swing.JLayeredPane;
 
 import java.awt.BorderLayout;
 import java.awt.Dimension;
+import java.awt.Graphics;
+
 import javax.swing.JPanel;
 import javax.swing.JTextField;
 import javax.swing.KeyStroke;
+import javax.swing.SwingUtilities;
 import javax.swing.border.Border;
 import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
@@ -23,7 +27,10 @@ import java.awt.event.ActionListener;
 import java.awt.event.ActionEvent;
 import java.util.ArrayList;
 import java.util.concurrent.atomic.AtomicBoolean;
+
 import main.model.Set;
+import main.model.SetUserInformation;
+
 import main.controller.CreateButton;
 import main.controller.Creator;
 import main.controller.Decorator;
@@ -33,6 +40,8 @@ import main.view.MainWindow;
 import main.view.student.StudentClasses;
 
 import java.awt.event.KeyEvent;
+import java.awt.image.BufferedImage;
+import java.awt.Graphics2D;
 
 import java.awt.Point;
 import java.awt.event.MouseMotionAdapter;
@@ -58,6 +67,9 @@ public class StudentClasses extends JFrame {
     JLayeredPane layeredPane = new JLayeredPane();
     
     Set set;
+    
+    private SetUserInformation setUserInformation;
+
     JPanel instructionsPanel;
 
     private static Boolean isDragging = false;
@@ -68,6 +80,8 @@ public class StudentClasses extends JFrame {
     public void studentClassesLaunch() {
         southContainer.setName("SouthContainer");
         this.set = Set.getInstance();
+        this.setUserInformation = SetUserInformation.getInstance();
+
         set.setCurrentClass("StudentClasses.java");
         window = set.getWindow();
         window.setName("window");
@@ -101,14 +115,14 @@ public class StudentClasses extends JFrame {
         // window.add(layeredPane);
 //
         
-        instructionsWordsAndPanel("Edit Classes Mode "+"(for " +set.getStudentOrTeacher()+"s)");
+        instructionsWordsAndPanel("Edit Classes Mode "+"(for " +setUserInformation.getStudentOrTeacher()+"s)");
         loadIfNeeded();
         westPanelCreate();
         buttonSetUpAction();
     }
 
     private void loadIfNeeded() {
-        String filePath = "/Users/evy/Documents/GradeTracker-new/src/main/view/UserInfo/StudentInfo/"+set.getUsername()+"/"+"ClassInformation"+"/class.txt";
+        String filePath = "/Users/evy/Documents/GradeTracker-new/src/main/view/UserInfo/StudentInfo/"+setUserInformation.getUsername()+"/"+"ClassInformation"+"/class.txt";
         if (fileHandler.fileExists(filePath)) {//case for if existing file
             System.out.println("I have info to load!");
             ArrayList<String> myList = fileHandler.readFileToList(filePath);
@@ -216,7 +230,7 @@ public class StudentClasses extends JFrame {
 
         set.setFinalClassList(set.getCurrentPanelList());
         StudentStatCollect studentStatCollect = new StudentStatCollect();
-        if (fileHandler.fileExists("/Users/evy/Documents/GradeTracker-new/src/main/view/UserInfo/StudentInfo/" + set.getUsername() + "/" +"ClassInformation"+"/"+set.getFinalClassList().get(0) + ".txt")) {
+        if (fileHandler.fileExists("/Users/evy/Documents/GradeTracker-new/src/main/view/UserInfo/StudentInfo/" + setUserInformation.getUsername() + "/" +"ClassInformation"+"/"+set.getFinalClassList().get(0) + ".txt")) {
             create.hideContainer();
             studentStatCollect.addLoadedBoxes();
         }
@@ -251,7 +265,7 @@ public class StudentClasses extends JFrame {
     private void writeType() {
         System.out.println(1111+"in write type");
         //create.setClassList();
-        set.setFilePath("/Users/evy/Documents/GradeTracker-new/src/main/view/UserInfo/StudentInfo/" + set.getUsername() + "/" + "ClassInformation" + "/class.txt");
+        set.setFilePath("/Users/evy/Documents/GradeTracker-new/src/main/view/UserInfo/StudentInfo/" + setUserInformation.getUsername() + "/" + "ClassInformation" + "/class.txt");
         System.out.println("2222 filepath "+set.getFilePath());
        //create.writeTextToFile();
         fileWrite.writeTextToFile();
@@ -293,6 +307,11 @@ public class StudentClasses extends JFrame {
 
     JTextField[] tempTextField = new JTextField[1];
     tempTextField[0] = new JTextField("ERROR"); //if not overwritten will show error
+    BufferedImage[] textFieldImage = new BufferedImage[1];
+    textFieldImage[0] = null;
+    //new BufferedImage(10,10,BufferedImage.TYPE_INT_RGB);
+    //Graphics g2 = (Graphics2D) textFieldImage[0].getGraphics(); 
+
         for (int i = 0; i < set.getTextFieldPanel().getComponentCount(); i++) { 
             //tempTextField = new JTextField[1];
             JTextField textField = new JTextField();
@@ -313,13 +332,37 @@ public class StudentClasses extends JFrame {
             textField.addMouseMotionListener(new MouseMotionAdapter() {
                 public void mouseDragged(MouseEvent e) {
                     //
+                    //if (draggedTextField != null) {
                     draggedTextField = (JTextField) e.getSource();
+                    //}
 
                     //<>
-                    tempTextField[0] = create.createTextBox("♡Hello♡", "JTextField", false);
+                    if (tempTextField[0].getText().equals("ERROR")){
+                    tempTextField[0] = create.createTextBox("♡Hello. Ur cute♡", "JTextField", false);
                     //layeredPane.add(tempTextField[0]);
                     tempTextField[0].setOpaque(true);
-                    tempTextField[0].setBounds(50, 50, 100, 30);
+                    }
+
+                    if ((draggedTextField.getX() > tempTextField[0].getX()) && (draggedTextField.getY() > tempTextField[0].getY())) {
+                        System.out.println("made it :) ");
+                    }
+
+                    tempTextField[0].setBounds(e.getX(), e.getY(), 100, 30);
+
+                    // Get the mouse coordinates relative to the layered pane
+                    //Point mousePoint = SwingUtilities.convertPoint(e.getComponent(), e.getPoint(), layeredPane);
+
+                    // Set the location of the tempTextField
+                    //tempTextField[0].setLocation(mousePoint);
+
+                    // Point location = draggedTextField.getLocation();
+                    // int x = location.x - initialClick.x + e.getX();
+                    // int y = location.y - initialClick.y + e.getY();
+                    // tempTextField[0].setLocation(x, y);
+                    // revalidate();
+                    // repaint();
+
+                    //tempTextField[0].setLocationRelativeTo(cursor);
 
             //layeredPane.add(tempTextField[0]);
                     //<>
@@ -338,7 +381,34 @@ public class StudentClasses extends JFrame {
                     layeredPane.setVisible(true);
                     tempTextField[0].setOpaque(true);
                     tempTextField[0].setVisible(true);
-                    //window.add(layeredPane);
+
+                    if (textFieldImage[0] == null) {
+                        textFieldImage[0] = new BufferedImage(draggedTextField.getWidth(), draggedTextField.getHeight(), BufferedImage.TYPE_INT_ARGB);
+                        Graphics2D g2d = textFieldImage[0].createGraphics();
+                        tempTextField[0].paint(g2d); // Render the JTextField onto the BufferedImage
+                        g2d.dispose();
+                    }
+    
+                    int x = e.getXOnScreen() - textFieldImage[0].getWidth() / 2;
+                    int y = e.getYOnScreen() - textFieldImage[0].getHeight() / 2;
+
+                    // Create a new BufferedImage to draw the image onto
+                    BufferedImage tempImage = new BufferedImage(layeredPane.getWidth(), layeredPane.getHeight(), BufferedImage.TYPE_INT_ARGB);
+                    Graphics2D g = tempImage.createGraphics();
+                    //g.drawImage(textFieldImage[0], x, y, null);
+                    g.dispose();
+
+                    // Paint the BufferedImage onto the layeredPane
+                    Graphics gPane = layeredPane.getGraphics();
+                    gPane.drawImage(tempImage, 0, 0, null);
+                    gPane.dispose();
+
+                    if (!layeredPane.isAncestorOf(tempTextField[0])) {
+                        layeredPane.add(tempTextField[0], Integer.valueOf(JLayeredPane.DRAG_LAYER));
+                    }
+                    layeredPane.setVisible(true);
+                    tempTextField[0].setOpaque(true);
+                    tempTextField[0].setVisible(true);
 
                 }
             });
@@ -347,6 +417,7 @@ public class StudentClasses extends JFrame {
             //tempTextField[0].addMouseListener( new MouseAdapter() {
                     public void mouseReleased(MouseEvent e) {
                         System.out.println("mouselistener"+3333);
+                        layeredPane.remove(tempTextField[0]);
                     }
             });
     }
@@ -398,7 +469,7 @@ public class StudentClasses extends JFrame {
         deleteClassButton.setText("Delete?");
         window.remove(instructionsPanel);
         instructionsWordsAndPanel("Hit Delete Button to Delete");
-        String filePath = "/Users/evy/Documents/GradeTracker-new/src/main/view/UserInfo/StudentInfo/"+set.getUsername()+"/"+"ClassInformation"+"/"+selectedTextBox.getText()+".txt";
+        String filePath = "/Users/evy/Documents/GradeTracker-new/src/main/view/UserInfo/StudentInfo/"+setUserInformation.getUsername()+"/"+"ClassInformation"+"/"+selectedTextBox.getText()+".txt";
         removeDeleteClassButtonActionListeners();//deleteClassButton.getActionListeners().length);
         deleteClassButton.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent e) {

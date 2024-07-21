@@ -26,6 +26,7 @@ import java.awt.Dimension;
 
 import java.io.IOException;
 import main.model.Set;
+import main.model.SetUserInformation;
 import main.model.SetListeners;
 import main.view.student.StudentStatCollect;
 
@@ -46,6 +47,8 @@ import java.awt.event.FocusEvent;
 public class Decorator {
     JFrame window;
     Set set;
+    SetUserInformation setUserInformation;
+
     SetListeners setListeners;
     JDialog dialog;
     String reason;
@@ -152,7 +155,7 @@ public class Decorator {
         //System.out.println(panelForDeleting.getComponentCount() + " :beforeselectedBoxPanelComponenents");
         create.deleteTextBox(panelForDeleting);
         //System.out.println(panelForDeleting.getComponentCount() + " :afterselectedBoxPanelComponenents");
-        Path filePath = Paths.get("/Users/evy/Documents/GradeTracker-new/src/main/view/UserInfo/StudentInfo/"+set.getUsername()+"/"+"ClassInformation"+"/"+textField.getText()+".txt");
+        Path filePath = Paths.get("/Users/evy/Documents/GradeTracker-new/src/main/view/UserInfo/StudentInfo/"+setUserInformation.getUsername()+"/"+"ClassInformation"+"/"+textField.getText()+".txt");
         
         try {
             Files.deleteIfExists(filePath);
