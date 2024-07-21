@@ -1,53 +1,24 @@
 package main.controller;
 
-import javax.swing.JDialog;
 import javax.swing.JFrame;
-import javax.swing.JLabel;
 import javax.swing.JTextField;
-import java.awt.BorderLayout;
 import java.awt.Color;
-import javax.swing.JPanel;
 import java.awt.Rectangle;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
-import java.awt.event.MouseListener;
 import java.awt.event.FocusAdapter;
 import java.awt.event.FocusEvent;
 
-import java.io.FileWriter;
-import java.io.IOException;
-import java.util.ArrayList;
-import java.io.BufferedWriter;
-import java.io.File;
-import java.awt.Component;
-
-import java.awt.Dimension;
-import java.awt.FlowLayout;
 import java.awt.FontMetrics;
 
-import main.controller.Creator;
 import main.model.Set;
-
-import java.awt.Container;
-
 
 public class TextFieldColorFocusListener {
     private JFrame window;
-    private JPanel textFieldPanel = new JPanel(new FlowLayout(FlowLayout.LEFT));
     private Set set;
-    private FileHandling fileHandler = new FileHandling();
-    private int textboxCounter;
     private JTextField textField = new JTextField();
-    private ArrayList<String> classList = new ArrayList<>();
-    private ArrayList<String>textFieldPanelText = new ArrayList<>();
-    private JPanel textFieldContainer = new JPanel(new FlowLayout(FlowLayout.LEFT));
     private Boolean focusGranted = true;
-    private int attachedBoxes = 0;
-    private int maxAttachedBoxes = 0;
-    private boolean loaded;
-    private String filePath;
     private String text = textField.getText().trim();
-    private CreateButton createButton = new CreateButton();
     
     public TextFieldColorFocusListener() {
         this.set = Set.getInstance();
