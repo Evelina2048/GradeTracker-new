@@ -126,22 +126,9 @@ private void truncateLabelText(String prefix, String suffix, int maxWidth) {
     int usernameWidth = fontMetrics.stringWidth(username);
     int ellipsisWidth = fontMetrics.stringWidth(ellipsis);
     int availableWidth = maxWidth - prefixWidth - suffixWidth - ellipsisWidth;
-    //System.out.println("6666 "+ maxWidth +" "+prefixWidth+" "+suffixWidth+" "+ellipsisWidth+" ");
 
-        // char widestChar = 'a';
-        // int maxCharWidth = 0;
-        // for (char c = 32; c < 127; c++) {
-        //     int charWidth = fontMetrics.charWidth(c);
-        //     if (charWidth > maxCharWidth) {
-        //         maxCharWidth = charWidth;
-        //         widestChar = c;
-        //     }
-        // } //answer for this font is "~"
-
-        //how many ~ to get to max width?
-        System.out.println("~ width "+ fontMetrics.stringWidth("~")+" max width "+ maxWidth);
-
-        //System.out.println("widestchar "+widestChar);
+    //how many ~ to get to max width?
+    System.out.println("~ width "+ fontMetrics.stringWidth("~")+" max width "+ maxWidth);
 
     System.out.println("usernamewidth: "+ usernameWidth+ ": available width: "+availableWidth);
 
@@ -223,8 +210,8 @@ private void backNextButton() {
     Creator create = new Creator();
     JButton backButton = createButton.backButtonCreate();
     backButton.addActionListener(new ActionListener() {
-        public void actionPerformed(ActionEvent e) {
-            decorate.hideWindow(instructionsPanel, choicesPanel, backNextButtonsPanel);     
+        public void actionPerformed(ActionEvent e) {;
+            decorate.hideWindow(instructionsPanel, choicesPanel, backNextButtonsPanel);    
             doBackButtonProcedure();
         }
     });

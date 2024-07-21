@@ -20,7 +20,7 @@ public class CompositeActionListenerWithPriorities implements ActionListener {
     new TreeMap<Integer,ArrayList<ActionListener>>();
     private boolean isProcessing = false;
     private Set set = Set.getInstance();
-    private int currentClass = 0;
+    private String currentClass = null;//"Current class not changed";
     private static CompositeActionListenerWithPriorities instance;
     //this.set = Set.getInstance();
     private CompositeActionListenerWithPriorities() {}
@@ -63,8 +63,9 @@ public class CompositeActionListenerWithPriorities implements ActionListener {
     return false;
   }
 
-  public void addClassActionListener(ActionListener a, int priority, String keyCause, JRadioButton button){
-    
+  public void addClassActionListener(ActionListener a, int priority, String keyCause, JRadioButton button, String listenerSource){
+    System.out.println("currentclass: "+currentClass+" listenersource "+listenerSource);
+    System.out.println("3333 in composite action listener. listeners.size() "+listeners.size());
     //deleteActionListener(a);
     if(!listeners.containsKey(priority)){
       listeners.put(priority,new ArrayList<ActionListener>());
@@ -72,6 +73,7 @@ public class CompositeActionListenerWithPriorities implements ActionListener {
     listeners.get(priority).add(a);
 
     if (listeners.size() == 2) {
+      System.out.println("its being run and stuff 1");
      actionPerformed(new ActionEvent(this, ActionEvent.ACTION_PERFORMED, "PerformAllActions"));
     }
 
@@ -81,14 +83,24 @@ public class CompositeActionListenerWithPriorities implements ActionListener {
         //actionPerformed(new ActionEvent(this, ActionEvent.ACTION_PERFORMED, "PerformAllActions"));
       //}
     //}
+    System.out.println("adding action listener currentclass: "+currentClass+" listenersource "+listenerSource);
+    if (currentClass == listenerSource && !keyCause.equals("click")) {
+      //ActionEvent event = new ActionEvent(this, ActionEvent.ACTION_PERFORMED, "PerformThisAction");
+      System.out.println("its being run and stuff 2");
+      CompositeActionListenerWithPriorities.this.actionPerformed(new ActionEvent(CompositeActionListenerWithPriorities.this, ActionEvent.ACTION_PERFORMED, "PerformThisActions"));
+      CompositeActionListenerWithPriorities.this.actionPerformed(new ActionEvent(CompositeActionListenerWithPriorities.this, ActionEvent.ACTION_PERFORMED, "PerformAllActions"));
+      currentClass = null;
+    }
 
-    if (keyCause == "EnterAction" || keyCause == "nextButton") {
+    else if (keyCause == "EnterAction" || keyCause == "nextButton") {
       Timer timer = new Timer(1, new ActionListener() {
         @Override
         public void actionPerformed(ActionEvent e) {
             Decorator decorate = new Decorator();
+
             if (listeners.size() == 2) {
                 // Correctly reference the outer class for the action event
+                System.out.println("its being run and stuff 3");
                 CompositeActionListenerWithPriorities.this.actionPerformed(
                 new ActionEvent(CompositeActionListenerWithPriorities.this, ActionEvent.ACTION_PERFORMED, "PerformAllActions"));
             } 
@@ -124,8 +136,9 @@ public class CompositeActionListenerWithPriorities implements ActionListener {
 
   // }
 
-  public void DEBUGLISTENERSIZE() {
-    System.out.println(listeners.size());
+  public int DEBUGLISTENERSIZE() {
+    //System.out.println(listeners.size());
+    return listeners.size();
   }
 
   private void performAllActions() {
@@ -138,10 +151,17 @@ public class CompositeActionListenerWithPriorities implements ActionListener {
   public void reset() {
     listeners.clear();
     isProcessing = false;
-}
+    currentClass = null;
+  }
 
-  public void setCurrentClassNumber(int thisClass) {
-    currentClass = thisClass;
+  public void setCurrentClass(String thisClass) {
+    if (currentClass == null) {
+      currentClass = thisClass;
+    }
+  }
+
+  public Map<Integer, ArrayList<ActionListener>> DEBUGLISTENERMAP() {
+    return listeners;
   }
 
 }

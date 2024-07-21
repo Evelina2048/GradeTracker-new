@@ -64,6 +64,7 @@ public class Gather {
     private Boolean firstTimeInTextbox = true;
     private CreateButton createButton = new CreateButton();
     
+    private String currentClass = "Gather Loading";
     JRadioButton studentButton;
     JRadioButton teacherButton;
     ButtonGroup teacherStudentGroup;
@@ -95,6 +96,7 @@ public class Gather {
 
         this.setListeners = SetListeners.getInstance();
         this.actionPriorities = CompositeActionListenerWithPriorities.getInstance();
+        actionPriorities.setCurrentClass("Gather Loading");
         
         //this.actionPriorities = CompositeActionListenerWithPriorities.getInstance();
 
@@ -106,15 +108,15 @@ public class Gather {
 
         // newUser = new NewUser();
 
+        System.out.println();
         makeUsernameBox();
         gatherLaunch();
-        
-
     }
 
     public void gatherLaunch () {
-        set.setCurrentClass("Gather");
-        actionPriorities.setCurrentClassNumber(2); //needs to be set here as well because if going between classes really quick on multiple threads, want to make sure actionPriorities has the right class. And using integers that represent view order for comparison logic in class
+        actionPriorities.setCurrentClass("Gather Loading");
+        //set.setCurrentClass("Gather");
+        //actionPriorities.setCurrentClass("Gather"); //needs to be set here as well because if going between classes really quick on multiple threads, want to make sure actionPriorities has the right class. And using integers that represent view order for comparison logic in class
         
         window.setTitle("Gather");
         window = set.getWindow();
@@ -130,7 +132,6 @@ public class Gather {
         EnterAction enterAction = new EnterAction();
         window.getRootPane().getInputMap(JComponent.WHEN_IN_FOCUSED_WINDOW).put(KeyStroke.getKeyStroke(KeyEvent.VK_ENTER, 0), "enterAction");
         window.getRootPane().getActionMap().put("enterAction", enterAction);
-
     }
 
     private void makeUsernameBox() {
@@ -359,50 +360,47 @@ public class Gather {
         makeNextButton();
         backNextButtonsPanel = createButton.makeBackNextButtonsPanel(backButtonPanel,saveButtonPanel, nextButtonPanel);
         window.add(backNextButtonsPanel, BorderLayout.SOUTH);
+        currentClass = "Gather";
+        actionPriorities.setCurrentClass("Gather");
     }
 
     private void makeBackButton() {
         JButton backButton = createButton.backButtonCreate();
         backButtonPanel.add(backButton);
+        // backButton.addActionListener(new ActionListener() {
+        //     public void actionPerformed(ActionEvent e) {
+        //        setUserInformation.setUsername(textField.getText());
+        //        backButtonAction();
+        //     }
+        //backButton
+        System.out.println(1111);
         backButton.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent e) {
-               setUserInformation.setUsername(textField.getText());
-               backButtonAction();
-            }
-            //actionPriorities.addClassActionListener(b -> {
-               // set.setUsername(textField.getText());
-                //backButtonAction();
-            //}, 2, "backButton", null);
-            //actionPerformed(new ActionEvent(this, ActionEvent.ACTION_PERFORMED, "PerformAllActions"));
-        //}
-        });
+                System.out.println(2222);
+                actionPriorities.setCurrentClass("Gather");
+                actionPriorities.addClassActionListener(b -> {
+                    setUserInformation.setExistingOrNew(existingOrNew);
+                    backButtonAction();
+                }, 2, "backButton",null, "Gather");
+        }});
+
+    }
         //<>
         // actionPriorities.addClassActionListener(b -> {
         //     set.setUsername(textField.getText());
         //     backButtonAction();
         // }, 2, "click", null);
         //<>
-    }
+    
 
-    private void backButtonAction() {
-        // hideWindow(); 
-        // NewUser newUser = new NewUser();
-        // newUser.newUserSetup();
-        // if (set.getExistingOrNew() != null) {
-        //     newUser.setButtonSelected();
-        // }
-        //actionPriorities.addClassActionListener(b -> {
+        private void backButtonAction() {
+            System.out.println("hidewindow1");
             hideWindow(); 
-            //window.getRootPane().getInputMap().put(KeyStroke.getKeyStroke("ENTER"), "none");
-
-
             NewUser newUser = new NewUser();
             newUser.newUserSetup();
             if (setUserInformation.getExistingOrNew() != null) {
                 newUser.setButtonSelected();
             }
-           // actionPriorities.actionPerformed(new ActionEvent(this, ActionEvent.ACTION_PERFORMED, "PerformAllActions"));       
-        //}, 2, "backButton", null); 
     }   
 
     private void makeSaveButton() {
@@ -449,6 +447,7 @@ public class Gather {
             String filePath = "somethingwentwrong";//if not overwritten, somethingwent wrong
             if (existingOrNew.trim().equals("New User")) { //if new user,
                 //goToStudentClasses(filePath);
+                System.out.println("hidewindow2");
                 hideWindow();
                 MainWindow main = new MainWindow();
                 //main.show(0,0);
@@ -615,19 +614,15 @@ public class Gather {
     }
 
     private void hideWindow() {
+        System.out.println("current class "+ currentClass);
         instructionsPanel.setVisible(false);
         choicesPanel.setVisible(false);
         backNextButtonsPanel.setVisible(false);
-
-        //textField.setVisible(false);
-        // backNextButtonsPanel.setVisible(false);
-        // instructionsPanel.setVisible(false);
     }
 
     private void goToStudentClasses(String filePath) {
         //writeUsername(filePath);
         ////move on to studentclasses class
-        // hideWindow();
         // StudentClasses studentClasses = new StudentClasses();
         // studentClasses.studentClassesLaunch();
     }

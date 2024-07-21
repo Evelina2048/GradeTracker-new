@@ -45,6 +45,7 @@ public class NewUser extends JFrame {
     private CompositeActionListenerWithPriorities actionPriorities;
     private CreateButton createButton = new CreateButton();
     long clickTimeMillis;
+    private String currentClass = "NewUser loading";
     //CompositeActionListenerWithPriorities actionPriorities = new CompositeActionListenerWithPriorities();
     //this.actionPriorities = actionPriorities.getInstance();
 
@@ -92,8 +93,8 @@ public class NewUser extends JFrame {
 
     public void newUserSetup() {
         window = set.getWindow();
-        set.setCurrentClass("NewUser");
-        actionPriorities.setCurrentClassNumber(1); //needs to be set here as well because if going between classes really quick on multiple threads, want to make sure actionPriorities has the right class. And using integers that represent view order for comparison logic in class
+        set.setCurrentClass(currentClass);
+        actionPriorities.setCurrentClass(currentClass); //needs to be set here as well because if going between classes really quick on multiple threads, want to make sure actionPriorities has the right class. And using integers that represent view order for comparison logic in class
 
         //CompositeActionListenerWithPriorities 
         //actionPriorities = new CompositeActionListenerWithPriorities();
@@ -171,9 +172,9 @@ public class NewUser extends JFrame {
         newUserButton = new JRadioButton("New User");
         choicesButtonDecorate(newUserButton);
 
-            newUserButton.addActionListener(e -> {
+            //newUserButton.addActionListener(e -> {
                 addNewUserActionListener();
-            });
+            //});
         }
     
     private void checkIfExistingChangedWithUsername() {
@@ -214,6 +215,7 @@ public class NewUser extends JFrame {
         nextButton.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
+
                 nextButtonActionListenerWithPriorities("nextButton");
             }
         });
@@ -225,7 +227,8 @@ public class NewUser extends JFrame {
         window.add(backNextButtonsPanel, BorderLayout.SOUTH);
 
             
-            backButton.setEnabled(false);
+        backButton.setEnabled(false);
+        
     }
 
     private void doNextButtonProcedure(){
@@ -263,7 +266,6 @@ public class NewUser extends JFrame {
     }
 
     public void setButtonSelected() {
-       //originalExistingOrNew = set.getOriginalExistingOrNewStatus();
         existingOrNew = setUserInformation.getExistingOrNew().trim();
         if (existingOrNew == "New User") {
             addNewUserActionListener();
@@ -276,6 +278,8 @@ public class NewUser extends JFrame {
             existingButton.setSelected(true);
             moveOnPossible = true;
         }
+
+        System.out.println("in new user. listeners: "+ actionPriorities.DEBUGLISTENERSIZE());
     }
 
     public void showWindow() {
@@ -283,14 +287,17 @@ public class NewUser extends JFrame {
     }
 
     private void addNewUserActionListener() {
+        newUserButton.addActionListener(e -> {
+        System.out.println("about to run newuseraction listener");
         actionPriorities.addClassActionListener(b -> {
+            System.out.println("is running newuseraction listener");
             //clickTimeMillis = System.currentTimeMillis();
             moveOnPossible = true;
             existingOrNew = newUserButton.getText();
             setUserInformation.setExistingOrNew(existingOrNew);
             checkIfExistingChangedWithUsername();
-            //newUserActionCompleted = true;
-        }, 2, "click", newUserButton);
+        }, 2, "click", newUserButton, "NewUser");
+        });
     }
 
     private void addExistingUserActionListener() {
@@ -299,7 +306,7 @@ public class NewUser extends JFrame {
             setUserInformation.setExistingOrNew(existingOrNew);
             moveOnPossible = true;
             checkIfExistingChangedWithUsername();
-        }, 2, "click", newUserButton);
+        }, 2, "click", newUserButton, currentClass);
     }
 
     private void nextButtonActionListenerWithPriorities(String keyCause) {
@@ -310,13 +317,15 @@ public class NewUser extends JFrame {
                 System.out.println("enteraction");
                 doNextButtonProcedure();
             }
-        }, 1, keyCause, newUserButton);  // Add this ActionListener with priority 1
+        }, 1, keyCause, newUserButton, "NewUser");  // Add this ActionListener with priority 1
     }
 
     public class EnterAction extends AbstractAction  {
         @Override
         public void actionPerformed(ActionEvent e) {
+            System.out.println("in new user right before enter. listeners: "+ actionPriorities.DEBUGLISTENERSIZE());
             nextButtonActionListenerWithPriorities("EnterAction");
+            System.out.println("in new user enter. listeners: "+ actionPriorities.DEBUGLISTENERSIZE());
 
         // public void actionPerformed(ActionEvent e) {
         //     actionPriorities.addClassActionListener(e1 -> doNextButtonProcedure(), 2);

@@ -96,7 +96,6 @@ private void tryToWrite(BufferedWriter writer) {
 
 public void writeTextToFile(){//JPanel textFieldPanel) {//(String importedFilePath, JPanel textFieldPanel) {;
     //filePath = importedFilePath;
-    System.out.println("3333 in write text to file");
     set.setCanContinue(true);
     //System.out.println("Step4: begin writeTextToFile."+ set.getCurrentPanelList());
     debugPrintPanel();
@@ -109,17 +108,13 @@ public void writeTextToFile(){//JPanel textFieldPanel) {//(String importedFilePa
 private void tryToWriteWithoutAppend() {
     //writer = new BufferedWriter(new FileWriter(filePath));
     filePath = set.getFilePath();
-    System.out.println("4444 trytowritewithoutappend");
     try (BufferedWriter writer = new BufferedWriter(new FileWriter(filePath))) {
-        System.out.println("5555 trytowritewithoutappend. made it past try and component count "+textFieldPanel.getComponentCount());
         if (!classList.isEmpty()) {
            classList.clear();
         }
 
         for (Component component : set.getTextFieldPanel().getComponents()) {
-            System.out.println("6666 trytowritewithoutappend. into loop");
             if (component instanceof JTextField ) {
-                System.out.println("7777 is a textfield");
                 tryToWriteTextFieldWithoutAppend(component, writer);
             }
             else if (component instanceof JPanel) {

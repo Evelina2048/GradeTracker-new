@@ -219,7 +219,6 @@ public class StudentClasses extends JFrame {
     private void doNextButtonProcedure() {
         ArrayList<String> classList;
         classList = set.getCurrentPanelList();
-        System.out.println("2222 classlist"+classList);
         set.setClassList(classList);
         writeType();
         System.out.println("nextbuttonhit");
@@ -263,10 +262,8 @@ public class StudentClasses extends JFrame {
     }
 
     private void writeType() {
-        System.out.println(1111+"in write type");
         //create.setClassList();
         set.setFilePath("/Users/evy/Documents/GradeTracker-new/src/main/view/UserInfo/StudentInfo/" + setUserInformation.getUsername() + "/" + "ClassInformation" + "/class.txt");
-        System.out.println("2222 filepath "+set.getFilePath());
        //create.writeTextToFile();
         fileWrite.writeTextToFile();
         fileWrite.debugPrintPanel();
@@ -416,7 +413,6 @@ public class StudentClasses extends JFrame {
             textField.addMouseListener(new MouseAdapter() {
             //tempTextField[0].addMouseListener( new MouseAdapter() {
                     public void mouseReleased(MouseEvent e) {
-                        System.out.println("mouselistener"+3333);
                         layeredPane.remove(tempTextField[0]);
                     }
             });

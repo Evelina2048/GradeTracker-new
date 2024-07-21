@@ -386,8 +386,7 @@ public class Decorator {
     public void hideWindow(JPanel instructionsPanel, JPanel choicesPanel, JPanel backNextButtonsPanel) {
         instructionsPanel.setVisible(false);
         choicesPanel.setVisible(false);
-        backNextButtonsPanel.setVisible(false);
-    
+        backNextButtonsPanel.setVisible(false);   
     }
 
     public JTextField decorateTextBox(String placeholderText) {
