@@ -46,8 +46,6 @@ public class NewUser extends JFrame {
     private CreateButton createButton = new CreateButton();
     long clickTimeMillis;
     private String currentClass = "NewUser loading";
-    //CompositeActionListenerWithPriorities actionPriorities = new CompositeActionListenerWithPriorities();
-    //this.actionPriorities = actionPriorities.getInstance();
 
     Boolean newUserActionStarted = false;
     Boolean newUserActionCompleted = false;
@@ -72,15 +70,8 @@ public class NewUser extends JFrame {
         this.setUserInformation = SetUserInformation.getInstance();
 
         this.actionPriorities = CompositeActionListenerWithPriorities.getInstance();
-        //this.actionPriorities = CompositeActionListenerWithPriorities.getInstance();
         window = set.getWindow();
-        //System.out.println("in new user, listenerreasons "+actionPriorities.getListenerReasons());
 
-        // if (actionPriorities.getListenerReasons().contains("backButton")) {
-        //     System.out.println("it does contain a listener from back button");
-        //     actionPriorities.actionPerformed(new ActionEvent(this, ActionEvent.ACTION_PERFORMED, "PerformAllActions"));
-        // }
-        //window.setLocationRelativeTo(null);
         newUserSetup();
 
         EnterAction enterAction = new EnterAction();
@@ -95,10 +86,6 @@ public class NewUser extends JFrame {
         window = set.getWindow();
         set.setCurrentClass(currentClass);
         actionPriorities.setCurrentClass(currentClass); //needs to be set here as well because if going between classes really quick on multiple threads, want to make sure actionPriorities has the right class. And using integers that represent view order for comparison logic in class
-
-        //CompositeActionListenerWithPriorities 
-        //actionPriorities = new CompositeActionListenerWithPriorities();
-        //actionPriorities.DEBUGLISTENERSIZE();
 
         window.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
         //window.setLayout(null);
@@ -148,24 +135,11 @@ public class NewUser extends JFrame {
         //initialize buttons with color
         existingButton = new JRadioButton("Existing");
         choicesButtonDecorate(existingButton);
-        // existingButton.addActionListener(new ActionListener() {
-        //     public void actionPerformed(ActionEvent e) {
-        //         existingOrNew = existingButton.getText();
-        //         set.setExistingOrNew(existingOrNew);
-        //         moveOnPossible = true;
-        //         checkIfExistingChangedWithUsername();
-        //     } 
-        // });
 
         existingButton.addActionListener(e -> {
             addExistingUserActionListener();
      });
-    
-        // newUserButton.addActionListener(e -> {
-        //     actionPriorities.addClassActionListener(b -> {
-        //         //clickTimeMillis = System.currentTimeMillis();
-        //     }, 1);
-        // });
+
     }
     
     private void newUserButton() {
@@ -327,11 +301,6 @@ public class NewUser extends JFrame {
             nextButtonActionListenerWithPriorities("EnterAction");
             System.out.println("in new user enter. listeners: "+ actionPriorities.DEBUGLISTENERSIZE());
 
-        // public void actionPerformed(ActionEvent e) {
-        //     actionPriorities.addClassActionListener(e1 -> doNextButtonProcedure(), 2);
-        // }
-        
-        
     }
     }
     }

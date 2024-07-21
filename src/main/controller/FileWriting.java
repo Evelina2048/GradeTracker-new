@@ -46,7 +46,6 @@ public void writeFolderToFile() {
 }
 
 public void decideIfWrite(Component component, BufferedWriter writer) {
-    //filePath =
     Decorator decorate = new Decorator();
     textField = (JTextField) component;
     Boolean studentStatNonWritablePlaceholder = set.getEmptiedState(textField) == false && set.getCurrentClass() == "StudentStatCollect.java" && !textField.getText().equals("Credits (Optional)");
@@ -58,13 +57,7 @@ public void decideIfWrite(Component component, BufferedWriter writer) {
         removeUnwritablePlaceholders();
         
         if (set.getCanContinue()) {
-            //JDialog dialog = decorate.genericPopUpMessage("<html><center>Must fill in placeholder.<br>Will not save sections with placeholders",null);
-            
-            //JDialog dialog = 
             decorate.areYouSureMessage(null, "studentStatsEmpty", "Remove placeholders to continue"); //hello friends
-            // dialog.setLocationRelativeTo(window);
-            // dialog.setLocation(dialog.getX(), dialog.getY() + 15); 
-            // dialog.setVisible(true);
             return;
         }
     }
@@ -79,8 +72,6 @@ private void tryToWrite(BufferedWriter writer) {
     if (!text.isEmpty()) {
         try {
             if (attachedBoxes == maxAttachedBoxes) {
-                //System.out.println("writing in decide if write: "+text);
-                // classList.add(text);
                 writer.write(text + "\n");
                 System.out.println("classlisr "+classList);
             }
@@ -90,23 +81,18 @@ private void tryToWrite(BufferedWriter writer) {
         } catch (IOException e) {
             e.printStackTrace();
         }                             
-        //System.out.println("should be writing");
     }
 }
 
-public void writeTextToFile(){//JPanel textFieldPanel) {//(String importedFilePath, JPanel textFieldPanel) {;
-    //filePath = importedFilePath;
+public void writeTextToFile(){
     set.setCanContinue(true);
-    //System.out.println("Step4: begin writeTextToFile."+ set.getCurrentPanelList());
     debugPrintPanel();
     setUserInformation.getUsername();
     tryToWriteWithoutAppend();
-    //System.out.println("in write text to file: "+set.getCurrentPanelList());
-    //set.setClassList(classList);
+
 }
 
 private void tryToWriteWithoutAppend() {
-    //writer = new BufferedWriter(new FileWriter(filePath));
     filePath = set.getFilePath();
     try (BufferedWriter writer = new BufferedWriter(new FileWriter(filePath))) {
         if (!classList.isEmpty()) {
@@ -118,8 +104,6 @@ private void tryToWriteWithoutAppend() {
                 tryToWriteTextFieldWithoutAppend(component, writer);
             }
             else if (component instanceof JPanel) {
-                //System.out.println("JPanel");
-                //filePath =
                 writeTextToFileWithAppend((JPanel) component);
             }
             else {
@@ -144,7 +128,6 @@ private void tryToWriteTextFieldWithoutAppend(Component component, BufferedWrite
                 } catch (IOException e) {
                     e.printStackTrace();
                 }                             
-                //System.out.println("should be writing");
             }
             else {
                 attachedBoxes++;
@@ -183,17 +166,11 @@ private void seeHowManyPlaceholdersToSkip() {
 }
 
 public void writeTextToFileWithAppend(JPanel panel) {
-    //String filePath = importedFilePath;
     filePath = set.getFilePath();
     try (BufferedWriter writer = new BufferedWriter(new FileWriter(filePath, true))) {
         for (Component component : panel.getComponents()) {
             if (component instanceof JTextField) {
-                //classList.add(text);
                 decideIfWrite(component, writer);
-
-                //if placeholder count == panel.length(){
-                // are you sure message that says "this class has grade parts that are completely empty. leave blank?"
-                //}
             }
 
             if (component instanceof JPanel) {

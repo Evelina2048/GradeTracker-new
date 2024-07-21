@@ -2,7 +2,6 @@ package main.view.student;
 
 import javax.swing.JButton;
 import javax.swing.JFrame;
-import javax.swing.JLabel;
 
 import java.awt.BorderLayout;
 import java.awt.GridLayout;
@@ -66,11 +65,10 @@ public class StudentStatCollect extends JFrame {
         textBoxPanel.setName("gridlayout textboxpanel");
         classLabelPanel.setName("classLabelPanel student stat");
 
-        ///
         EnterAction enterAction = new EnterAction();
         window.getRootPane().getInputMap(JComponent.WHEN_IN_FOCUSED_WINDOW).put(KeyStroke.getKeyStroke(KeyEvent.VK_ENTER, 0), "enterAction");
         window.getRootPane().getActionMap().put("enterAction", enterAction);
-        ///
+
         finalClassList = set.getFinalClassList();
         System.out.println("final class list issssss before: "+ finalClassList);
         finalClassList = set.getFinalClassList();
@@ -82,12 +80,6 @@ public class StudentStatCollect extends JFrame {
         fileHandler = new FileHandling();
         createNewTypeButton();
         buttonSetUpAction();
-
-        // if (!fileHandler.fileExists( "/Users/evy/Documents/GradeTracker-new/src/main/view/UserInfo/StudentInfo/"+set.getUsername()+"/"+set.getFinalClassList().get(set.getClassListIndex())+".txt")) {
-        //     System.out.println("flag");
-        //     DisplayClasses();
-        // }
-        //display classes is called in student classes
         window.setTitle("StudentStatCollect");
     }
 
@@ -144,21 +136,12 @@ public class StudentStatCollect extends JFrame {
             classLabelPanel.revalidate();
             classLabelPanel.repaint();
             textBoxPanelReset();
-            //
-            //new JPanel(new GridLayout(0,4,5,5));
-            //new JPanel(new FlowLayout(FlowLayout.LEFT));
-            //
 
-            //boxManageCreate(set.getFinalClassList().get(set.getClassListIndex()), "JLabel"); //displays class label 
             addLoadedBoxes();
         }
     }
 
     public void addLoadedBoxes() {
-        //textBoxPanel.add(create.typeBox(set.getFinalClassList().get(0)+"BAT", "JLabel", true));
-
-
-        //textBoxPanel.add(create.typeBox(set.getFinalClassList().get(set.getClassListIndex()), "JLabel",  true));
         String filePath = "/Users/evy/Documents/GradeTracker-new/src/main/view/UserInfo/StudentInfo/"+setUserInformation.getUsername()+"/ClassInformation/"+set.getFinalClassList().get(set.getClassListIndex())+".txt";
         
         JPanel testPanel = fileHandler.loadTextboxes(filePath);
@@ -191,11 +174,6 @@ public class StudentStatCollect extends JFrame {
         correctGradeFormatChecker(pattern);
 
         set.setTextFieldPanel(textBoxPanel);
-        //JPanel test = (JPanel) textBoxPanel.getComponent(0);
-        //JPanel testTwo = (JPanel) test.getComponent(0);
-        //JLabel testThree = (JLabel) testTwo.getComponent(0);
-        //String testText = testThree.getText();
-        //System.out.println("textBoxPanelComponens: "+ textBoxPanel.getComponentCount() +"..."+ testText);
         
         //if (textBoxPanel.getComponentCount() == 5 || 8 || 11 || 14 || 17 || 20 || 23 || 26 || 29 || 32) {
         //if ((textBoxPanel.getComponentCount() - 5) % 3 == 0) { //only want to write if 

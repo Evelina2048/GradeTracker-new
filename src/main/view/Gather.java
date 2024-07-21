@@ -87,7 +87,6 @@ public class Gather {
     String pathToUsernameFolder;
     FileHandling fileHandler = new FileHandling();
     CompositeActionListenerWithPriorities actionPriorities;
-    //CompositeActionListenerWithPriorities actionPriorities;
 
     public Gather() {
         System.out.println("entering gather");
@@ -97,16 +96,12 @@ public class Gather {
         this.setListeners = SetListeners.getInstance();
         this.actionPriorities = CompositeActionListenerWithPriorities.getInstance();
         actionPriorities.setCurrentClass("Gather Loading");
-        
-        //this.actionPriorities = CompositeActionListenerWithPriorities.getInstance();
 
         existingOrNew = setUserInformation.getExistingOrNew();
         studentOrTeacher = setUserInformation.getStudentOrTeacher();
         pathToUsernameFolder = "/Users/evy/Documents/GradeTracker-new/src/main/view/UserInfo/StudentInfo/" + setUserInformation.getUsername();
         window = set.getWindow();
         create = new Creator();
-
-        // newUser = new NewUser();
 
         System.out.println();
         makeUsernameBox();
@@ -145,23 +140,11 @@ public class Gather {
             textField = decorate.decorateTextBox("Enter user name");
         }
 
-        // else if (set.getUsername() != null && set.getExistingOrNewChanged() == false) { //user came back to gather after changing newuser setting
-        //     System.out.println("whatToSetTextFieldTo opt 2");
-        //     // textField = decorate.decorateTextBox("Enter user name");
-        // }
-
-        // else if (set.getUsername() != null && set.getExistingOrNewChanged() == true) { //user came back to gather after changing newuser setting
-        //     System.out.println("whatToSetTextFieldTo opt 2");
-        //     textField = decorate.decorateTextBox("Enter user name");
-        // }
-
         else {
             System.out.println("whatToSetTextFieldTo opt 3");
             textField = decorate.decorateTextBox(setUserInformation.getUsername());
             set.setLoadedState(textField, true);
             textFieldMouseListener();
-
-            //set.setCanContinue(true);
         }
     }
 
@@ -176,20 +159,6 @@ public class Gather {
                 public void focusGained(FocusEvent e) {
                     System.out.println("focuslistener#5");
                         window.requestFocusInWindow();
-                        // if (textField.hasFocusListener(set.getYesFocusListener())) {
-                        //     textField.removeFocusListener(set.getYesFocusListener());
-                        // }
-                        // for (FocusListener listener : textField.getFocusListeners()) {
-                        //     if (listener == set.getYesFocusListener()) {
-                        //         textField.removeFocusListener(set.getYesFocusListener());
-                        //         break;
-                        //     }
-
-                        //     else if (listener == set.getNoFocusListener()) {
-                        //       textField.removeFocusListener(set.getNoFocusListener());
-                        //        break;
-                        //     }
-                        // }
                         decorate.areYouSureMessageListenerForEditingUsername();
                         firstTimeInTextbox = false;
                         
@@ -197,55 +166,13 @@ public class Gather {
             };
 
             setListeners.setDialogFocusListener(textfieldFocusListener);
-            //deleteAllFocusListeners();
-            // textField.removeFocusListener(set.getDialogFocusListener());
 
-            decorate.deleteFocusListeners(textField.getFocusListeners().length-2);//textField.getFocusListeners().length-1);
+            decorate.deleteFocusListeners(textField.getFocusListeners().length-2);
 
             textField.addFocusListener(textfieldFocusListener);
-            //deleteFocusListeners(1);
-
-            // textField.addFocusListener(new FocusAdapter() {
-            //     @Override
-            //     public void focusGained(FocusEvent e) {
-            //         decorate.areYouSureMessageDelete(textField, "editing username", "<html><center>Editing this username will create or <br>login to an account under this name. <br>Do you wish to continue?");
-            //         //window.requestFocusInWindow();
-            //     }
-                
-            // });
 
         }
     }
-    
-    private void deleteAllMouseListeners() {
-        MouseListener[] mouseListeners = textField.getMouseListeners();
-        // for (MouseListener listener : mouseListeners) {
-        //     textField.removeMouseListener(listener);
-        // }
-
-        for (int i = mouseListeners.length-1; i >= 3; i--) {
-        //for (int i = 0; i <= 1; i++) {
-            textField.removeMouseListener(mouseListeners[i]);
-        }
-    }
-
-    private void deleteAllFocusListeners() {
-        FocusListener[] focusListeners = textField.getFocusListeners();
-        for (FocusListener listener : focusListeners) {
-            textField.removeFocusListener(listener);
-        }
-    }
-
-    // private void deleteFocusListeners(int amount) {
-    //     FocusListener[] listeners = textField.getFocusListeners();
-    //     //for (FocusListener listener : focusListeners) {
-    //     //    textField.removeFocusListener(listener);
-    //     //}
-    //     for (int i = 0; i <= amount; i++) {
-    //         textField.removeFocusListener(listeners[listeners.length-1]);
-    //     }
-
-    // }
 
     private void instructionsWordsWindow() {
         JLabel instructionsWordsLabel;
@@ -256,13 +183,7 @@ public class Gather {
         Boolean previousSettingsChanged = (set.getNewOrExistingChanged() == true);
         System.out.println("{}"+textField.getText()+"{}");
         Boolean didNotChangeUsernameFromDefault = (textField.getText().trim().equals("Enter user name")) && (set.getEmptiedState(textField)==false);
-        //Boolean didNotChangeUsernameFromDefault =  (textField.getText() == "Enter user name") && set.getEmptiedState(textField)==false;
-
-
-        System.out.println("!!!! "+(textField.getText().trim().equals("Enter user name"))+" "+(set.getEmptiedState(textField)==false));
-        System.out.println("******"+ (textField.getText())+"******");
-        //System.out.println("******^^^^^"+ (textField.getText()) +" "+(set.getEmptiedState(textField)==false));
-
+    
         if (newUser && (username == null || didNotChangeUsernameFromDefault) && previousSettingsNotChanged) {
             System.out.println("instruction words option 1");
             instructionsWordsLabel = new JLabel("You are a new user. Create a user name.");
@@ -302,10 +223,6 @@ public class Gather {
             instructionsWordsLabel = new JLabel("<html><center>You changed your NewUser/Existing settings. <br> You are an existing user. Type in your user name");
         }
 
-        // else if (existingUser && set.getUsername() != null && previousSettingsNotChanged) {
-        //     System.out.println("instruction words option 4");
-        //     instructionsWordsLabel = new JLabel("<html><center>Welcome back!");
- 
         else {
             System.out.println("instruction words option 9. new user: "+ newUser+" username: "+ username +" previoussettingsnotchanged: "+ previousSettingsNotChanged+ " fileExists? " +fileHandler.fileExists(pathToUsernameFolder));
             instructionsWordsLabel = new JLabel("Error");
@@ -367,12 +284,6 @@ public class Gather {
     private void makeBackButton() {
         JButton backButton = createButton.backButtonCreate();
         backButtonPanel.add(backButton);
-        // backButton.addActionListener(new ActionListener() {
-        //     public void actionPerformed(ActionEvent e) {
-        //        setUserInformation.setUsername(textField.getText());
-        //        backButtonAction();
-        //     }
-        //backButton
         System.out.println(1111);
         backButton.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent e) {
@@ -385,13 +296,6 @@ public class Gather {
         }});
 
     }
-        //<>
-        // actionPriorities.addClassActionListener(b -> {
-        //     set.setUsername(textField.getText());
-        //     backButtonAction();
-        // }, 2, "click", null);
-        //<>
-    
 
         private void backButtonAction() {
             System.out.println("hidewindow1");
@@ -446,121 +350,15 @@ public class Gather {
         else if (textFieldFilled) { //good case
             String filePath = "somethingwentwrong";//if not overwritten, somethingwent wrong
             if (existingOrNew.trim().equals("New User")) { //if new user,
-                //goToStudentClasses(filePath);
                 System.out.println("hidewindow2");
                 hideWindow();
                 MainWindow main = new MainWindow();
-                //main.show(0,0);
             }
         }
         else {
             System.out.println("Something went wrong in username input");
             errorMessageSetUp("<html><center>Something went wrong in username input",200,90);
         }
-    }
-
-// private void errorMessageSetUp(String labelWords, int width, int height) {
-//     JDialog dialog = new JDialog(window, true);
-//     dialog.setLayout(new FlowLayout());
-//     JLabel label = new JLabel(labelWords);
-//     label.setHorizontalAlignment(SwingConstants.CENTER);
-//     dialog.add(label);
-//     JButton okButton = new JButton("OK");
-//     okButton.setVisible(true);
-//     dialog.add(okButton);
-//     dialog.setSize(width,height);
-//     okButton.addActionListener(new ActionListener() {
-//         public void actionPerformed(ActionEvent e) {
-//             dialog.setVisible(false);
-//             dialog.dispose(); 
-//         }
-//     });
-    
-//     dialog.setLocationRelativeTo(studentButton);
-//     dialog.setLocation(dialog.getX(), dialog.getY() + 15); 
-//     dialog.setVisible(true);
-// }
-
-
-// private void writeUsername(String filePath) {
-//     //and username not taken
-//     String usernamePath = "somethingwentwrong.txt";
-//     String username = textField.getText().trim();
-//     set.setUsername(username);
-//     if ("Student".equals(studentOrTeacher)) {
-//         usernamePath = "/Users/evy/Documents/GradeTracker-new/src/main/view/UserInfo/studentUsername.txt";
-//     }
-
-//     else if ("Teacher".equals(studentOrTeacher)) {
-//         usernamePath = "/Users/evy/Documents/GradeTracker-new/src/main/view/UserInfo/teacherUsername.txt";
-//     }
-
-//     checkIfExisting(usernamePath, username);
-// }
-
-    // private void checkIfExisting(String filePath, String username) {
-    //     //boolean usernametaken = false;
-
-    //     readNames(filePath, username);
-    //     // if (usernametaken == false) {
-    //     //     writeNewName(filePath, username);    
-    //     // }
-    // }
-
-    // private void writeNewName(String filePath, String username) {
-    //         try (FileWriter writer = new FileWriter(filePath, true)) {
-    //             writer.write(username + "\n");
-
-    //         } catch (IOException e1) {
-    //             e1.printStackTrace();
-    //         }
-    // }
-
-    // private boolean readNames(String filePath, String username) {
-    //     BufferedReader reader = null;
-    //     Boolean usernametaken = null;
-    //     try {
-    //         reader = new BufferedReader(new FileReader(filePath));
-    //         usernametaken = readLine(reader, username);
-    //     } catch (IOException e) {
-    //         e.printStackTrace();
-    //     } finally {
-    //         try {
-    //             if (reader != null) {
-    //                 reader.close();
-    //             }
-    //         } catch (IOException e) {
-    //             e.printStackTrace();
-    //         }
-    //     }
-    //     if (usernametaken != null) {
-    //     return usernametaken;
-    //     }
-    //     else {
-    //         return false;
-    //     }
-    // }
-
-    // private boolean readLine(BufferedReader reader, String username){
-    //     String line;
-    //     Boolean usernametaken;
-    //     try {
-    //         while ((line = reader.readLine()) != null) {
-    //             if (line.equals(username) && set.getUsername() == null) {//if matches username
-    //                 errorMessageSetUp("<html><center>Username already exists.<br> Please choose another.",200,100);
-    //                 usernametaken = true;
-    //                 //break;
-    //                 return true;
-    //             }
-    //         }
-    //     } catch (IOException e) { 
-    //         e.printStackTrace();
-    //     } //return usernametaken;
-    //     return false;
-    // }
-
-    private void setWindowX(int newWindowX) {
-        windowX = newWindowX;
     }
 
     public void errorMessageSetUp(String labelWords, int width, int height) {
@@ -590,25 +388,11 @@ public class Gather {
         return windowX;
     }
 
-    private void setWindowY(int newWindowY) {
-        windowY = newWindowY;
-    }
-
     public int getWindowY() {
         return windowY;
     }
 
     public void showWindow(int windowX, int windowY) {
-    // if (windowX != 0 && windowY != 0) {
-    //     window.setLocation(windowX, windowY);
-    //     setWindowX(windowX);
-    //     setWindowY(windowY);
-
-    // }
-
-    // else {
-    //     window.setLocation(window.getX(), window.getY());
-    // }
 
     window.setVisible(true);
     }
@@ -618,13 +402,6 @@ public class Gather {
         instructionsPanel.setVisible(false);
         choicesPanel.setVisible(false);
         backNextButtonsPanel.setVisible(false);
-    }
-
-    private void goToStudentClasses(String filePath) {
-        //writeUsername(filePath);
-        ////move on to studentclasses class
-        // StudentClasses studentClasses = new StudentClasses();
-        // studentClasses.studentClassesLaunch();
     }
 
     public class EnterAction extends AbstractAction {
