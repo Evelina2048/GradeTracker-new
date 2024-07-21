@@ -110,15 +110,7 @@ private void truncateLabelText(String prefix, String suffix, int maxWidth) {
     FontMetrics fontMetrics = instructionsWords.getFontMetrics(instructionsWords.getFont());
     JLabel usernameLabel = new JLabel(setUserInformation.getUsername());
     String fullText = prefix + usernameLabel.getText() + suffix;
-    //FontMetrics fontMetrics = usernameLabel.getFontMetrics(usernameLabel.getFont());
 
-    // if (fontMetrics.stringWidth(fullText)+ fontMetrics.stringWidth(set.getUsername()) <= maxWidth) {
-    //     System.out.println("should not print with long text");
-    //     usernameLabel.setText(fullText);
-    //     return;
-    // }
-
-   //String username = usernameLabel.getText();
     String username = setUserInformation.getUsername();
     String ellipsis = " ...";
     int prefixWidth = fontMetrics.stringWidth(prefix);
@@ -143,11 +135,9 @@ private void truncateLabelText(String prefix, String suffix, int maxWidth) {
     String currentUsernamePermittedAmount = setUserInformation.getUsername().substring(0, endIndex);
     System.out.println("currentUsernamePermittedAmount "+currentUsernamePermittedAmount);
 
-    //while (!(fontMetrics.stringWidth(username.substring(0, endIndex)) <= availableWidth && fontMetrics.stringWidth(username.substring(0, endIndex+1)) >= availableWidth)) {
     while (fontMetrics.stringWidth(username.substring(0, endIndex+1)) <= availableWidth) {    
         System.out.println("it works "+ fontMetrics.stringWidth(username.substring(0, endIndex+1))+" "+availableWidth);
         endIndex++;
-        //currentUsernamePermittedAmount = set.getUsername().substring(0, endIndex);
         System.out.println("it works2: "+currentUsernamePermittedAmount+" "+setUserInformation.getUsername().substring(0, endIndex));
     }
     if(currentUsernamePermittedAmount.charAt(currentUsernamePermittedAmount.length()-1)==' ' && currentUsernamePermittedAmount.charAt(currentUsernamePermittedAmount.length()-2)!=' ') {
@@ -363,28 +353,12 @@ public void setButtonSelected() {
 }
 
 public void show(int windowX, int windowY) {
-//    if (windowX != 0 && windowY != 0) {
-//        window.setLocation(windowX, windowY);
-//    }
-
-//    else {
-//     window.setLocationRelativeTo(null);
-//    }
-
-
     window.setVisible(true);
 }
 
 public void hideWindow() {
 
 }
-
-// public class EnterAction extends AbstractAction {
-//     @Override
-//     public void actionPerformed(ActionEvent e) {
-//         doNextButtonProcedure();
-//     }
-// }
 
 public class EnterAction extends AbstractAction {
     @Override

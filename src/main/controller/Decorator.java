@@ -43,7 +43,6 @@ import java.awt.event.FocusAdapter;
 import java.awt.event.FocusEvent;
 
 //key listening
-
 public class Decorator {
     JFrame window;
     Set set;
@@ -150,11 +149,8 @@ public class Decorator {
         Creator create = new Creator();
         textField.setVisible(false);
         JPanel panelForDeleting = new JPanel();
-        //System.out.println("does textfield be null?: "+textField==null+ "textfield text"+ textField.getText());
         panelForDeleting.add(textField);
-        //System.out.println(panelForDeleting.getComponentCount() + " :beforeselectedBoxPanelComponenents");
         create.deleteTextBox(panelForDeleting);
-        //System.out.println(panelForDeleting.getComponentCount() + " :afterselectedBoxPanelComponenents");
         Path filePath = Paths.get("/Users/evy/Documents/GradeTracker-new/src/main/view/UserInfo/StudentInfo/"+setUserInformation.getUsername()+"/"+"ClassInformation"+"/"+textField.getText()+".txt");
         
         try {
@@ -165,7 +161,6 @@ public class Decorator {
         dialog.setVisible(false);
         dialog.dispose(); 
 
-        // create.windowFix();
     }
 
     private void reasonIsChangingUsernameYes() {
@@ -184,12 +179,9 @@ public class Decorator {
                 });
             }
         };
-        //textField.removeFocusListener(set.getDialogFocusListener());
 
         textField.addFocusListener(yesFocusListener);
         setListeners.setYesFocusListener(yesFocusListener);        
-        //textField.customFocusListener.requestFocusInWindow();
-
         
         dialog.setVisible(false);
         dialog.dispose(); 
@@ -214,9 +206,6 @@ public class Decorator {
 
     public void deleteFocusListeners(int amount) {
         FocusListener[] listeners = textField.getFocusListeners();
-        //for (FocusListener listener : focusListeners) {
-        //    textField.removeFocusListener(listener);
-        //}
         for (int i = 0; i < amount; i++) {
             textField.removeFocusListener(listeners[listeners.length-1-i]);
         }
@@ -234,15 +223,6 @@ public class Decorator {
     }
        
     private void noButtonAction() {
-        //set.setCanContinue(false);
-
-        // textField.removeFocusListener(set.getDialogFocusListener());
-        // window.requestFocusInWindow(); 
-        // dialog.setVisible(false);
-        // dialog.dispose();
-        // window.requestFocusInWindow(); 
-
-        //deleteFocusListeners(textField.getFocusListeners().length-1);//textField.getFocusListeners().length);
 
         window.requestFocusInWindow(); 
         dialog.setVisible(false);
@@ -250,33 +230,11 @@ public class Decorator {
         dialog.dispose();
         window.requestFocusInWindow(); 
         
-
-        // FocusListener yesFocusListener = new FocusAdapter() {
-        //     @Override
-        //     public void focusGained(FocusEvent e) {
-        //         SwingUtilities.invokeLater(() -> {
-        //             System.out.println("focusered");
-        //             textField.setCaretPosition(caretPosition);
-        //         });
-        //     }
-        // };
-        // textField.addFocusListener(yesFocusListener);
-        // set.setYesFocusListener(yesFocusListener);
-
-        //textField.addFocusListener(new FocusAdapter() {
         FocusListener noFocusListener = new FocusAdapter() {
                 @Override
                 public void focusGained(FocusEvent e) {
                     System.out.println("focuslistener#4");
                     window.requestFocusInWindow();
-                    //below is necessary 
-                    //
-                    // areYouSureMessageDelete(textField, "editing username", "<html><center>Editing this username will create or <br>login to an account under this name. <br>Do you wish to continue?");
-                    //
-
-                    //window.requestFocusInWindow();
-
-                    //textField.removeFocusListener(noFocusListener);
 
                     SwingUtilities.invokeLater(new Runnable() {
                         public void run() {
@@ -291,8 +249,6 @@ public class Decorator {
         textField.addFocusListener(noFocusListener);
         setListeners.setNoFocusListener(noFocusListener);
         textField.removeFocusListener(setListeners.getDialogFocusListener());
-
-        //textField.addFocusListener(set.getDialogFocusListener());
     }
 
     public void setCaretPositionToZero(JTextField importedTextField) {
@@ -332,21 +288,13 @@ public class Decorator {
                 dialog.dispose(); 
                 set.setCanContinue(false);
                 button.setEnabled(true);
-                //textField.getFocusListeners.Count()
-                // FocusListener[] listeners = textField.getFocusListeners();
-                // int listenerCount = listeners.length;
-                // System.out.println("listenercount: "+listenerCount);
             }
         });
         dialog.addWindowListener(new WindowAdapter() {
             @Override
             public void windowClosing(WindowEvent e) {
-                //window.requestFocusInWindow();
                 dialog.dispose();
                 set.setCanContinue(false);
-
-                //
-                //
             }
         });
         return dialog;
@@ -357,20 +305,6 @@ public class Decorator {
         textField = importedTextField;
         FocusListener[] listeners = textField.getFocusListeners();
         int listenerCount = listeners.length;
-        
-        // Iterate through all listeners except the last one
-        // for (int i = listenerCount-1; listenerCount-x; i++) {
-        //     textField.removeFocusListener(listeners[i]);
-        // }
-
-        // for (int i = listenerCount-1; listenerCount-x; i++) {
-        //     textField.removeFocusListener(listeners[i]);
-        // }
-
-        // textField.removeFocusListener(listeners[listenerCount-1]);
-        // textField.removeFocusListener(listeners[listenerCount-2]);
-        // textField.removeFocusListener(listeners[listenerCount-3]);
-        //textField.removeFocusListener(listeners[listenerCount-4]);
     }
 
     public void errorMessageSetUp(JRadioButton button) {
