@@ -54,7 +54,7 @@ public class TextFieldColorFocusListener {
             }
             @Override
             public void focusLost(FocusEvent e) {
-                focusLostLeftAlign();
+                //focusLostLeftAlign();
                 focusTextField.setForeground(Color.lightGray);
                 FontMetrics fontMetrics = textField.getFontMetrics(textField.getFont());
                 System.out.println("focus is lost "+fontMetrics.stringWidth(textField.getText())+ text);
@@ -103,12 +103,30 @@ public class TextFieldColorFocusListener {
                     textField.setForeground(Color.GRAY);
                     set.setEmptiedState(textField, false);
                     window.requestFocusInWindow();
+
+                    //:
+                    textField.grabFocus();
+                    textField.setCaretPosition(0);
+                    window.requestFocusInWindow();
+                    //:
                 }
                 else if (pointNotInTextbox &&  set.getEmptiedState(textField) == true && !textField.getText().isEmpty()) {
                     window.requestFocusInWindow();
+
+                    //:
+                    textField.grabFocus();
+                    textField.setCaretPosition(0);
+                    window.requestFocusInWindow();
+                    //:
                 }
                 else if (pointNotInTextbox) {
                     window.requestFocusInWindow();
+
+                    //:
+                    textField.grabFocus();
+                    textField.setCaretPosition(0);
+                    window.requestFocusInWindow();
+                    //:
 
                 }
                 else {
@@ -122,6 +140,9 @@ public class TextFieldColorFocusListener {
         textField.grabFocus();
         textField.setCaretPosition(0);
         window.requestFocusInWindow();
+        //if (focusLost is because of other textbox gain) {
+        //    newTextField.grabFocus();
+        //}
     }
 
 }

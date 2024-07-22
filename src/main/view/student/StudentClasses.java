@@ -107,7 +107,7 @@ public class StudentClasses extends JFrame {
     }
 
     private void loadIfNeeded() {
-        String filePath = "/Users/evy/Documents/GradeTracker-new/src/main/view/UserInfo/StudentInfo/"+setUserInformation.getUsername()+"/"+"ClassInformation"+"/class.txt";
+        String filePath = setUserInformation.getPathToClassTextFile();
         if (fileHandler.fileExists(filePath)) {//case for if existing file
             System.out.println("I have info to load!");
             ArrayList<String> myList = fileHandler.readFileToList(filePath);
@@ -203,7 +203,7 @@ public class StudentClasses extends JFrame {
     }
     private void doNextButtonProcedure() {
         ArrayList<String> classList;
-        classList = set.getCurrentPanelList();
+        classList = fileWrite.getClassList();//set.getTextFieldPanel();//set.getCurrentPanelList();
         set.setClassList(classList);
         writeType();
         System.out.println("nextbuttonhit");
@@ -247,8 +247,11 @@ public class StudentClasses extends JFrame {
     }
 
     private void writeType() {
-        set.setFinalClassList(set.getClassList());
-        set.setFilePath("/Users/evy/Documents/GradeTracker-new/src/main/view/UserInfo/StudentInfo/" + setUserInformation.getUsername() + "/" + "ClassInformation" + "/class.txt");
+        //set.setFinalClassList(set.getClassList());
+        System.out.println("testing? "+set.getCurrentPanelList());
+        set.setFinalClassList(set.getCurrentPanelList());
+        System.out.println("set.getcurrentpanellist "+set.getCurrentPanelList());
+        set.setFilePath(setUserInformation.getPathToClassTextFile());
         fileWrite.writeTextToFile();
         fileWrite.debugPrintPanel();
     }

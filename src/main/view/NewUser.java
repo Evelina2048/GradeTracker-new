@@ -1,6 +1,5 @@
 package main.view;
 
-import javax.swing.Timer;
 import javax.swing.AbstractAction;
 import javax.swing.ButtonGroup;
 import javax.swing.JButton;
@@ -21,7 +20,6 @@ import java.awt.event.ActionEvent;
 
 //key listening
 import java.awt.event.KeyEvent;
-import java.lang.reflect.InvocationTargetException;
 
 import main.model.Set;
 import main.model.SetUserInformation;

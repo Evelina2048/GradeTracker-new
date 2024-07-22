@@ -1,9 +1,12 @@
 package main.model;
 
+import javax.swing.JTextField;
+
 public class SetUserInformation {
     private String username;
     private String existingOrNew;
     private String studentOrTeacher;
+    private Set set;
 
     //Below is for singleton design pattern
     // Static variable to hold the single instance of the class
@@ -26,6 +29,25 @@ public class SetUserInformation {
 
     public String getUsername() {
         return username;
+    }
+
+    public String getPathToClassInformationFolder() {
+        //return;
+        return "/Users/evy/Documents/GradeTracker-new/src/main/view/UserInfo/StudentInfo/"+getUsername()+"/ClassInformation/";
+    }
+
+    public String getPathToClassTextFile() {
+        //return;
+        return "/Users/evy/Documents/GradeTracker-new/src/main/view/UserInfo/StudentInfo/"+getUsername()+"/ClassInformation/class.txt";
+    }
+
+    public String getPathToClassInformationFileWithTextField(JTextField textField) {
+        return "/Users/evy/Documents/GradeTracker-new/src/main/view/UserInfo/StudentInfo/"+getUsername()+"/ClassInformation/"+textField.getText()+".txt";
+    }
+
+    public String getPathToClassInformationFileWithIndex() {
+        this.set = Set.getInstance();
+        return  "/Users/evy/Documents/GradeTracker-new/src/main/view/UserInfo/StudentInfo/"+getUsername()+"/ClassInformation/"+set.getFinalClassList().get(set.getClassListIndex())+".txt";
     }
 
     public void setExistingOrNew(String myExistingOrNew) {

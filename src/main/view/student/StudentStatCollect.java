@@ -19,11 +19,13 @@ import main.model.Set;
 import main.model.SetUserInformation;
 
 import main.controller.Creator;
+import main.controller.Decorator;
 import main.controller.FileHandling;
 import main.controller.FileWriting;
 
 import javax.swing.AbstractAction;
 import javax.swing.JComponent;
+import javax.swing.JDialog;
 import javax.swing.KeyStroke;
 import java.awt.event.KeyEvent;
 import main.controller.CreateButton;
@@ -142,13 +144,13 @@ public class StudentStatCollect extends JFrame {
     }
 
     public void addLoadedBoxes() {
-        String filePath = "/Users/evy/Documents/GradeTracker-new/src/main/view/UserInfo/StudentInfo/"+setUserInformation.getUsername()+"/ClassInformation/"+set.getFinalClassList().get(set.getClassListIndex())+".txt";
+        String filePath = setUserInformation.getPathToClassInformationFileWithIndex();
         
-        JPanel testPanel = fileHandler.loadTextboxes(filePath);
-        int numberOfComponents = testPanel.getComponentCount();
+        JPanel loadedBoxesPanel = fileHandler.loadTextboxes(filePath);
+        int numberOfComponents = loadedBoxesPanel.getComponentCount();
         numOfBoxes += numberOfComponents;
         for (int i = 0; i < numberOfComponents; i++) {
-            textBoxPanel.add(testPanel.getComponent(0));
+            textBoxPanel.add(loadedBoxesPanel.getComponent(0));
         }
         classLabelPanel.add(textBoxPanel);
         window.add(classLabelPanel);
@@ -209,7 +211,7 @@ public class StudentStatCollect extends JFrame {
 
     public void visitNextStudentClass() {
         //readClass(finalClassList);
-        String filePath = "/Users/evy/Documents/GradeTracker-new/src/main/view/UserInfo/StudentInfo/"+setUserInformation.getUsername()+"/ClassInformation/"+set.getFinalClassList().get(set.getClassListIndex())+".txt";
+        String filePath = setUserInformation.getPathToClassInformationFileWithIndex();
         if (fileHandler.fileExists(filePath)) {
             textBoxPanelReset();
 
@@ -327,7 +329,7 @@ public class StudentStatCollect extends JFrame {
     }
 
     private void boxManageCreate(String placeholder, String type, Boolean boxLoaded) {
-        if (numOfBoxes <= maxBoxes) {
+        if (numOfBoxes < maxBoxes) {
             System.out.println("test.1 "+ placeholder +" "+type+ "textboxpanel components"+textBoxPanel.getComponentCount());
             textBoxPanel.add(create.typeBox(placeholder, type, boxLoaded));//false));
             System.out.println("test.2 "+ placeholder +" "+type+ "textboxpanel components"+textBoxPanel.getComponentCount());
@@ -336,6 +338,13 @@ public class StudentStatCollect extends JFrame {
             //System.out.println("visibility"+set.getDEBUGBOX().isVisible());
             numOfBoxes++;
             //window.add(classLabelPanel);
+        }
+        else if (numOfBoxes == maxBoxes) {
+            Decorator decorate = new Decorator();
+            JDialog dialog = decorate.genericPopUpMessage("<html><center>Maximum amount reached.", null, 200 , 100);
+            dialog.setLocationRelativeTo(window);
+            dialog.setLocation(dialog.getX(), dialog.getY() + 15); 
+            dialog.setVisible(true);        
         }
     }
 

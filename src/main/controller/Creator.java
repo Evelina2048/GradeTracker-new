@@ -1,29 +1,23 @@
 package main.controller;
 
+import javax.swing.JDialog;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JTextField;
+import javax.swing.JPanel;
+
 import java.awt.BorderLayout;
 import java.awt.Color;
-import javax.swing.JPanel;
-import java.awt.Rectangle;
-import java.awt.event.MouseAdapter;
-import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
-import java.awt.event.FocusAdapter;
-import java.awt.event.FocusEvent;
-
-import java.util.ArrayList;
 import java.awt.Component;
-
 import java.awt.Dimension;
 import java.awt.FlowLayout;
-import java.awt.FontMetrics;
+import java.awt.Container;
+
+import java.util.ArrayList;
 
 import main.controller.Creator;
 import main.model.Set;
-
-import java.awt.Container;
 
 
 public class Creator {
@@ -32,12 +26,9 @@ public class Creator {
     private Set set;
     private int textboxCounter;
     private JTextField textField = new JTextField();
-    private ArrayList<String> classList = new ArrayList<>();
     private ArrayList<String>textFieldPanelText = new ArrayList<>();
     private JPanel textFieldContainer = new JPanel(new FlowLayout(FlowLayout.LEFT));
-    private Boolean focusGranted = true;
     private boolean loaded;
-    private String text = textField.getText().trim();
     private CreateButton createButton = new CreateButton();
     private TextFieldColorFocusListener colorFocusListener;
     
@@ -52,8 +43,8 @@ public class Creator {
         int width = 144;
         int height = 50;
         Decorator decorate = new Decorator();
-        textboxCounter++;
-        if (textboxCounter <= 30 && my_type.equals("JTextField")) {
+        if (textboxCounter < 30 && my_type.equals("JTextField")) {
+            textboxCounter++;
             textField = decorate.decorateTextBox(placeholder);
             createButton.addDocumentListenerForSaving(textField);
             textFieldPanel.add(textField); 
@@ -63,10 +54,20 @@ public class Creator {
             colorFocusListener.textFieldFocusListener(textField, placeholder);
             windowFix();
         }
+        else if (textboxCounter >= 30) {
+            System.out.println("umm hello?");
+            JDialog dialog = decorate.genericPopUpMessage("<html><center>Maximum amount reached.", null, 200 , 100);
+            dialog.setLocationRelativeTo(window);
+            dialog.setLocation(dialog.getX(), dialog.getY() + 15); 
+            dialog.setVisible(true);         
+        }
         else if (my_type.equals("JLabel")) {
             JLabel toAddType = new JLabel(placeholder);
             textFieldPanel.add(toAddType);
         }
+
+        System.out.println("textboxCounter: "+ textboxCounter);
+
         checkIfLoadedAndAction();
         set.setTextFieldPanel(textFieldPanel);
         System.out.println("in create textbox. panel: "+set.getTextFieldPanel().getComponentCount());

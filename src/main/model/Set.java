@@ -210,4 +210,13 @@ public class Set {
     public JButton getCurrentSaveButton() {
         return saveButton;
     }
+
+    // public void getPathToClassInformationFolder() {
+    //     //return;
+    //     return "/Users/evy/Documents/GradeTracker-new/src/main/view/UserInfo/StudentInfo/"+setUserInformation.getUsername()+"/ClassInformation/";
+    // }
+
+    // public String getPathToClassInformationFile(JTextField textField) {
+    //     return "/Users/evy/Documents/GradeTracker-new/src/main/view/UserInfo/StudentInfo/"+setUserInformation.getUsername()+"/"+"ClassInformation"+"/"+textField.getText()+".txt";
+    // }
 }

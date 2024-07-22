@@ -151,8 +151,8 @@ public class Decorator {
         JPanel panelForDeleting = new JPanel();
         panelForDeleting.add(textField);
         create.deleteTextBox(panelForDeleting);
-        Path filePath = Paths.get("/Users/evy/Documents/GradeTracker-new/src/main/view/UserInfo/StudentInfo/"+setUserInformation.getUsername()+"/"+"ClassInformation"+"/"+textField.getText()+".txt");
-        
+        //Path filePath = Paths.get("/Users/evy/Documents/GradeTracker-new/src/main/view/UserInfo/StudentInfo/"+setUserInformation.getUsername()+"/"+"ClassInformation"+"/"+textField.getText()+".txt");
+        Path filePath = Paths.get(setUserInformation.getPathToClassInformationFileWithTextField(textField));
         try {
             Files.deleteIfExists(filePath);
         } catch (IOException e1) {
@@ -269,7 +269,7 @@ public class Decorator {
         });
     }
 
-    public JDialog genericPopUpMessage(String text,JRadioButton button) {
+    public JDialog genericPopUpMessage(String text,JRadioButton button, int width, int height) {
         dialog = new JDialog(window, true);
         dialog.setResizable(false);
         dialog.setLayout(new FlowLayout());
@@ -279,7 +279,7 @@ public class Decorator {
         JButton okButton = new JButton("OK");
         okButton.setVisible(true);
         dialog.add(okButton);
-        dialog.setSize(200,90);
+        dialog.setSize(width, height); //200,90
         set.setCanContinue(false);
         okButton.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent e) {
@@ -287,7 +287,7 @@ public class Decorator {
                 dialog.setVisible(false);
                 dialog.dispose(); 
                 set.setCanContinue(false);
-                button.setEnabled(true);
+                //button.setEnabled(true);
             }
         });
         dialog.addWindowListener(new WindowAdapter() {
@@ -308,7 +308,7 @@ public class Decorator {
     }
 
     public void errorMessageSetUp(JRadioButton button) {
-        dialog = genericPopUpMessage("<html><center>Please choose an option", button);
+        dialog = genericPopUpMessage("<html><center>Please choose an option", button, 200, 90);
         dialog.setResizable(false);
         
         dialog.setLocationRelativeTo(button);
@@ -351,6 +351,29 @@ public class Decorator {
         areYouSureMessage(textField, "editing username", "<html><center>Editing this username will create or <br>login to an account under this name. <br>Do you wish to continue?");
         window.requestFocusInWindow();
     }
+
+    // public void errorMessageSetUp(String labelWords, int width, int height, JRad) {
+    //     JDialog dialog = new JDialog(window, true);
+    //     dialog.setResizable(false);
+    //     dialog.setLayout(new FlowLayout());
+    //     JLabel label = new JLabel(labelWords);
+    //     label.setHorizontalAlignment(SwingConstants.CENTER);
+    //     dialog.add(label);
+    //     JButton okButton = new JButton("OK");
+    //     okButton.setVisible(true);
+    //     dialog.add(okButton);
+    //     dialog.setSize(width,height);
+    //     okButton.addActionListener(new ActionListener() {
+    //         public void actionPerformed(ActionEvent e) {
+    //             dialog.setVisible(false);
+    //             dialog.dispose(); 
+    //         }
+    //     });
+        
+    //     dialog.setLocationRelativeTo(studentButton);
+    //     dialog.setLocation(dialog.getX(), dialog.getY() + 15); 
+    //     dialog.setVisible(true);
+    // }
 
 
 

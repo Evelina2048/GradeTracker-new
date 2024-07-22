@@ -297,7 +297,8 @@ private boolean readLine(BufferedReader reader, String username, boolean usernam
     try {
         while ((line = reader.readLine()) != null) {
             if (line.equals(username) && setUserInformation.getUsername() == null) {//if matches username
-                errorMessageSetUp("<html><center>Username already exists.<br> Please choose another.",200,100);
+                //errorMessageSetUp("<html><center>Username already exists.<br> Please choose another.",200,100);
+                decorate.genericPopUpMessage("<html><center>Username already exists.<br> Please choose another.", studentButton, 200 , 100);
                 usernametaken = true;
                 break;
             }
@@ -307,28 +308,28 @@ private boolean readLine(BufferedReader reader, String username, boolean usernam
     } return usernametaken;
 }
 
-private void errorMessageSetUp(String labelWords, int width, int height) {
-    JDialog dialog = new JDialog(window, true);
-    dialog.setResizable(false);
-    dialog.setLayout(new FlowLayout());
-    JLabel label = new JLabel(labelWords);
-    label.setHorizontalAlignment(SwingConstants.CENTER);
-    dialog.add(label);
-    JButton okButton = new JButton("OK");
-    okButton.setVisible(true);
-    dialog.add(okButton);
-    dialog.setSize(width,height);
-    okButton.addActionListener(new ActionListener() {
-        public void actionPerformed(ActionEvent e) {
-            dialog.setVisible(false);
-            dialog.dispose(); 
-        }
-    });
+// private void errorMessageSetUp(String labelWords, int width, int height) {
+//     JDialog dialog = new JDialog(window, true);
+//     dialog.setResizable(false);
+//     dialog.setLayout(new FlowLayout());
+//     JLabel label = new JLabel(labelWords);
+//     label.setHorizontalAlignment(SwingConstants.CENTER);
+//     dialog.add(label);
+//     JButton okButton = new JButton("OK");
+//     okButton.setVisible(true);
+//     dialog.add(okButton);
+//     dialog.setSize(width,height);
+//     okButton.addActionListener(new ActionListener() {
+//         public void actionPerformed(ActionEvent e) {
+//             dialog.setVisible(false);
+//             dialog.dispose(); 
+//         }
+//     });
     
-    dialog.setLocationRelativeTo(studentButton);
-    dialog.setLocation(dialog.getX(), dialog.getY() + 15); 
-    dialog.setVisible(true);
-}
+//     dialog.setLocationRelativeTo(studentButton);
+//     dialog.setLocation(dialog.getX(), dialog.getY() + 15); 
+//     dialog.setVisible(true);
+// }
 
 private void writeNewName(String filePath, String username) {
     try (FileWriter writer = new FileWriter(filePath, true)) {
