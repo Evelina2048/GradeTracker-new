@@ -16,7 +16,6 @@ import java.awt.Container;
 
 import java.util.ArrayList;
 
-import main.controller.Creator;
 import main.model.Set;
 
 
@@ -169,36 +168,36 @@ public class Creator {
             return "something went wrong goIntoPanel";
         }
 
-        public JTextField goIntoPanelReturnTextbox(JPanel panel, int index) {
-            Container container = panel;
-            Component component = container.getComponent(index);
-            if (component instanceof JTextField) {
-                    JTextField textField = (JTextField) component;
-                    return textField;
-                } 
-            else if (component instanceof JPanel) {
-                    JPanel jpanel = (JPanel) component;
-                    goIntoPanel(jpanel, 0);
-                }
-                System.out.println("none of these" +component.getClass().getName());
-                return textField;
-            }
+    // public JTextField goIntoPanelReturnTextbox(JPanel panel, int index) {
+    //     Container container = panel;
+    //     Component component = container.getComponent(index);
+    //     if (component instanceof JTextField) {
+    //             JTextField textField = (JTextField) component;
+    //             return textField;
+    //         } 
+    //     else if (component instanceof JPanel) {
+    //             JPanel jpanel = (JPanel) component;
+    //             goIntoPanel(jpanel, 0);
+    //         }
+    //         System.out.println("none of these" +component.getClass().getName());
+    //         return textField;
+    //     }
         
-            public Boolean checkIfHasPlaceholder(JPanel textFieldPanel2) {
-                JTextField textField = new JTextField();
-                for (int i = 0; i < textFieldPanel2.getComponentCount()-1; i++) {
-                    Component component = textFieldPanel2.getComponent(i);
-                    if (component instanceof JTextField) {
-                        textField = (JTextField) component;
-                    } 
-                    else if (component instanceof JPanel) {
-                        textField = (JTextField) goIntoPanelReturnTextbox(textFieldPanel2, i);
-                    }
-                    if (set.getEmptiedState(textField) == false) {
-                        return false;
-                    }}
-                    return true;
-            }
+    // public Boolean checkIfHasPlaceholder(JPanel textFieldPanel2) {
+    //     JTextField textField = new JTextField();
+    //     for (int i = 0; i < textFieldPanel2.getComponentCount()-1; i++) {
+    //         Component component = textFieldPanel2.getComponent(i);
+    //         if (component instanceof JTextField) {
+    //             textField = (JTextField) component;
+    //         } 
+    //         else if (component instanceof JPanel) {
+    //             textField = (JTextField) goIntoPanelReturnTextbox(textFieldPanel2, i);
+    //         }
+    //         if (set.getEmptiedState(textField) == false) {
+    //             return false;
+    //         }}
+    //         return true;
+    // }
 
     public void deleteMouseListeners(JTextField textField, int numberToDelete) {
         MouseListener[] listeners = textField.getMouseListeners();

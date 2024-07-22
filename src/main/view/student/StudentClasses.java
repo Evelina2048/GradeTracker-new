@@ -34,6 +34,8 @@ import main.controller.Creator;
 import main.controller.Decorator;
 import main.controller.FileHandling;
 import main.controller.FileWriting;
+import main.model.GoIntoPanel;
+
 import main.view.MainWindow;
 import main.view.student.StudentClasses;
 
@@ -47,9 +49,12 @@ import java.awt.event.MouseMotionAdapter;
 
 public class StudentClasses extends JFrame {
     private JFrame window;
+
     private Creator create;
+    private GoIntoPanel goIntoPanel;
     private Decorator decorate;
     private CreateButton createButton;
+
     private JPanel backNextButtonsPanel;
     private JButton saveButton;
     private JTextField selectedTextBox;
@@ -301,7 +306,7 @@ public class StudentClasses extends JFrame {
                 addMouseListenerToTextboxAndFrame(textField);
             }
             else if (set.getTextFieldPanel().getComponent(i) instanceof JPanel) {
-                textField = create.goIntoPanelReturnTextbox((JPanel) set.getTextFieldPanel().getComponent(i), 0);
+                textField = goIntoPanel.goIntoPanelReturnTextbox((JPanel) set.getTextFieldPanel().getComponent(i), 0);
                 
                 addMouseListenerToTextboxAndFrame(textField);
             }
@@ -499,7 +504,7 @@ public class StudentClasses extends JFrame {
                     }
 
                     else {
-                        textField = create.goIntoPanelReturnTextbox((JPanel) set.getTextFieldPanel().getComponent(i), 0);
+                        textField = goIntoPanel.goIntoPanelReturnTextbox((JPanel) set.getTextFieldPanel().getComponent(i), 0);
                     }
                     textField.setEditable(true);
                     textField.setFocusable(true);

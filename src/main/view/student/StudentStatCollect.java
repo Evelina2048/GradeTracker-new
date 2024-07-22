@@ -19,6 +19,7 @@ import main.model.Set;
 import main.model.SetUserInformation;
 
 import main.controller.Creator;
+import main.model.GoIntoPanel;
 import main.controller.Decorator;
 import main.controller.FileHandling;
 import main.controller.FileWriting;
@@ -33,6 +34,7 @@ import main.controller.CreateButton;
 public class StudentStatCollect extends JFrame {
     private JFrame window;
     private Creator create;
+    private GoIntoPanel goIntoPanel;
     private JPanel backNextButtonsPanel;
     private JButton newTypeButton;
     private Set set;
@@ -287,7 +289,9 @@ public class StudentStatCollect extends JFrame {
    private void correctGradeFormatChecker(Pattern pattern) {
         int index = 4;
         for (int i=1; i<=8; i++) { //max num of grade type
-            String text = create.goIntoPanel(classLabelPanel, index);
+            //String text = create.goIntoPanel(classLabelPanel, index);
+            String text = goIntoPanel.goIntoPanel(classLabelPanel, index);
+
             if (text.equals("does not exist")) {
                 System.out.println("fail");
                 break;
