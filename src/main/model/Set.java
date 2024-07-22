@@ -81,77 +81,6 @@ public class Set {
         return finalClassList;
     }
 
-    public ArrayList<String> getTypeList() {
-        return typeList;
-    }
-
-
-    public void setSaveable(Boolean canSave) {
-        saveable = canSave;
-    }
-
-    public boolean getSaveable() {
-        return saveable;
-    }
-
-    public void setTextFieldPanel(JPanel theTextFieldPanel) {
-        textFieldPanel = theTextFieldPanel;
-    }
-
-    public JPanel getTextFieldPanel() {
-        return textFieldPanel;
-    }
-
-    public void addTextFieldPanel(Component add) {
-        textFieldPanel.add(add);
-    }
-
-    public boolean getEmptiedState(JTextField textField) {
-        return textFieldEmptiedMap.getOrDefault(textField, false);
-    }
-
-    public void setEmptiedState(JTextField textField, boolean state) {
-        textFieldEmptiedMap.put(textField, state);
-    }
-
-    public boolean getLoadedState(JTextField textField) {
-        return textFieldLoadedMap.getOrDefault(textField, false);
-    }
-
-    public void setLoadedState(JTextField textField, boolean state) {
-        textFieldLoadedMap.put(textField, state);
-    }
-
-    public void incrementClassListIndex() {
-        classListIndex++;
-    }
-
-    public void decrementClassListIndex() {
-        classListIndex--;
-    }
-
-    public int getClassListIndex() {
-        return classListIndex;
-    }
-
-    public void resetClassList() {
-    }
-
-    // public void setExistingOrNew(String myExistingOrNew) {
-    //     existingOrNew = myExistingOrNew;
-    // }
-
-    // public String getExistingOrNew() {
-    //     return existingOrNew;
-    // }
-
-    // public void setStudentOrTeacher(String myStudentOrTeacher) {
-    //     studentOrTeacher = myStudentOrTeacher;
-    // }
-
-    // public String getStudentOrTeacher() {
-    //     return studentOrTeacher;
-    // }
 
     public void setWindow(JFrame myWindow) {
         window = myWindow;
@@ -159,22 +88,6 @@ public class Set {
 
     public JFrame getWindow() {
         return window;
-    }
-
-    public void setCurrentClass(String myClass) {
-        currentClass = myClass;
-    }
-
-    public String getCurrentClass() {
-        return currentClass;
-    }
-
-    public void setCanContinue(boolean myCanContinue) {
-        canContinue = myCanContinue;
-    }
-
-    public Boolean getCanContinue() {
-        return canContinue;
     }
 
     public void setNewOrExistingChanged(boolean changed) {

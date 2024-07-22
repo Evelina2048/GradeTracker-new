@@ -13,6 +13,7 @@ import java.awt.Component;
 import java.awt.FlowLayout;
 
 import main.model.Set;
+import main.model.SetState;
 import main.model.SetUserInformation;
 
 import java.io.FileWriter;
@@ -20,8 +21,11 @@ import java.io.FileWriter;
 public class FileWriting {
     private JFrame window;
     private JPanel textFieldPanel = new JPanel(new FlowLayout(FlowLayout.LEFT));
+    
     private Set set;
+    private SetState setState;
     private SetUserInformation setUserInformation;
+
     private FileHandling fileHandler = new FileHandling();
     private JTextField textField = new JTextField();
     private ArrayList<String> classList = new ArrayList<>();
@@ -35,6 +39,7 @@ public class FileWriting {
     
     public FileWriting() {
         this.set = Set.getInstance();
+        this.setState = SetState.getInstance();
         this.setUserInformation = SetUserInformation.getInstance();
         this.window = set.getWindow();
     }
@@ -53,16 +58,16 @@ public void decideIfWrite(Component component, BufferedWriter writer) {
     System.out.println("6666"+"decide if write");
     Decorator decorate = new Decorator();
     textField = (JTextField) component;
-    Boolean studentStatNonWritablePlaceholder = set.getEmptiedState(textField) == false && set.getCurrentClass() == "StudentStatCollect.java" && !textField.getText().equals("Credits (Optional)");
+    Boolean studentStatNonWritablePlaceholder = setState.getEmptiedState(textField) == false && setState.getCurrentClass() == "StudentStatCollect.java" && !textField.getText().equals("Credits (Optional)");
 
-    if (set.getEmptiedState(textField) == true) {
+    if (setState.getEmptiedState(textField) == true) {
         tryToWrite(writer);
     }
     else if (studentStatNonWritablePlaceholder) {
         System.out.println("7777"+"decide if write");
         removeUnwritablePlaceholders();
         
-        if (set.getCanContinue()) {
+        if (setState.getCanContinue()) {
             placeholderCount++;
             allCount++;
             System.out.println("8888 placeholder count"+placeholderCount);
@@ -94,7 +99,7 @@ private void tryToWrite(BufferedWriter writer) {
 }
 
 public void writeTextToFile(){
-    set.setCanContinue(true);
+    setState.setCanContinue(true);
     debugPrintPanel();
     setUserInformation.getUsername();
     System.out.println(1111);
@@ -110,11 +115,11 @@ private void tryToWriteWithoutAppend() {
            classList.clear();
         }
 
-        for (Component component : set.getTextFieldPanel().getComponents()) {
+        for (Component component : setState.getTextFieldPanel().getComponents()) {
             if (component instanceof JTextField ) {
                 tryToWriteTextFieldWithoutAppend(component, writer);
                 System.out.println(3333.1);
-                set.setCanContinue(true);
+                setState.setCanContinue(true);
             }
             else if (component instanceof JPanel) {
                 writeTextToFileWithAppend((JPanel) component);
@@ -131,7 +136,7 @@ private void tryToWriteWithoutAppend() {
 
 private void tryToWriteTextFieldWithoutAppend(Component component, BufferedWriter writer) { //i think for student stat
     JTextField textField = (JTextField) component;
-    if (set.getEmptiedState(textField) == true && attachedBoxes == maxAttachedBoxes) {
+    if (setState.getEmptiedState(textField) == true && attachedBoxes == maxAttachedBoxes) {
         String text = textField.getText().trim();
         if (!text.isEmpty()) {
             if (attachedBoxes == maxAttachedBoxes) {
@@ -147,7 +152,7 @@ private void tryToWriteTextFieldWithoutAppend(Component component, BufferedWrite
                 attachedBoxes++;
             }
     }
-    else if (set.getEmptiedState(textField) == false) {
+    else if (setState.getEmptiedState(textField) == false) {
         seeHowManyPlaceholdersToSkip();
         System.out.println("placeholder count: "+placeholderCount);
         
@@ -156,7 +161,7 @@ private void tryToWriteTextFieldWithoutAppend(Component component, BufferedWrite
 
 private void seeHowManyPlaceholdersToSkip() {
     Decorator decorate = new Decorator();
-    if (set.getCanContinue()) {
+    if (setState.getCanContinue()) {
         JDialog dialog = decorate.genericPopUpMessage("<html><center>Must fill in placeholder.<br>Will not save sections with placeholders", null, 200, 90);
         dialog.setLocationRelativeTo(window);
         dialog.setLocation(dialog.getX(), dialog.getY() + 15); 

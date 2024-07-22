@@ -16,13 +16,17 @@ import java.awt.FlowLayout;
 import java.nio.file.attribute.BasicFileAttributes;
 import java.nio.file.FileVisitResult;
 import java.nio.file.SimpleFileVisitor;
+
 import main.model.Set;
+import main.model.SetState;
 
 public class FileHandling {
         private Set set;
+        private SetState setState;
 
         public FileHandling() {
             set = Set.getInstance();
+            setState = SetState.getInstance();
         }
 
         public ArrayList<String> readFileToList(String filePath) {
@@ -103,11 +107,11 @@ public class FileHandling {
             JPanel bigPanel = new JPanel(new FlowLayout(FlowLayout.LEFT));
             bigPanel.setName("bigPanel in loadtextboxes");
             System.out.println("arrayList"+arrayList);
-            bigPanel.add(create.typeBox(set.getFinalClassList().get(set.getClassListIndex())+"CAT", "JLabel", true));
+            bigPanel.add(create.typeBox(set.getFinalClassList().get(setState.getClassListIndex())+"CAT", "JLabel", true));
             for (int i = 0; i<arrayList.size(); i++) {
                 bigPanel.add(create.typeBox(arrayList.get(i), "JTextField", true));
             }
-            set.setTextFieldPanel(bigPanel);
+            setState.setTextFieldPanel(bigPanel);
             return bigPanel;
     
         }

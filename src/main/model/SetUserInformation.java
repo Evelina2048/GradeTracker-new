@@ -7,13 +7,16 @@ public class SetUserInformation {
     private String existingOrNew;
     private String studentOrTeacher;
     private Set set;
+    private SetState setState;
 
     //Below is for singleton design pattern
     // Static variable to hold the single instance of the class
     private static SetUserInformation instance;
 
     // Private constructor to prevent instantiation
-    private SetUserInformation() {}
+    private SetUserInformation() {
+        setState = SetState.getInstance();
+    }
 
     // Public method to provide access to the single instance
     public static SetUserInformation getInstance() {
@@ -47,7 +50,7 @@ public class SetUserInformation {
 
     public String getPathToClassInformationFileWithIndex() {
         this.set = Set.getInstance();
-        return  "/Users/evy/Documents/GradeTracker-new/src/main/view/UserInfo/StudentInfo/"+getUsername()+"/ClassInformation/"+set.getFinalClassList().get(set.getClassListIndex())+".txt";
+        return  "/Users/evy/Documents/GradeTracker-new/src/main/view/UserInfo/StudentInfo/"+getUsername()+"/ClassInformation/"+set.getFinalClassList().get(setState.getClassListIndex())+".txt";
     }
 
     public void setExistingOrNew(String myExistingOrNew) {

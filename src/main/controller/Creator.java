@@ -17,12 +17,14 @@ import java.awt.Container;
 import java.util.ArrayList;
 
 import main.model.Set;
+import main.model.SetState;
 
 
 public class Creator {
     private JFrame window;
     private JPanel textFieldPanel = new JPanel(new FlowLayout(FlowLayout.LEFT));
     private Set set;
+    private SetState setState;
     private int textboxCounter;
     private JTextField textField = new JTextField();
     private ArrayList<String>textFieldPanelText = new ArrayList<>();
@@ -33,6 +35,8 @@ public class Creator {
     
     public Creator() {
         this.set = Set.getInstance();
+        this.setState = SetState.getInstance();
+        
         this.window = set.getWindow();
         colorFocusListener = new TextFieldColorFocusListener();
     }
@@ -68,20 +72,20 @@ public class Creator {
         System.out.println("textboxCounter: "+ textboxCounter);
 
         checkIfLoadedAndAction();
-        set.setTextFieldPanel(textFieldPanel);
-        System.out.println("in create textbox. panel: "+set.getTextFieldPanel().getComponentCount());
+        setState.setTextFieldPanel(textFieldPanel);
+        System.out.println("in create textbox. panel: "+setState.getTextFieldPanel().getComponentCount());
         return textField;
     }
 
     private void checkIfLoadedAndAction() {
         if (loaded) {
-            set.setEmptiedState(textField, true);
-            set.setLoadedState(textField, true);
+            setState.setEmptiedState(textField, true);
+            setState.setLoadedState(textField, true);
 
             textField.setForeground(Color.lightGray);
         }
         else if (loaded == false) {
-            set.setLoadedState(textField, false);
+            setState.setLoadedState(textField, false);
         }
     }
 

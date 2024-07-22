@@ -22,6 +22,7 @@ import java.awt.event.ActionEvent;
 import java.awt.event.KeyEvent;
 
 import main.model.Set;
+import main.model.SetState;
 import main.model.SetUserInformation;
 
 import main.controller.Creator;
@@ -37,7 +38,9 @@ public class NewUser extends JFrame {
     private String existingOrNew;
     private boolean moveOnPossible = false;
     private Gather gatherFrame;
+
     private Set set;
+    private SetState setState;
     private SetUserInformation setUserInformation;
     
     private CompositeActionListenerWithPriorities actionPriorities;
@@ -65,6 +68,7 @@ public class NewUser extends JFrame {
 
     public NewUser() {
         this.set = Set.getInstance();
+        this.setState = SetState.getInstance();
         this.setUserInformation = SetUserInformation.getInstance();
 
         this.actionPriorities = CompositeActionListenerWithPriorities.getInstance();
@@ -82,7 +86,7 @@ public class NewUser extends JFrame {
 
     public void newUserSetup() {
         window = set.getWindow();
-        set.setCurrentClass(currentClass);
+        setState.setCurrentClass(currentClass);
         actionPriorities.setCurrentClass(currentClass); //needs to be set here as well because if going between classes really quick on multiple threads, want to make sure actionPriorities has the right class. And using integers that represent view order for comparison logic in class
 
         window.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);

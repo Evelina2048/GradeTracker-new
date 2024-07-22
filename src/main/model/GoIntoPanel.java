@@ -12,10 +12,13 @@ import main.model.Set;
 
 public class GoIntoPanel {
     private Set set;
+    private SetState setState;
+
     private JTextField textField = new JTextField();
     
     public GoIntoPanel() {
         this.set = Set.getInstance();
+        this.setState = SetState.getInstance();
     }
 
     public String goIntoPanel(JPanel panel, int index) {
@@ -65,7 +68,7 @@ public class GoIntoPanel {
             else if (component instanceof JPanel) {
                 textField = (JTextField) goIntoPanelReturnTextbox(textFieldPanel2, i);
             }
-            if (set.getEmptiedState(textField) == false) {
+            if (setState.getEmptiedState(textField) == false) {
                 return false;
             }}
             return true;

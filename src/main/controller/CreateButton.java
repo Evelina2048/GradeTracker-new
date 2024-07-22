@@ -12,6 +12,7 @@ import java.awt.Dimension;
 import java.awt.FlowLayout;
 
 import main.model.Set;
+import main.model.SetState;
 
 public class CreateButton {
     private JPanel backNextButtonsPanel;
@@ -19,11 +20,13 @@ public class CreateButton {
     private JButton saveButton;
     private JPanel textFieldContainer = new JPanel(new FlowLayout(FlowLayout.LEFT));
     private Set set;
+    private SetState setState;
 
     public CreateButton() {
         textFieldPanel.setName("textFieldPanel");
         textFieldContainer.setName("textFieldContainer");
         this.set = Set.getInstance();
+        this.setState = SetState.getInstance();
     }
 
     public JButton backButtonCreate() {
@@ -90,7 +93,7 @@ public class CreateButton {
         public void removeUpdate(DocumentEvent e) {
             System.out.println("removeUpdate/// "+ textField.getWidth()+ textField.getParent().getParent().getParent().getParent().getParent().getName());
             //set.setEmptiedState(true);
-            set.setEmptiedState(textField, true);
+            setState.setEmptiedState(textField, true);
             //textField.getParent();
         }
 

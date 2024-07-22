@@ -31,6 +31,7 @@ import java.awt.event.FocusEvent;
 import java.awt.event.FocusListener;
 
 import main.model.Set;
+import main.model.SetState;
 import main.model.SetListeners;
 import main.model.SetUserInformation;
 
@@ -53,6 +54,7 @@ public class Gather {
     private int windowX;
     private int windowY;
     private Set set;
+    private SetState setState;
     private SetUserInformation setUserInformation;
 
     private SetListeners setListeners;
@@ -91,6 +93,7 @@ public class Gather {
     public Gather() {
         System.out.println("entering gather");
         this.set = Set.getInstance();
+        this.setState = SetState.getInstance();
         this.setUserInformation = SetUserInformation.getInstance();
 
         this.setListeners = SetListeners.getInstance();
@@ -143,7 +146,7 @@ public class Gather {
         else {
             System.out.println("whatToSetTextFieldTo opt 3");
             textField = decorate.decorateTextBox(setUserInformation.getUsername());
-            set.setLoadedState(textField, true);
+            setState.setLoadedState(textField, true);
             textFieldMouseListener();
         }
     }
@@ -182,13 +185,13 @@ public class Gather {
         Boolean previousSettingsNotChanged = (set.getNewOrExistingChanged() == false);
         Boolean previousSettingsChanged = (set.getNewOrExistingChanged() == true);
         System.out.println("{}"+textField.getText()+"{}");
-        Boolean didNotChangeUsernameFromDefault = (textField.getText().trim().equals("Enter user name")) && (set.getEmptiedState(textField)==false);
+        Boolean didNotChangeUsernameFromDefault = (textField.getText().trim().equals("Enter user name")) && (setState.getEmptiedState(textField)==false);
     
         if (newUser && (username == null || didNotChangeUsernameFromDefault) && previousSettingsNotChanged) {
             System.out.println("instruction words option 1");
             instructionsWordsLabel = new JLabel("You are a new user. Create a user name.");
         }
-        else if (newUser && username != null && previousSettingsNotChanged && fileHandler.folderExists(pathToUsernameFolder) && set.getEmptiedState(textField)){//readNames(pathToUsernameFolder, set.getUsername())){ //checkIfExisting(pathToUsernameFolder, set.getUsername())){//fileHandler.fileExists("/Users/evy/Documents/GradeTracker-new/src/main/view/UserInfo/StudentInfo/" + set.getUsername())){//fileHandler.fileExists(pathToUsernameFolder)) { //file name exists
+        else if (newUser && username != null && previousSettingsNotChanged && fileHandler.folderExists(pathToUsernameFolder) && setState.getEmptiedState(textField)){//readNames(pathToUsernameFolder, set.getUsername())){ //checkIfExisting(pathToUsernameFolder, set.getUsername())){//fileHandler.fileExists("/Users/evy/Documents/GradeTracker-new/src/main/view/UserInfo/StudentInfo/" + set.getUsername())){//fileHandler.fileExists(pathToUsernameFolder)) { //file name exists
             System.out.println("instruction words option 2");
             instructionsWordsLabel = new JLabel("<html><center>Welcome back!<br> Already created account. Click to edit.");
         }
@@ -252,7 +255,7 @@ public class Gather {
         choicesPanel= new JPanel(new GridBagLayout());
         choicesPanel.setBackground(choicesPanelColor);
 
-        set.setEmptiedState(textField, false);
+        setState.setEmptiedState(textField, false);
 
         makeUsernameBox();
 
@@ -340,11 +343,11 @@ public class Gather {
 
     private void nextButtonAction() {
         boolean textFieldEmpty = textField.getText().trim().isEmpty();
-        boolean textFieldHasntChanged = textField.getText().equals("Enter user name") &&  !set.getEmptiedState(textField);
+        boolean textFieldHasntChanged = textField.getText().equals("Enter user name") &&  !setState.getEmptiedState(textField);
         boolean textFieldFilled = textField.getText().trim().isEmpty() == false;
         //check if the username is not empty
-        System.out.println(textFieldEmpty || textFieldHasntChanged && set.getLoadedState(textField) == false);
-        if (textFieldEmpty || textFieldHasntChanged && set.getLoadedState(textField) == false) {
+        System.out.println(textFieldEmpty || textFieldHasntChanged && setState.getLoadedState(textField) == false);
+        if (textFieldEmpty || textFieldHasntChanged && setState.getLoadedState(textField) == false) {
             errorMessageSetUp("<html><center>Please choose an option",200,90);
         }
         else if (textFieldFilled) { //good case

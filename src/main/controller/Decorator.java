@@ -28,6 +28,7 @@ import java.io.IOException;
 import main.model.Set;
 import main.model.SetUserInformation;
 import main.model.SetListeners;
+import main.model.SetState;
 import main.view.student.StudentStatCollect;
 
 //files
@@ -46,6 +47,7 @@ import java.awt.event.FocusEvent;
 public class Decorator {
     JFrame window;
     Set set;
+    SetState setState;
     SetUserInformation setUserInformation;
 
     SetListeners setListeners;
@@ -57,6 +59,7 @@ public class Decorator {
     
     public Decorator() {
         set = Set.getInstance();
+        setState = SetState.getInstance();
         setListeners = SetListeners.getInstance();
         window = set.getWindow();
         colorFocusListener = new TextFieldColorFocusListener();
@@ -280,13 +283,13 @@ public class Decorator {
         okButton.setVisible(true);
         dialog.add(okButton);
         dialog.setSize(width, height); //200,90
-        set.setCanContinue(false);
+        setState.setCanContinue(false);
         okButton.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent e) {
                 
                 dialog.setVisible(false);
                 dialog.dispose(); 
-                set.setCanContinue(false);
+                setState.setCanContinue(false);
                 //button.setEnabled(true);
             }
         });
@@ -294,7 +297,7 @@ public class Decorator {
             @Override
             public void windowClosing(WindowEvent e) {
                 dialog.dispose();
-                set.setCanContinue(false);
+                setState.setCanContinue(false);
             }
         });
         return dialog;
@@ -324,7 +327,7 @@ public class Decorator {
     }
 
     public JTextField decorateTextBox(String placeholderText) {
-       if (set.getCurrentClass() == "StudentStatCollect.java") {
+       if (setState.getCurrentClass() == "StudentStatCollect.java") {
         textField.setSize(new Dimension(144, 50));
        }
        else {

@@ -12,16 +12,19 @@ import java.awt.event.FocusEvent;
 import java.awt.FontMetrics;
 
 import main.model.Set;
+import main.model.SetState;
 
 public class TextFieldColorFocusListener {
     private JFrame window;
     private Set set;
+    private SetState setState;
     private JTextField textField = new JTextField();
     private Boolean focusGranted = true;
     private String text = textField.getText().trim();
     
     public TextFieldColorFocusListener() {
         this.set = Set.getInstance();
+        this.setState = SetState.getInstance();
         this.window = set.getWindow();
     }
 
@@ -32,16 +35,16 @@ public class TextFieldColorFocusListener {
                 focusTextField.setCaretPosition(focusTextField.getText().length());
                 if (focusGranted) {
                     focusTextField.setForeground(Color.gray);
-                    if (focusTextField.getText().equals(placeholder) && set.getEmptiedState(focusTextField) == false && set.getLoadedState(textField) == false) {
+                    if (focusTextField.getText().equals(placeholder) && setState.getEmptiedState(focusTextField) == false && setState.getLoadedState(textField) == false) {
                         focusTextField.setText("");
-                        set.setEmptiedState(textField, true);
-                    }else if (!focusTextField.getText().equals(placeholder) && !focusTextField.getText().isEmpty() && set.getEmptiedState(textField) == true) {
-                        set.setEmptiedState(focusTextField, true);
-                    }else if (focusTextField.getText().equals(placeholder) && set.getEmptiedState(textField) == true && set.getLoadedState(textField) == false) {
+                        setState.setEmptiedState(textField, true);
+                    }else if (!focusTextField.getText().equals(placeholder) && !focusTextField.getText().isEmpty() && setState.getEmptiedState(textField) == true) {
+                        setState.setEmptiedState(focusTextField, true);
+                    }else if (focusTextField.getText().equals(placeholder) && setState.getEmptiedState(textField) == true && setState.getLoadedState(textField) == false) {
                         //System.out.println("focuslistener#1.3");
                         focusTextField.setText(""); // Clear the placeholder text when the field gains focus
-                        set.setEmptiedState(focusTextField, true);
-                        set.setSaveable(true);
+                        setState.setEmptiedState(focusTextField, true);
+                        setState.setSaveable(true);
                     }
                     
                     else {
@@ -64,10 +67,10 @@ public class TextFieldColorFocusListener {
                 
                 if (focusTextField.getText().isEmpty()) {
                     focusTextField.setText(placeholder);
-                    set.setEmptiedState(focusTextField, false);
+                    setState.setEmptiedState(focusTextField, false);
                 }
                 
-                else if (!focusTextField.getText().isEmpty() && set.getEmptiedState(textField) == true){
+                else if (!focusTextField.getText().isEmpty() && setState.getEmptiedState(textField) == true){
                 }
 
             }
@@ -101,7 +104,7 @@ public class TextFieldColorFocusListener {
                 if (pointNotInTextbox && textField.getText().isEmpty()) {
                     textField.setText(placeholder);
                     textField.setForeground(Color.GRAY);
-                    set.setEmptiedState(textField, false);
+                    setState.setEmptiedState(textField, false);
                     window.requestFocusInWindow();
 
                     //:
@@ -110,7 +113,7 @@ public class TextFieldColorFocusListener {
                     window.requestFocusInWindow();
                     //:
                 }
-                else if (pointNotInTextbox &&  set.getEmptiedState(textField) == true && !textField.getText().isEmpty()) {
+                else if (pointNotInTextbox &&  setState.getEmptiedState(textField) == true && !textField.getText().isEmpty()) {
                     window.requestFocusInWindow();
 
                     //:

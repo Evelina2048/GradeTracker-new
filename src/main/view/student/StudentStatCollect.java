@@ -16,6 +16,7 @@ import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
 import main.model.Set;
+import main.model.SetState;
 import main.model.SetUserInformation;
 
 import main.controller.Creator;
@@ -34,15 +35,17 @@ import main.controller.CreateButton;
 public class StudentStatCollect extends JFrame {
     private JFrame window;
     private Creator create;
-    private GoIntoPanel goIntoPanel;
+    //private GoIntoPanel goIntoPanel;
     private JPanel backNextButtonsPanel;
     private JButton newTypeButton;
     private Set set;
+    private SetState setState;
     
     private SetUserInformation setUserInformation;
 
     private CreateButton createButton = new CreateButton();
     private FileWriting fileWrite = new FileWriting();
+    private GoIntoPanel goIntoPanel = new GoIntoPanel();
     private JPanel container = new JPanel(new FlowLayout(FlowLayout.LEFT));
     private JPanel newDelContainerFlow;
     private JPanel classLabelPanel = new JPanel(new FlowLayout(FlowLayout.LEFT));
@@ -61,9 +64,10 @@ public class StudentStatCollect extends JFrame {
 
     public void studentStatCollectLaunch() {
         this.set = Set.getInstance();
+        this.setState = SetState.getInstance();
         this.setUserInformation = SetUserInformation.getInstance();
 
-        set.setCurrentClass("StudentStatCollect.java");
+        setState.setCurrentClass("StudentStatCollect.java");
         window = set.getWindow();
         container.setName("contianer");
         textBoxPanel.setName("gridlayout textboxpanel");
@@ -116,14 +120,14 @@ public class StudentStatCollect extends JFrame {
     private void backAction(JButton backButton) {
         backButton.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent e) {
-                if(set.getCanContinue()) {
-                    if (set.getClassListIndex() == 0) { //case for back to classes
+                if(setState.getCanContinue()) {
+                    if (setState.getClassListIndex() == 0) { //case for back to classes
                         hideWindow();
                         StudentClasses studentClasses = new StudentClasses();
                         studentClasses.studentClassesLaunch();
                         saveButtonAction();
                     }
-                    else if (set.getClassListIndex() > 0) {
+                    else if (setState.getClassListIndex() > 0) {
                         goToPreviousClasses();              
                     }
                 }
@@ -133,9 +137,9 @@ public class StudentStatCollect extends JFrame {
 
     private void goToPreviousClasses() {
         saveButtonAction();
-        if (set.getCanContinue()) {
+        if (setState.getCanContinue()) {
             System.out.println("there are previous classes");
-            set.decrementClassListIndex();
+            setState.decrementClassListIndex();
             classLabelPanel.removeAll();
             classLabelPanel.revalidate();
             classLabelPanel.repaint();
@@ -177,14 +181,14 @@ public class StudentStatCollect extends JFrame {
         Pattern pattern = Pattern.compile("^(?:[0-9]*(?:.[0-9]+))*\s*$|^[0-9]*\s*$", Pattern.CASE_INSENSITIVE);
         correctGradeFormatChecker(pattern);
 
-        set.setTextFieldPanel(textBoxPanel);
+        setState.setTextFieldPanel(textBoxPanel);
         
         //if (textBoxPanel.getComponentCount() == 5 || 8 || 11 || 14 || 17 || 20 || 23 || 26 || 29 || 32) {
         //if ((textBoxPanel.getComponentCount() - 5) % 3 == 0) { //only want to write if 
-        System.out.println("testtesttest: "+ set.getCurrentClass());
-        set.setFilePath("/Users/evy/Documents/GradeTracker-new/src/main/view/UserInfo/StudentInfo/" + setUserInformation.getUsername() +"/ClassInformation/"+finalClassList.get(set.getClassListIndex())+ ".txt");
+        System.out.println("testtesttest: "+ setState.getCurrentClass());
+        set.setFilePath("/Users/evy/Documents/GradeTracker-new/src/main/view/UserInfo/StudentInfo/" + setUserInformation.getUsername() +"/ClassInformation/"+finalClassList.get(setState.getClassListIndex())+ ".txt");
         
-        create.setTextFieldContainer(set.getTextFieldPanel());
+        create.setTextFieldContainer(setState.getTextFieldPanel());
         fileWrite.writeTextToFile();
        // }
     }
@@ -199,9 +203,9 @@ public class StudentStatCollect extends JFrame {
 
     private void doNextButtonProcedure() {
         saveButtonAction();
-        if(set.getCanContinue()) {
-            set.incrementClassListIndex();
-            if (set.getClassListIndex()+1 <= set.getFinalClassList().size()) {
+        if(setState.getCanContinue()) {
+            setState.incrementClassListIndex();
+            if (setState.getClassListIndex()+1 <= set.getFinalClassList().size()) {
                 visitNextStudentClass();
             }
             else {
@@ -312,8 +316,8 @@ public class StudentStatCollect extends JFrame {
     }
 
     private void readClass(ArrayList<String> typeList) { 
-        System.out.println("readclass test:"+ set.getFinalClassList()+"index: "+set.getClassListIndex());
-        boxManageCreate(set.getFinalClassList().get(set.getClassListIndex())+"AHC", "JLabel", false); //necessary
+        System.out.println("readclass test:"+ set.getFinalClassList()+"index: "+setState.getClassListIndex());
+        boxManageCreate(set.getFinalClassList().get(setState.getClassListIndex())+"AHC", "JLabel", false); //necessary
         boxManageCreate("Credits (optional)", "JTextField", false);
         newSet();
         container.add(classLabelPanel);
