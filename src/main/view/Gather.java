@@ -281,17 +281,15 @@ public class Gather {
         backNextButtonsPanel = createButton.makeBackNextButtonsPanel(backButtonPanel,saveButtonPanel, nextButtonPanel);
         window.add(backNextButtonsPanel, BorderLayout.SOUTH);
         currentClass = "Gather";
-        actionPriorities.setCurrentClass("Gather");
+        actionPriorities.setCurrentClass(currentClass);
     }
 
     private void makeBackButton() {
         JButton backButton = createButton.backButtonCreate();
         backButtonPanel.add(backButton);
-        System.out.println(1111);
         backButton.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent e) {
-                System.out.println(2222);
-                actionPriorities.setCurrentClass("Gather");
+                actionPriorities.setCurrentClass(currentClass);
                 actionPriorities.addClassActionListener(b -> {
                     setUserInformation.setExistingOrNew(existingOrNew);
                     backButtonAction();

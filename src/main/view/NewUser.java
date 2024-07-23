@@ -74,7 +74,7 @@ public class NewUser extends JFrame {
         this.actionPriorities = CompositeActionListenerWithPriorities.getInstance();
         window = set.getWindow();
 
-        actionPriorities.setCurrentClass("NewUser"); //needs to be set here as well because if going between classes really quick on multiple threads, want to make sure actionPriorities has the right class. And using integers that represent view order for comparison logic in class
+        actionPriorities.setCurrentClass(currentClass); //needs to be set here as well because if going between classes really quick on multiple threads, want to make sure actionPriorities has the right class. And using integers that represent view order for comparison logic in class
         System.out.println("getpriorities "+actionPriorities.getCurrentClass());
 
 
@@ -92,7 +92,6 @@ public class NewUser extends JFrame {
         window = set.getWindow();
         setState.setCurrentClass(currentClass);
         window.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
-        //window.setLayout(null);
         window.setSize(windowWidth, windowHeight);
         
         window.setTitle("New User");
@@ -274,7 +273,7 @@ public class NewUser extends JFrame {
             existingOrNew = newUserButton.getText();
             setUserInformation.setExistingOrNew(existingOrNew);
             checkIfExistingChangedWithUsername();
-        }, 2, "click", newUserButton, "NewUser");
+        }, 2, "click", newUserButton, currentClass);
         });
     }
 
@@ -295,13 +294,13 @@ public class NewUser extends JFrame {
                 System.out.println("enteraction");
                 doNextButtonProcedure();
             }
-        }, 1, keyCause, newUserButton, "NewUser");  // Add this ActionListener with priority 1
+        }, 1, keyCause, newUserButton, currentClass);  // Add this ActionListener with priority 1
     }
 
     public class EnterAction extends AbstractAction  {
         @Override
         public void actionPerformed(ActionEvent e) {
-            actionPriorities.setCurrentClass("NewUser");
+            actionPriorities.setCurrentClass(currentClass);
             System.out.println("in new user right before enter. listeners: "+ actionPriorities.DEBUGLISTENERSIZE()+ actionPriorities.getCurrentClass());
             nextButtonActionListenerWithPriorities("EnterAction");
             System.out.println("in new user enter. listeners: "+ actionPriorities.DEBUGLISTENERSIZE()+". current class in ap "+actionPriorities.getCurrentClass()+choicesPanel.getBackground());
