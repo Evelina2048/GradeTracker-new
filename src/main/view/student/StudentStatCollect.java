@@ -35,7 +35,7 @@ import main.controller.CreateButton;
 public class StudentStatCollect extends JFrame {
     private JFrame window;
     private Creator create;
-    //private GoIntoPanel goIntoPanel;
+    private GoIntoPanel goIntoPanel;
     private JPanel backNextButtonsPanel;
     private JButton newTypeButton;
     private Set set;
@@ -45,7 +45,6 @@ public class StudentStatCollect extends JFrame {
 
     private CreateButton createButton = new CreateButton();
     private FileWriting fileWrite = new FileWriting();
-    private GoIntoPanel goIntoPanel = new GoIntoPanel();
     private JPanel container = new JPanel(new FlowLayout(FlowLayout.LEFT));
     private JPanel newDelContainerFlow;
     private JPanel classLabelPanel = new JPanel(new FlowLayout(FlowLayout.LEFT));
@@ -82,10 +81,11 @@ public class StudentStatCollect extends JFrame {
         finalClassList = set.getFinalClassList();
         System.out.println("final class list issssss: "+ finalClassList);
         create = new Creator();
-
         create.hideContainer();
 
+        goIntoPanel = new GoIntoPanel();
         fileHandler = new FileHandling();
+        
         createNewTypeButton();
         buttonSetUpAction();
         window.setTitle("StudentStatCollect");

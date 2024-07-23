@@ -305,7 +305,9 @@ public class Gather {
             hideWindow(); 
             NewUser newUser = new NewUser();
             newUser.newUserSetup();
+            System.out.println("back button new user "+actionPriorities.getCurrentClass());
             if (setUserInformation.getExistingOrNew() != null) {
+                System.out.println("about to select buttons in new user. actionlistener "+actionPriorities.getCurrentClass());
                 newUser.setButtonSelected();
             }
     }   
@@ -401,7 +403,7 @@ public class Gather {
     }
 
     private void hideWindow() {
-        System.out.println("current class "+ currentClass);
+        System.out.println("current class in hidewindow"+ currentClass);
         instructionsPanel.setVisible(false);
         choicesPanel.setVisible(false);
         backNextButtonsPanel.setVisible(false);

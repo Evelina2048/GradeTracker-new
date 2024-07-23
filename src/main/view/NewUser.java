@@ -74,6 +74,10 @@ public class NewUser extends JFrame {
         this.actionPriorities = CompositeActionListenerWithPriorities.getInstance();
         window = set.getWindow();
 
+        actionPriorities.setCurrentClass("NewUser"); //needs to be set here as well because if going between classes really quick on multiple threads, want to make sure actionPriorities has the right class. And using integers that represent view order for comparison logic in class
+        System.out.println("getpriorities "+actionPriorities.getCurrentClass());
+
+
         newUserSetup();
 
         EnterAction enterAction = new EnterAction();
@@ -87,8 +91,6 @@ public class NewUser extends JFrame {
     public void newUserSetup() {
         window = set.getWindow();
         setState.setCurrentClass(currentClass);
-        actionPriorities.setCurrentClass(currentClass); //needs to be set here as well because if going between classes really quick on multiple threads, want to make sure actionPriorities has the right class. And using integers that represent view order for comparison logic in class
-
         window.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
         //window.setLayout(null);
         window.setSize(windowWidth, windowHeight);
@@ -299,9 +301,10 @@ public class NewUser extends JFrame {
     public class EnterAction extends AbstractAction  {
         @Override
         public void actionPerformed(ActionEvent e) {
-            System.out.println("in new user right before enter. listeners: "+ actionPriorities.DEBUGLISTENERSIZE());
+            actionPriorities.setCurrentClass("NewUser");
+            System.out.println("in new user right before enter. listeners: "+ actionPriorities.DEBUGLISTENERSIZE()+ actionPriorities.getCurrentClass());
             nextButtonActionListenerWithPriorities("EnterAction");
-            System.out.println("in new user enter. listeners: "+ actionPriorities.DEBUGLISTENERSIZE());
+            System.out.println("in new user enter. listeners: "+ actionPriorities.DEBUGLISTENERSIZE()+". current class in ap "+actionPriorities.getCurrentClass()+choicesPanel.getBackground());
 
     }
     }
