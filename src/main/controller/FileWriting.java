@@ -55,7 +55,6 @@ public void writeFolderToFile() {
 }
 
 public void decideIfWrite(Component component, BufferedWriter writer) {
-    System.out.println("6666"+"decide if write");
     Decorator decorate = new Decorator();
     textField = (JTextField) component;
     Boolean studentStatNonWritablePlaceholder = setState.getEmptiedState(textField) == false && setState.getCurrentClass() == "StudentStatCollect.java" && !textField.getText().equals("Credits (Optional)");
@@ -64,13 +63,11 @@ public void decideIfWrite(Component component, BufferedWriter writer) {
         tryToWrite(writer);
     }
     else if (studentStatNonWritablePlaceholder) {
-        System.out.println("7777"+"decide if write");
         removeUnwritablePlaceholders();
         
         if (setState.getCanContinue()) {
             placeholderCount++;
             allCount++;
-            System.out.println("8888 placeholder count"+placeholderCount);
             decorate.areYouSureMessage(null, "studentStatsEmpty", "Remove placeholders to continue"); //hello friends
             //return;
         }
@@ -102,13 +99,11 @@ public void writeTextToFile(){
     setState.setCanContinue(true);
     debugPrintPanel();
     setUserInformation.getUsername();
-    System.out.println(1111);
     tryToWriteWithoutAppend();
 
 }
 
 private void tryToWriteWithoutAppend() {
-    System.out.println(2222);
     filePath = set.getFilePath();
     try (BufferedWriter writer = new BufferedWriter(new FileWriter(filePath))) {
         if (!classList.isEmpty()) {
@@ -118,12 +113,10 @@ private void tryToWriteWithoutAppend() {
         for (Component component : setState.getTextFieldPanel().getComponents()) {
             if (component instanceof JTextField ) {
                 tryToWriteTextFieldWithoutAppend(component, writer);
-                System.out.println(3333.1);
                 setState.setCanContinue(true);
             }
             else if (component instanceof JPanel) {
                 writeTextToFileWithAppend((JPanel) component);
-                System.out.println(3333.2);
             }
             else {
                 System.out.println("component is something else. Something went wrong"+ component.getClass().getName());
@@ -188,12 +181,10 @@ private void seeHowManyPlaceholdersToSkip() {
 }
 
 public void writeTextToFileWithAppend(JPanel panel) { //i think student classes
-    System.out.println("4444"+"write text to file with append");
     filePath = set.getFilePath();
     try (BufferedWriter writer = new BufferedWriter(new FileWriter(filePath, true))) {
         for (Component component : panel.getComponents()) {
             if (component instanceof JTextField) {
-                System.out.println("5555"+"write text to file with append");
                 decideIfWrite(component, writer);
                 
             }

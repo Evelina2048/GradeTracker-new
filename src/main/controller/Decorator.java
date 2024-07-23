@@ -286,7 +286,7 @@ public class Decorator {
         setState.setCanContinue(false);
         okButton.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent e) {
-                
+                System.out.println("6666");
                 dialog.setVisible(false);
                 dialog.dispose(); 
                 setState.setCanContinue(false);
@@ -311,6 +311,8 @@ public class Decorator {
     }
 
     public void errorMessageSetUp(JRadioButton button) {
+        System.out.println("5555");
+
         dialog = genericPopUpMessage("<html><center>Please choose an option", button, 200, 90);
         dialog.setResizable(false);
         

@@ -64,8 +64,7 @@ public class CompositeActionListenerWithPriorities implements ActionListener {
   }
 
   public void addClassActionListener(ActionListener a, int priority, String keyCause, JRadioButton button, String listenerSource){
-    System.out.println("currentclass: "+currentClass+" listenersource "+listenerSource);
-    System.out.println("3333 in composite action listener. listeners.size() "+listeners.size());
+    //System.out.println("currentclass: "+currentClass+" listenersource "+listenerSource);
     //deleteActionListener(a);
     if(!listeners.containsKey(priority)){
       listeners.put(priority,new ArrayList<ActionListener>());
@@ -83,10 +82,10 @@ public class CompositeActionListenerWithPriorities implements ActionListener {
         //actionPerformed(new ActionEvent(this, ActionEvent.ACTION_PERFORMED, "PerformAllActions"));
       //}
     //}
-    System.out.println("adding action listener currentclass: "+currentClass+" listenersource "+listenerSource);
+    //System.out.println("adding action listener currentclass: "+currentClass+" listenersource "+listenerSource);
     if (currentClass == listenerSource && !keyCause.equals("click")) {
       //ActionEvent event = new ActionEvent(this, ActionEvent.ACTION_PERFORMED, "PerformThisAction");
-      System.out.println("its being run and stuff 2. current class "+ currentClass);
+     // System.out.println("its being run and stuff 2. current class "+ currentClass);
       CompositeActionListenerWithPriorities.this.actionPerformed(new ActionEvent(CompositeActionListenerWithPriorities.this, ActionEvent.ACTION_PERFORMED, "PerformThisActions"));
       CompositeActionListenerWithPriorities.this.actionPerformed(new ActionEvent(CompositeActionListenerWithPriorities.this, ActionEvent.ACTION_PERFORMED, "PerformAllActions"));
     }
@@ -99,12 +98,14 @@ public class CompositeActionListenerWithPriorities implements ActionListener {
 
             if (listeners.size() == 2) {
                 // Correctly reference the outer class for the action event
-                System.out.println("its being run and stuff 3");
+                //System.out.println("its being run and stuff 3");
                 CompositeActionListenerWithPriorities.this.actionPerformed(
                 new ActionEvent(CompositeActionListenerWithPriorities.this, ActionEvent.ACTION_PERFORMED, "PerformAllActions"));
             } 
             else if (listeners.size() == 1) {
                 //decorate.errorMessageSetUp("<html><center>Username already exists.<br> Please choose another.",200,100);
+
+
                 decorate.errorMessageSetUp(button);
                 
                 //button.setEnabled(false);
@@ -115,7 +116,7 @@ public class CompositeActionListenerWithPriorities implements ActionListener {
                 //button.setForeground(Color.white);
                 
                 //button.setColor(Color.white);
-                decorate.errorMessageSetUp(button);
+                //decorate.errorMessageSetUp(button);
                 return;
 
             } 
