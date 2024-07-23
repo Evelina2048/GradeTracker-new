@@ -226,7 +226,6 @@ public class NewUser extends JFrame {
         }
         // else if ((!newUserButton.isSelected() && !existingButton.isSelected())) {
         //     //getErrorMessage();
-        //     System.out.println("4444");
         //     decorate.errorMessageSetUp(newUserButton);
         // }  
 
@@ -289,7 +288,6 @@ public class NewUser extends JFrame {
     }
 
     private void nextButtonActionListenerWithPriorities(String keyCause) {
-        System.out.println("1111.5");
         actionPriorities.addClassActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {// remember wont run  if just enter without a click
@@ -302,7 +300,6 @@ public class NewUser extends JFrame {
     public class EnterAction extends AbstractAction  {
         @Override
         public void actionPerformed(ActionEvent e) {
-            System.out.println("1111");
             actionPriorities.setCurrentClass(currentClass);
             //System.out.println("in new user right before enter. listeners: "+ actionPriorities.DEBUGLISTENERSIZE()+ actionPriorities.getCurrentClass());
             nextButtonActionListenerWithPriorities("EnterAction");

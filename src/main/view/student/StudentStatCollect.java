@@ -6,10 +6,11 @@ import javax.swing.JFrame;
 import java.awt.BorderLayout;
 import java.awt.GridLayout;
 import java.awt.Dimension;
-import javax.swing.JPanel;
 import java.awt.event.ActionListener;
 import java.awt.event.ActionEvent;
 import java.awt.FlowLayout;
+import java.awt.Color;
+
 import java.util.ArrayList;
 
 import java.util.regex.Matcher;
@@ -29,6 +30,8 @@ import javax.swing.AbstractAction;
 import javax.swing.JComponent;
 import javax.swing.JDialog;
 import javax.swing.KeyStroke;
+import javax.swing.JPanel;
+
 import java.awt.event.KeyEvent;
 import main.controller.CreateButton;
 
@@ -38,8 +41,10 @@ public class StudentStatCollect extends JFrame {
     private GoIntoPanel goIntoPanel;
     private JPanel backNextButtonsPanel;
     private JButton newTypeButton;
+    private JButton swapClassesButton;
     private Set set;
     private SetState setState;
+    private Color lightgrayColor = Color.decode("#AFA2A2");
     
     private SetUserInformation setUserInformation;
 
@@ -69,9 +74,10 @@ public class StudentStatCollect extends JFrame {
         setState.setCurrentClass("StudentStatCollect.java");
         window = set.getWindow();
         container.setName("contianer");
+        //container.setBackground(Color.pink);
         textBoxPanel.setName("gridlayout textboxpanel");
+        textBoxPanel.setBackground(lightgrayColor);
         classLabelPanel.setName("classLabelPanel student stat");
-
         EnterAction enterAction = new EnterAction();
         window.getRootPane().getInputMap(JComponent.WHEN_IN_FOCUSED_WINDOW).put(KeyStroke.getKeyStroke(KeyEvent.VK_ENTER, 0), "enterAction");
         window.getRootPane().getActionMap().put("enterAction", enterAction);
@@ -159,6 +165,8 @@ public class StudentStatCollect extends JFrame {
             textBoxPanel.add(loadedBoxesPanel.getComponent(0));
         }
         classLabelPanel.add(textBoxPanel);
+        //classLabelPanel.setBackground(Color.PINK);
+        classLabelPanel.setBackground(lightgrayColor);
         window.add(classLabelPanel);
         
         create.windowFix();
@@ -201,11 +209,14 @@ public class StudentStatCollect extends JFrame {
         });
     }
 
-    private void doNextButtonProcedure() {
+    public void doNextButtonProcedure() {
+        System.out.println("6666");
         saveButtonAction();
         if(setState.getCanContinue()) {
+            System.out.println();
             setState.incrementClassListIndex();
             if (setState.getClassListIndex()+1 <= set.getFinalClassList().size()) {
+                System.out.println();
                 visitNextStudentClass();
             }
             else {
@@ -251,7 +262,7 @@ public class StudentStatCollect extends JFrame {
        newDelContainerFlow = new JPanel(new FlowLayout(FlowLayout.LEFT,0,5));
        newDelContainerFlow.setName("newdelcontainerflow");
 
-       JPanel newDelContainer = new JPanel(new GridLayout(2,1,0,5));
+       JPanel newDelContainer = new JPanel(new GridLayout(3,1,0,5));
        newDelContainer.setName("newDelContainer");
        //gridlayout allows any time of resizing
        //flowlayout allows resizing of width
@@ -262,10 +273,17 @@ public class StudentStatCollect extends JFrame {
         }
         });
        JPanel delTypeButtonPanel = deleteButtonPanel();
+       JPanel swapTypesButtonPanel = swapTypesButtonPanel();
        newDelContainer.add(newTypeButtonPanel);
+       newDelContainer.add(swapTypesButtonPanel);
        newDelContainer.add(delTypeButtonPanel);
        newDelContainerFlow.add(newDelContainer);
        window.add(newDelContainerFlow, BorderLayout.EAST);
+
+    //    newDelContainer.add(newTypeButtonPanel);
+    //    newDelContainer.add(delTypeButtonPanel);
+    //    newDelContainerFlow.add(newDelContainer);
+    //    window.add(newDelContainerFlow, BorderLayout.EAST);
        create.windowFix();
    }
 
@@ -289,6 +307,28 @@ public class StudentStatCollect extends JFrame {
     delTypeButtonPanel.add(deleteTypeButton,BorderLayout.NORTH);
     return delTypeButtonPanel;
    }
+
+   private JPanel swapTypesButtonPanel() {
+    JButton swapClassesButton = new JButton("Swap Types");
+        swapClassesButton.setPreferredSize(new Dimension(90, 50));
+        swapClassesButton.addActionListener(new ActionListener() {
+        public void actionPerformed(ActionEvent e) {
+            if (textBoxPanel.getComponentCount() >= 8) {
+                create.deleteTextBox(textBoxPanel);
+                create.deleteTextBox(textBoxPanel);
+                create.deleteTextBox(textBoxPanel);
+                numOfBoxes = numOfBoxes - 3;
+                typeNumber--;
+                
+                createButton.saveButtonEnable();
+            }
+    }
+    });  
+    JPanel swapClassesButtonPanel = new JPanel(new BorderLayout());
+    swapClassesButtonPanel.add(swapClassesButton,BorderLayout.NORTH);
+    return swapClassesButtonPanel;
+    
+}
 
    private void correctGradeFormatChecker(Pattern pattern) {
         int index = 4;
@@ -322,6 +362,7 @@ public class StudentStatCollect extends JFrame {
         newSet();
         container.add(classLabelPanel);
         container.setName("container in readclass");
+        //classLabelPanel.setBackground(Color.pink);
         window.add(classLabelPanel, BorderLayout.CENTER);
         create.windowFix();
     }
@@ -342,6 +383,7 @@ public class StudentStatCollect extends JFrame {
             textBoxPanel.add(create.typeBox(placeholder, type, boxLoaded));//false));
             System.out.println("test.2 "+ placeholder +" "+type+ "textboxpanel components"+textBoxPanel.getComponentCount());
             classLabelPanel.add(textBoxPanel);
+            //classLabelPanel.setBackground(Color.pink);
             create.windowFix();
             //System.out.println("visibility"+set.getDEBUGBOX().isVisible());
             numOfBoxes++;
@@ -349,10 +391,12 @@ public class StudentStatCollect extends JFrame {
         }
         else if (numOfBoxes == maxBoxes) {
             Decorator decorate = new Decorator();
-            JDialog dialog = decorate.genericPopUpMessage("<html><center>Maximum amount reached.", null, 200 , 100);
-            dialog.setLocationRelativeTo(window);
-            dialog.setLocation(dialog.getX(), dialog.getY() + 15); 
-            dialog.setVisible(true);        
+            // JDialog dialog = decorate.genericPopUpMessage("<html><center>Maximum amount reached.", null, 200 , 100);
+            // dialog.setLocationRelativeTo(window);
+            // dialog.setLocation(dialog.getX(), dialog.getY() + 15); 
+            // dialog.setVisible(true);        
+
+            decorate.maximumAmountReachedPopup();
         }
     }
 

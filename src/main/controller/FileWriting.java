@@ -65,12 +65,12 @@ public void decideIfWrite(Component component, BufferedWriter writer) {
     else if (studentStatNonWritablePlaceholder) {
         removeUnwritablePlaceholders();
         
-        if (setState.getCanContinue()) {
-            placeholderCount++;
-            allCount++;
-            decorate.areYouSureMessage(null, "studentStatsEmpty", "Remove placeholders to continue"); //hello friends
-            //return;
-        }
+        // if (setState.getCanContinue()) {
+        //     placeholderCount++;
+        //     allCount++;
+        //     decorate.areYouSureMessage(null, "studentStatsEmpty", "Remove placeholders to continue?", 230, 90); //hello friends
+        //     //return;
+        // }
     }
 }
 
@@ -112,7 +112,7 @@ private void tryToWriteWithoutAppend() {
 
         for (Component component : setState.getTextFieldPanel().getComponents()) {
             if (component instanceof JTextField ) {
-                tryToWriteTextFieldWithoutAppend(component, writer);
+                tryToWriteTextFieldWithoutAppend(component, writer); //i think for student stat
                 setState.setCanContinue(true);
             }
             else if (component instanceof JPanel) {
@@ -145,7 +145,7 @@ private void tryToWriteTextFieldWithoutAppend(Component component, BufferedWrite
                 attachedBoxes++;
             }
     }
-    else if (setState.getEmptiedState(textField) == false) {
+    else if (setState.getEmptiedState(textField) == false) {//TODO
         seeHowManyPlaceholdersToSkip();
         System.out.println("placeholder count: "+placeholderCount);
         
@@ -155,6 +155,7 @@ private void tryToWriteTextFieldWithoutAppend(Component component, BufferedWrite
 private void seeHowManyPlaceholdersToSkip() {
     Decorator decorate = new Decorator();
     if (setState.getCanContinue()) {
+        System.out.println("if youre seeing this, please take note because i have no idea when this placeholder launches");
         JDialog dialog = decorate.genericPopUpMessage("<html><center>Must fill in placeholder.<br>Will not save sections with placeholders", null, 200, 90);
         dialog.setLocationRelativeTo(window);
         dialog.setLocation(dialog.getX(), dialog.getY() + 15); 
@@ -213,6 +214,7 @@ private void removeUnwritablePlaceholders() {
     }
 
     else if (text.equals("Grades(format:# # #)") && attachedBoxes == maxAttachedBoxes) {
+
         deleteLines(filePath, text);
         deleteLines(filePath, text);
     }
@@ -220,7 +222,17 @@ private void removeUnwritablePlaceholders() {
     else {
         attachedBoxes++;
     }
-    placeholderCount++;
+    //placeholderCount++;
+
+    if (setState.getCanContinue()) {
+        Decorator decorate = new Decorator();
+        placeholderCount++;
+        allCount++;
+        if (placeholderCount == 1) {
+        decorate.areYouSureMessage(null, "studentStatsEmpty", "Remove placeholder(s) to continue?", 230, 90); //hello friends
+        }
+        //return;
+    }
 }
 
 public void deleteLines(String importedFilePath, String text) {

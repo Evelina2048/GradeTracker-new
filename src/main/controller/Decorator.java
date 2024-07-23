@@ -96,7 +96,8 @@ public class Decorator {
         return gbc;
     }
 
-    public String areYouSureMessage(JTextField importedTextField, String myReason, String text) {
+    public String areYouSureMessage(JTextField importedTextField, String myReason, String text, int width, int height) {
+        System.out.println("1111");
         reason = myReason;
         textField = importedTextField;
         dialog = new JDialog(window, true);
@@ -113,7 +114,7 @@ public class Decorator {
         JButton noButton = new JButton("Cancel");
         noButton.setVisible(true);
         dialog.add(noButton);
-        dialog.setSize(250,120);
+        dialog.setSize(width,height); //250, 120
         
         yesButtonActionListener(yesButton);
         noButtonActionListener(noButton);
@@ -127,6 +128,7 @@ public class Decorator {
     private void yesButtonActionListener(JButton yesButton) {
         yesButton.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent e) { 
+                System.out.println("2222");
                yesButtonAction();
                //dialog.dispose(); 
             }
@@ -135,17 +137,22 @@ public class Decorator {
     }
 
     private void yesButtonAction() {
+        System.out.println("3333");
          if (reason == "deleting") {   
             reasonIsDeletingActionYes();
          }  
 
          else if (reason == "studentStatsEmpty") {
+            System.out.println("4444");
             reasonIsStudentStatsEmptyYes();
          }
 
          else {
             reasonIsChangingUsernameYes();
          }
+        // dialog.setVisible(false);
+        // dialog.dispose(); 
+
     }
 
     private void reasonIsDeletingActionYes() { //for student classes
@@ -202,9 +209,15 @@ public class Decorator {
     }
 
     private void reasonIsStudentStatsEmptyYes() {
+        System.out.println("5555");
         //go to next class or print class
+
+        //TODO
         StudentStatCollect studentStat = new StudentStatCollect();
-        studentStat.visitNextStudentClass();
+        //studentStat.visitNextStudentClass();
+        studentStat.doNextButtonProcedure();
+        dialog.setVisible(false);
+        dialog.dispose();
     }
 
     public void deleteFocusListeners(int amount) {
@@ -286,7 +299,6 @@ public class Decorator {
         setState.setCanContinue(false);
         okButton.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent e) {
-                System.out.println("6666");
                 dialog.setVisible(false);
                 dialog.dispose(); 
                 setState.setCanContinue(false);
@@ -311,8 +323,6 @@ public class Decorator {
     }
 
     public void errorMessageSetUp(JRadioButton button) {
-        System.out.println("5555");
-
         dialog = genericPopUpMessage("<html><center>Please choose an option", button, 200, 90);
         dialog.setResizable(false);
         
@@ -353,8 +363,15 @@ public class Decorator {
     }
 
     public void areYouSureMessageListenerForEditingUsername() {
-        areYouSureMessage(textField, "editing username", "<html><center>Editing this username will create or <br>login to an account under this name. <br>Do you wish to continue?");
+        areYouSureMessage(textField, "editing username", "<html><center>Editing this username will create or <br>login to an account under this name. <br>Do you wish to continue?", 250, 120);
         window.requestFocusInWindow();
+    }
+
+    public void maximumAmountReachedPopup() {
+        JDialog dialog = genericPopUpMessage("<html><center>Maximum amount reached.", null, 200 , 100);
+            dialog.setLocationRelativeTo(window);
+            dialog.setLocation(dialog.getX(), dialog.getY() + 15); 
+            dialog.setVisible(true);        
     }
 
     // public void errorMessageSetUp(String labelWords, int width, int height, JRad) {

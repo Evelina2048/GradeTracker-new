@@ -57,6 +57,7 @@ public class StudentClasses extends JFrame {
     private GoIntoPanel goIntoPanel;
     private Decorator decorate;
     private CreateButton createButton;
+    private Color lightgrayColor = Color.decode("#AFA2A2");
 
     private JPanel backNextButtonsPanel;
     private JButton saveButton;
@@ -86,12 +87,15 @@ public class StudentClasses extends JFrame {
 
     public void studentClassesLaunch() {
         southContainer.setName("SouthContainer");
+        southContainer.setBackground(Color.pink);
+        southContainer.setForeground(Color.pink);
         this.set = Set.getInstance();
         this.setState = SetState.getInstance();
         this.setUserInformation = SetUserInformation.getInstance();
 
         setState.setCurrentClass("StudentClasses.java");
         window = set.getWindow();
+        //window.setBackground(Color.pink);
         window.setName("window");
         create = new Creator();
         decorate = new Decorator();
@@ -456,7 +460,7 @@ public class StudentClasses extends JFrame {
                 //if the file has loaded information attached
                 if (setState.getLoadedState(selectedTextBox) && (fileHandler.fileExists(filePath)) && fileHandler.fileIsNotEmpty(filePath)) {
                 
-                    yesOrNoDialog[0] = decorate.areYouSureMessage(selectedTextBox, "deleting", "<html><center>Deleting this class will optiondelete <br>its loaded information.<br>Do you wish to continue?");
+                    yesOrNoDialog[0] = decorate.areYouSureMessage(selectedTextBox, "deleting", "<html><center>Deleting this class will optiondelete <br>its loaded information.<br>Do you wish to continue?", 250, 120);
 
                     selectedTextBox.setForeground(Color.GRAY);
                     selectedTextBox.setBorder(borderRegular);

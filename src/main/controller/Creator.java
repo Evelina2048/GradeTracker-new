@@ -32,6 +32,7 @@ public class Creator {
     private boolean loaded;
     private CreateButton createButton = new CreateButton();
     private TextFieldColorFocusListener colorFocusListener;
+    private Color lightgrayColor = Color.decode("#AFA2A2");
     
     public Creator() {
         this.set = Set.getInstance();
@@ -39,6 +40,7 @@ public class Creator {
         
         this.window = set.getWindow();
         colorFocusListener = new TextFieldColorFocusListener();
+        textFieldPanel.setBackground(lightgrayColor);
     }
 
     public JTextField createTextBox(String placeholder, String my_type, Boolean boxLoaded) {
@@ -58,11 +60,9 @@ public class Creator {
             windowFix();
         }
         else if (textboxCounter >= 30) {
-            System.out.println("umm hello?");
-            JDialog dialog = decorate.genericPopUpMessage("<html><center>Maximum amount reached.", null, 200 , 100);
-            dialog.setLocationRelativeTo(window);
-            dialog.setLocation(dialog.getX(), dialog.getY() + 15); 
-            dialog.setVisible(true);         
+            //Decorator decorate = new Decorator();
+            System.out.println("umm hello?"); //for student classes...
+            decorate.maximumAmountReachedPopup(); 
         }
         else if (my_type.equals("JLabel")) {
             JLabel toAddType = new JLabel(placeholder);
@@ -73,6 +73,7 @@ public class Creator {
 
         checkIfLoadedAndAction();
         setState.setTextFieldPanel(textFieldPanel);
+        //textFieldPanel.setBackground(Color.pink);
         System.out.println("in create textbox. panel: "+setState.getTextFieldPanel().getComponentCount());
         return textField;
     }
@@ -141,11 +142,15 @@ public class Creator {
         else if(my_type.equals("JLabel")) {
             System.out.println("hi creating jlabel for "+placeholder+" which is loaded? "+boxLoaded);
             JLabel toAddType = new JLabel(placeholder);
+            //toAddType.setForeground(Color.darkGray);
             gradeTypePanel.add(toAddType);
         }
         gradeTypePanel.setPreferredSize(new Dimension( 155,50));
         northTypePanel.add(gradeTypePanel, BorderLayout.NORTH);
+        //gradeTypePanel.setBackground(Color.pink);
+        gradeTypePanel.setBackground(lightgrayColor);
         windowFix();
+
 
         return northTypePanel;
     }
