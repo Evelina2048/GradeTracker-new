@@ -20,7 +20,7 @@ public class CompositeActionListenerWithPriorities implements ActionListener {
     new TreeMap<Integer,ArrayList<ActionListener>>();
     private boolean isProcessing = false;
     private Set set = Set.getInstance();
-    private String currentClass = null;//"Current class not changed";
+    private String currentClass = "Current class not changed";
     private static CompositeActionListenerWithPriorities instance;
     //this.set = Set.getInstance();
     private CompositeActionListenerWithPriorities() {}
@@ -86,10 +86,9 @@ public class CompositeActionListenerWithPriorities implements ActionListener {
     System.out.println("adding action listener currentclass: "+currentClass+" listenersource "+listenerSource);
     if (currentClass == listenerSource && !keyCause.equals("click")) {
       //ActionEvent event = new ActionEvent(this, ActionEvent.ACTION_PERFORMED, "PerformThisAction");
-      System.out.println("its being run and stuff 2");
+      System.out.println("its being run and stuff 2. current class "+ currentClass);
       CompositeActionListenerWithPriorities.this.actionPerformed(new ActionEvent(CompositeActionListenerWithPriorities.this, ActionEvent.ACTION_PERFORMED, "PerformThisActions"));
       CompositeActionListenerWithPriorities.this.actionPerformed(new ActionEvent(CompositeActionListenerWithPriorities.this, ActionEvent.ACTION_PERFORMED, "PerformAllActions"));
-      currentClass = null;
     }
 
     else if (keyCause == "EnterAction" || keyCause == "nextButton") {
@@ -158,6 +157,10 @@ public class CompositeActionListenerWithPriorities implements ActionListener {
     if (currentClass == null) {
       currentClass = thisClass;
     }
+  }
+
+  public String getCurrentClass() {
+    return currentClass;
   }
 
   public Map<Integer, ArrayList<ActionListener>> DEBUGLISTENERMAP() {
