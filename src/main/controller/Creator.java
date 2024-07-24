@@ -1,6 +1,5 @@
 package main.controller;
 
-import javax.swing.JDialog;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JTextField;
@@ -12,7 +11,6 @@ import java.awt.event.MouseListener;
 import java.awt.Component;
 import java.awt.Dimension;
 import java.awt.FlowLayout;
-import java.awt.Container;
 
 import java.util.ArrayList;
 
@@ -40,7 +38,7 @@ public class Creator {
         
         this.window = set.getWindow();
         colorFocusListener = new TextFieldColorFocusListener();
-        textFieldPanel.setBackground(lightgrayColor);
+        //textFieldPanel.setBackground(lightgrayColor);
     }
 
     public JTextField createTextBox(String placeholder, String my_type, Boolean boxLoaded) {
@@ -77,6 +75,8 @@ public class Creator {
         System.out.println("in create textbox. panel: "+setState.getTextFieldPanel().getComponentCount());
         return textField;
     }
+
+    
 
     private void checkIfLoadedAndAction() {
         if (loaded) {
@@ -148,34 +148,34 @@ public class Creator {
         gradeTypePanel.setPreferredSize(new Dimension( 155,50));
         northTypePanel.add(gradeTypePanel, BorderLayout.NORTH);
         //gradeTypePanel.setBackground(Color.pink);
-        gradeTypePanel.setBackground(lightgrayColor);
+        //gradeTypePanel.setBackground(lightgrayColor);
         windowFix();
 
 
         return northTypePanel;
     }
 
-    public String goIntoPanel(JPanel panel, int index) {
-        Container container = panel;
-        if (index >= container.getComponentCount()) { //check component is not null
-            return "does not exist";
-        }
-        Component component = container.getComponent(index);
-        if (component instanceof JTextField) {
-                JTextField textField = (JTextField) component;
-                String text = textField.getText();
-                return text;
-            } 
-        else if (component instanceof JPanel) {
-                JPanel jpanel = (JPanel) component;
-                String text = goIntoPanel(jpanel, 0);
-                if (text != null) {
-                    return text;
-                }
-            }
-            System.out.println("none of these" +component.getClass().getName());
-            return "something went wrong goIntoPanel";
-        }
+    // public String goIntoPanel(JPanel panel, int index) {
+    //     Container container = panel;
+    //     if (index >= container.getComponentCount()) { //check component is not null
+    //         return "does not exist";
+    //     }
+    //     Component component = container.getComponent(index);
+    //     if (component instanceof JTextField) {
+    //             JTextField textField = (JTextField) component;
+    //             String text = textField.getText();
+    //             return text;
+    //         } 
+    //     else if (component instanceof JPanel) {
+    //             JPanel jpanel = (JPanel) component;
+    //             String text = goIntoPanel(jpanel, 0);
+    //             if (text != null) {
+    //                 return text;
+    //             }
+    //         }
+    //         System.out.println("none of these" +component.getClass().getName());
+    //         return "something went wrong goIntoPanel";
+    //     }
 
     // public JTextField goIntoPanelReturnTextbox(JPanel panel, int index) {
     //     Container container = panel;

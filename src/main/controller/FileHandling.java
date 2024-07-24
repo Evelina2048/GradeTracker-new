@@ -19,14 +19,17 @@ import java.nio.file.SimpleFileVisitor;
 
 import main.model.Set;
 import main.model.SetState;
+import main.model.SetUserInformation;
 
 public class FileHandling {
         private Set set;
         private SetState setState;
+        private SetUserInformation setUserInformation;
 
         public FileHandling() {
             set = Set.getInstance();
             setState = SetState.getInstance();
+            setUserInformation = SetUserInformation.getInstance();
         }
 
         public ArrayList<String> readFileToList(String filePath) {
@@ -131,7 +134,8 @@ public class FileHandling {
             //bigPanel.setVisible(false);
         }
 
-        public static void deleteClass(Path filePath) throws IOException {
+        public static void deleteClass(String filePathString) throws IOException {
+            Path filePath = Paths.get(filePathString);
             Files.walkFileTree(filePath, new SimpleFileVisitor<Path>() {
                 @Override
                 public FileVisitResult visitFile(Path file, BasicFileAttributes attrs) throws IOException {
@@ -145,6 +149,18 @@ public class FileHandling {
                     return FileVisitResult.CONTINUE;
                 }
             });
+        }
+
+        public void deleteFromDeleteQueue() {
+            ArrayList <String> deleteQueue = setUserInformation.getDeleteQueue();
+            for (String queueObjectFilePath: deleteQueue) {
+                try {
+                    deleteClass(queueObjectFilePath);
+                } catch (IOException e) {
+                    e.printStackTrace();
+                }
+
+            }
         }
 
         //public void 

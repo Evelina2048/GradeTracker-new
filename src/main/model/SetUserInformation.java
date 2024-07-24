@@ -1,5 +1,7 @@
 package main.model;
 
+import java.util.ArrayList;
+
 import javax.swing.JTextField;
 
 public class SetUserInformation {
@@ -8,6 +10,7 @@ public class SetUserInformation {
     private String studentOrTeacher;
     private Set set;
     private SetState setState;
+    private ArrayList<String> deleteQueue = new ArrayList<>();
 
     //Below is for singleton design pattern
     // Static variable to hold the single instance of the class
@@ -67,5 +70,14 @@ public class SetUserInformation {
 
     public String getStudentOrTeacher() {
         return studentOrTeacher;
+    }
+
+    public void addDeleteToQueue(String text) {
+        deleteQueue.add("/Users/evy/Documents/GradeTracker-new/target/classes/main/view/UserInfo/StudentInfo/"+getUsername()+"/ClassInformation/"+text+".txt");
+
+    }
+
+    public ArrayList<String> getDeleteQueue() {
+        return deleteQueue;
     }
 }

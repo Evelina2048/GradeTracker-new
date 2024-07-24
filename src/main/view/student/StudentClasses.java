@@ -228,6 +228,7 @@ public class StudentClasses extends JFrame {
         create.hideContainer();
 
         set.setFinalClassList(set.getCurrentPanelList());
+        System.out.println("thestuffclasslist "+classList+" "+set.getCurrentPanelList());
         StudentStatCollect studentStatCollect = new StudentStatCollect();
         if (fileHandler.fileExists("/Users/evy/Documents/GradeTracker-new/src/main/view/UserInfo/StudentInfo/" + setUserInformation.getUsername() + "/" +"ClassInformation"+"/"+set.getFinalClassList().get(0) + ".txt")) {
             create.hideContainer();
@@ -305,7 +306,9 @@ public class StudentClasses extends JFrame {
     private void prepareTextboxForDeleteMode() {
 
     JTextField[] tempTextField = new JTextField[1];
+    //JLabel[] tempTextField = new JLabel[1];
     tempTextField[0] = new JTextField("ERROR"); //if not overwritten will show error
+    //tempTextField[0] = new JLabel("ERROR");
     BufferedImage[] textFieldImage = new BufferedImage[1];
     textFieldImage[0] = null;
 
@@ -328,13 +331,16 @@ public class StudentClasses extends JFrame {
             //window.setLayout(null);
             textField.addMouseMotionListener(new MouseMotionAdapter() {
                 public void mouseDragged(MouseEvent e) {
+                    JTextField newBackgroundField = new JTextField("EMPTY");
                     
-                    if (draggedTextField != null) {
+                    if (draggedTextField != null) { 
                         draggedTextField = (JTextField) e.getSource();
+                        //newBackgroundField = (JTextField) e.getSource();
                     }
 
                     if (tempTextField[0].getText().equals("ERROR")){
                     tempTextField[0] = create.createTextBox("Hello. Ur cute", "JTextField", false);
+                    //tempTextField[0] = new JLabel("Hello <3");
                     tempTextField[0].setOpaque(true);
                     }
 
@@ -346,24 +352,34 @@ public class StudentClasses extends JFrame {
                     tempTextField[0].setBounds(e.getX(), e.getY(), 144, 30);
                     //tempTextField[0].repaint();
 
-                    Rectangle bounds = new Rectangle(e.getX() - draggedTextField.getWidth() / 2,
-                    e.getY() - draggedTextField.getHeight() / 2,
-                    draggedTextField.getWidth(), 
-                    draggedTextField.getHeight());
-                    layeredPane.repaint(bounds);
+                    // Rectangle bounds = new Rectangle(e.getX() - draggedTextField.getWidth() / 2,
+                    // e.getY() - draggedTextField.getHeight() / 2,
+                    // draggedTextField.getWidth(), 
+                    // draggedTextField.getHeight());
+
+                    //draggedTextField.repaint(bounds);
+                    //tempTextField[0].repaint();
 
                     //System.out.println("temptextfield "+ tempTextField[0].getText());
+                    //draggedTextField.setVisible(false);
                     
                     if (!layeredPane.isAncestorOf(tempTextField[0])) {
+                        newBackgroundField = create.createTextBox(draggedTextField.getText(), "JTextField", false);//"BACK");
+                        newBackgroundField.setForeground(Color.lightGray);
+                        newBackgroundField.setBounds(draggedTextField.getX(), draggedTextField.getY(), draggedTextField.getWidth(), draggedTextField.getHeight());
+
 
                         draggedTextField.setBounds(0, 0,layeredPane.getWidth(), layeredPane.getHeight());
-                        draggedTextField.setOpaque(false);
+                        draggedTextField.setVisible(false);
+
+                        newBackgroundField.setOpaque(true);
+                        newBackgroundField.setVisible(true);
 
                         layeredPane.add(tempTextField[0], Integer.valueOf(JLayeredPane.DRAG_LAYER));
+                        layeredPane.add(newBackgroundField, Integer.valueOf(JLayeredPane.DRAG_LAYER));
                         layeredPane.setVisible(true);
                         tempTextField[0].setOpaque(true);
                         tempTextField[0].setVisible(true);
-
                     }
                     //tempTextField[0].repaint();
 
@@ -528,7 +544,6 @@ public class StudentClasses extends JFrame {
                 backToDefaultDeleteButton();
                 newClassButton.setEnabled(true);
                 for (int i = 0; i < setState.getTextFieldPanel().getComponentCount(); i++) {
-
                     JTextField textField = new JTextField();
                     if (setState.getTextFieldPanel().getComponent(i) instanceof JTextField) {
                         textField = (JTextField) setState.getTextFieldPanel().getComponent(i);

@@ -11,8 +11,6 @@ import javax.swing.JTextField;
 import javax.swing.KeyStroke;
 import javax.swing.SwingConstants;
 
-import main.view.student.StudentClasses;
-
 import java.awt.BorderLayout;
 import java.awt.Color;
 import java.awt.Font;
@@ -28,7 +26,6 @@ import java.awt.FlowLayout;
 
 import java.awt.event.FocusAdapter;
 import java.awt.event.FocusEvent;
-import java.awt.event.FocusListener;
 
 import main.model.Set;
 import main.model.SetState;
@@ -43,14 +40,12 @@ import main.controller.FileHandling;
 import main.controller.FileWriting;
 
 import java.awt.event.KeyEvent;
-import java.awt.event.MouseListener;
 
 
 //import class files
 
 public class Gather {
     private JFrame window;
-    private NewUser newUser;
     private int windowX;
     private int windowY;
     private Set set;
@@ -58,12 +53,8 @@ public class Gather {
     private SetUserInformation setUserInformation;
 
     private SetListeners setListeners;
-    private Creator create;
     private FileWriting fileWrite = new FileWriting();
     private String existingOrNew;
-    private String studentOrTeacher;
-
-    private Boolean firstTimeInTextbox = true;
     private CreateButton createButton = new CreateButton();
     
     private String currentClass = "Gather Loading";
@@ -101,10 +92,10 @@ public class Gather {
         actionPriorities.setCurrentClass("Gather Loading");
 
         existingOrNew = setUserInformation.getExistingOrNew();
-        studentOrTeacher = setUserInformation.getStudentOrTeacher();
+        setUserInformation.getStudentOrTeacher();
         pathToUsernameFolder = "/Users/evy/Documents/GradeTracker-new/src/main/view/UserInfo/StudentInfo/" + setUserInformation.getUsername();
         window = set.getWindow();
-        create = new Creator();
+        new Creator();
 
         System.out.println();
         makeUsernameBox();
@@ -163,7 +154,6 @@ public class Gather {
                     System.out.println("focuslistener#5");
                         window.requestFocusInWindow();
                         decorate.areYouSureMessageListenerForEditingUsername();
-                        firstTimeInTextbox = false;
                         
                 }
             };
@@ -351,11 +341,9 @@ public class Gather {
             errorMessageSetUp("<html><center>Please choose an option",200,90);
         }
         else if (textFieldFilled) { //good case
-            String filePath = "somethingwentwrong";//if not overwritten, somethingwent wrong
             if (existingOrNew.trim().equals("New User")) { //if new user,
-                System.out.println("hidewindow2");
                 hideWindow();
-                MainWindow main = new MainWindow();
+                new MainWindow();
             }
         }
         else {

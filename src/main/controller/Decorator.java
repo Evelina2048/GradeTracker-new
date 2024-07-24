@@ -53,7 +53,7 @@ public class Decorator {
     SetListeners setListeners;
     JDialog dialog;
     String reason;
-    JTextField textField = new JTextField();;
+    JTextField textField = new JTextField();
     String yesOrNoDialog;
     TextFieldColorFocusListener colorFocusListener;
     
@@ -147,6 +147,10 @@ public class Decorator {
             reasonIsStudentStatsEmptyYes();
          }
 
+         else if (reason == "closing window") {
+            window.dispose();
+         }
+
          else {
             reasonIsChangingUsernameYes();
          }
@@ -165,6 +169,8 @@ public class Decorator {
         Path filePath = Paths.get(setUserInformation.getPathToClassInformationFileWithTextField(textField));
         try {
             Files.deleteIfExists(filePath);
+            //TODO
+            setUserInformation.addDeleteToQueue(textField.getText());
         } catch (IOException e1) {
             e1.printStackTrace();
         }
@@ -243,7 +249,9 @@ public class Decorator {
         window.requestFocusInWindow(); 
         dialog.setVisible(false);
         window.requestFocusInWindow(); 
-        dialog.dispose();
+        if (dialog != null) {
+            dialog.dispose();
+        }
         window.requestFocusInWindow(); 
         
         FocusListener noFocusListener = new FocusAdapter() {
@@ -357,7 +365,6 @@ public class Decorator {
        //textField.setHorizontalAlignment(JTextField.LEFT);
        textField.setText(placeholderText);
 
-       Creator create = new Creator();
        colorFocusListener.textFieldFocusListener(textField, placeholderText);
        return textField;
     }
@@ -397,11 +404,9 @@ public class Decorator {
     //     dialog.setVisible(true);
     // }
 
-
-
-    private void removeLastFocusListener(JTextField textField) {
-        FocusListener[] listeners = textField.getFocusListeners();
-        textField.removeFocusListener(listeners[listeners.length-1]);
-    }
+    // private void removeLastFocusListener(JTextField textField) {
+    //     FocusListener[] listeners = textField.getFocusListeners();
+    //     textField.removeFocusListener(listeners[listeners.length-1]);
+    // }
 
 }
