@@ -90,7 +90,7 @@ public class StudentClasses extends JFrame {
 
     public void studentClassesLaunch() {
         southContainer.setName("SouthContainer");
-        southContainer.setBackground(Color.pink);
+        //southContainer.setBackground(Color.pink);
         southContainer.setForeground(Color.pink);
         this.set = Set.getInstance();
         this.setState = SetState.getInstance();
@@ -107,7 +107,7 @@ public class StudentClasses extends JFrame {
             @Override
             public void windowClosing(WindowEvent e) {
                 if (set.getCurrentSaveButton().isEnabled() && saveButton != null) {
-                    decorate.areYouSureMessage(null, "closing window", "<html><center> You did not save <br> Close anyways?", 200, 120);
+                    decorate.areYouSureMessage(null, "closing window", "<html><center> You did not save <br> Close anyways?", 176, 107);
                 }
             }
         });
@@ -136,6 +136,7 @@ public class StudentClasses extends JFrame {
         loadIfNeeded();
         westPanelCreate();
         buttonSetUpAction();
+        currentClass = "StudentClasses";
         actionPriorities.setCurrentClass(currentClass);
     }
 
@@ -391,9 +392,20 @@ public class StudentClasses extends JFrame {
                     Point rightPoint = new Point(cursorPoint.x - 40, cursorPoint.y);
                     //JTextField leftTextField = (JTextField) ;//(JTextField) e.getSource();
                     
-                    if (layeredPane.getComponentAt(leftPoint) instanceof JTextField && layeredPane.getComponentAt(rightPoint) instanceof JTextField) {
+                    if ((layeredPane.getComponentAt(leftPoint) instanceof JTextField && layeredPane.getComponentAt(rightPoint) instanceof JTextField) || (window.getComponentAt(leftPoint) instanceof JTextField && window.getComponentAt(rightPoint) instanceof JTextField)) {
                         Component comp = layeredPane.getComponentAt(leftPoint);
                         System.out.println("comp "+comp.getClass().getName());
+                        for (int i = 0; i < setState.getTextFieldPanel().getComponentCount(); i++) {
+                            System.out.println("1111hello");
+                            //JTextField textfieldComponent = 
+                            //if (setState.getTextFieldPanel().getComponent(i).getText().equals(window.getComponentAt(leftPoint).getText())) {
+                                JPanel textFieldPanel = setState.getTextFieldPanel();
+                                //textFieldPanel.getComponent(i+1) = create.createTextBox();
+                                textFieldPanel.add(create.createTextBox("", "JTextField", false));
+                                create.windowFix();
+                                System.out.println("2222hello");
+                            //}
+                        }
                     }
 
                     else if (window.getComponentAt(leftPoint) instanceof JTextField && window.getComponentAt(rightPoint) instanceof JTextField) {
