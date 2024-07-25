@@ -93,7 +93,6 @@ public class Gather {
 
         existingOrNew = setUserInformation.getExistingOrNew();
         setUserInformation.getStudentOrTeacher();
-        //pathToUsernameFolder = "/Users/evy/Documents/GradeTracker-new/src/main/view/UserInfo/StudentInfo/" + setUserInformation.getUsername();
         pathToUsernameFolder = setUserInformation.getPathToUsernameFolder();
         window = set.getWindow();
         new Creator();
@@ -190,7 +189,7 @@ public class Gather {
             instructionsWordsLabel = new JLabel("You are a new user. Create a user name.");
         }
         //should be below
-        else if (newUser && username != null && previousSettingsNotChanged && fileHandler.folderExists(pathToUsernameFolder) && setState.getEmptiedState(textField)){//readNames(pathToUsernameFolder, set.getUsername())){ //checkIfExisting(pathToUsernameFolder, set.getUsername())){//fileHandler.fileExists("/Users/evy/Documents/GradeTracker-new/src/main/view/UserInfo/StudentInfo/" + set.getUsername())){//fileHandler.fileExists(pathToUsernameFolder)) { //file name exists
+        else if (newUser && username != null && previousSettingsNotChanged && fileHandler.folderExists(pathToUsernameFolder) && setState.getEmptiedState(textField)){
             System.out.println("instruction words option 2");
             instructionsWordsLabel = new JLabel("<html><center>Welcome back!<br> Already created account. Click to edit.");
         }

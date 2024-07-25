@@ -165,7 +165,6 @@ public class Decorator {
         JPanel panelForDeleting = new JPanel();
         panelForDeleting.add(textField);
         create.deleteTextBox(panelForDeleting);
-        //Path filePath = Paths.get("/Users/evy/Documents/GradeTracker-new/src/main/view/UserInfo/StudentInfo/"+setUserInformation.getUsername()+"/"+"ClassInformation"+"/"+textField.getText()+".txt");
         Path filePath = Paths.get(setUserInformation.getPathToClassInformationFileWithTextField(textField));
         try {
             Files.deleteIfExists(filePath);
