@@ -17,10 +17,12 @@ import java.awt.Graphics;
 import javax.swing.JPanel;
 import javax.swing.JTextField;
 import javax.swing.KeyStroke;
+import javax.swing.SwingUtilities;
 import javax.swing.border.Border;
 import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
 import java.awt.Color;
+import java.awt.Component;
 import java.awt.event.MouseAdapter;
 import java.awt.GridLayout;
 import java.awt.event.ActionListener;
@@ -31,6 +33,7 @@ import java.util.concurrent.atomic.AtomicBoolean;
 import main.model.Set;
 import main.model.SetUserInformation;
 import main.model.SetState;
+import main.model.SetList;
 
 import main.controller.CreateButton;
 import main.controller.Creator;
@@ -75,8 +78,8 @@ public class StudentClasses extends JFrame {
     
     Set set;
     SetState setState;
-    
     private SetUserInformation setUserInformation;
+    private SetList setList;
 
     JPanel instructionsPanel;
 
@@ -92,6 +95,7 @@ public class StudentClasses extends JFrame {
         this.set = Set.getInstance();
         this.setState = SetState.getInstance();
         this.setUserInformation = SetUserInformation.getInstance();
+        this.setList = SetList.getInstance();
 
         setState.setCurrentClass("StudentClasses.java");
         window = set.getWindow();
@@ -129,8 +133,8 @@ public class StudentClasses extends JFrame {
             for (int index=0; index<myList.size(); index++) {
                 create.createTextBox(myList.get(index), "JTextField", true);
             }
-            set.setClassList(myList);
-            set.setFinalClassList(set.getCurrentPanelList());
+            setList.setClassList(myList);
+            setList.setFinalClassList(setList.getCurrentPanelList());
             
         }
 
@@ -219,18 +223,18 @@ public class StudentClasses extends JFrame {
     private void doNextButtonProcedure() {
         ArrayList<String> classList;
         classList = fileWrite.getClassList();//set.getTextFieldPanel();//set.getCurrentPanelList();
-        set.setClassList(classList);
+        setList.setClassList(classList);
         writeType();
         System.out.println("nextbuttonhit");
         fileWrite.writeTextToFile();
-        set.setFinalClassList(classList);
+        setList.setFinalClassList(classList);
         hideWindow();
         create.hideContainer();
 
-        set.setFinalClassList(set.getCurrentPanelList());
-        System.out.println("thestuffclasslist "+classList+" "+set.getCurrentPanelList());
+        setList.setFinalClassList(setList.getCurrentPanelList());
+        System.out.println("thestuffclasslist "+classList+" "+setList.getCurrentPanelList());
         StudentStatCollect studentStatCollect = new StudentStatCollect();
-        if (fileHandler.fileExists("/Users/evy/Documents/GradeTracker-new/src/main/view/UserInfo/StudentInfo/" + setUserInformation.getUsername() + "/" +"ClassInformation"+"/"+set.getFinalClassList().get(0) + ".txt")) {
+        if (fileHandler.fileExists("/Users/evy/Documents/GradeTracker-new/src/main/view/UserInfo/StudentInfo/" + setUserInformation.getUsername() + "/" +"ClassInformation"+"/"+setList.getFinalClassList().get(0) + ".txt")) {
             create.hideContainer();
             studentStatCollect.addLoadedBoxes();
         }
@@ -246,7 +250,7 @@ public class StudentClasses extends JFrame {
         newClassButton.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent e) {
                 create.createTextBox("Enter Class Name", "JTextField",false);
-                System.out.println("class list in new class button"+ set.getCurrentPanelList());
+                System.out.println("class list in new class button"+ setList.getCurrentPanelList());
         }
     });
     }
@@ -264,9 +268,9 @@ public class StudentClasses extends JFrame {
 
     private void writeType() {
         //set.setFinalClassList(set.getClassList());
-        System.out.println("testing? "+set.getCurrentPanelList());
-        set.setFinalClassList(set.getCurrentPanelList());
-        System.out.println("set.getcurrentpanellist "+set.getCurrentPanelList());
+        System.out.println("testing? "+setList.getCurrentPanelList());
+        setList.setFinalClassList(setList.getCurrentPanelList());
+        System.out.println("set.getcurrentpanellist "+setList.getCurrentPanelList());
         set.setFilePath(setUserInformation.getPathToClassTextFile());
         fileWrite.writeTextToFile();
         fileWrite.debugPrintPanel();
@@ -311,6 +315,9 @@ public class StudentClasses extends JFrame {
     //tempTextField[0] = new JLabel("ERROR");
     BufferedImage[] textFieldImage = new BufferedImage[1];
     textFieldImage[0] = null;
+    Component lastComponent = setState.getTextFieldPanel().getComponent(setState.getTextFieldPanel().getComponentCount()-1);
+    //Bounds lastComponentBounds = lastComponent.getBounds();
+    Rectangle lastComponentBounds = lastComponent.getBounds();
 
         for (int i = 0; i < setState.getTextFieldPanel().getComponentCount(); i++) { 
             JTextField textField = new JTextField();
@@ -327,10 +334,60 @@ public class StudentClasses extends JFrame {
             else {
                 System.out.println("There was an issue in delete mode. student classes" + setState.getTextFieldPanel().getComponent(i).getClass().getName());
             }
+            //Component currentComponent = setState.getTextFieldPanel().getComponent(i);
 
             //window.setLayout(null);
             textField.addMouseMotionListener(new MouseMotionAdapter() {
                 public void mouseDragged(MouseEvent e) {
+
+                    //
+                    Point cursorPoint = e.getPoint();
+                    Point leftPoint = new Point(cursorPoint.x - 40, cursorPoint.y);
+                    Point rightPoint = new Point(cursorPoint.x - 40, cursorPoint.y);
+                    //JTextField leftTextField = (JTextField) ;//(JTextField) e.getSource();
+                    
+                    if (layeredPane.getComponentAt(leftPoint) instanceof JTextField && layeredPane.getComponentAt(rightPoint) instanceof JTextField) {
+                        Component comp = layeredPane.getComponentAt(leftPoint);
+                        System.out.println("comp "+comp.getClass().getName());
+                    }
+
+                    else if (window.getComponentAt(leftPoint) instanceof JTextField && window.getComponentAt(rightPoint) instanceof JTextField) {
+                        Component comp = window.getComponentAt(leftPoint);
+                        System.out.println("comp2 "+comp.getClass().getName());
+                    }
+
+
+                    // if () {
+
+                    // }
+                    //Component 
+                    // if (window.getComponentAt(leftPoint) instanceof JTextField) {
+                    //     JTextField componentToLeft = (JTextField) SwingUtilities.getDeepestComponentAt(window, leftPoint.x, leftPoint.y);
+                    //     System.out.println("about to text: "+componentToLeft.getText());
+                    // }
+
+                    // else if (window.getComponentAt(leftPoint) instanceof JFrame){
+                    //     JFrame jframe = (JFrame) window.getComponentAt(leftPoint);
+                    //     Component compon = jframe.getContentPane(;
+
+                    //     System.out.println("is jframe instance?"+ (compon instanceof JTextField));
+                    //     System.out.println("is a instance of jframe "+ window.getComponentAt(leftPoint).getClass().getName()); //SwingUtilities.getDeepestComponentAt(window, leftPoint.x, leftPoint.y));//
+                        
+                    // }
+
+                    // else if (window.getComponentAt(leftPoint) != null){
+                    //     //System.out.println("is a instance of"+ window.getComponentAt(leftPoint).getClass().getName()); //SwingUtilities.getDeepestComponentAt(window, leftPoint.x, leftPoint.y));//
+                    //     //JTextField()
+                    // }
+                    
+                    // else {
+                    //     System.out.println("failing atm");
+                    // }
+                    //
+                    //if ( lastComponent == currentComponent) {
+
+                        
+                    //}
                     JTextField newBackgroundField = new JTextField("EMPTY");
                     
                     if (draggedTextField != null) { 
@@ -350,6 +407,8 @@ public class StudentClasses extends JFrame {
 
                    // tempTextField[0].repaint();
                     tempTextField[0].setBounds(e.getX(), e.getY(), 144, 30);
+                    //tempTextField[0].setForeground(new Color(230, 230, 230));
+
                     //tempTextField[0].repaint();
 
                     // Rectangle bounds = new Rectangle(e.getX() - draggedTextField.getWidth() / 2,
@@ -368,6 +427,7 @@ public class StudentClasses extends JFrame {
                         newBackgroundField.setForeground(Color.lightGray);
                         newBackgroundField.setBounds(draggedTextField.getX(), draggedTextField.getY(), draggedTextField.getWidth(), draggedTextField.getHeight());
 
+                        //newBackgroundField.setFocu
 
                         draggedTextField.setBounds(0, 0,layeredPane.getWidth(), layeredPane.getHeight());
                         draggedTextField.setVisible(false);
@@ -376,11 +436,13 @@ public class StudentClasses extends JFrame {
                         newBackgroundField.setVisible(true);
 
                         layeredPane.add(tempTextField[0], Integer.valueOf(JLayeredPane.DRAG_LAYER));
-                        layeredPane.add(newBackgroundField, Integer.valueOf(JLayeredPane.DRAG_LAYER));
+                        newBackgroundField.setEditable(false);
+                        layeredPane.add(newBackgroundField, Integer.valueOf(JLayeredPane.FRAME_CONTENT_LAYER));
                         layeredPane.setVisible(true);
                         tempTextField[0].setOpaque(true);
                         tempTextField[0].setVisible(true);
                     }
+                    //newBackgroundField.setEditable(false);
                     //tempTextField[0].repaint();
 
 
