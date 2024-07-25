@@ -330,7 +330,7 @@ public class Decorator {
         int listenerCount = listeners.length;
     }
 
-    public void errorMessageSetUp(JRadioButton button) {
+    public void pleaseChooseAnOptionWithRadioButtons(JRadioButton button) {
         dialog = genericPopUpMessage("<html><center>Please choose an option", button, 200, 90);
         dialog.setResizable(false);
         

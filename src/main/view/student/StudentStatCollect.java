@@ -66,7 +66,7 @@ public class StudentStatCollect extends JFrame {
 
     private int typeNumber = 0;
     private int numOfBoxes = 0;
-    private int maxBoxes = 25;
+    private int maxBoxes = 26;
 
     public StudentStatCollect() {
         studentStatCollectLaunch();
@@ -152,6 +152,7 @@ public class StudentStatCollect extends JFrame {
         //:
         backButton.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent e) {
+                actionPriorities.setCurrentClass(currentClass);
                 actionPriorities.addClassActionListener(b -> {
                     if(setState.getCanContinue()) {
                         if (setState.getClassListIndex() == 0) { //case for back to classes
@@ -457,6 +458,7 @@ public class StudentStatCollect extends JFrame {
     public class EnterAction extends AbstractAction {
         @Override
         public void actionPerformed(ActionEvent e) {
+            actionPriorities.setCurrentClass(currentClass);
             actionPriorities.addClassActionListener(new ActionListener() {
                 @Override
                 public void actionPerformed(ActionEvent e) { // remember won't run if just enter without a click

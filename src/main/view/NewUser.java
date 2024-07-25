@@ -30,9 +30,6 @@ import main.controller.Decorator;
 import main.controller.CompositeActionListenerWithPriorities;
 import main.controller.CreateButton;
 
-import java.awt.event.WindowAdapter;
-import java.awt.event.WindowEvent;
-
 public class NewUser extends JFrame {
     private JFrame window;
     private JFrame main;
@@ -74,16 +71,7 @@ public class NewUser extends JFrame {
         this.setUserInformation = SetUserInformation.getInstance();
         this.actionPriorities = CompositeActionListenerWithPriorities.getInstance();
         
-        window = set.getWindow();
-
-        window.addWindowListener(new WindowAdapter() {
-            @Override
-            public void windowClosing(WindowEvent e) {
-                if (set.getCurrentSaveButton().isEnabled()) {
-                    decorate.areYouSureMessage(null, "closing window", "<html><center> You did not save <br> Close anyways?", 200, 120);
-                }
-            }
-        });
+        window = set.getWindow(); 
 
         actionPriorities.setCurrentClass(currentClass); //needs to be set here as well because if going between classes really quick on multiple threads, want to make sure actionPriorities has the right class. And using integers that represent view order for comparison logic in class
         System.out.println("getpriorities "+actionPriorities.getCurrentClass());

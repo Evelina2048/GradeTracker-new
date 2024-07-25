@@ -119,6 +119,9 @@ public class Gather {
 
         buttonSetUpAction();
 
+        currentClass = "Gather";
+        actionPriorities.setCurrentClass(currentClass);
+
         EnterAction enterAction = new EnterAction();
         window.getRootPane().getInputMap(JComponent.WHEN_IN_FOCUSED_WINDOW).put(KeyStroke.getKeyStroke(KeyEvent.VK_ENTER, 0), "enterAction");
         window.getRootPane().getActionMap().put("enterAction", enterAction);
@@ -359,6 +362,8 @@ public class Gather {
         boolean textFieldFilled = textField.getText().trim().isEmpty() == false;
         //check if the username is not empty
         System.out.println(textFieldEmpty || textFieldHasntChanged && setState.getLoadedState(textField) == false);
+        System.out.println("oh hi!");
+
         if (textFieldEmpty || textFieldHasntChanged && setState.getLoadedState(textField) == false) {
             errorMessageSetUp("<html><center>Please choose an option",200,90);
         }
@@ -425,6 +430,7 @@ public class Gather {
 
         @Override
         public void actionPerformed(ActionEvent e) {
+            actionPriorities.setCurrentClass(currentClass);
             actionPriorities.addClassActionListener(new ActionListener() {
                 @Override
                 public void actionPerformed(ActionEvent e) { // remember won't run if just enter without a click

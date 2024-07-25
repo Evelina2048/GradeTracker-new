@@ -1,7 +1,5 @@
 package main.view.student;
 
-import java.awt.Rectangle;
-
 import javax.swing.AbstractAction;
 import javax.swing.BorderFactory;
 import javax.swing.JButton;
@@ -12,12 +10,9 @@ import javax.swing.JLayeredPane;
 
 import java.awt.BorderLayout;
 import java.awt.Dimension;
-import java.awt.Graphics;
-
 import javax.swing.JPanel;
 import javax.swing.JTextField;
 import javax.swing.KeyStroke;
-import javax.swing.SwingUtilities;
 import javax.swing.border.Border;
 import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
@@ -27,6 +22,14 @@ import java.awt.event.MouseAdapter;
 import java.awt.GridLayout;
 import java.awt.event.ActionListener;
 import java.awt.event.ActionEvent;
+import java.awt.event.KeyEvent;
+import java.awt.image.BufferedImage;
+import java.awt.Point;
+import java.awt.event.MouseMotionAdapter;
+import java.awt.event.WindowAdapter;
+import java.awt.event.WindowEvent;
+import java.awt.Rectangle;
+
 import java.util.ArrayList;
 import java.util.concurrent.atomic.AtomicBoolean;
 
@@ -46,13 +49,6 @@ import main.model.GoIntoPanel;
 
 import main.view.MainWindow;
 import main.view.student.StudentClasses;
-
-import java.awt.event.KeyEvent;
-import java.awt.image.BufferedImage;
-import java.awt.Graphics2D;
-
-import java.awt.Point;
-import java.awt.event.MouseMotionAdapter;
 
 public class StudentClasses extends JFrame {
     private JFrame window;
@@ -105,6 +101,17 @@ public class StudentClasses extends JFrame {
 
         setState.setCurrentClass("StudentClasses.java");
         window = set.getWindow();
+
+        ///
+        window.addWindowListener(new WindowAdapter() {
+            @Override
+            public void windowClosing(WindowEvent e) {
+                if (set.getCurrentSaveButton().isEnabled() && saveButton != null) {
+                    decorate.areYouSureMessage(null, "closing window", "<html><center> You did not save <br> Close anyways?", 200, 120);
+                }
+            }
+        });
+        ///
         //window.setBackground(Color.pink);
         window.setName("window");
         create = new Creator();
@@ -197,15 +204,16 @@ public class StudentClasses extends JFrame {
         //:
         backButton.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent e) {
-            actionPriorities.addClassActionListener(new ActionListener() {
-                @Override
-                public void actionPerformed(ActionEvent e) {// remember wont run  if just enter without a click
-                    hideWindow(); 
-                    set.setWindow(window);
-                    MainWindow main = new MainWindow();
-                    main.MainWindowLaunch();
-                    main.setButtonSelected();
-                }
+                actionPriorities.setCurrentClass(currentClass);
+                actionPriorities.addClassActionListener(new ActionListener() {
+                    @Override
+                    public void actionPerformed(ActionEvent e) {// remember wont run  if just enter without a click
+                        hideWindow(); 
+                        set.setWindow(window);
+                        MainWindow main = new MainWindow();
+                        main.MainWindowLaunch();
+                        main.setButtonSelected();
+                    }
             }, 1, "backButton", null, currentClass);  // Add this ActionListener with priority 1
         }});
         //:
@@ -525,12 +533,12 @@ public class StudentClasses extends JFrame {
     }
     }
 
-    private void addDraggingMouseReleasedListener(JTextField textField, JTextField[] tempTextField) {
-}
+//     private void addDraggingMouseReleasedListener(JTextField textField, JTextField[] tempTextField) {
+// }
 
-    private void draggingListeners() {
-        //
-    }
+//     private void draggingListeners() {
+//         //
+//     }
 
     private void addMouseListenerToTextboxAndFrame(JTextField textField) {
         turnOffEditability(textField);

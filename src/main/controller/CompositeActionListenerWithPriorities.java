@@ -83,6 +83,7 @@ public class CompositeActionListenerWithPriorities implements ActionListener {
       //}
     //}
     //System.out.println("adding action listener currentclass: "+currentClass+" listenersource "+listenerSource);
+    System.out.println("should be here: currentclass "+currentClass+ " listenersource "+listenerSource+" keyCause "+ keyCause);
     if (currentClass == listenerSource && !keyCause.equals("click")) {
       //ActionEvent event = new ActionEvent(this, ActionEvent.ACTION_PERFORMED, "PerformThisAction");
      // System.out.println("its being run and stuff 2. current class "+ currentClass);
@@ -106,7 +107,10 @@ public class CompositeActionListenerWithPriorities implements ActionListener {
                 //decorate.errorMessageSetUp("<html><center>Username already exists.<br> Please choose another.",200,100);
 
 
-                decorate.errorMessageSetUp(button);
+                //decorate.errorMessageSetUp(button);
+
+                System.out.println("Maybe not needed?");
+                //decorate.pleaseChooseAnOptionWithRadioButtons(button);
                 
                 //button.setEnabled(false);
                 //button.setForeground(Color.WHITE); // Set the foreground color to white

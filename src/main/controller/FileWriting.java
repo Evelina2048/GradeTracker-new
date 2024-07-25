@@ -225,11 +225,11 @@ private void removeUnwritablePlaceholders() {
     //placeholderCount++;
 
     if (setState.getCanContinue()) {
-        Decorator decorate = new Decorator();
-        placeholderCount++;
-        allCount++;
-        if (placeholderCount == 1) {
-        decorate.areYouSureMessage(null, "studentStatsEmpty", "Remove placeholder(s) to continue?", 230, 90); //hello friends
+            Decorator decorate = new Decorator();
+            placeholderCount++;
+            allCount++;
+            if (placeholderCount == 1) {
+            decorate.areYouSureMessage(null, "studentStatsEmpty", "Remove placeholder(s) to continue?", 230, 90); //hello friends
         }
 
         // else if (allCount == setState.getTextFieldPanel().getComponentCount() && placeholderCount == allCount) {

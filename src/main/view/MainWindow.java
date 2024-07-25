@@ -266,7 +266,8 @@ private void doNextButtonProcedure() {
             }
     }
     else if (!moveOnPossible) {
-        decorate.errorMessageSetUp(studentButton);
+        //decorate.errorMessageSetUp(studentButton);
+        decorate.pleaseChooseAnOptionWithRadioButtons(studentButton);
     }
 }
 
@@ -407,6 +408,7 @@ public class EnterAction extends AbstractAction {
 
     @Override
     public void actionPerformed(ActionEvent e) {
+        actionPriorities.setCurrentClass(currentClass);
         actionPriorities.addClassActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) { // remember won't run if just enter without a click
