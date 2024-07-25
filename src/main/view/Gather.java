@@ -124,6 +124,7 @@ public class Gather {
     }
 
     private void makeUsernameBox() {
+        System.out.println("username "+setUserInformation.getUsername());
         System.out.println("username: "+setUserInformation.getUsername()+"haschanged? "+set.getNewOrExistingChanged());
         if (setUserInformation.getUsername() == null && set.getNewOrExistingChanged() == false) {
             System.out.println("whatToSetTextFieldTo opt 1");
@@ -279,6 +280,7 @@ public class Gather {
         backButtonPanel.add(backButton);
         backButton.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent e) {
+                setUserInformation.setUsername(textField.getText());
                 actionPriorities.setCurrentClass(currentClass);
                 actionPriorities.addClassActionListener(b -> {
                     setUserInformation.setExistingOrNew(existingOrNew);

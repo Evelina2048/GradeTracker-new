@@ -252,7 +252,7 @@ private void writeUsername(String filePath) {
     //and username not taken
     String usernamePath = "somethingwentwrong.txt";
     String username = setUserInformation.getUsername();//textField.getText().trim();
-    setUserInformation.setUsername(username);
+    //setUserInformation.setUsername(username);
     if ("Student".equals(studentOrTeacher)) {
         usernamePath = "/Users/evy/Documents/GradeTracker-new/src/main/view/UserInfo/studentUsername.txt";
     }

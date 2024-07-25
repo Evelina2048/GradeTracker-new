@@ -42,46 +42,46 @@ public class Set {
         }
         return instance;
     }
+//
+    // public void setClassList(ArrayList<String> newClassList) {
+    //     classList = newClassList;
+    // }
 
-    public void setClassList(ArrayList<String> newClassList) {
-        classList = newClassList;
-    }
+    // public ArrayList<String> getClassList() {
+    //     return classList;
+    // }
 
-    public ArrayList<String> getClassList() {
-        return classList;
-    }
+    // public void setTypeList(ArrayList<String> newTypeList) {
+    //     typeList = newTypeList;
+    // }
 
-    public void setTypeList(ArrayList<String> newTypeList) {
-        typeList = newTypeList;
-    }
-
-    public void removeClassFromClassList() {
-        int lastIndex = classList.size() - 1;
-        System.out.println("CLASSLISTSIZE: "+classList.size());
-        if (lastIndex >= 0) {
-            classList.remove(lastIndex);
-            System.out.println("CLASSLISTSIZE: "+classList.size());
-        } else {
-            System.out.println("ArrayList is empty. Nothing to remove.");
-        }
+    // public void removeClassFromClassList() {
+    //     int lastIndex = classList.size() - 1;
+    //     System.out.println("CLASSLISTSIZE: "+classList.size());
+    //     if (lastIndex >= 0) {
+    //         classList.remove(lastIndex);
+    //         System.out.println("CLASSLISTSIZE: "+classList.size());
+    //     } else {
+    //         System.out.println("ArrayList is empty. Nothing to remove.");
+    //     }
         
-    }
+    // }
 
-    public ArrayList<String> getCurrentPanelList() {
-        return classList;
-    }
+    // public ArrayList<String> getCurrentPanelList() {
+    //     return classList;
+    // }
 
-    public void setFinalClassList(ArrayList<String> userFinalClassList) {
-        System.out.println("insetfinalclasslist: "+finalClassList);
-        finalClassList = userFinalClassList;
-    }
+    // public void setFinalClassList(ArrayList<String> userFinalClassList) {
+    //     System.out.println("insetfinalclasslist: "+finalClassList);
+    //     finalClassList = userFinalClassList;
+    // }
 
-    public ArrayList<String> getFinalClassList() {
-        System.out.println("ingetfinalclasslist: "+finalClassList);
-        return finalClassList;
-    }
+    // public ArrayList<String> getFinalClassList() {
+    //     System.out.println("ingetfinalclasslist: "+finalClassList);
+    //     return finalClassList;
+    // }
 
-
+//
     public void setWindow(JFrame myWindow) {
         window = myWindow;
     }

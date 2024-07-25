@@ -3,6 +3,7 @@ package main.model;
 import java.util.ArrayList;
 
 import javax.swing.JTextField;
+import main.model.SetList;
 
 public class SetUserInformation {
     private String username;
@@ -10,6 +11,8 @@ public class SetUserInformation {
     private String studentOrTeacher;
     private Set set;
     private SetState setState;
+    private SetList setList;
+    
     private ArrayList<String> deleteQueue = new ArrayList<>();
 
     //Below is for singleton design pattern
@@ -19,6 +22,7 @@ public class SetUserInformation {
     // Private constructor to prevent instantiation
     private SetUserInformation() {
         setState = SetState.getInstance();
+        setList = SetList.getInstance();
     }
 
     // Public method to provide access to the single instance
@@ -53,7 +57,7 @@ public class SetUserInformation {
 
     public String getPathToClassInformationFileWithIndex() {
         this.set = Set.getInstance();
-        return  "/Users/evy/Documents/GradeTracker-new/src/main/view/UserInfo/StudentInfo/"+getUsername()+"/ClassInformation/"+set.getFinalClassList().get(setState.getClassListIndex())+".txt";
+        return  "/Users/evy/Documents/GradeTracker-new/src/main/view/UserInfo/StudentInfo/"+getUsername()+"/ClassInformation/"+setList.getFinalClassList().get(setState.getClassListIndex())+".txt";
     }
 
     public void setExistingOrNew(String myExistingOrNew) {

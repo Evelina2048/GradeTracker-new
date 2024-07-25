@@ -19,6 +19,7 @@ import java.util.regex.Pattern;
 import main.model.Set;
 import main.model.SetState;
 import main.model.SetUserInformation;
+import main.model.SetList;
 
 import main.controller.Creator;
 import main.model.GoIntoPanel;
@@ -44,6 +45,7 @@ public class StudentStatCollect extends JFrame {
     private JButton swapClassesButton;
     private Set set;
     private SetState setState;
+    private SetList setList;
     private Color lightgrayColor = Color.decode("#AFA2A2");
     
     private SetUserInformation setUserInformation;
@@ -70,6 +72,7 @@ public class StudentStatCollect extends JFrame {
         this.set = Set.getInstance();
         this.setState = SetState.getInstance();
         this.setUserInformation = SetUserInformation.getInstance();
+        this.setList = SetList.getInstance();
 
         setState.setCurrentClass("StudentStatCollect.java");
         window = set.getWindow();
@@ -82,9 +85,9 @@ public class StudentStatCollect extends JFrame {
         window.getRootPane().getInputMap(JComponent.WHEN_IN_FOCUSED_WINDOW).put(KeyStroke.getKeyStroke(KeyEvent.VK_ENTER, 0), "enterAction");
         window.getRootPane().getActionMap().put("enterAction", enterAction);
 
-        finalClassList = set.getFinalClassList();
+        finalClassList = setList.getFinalClassList();
         System.out.println("final class list issssss before: "+ finalClassList);
-        finalClassList = set.getFinalClassList();
+        finalClassList = setList.getFinalClassList();
         System.out.println("final class list issssss: "+ finalClassList);
         create = new Creator();
         create.hideContainer();
@@ -215,7 +218,7 @@ public class StudentStatCollect extends JFrame {
         if(setState.getCanContinue()) {
             System.out.println();
             setState.incrementClassListIndex();
-            if (setState.getClassListIndex()+1 <= set.getFinalClassList().size()) {
+            if (setState.getClassListIndex()+1 <= setList.getFinalClassList().size()) {
                 System.out.println();
                 visitNextStudentClass();
             }
@@ -351,13 +354,13 @@ public class StudentStatCollect extends JFrame {
     //read classes array, first five classes
     public void DisplayClasses() {
         setUserInformation.getUsername();
-        ArrayList<String> typeList = set.getCurrentPanelList();
+        ArrayList<String> typeList = setList.getCurrentPanelList();
         readClass(typeList);
     }
 
     private void readClass(ArrayList<String> typeList) { 
-        System.out.println("readclass test:"+ set.getFinalClassList()+"index: "+setState.getClassListIndex());
-        boxManageCreate(set.getFinalClassList().get(setState.getClassListIndex())+"AHC", "JLabel", false); //necessary
+        System.out.println("readclass test:"+ setList.getFinalClassList()+"index: "+setState.getClassListIndex());
+        boxManageCreate(setList.getFinalClassList().get(setState.getClassListIndex())+"AHC", "JLabel", false); //necessary
         boxManageCreate("Credits (optional)", "JTextField", false);
         newSet();
         container.add(classLabelPanel);
