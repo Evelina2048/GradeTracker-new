@@ -40,6 +40,8 @@ import main.controller.Creator;
 import main.controller.Decorator;
 import main.controller.FileHandling;
 import main.controller.FileWriting;
+import main.controller.CompositeActionListenerWithPriorities;
+
 import main.model.GoIntoPanel;
 
 import main.view.MainWindow;
@@ -51,7 +53,6 @@ import java.awt.Graphics2D;
 
 import java.awt.Point;
 import java.awt.event.MouseMotionAdapter;
-
 
 public class StudentClasses extends JFrame {
     private JFrame window;
@@ -68,6 +69,8 @@ public class StudentClasses extends JFrame {
     private Point initialClick;
     private JTextField draggedTextField = new JTextField();
     private FileWriting fileWrite = new FileWriting();
+    private CompositeActionListenerWithPriorities actionPriorities;
+
     Border borderRegular = BorderFactory.createLineBorder(Color.GRAY, 2);
     JPanel southContainer = new JPanel(new GridLayout(2,1,0,0));
     AtomicBoolean textFieldEmptied = new AtomicBoolean(false);;
@@ -75,6 +78,7 @@ public class StudentClasses extends JFrame {
     JButton deleteClassButton;
     FileHandling fileHandler = new FileHandling();
     JLayeredPane layeredPane = new JLayeredPane();
+    private String currentClass = "StudentClasses Loading";
     
     Set set;
     SetState setState;
@@ -96,6 +100,8 @@ public class StudentClasses extends JFrame {
         this.setState = SetState.getInstance();
         this.setUserInformation = SetUserInformation.getInstance();
         this.setList = SetList.getInstance();
+        this.actionPriorities = CompositeActionListenerWithPriorities.getInstance();
+        actionPriorities.setCurrentClass(currentClass);
 
         setState.setCurrentClass("StudentClasses.java");
         window = set.getWindow();
@@ -123,6 +129,7 @@ public class StudentClasses extends JFrame {
         loadIfNeeded();
         westPanelCreate();
         buttonSetUpAction();
+        actionPriorities.setCurrentClass(currentClass);
     }
 
     private void loadIfNeeded() {
@@ -178,14 +185,30 @@ public class StudentClasses extends JFrame {
         JPanel backButtonPanel = new JPanel();
         backButtonPanel.add(backButton);
         backButton.setPreferredSize(new Dimension(87, 29));
+        // backButton.addActionListener(new ActionListener() {
+        //     public void actionPerformed(ActionEvent e) {
+        //         hideWindow(); 
+        //         set.setWindow(window);
+        //         MainWindow main = new MainWindow();
+        //         main.MainWindowLaunch();
+        //         main.setButtonSelected();
+        // }});
+
+        //:
         backButton.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent e) {
-                hideWindow(); 
-                set.setWindow(window);
-                MainWindow main = new MainWindow();
-                main.MainWindowLaunch();
-                main.setButtonSelected();
+            actionPriorities.addClassActionListener(new ActionListener() {
+                @Override
+                public void actionPerformed(ActionEvent e) {// remember wont run  if just enter without a click
+                    hideWindow(); 
+                    set.setWindow(window);
+                    MainWindow main = new MainWindow();
+                    main.MainWindowLaunch();
+                    main.setButtonSelected();
+                }
+            }, 1, "backButton", null, currentClass);  // Add this ActionListener with priority 1
         }});
+        //:
         return backButtonPanel;
     }
 
@@ -213,11 +236,25 @@ public class StudentClasses extends JFrame {
         JPanel nextButtonPanel = new JPanel();
         nextButtonPanel.add(nextButton);
         nextButton.setPreferredSize(new Dimension(87, 29));
+        // nextButton.addActionListener(new ActionListener() {
+        //     public void actionPerformed(ActionEvent e) {
+        //         doNextButtonProcedure();
+        //     }
+        // });
+
+        //:
         nextButton.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent e) {
-                doNextButtonProcedure();
+                actionPriorities.addClassActionListener(new ActionListener() {
+                    @Override
+                    public void actionPerformed(ActionEvent e) {// remember wont run  if just enter without a click
+                        System.out.println("enteraction");
+                        doNextButtonProcedure();
+                    }
+                }, 1, "nextButton", null, currentClass);  // Add this ActionListener with priority 1
             }
         });
+        //:
         return nextButtonPanel;
     }
     private void doNextButtonProcedure() {
@@ -658,11 +695,25 @@ public class StudentClasses extends JFrame {
     }
 
     public class EnterAction extends AbstractAction {
+        // @Override
+        // public void actionPerformed(ActionEvent e) {
+        //     System.out.println("2.5");
+        //     doNextButtonProcedure();
+        // }
+
         @Override
         public void actionPerformed(ActionEvent e) {
-            System.out.println("2.5");
-            doNextButtonProcedure();
+            actionPriorities.addClassActionListener(new ActionListener() {
+                @Override
+                public void actionPerformed(ActionEvent e) { // remember won't run if just enter without a click
+                    System.out.println("enteraction");
+                    doNextButtonProcedure();
+                }
+            }, 1, "EnterAction", null, currentClass);  // Add this ActionListener with priority 1
         }
+
+
+        
     }
 
     }

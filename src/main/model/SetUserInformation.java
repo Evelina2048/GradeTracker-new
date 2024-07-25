@@ -41,6 +41,10 @@ public class SetUserInformation {
         return username;
     }
 
+    public String getPathToUsernameFolder() {
+        return "/Users/evy/Documents/GradeTracker-new/src/main/view/UserInfo/StudentInfo/"+getUsername();
+    }
+
     public String getPathToClassInformationFolder() {
         //return;
         return "/Users/evy/Documents/GradeTracker-new/src/main/view/UserInfo/StudentInfo/"+getUsername()+"/ClassInformation/";

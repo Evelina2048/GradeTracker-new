@@ -26,6 +26,7 @@ import main.model.GoIntoPanel;
 import main.controller.Decorator;
 import main.controller.FileHandling;
 import main.controller.FileWriting;
+import main.controller.CompositeActionListenerWithPriorities;
 
 import javax.swing.AbstractAction;
 import javax.swing.JComponent;
@@ -47,11 +48,14 @@ public class StudentStatCollect extends JFrame {
     private SetState setState;
     private SetList setList;
     private Color lightgrayColor = Color.decode("#AFA2A2");
+    private String currentClass = "StudentStatCollect Loading";
     
     private SetUserInformation setUserInformation;
 
     private CreateButton createButton = new CreateButton();
     private FileWriting fileWrite = new FileWriting();
+    private CompositeActionListenerWithPriorities actionPriorities;
+
     private JPanel container = new JPanel(new FlowLayout(FlowLayout.LEFT));
     private JPanel newDelContainerFlow;
     private JPanel classLabelPanel = new JPanel(new FlowLayout(FlowLayout.LEFT));
@@ -73,6 +77,8 @@ public class StudentStatCollect extends JFrame {
         this.setState = SetState.getInstance();
         this.setUserInformation = SetUserInformation.getInstance();
         this.setList = SetList.getInstance();
+        this.actionPriorities = CompositeActionListenerWithPriorities.getInstance();
+        actionPriorities.setCurrentClass(currentClass);
 
         setState.setCurrentClass("StudentStatCollect.java");
         window = set.getWindow();
@@ -98,6 +104,7 @@ public class StudentStatCollect extends JFrame {
         createNewTypeButton();
         buttonSetUpAction();
         window.setTitle("StudentStatCollect");
+        actionPriorities.setCurrentClass(currentClass);
     }
 
     public void buttonSetUpAction() {
@@ -127,21 +134,39 @@ public class StudentStatCollect extends JFrame {
     }
     
     private void backAction(JButton backButton) {
+        // backButton.addActionListener(new ActionListener() {
+        //     public void actionPerformed(ActionEvent e) {
+        //         if(setState.getCanContinue()) {
+        //             if (setState.getClassListIndex() == 0) { //case for back to classes
+        //                 hideWindow();
+        //                 StudentClasses studentClasses = new StudentClasses();
+        //                 studentClasses.studentClassesLaunch();
+        //                 saveButtonAction();
+        //             }
+        //             else if (setState.getClassListIndex() > 0) {
+        //                 goToPreviousClasses();              
+        //             }
+        //         }
+        //     }
+        // });
+        //:
         backButton.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent e) {
-                if(setState.getCanContinue()) {
-                    if (setState.getClassListIndex() == 0) { //case for back to classes
-                        hideWindow();
-                        StudentClasses studentClasses = new StudentClasses();
-                        studentClasses.studentClassesLaunch();
-                        saveButtonAction();
+                actionPriorities.addClassActionListener(b -> {
+                    if(setState.getCanContinue()) {
+                        if (setState.getClassListIndex() == 0) { //case for back to classes
+                            hideWindow();
+                            StudentClasses studentClasses = new StudentClasses();
+                            studentClasses.studentClassesLaunch();
+                            saveButtonAction();
+                        }
+                        else if (setState.getClassListIndex() > 0) {
+                            goToPreviousClasses();              
+                        }
                     }
-                    else if (setState.getClassListIndex() > 0) {
-                        goToPreviousClasses();              
-                    }
-                }
-            }
-        });
+                }, 2, "backButton",null, currentClass);
+        }});
+        //:
     }
 
     private void goToPreviousClasses() {
@@ -205,11 +230,25 @@ public class StudentStatCollect extends JFrame {
     }
 
     private void nextButtonAction(JButton nextButton) {
+        // nextButton.addActionListener(new ActionListener() {
+        //     public void actionPerformed(ActionEvent e) {
+        //         doNextButtonProcedure();
+        //     }
+        // });
+
+        //:
         nextButton.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent e) {
-                doNextButtonProcedure();
+                actionPriorities.addClassActionListener(new ActionListener() {
+                    @Override
+                    public void actionPerformed(ActionEvent e) {// remember wont run  if just enter without a click
+                        System.out.println("enteraction");
+                        doNextButtonProcedure();
+                    }
+                }, 1, "nextButton", null, currentClass);  // Add this ActionListener with priority 1
             }
         });
+        //:
     }
 
     public void doNextButtonProcedure() {
@@ -418,7 +457,13 @@ public class StudentStatCollect extends JFrame {
     public class EnterAction extends AbstractAction {
         @Override
         public void actionPerformed(ActionEvent e) {
-            doNextButtonProcedure();
+            actionPriorities.addClassActionListener(new ActionListener() {
+                @Override
+                public void actionPerformed(ActionEvent e) { // remember won't run if just enter without a click
+                    System.out.println("enteraction");
+                    doNextButtonProcedure();
+                }
+            }, 1, "EnterAction", null, currentClass);  // Add this ActionListener with priority 1
         }
     }
     }

@@ -93,7 +93,8 @@ public class Gather {
 
         existingOrNew = setUserInformation.getExistingOrNew();
         setUserInformation.getStudentOrTeacher();
-        pathToUsernameFolder = "/Users/evy/Documents/GradeTracker-new/src/main/view/UserInfo/StudentInfo/" + setUserInformation.getUsername();
+        //pathToUsernameFolder = "/Users/evy/Documents/GradeTracker-new/src/main/view/UserInfo/StudentInfo/" + setUserInformation.getUsername();
+        pathToUsernameFolder = setUserInformation.getPathToUsernameFolder();
         window = set.getWindow();
         new Creator();
 
@@ -121,6 +122,8 @@ public class Gather {
         EnterAction enterAction = new EnterAction();
         window.getRootPane().getInputMap(JComponent.WHEN_IN_FOCUSED_WINDOW).put(KeyStroke.getKeyStroke(KeyEvent.VK_ENTER, 0), "enterAction");
         window.getRootPane().getActionMap().put("enterAction", enterAction);
+        currentClass = "Gather";
+        actionPriorities.setCurrentClass(currentClass);
     }
 
     private void makeUsernameBox() {
@@ -139,6 +142,7 @@ public class Gather {
             System.out.println("whatToSetTextFieldTo opt 3");
             textField = decorate.decorateTextBox(setUserInformation.getUsername());
             setState.setLoadedState(textField, true);
+            setState.setEmptiedState(textField, true);
             textFieldMouseListener();
         }
     }
@@ -182,6 +186,7 @@ public class Gather {
             System.out.println("instruction words option 1");
             instructionsWordsLabel = new JLabel("You are a new user. Create a user name.");
         }
+        //should be below
         else if (newUser && username != null && previousSettingsNotChanged && fileHandler.folderExists(pathToUsernameFolder) && setState.getEmptiedState(textField)){//readNames(pathToUsernameFolder, set.getUsername())){ //checkIfExisting(pathToUsernameFolder, set.getUsername())){//fileHandler.fileExists("/Users/evy/Documents/GradeTracker-new/src/main/view/UserInfo/StudentInfo/" + set.getUsername())){//fileHandler.fileExists(pathToUsernameFolder)) { //file name exists
             System.out.println("instruction words option 2");
             instructionsWordsLabel = new JLabel("<html><center>Welcome back!<br> Already created account. Click to edit.");
@@ -218,7 +223,7 @@ public class Gather {
         }
 
         else {
-            System.out.println("instruction words option 9. new user: "+ newUser+" username: "+ username +" previoussettingsnotchanged: "+ previousSettingsNotChanged+ " fileExists? " +fileHandler.fileExists(pathToUsernameFolder));
+            System.out.println("instruction words option 9. new user: "+ newUser+" username: "+ username +" previoussettingsnotchanged: "+ previousSettingsNotChanged+ " fileExists? " +fileHandler.folderExists(pathToUsernameFolder));
             instructionsWordsLabel = new JLabel("Error");
         }
         decorateInstructions(instructionsWordsLabel);
@@ -271,8 +276,8 @@ public class Gather {
         makeNextButton();
         backNextButtonsPanel = createButton.makeBackNextButtonsPanel(backButtonPanel,saveButtonPanel, nextButtonPanel);
         window.add(backNextButtonsPanel, BorderLayout.SOUTH);
-        currentClass = "Gather";
-        actionPriorities.setCurrentClass(currentClass);
+        //currentClass = "Gather";
+        //actionPriorities.setCurrentClass(currentClass);
     }
 
     private void makeBackButton() {
@@ -317,11 +322,26 @@ public class Gather {
     }
 
     private void nextButtonAddActionListener() {
+        // nextButton.addActionListener(new ActionListener() {
+        //     public void actionPerformed(ActionEvent e) {
+        //         doNextButtonProcedure();
+        //     }
+        // });
+
+        //:
         nextButton.addActionListener(new ActionListener() {
+            @Override
             public void actionPerformed(ActionEvent e) {
-                doNextButtonProcedure();
+                actionPriorities.addClassActionListener(new ActionListener() {
+                    @Override
+                    public void actionPerformed(ActionEvent e) { // remember won't run if just enter without a click
+                        System.out.println("enteraction");
+                        doNextButtonProcedure();
+                    }
+                }, 1, "nextButton", null, currentClass);  // Add this ActionListener with priority 1
             }
         });
+        //:
     }
 
     private void doNextButtonProcedure() {
@@ -398,9 +418,20 @@ public class Gather {
     }
 
     public class EnterAction extends AbstractAction {
+        // @Override
+        // public void actionPerformed(ActionEvent e) {
+        //     doNextButtonProcedure();
+        // }
+
         @Override
         public void actionPerformed(ActionEvent e) {
-            doNextButtonProcedure();
+            actionPriorities.addClassActionListener(new ActionListener() {
+                @Override
+                public void actionPerformed(ActionEvent e) { // remember won't run if just enter without a click
+                    System.out.println("enteraction");
+                    doNextButtonProcedure();
+                }
+            }, 1, "EnterAction", null, currentClass);  // Add this ActionListener with priority 1
         }
-    }
+}
 }

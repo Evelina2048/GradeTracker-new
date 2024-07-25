@@ -57,6 +57,7 @@ public class FileHandling {
 
 
         public boolean fileExists(String filePath) {
+            System.out.println("fileexistspath "+filePath);
             try {
                 BufferedReader reader = new BufferedReader(new FileReader(filePath));
                 //System.out.println("File exists"); 

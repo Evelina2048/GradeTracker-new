@@ -36,12 +36,15 @@ import main.view.student.StudentClasses;
 import main.controller.Creator;
 import main.controller.Decorator;
 import main.controller.CreateButton;
+import main.controller.CompositeActionListenerWithPriorities;
 
 public class MainWindow extends JFrame {
 private String studentOrTeacher;
 private boolean moveOnPossible = false;
 private Set set;
 private SetUserInformation setUserInformation;
+private CompositeActionListenerWithPriorities actionPriorities;
+private String currentClass = "StudentStatCollect Loading";
 
 private CreateButton createButton = new CreateButton();
 
@@ -70,6 +73,8 @@ public void MainWindowLaunch() {
     System.out.println("entering main window");
     this.set = Set.getInstance();
     this.setUserInformation = SetUserInformation.getInstance();
+    this.actionPriorities = CompositeActionListenerWithPriorities.getInstance();
+    actionPriorities.setCurrentClass(currentClass);
 
     window = set.getWindow();
 
@@ -87,6 +92,8 @@ public void MainWindowLaunch() {
     window.getRootPane().getActionMap().put("enterAction", enterAction);
 
     window.requestFocusInWindow();
+    currentClass = "MainWindow";
+    actionPriorities.setCurrentClass(currentClass);
 }
 
 private void windowSetUp() {
@@ -199,23 +206,46 @@ private void backNextButton() {
     backNextButtonsPanel = new JPanel(new BorderLayout());
     Creator create = new Creator();
     JButton backButton = createButton.backButtonCreate();
+    // backButton.addActionListener(new ActionListener() {
+    //     public void actionPerformed(ActionEvent e) {;
+    //         decorate.hideWindow(instructionsPanel, choicesPanel, backNextButtonsPanel);    
+    //         doBackButtonProcedure();
+    //     }
+    // });
+    //:
     backButton.addActionListener(new ActionListener() {
-        public void actionPerformed(ActionEvent e) {;
-            decorate.hideWindow(instructionsPanel, choicesPanel, backNextButtonsPanel);    
-            doBackButtonProcedure();
-        }
-    });
+        public void actionPerformed(ActionEvent e) {
+            actionPriorities.addClassActionListener(b -> {
+                decorate.hideWindow(instructionsPanel, choicesPanel, backNextButtonsPanel);    
+                doBackButtonProcedure();
+            }, 2, "backButton",null, currentClass);
+    }});
+    //:
     JPanel backButtonPanel = new JPanel();
     backButtonPanel.add(backButton);
 
     JButton nextButton = createButton.nextButtonCreate();
     JPanel nextButtonPanel = new JPanel();
     nextButtonPanel.add(nextButton);
+    // nextButton.addActionListener(new ActionListener() {
+    //     public void actionPerformed(ActionEvent e) {
+    //         doNextButtonProcedure();
+    //     }
+    // });
+
+    //:
     nextButton.addActionListener(new ActionListener() {
         public void actionPerformed(ActionEvent e) {
-            doNextButtonProcedure();
+            actionPriorities.addClassActionListener(new ActionListener() {
+                @Override
+                public void actionPerformed(ActionEvent e) {// remember wont run  if just enter without a click
+                    //System.out.println("enteraction");
+                    doNextButtonProcedure();
+                }
+            }, 1, "nextButton", null, currentClass);  // Add this ActionListener with priority 1
         }
     });
+    //:
     backNextButtonsPanel = createButton.makeBackNextButtonsPanel(backButtonPanel, new JPanel(), nextButtonPanel);
     window.add(backNextButtonsPanel, BorderLayout.SOUTH);
 }
@@ -362,18 +392,35 @@ public void hideWindow() {
 }
 
 public class EnterAction extends AbstractAction {
+    // @Override
+    // public void actionPerformed(ActionEvent e) {
+    //     // Introduce a small delay before calling doNextButtonProcedure()
+    //     Timer timer = new Timer(10, new ActionListener() {
+    //         @Override
+    //         public void actionPerformed(ActionEvent evt) {
+    //             doNextButtonProcedure();
+    //         }
+    //     });
+    //     timer.setRepeats(false); // Only execute once
+    //     timer.start();
+    // }
+
     @Override
     public void actionPerformed(ActionEvent e) {
-        // Introduce a small delay before calling doNextButtonProcedure()
-        Timer timer = new Timer(10, new ActionListener() {
+        actionPriorities.addClassActionListener(new ActionListener() {
             @Override
-            public void actionPerformed(ActionEvent evt) {
-                doNextButtonProcedure();
+            public void actionPerformed(ActionEvent e) { // remember won't run if just enter without a click
+                // Introduce a small delay before calling doNextButtonProcedure()
+                Timer timer = new Timer(10, new ActionListener() {
+                    @Override
+                    public void actionPerformed(ActionEvent evt) {
+                        doNextButtonProcedure();
+                    }
+                });
+                timer.setRepeats(false); // Only execute once
+                timer.start();
             }
-        });
-        timer.setRepeats(false); // Only execute once
-        timer.start();
+        }, 1, "EnterAction", null, currentClass);  // Add this ActionListener with priority 1
     }
 }
-
 }

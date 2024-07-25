@@ -54,7 +54,7 @@ public void writeFolderToFile() {
     }
 }
 
-public void decideIfWrite(Component component, BufferedWriter writer) {
+private void decideIfWrite(Component component, BufferedWriter writer) {
     Decorator decorate = new Decorator();
     textField = (JTextField) component;
     Boolean studentStatNonWritablePlaceholder = setState.getEmptiedState(textField) == false && setState.getCurrentClass() == "StudentStatCollect.java" && !textField.getText().equals("Credits (Optional)");
@@ -95,7 +95,7 @@ private void tryToWrite(BufferedWriter writer) {
     }
 }
 
-public void writeTextToFile(){
+public void writeTextToFile(){ //Student Classes and Stat
     setState.setCanContinue(true);
     debugPrintPanel();
     setUserInformation.getUsername();
@@ -112,7 +112,7 @@ private void tryToWriteWithoutAppend() {
 
         for (Component component : setState.getTextFieldPanel().getComponents()) {
             if (component instanceof JTextField ) {
-                tryToWriteTextFieldWithoutAppend(component, writer); //i think for student stat
+                tryToWriteTextFieldWithoutAppend(component, writer); //student stat
                 setState.setCanContinue(true);
             }
             else if (component instanceof JPanel) {
@@ -127,7 +127,7 @@ private void tryToWriteWithoutAppend() {
     }
 }
 
-private void tryToWriteTextFieldWithoutAppend(Component component, BufferedWriter writer) { //i think for student stat
+private void tryToWriteTextFieldWithoutAppend(Component component, BufferedWriter writer) { //student stat
     JTextField textField = (JTextField) component;
     if (setState.getEmptiedState(textField) == true && attachedBoxes == maxAttachedBoxes) {
         String text = textField.getText().trim();
@@ -181,7 +181,7 @@ private void seeHowManyPlaceholdersToSkip() {
     }
 }
 
-public void writeTextToFileWithAppend(JPanel panel) { //i think student classes
+private void writeTextToFileWithAppend(JPanel panel) { //student classes
     filePath = set.getFilePath();
     try (BufferedWriter writer = new BufferedWriter(new FileWriter(filePath, true))) {
         for (Component component : panel.getComponents()) {

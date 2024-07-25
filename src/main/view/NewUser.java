@@ -72,8 +72,8 @@ public class NewUser extends JFrame {
         this.set = Set.getInstance();
         this.setState = SetState.getInstance();
         this.setUserInformation = SetUserInformation.getInstance();
-
         this.actionPriorities = CompositeActionListenerWithPriorities.getInstance();
+        
         window = set.getWindow();
 
         window.addWindowListener(new WindowAdapter() {
@@ -203,7 +203,6 @@ public class NewUser extends JFrame {
         nextButton.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-
                 nextButtonActionListenerWithPriorities("nextButton");
             }
         });
@@ -306,7 +305,7 @@ public class NewUser extends JFrame {
                 System.out.println("enteraction");
                 doNextButtonProcedure();
             }
-        }, 1, keyCause, newUserButton, currentClass);  // Add this ActionListener with priority 1
+        }, 1, "nextButton", newUserButton, currentClass);  // Add this ActionListener with priority 1
     }
 
     public class EnterAction extends AbstractAction  {
