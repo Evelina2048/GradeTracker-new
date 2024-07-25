@@ -46,7 +46,6 @@ public class FileWriting {
 
 public void writeFolderToFile() {
     String username = setUserInformation.getUsername();
-    //String folderPath = "/Users/evy/Documents/GradeTracker-new/src/main/view/UserInfo/StudentInfo/"+username+"/ClassInformation/"; //+ username;
     String folderPath = setUserInformation.getPathToClassInformationFolder();
     File folder = new File(folderPath);
     if (!folder.exists()) {

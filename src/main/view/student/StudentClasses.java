@@ -279,7 +279,7 @@ public class StudentClasses extends JFrame {
         setList.setFinalClassList(setList.getCurrentPanelList());
         System.out.println("thestuffclasslist "+classList+" "+setList.getCurrentPanelList());
         StudentStatCollect studentStatCollect = new StudentStatCollect();
-        if (fileHandler.fileExists("/Users/evy/Documents/GradeTracker-new/src/main/view/UserInfo/StudentInfo/" + setUserInformation.getUsername() + "/" +"ClassInformation"+"/"+setList.getFinalClassList().get(0) + ".txt")) {
+        if (fileHandler.fileExists("/Users/evy/Documents/GradeTracker-new/src/main/view/UserInfo/StudentInfo/" + setUserInformation.getUsername() + "/" +"ClassInformation"+"/"+setList.getFinalClassList().get(0) + ".txt")) { //needs to keep path because its with index 0
             create.hideContainer();
             studentStatCollect.addLoadedBoxes();
         }
@@ -575,7 +575,8 @@ public class StudentClasses extends JFrame {
         deleteClassButton.setText("Delete?");
         window.remove(instructionsPanel);
         instructionsWordsAndPanel("Hit Delete Button to Delete");
-        String filePath = "/Users/evy/Documents/GradeTracker-new/src/main/view/UserInfo/StudentInfo/"+setUserInformation.getUsername()+"/"+"ClassInformation"+"/"+selectedTextBox.getText()+".txt";
+        //String filePath = "/Users/evy/Documents/GradeTracker-new/src/main/view/UserInfo/StudentInfo/"+setUserInformation.getUsername()+"/"+"ClassInformation"+"/"+selectedTextBox.getText()+".txt";
+        String filePath = setUserInformation.getPathToClassInformationFileWithTextField(selectedTextBox);
         removeDeleteClassButtonActionListeners();//deleteClassButton.getActionListeners().length);
         deleteClassButton.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent e) {

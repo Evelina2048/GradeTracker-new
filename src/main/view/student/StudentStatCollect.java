@@ -223,8 +223,8 @@ public class StudentStatCollect extends JFrame {
         //if (textBoxPanel.getComponentCount() == 5 || 8 || 11 || 14 || 17 || 20 || 23 || 26 || 29 || 32) {
         //if ((textBoxPanel.getComponentCount() - 5) % 3 == 0) { //only want to write if 
         System.out.println("testtesttest: "+ setState.getCurrentClass());
-        set.setFilePath("/Users/evy/Documents/GradeTracker-new/src/main/view/UserInfo/StudentInfo/" + setUserInformation.getUsername() +"/ClassInformation/"+finalClassList.get(setState.getClassListIndex())+ ".txt");
-        
+        //set.setFilePath("/Users/evy/Documents/GradeTracker-new/src/main/view/UserInfo/StudentInfo/" + setUserInformation.getUsername() +"/ClassInformation/"+finalClassList.get(setState.getClassListIndex())+ ".txt");
+        set.setFilePath(setUserInformation.getPathToClassInformationFileWithIndex());
         create.setTextFieldContainer(setState.getTextFieldPanel());
         fileWrite.writeTextToFile();
        // }
