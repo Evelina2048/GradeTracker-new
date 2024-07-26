@@ -396,14 +396,13 @@ public class StudentClasses extends JFrame {
                         Component comp = layeredPane.getComponentAt(leftPoint);
                         System.out.println("comp "+comp.getClass().getName());
                         for (int i = 0; i < setState.getTextFieldPanel().getComponentCount(); i++) {
-                            System.out.println("1111hello");
                             //JTextField textfieldComponent = 
                             //if (setState.getTextFieldPanel().getComponent(i).getText().equals(window.getComponentAt(leftPoint).getText())) {
                                 JPanel textFieldPanel = setState.getTextFieldPanel();
                                 //textFieldPanel.getComponent(i+1) = create.createTextBox();
                                 textFieldPanel.add(create.createTextBox("", "JTextField", false));
                                 create.windowFix();
-                                System.out.println("2222hello");
+
                             //}
                         }
                     }

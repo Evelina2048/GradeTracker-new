@@ -299,6 +299,7 @@ public class NewUser extends JFrame {
     public class EnterAction extends AbstractAction  {
         @Override
         public void actionPerformed(ActionEvent e) {
+            System.out.println("enter from new user");
             actionPriorities.setCurrentClass(currentClass);
             //System.out.println("in new user right before enter. listeners: "+ actionPriorities.DEBUGLISTENERSIZE()+ actionPriorities.getCurrentClass());
             nextButtonActionListenerWithPriorities("EnterAction");

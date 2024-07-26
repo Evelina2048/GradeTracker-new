@@ -52,6 +52,8 @@ public class Gather {
     private SetState setState;
     private SetUserInformation setUserInformation;
 
+    private Creator create;
+
     private SetListeners setListeners;
     private FileWriting fileWrite = new FileWriting();
     private String existingOrNew;
@@ -95,9 +97,11 @@ public class Gather {
         setUserInformation.getStudentOrTeacher();
         pathToUsernameFolder = setUserInformation.getPathToUsernameFolder();
         window = set.getWindow();
-        new Creator();
+        //new Creator();
+        //Creator create = new Creator();
 
-        System.out.println();
+        //System.out.println();
+        this.create = new Creator();
         makeUsernameBox();
         gatherLaunch();
     }
@@ -133,17 +137,22 @@ public class Gather {
         System.out.println("username: "+setUserInformation.getUsername()+"haschanged? "+set.getNewOrExistingChanged());
         if (setUserInformation.getUsername() == null && set.getNewOrExistingChanged() == false) {
             System.out.println("whatToSetTextFieldTo opt 1");
-            textField = decorate.decorateTextBox("Enter user name");
+            textField =  decorate.decorateTextBox("Enter user name");
+            setState.setLoadedState(textField, false);
+            setState.setEmptiedState(textField, false);
         }
         else if (setUserInformation.getUsername() == null && set.getNewOrExistingChanged() == true) { //user came back to gather after changing newuser setting
             System.out.println("whatToSetTextFieldTo opt 2");
-            textField = decorate.decorateTextBox("Enter user name");
+            textField = decorate.decorateTextBox("Enter user name");//create.createTextBox("Enter user name", "JTextField", false);
+            //setState.setLoadedState(textField, false);
+            //setState.setEmptiedState(textField, false);
         }
 
         else {
-            System.out.println("whatToSetTextFieldTo opt 3");
-            textField = decorate.decorateTextBox(setUserInformation.getUsername());
+            System.out.println("whatToSetTextFieldTo opt 3 username: "+setUserInformation.getUsername());
+            textField = decorate.decorateTextBox(setUserInformation.getUsername());//create.createTextBox(setUserInformation.getUsername(), "JTextField", true);//
             setState.setLoadedState(textField, true);
+
             setState.setEmptiedState(textField, true);
             textFieldMouseListener();
         }
@@ -287,12 +296,12 @@ public class Gather {
         backButtonPanel.add(backButton);
         backButton.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent e) {
-                setUserInformation.setUsername(textField.getText());
+                setUsername();
                 actionPriorities.setCurrentClass(currentClass);
                 actionPriorities.addClassActionListener(b -> {
                     setUserInformation.setExistingOrNew(existingOrNew);
                     backButtonAction();
-                }, 2, "backButton",null, "Gather");
+                }, 2, "backButton",null, currentClass);
         }});
 
     }
@@ -347,8 +356,8 @@ public class Gather {
     }
 
     private void doNextButtonProcedure() {
-
-        setUserInformation.setUsername(textField.getText());
+        System.out.println("3333"+ setUserInformation.getUsername());
+        setUsername();
         set.setWindow(window);
         System.out.println("nextbutton action in gather");
         nextButtonAction();
@@ -401,6 +410,14 @@ public class Gather {
         dialog.setVisible(true);
     }
 
+    private void setUsername() {
+        System.out.println("4444"+ setUserInformation.getUsername());
+        if (setState.getEmptiedState(textField)) {
+            System.out.println("5555"+ setUserInformation.getUsername());
+            setUserInformation.setUsername(textField.getText());
+        }
+    }
+
     public int getWindowX() {
         return windowX;
     }
@@ -429,11 +446,15 @@ public class Gather {
 
         @Override
         public void actionPerformed(ActionEvent e) {
+            System.out.println("enter from gather");
+            System.out.println("1111"+ setUserInformation.getUsername());
             actionPriorities.setCurrentClass(currentClass);
             actionPriorities.addClassActionListener(new ActionListener() {
                 @Override
                 public void actionPerformed(ActionEvent e) { // remember won't run if just enter without a click
+                    System.out.println("2222"+ setUserInformation.getUsername());
                     System.out.println("enteraction");
+                    System.out.println();
                     doNextButtonProcedure();
                 }
             }, 1, "EnterAction", null, currentClass);  // Add this ActionListener with priority 1

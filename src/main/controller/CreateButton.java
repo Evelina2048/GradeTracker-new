@@ -91,8 +91,9 @@ public class CreateButton {
 
         @Override
         public void removeUpdate(DocumentEvent e) {
-            System.out.println("removeUpdate/// "+ textField.getWidth()+ textField.getParent().getParent().getParent().getParent().getParent().getName());
+            System.out.println("removeUpdate/// ");
             //set.setEmptiedState(true);
+            System.out.println(1111.5);
             setState.setEmptiedState(textField, true);
             //textField.getParent();
         }
@@ -105,7 +106,13 @@ public class CreateButton {
     }
 
     public void saveButtonEnable() {
+        if (saveButton != null) {
         set.getCurrentSaveButton().setEnabled(true);
+        }
+
+        else {
+            System.err.println("savebutton is null");
+        }
         //saveButton.setEnabled(true);
     }
 

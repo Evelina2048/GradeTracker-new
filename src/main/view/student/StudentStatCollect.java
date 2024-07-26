@@ -85,7 +85,7 @@ public class StudentStatCollect extends JFrame {
         container.setName("contianer");
         //container.setBackground(Color.pink);
         textBoxPanel.setName("gridlayout textboxpanel");
-        textBoxPanel.setBackground(lightgrayColor);
+        //textBoxPanel.setBackground(lightgrayColor);
         classLabelPanel.setName("classLabelPanel student stat");
         EnterAction enterAction = new EnterAction();
         window.getRootPane().getInputMap(JComponent.WHEN_IN_FOCUSED_WINDOW).put(KeyStroke.getKeyStroke(KeyEvent.VK_ENTER, 0), "enterAction");
@@ -104,6 +104,8 @@ public class StudentStatCollect extends JFrame {
         createNewTypeButton();
         buttonSetUpAction();
         window.setTitle("StudentStatCollect");
+
+        currentClass = "StudentStatCollect";
         actionPriorities.setCurrentClass(currentClass);
     }
 
@@ -195,7 +197,7 @@ public class StudentStatCollect extends JFrame {
         }
         classLabelPanel.add(textBoxPanel);
         //classLabelPanel.setBackground(Color.PINK);
-        classLabelPanel.setBackground(lightgrayColor);
+        //classLabelPanel.setBackground(lightgrayColor);
         window.add(classLabelPanel);
         
         create.windowFix();
@@ -316,9 +318,9 @@ public class StudentStatCollect extends JFrame {
         }
         });
        JPanel delTypeButtonPanel = deleteButtonPanel();
-       JPanel swapTypesButtonPanel = swapTypesButtonPanel();
+       //JPanel swapTypesButtonPanel = swapTypesButtonPanel();
        newDelContainer.add(newTypeButtonPanel);
-       newDelContainer.add(swapTypesButtonPanel);
+       //newDelContainer.add(swapTypesButtonPanel);
        newDelContainer.add(delTypeButtonPanel);
        newDelContainerFlow.add(newDelContainer);
        window.add(newDelContainerFlow, BorderLayout.EAST);
@@ -351,27 +353,27 @@ public class StudentStatCollect extends JFrame {
     return delTypeButtonPanel;
    }
 
-   private JPanel swapTypesButtonPanel() {
-    JButton swapClassesButton = new JButton("Swap Types");
-        swapClassesButton.setPreferredSize(new Dimension(90, 50));
-        swapClassesButton.addActionListener(new ActionListener() {
-        public void actionPerformed(ActionEvent e) {
-            if (textBoxPanel.getComponentCount() >= 8) {
-                create.deleteTextBox(textBoxPanel);
-                create.deleteTextBox(textBoxPanel);
-                create.deleteTextBox(textBoxPanel);
-                numOfBoxes = numOfBoxes - 3;
-                typeNumber--;
+//    private JPanel swapTypesButtonPanel() {
+//     JButton swapClassesButton = new JButton("Swap Types Mode");
+//         swapClassesButton.setPreferredSize(new Dimension(90, 50));
+//         swapClassesButton.addActionListener(new ActionListener() {
+//         public void actionPerformed(ActionEvent e) {
+//             if (textBoxPanel.getComponentCount() >= 8) {
+//                 create.deleteTextBox(textBoxPanel);
+//                 create.deleteTextBox(textBoxPanel);
+//                 create.deleteTextBox(textBoxPanel);
+//                 numOfBoxes = numOfBoxes - 3;
+//                 typeNumber--;
                 
-                createButton.saveButtonEnable();
-            }
-    }
-    });  
-    JPanel swapClassesButtonPanel = new JPanel(new BorderLayout());
-    swapClassesButtonPanel.add(swapClassesButton,BorderLayout.NORTH);
-    return swapClassesButtonPanel;
+//                 createButton.saveButtonEnable();
+//             }
+//     }
+//     });  
+//     JPanel swapClassesButtonPanel = new JPanel(new BorderLayout());
+//     swapClassesButtonPanel.add(swapClassesButton,BorderLayout.NORTH);
+//     return swapClassesButtonPanel;
     
-}
+// }
 
    private void correctGradeFormatChecker(Pattern pattern) {
         int index = 4;

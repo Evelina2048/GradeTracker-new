@@ -71,7 +71,6 @@ public class Creator {
 
         checkIfLoadedAndAction();
         setState.setTextFieldPanel(textFieldPanel);
-        //textFieldPanel.setBackground(Color.pink);
         System.out.println("in create textbox. panel: "+setState.getTextFieldPanel().getComponentCount());
         return textField;
     }

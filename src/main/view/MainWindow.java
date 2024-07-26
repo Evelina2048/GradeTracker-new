@@ -118,6 +118,8 @@ private void truncateLabelText(String prefix, String suffix, int maxWidth) {
     JLabel usernameLabel = new JLabel(setUserInformation.getUsername());
     String fullText = prefix + usernameLabel.getText() + suffix;
 
+    System.out.println("username "+setUserInformation.getUsername());
+
     String username = setUserInformation.getUsername();
     String ellipsis = " ...";
     int prefixWidth = fontMetrics.stringWidth(prefix);

@@ -9,7 +9,6 @@ import javax.swing.JTextField;
 
 public class SetList {
     private ArrayList<String> classList;
-    private ArrayList<String> typeList;
     private Boolean saveable;
     private JPanel textFieldPanel;
     private HashMap<JTextField, Boolean> textFieldEmptiedMap = new HashMap<>();
@@ -42,10 +41,7 @@ public class SetList {
         return classList;
     }
 
-    public void setTypeList(ArrayList<String> newTypeList) {
-        typeList = newTypeList;
-    }
-
+    //public void setTypeList(ArrayList<String> newTypeList) {
     public void removeClassFromClassList() {
         int lastIndex = classList.size() - 1;
         System.out.println("CLASSLISTSIZE: "+classList.size());

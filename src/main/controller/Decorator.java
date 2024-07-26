@@ -101,6 +101,7 @@ public class Decorator {
         reason = myReason;
         textField = importedTextField;
         dialog = new JDialog(window, true);
+
         dialog.setResizable(false);
         dialog.setLayout(new FlowLayout());
         JLabel label = new JLabel(text);
@@ -128,7 +129,6 @@ public class Decorator {
     private void yesButtonActionListener(JButton yesButton) {
         yesButton.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent e) { 
-                System.out.println("2222");
                yesButtonAction();
                //dialog.dispose(); 
             }
@@ -137,13 +137,11 @@ public class Decorator {
     }
 
     private void yesButtonAction() {
-        System.out.println("3333");
          if (reason == "deleting") {   
             reasonIsDeletingActionYes();
          }  
 
          else if (reason == "studentStatsEmpty") {
-            System.out.println("4444");
             reasonIsStudentStatsEmptyYes();
          }
 
@@ -244,7 +242,7 @@ public class Decorator {
     }
        
     private void noButtonAction() {
-
+        //System.out.println("dialog stats: "+dialog.getSize());
         window.requestFocusInWindow(); 
         dialog.setVisible(false);
         window.requestFocusInWindow(); 
@@ -365,6 +363,9 @@ public class Decorator {
        textField.setText(placeholderText);
 
        colorFocusListener.textFieldFocusListener(textField, placeholderText);
+       CreateButton createButton = new CreateButton();
+       createButton.addDocumentListenerForSaving(textField);
+
        return textField;
     }
 
