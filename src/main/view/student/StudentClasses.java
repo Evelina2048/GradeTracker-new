@@ -97,7 +97,7 @@ public class StudentClasses extends JFrame {
         this.setUserInformation = SetUserInformation.getInstance();
         this.setList = SetList.getInstance();
         this.actionPriorities = CompositeActionListenerWithPriorities.getInstance();
-        actionPriorities.setCurrentClass(currentClass);
+        //actionPriorities.setCurrentClass(currentClass);
 
         setState.setCurrentClass("StudentClasses.java");
         window = set.getWindow();
@@ -136,8 +136,10 @@ public class StudentClasses extends JFrame {
         loadIfNeeded();
         westPanelCreate();
         buttonSetUpAction();
+        System.out.println("1111 "+actionPriorities.getCurrentClass());
         currentClass = "StudentClasses";
         actionPriorities.setCurrentClass(currentClass);
+        System.out.println("2222 "+actionPriorities.getCurrentClass());
     }
 
     private void loadIfNeeded() {
@@ -254,6 +256,7 @@ public class StudentClasses extends JFrame {
         //:
         nextButton.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent e) {
+                actionPriorities.setCurrentClass(currentClass);
                 actionPriorities.addClassActionListener(new ActionListener() {
                     @Override
                     public void actionPerformed(ActionEvent e) {// remember wont run  if just enter without a click
@@ -723,9 +726,11 @@ public class StudentClasses extends JFrame {
 
         @Override
         public void actionPerformed(ActionEvent e) {
+            System.out.println("3333 "+actionPriorities.getCurrentClass());
             actionPriorities.addClassActionListener(new ActionListener() {
                 @Override
                 public void actionPerformed(ActionEvent e) { // remember won't run if just enter without a click
+                    System.out.println("4444 "+actionPriorities.getCurrentClass());
                     System.out.println("enteraction");
                     doNextButtonProcedure();
                 }

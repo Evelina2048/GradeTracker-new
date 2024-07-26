@@ -356,7 +356,6 @@ public class Gather {
     }
 
     private void doNextButtonProcedure() {
-        System.out.println("3333"+ setUserInformation.getUsername());
         setUsername();
         set.setWindow(window);
         System.out.println("nextbutton action in gather");
@@ -411,9 +410,7 @@ public class Gather {
     }
 
     private void setUsername() {
-        System.out.println("4444"+ setUserInformation.getUsername());
         if (setState.getEmptiedState(textField)) {
-            System.out.println("5555"+ setUserInformation.getUsername());
             setUserInformation.setUsername(textField.getText());
         }
     }
@@ -447,12 +444,10 @@ public class Gather {
         @Override
         public void actionPerformed(ActionEvent e) {
             System.out.println("enter from gather");
-            System.out.println("1111"+ setUserInformation.getUsername());
             actionPriorities.setCurrentClass(currentClass);
             actionPriorities.addClassActionListener(new ActionListener() {
                 @Override
                 public void actionPerformed(ActionEvent e) { // remember won't run if just enter without a click
-                    System.out.println("2222"+ setUserInformation.getUsername());
                     System.out.println("enteraction");
                     System.out.println();
                     doNextButtonProcedure();

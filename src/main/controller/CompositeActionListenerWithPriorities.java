@@ -103,27 +103,27 @@ public class CompositeActionListenerWithPriorities implements ActionListener {
                 CompositeActionListenerWithPriorities.this.actionPerformed(
                 new ActionEvent(CompositeActionListenerWithPriorities.this, ActionEvent.ACTION_PERFORMED, "PerformAllActions"));
             } 
-            else if (listeners.size() == 1) {
-                //decorate.errorMessageSetUp("<html><center>Username already exists.<br> Please choose another.",200,100);
+            // else if (listeners.size() == 1) {
+            //     //decorate.errorMessageSetUp("<html><center>Username already exists.<br> Please choose another.",200,100);
 
 
-                //decorate.errorMessageSetUp(button);
+            //     //decorate.errorMessageSetUp(button);
 
-                System.out.println("Maybe not needed?");
-                //decorate.pleaseChooseAnOptionWithRadioButtons(button);
+            //     System.out.println("Maybe not needed?");
+            //     //decorate.pleaseChooseAnOptionWithRadioButtons(button);
                 
-                //button.setEnabled(false);
-                //button.setForeground(Color.WHITE); // Set the foreground color to white
-                //UIManager.put("RadioButton.disabledText", Color.WHITE);
-                listeners.clear();
+            //     //button.setEnabled(false);
+            //     //button.setForeground(Color.WHITE); // Set the foreground color to white
+            //     //UIManager.put("RadioButton.disabledText", Color.WHITE);
+            //     listeners.clear();
 
-                //button.setForeground(Color.white);
+            //     //button.setForeground(Color.white);
                 
-                //button.setColor(Color.white);
-                //decorate.errorMessageSetUp(button);
-                return;
+            //     //button.setColor(Color.white);
+            //     //decorate.errorMessageSetUp(button);
+            //     return;
 
-            } 
+            // } 
             else {
                 System.out.println("Something went wrong in CompositeActionListenerWithPriorities addClassActionListener \u00AF\\_(\u30C4)_/\u00AF");
             }

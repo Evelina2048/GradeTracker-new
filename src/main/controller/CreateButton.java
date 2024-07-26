@@ -93,7 +93,6 @@ public class CreateButton {
         public void removeUpdate(DocumentEvent e) {
             System.out.println("removeUpdate/// ");
             //set.setEmptiedState(true);
-            System.out.println(1111.5);
             setState.setEmptiedState(textField, true);
             //textField.getParent();
         }

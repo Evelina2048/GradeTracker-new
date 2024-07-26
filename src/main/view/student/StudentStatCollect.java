@@ -255,7 +255,6 @@ public class StudentStatCollect extends JFrame {
     }
 
     public void doNextButtonProcedure() {
-        System.out.println("6666");
         saveButtonAction();
         if(setState.getCanContinue()) {
             System.out.println();

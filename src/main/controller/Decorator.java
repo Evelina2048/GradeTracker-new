@@ -97,7 +97,6 @@ public class Decorator {
     }
 
     public String areYouSureMessage(JTextField importedTextField, String myReason, String text, int width, int height) {
-        System.out.println("1111");
         reason = myReason;
         textField = importedTextField;
         dialog = new JDialog(window, true);
@@ -212,7 +211,6 @@ public class Decorator {
     }
 
     private void reasonIsStudentStatsEmptyYes() {
-        System.out.println("5555");
         //go to next class or print class
 
         //TODO
