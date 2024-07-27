@@ -224,19 +224,20 @@ private void removeUnwritablePlaceholders() {
     }
     //placeholderCount++;
 
-    if (setState.getCanContinue()) {
-            Decorator decorate = new Decorator();
+    // if (setState.getCanContinue()) {
+    //         Decorator decorate = new Decorator();
             placeholderCount++;
             allCount++;
-            if (placeholderCount == 1) {
-            decorate.areYouSureMessage(null, "studentStatsEmpty", "Remove placeholder(s) to continue?", 230, 90); //hello friends
-        }
+        //     if (placeholderCount == 1) {
+        //     decorate.areYouSureMessage(null, "studentStatsEmpty", "Remove placeholder(s) to continue?", 230, 90); //hello friends
+        //     setState.setCanContinue(false);
+        // }
 
         // else if (allCount == setState.getTextFieldPanel().getComponentCount() && placeholderCount == allCount) {
         //     decorate.areYouSureMessage(null, "studentStatsEmpty", "", 230, 90);
         // }
         //return;
-    }
+    //}
 }
 
 public void deleteLines(String importedFilePath, String text) {

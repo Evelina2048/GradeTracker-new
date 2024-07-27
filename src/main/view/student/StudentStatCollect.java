@@ -230,8 +230,18 @@ public class StudentStatCollect extends JFrame {
 
         setState.setTextFieldPanel(textBoxPanel);
         System.out.println("1111 placeholdercount"+ fileWrite.howManyPlaceholders());
-
+        //if (fileWrite.howManyPlaceholders() == 0) {
+        //setState.setCanContinue(true);
         fileWrite.writeTextToFile();
+        //}
+
+
+        if (fileWrite.howManyPlaceholders() > 0) { 
+            Decorator decorate = new Decorator();
+            decorate.areYouSureMessage(null, "studentStatsEmpty", "Remove placeholder(s) to continue?", 230, 90);
+            setState.setCanContinue(false);
+        }
+
        // }
     }
 
