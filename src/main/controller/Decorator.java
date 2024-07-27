@@ -57,6 +57,8 @@ public class Decorator {
     String yesOrNoDialog;
     TextFieldColorFocusListener colorFocusListener;
     
+    Font currentTextFieldFont;
+
     public Decorator() {
         set = Set.getInstance();
         setState = SetState.getInstance();
@@ -353,6 +355,14 @@ public class Decorator {
        }
 
        textField.setFont(new Font("Roboto", Font.PLAIN, 14));
+
+       if (currentTextFieldFont == null) {
+        System.out.println("hi font");
+            currentTextFieldFont = textField.getFont();
+            setState.setTextFieldFont(currentTextFieldFont);
+        // currentFontName = currentFont.getFontName();
+       }
+
        textField.setForeground(Color.gray);
        textField.setBorder(BorderFactory.createLineBorder(Color.gray, 2));
 
@@ -382,6 +392,10 @@ public class Decorator {
             dialog.setLocation(dialog.getX(), dialog.getY() + 15); 
             dialog.setVisible(true);  
         }      
+    }
+
+    public Font getFontFromTextFields() {
+        return currentTextFieldFont;
     }
 
     // public void errorMessageSetUp(String labelWords, int width, int height, JRad) {

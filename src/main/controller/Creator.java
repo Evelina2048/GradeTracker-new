@@ -11,6 +11,7 @@ import java.awt.event.MouseListener;
 import java.awt.Component;
 import java.awt.Dimension;
 import java.awt.FlowLayout;
+import java.awt.Font;
 
 import java.util.ArrayList;
 
@@ -139,8 +140,14 @@ public class Creator {
         }
 
         else if(my_type.equals("JLabel")) {
+            Decorator decorate = new Decorator();
             System.out.println("hi creating jlabel for "+placeholder+" which is loaded? "+boxLoaded);
             JLabel toAddType = new JLabel(placeholder);
+            Font currentTextFieldFont = setState.getTextFieldFont();
+            Font boldFont = new Font(currentTextFieldFont.getFontName(), Font.BOLD, currentTextFieldFont.getSize());
+            toAddType.setFont(boldFont);
+            toAddType.setForeground(Color.gray);
+
             //toAddType.setForeground(Color.darkGray);
             gradeTypePanel.add(toAddType);
         }

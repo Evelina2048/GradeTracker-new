@@ -10,6 +10,8 @@ import javax.swing.JPanel;
 import javax.swing.JTextField;
 import java.awt.Component;
 
+import java.awt.Font;
+
 public class SetState {
     private ArrayList<String> classList;
     private ArrayList<String> typeList;
@@ -25,6 +27,8 @@ public class SetState {
     private JButton saveButton;
     private Boolean newOrExistingHasChanged = false;
     private String filePath;
+
+    private Font textFieldFont;
 
     //Below is for singleton design pattern
     // Static variable to hold the single instance of the class
@@ -110,5 +114,13 @@ public class SetState {
 
     public Boolean getCanContinue() {
         return canContinue;
+    }
+
+    public void setTextFieldFont(Font thisFont) {
+        textFieldFont = thisFont;
+    }
+
+    public Font getTextFieldFont() {
+        return textFieldFont;
     }
 }
