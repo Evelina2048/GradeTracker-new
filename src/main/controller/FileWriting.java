@@ -12,6 +12,7 @@ import java.awt.Component;
 
 import java.awt.FlowLayout;
 
+import main.model.GoIntoPanel;
 import main.model.Set;
 import main.model.SetState;
 import main.model.SetUserInformation;
@@ -262,5 +263,33 @@ public  ArrayList<String> getClassList() {
     return classList;
 }
 
+public int howManyPlaceholders() {
+    GoIntoPanel goIntoPanel = new GoIntoPanel();
+    int placeholderAmount = 0;
+    JTextField returnedBox = new JTextField("howmanyplaceholdersnotchanged");
+    System.out.println("component amount"+setState.getTextFieldPanel().getComponentCount());
+    // for (int i = 1; i <= 1; i++) {
+    for (int i = 1; i < setState.getTextFieldPanel().getComponentCount(); i++) {
+    //for (Component component : setState.getTextFieldPanel().getComponents()) {
+        System.out.println("instance of "+setState.getTextFieldPanel().getComponent(i).getClass().getName());
+        Component component = setState.getTextFieldPanel().getComponent(i);
+        if (component instanceof JTextField && setState.getEmptiedState(textField) == false) {
+            placeholderAmount++;
+        }
+        else if (component instanceof JPanel) {
+            returnedBox = goIntoPanel.goIntoPanelReturnTextbox(setState.getTextFieldPanel(), i);
+            System.out.println("returnedboxshouldbeseventimes " + returnedBox.getText());
+            if (setState.getEmptiedState(returnedBox) == false) {
+                System.out.println("in jpanel "+ returnedBox.getText());
+                placeholderAmount++;
+            }
+        }
+        else {
+            System.out.println("component is something else. Something went wrong"+ component.getClass().getName());
+        }
 
+        //placeholderAmount--; //for jlabel
+    }
+    return placeholderAmount;
+}
 }

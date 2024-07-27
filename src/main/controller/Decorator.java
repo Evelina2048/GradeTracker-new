@@ -265,9 +265,12 @@ public class Decorator {
                 }
                 
         };
-        textField.addFocusListener(noFocusListener);
+
+        if (textField != null) {
+            textField.addFocusListener(noFocusListener);
+            textField.removeFocusListener(setListeners.getDialogFocusListener());
+        }
         setListeners.setNoFocusListener(noFocusListener);
-        textField.removeFocusListener(setListeners.getDialogFocusListener());
     }
 
     public void setCaretPositionToZero(JTextField importedTextField) {

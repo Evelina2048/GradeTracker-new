@@ -74,7 +74,7 @@ public void MainWindowLaunch() {
     this.set = Set.getInstance();
     this.setUserInformation = SetUserInformation.getInstance();
     this.actionPriorities = CompositeActionListenerWithPriorities.getInstance();
-    actionPriorities.setCurrentClass(currentClass);
+    //actionPriorities.setCurrentClass(currentClass);
 
     window = set.getWindow();
 
@@ -217,6 +217,7 @@ private void backNextButton() {
     //:
     backButton.addActionListener(new ActionListener() {
         public void actionPerformed(ActionEvent e) {
+            actionPriorities.setCurrentClass(currentClass);
             actionPriorities.addClassActionListener(b -> {
                 decorate.hideWindow(instructionsPanel, choicesPanel, backNextButtonsPanel);    
                 doBackButtonProcedure();

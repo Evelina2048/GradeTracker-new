@@ -219,8 +219,6 @@ public class StudentStatCollect extends JFrame {
     private void saveButtonAction() {
         Pattern pattern = Pattern.compile("^(?:[0-9]*(?:.[0-9]+))*\s*$|^[0-9]*\s*$", Pattern.CASE_INSENSITIVE);
         correctGradeFormatChecker(pattern);
-
-        setState.setTextFieldPanel(textBoxPanel);
         
         //if (textBoxPanel.getComponentCount() == 5 || 8 || 11 || 14 || 17 || 20 || 23 || 26 || 29 || 32) {
         //if ((textBoxPanel.getComponentCount() - 5) % 3 == 0) { //only want to write if 
@@ -228,6 +226,11 @@ public class StudentStatCollect extends JFrame {
         //set.setFilePath("/Users/evy/Documents/GradeTracker-new/src/main/view/UserInfo/StudentInfo/" + setUserInformation.getUsername() +"/ClassInformation/"+finalClassList.get(setState.getClassListIndex())+ ".txt");
         set.setFilePath(setUserInformation.getPathToClassInformationFileWithIndex());
         create.setTextFieldContainer(setState.getTextFieldPanel());
+
+
+        setState.setTextFieldPanel(textBoxPanel);
+        System.out.println("1111 placeholdercount"+ fileWrite.howManyPlaceholders());
+
         fileWrite.writeTextToFile();
        // }
     }

@@ -191,6 +191,7 @@ public class NewUser extends JFrame {
         nextButton.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
+                actionPriorities.setCurrentClass(currentClass);
                 nextButtonActionListenerWithPriorities("nextButton");
             }
         });

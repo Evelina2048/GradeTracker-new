@@ -47,16 +47,26 @@ public class GoIntoPanel {
         Container container = panel;
         Component component = container.getComponent(index);
         if (component instanceof JTextField) {
+                System.out.println("should print last");
                 JTextField textField = (JTextField) component;
+                System.out.println("textfield text and stuff "+textField.getText()+ " emptiedstate "+setState.getEmptiedState(textField));
                 return textField;
             } 
         else if (component instanceof JPanel) {
+            System.out.println("should print first");
                 JPanel jpanel = (JPanel) component;
-                goIntoPanel(jpanel, 0);
+                //TODO was goIntoPanel(jpanel, 0);
+                goIntoPanelReturnTextbox(jpanel, 0);
             }
-            System.out.println("none of these" +component.getClass().getName());
-            return textField;
+        
+        else {
+            System.out.println("im confused " + component.getClass().getName());
         }
+            //System.out.println("none of these" +component.getClass().getName());
+        //return textField;
+        JPanel jpanel = (JPanel) component;
+        return goIntoPanelReturnTextbox(jpanel, 0);
+    }
         
     public Boolean checkIfHasPlaceholder(JPanel textFieldPanel2) {
         JTextField textField = new JTextField();

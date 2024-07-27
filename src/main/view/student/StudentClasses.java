@@ -727,6 +727,7 @@ public class StudentClasses extends JFrame {
         @Override
         public void actionPerformed(ActionEvent e) {
             System.out.println("3333 "+actionPriorities.getCurrentClass());
+            actionPriorities.setCurrentClass(currentClass);
             actionPriorities.addClassActionListener(new ActionListener() {
                 @Override
                 public void actionPerformed(ActionEvent e) { // remember won't run if just enter without a click
