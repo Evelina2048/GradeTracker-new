@@ -136,10 +136,8 @@ public class StudentClasses extends JFrame {
         loadIfNeeded();
         westPanelCreate();
         buttonSetUpAction();
-        System.out.println("1111 "+actionPriorities.getCurrentClass());
         currentClass = "StudentClasses";
         actionPriorities.setCurrentClass(currentClass);
-        System.out.println("2222 "+actionPriorities.getCurrentClass());
     }
 
     private void loadIfNeeded() {
@@ -726,12 +724,10 @@ public class StudentClasses extends JFrame {
 
         @Override
         public void actionPerformed(ActionEvent e) {
-            System.out.println("3333 "+actionPriorities.getCurrentClass());
             actionPriorities.setCurrentClass(currentClass);
             actionPriorities.addClassActionListener(new ActionListener() {
                 @Override
                 public void actionPerformed(ActionEvent e) { // remember won't run if just enter without a click
-                    System.out.println("4444 "+actionPriorities.getCurrentClass());
                     System.out.println("enteraction");
                     doNextButtonProcedure();
                 }

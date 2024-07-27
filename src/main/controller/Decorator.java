@@ -376,10 +376,12 @@ public class Decorator {
     }
 
     public void maximumAmountReachedPopup() {
-        JDialog dialog = genericPopUpMessage("<html><center>Maximum amount reached.", null, 200 , 100);
+        if (setState.getCanContinue() == true) {
+            JDialog dialog = genericPopUpMessage("<html><center>Maximum amount reached.", null, 200 , 100);
             dialog.setLocationRelativeTo(window);
             dialog.setLocation(dialog.getX(), dialog.getY() + 15); 
-            dialog.setVisible(true);        
+            dialog.setVisible(true);  
+        }      
     }
 
     // public void errorMessageSetUp(String labelWords, int width, int height, JRad) {
