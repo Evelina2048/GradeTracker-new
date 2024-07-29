@@ -65,6 +65,7 @@ public class StudentClasses extends JFrame {
     private JTextField draggedTextField = new JTextField();
     private FileWriting fileWrite = new FileWriting();
     private CompositeActionListenerWithPriorities actionPriorities;
+    private JLabel spacedLabel;
 
     Border borderRegular = BorderFactory.createLineBorder(Color.GRAY, 2);
     JPanel southContainer = new JPanel(new GridLayout(2,1,0,0));
@@ -217,6 +218,7 @@ public class StudentClasses extends JFrame {
                 actionPriorities.addClassActionListener(new ActionListener() {
                     @Override
                     public void actionPerformed(ActionEvent e) {// remember wont run  if just enter without a click
+                        saveButtonAction();
                         hideWindow(); 
                         set.setWindow(window);
                         MainWindow main = new MainWindow();
@@ -381,6 +383,8 @@ public class StudentClasses extends JFrame {
     Component lastComponent = setState.getTextFieldPanel().getComponent(setState.getTextFieldPanel().getComponentCount()-1);
     //Bounds lastComponentBounds = lastComponent.getBounds();
     Rectangle lastComponentBounds = lastComponent.getBounds();
+    JPanel tempTextFieldPanel = setState.getTextFieldPanel();
+    int[] spacedLabelIndex = new int[1];
 
         for (int i = 0; i < setState.getTextFieldPanel().getComponentCount(); i++) { 
             JTextField textField = new JTextField();
@@ -418,6 +422,7 @@ public class StudentClasses extends JFrame {
                         System.out.println("comp "+comp.getClass().getName());
                         //ArrayList<JTextField> toDeleteList = new ArrayList<>();
                         ArrayList<JTextField> toAddList = new ArrayList<>();
+
                         for (int i = 0; i < setState.getTextFieldPanel().getComponentCount(); i++) { //loop to find what matches left component
                             JTextField textFieldComponent = (JTextField) comp;
                             JTextField componentFromPanel = (JTextField) setState.getTextFieldPanel().getComponent(i);
@@ -435,12 +440,17 @@ public class StudentClasses extends JFrame {
                             //}
                             }
                             else if (matchFound) {
-                                toAddList.add((JTextField) setState.getTextFieldPanel().getComponent(i));
-                                //JPanel panel = new JPanel();
-                                //panel.add(setState.getTextFieldPanel().getComponent(i));
-                                //create.deleteTextBox(panel);
+                                //toAddList.add((JTextField) setState.getTextFieldPanel().getComponent(i));
+                                toAddList.add((JTextField) tempTextFieldPanel.getComponent(i));
+                                JPanel panel = new JPanel();
+                                panel.add(tempTextFieldPanel.getComponent(i));
+                                create.deleteTextBox(panel);
                             }
                         }
+                        
+                        //spacedLabel = (JLabel) create.createTextBox("", "JLabel", false);
+                        spacedLabelIndex[0] = tempTextFieldPanel.getComponentCount()-1; //minus 1 to account for starting from 0.
+                        //System.out.println("spacedlabeltext: "+spacedLabelIndex);
                         textFieldPanel.add(create.createTextBox("", "JLabel", false));
                         //for (int j = 0; j < toDeleteList.size(); j++) {//delete from list
                         //}
@@ -580,6 +590,19 @@ public class StudentClasses extends JFrame {
             textField.addMouseListener(new MouseAdapter() {
             //tempTextField[0].addMouseListener( new MouseAdapter() {
                     public void mouseReleased(MouseEvent e) {
+                        //tempTextFieldPanel.getComponent(spacedLabelIndex[0]) = create.createTextBox(draggedTextField.getText(), "JTextField", false);
+
+                        // Create the new text field with the text from draggedTextField
+                        JTextField newTextField = new JTextField(draggedTextField.getText());
+
+                        // Remove the old component at the specified index
+                        Component oldComponent = tempTextFieldPanel.getComponent(spacedLabelIndex[0]);
+                        tempTextFieldPanel.remove(oldComponent);
+
+                        // Add the new component at the same index
+                        tempTextFieldPanel.add(newTextField, spacedLabelIndex[0]);
+
+                        create.windowFix();
                         layeredPane.remove(tempTextField[0]);
                     }
             });

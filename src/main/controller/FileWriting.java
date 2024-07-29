@@ -16,6 +16,7 @@ import main.model.GoIntoPanel;
 import main.model.Set;
 import main.model.SetState;
 import main.model.SetUserInformation;
+import main.controller.CompositeActionListenerWithPriorities;
 
 import java.io.FileWriter;
 
@@ -26,6 +27,7 @@ public class FileWriting {
     private Set set;
     private SetState setState;
     private SetUserInformation setUserInformation;
+    private CompositeActionListenerWithPriorities actionPriorities;
 
     private FileHandling fileHandler = new FileHandling();
     private JTextField textField = new JTextField();
@@ -42,6 +44,7 @@ public class FileWriting {
         this.set = Set.getInstance();
         this.setState = SetState.getInstance();
         this.setUserInformation = SetUserInformation.getInstance();
+        this.actionPriorities = CompositeActionListenerWithPriorities.getInstance();
         this.window = set.getWindow();
     }
 
@@ -133,7 +136,14 @@ private void tryToWriteTextFieldWithoutAppend(Component component, BufferedWrite
         String text = textField.getText().trim();
         if (!text.isEmpty()) {
             if (attachedBoxes == maxAttachedBoxes) {
+                //TODO classlist
+                if (actionPriorities.getCurrentClass() == "StudentClasses" && !classList.contains(text)) {
+                    classList.add(text);
+                }
+
+                else {
                 classList.add(text);
+                }
                 System.out.println("in trytowritetextfieldwithoutappend classlist "+classList);
                 try {
                     writer.write(text + "\n");
