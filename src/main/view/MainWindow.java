@@ -96,7 +96,7 @@ public void MainWindowLaunch() {
 private void windowSetUp() {
     //window set up
     window.setTitle("Launcher");
-    window.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
+    //window.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
     //window.setLayout(null);
     window.setSize(windowWidth, windowHeight);
 }

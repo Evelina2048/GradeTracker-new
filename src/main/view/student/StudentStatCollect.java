@@ -277,7 +277,6 @@ public class StudentStatCollect extends JFrame {
             if (setState.getClassListIndex()+1 <= setList.getFinalClassList().size()) {
                 System.out.println("the jlabel name: "+setList.getFinalClassList().get(setState.getClassListIndex()));
                 //hideWindow();
-                System.out.println("1111");
                 visitNextStudentClass();
                 studentStatCollectLaunch();
             }

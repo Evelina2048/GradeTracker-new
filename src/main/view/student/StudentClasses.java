@@ -81,6 +81,7 @@ public class StudentClasses extends JFrame {
     SetState setState;
     private SetUserInformation setUserInformation;
     private SetList setList;
+    private WindowAdapter windowCloseAdapter;
 
     JPanel instructionsPanel;
 
@@ -103,15 +104,27 @@ public class StudentClasses extends JFrame {
         setState.setCurrentClass("StudentClasses.java");
         window = set.getWindow();
 
-        ///
-        window.addWindowListener(new WindowAdapter() {
+        // ///
+        // window.addWindowListener(new WindowAdapter() {
+        //     @Override
+        //     public void windowClosing(WindowEvent e) {
+        //         if (set.getCurrentSaveButton().isEnabled() && saveButton != null) {
+        //             decorate.areYouSureMessage(null, "closing window", "<html><center> You did not save <br> Close anyways?", 176, 107);
+        //         }
+        //     }
+        // });
+
+        WindowAdapter windowCloseAdapter = new WindowAdapter() {
             @Override
             public void windowClosing(WindowEvent e) {
                 if (set.getCurrentSaveButton().isEnabled() && saveButton != null) {
+                    System.out.println(1111);
                     decorate.areYouSureMessage(null, "closing window", "<html><center> You did not save <br> Close anyways?", 176, 107);
                 }
             }
-        });
+        };
+
+        window.addWindowListener(windowCloseAdapter);
         ///
         //window.setBackground(Color.pink);
         window.setName("window");
@@ -215,6 +228,21 @@ public class StudentClasses extends JFrame {
                         MainWindow main = new MainWindow();
                         main.MainWindowLaunch();
                         main.setButtonSelected();
+
+                        //
+                        ///
+                        // window.addWindowListener(new WindowAdapter() {
+                        //     @Override
+                        //     public void windowClosing(WindowEvent e) {
+                        //         if (set.getCurrentSaveButton().isEnabled() && saveButton != null) {
+                        //             decorate.areYouSureMessage(null, "closing window", "<html><center> You did not save <br> Close anyways?", 176, 107);
+                        //         }
+                        //     }
+                        // });
+                        ///
+
+                        window.removeWindowListener(windowCloseAdapter);
+                        //
                     }
             }, 1, "backButton", null, currentClass);  // Add this ActionListener with priority 1
         }});
