@@ -30,7 +30,6 @@ import main.controller.CompositeActionListenerWithPriorities;
 
 import javax.swing.AbstractAction;
 import javax.swing.JComponent;
-import javax.swing.JDialog;
 import javax.swing.KeyStroke;
 import javax.swing.JPanel;
 
@@ -43,11 +42,9 @@ public class StudentStatCollect extends JFrame {
     private GoIntoPanel goIntoPanel;
     private JPanel backNextButtonsPanel;
     private JButton newTypeButton;
-    private JButton swapClassesButton;
     private Set set;
     private SetState setState;
     private SetList setList;
-    private Color lightgrayColor = Color.decode("#AFA2A2");
     private String currentClass = "StudentStatCollect Loading";
     
     private SetUserInformation setUserInformation;

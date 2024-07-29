@@ -58,8 +58,6 @@ public class StudentClasses extends JFrame {
     private GoIntoPanel goIntoPanel;
     private Decorator decorate;
     private CreateButton createButton;
-    private Color lightgrayColor = Color.decode("#AFA2A2");
-
     private JPanel backNextButtonsPanel;
     private JButton saveButton;
     private JTextField selectedTextBox;
@@ -92,14 +90,12 @@ public class StudentClasses extends JFrame {
 
     public void studentClassesLaunch() {
         southContainer.setName("SouthContainer");
-        //southContainer.setBackground(Color.pink);
         southContainer.setForeground(Color.pink);
         this.set = Set.getInstance();
         this.setState = SetState.getInstance();
         this.setUserInformation = SetUserInformation.getInstance();
         this.setList = SetList.getInstance();
         this.actionPriorities = CompositeActionListenerWithPriorities.getInstance();
-        //actionPriorities.setCurrentClass(currentClass);
 
         setState.setCurrentClass("StudentClasses.java");
         window = set.getWindow();
@@ -125,8 +121,6 @@ public class StudentClasses extends JFrame {
         };
 
         window.addWindowListener(windowCloseAdapter);
-        ///
-        //window.setBackground(Color.pink);
         window.setName("window");
         create = new Creator();
         decorate = new Decorator();
@@ -242,17 +236,14 @@ public class StudentClasses extends JFrame {
                         ///
 
                         window.removeWindowListener(windowCloseAdapter);
-                        //
                     }
             }, 1, "backButton", null, currentClass);  // Add this ActionListener with priority 1
         }});
-        //:
         return backButtonPanel;
     }
 
     private JPanel makeSaveButtonPanel() {
         saveButton = createButton.saveButtonCreate();
-        //set.setCurrentSaveButton(saveButton);
 
         saveButton.setEnabled(false);
         JPanel saveButtonPanel = new JPanel();
@@ -276,13 +267,7 @@ public class StudentClasses extends JFrame {
         JPanel nextButtonPanel = new JPanel();
         nextButtonPanel.add(nextButton);
         nextButton.setPreferredSize(new Dimension(87, 29));
-        // nextButton.addActionListener(new ActionListener() {
-        //     public void actionPerformed(ActionEvent e) {
-        //         doNextButtonProcedure();
-        //     }
-        // });
 
-        //:
         nextButton.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent e) {
                 actionPriorities.setCurrentClass(currentClass);
@@ -295,12 +280,11 @@ public class StudentClasses extends JFrame {
                 }, 1, "nextButton", null, currentClass);  // Add this ActionListener with priority 1
             }
         });
-        //:
         return nextButtonPanel;
     }
     private void doNextButtonProcedure() {
         ArrayList<String> classList;
-        classList = fileWrite.getClassList();//set.getTextFieldPanel();//set.getCurrentPanelList();
+        classList = fileWrite.getClassList();
         setList.setClassList(classList);
         writeType();
         System.out.println("nextbuttonhit");
@@ -432,7 +416,7 @@ public class StudentClasses extends JFrame {
                     if ((layeredPane.getComponentAt(leftPoint) instanceof JTextField && layeredPane.getComponentAt(rightPoint) instanceof JTextField) || (window.getComponentAt(leftPoint) instanceof JTextField && window.getComponentAt(rightPoint) instanceof JTextField)) {
                         Component comp = layeredPane.getComponentAt(leftPoint);
                         System.out.println("comp "+comp.getClass().getName());
-                        ArrayList<JTextField> toDeleteList = new ArrayList<>();
+                        //ArrayList<JTextField> toDeleteList = new ArrayList<>();
                         ArrayList<JTextField> toAddList = new ArrayList<>();
                         for (int i = 0; i < setState.getTextFieldPanel().getComponentCount(); i++) { //loop to find what matches left component
                             JTextField textFieldComponent = (JTextField) comp;
@@ -644,9 +628,8 @@ public class StudentClasses extends JFrame {
         deleteClassButton.setText("Delete?");
         window.remove(instructionsPanel);
         instructionsWordsAndPanel("Hit Delete Button to Delete");
-        //String filePath = "/Users/evy/Documents/GradeTracker-new/src/main/view/UserInfo/StudentInfo/"+setUserInformation.getUsername()+"/"+"ClassInformation"+"/"+selectedTextBox.getText()+".txt";
         String filePath = setUserInformation.getPathToClassInformationFileWithTextField(selectedTextBox);
-        removeDeleteClassButtonActionListeners();//deleteClassButton.getActionListeners().length);
+        removeDeleteClassButtonActionListeners();
         deleteClassButton.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent e) {
                 newClassButton.setEnabled(true);
@@ -773,12 +756,6 @@ public class StudentClasses extends JFrame {
     }
 
     public class EnterAction extends AbstractAction {
-        // @Override
-        // public void actionPerformed(ActionEvent e) {
-        //     System.out.println("2.5");
-        //     doNextButtonProcedure();
-        // }
-
         @Override
         public void actionPerformed(ActionEvent e) {
             actionPriorities.setCurrentClass(currentClass);
