@@ -69,19 +69,23 @@ public class StudentStatCollect extends JFrame {
     private int maxBoxes = 26;
 
     public StudentStatCollect() {
-        studentStatCollectLaunch();
-    }
-
-    public void studentStatCollectLaunch() {
         this.set = Set.getInstance();
         this.setState = SetState.getInstance();
         this.setUserInformation = SetUserInformation.getInstance();
         this.setList = SetList.getInstance();
         this.actionPriorities = CompositeActionListenerWithPriorities.getInstance();
         actionPriorities.setCurrentClass(currentClass);
+        create = new Creator();
+        goIntoPanel = new GoIntoPanel();
+        fileHandler = new FileHandling();
 
         setState.setCurrentClass("StudentStatCollect.java");
         window = set.getWindow();
+
+        //studentStatCollectLaunch();
+    }
+
+    public void studentStatCollectLaunch() {
         container.setName("contianer");
         //container.setBackground(Color.pink);
         textBoxPanel.setName("gridlayout textboxpanel");
@@ -95,11 +99,8 @@ public class StudentStatCollect extends JFrame {
         System.out.println("final class list issssss before: "+ finalClassList);
         finalClassList = setList.getFinalClassList();
         System.out.println("final class list issssss: "+ finalClassList);
-        create = new Creator();
         create.hideContainer();
 
-        goIntoPanel = new GoIntoPanel();
-        fileHandler = new FileHandling();
         
         createNewTypeButton();
         buttonSetUpAction();
@@ -110,11 +111,13 @@ public class StudentStatCollect extends JFrame {
     }
 
     public void buttonSetUpAction() {
+        System.out.println("in button set up action");
         JButton backButton = createButton.backButtonCreate();
         JPanel backButtonPanel = new JPanel();
         backButtonPanel.add(backButton);
         backAction(backButton);
         JButton saveButton = createButton.saveButtonCreate();
+        System.out.println("is savebutton set version? "+(saveButton==set.getCurrentSaveButton()));
         JPanel saveButtonPanel = new JPanel();
         saveButton.setEnabled(false);
         saveButtonPanel.add(saveButton);
@@ -272,8 +275,11 @@ public class StudentStatCollect extends JFrame {
             System.out.println();
             setState.incrementClassListIndex();
             if (setState.getClassListIndex()+1 <= setList.getFinalClassList().size()) {
-                System.out.println();
+                System.out.println("the jlabel name: "+setList.getFinalClassList().get(setState.getClassListIndex()));
+                //hideWindow();
+                System.out.println("1111");
                 visitNextStudentClass();
+                studentStatCollectLaunch();
             }
             else {
                 hideWindow();

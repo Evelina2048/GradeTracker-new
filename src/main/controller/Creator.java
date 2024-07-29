@@ -140,6 +140,7 @@ public class Creator {
         }
 
         else if(my_type.equals("JLabel")) {
+            System.out.println("jlabel to be created");
             Decorator decorate = new Decorator();
             System.out.println("hi creating jlabel for "+placeholder+" which is loaded? "+boxLoaded);
             JLabel toAddType = new JLabel(placeholder);

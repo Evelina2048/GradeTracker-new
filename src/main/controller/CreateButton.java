@@ -86,6 +86,7 @@ public class CreateButton {
         textField.getDocument().addDocumentListener(new DocumentListener() {
         @Override
         public void insertUpdate(DocumentEvent e) {
+            System.out.println("insert update. savebutton should enable");
             saveButtonEnable(); 
         }
 
@@ -106,7 +107,7 @@ public class CreateButton {
 
     public void saveButtonEnable() {
         if (set.getCurrentSaveButton() != null) {
-            System.out.println("should enable");
+            System.out.println("should enable saved button");
             set.getCurrentSaveButton().setEnabled(true);
         }
 
