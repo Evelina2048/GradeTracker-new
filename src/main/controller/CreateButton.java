@@ -105,8 +105,9 @@ public class CreateButton {
     }
 
     public void saveButtonEnable() {
-        if (saveButton != null) {
-        set.getCurrentSaveButton().setEnabled(true);
+        if (set.getCurrentSaveButton() != null) {
+            System.out.println("should enable");
+            set.getCurrentSaveButton().setEnabled(true);
         }
 
         else {

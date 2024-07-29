@@ -18,6 +18,7 @@ import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
 import java.awt.Color;
 import java.awt.Component;
+import java.awt.Container;
 import java.awt.event.MouseAdapter;
 import java.awt.GridLayout;
 import java.awt.event.ActionListener;
@@ -223,6 +224,8 @@ public class StudentClasses extends JFrame {
 
     private JPanel makeSaveButtonPanel() {
         saveButton = createButton.saveButtonCreate();
+        //set.setCurrentSaveButton(saveButton);
+
         saveButton.setEnabled(false);
         JPanel saveButtonPanel = new JPanel();
         saveButtonPanel.add(saveButton);
@@ -355,7 +358,6 @@ public class StudentClasses extends JFrame {
     }
 
     private void prepareTextboxForDeleteMode() {
-
     JTextField[] tempTextField = new JTextField[1];
     //JLabel[] tempTextField = new JLabel[1];
     tempTextField[0] = new JTextField("ERROR"); //if not overwritten will show error
@@ -391,21 +393,40 @@ public class StudentClasses extends JFrame {
                     Point cursorPoint = e.getPoint();
                     Point leftPoint = new Point(cursorPoint.x - 40, cursorPoint.y);
                     Point rightPoint = new Point(cursorPoint.x - 40, cursorPoint.y);
+                    Boolean matchFound = false;
+                    //int saveI;
                     //JTextField leftTextField = (JTextField) ;//(JTextField) e.getSource();
                     
+                    //if in between two textFields
                     if ((layeredPane.getComponentAt(leftPoint) instanceof JTextField && layeredPane.getComponentAt(rightPoint) instanceof JTextField) || (window.getComponentAt(leftPoint) instanceof JTextField && window.getComponentAt(rightPoint) instanceof JTextField)) {
                         Component comp = layeredPane.getComponentAt(leftPoint);
                         System.out.println("comp "+comp.getClass().getName());
-                        for (int i = 0; i < setState.getTextFieldPanel().getComponentCount(); i++) {
-                            //JTextField textfieldComponent = 
+                        ArrayList<JTextField> toDeleteList = new ArrayList<>();
+                        ArrayList<JTextField> toAddList = new ArrayList<>();
+                        for (int i = 0; i < setState.getTextFieldPanel().getComponentCount(); i++) { //loop to find what matches left component
+                            JTextField textFieldComponent = (JTextField) comp;
+                            JTextField componentFromPanel = (JTextField) setState.getTextFieldPanel().getComponent(i);
+                            if (textFieldComponent.getText().equals(componentFromPanel.getText())) { //if this component matches left component
                             //if (setState.getTextFieldPanel().getComponent(i).getText().equals(window.getComponentAt(leftPoint).getText())) {
                                 JPanel textFieldPanel = setState.getTextFieldPanel();
                                 //textFieldPanel.getComponent(i+1) = create.createTextBox();
+                                textFieldPanel.add(create.createTextBox("(:", "JTextField", false));
                                 textFieldPanel.add(create.createTextBox("", "JTextField", false));
                                 create.windowFix();
-
+                                //int saveI = i;
+                                matchFound = true;
+                                break;
                             //}
+                            }
+                            else if (matchFound) {
+                                toAddList.add((JTextField) setState.getTextFieldPanel().getComponent(i));
+                                JPanel panel = new JPanel();
+                                panel.add(setState.getTextFieldPanel().getComponent(i));
+                                create.deleteTextBox(panel);
+                            }
                         }
+                        //for (int j = 0; j < toDeleteList.size(); j++) {//delete from list
+                        //}
                     }
 
                     else if (window.getComponentAt(leftPoint) instanceof JTextField && window.getComponentAt(rightPoint) instanceof JTextField) {

@@ -9,8 +9,6 @@ import javax.swing.JRadioButton;
 import javax.swing.KeyStroke;
 import javax.swing.JPanel;
 import javax.swing.JLabel;
-import javax.swing.JDialog;
-import javax.swing.SwingConstants;
 import javax.swing.Timer;
 
 import java.awt.BorderLayout;
@@ -20,7 +18,6 @@ import java.awt.FontMetrics;
 import java.awt.GridBagLayout;
 import java.awt.event.ActionListener;
 import java.awt.event.ActionEvent;
-import java.awt.FlowLayout;
 
 //key listening
 import java.awt.event.KeyEvent;
@@ -116,7 +113,7 @@ private void InstructionsWordsWindow() {
 private void truncateLabelText(String prefix, String suffix, int maxWidth) {
     FontMetrics fontMetrics = instructionsWords.getFontMetrics(instructionsWords.getFont());
     JLabel usernameLabel = new JLabel(setUserInformation.getUsername());
-    String fullText = prefix + usernameLabel.getText() + suffix;
+    usernameLabel.getText();
 
     System.out.println("username "+setUserInformation.getUsername());
 
@@ -206,7 +203,7 @@ private void addToChoicesPanel(ButtonGroup teacherStudentGroup, JRadioButton tea
 
 private void backNextButton() {
     backNextButtonsPanel = new JPanel(new BorderLayout());
-    Creator create = new Creator();
+    new Creator();
     JButton backButton = createButton.backButtonCreate();
     // backButton.addActionListener(new ActionListener() {
     //     public void actionPerformed(ActionEvent e) {;

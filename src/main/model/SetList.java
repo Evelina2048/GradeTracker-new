@@ -9,7 +9,6 @@ import javax.swing.JTextField;
 
 public class SetList {
     private ArrayList<String> classList;
-    private Boolean saveable;
     private JPanel textFieldPanel;
     private HashMap<JTextField, Boolean> textFieldEmptiedMap = new HashMap<>();
     private HashMap<JTextField, Boolean> textFieldLoadedMap = new HashMap<>();

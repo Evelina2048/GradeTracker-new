@@ -377,12 +377,16 @@ public class Gather {
         else if (textFieldFilled) { //good case
             if (existingOrNew.trim().equals("New User")) { //if new user,
                 hideWindow();
-                new MainWindow();
+                MainWindow main = new MainWindow();
+                main.setButtonSelected();
             }
         }
         else {
             System.out.println("Something went wrong in username input");
             errorMessageSetUp("<html><center>Something went wrong in username input",200,90);
+        }
+
+        if (setUserInformation.getStudentOrTeacher() != null) {
         }
     }
 

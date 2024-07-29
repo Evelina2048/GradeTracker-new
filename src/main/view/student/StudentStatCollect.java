@@ -322,10 +322,8 @@ public class StudentStatCollect extends JFrame {
        newDelContainer.setName("newDelContainer");
        //gridlayout allows any time of resizing
        //flowlayout allows resizing of width
-       System.out.println("1111");
        newTypeButton.addActionListener(new ActionListener() {
         public void actionPerformed(ActionEvent e) {
-            System.out.println("2222");
             newSet();
             System.out.println("ClassLabelPanel after adding: "+ allBoxesPanel.getComponentCount());
         }
@@ -436,7 +434,6 @@ public class StudentStatCollect extends JFrame {
     }
 
     private void boxManageCreate(String placeholder, String type, Boolean boxLoaded) {
-        System.out.println("4444");
         if (numOfBoxes < maxBoxes) {
             System.out.println("test.1 "+ placeholder +" "+type+ "textboxpanel components"+textBoxPanel.getComponentCount());
             textBoxPanel.add(create.typeBox(placeholder, type, boxLoaded));//false));
@@ -453,8 +450,7 @@ public class StudentStatCollect extends JFrame {
             // JDialog dialog = decorate.genericPopUpMessage("<html><center>Maximum amount reached.", null, 200 , 100);
             // dialog.setLocationRelativeTo(window);
             // dialog.setLocation(dialog.getX(), dialog.getY() + 15); 
-            // dialog.setVisible(true);   
-            System.out.println("5555");     
+            // dialog.setVisible(true);       
 
             decorate.maximumAmountReachedPopup();
             setState.setCanContinue(false);
@@ -463,7 +459,6 @@ public class StudentStatCollect extends JFrame {
 
     private void newSet() {
         typeNumber++;
-        System.out.println("3333");
         boxManageCreate("Grade Type "+typeNumber, "JTextField",false);
         boxManageCreate("Percentage of Grade", "JTextField",false);
         boxManageCreate("Grades(format:# # #)", "JTextField",false);

@@ -3,9 +3,6 @@ package main.model;
 import java.util.ArrayList;
 import java.util.HashMap;
 
-import javax.swing.JButton;
-import javax.swing.JFrame;
-import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.JTextField;
 import java.awt.Component;
@@ -13,28 +10,19 @@ import java.awt.Component;
 import java.awt.Font;
 
 public class SetState {
-    private ArrayList<String> classList;
     private ArrayList<String> typeList;
     private Boolean saveable;
     private JPanel textFieldPanel;
     private HashMap<JTextField, Boolean> textFieldEmptiedMap = new HashMap<>();
     private HashMap<JTextField, Boolean> textFieldLoadedMap = new HashMap<>();
     private int classListIndex = 0;
-    private ArrayList<String> finalClassList;
-    private JFrame window;
     private String currentClass;
     private Boolean canContinue = true;
-    private JButton saveButton;
-    private Boolean newOrExistingHasChanged = false;
-    private String filePath;
-
     private Font textFieldFont;
 
     //Below is for singleton design pattern
     // Static variable to hold the single instance of the class
     private static SetState instance;
-
-    private JLabel DEBUGMARKEDBOX;
 
     // Private constructor to prevent instantiation
     private SetState() {}
