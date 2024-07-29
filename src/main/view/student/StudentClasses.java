@@ -394,6 +394,7 @@ public class StudentClasses extends JFrame {
                     Point leftPoint = new Point(cursorPoint.x - 40, cursorPoint.y);
                     Point rightPoint = new Point(cursorPoint.x - 40, cursorPoint.y);
                     Boolean matchFound = false;
+                    JPanel textFieldPanel = setState.getTextFieldPanel();
                     //int saveI;
                     //JTextField leftTextField = (JTextField) ;//(JTextField) e.getSource();
                     
@@ -408,10 +409,11 @@ public class StudentClasses extends JFrame {
                             JTextField componentFromPanel = (JTextField) setState.getTextFieldPanel().getComponent(i);
                             if (textFieldComponent.getText().equals(componentFromPanel.getText())) { //if this component matches left component
                             //if (setState.getTextFieldPanel().getComponent(i).getText().equals(window.getComponentAt(leftPoint).getText())) {
-                                JPanel textFieldPanel = setState.getTextFieldPanel();
                                 //textFieldPanel.getComponent(i+1) = create.createTextBox();
-                                textFieldPanel.add(create.createTextBox("(:", "JTextField", false));
-                                textFieldPanel.add(create.createTextBox("", "JTextField", false));
+
+                                //textFieldPanel.add(create.createTextBox("(:", "JTextField", false));
+                                //extFieldPanel.add(create.createTextBox("", "JTextField", false));
+
                                 create.windowFix();
                                 //int saveI = i;
                                 matchFound = true;
@@ -420,13 +422,17 @@ public class StudentClasses extends JFrame {
                             }
                             else if (matchFound) {
                                 toAddList.add((JTextField) setState.getTextFieldPanel().getComponent(i));
-                                JPanel panel = new JPanel();
-                                panel.add(setState.getTextFieldPanel().getComponent(i));
-                                create.deleteTextBox(panel);
+                                //JPanel panel = new JPanel();
+                                //panel.add(setState.getTextFieldPanel().getComponent(i));
+                                //create.deleteTextBox(panel);
                             }
                         }
+                        textFieldPanel.add(create.createTextBox("", "JLabel", false));
                         //for (int j = 0; j < toDeleteList.size(); j++) {//delete from list
                         //}
+                        for (int j = 0; j < toAddList.size(); j++) {//delete from list
+                            textFieldPanel.add(toAddList.get(j));
+                        }
                     }
 
                     else if (window.getComponentAt(leftPoint) instanceof JTextField && window.getComponentAt(rightPoint) instanceof JTextField) {
