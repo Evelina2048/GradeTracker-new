@@ -72,6 +72,9 @@ public class StudentClasses extends JFrame {
     AtomicBoolean textFieldEmptied = new AtomicBoolean(false);;
     JButton newClassButton;
     JButton deleteClassButton;
+    JButton moveClassButton;
+    JPanel moveClassButtonPanel;
+
     FileHandling fileHandler = new FileHandling();
     JLayeredPane layeredPane = new JLayeredPane();
     private String currentClass = "StudentClasses Loading";
@@ -169,6 +172,7 @@ public class StudentClasses extends JFrame {
     private void westPanelCreate() {
         createNewClassButton();
         deleteClassButton();
+        moveClassButton();
 
         JPanel buttonsPanel = new JPanel(new BorderLayout());
 
@@ -177,6 +181,7 @@ public class StudentClasses extends JFrame {
         buttonsPanel.setPreferredSize(new Dimension(100,0));
         buttonsPanel.add(newClassButton,BorderLayout.WEST);
         buttonsPanel.add(deleteClassButton, BorderLayout.EAST);
+        buttonsPanel.add(moveClassButton, BorderLayout.CENTER);
     
         southContainer.add(buttonsPanel,BorderLayout.CENTER);
 
@@ -338,6 +343,18 @@ public class StudentClasses extends JFrame {
         });
     }
 
+    private void moveClassButton() {
+        moveClassButton = new JButton("Move Classes");
+        //moveClassButtonPanel = new JPanel();
+        //moveClassButtonPanel.setSize(new Dimension(150, 50));
+        //moveClassButtonPanel.add(moveClassButton);
+        moveClassButton.addActionListener(new ActionListener() {
+            public void actionPerformed(ActionEvent e) {
+                System.out.println("moveClass Mode hit");
+            }
+        });
+    }
+
     private void writeType() {
         //set.setFinalClassList(set.getClassList());
         System.out.println("testing? "+setList.getCurrentPanelList());
@@ -365,6 +382,7 @@ public class StudentClasses extends JFrame {
         prepareTextboxForDeleteMode();
         saveButtonAction();
         newClassButton.setEnabled(false);
+        moveClassButton.setEnabled(false);
         leaveDeleteModeButton();
 
         window.remove(instructionsPanel);
@@ -510,7 +528,7 @@ public class StudentClasses extends JFrame {
                     }
 
                     if (tempTextField[0].getText().equals("ERROR")){
-                    tempTextField[0] = create.createTextBox("Hello. Ur cute", "JTextField", false);
+                    tempTextField[0] = create.createTextBox(draggedTextField.getText(), "JTextField", false);
                     //tempTextField[0] = new JLabel("Hello <3");
                     tempTextField[0].setOpaque(true);
                     }
@@ -672,6 +690,7 @@ public class StudentClasses extends JFrame {
         deleteClassButton.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent e) {
                 newClassButton.setEnabled(true);
+                moveClassButton.setEnabled(true);
                 //if the file has loaded information attached
                 if (setState.getLoadedState(selectedTextBox) && (fileHandler.fileExists(filePath)) && fileHandler.fileIsNotEmpty(filePath)) {
                 
@@ -742,6 +761,7 @@ public class StudentClasses extends JFrame {
                 instructionsWordsAndPanel("Left Delete Mode. In Edit Mode");
                 backToDefaultDeleteButton();
                 newClassButton.setEnabled(true);
+                moveClassButton.setEnabled(true);
                 for (int i = 0; i < setState.getTextFieldPanel().getComponentCount(); i++) {
                     JTextField textField = new JTextField();
                     if (setState.getTextFieldPanel().getComponent(i) instanceof JTextField) {
@@ -783,6 +803,7 @@ public class StudentClasses extends JFrame {
         backNextButtonsPanel.setVisible(false);
         newClassButton.setVisible(false);
         deleteClassButton.setVisible(false);
+        moveClassButton.setVisible(false);
         southContainer.setVisible(false);
         create.getTextFieldContainer().setVisible(false);
         instructionsPanel.setVisible(false);
