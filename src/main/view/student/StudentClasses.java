@@ -613,6 +613,7 @@ public class StudentClasses extends JFrame {
 
                         create.windowFix();
                         layeredPane.remove(tempTextField[0]);
+                        fixClassList();
                     }
             });
     }
@@ -624,6 +625,15 @@ public class StudentClasses extends JFrame {
 //     private void draggingListeners() {
 //         //
 //     }
+
+    private void fixClassList() {
+        ArrayList<String> fixedClassList = new ArrayList<>();
+        for (int i = 0; i < setState.getTextFieldPanel().getComponentCount(); i++) {
+            JTextField textFieldComponent = (JTextField) setState.getTextFieldPanel().getComponent(i);
+            fixedClassList.add(textFieldComponent.getText());
+            setList.setClassList(fixedClassList);
+        }
+    }
 
     private void addMouseListenerToTextboxAndFrame(JTextField textField) {
         turnOffEditability(textField);
