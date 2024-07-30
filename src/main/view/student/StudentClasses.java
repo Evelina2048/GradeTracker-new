@@ -100,7 +100,6 @@ public class StudentClasses extends JFrame {
 
         setState.setCurrentClass("StudentClasses.java");
         window = set.getWindow();
-        System.out.println("5555 "+setList.getFinalClassList());
 
         // ///
         // window.addWindowListener(new WindowAdapter() {
@@ -277,6 +276,7 @@ public class StudentClasses extends JFrame {
                     @Override
                     public void actionPerformed(ActionEvent e) {// remember wont run  if just enter without a click
                         //System.out.println("enteraction");
+                        System.out.println("1111 ");
                         doNextButtonProcedure();
                     }
                 }, 1, "nextButton", null, currentClass);  // Add this ActionListener with priority 1
@@ -285,11 +285,9 @@ public class StudentClasses extends JFrame {
         return nextButtonPanel;
     }
     private void doNextButtonProcedure() {
-        System.out.println("2222 "+setList.getFinalClassList()+" currentpanellist "+setList.getCurrentPanelList());
         ArrayList<String> classList;
         classList = fileWrite.getClassList();
 
-        System.out.println("2222.1 classlist"+classList);
         //setList.setClassList(classList);
         writeType();
         System.out.println("nextbuttonhit");
@@ -302,12 +300,11 @@ public class StudentClasses extends JFrame {
         setList.setFinalClassList(setList.getCurrentPanelList());
         }
 
-        System.out.println("2222.5 "+setList.getFinalClassList());
-
         System.out.println("thestuffclasslist "+classList+" "+setList.getCurrentPanelList());
         StudentStatCollect studentStatCollect = new StudentStatCollect();
         //System.out.println("f")
         if (fileHandler.fileExists("/Users/evy/Documents/GradeTracker-new/src/main/view/UserInfo/StudentInfo/" + setUserInformation.getUsername() + "/" +"ClassInformation"+"/"+setList.getFinalClassList().get(0) + ".txt")) { //needs to keep path because its with index 0
+            System.out.println("3333 ");
             create.hideContainer();
             studentStatCollect.studentStatCollectLaunch();
             studentStatCollect.addLoadedBoxes();
@@ -805,7 +802,6 @@ public class StudentClasses extends JFrame {
                 @Override
                 public void actionPerformed(ActionEvent e) { // remember won't run if just enter without a click
                     System.out.println("enteraction");
-                    System.out.println("1111 "+setList.getFinalClassList());
                     doNextButtonProcedure();
                 }
             }, 1, "EnterAction", null, currentClass);  // Add this ActionListener with priority 1

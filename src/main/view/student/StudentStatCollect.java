@@ -98,15 +98,15 @@ public class StudentStatCollect extends JFrame {
         System.out.println("final class list issssss: "+ finalClassList);
         create.hideContainer();
 
-        
+        System.out.println("4444 "+(backNextButtonsPanel==null));
         createNewTypeButton();
         buttonSetUpAction();
+        System.out.println("5555 "+(backNextButtonsPanel==null));
         window.setTitle("StudentStatCollect");
 
         currentClass = "StudentStatCollect";
         actionPriorities.setCurrentClass(currentClass);
 
-        System.out.println("3333"+setList.getFinalClassList());
     }
 
     public void buttonSetUpAction() {
@@ -157,10 +157,10 @@ public class StudentStatCollect extends JFrame {
         backButton.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent e) {
                 actionPriorities.setCurrentClass(currentClass);
-                System.out.println("4444 "+setList.getFinalClassList());
                 actionPriorities.addClassActionListener(b -> {
                     if(setState.getCanContinue()) {
                         if (setState.getClassListIndex() == 0) { //case for back to classes
+                            System.out.println("hidewindow1");
                             hideWindow();
                             StudentClasses studentClasses = new StudentClasses();
                             studentClasses.studentClassesLaunch();
@@ -261,6 +261,7 @@ public class StudentStatCollect extends JFrame {
                     @Override
                     public void actionPerformed(ActionEvent e) {// remember wont run  if just enter without a click
                         System.out.println("enteraction");
+                        System.out.println("6666 "+(backNextButtonsPanel==null));
                         doNextButtonProcedure();
                     }
                 }, 1, "nextButton", null, currentClass);  // Add this ActionListener with priority 1
@@ -275,12 +276,14 @@ public class StudentStatCollect extends JFrame {
             System.out.println();
             setState.incrementClassListIndex();
             if (setState.getClassListIndex()+1 <= setList.getFinalClassList().size()) {
+                System.out.println("7777 "+(backNextButtonsPanel==null));
                 System.out.println("the jlabel name: "+setList.getFinalClassList().get(setState.getClassListIndex()));
                 //hideWindow();
-                visitNextStudentClass();
                 studentStatCollectLaunch();
+                visitNextStudentClass();
             }
             else {
+                System.out.println("hidewindow2");
                 hideWindow();
                 new PrintStudentGrades(set.getWindow(), setUserInformation.getStudentOrTeacher(), setUserInformation.getExistingOrNew());
             }
@@ -302,8 +305,10 @@ public class StudentStatCollect extends JFrame {
             create.windowFix();
         }
         else { //first time visiting next class
+            System.out.println("hidewindow3");
             hideWindow();
             StudentStatCollect studentStatCollect = new StudentStatCollect();
+            //studentStatCollect.studentStatCollectLaunch();
             studentStatCollect.DisplayClasses();
         }
 
@@ -429,6 +434,7 @@ public class StudentStatCollect extends JFrame {
     }
 
     private void hideWindow() {
+        System.out.println("about to hide window in "+setList.getFinalClassList().get(setState.getClassListIndex()));
         create.hideContainer();
         backNextButtonsPanel.setVisible(false);
         newDelContainerFlow.setVisible(false);
