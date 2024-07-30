@@ -16,7 +16,6 @@ import main.model.GoIntoPanel;
 import main.model.Set;
 import main.model.SetState;
 import main.model.SetUserInformation;
-import main.controller.CompositeActionListenerWithPriorities;
 
 import java.io.FileWriter;
 
@@ -38,8 +37,6 @@ public class FileWriting {
     private String text = textField.getText().trim();
 
     private int placeholderCount = 0;
-    private int allCount = 0;
-    
     public FileWriting() {
         this.set = Set.getInstance();
         this.setState = SetState.getInstance();
@@ -49,7 +46,7 @@ public class FileWriting {
     }
 
 public void writeFolderToFile() {
-    String username = setUserInformation.getUsername();
+    setUserInformation.getUsername();
     String folderPath = setUserInformation.getPathToClassInformationFolder();
     File folder = new File(folderPath);
     if (!folder.exists()) {
@@ -58,7 +55,6 @@ public void writeFolderToFile() {
 }
 
 private void decideIfWrite(Component component, BufferedWriter writer) {
-    Decorator decorate = new Decorator();
     textField = (JTextField) component;
     Boolean studentStatNonWritablePlaceholder = setState.getEmptiedState(textField) == false && setState.getCurrentClass() == "StudentStatCollect.java" && !textField.getText().equals("Credits (Optional)");
 
@@ -67,19 +63,8 @@ private void decideIfWrite(Component component, BufferedWriter writer) {
     }
     else if (studentStatNonWritablePlaceholder) {
         removeUnwritablePlaceholders();
-        
-        // if (setState.getCanContinue()) {
-        //     placeholderCount++;
-        //     allCount++;
-        //     decorate.areYouSureMessage(null, "studentStatsEmpty", "Remove placeholders to continue?", 230, 90); //hello friends
-        //     //return;
-        // }
     }
 }
-
-// public void makeUsernameFile() {
-
-// }
 
 private void tryToWrite(BufferedWriter writer) {
     text = textField.getText().trim();
@@ -232,22 +217,7 @@ private void removeUnwritablePlaceholders() {
     else {
         attachedBoxes++;
     }
-    //placeholderCount++;
-
-    // if (setState.getCanContinue()) {
-    //         Decorator decorate = new Decorator();
-            placeholderCount++;
-            allCount++;
-        //     if (placeholderCount == 1) {
-        //     decorate.areYouSureMessage(null, "studentStatsEmpty", "Remove placeholder(s) to continue?", 230, 90); //hello friends
-        //     setState.setCanContinue(false);
-        // }
-
-        // else if (allCount == setState.getTextFieldPanel().getComponentCount() && placeholderCount == allCount) {
-        //     decorate.areYouSureMessage(null, "studentStatsEmpty", "", 230, 90);
-        // }
-        //return;
-    //}
+        placeholderCount++;
 }
 
 public void deleteLines(String importedFilePath, String text) {
@@ -279,9 +249,7 @@ public int howManyPlaceholders() {
     int placeholderAmount = 0;
     JTextField returnedBox = new JTextField("howmanyplaceholdersnotchanged");
     System.out.println("component amount"+setState.getTextFieldPanel().getComponentCount());
-    // for (int i = 1; i <= 1; i++) {
     for (int i = 1; i < setState.getTextFieldPanel().getComponentCount(); i++) {
-    //for (Component component : setState.getTextFieldPanel().getComponents()) {
         System.out.println("instance of "+setState.getTextFieldPanel().getComponent(i).getClass().getName());
         Component component = setState.getTextFieldPanel().getComponent(i);
         if (component instanceof JTextField && setState.getEmptiedState(textField) == false) {
