@@ -99,7 +99,6 @@ public class Decorator {
     }
 
     public String areYouSureMessage(JTextField importedTextField, String myReason, String text, int width, int height) {
-        System.out.println("2222"+myReason);
         reason = myReason;
         textField = importedTextField;
         dialog = new JDialog(window, true);
@@ -233,11 +232,9 @@ public class Decorator {
     }
 
     private void noButtonActionListener(JButton noButton) {
-        System.out.println("3333 in noButtonActionListener");
         //set.setDialogBeingDisplayed(false);
         noButton.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent e) {
-                System.out.println("4444 in action performed");
                 noButtonAction();
             }
         });
@@ -249,7 +246,6 @@ public class Decorator {
             //window.remove
             window.setDefaultCloseOperation(JFrame.DO_NOTHING_ON_CLOSE);
         }
-        System.out.println("5555 in no button aciton");
         //System.out.println("dialog stats: "+dialog.getSize());
         window.requestFocusInWindow(); 
         dialog.setVisible(false);

@@ -100,6 +100,7 @@ public class StudentClasses extends JFrame {
 
         setState.setCurrentClass("StudentClasses.java");
         window = set.getWindow();
+        System.out.println("5555 "+setList.getFinalClassList());
 
         // ///
         // window.addWindowListener(new WindowAdapter() {
@@ -115,7 +116,6 @@ public class StudentClasses extends JFrame {
             @Override
             public void windowClosing(WindowEvent e) {
                 if (set.getCurrentSaveButton().isEnabled() && saveButton != null) {
-                    System.out.println(1111);
                     decorate.areYouSureMessage(null, "closing window", "<html><center> You did not save <br> Close anyways?", 176, 107);
                 }
             }
@@ -158,7 +158,7 @@ public class StudentClasses extends JFrame {
                 create.createTextBox(myList.get(index), "JTextField", true);
             }
             setList.setClassList(myList);
-            setList.setFinalClassList(setList.getCurrentPanelList());
+            //setList.setFinalClassList(setList.getCurrentPanelList());
             
         }
 
@@ -276,7 +276,7 @@ public class StudentClasses extends JFrame {
                 actionPriorities.addClassActionListener(new ActionListener() {
                     @Override
                     public void actionPerformed(ActionEvent e) {// remember wont run  if just enter without a click
-                        System.out.println("enteraction");
+                        //System.out.println("enteraction");
                         doNextButtonProcedure();
                     }
                 }, 1, "nextButton", null, currentClass);  // Add this ActionListener with priority 1
@@ -285,19 +285,28 @@ public class StudentClasses extends JFrame {
         return nextButtonPanel;
     }
     private void doNextButtonProcedure() {
+        System.out.println("2222 "+setList.getFinalClassList()+" currentpanellist "+setList.getCurrentPanelList());
         ArrayList<String> classList;
         classList = fileWrite.getClassList();
-        setList.setClassList(classList);
+
+        System.out.println("2222.1 classlist"+classList);
+        //setList.setClassList(classList);
         writeType();
         System.out.println("nextbuttonhit");
         fileWrite.writeTextToFile();
-        setList.setFinalClassList(classList);
+        //setList.setFinalClassList(classList);
         hideWindow();
         create.hideContainer();
 
+        if (setList.getCurrentPanelList().size() > 0) {
         setList.setFinalClassList(setList.getCurrentPanelList());
+        }
+
+        System.out.println("2222.5 "+setList.getFinalClassList());
+
         System.out.println("thestuffclasslist "+classList+" "+setList.getCurrentPanelList());
         StudentStatCollect studentStatCollect = new StudentStatCollect();
+        //System.out.println("f")
         if (fileHandler.fileExists("/Users/evy/Documents/GradeTracker-new/src/main/view/UserInfo/StudentInfo/" + setUserInformation.getUsername() + "/" +"ClassInformation"+"/"+setList.getFinalClassList().get(0) + ".txt")) { //needs to keep path because its with index 0
             create.hideContainer();
             studentStatCollect.studentStatCollectLaunch();
@@ -786,6 +795,7 @@ public class StudentClasses extends JFrame {
                 @Override
                 public void actionPerformed(ActionEvent e) { // remember won't run if just enter without a click
                     System.out.println("enteraction");
+                    System.out.println("1111 "+setList.getFinalClassList());
                     doNextButtonProcedure();
                 }
             }, 1, "EnterAction", null, currentClass);  // Add this ActionListener with priority 1

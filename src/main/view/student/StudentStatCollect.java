@@ -105,6 +105,8 @@ public class StudentStatCollect extends JFrame {
 
         currentClass = "StudentStatCollect";
         actionPriorities.setCurrentClass(currentClass);
+
+        System.out.println("3333"+setList.getFinalClassList());
     }
 
     public void buttonSetUpAction() {
@@ -155,6 +157,7 @@ public class StudentStatCollect extends JFrame {
         backButton.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent e) {
                 actionPriorities.setCurrentClass(currentClass);
+                System.out.println("4444 "+setList.getFinalClassList());
                 actionPriorities.addClassActionListener(b -> {
                     if(setState.getCanContinue()) {
                         if (setState.getClassListIndex() == 0) { //case for back to classes
