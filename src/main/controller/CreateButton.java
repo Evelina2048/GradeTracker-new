@@ -3,6 +3,8 @@ package main.controller;
 import javax.swing.BorderFactory;
 import javax.swing.JButton;
 import java.awt.BorderLayout;
+import java.awt.Container;
+
 import javax.swing.JPanel;
 import javax.swing.JTextField;
 import javax.swing.event.DocumentEvent;
@@ -92,7 +94,20 @@ public class CreateButton {
 
         @Override
         public void removeUpdate(DocumentEvent e) {
-            System.out.println("removeUpdate/// ");
+            // if (textField.getParent() != null) {
+            //     System.out.println("removeUpdate/// "+textField.getParent().getParent().getName());//.getParent().getParent().getParent().getName());
+            // }
+
+            if (textField.getParent() != null) {
+                Container textFieldParent = textField.getParent();
+                int parentCount = 1;
+                while (textFieldParent.getParent().getName() == null && parentCount < 100) {
+                     parentCount++;
+                     System.out.println("parentcount "+parentCount);
+                }
+                System.out.println("name? "+textFieldParent.getName()+" parentcount"+parentCount);
+            }
+
             //set.setEmptiedState(true);
             setState.setEmptiedState(textField, true);
             //textField.getParent();

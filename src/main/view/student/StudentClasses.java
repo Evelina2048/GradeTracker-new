@@ -281,7 +281,6 @@ public class StudentClasses extends JFrame {
                     @Override
                     public void actionPerformed(ActionEvent e) {// remember wont run  if just enter without a click
                         //System.out.println("enteraction");
-                        System.out.println("1111 ");
                         doNextButtonProcedure();
                     }
                 }, 1, "nextButton", null, currentClass);  // Add this ActionListener with priority 1
@@ -293,23 +292,16 @@ public class StudentClasses extends JFrame {
         ArrayList<String> classList;
         classList = fileWrite.getClassList();
 
-        //setList.setClassList(classList);
         writeType();
         System.out.println("nextbuttonhit");
         fileWrite.writeTextToFile();
-        //setList.setFinalClassList(classList);
         hideWindow();
         create.hideContainer();
-
-        if (setList.getCurrentPanelList().size() > 0) {
-        setList.setFinalClassList(setList.getCurrentPanelList());
-        }
 
         System.out.println("thestuffclasslist "+classList+" "+setList.getCurrentPanelList());
         StudentStatCollect studentStatCollect = new StudentStatCollect();
         //System.out.println("f")
         if (fileHandler.fileExists("/Users/evy/Documents/GradeTracker-new/src/main/view/UserInfo/StudentInfo/" + setUserInformation.getUsername() + "/" +"ClassInformation"+"/"+setList.getFinalClassList().get(0) + ".txt")) { //needs to keep path because its with index 0
-            System.out.println("3333 ");
             create.hideContainer();
             studentStatCollect.studentStatCollectLaunch();
             studentStatCollect.addLoadedBoxes();
@@ -357,12 +349,17 @@ public class StudentClasses extends JFrame {
 
     private void writeType() {
         //set.setFinalClassList(set.getClassList());
-        System.out.println("testing? "+setList.getCurrentPanelList());
-        setList.setFinalClassList(setList.getCurrentPanelList());
+
+
+
+        //setList.setFinalClassList(setList.getCurrentPanelList());
         System.out.println("set.getcurrentpanellist "+setList.getCurrentPanelList());
         set.setFilePath(setUserInformation.getPathToClassTextFile());
         fileWrite.writeTextToFile();
         fileWrite.debugPrintPanel();
+        System.out.println("testing? "+setList.getCurrentPanelList()+ "..."+ fileWrite.getClassList());
+        setList.setFinalClassList(fileWrite.getClassList());
+        System.out.println("111 "+setList.getFinalClassList());
     }
 
     private void backToDefaultDeleteButton() {

@@ -3,7 +3,6 @@ package main.model;
 import java.util.ArrayList;
 
 import javax.swing.JTextField;
-import main.model.SetList;
 
 public class SetUserInformation {
     private String username;
@@ -60,7 +59,7 @@ public class SetUserInformation {
     }
 
     public String getPathToClassInformationFileWithIndex() {
-        this.set = Set.getInstance();
+        System.out.println("final list in path"+ setList.getFinalClassList()+" "+"/Users/evy/Documents/GradeTracker-new/src/main/view/UserInfo/StudentInfo/"+getUsername()+"/ClassInformation/"+setList.getFinalClassList().get(setState.getClassListIndex())+".txt");
         return  "/Users/evy/Documents/GradeTracker-new/src/main/view/UserInfo/StudentInfo/"+getUsername()+"/ClassInformation/"+setList.getFinalClassList().get(setState.getClassListIndex())+".txt";
     }
 

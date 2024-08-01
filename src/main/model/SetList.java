@@ -20,6 +20,7 @@ public class SetList {
     private static SetList instance;
 
     private JLabel DEBUGMARKEDBOX;
+    private JPanel classLabelPanel;
 
     // Private constructor to prevent instantiation
     private SetList() {}
@@ -65,5 +66,13 @@ public class SetList {
     public ArrayList<String> getFinalClassList() {
         System.out.println("ingetfinalclasslist: "+finalClassList);
         return finalClassList;
+    }
+
+    public void setClassLabelPanel(JPanel thisClassLabelPanel) {
+        classLabelPanel = thisClassLabelPanel;
+    }
+
+    public JPanel getClassLabelPanel() {
+        return classLabelPanel;
     }
 }

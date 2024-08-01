@@ -34,6 +34,8 @@ public class Creator {
     private Color lightgrayColor = Color.decode("#AFA2A2");
     
     public Creator() {
+        textFieldPanel.setName("textfieldpanel in create");
+        textFieldContainer.setName("textfieldcontainer");
         this.set = Set.getInstance();
         this.setState = SetState.getInstance();
         
@@ -43,6 +45,7 @@ public class Creator {
     }
 
     public JTextField createTextBox(String placeholder, String my_type, Boolean boxLoaded) {
+        textFieldPanel.setName("textfieldpanel in create");
         loaded = boxLoaded;
         int width = 144;
         int height = 50;

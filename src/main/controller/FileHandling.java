@@ -11,25 +11,24 @@ import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
 import java.util.ArrayList;
+
+import javax.swing.JLabel;
 import javax.swing.JPanel;
 import java.awt.FlowLayout;
 import java.nio.file.attribute.BasicFileAttributes;
 import java.nio.file.FileVisitResult;
 import java.nio.file.SimpleFileVisitor;
 
-import main.model.Set;
 import main.model.SetState;
 import main.model.SetUserInformation;
 import main.model.SetList;
 
 public class FileHandling {
-        private Set set;
         private SetState setState;
         private SetUserInformation setUserInformation;
         private SetList setList;
 
         public FileHandling() {
-            set = Set.getInstance();
             setState = SetState.getInstance();
             setUserInformation = SetUserInformation.getInstance();
             setList = SetList.getInstance();
@@ -66,7 +65,6 @@ public class FileHandling {
             }
 
             catch (FileNotFoundException e) {
-                //System.out.println("File does not exist"); 
                 return false;
             }
     
@@ -114,7 +112,14 @@ public class FileHandling {
             JPanel bigPanel = new JPanel(new FlowLayout(FlowLayout.LEFT));
             bigPanel.setName("bigPanel in loadtextboxes");
             System.out.println("arrayList"+arrayList);
-            bigPanel.add(create.typeBox(setList.getFinalClassList().get(setState.getClassListIndex())+"CAT", "JLabel", true));
+
+            JPanel classjlabel = create.typeBox(setList.getFinalClassList().get(setState.getClassListIndex())+"CAT", "JLabel", true);
+            JPanel classlab1 = (JPanel) classjlabel.getComponent(0);
+            JLabel classlab2 = (JLabel) classlab1.getComponent(0);
+            //JLabel classlab3 = (JLabel) classlab2.getComponent(0);
+            System.out.println("classlab "+classlab2.getText());
+
+            bigPanel.add(classjlabel);
             for (int i = 0; i<arrayList.size(); i++) {
                 bigPanel.add(create.typeBox(arrayList.get(i), "JTextField", true));
             }
@@ -166,6 +171,4 @@ public class FileHandling {
 
             }
         }
-
-        //public void 
 }

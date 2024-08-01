@@ -10,7 +10,7 @@ import java.awt.event.ActionListener;
 import java.awt.event.ActionEvent;
 import java.awt.FlowLayout;
 import java.awt.Color;
-
+import java.awt.Component;
 import java.util.ArrayList;
 
 import java.util.regex.Matcher;
@@ -64,6 +64,7 @@ public class StudentStatCollect extends JFrame {
     private int typeNumber = 0;
     private int numOfBoxes = 0;
     private int maxBoxes = 26;
+    private JPanel thisClassPanel = new JPanel();
 
     public StudentStatCollect() {
         this.set = Set.getInstance();
@@ -79,13 +80,17 @@ public class StudentStatCollect extends JFrame {
         setState.setCurrentClass("StudentStatCollect.java");
         window = set.getWindow();
 
+
         //studentStatCollectLaunch();
     }
 
     public void studentStatCollectLaunch() {
+        System.out.println("222 "+setList.getFinalClassList());
+        window.setName("window");
         container.setName("contianer");
         //container.setBackground(Color.pink);
         textBoxPanel.setName("gridlayout textboxpanel");
+        allBoxesPanel.setName("allboxespanel");
         //textBoxPanel.setBackground(lightgrayColor);
         classLabelPanel.setName("classLabelPanel student stat");
         EnterAction enterAction = new EnterAction();
@@ -93,15 +98,14 @@ public class StudentStatCollect extends JFrame {
         window.getRootPane().getActionMap().put("enterAction", enterAction);
 
         finalClassList = setList.getFinalClassList();
+        //System.out.println(" "+setList.getFinalClassList());
         System.out.println("final class list issssss before: "+ finalClassList);
         finalClassList = setList.getFinalClassList();
         System.out.println("final class list issssss: "+ finalClassList);
         create.hideContainer();
 
-        System.out.println("4444 "+(backNextButtonsPanel==null));
         createNewTypeButton();
         buttonSetUpAction();
-        System.out.println("5555 "+(backNextButtonsPanel==null));
         window.setTitle("StudentStatCollect");
 
         currentClass = "StudentStatCollect";
@@ -132,33 +136,22 @@ public class StudentStatCollect extends JFrame {
     }
 
     private void textBoxPanelReset() {
+        System.out.println("4444");
         textBoxPanel.removeAll();
         textBoxPanel.revalidate();
         textBoxPanel.repaint();
     }
     
     private void backAction(JButton backButton) {
-        // backButton.addActionListener(new ActionListener() {
-        //     public void actionPerformed(ActionEvent e) {
-        //         if(setState.getCanContinue()) {
-        //             if (setState.getClassListIndex() == 0) { //case for back to classes
-        //                 hideWindow();
-        //                 StudentClasses studentClasses = new StudentClasses();
-        //                 studentClasses.studentClassesLaunch();
-        //                 saveButtonAction();
-        //             }
-        //             else if (setState.getClassListIndex() > 0) {
-        //                 goToPreviousClasses();              
-        //             }
-        //         }
-        //     }
-        // });
-        //:
         backButton.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent e) {
                 actionPriorities.setCurrentClass(currentClass);
                 actionPriorities.addClassActionListener(b -> {
                     if(setState.getCanContinue()) {
+                        //hideWindow();
+                        //setState.decrementClassListIndex();
+                        System.out.println("classlabelpanel "+classLabelPanel.getComponentCount());
+                        saveButtonAction();
                         if (setState.getClassListIndex() == 0) { //case for back to classes
                             System.out.println("hidewindow1");
                             hideWindow();
@@ -167,7 +160,10 @@ public class StudentStatCollect extends JFrame {
                             saveButtonAction();
                         }
                         else if (setState.getClassListIndex() > 0) {
-                            goToPreviousClasses();              
+                            //hideWindow();
+                            //textBoxPanel.removeAll();
+                            System.out.println("1111 "+ finalClassList.get(setState.getClassListIndex()));
+                            goToPreviousClasses();      
                         }
                     }
                 }, 2, "backButton",null, currentClass);
@@ -176,37 +172,92 @@ public class StudentStatCollect extends JFrame {
     }
 
     private void goToPreviousClasses() {
+        System.out.println("2222");
         saveButtonAction();
         if (setState.getCanContinue()) {
+            System.out.println("3333");
             System.out.println("there are previous classes");
             setState.decrementClassListIndex();
-            classLabelPanel.removeAll();
-            classLabelPanel.revalidate();
-            classLabelPanel.repaint();
-            textBoxPanelReset();
 
+            //window.setVisible(false);
+            Component[] windowComponents = window.getContentPane().getComponents();
+
+            //for (Component component:windowComponents) {
+            System.out.println("windowcomps "+windowComponents.length);
+            //for (int i = 0; i<windowComponents.length;i++) {
+            //for (int i = 13; i<25;i++) {
+            //for (int i = 20; i<25;i++) {
+            //for (int i = 20; i<23;i++) {
+            //for (int i = 21; i<23;i++) {
+            for (int i = 22; i<23;i++) {
+
+            //thisClassPanel.setVisible(false);
+
+            // for (int i = 22; i<23;i++) { //component is at index
+                Component component = windowComponents[i];
+                //if (component.contains(textField)) {
+                System.out.println("component "+component.getName());
+                System.out.println("componentclasslabelpanelinreadclasscheck " + classLabelPanel.isVisible());
+                //}
+                component.setVisible(false);
+                System.out.println("componentclasslabelpanelinreadclasscheck " + classLabelPanel.isVisible());
+            }
+            //setList.getClassLabelPanel().setVisible(false);
+
+            setList.getClassLabelPanel().removeAll();
+            classLabelPanel.removeAll();
+            //textBoxPanelReset();
             addLoadedBoxes();
         }
     }
 
     public void addLoadedBoxes() {
         String filePath = setUserInformation.getPathToClassInformationFileWithIndex();
+        textBoxPanelReset();
+        ///////////////// //create.hideContainer();
+        System.out.println("222 "+finalClassList+" index "+ setState.getClassListIndex()+ "filepath "+setUserInformation.getPathToClassInformationFileWithIndex());
         
         JPanel loadedBoxesPanel = fileHandler.loadTextboxes(filePath);
+        loadedBoxesPanel.setName("loadedBoxesPanel");
+
         int numberOfComponents = loadedBoxesPanel.getComponentCount();
         numOfBoxes += numberOfComponents;
         for (int i = 0; i < numberOfComponents; i++) {
-            textBoxPanel.add(loadedBoxesPanel.getComponent(0));
+           textBoxPanel.add(loadedBoxesPanel.getComponent(0));
         }
         classLabelPanel.add(textBoxPanel);
-        //classLabelPanel.setBackground(Color.PINK);
-        //classLabelPanel.setBackground(lightgrayColor);
-        window.add(classLabelPanel);
-        
-        create.windowFix();
+
+
+
+
+        // ////<
+        // //setList.setClassLabelPanel(classLabelPanel);
+        // // ArrayList<String> loadedBoxesList = fileHandler.readFileToList(filePath);
+        // // int numberOfComponents = loadedBoxesList.size();
+        // // numOfBoxes += numberOfComponents;
+        // // boxManageCreate("hello", "JLabel",false);
+        // // for (int i = 0; i < numberOfComponents; i++) {
+        // //     boxManageCreate(loadedBoxesList.get(i), "JTextField", true);
+        // // }
+
+        // //create.hideContainer();
+
+
+
+
+
+        // //classLabelPanel.setBackground(Color.PINK);
+        // //classLabelPanel.setBackground(lightgrayColor);
+        // ////>
         if (numOfBoxes == 0) {
             boxStarterPack();
         }    
+
+        textBoxPanel.setVisible(true);
+        classLabelPanel.setVisible(true);
+        // //window.add(classLabelPanel);
+        
+        create.windowFix();
     }
 
     private void saveAction(JButton saveButton) {
@@ -261,7 +312,6 @@ public class StudentStatCollect extends JFrame {
                     @Override
                     public void actionPerformed(ActionEvent e) {// remember wont run  if just enter without a click
                         System.out.println("enteraction");
-                        System.out.println("6666 "+(backNextButtonsPanel==null));
                         doNextButtonProcedure();
                     }
                 }, 1, "nextButton", null, currentClass);  // Add this ActionListener with priority 1
@@ -274,13 +324,15 @@ public class StudentStatCollect extends JFrame {
         saveButtonAction();
         if(setState.getCanContinue()) {
             System.out.println();
-            setState.incrementClassListIndex();
+            //if (setState.getClassListIndex() != setList.getFinalClassList().size()) {
+                setState.incrementClassListIndex();
+            //}
             if (setState.getClassListIndex()+1 <= setList.getFinalClassList().size()) {
-                System.out.println("7777 "+(backNextButtonsPanel==null));
                 System.out.println("the jlabel name: "+setList.getFinalClassList().get(setState.getClassListIndex()));
                 //hideWindow();
-                studentStatCollectLaunch();
+                //backNextButtonsPanel.setVisible(false);
                 visitNextStudentClass();
+                studentStatCollectLaunch();
             }
             else {
                 System.out.println("hidewindow2");
@@ -309,6 +361,8 @@ public class StudentStatCollect extends JFrame {
             hideWindow();
             StudentStatCollect studentStatCollect = new StudentStatCollect();
             //studentStatCollect.studentStatCollectLaunch();
+
+            
             studentStatCollect.DisplayClasses();
         }
 
@@ -418,29 +472,33 @@ public class StudentStatCollect extends JFrame {
     public void DisplayClasses() {
         setUserInformation.getUsername();
         ArrayList<String> typeList = setList.getCurrentPanelList();
-        readClass(typeList);
+        readClass(typeList); //3333
     }
 
     private void readClass(ArrayList<String> typeList) { 
         System.out.println("readclass test:"+ setList.getFinalClassList()+"index: "+setState.getClassListIndex());
         boxManageCreate(setList.getFinalClassList().get(setState.getClassListIndex())+"AHC", "JLabel", false); //necessary
         boxManageCreate("Credits (optional)", "JTextField", false);
-        newSet();
-        container.add(classLabelPanel);
-        container.setName("container in readclass");
-        //classLabelPanel.setBackground(Color.pink);
+        newSet(); //4444
+        //thisClassPanel = classLabelPanel;
+        classLabelPanel.setName("classlabelpanelinreadclass");
+        setList.setClassLabelPanel(classLabelPanel);
+
         window.add(classLabelPanel, BorderLayout.CENTER);
         create.windowFix();
     }
 
     private void hideWindow() {
-        System.out.println("about to hide window in "+setList.getFinalClassList().get(setState.getClassListIndex()));
+        //System.out.println("about to hide window in "+setList.getFinalClassList().get(setState.getClassListIndex()));
         create.hideContainer();
         backNextButtonsPanel.setVisible(false);
         newDelContainerFlow.setVisible(false);
         classLabelPanel.setVisible(false);
-        classLabelPanel.removeAll();
+        //classLabelPanel.removeAll();
         textBoxPanel.setVisible(false);
+
+        //window.removeAll();
+        //window.setAllComponentsVisible(false);
         
     }
 
@@ -450,30 +508,87 @@ public class StudentStatCollect extends JFrame {
             textBoxPanel.add(create.typeBox(placeholder, type, boxLoaded));//false));
             System.out.println("test.2 "+ placeholder +" "+type+ "textboxpanel components"+textBoxPanel.getComponentCount());
             classLabelPanel.add(textBoxPanel);
-            //classLabelPanel.setBackground(Color.pink);
             create.windowFix();
-            //System.out.println("visibility"+set.getDEBUGBOX().isVisible());
             numOfBoxes++;
-            //window.add(classLabelPanel);
         }
         else if (numOfBoxes == maxBoxes) {
-            Decorator decorate = new Decorator();
-            // JDialog dialog = decorate.genericPopUpMessage("<html><center>Maximum amount reached.", null, 200 , 100);
-            // dialog.setLocationRelativeTo(window);
-            // dialog.setLocation(dialog.getX(), dialog.getY() + 15); 
-            // dialog.setVisible(true);       
-
+            Decorator decorate = new Decorator(); 
             decorate.maximumAmountReachedPopup();
             setState.setCanContinue(false);
         }
+
+        classLabelPanel.setVisible(true);
+        textBoxPanel.setVisible(true);
     }
 
     private void newSet() {
+
+        Component[] windowComponents = window.getContentPane().getComponents();
+        System.out.println("windowcomponents "+windowComponents.length);
+        //for (int i = 0; i<windowComponents.length;i++) {
+        //for (int i = 0; i<20;i++) {
+        //for (int i = 10; i<20;i++) {
+        // for (int i = 18; i<19;i++) {
+
+
+        // //     //thisClassPanel.setVisible(false);
+
+        // //     // for (int i = 22; i<23;i++) { //component is at index
+        //          Component component = windowComponents[i];
+        // //         if (component instanceof JPanel) {
+        // //             JPanel jpanel = (JPanel) component;
+        // //             if (jpanel.getComponentCount() == 0) {
+        // //                 System.out.println("i "+i);
+        // //                 component.setVisible(false);
+        // //                 //component.dispose();
+        // //             }
+        // //         }
+        // //         //if (component.contains(textField)) {
+        // //         System.out.println("component "+component.getName());
+        // //         System.out.println("componentclasslabelpanelinreadclasscheck " + classLabelPanel.isVisible());
+        // //         //}
+        //          component.setVisible(false);
+        // //         System.out.println("componentclasslabelpanelinreadclasscheck " + classLabelPanel.isVisible());
+        // }
+
+
+        System.out.println("classlabelpanel visible"+classLabelPanel.isVisible());
         typeNumber++;
-        boxManageCreate("Grade Type "+typeNumber, "JTextField",false);
+        boxManageCreate("Grade Type "+typeNumber, "JTextField",false); //1111
         boxManageCreate("Percentage of Grade", "JTextField",false);
         boxManageCreate("Grades(format:# # #)", "JTextField",false);
         setState.setCanContinue(true);
+        System.out.println("classlabelpanel visible"+classLabelPanel.isVisible());
+
+
+
+
+
+
+        // Component[] windowComponents = window.getContentPane().getComponents();
+        // System.out.println("windowcomponents "+windowComponents.length);
+
+        // for (int i = 0; i<windowComponents.length;i++) {
+
+        //     //thisClassPanel.setVisible(false);
+
+        //     // for (int i = 22; i<23;i++) { //component is at index
+        //         Component component = windowComponents[i];
+        //         if (component instanceof JPanel) {
+        //             JPanel jpanel = (JPanel) component;
+        //             if (jpanel.getComponentCount() == 0) {
+        //                 System.out.println("i "+i);
+        //                 component.setVisible(false);
+        //                 //component.dispose();
+        //             }
+        //         }
+        //         //if (component.contains(textField)) {
+        //         System.out.println("component "+component.getName());
+        //         System.out.println("componentclasslabelpanelinreadclasscheck " + classLabelPanel.isVisible());
+        //         //}
+        //         //component.setVisible(false);
+        //         System.out.println("componentclasslabelpanelinreadclasscheck " + classLabelPanel.isVisible());
+        // }
     }
 
     // private void calculate() {
