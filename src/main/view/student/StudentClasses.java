@@ -1,4 +1,4 @@
-package main.view.student;
+package view.student;
 
 import javax.swing.AbstractAction;
 import javax.swing.BorderFactory;
@@ -34,22 +34,22 @@ import java.awt.Rectangle;
 import java.util.ArrayList;
 import java.util.concurrent.atomic.AtomicBoolean;
 
-import main.model.Set;
-import main.model.SetUserInformation;
-import main.model.SetState;
-import main.model.SetList;
+import model.Set;
+import model.SetUserInformation;
+import model.SetState;
+import model.SetList;
 
-import main.controller.CreateButton;
-import main.controller.Creator;
-import main.controller.Decorator;
-import main.controller.FileHandling;
-import main.controller.FileWriting;
-import main.controller.CompositeActionListenerWithPriorities;
+import controller.CreateButton;
+import controller.Creator;
+import controller.Decorator;
+import controller.FileHandling;
+import controller.FileWriting;
+import controller.CompositeActionListenerWithPriorities;
 
-import main.model.GoIntoPanel;
+import model.GoIntoPanel;
 
-import main.view.MainWindow;
-import main.view.student.StudentClasses;
+import view.MainWindow;
+import view.student.StudentClasses;
 
 public class StudentClasses extends JFrame {
     private JFrame window;

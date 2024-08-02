@@ -1,4 +1,4 @@
-package main.model;
+package model;
 
 import javax.swing.JFrame;
 import javax.swing.JTextField;
@@ -7,7 +7,7 @@ import javax.swing.JPanel;
 import java.awt.Component;
 import java.awt.Container;
 
-import main.model.Set;
+import model.Set;
 
 
 public class GoIntoPanel {

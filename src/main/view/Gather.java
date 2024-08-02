@@ -1,4 +1,4 @@
-package main.view;
+package view;
 
 import javax.swing.AbstractAction;
 import javax.swing.ButtonGroup;
@@ -27,17 +27,17 @@ import java.awt.FlowLayout;
 import java.awt.event.FocusAdapter;
 import java.awt.event.FocusEvent;
 
-import main.model.Set;
-import main.model.SetState;
-import main.model.SetListeners;
-import main.model.SetUserInformation;
+import model.Set;
+import model.SetState;
+import model.SetListeners;
+import model.SetUserInformation;
 
-import main.controller.CompositeActionListenerWithPriorities;
-import main.controller.CreateButton;
-import main.controller.Creator;
-import main.controller.Decorator;
-import main.controller.FileHandling;
-import main.controller.FileWriting;
+import controller.CompositeActionListenerWithPriorities;
+import controller.CreateButton;
+import controller.Creator;
+import controller.Decorator;
+import controller.FileHandling;
+import controller.FileWriting;
 
 import java.awt.event.KeyEvent;
 

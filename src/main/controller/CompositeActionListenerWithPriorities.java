@@ -1,4 +1,4 @@
-package main.controller;
+package controller;
 
 import java.awt.Color;
 import java.awt.event.ActionEvent;
@@ -12,8 +12,9 @@ import java.util.TreeSet;
 import javax.swing.JRadioButton;
 import javax.swing.Timer;
 import javax.swing.UIManager;
+import controller.Decorator;
 
-import main.model.Set;
+import model.Set;
 
 public class CompositeActionListenerWithPriorities implements ActionListener {
   private Map<Integer, ArrayList<ActionListener>> listeners = 

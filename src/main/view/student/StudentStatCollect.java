@@ -1,4 +1,4 @@
-package main.view.student;
+package view.student;
 
 import javax.swing.JButton;
 import javax.swing.JFrame;
@@ -16,25 +16,27 @@ import java.util.ArrayList;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
-import main.model.Set;
-import main.model.SetState;
-import main.model.SetUserInformation;
-import main.model.SetList;
+import model.Set;
+import model.SetState;
+import model.SetUserInformation;
+import model.SetList;
 
-import main.controller.Creator;
-import main.model.GoIntoPanel;
-import main.controller.Decorator;
-import main.controller.FileHandling;
-import main.controller.FileWriting;
-import main.controller.CompositeActionListenerWithPriorities;
+import controller.Creator;
+import model.GoIntoPanel;
+import controller.Decorator;
+import controller.FileHandling;
+import controller.FileWriting;
+import controller.CompositeActionListenerWithPriorities;
 
 import javax.swing.AbstractAction;
 import javax.swing.JComponent;
+import javax.swing.JDialog;
 import javax.swing.KeyStroke;
 import javax.swing.JPanel;
+import javax.swing.JTextField;
 
 import java.awt.event.KeyEvent;
-import main.controller.CreateButton;
+import controller.CreateButton;
 
 public class StudentStatCollect extends JFrame {
     private JFrame window;
@@ -136,7 +138,6 @@ public class StudentStatCollect extends JFrame {
     }
 
     private void textBoxPanelReset() {
-        System.out.println("4444");
         textBoxPanel.removeAll();
         textBoxPanel.revalidate();
         textBoxPanel.repaint();
@@ -162,7 +163,6 @@ public class StudentStatCollect extends JFrame {
                         else if (setState.getClassListIndex() > 0) {
                             //hideWindow();
                             //textBoxPanel.removeAll();
-                            System.out.println("1111 "+ finalClassList.get(setState.getClassListIndex()));
                             goToPreviousClasses();      
                         }
                     }
@@ -172,10 +172,8 @@ public class StudentStatCollect extends JFrame {
     }
 
     private void goToPreviousClasses() {
-        System.out.println("2222");
         saveButtonAction();
         if (setState.getCanContinue()) {
-            System.out.println("3333");
             System.out.println("there are previous classes");
             setState.decrementClassListIndex();
 
@@ -271,7 +269,7 @@ public class StudentStatCollect extends JFrame {
     }
 
     private void saveButtonAction() {
-        Pattern pattern = Pattern.compile("^(?:[0-9]*(?:.[0-9]+))*\s*$|^[0-9]*\s*$", Pattern.CASE_INSENSITIVE);
+        Pattern pattern = Pattern.compile("^(?:[0-9]*(?:.[0-9]+))*\s*$|^[0-9]*\s*)$", Pattern.CASE_INSENSITIVE);
         correctGradeFormatChecker(pattern);
         
         //if (textBoxPanel.getComponentCount() == 5 || 8 || 11 || 14 || 17 || 20 || 23 || 26 || 29 || 32) {
@@ -322,23 +320,124 @@ public class StudentStatCollect extends JFrame {
 
     public void doNextButtonProcedure() {
         saveButtonAction();
+        System.out.println(1111);
         if(setState.getCanContinue()) {
-            System.out.println();
+            System.out.println(2222);
             //if (setState.getClassListIndex() != setList.getFinalClassList().size()) {
                 setState.incrementClassListIndex();
             //}
             if (setState.getClassListIndex()+1 <= setList.getFinalClassList().size()) {
+                System.out.println(3333);
                 System.out.println("the jlabel name: "+setList.getFinalClassList().get(setState.getClassListIndex()));
                 //hideWindow();
+
+                //check if credits is valid
+                setState.getTextFieldPanel().getComponent(1);
+
+                Component credits = setState.getTextFieldPanel().getComponent(1);
+                if (credits instanceof JPanel) {
+                    System.out.println(4444);
+                    //TODO regex
+                    JTextField creditsTextField = goIntoPanel.goIntoPanelReturnTextbox((JPanel) credits, 0);
+                    System.out.println("credits? "+ creditsTextField.getText());
+                    String text = creditsTextField.getText();
+                    Pattern pattern = Pattern.compile("[0-9]+");
+                    Matcher matcher = pattern.matcher(text);
+                    Boolean matcherBoolean = matcher.find();
+
+                    if (matcherBoolean == true) {
+                        System.out.println(5555.1);
+                        System.out.println("Boo");
+                        visitNextStudentClass();
+                        studentStatCollectLaunch();
+                    }
+
+                    else if (matcherBoolean == false) {
+                        System.out.println(5555.2);
+                        System.out.println("*HI*");
+                        //decorate.errorMessageSetUp();
+                        Decorator decorate = new Decorator();
+                        JDialog dialog = decorate.genericPopUpMessage("Credits text is invalid. Must be integer",null,250,90);
+
+                        //dialog = genericPopUpMessage("<html><center>Please choose an option", button, 200, 90);
+                        dialog.setResizable(false);
+                        
+                        dialog.setLocationRelativeTo(null);
+                        //dialog.setLocation(dialog.getX(), dialog.getY() + 15); 
+                        dialog.setVisible(true);
+                    }
+
+                    else {
+                        System.out.println("matcher credit boolean, something wrong");
+                    }
+                    
+                    //Matcher matcher = pattern.matcher(text);
+                    //Boolean matcherBoolean = matcher.find();
+
+
+                    //L
+                    // int index = 4;
+                    // for (int i=1; i<=8; i++) { //max num of grade type
+                    //     //String text = create.goIntoPanel(classLabelPanel, index);
+                    //     String text = goIntoPanel.goIntoPanel(classLabelPanel, index);
+            
+                    //     if (text.equals("does not exist")) {
+                    //         System.out.println("fail");
+                    //         break;
+                    //     }
+                    //     index = index + 3;
+                    //     System.out.println("text before matcher works?"+text);
+                    //     Matcher matcher = pattern.matcher(text);
+                    //     Boolean matcherBoolean = matcher.find();
+            
+                    //     System.out.println("matcher works?: "+ matcherBoolean);
+                    // }
+                    //L
+                }
                 //backNextButtonsPanel.setVisible(false);
-                visitNextStudentClass();
-                studentStatCollectLaunch();
             }
             else {
-                System.out.println("hidewindow2");
-                hideWindow();
-                new PrintStudentGrades(set.getWindow(), setUserInformation.getStudentOrTeacher(), setUserInformation.getExistingOrNew());
+                //check if credits is valid
+                setState.getTextFieldPanel().getComponent(1);
+
+                //\\
+                //check if credits is valid
+                Component credits = setState.getTextFieldPanel().getComponent(1);
+                if (credits instanceof JPanel) {
+                    System.out.println(4444);
+                    //TODO regex
+                    JTextField creditsTextField = goIntoPanel.goIntoPanelReturnTextbox((JPanel) credits, 0);
+                    System.out.println("credits? "+ creditsTextField.getText());
+                    String text = creditsTextField.getText();
+                    Pattern pattern = Pattern.compile("[0-9]+");
+                    Matcher matcher = pattern.matcher(text);
+                    Boolean matcherBoolean = matcher.find();
+
+                    if (matcherBoolean == true) {
+                        System.out.println(5555.1);
+                        System.out.println("Boo");
+                        // visitNextStudentClass();
+                        // studentStatCollectLaunch();
+                        System.out.println("hidewindow2");
+                        hideWindow();
+                        new PrintStudentGrades(set.getWindow(), setUserInformation.getStudentOrTeacher(), setUserInformation.getExistingOrNew());
+                    }
+
+                    else if (matcherBoolean == false) {
+                        System.out.println(5555.2);
+                        System.out.println("*HI*");
+                        Decorator decorate = new Decorator();
+                        JDialog dialog = decorate.genericPopUpMessage("Credits text is invalid. Must be integer",null,250,90);
+                        dialog.setResizable(false);
+                        dialog.setLocationRelativeTo(null);
+                        dialog.setVisible(true);
+                    }
+
+                    else {
+                        System.out.println("matcher credit boolean, something wrong");
+                    }
             }
+        }
         }
     }
 
@@ -472,14 +571,14 @@ public class StudentStatCollect extends JFrame {
     public void DisplayClasses() {
         setUserInformation.getUsername();
         ArrayList<String> typeList = setList.getCurrentPanelList();
-        readClass(typeList); //3333
+        readClass(typeList);
     }
 
     private void readClass(ArrayList<String> typeList) { 
         System.out.println("readclass test:"+ setList.getFinalClassList()+"index: "+setState.getClassListIndex());
         boxManageCreate(setList.getFinalClassList().get(setState.getClassListIndex())+"AHC", "JLabel", false); //necessary
         boxManageCreate("Credits (optional)", "JTextField", false);
-        newSet(); //4444
+        newSet();
         //thisClassPanel = classLabelPanel;
         classLabelPanel.setName("classlabelpanelinreadclass");
         setList.setClassLabelPanel(classLabelPanel);
@@ -554,7 +653,7 @@ public class StudentStatCollect extends JFrame {
 
         System.out.println("classlabelpanel visible"+classLabelPanel.isVisible());
         typeNumber++;
-        boxManageCreate("Grade Type "+typeNumber, "JTextField",false); //1111
+        boxManageCreate("Grade Type "+typeNumber, "JTextField",false);
         boxManageCreate("Percentage of Grade", "JTextField",false);
         boxManageCreate("Grades(format:# # #)", "JTextField",false);
         setState.setCanContinue(true);

@@ -1,9 +1,10 @@
-package main.view;
+package view;
 
 import javax.swing.JFrame;
 import javax.swing.SwingUtilities;
 import java.awt.Color;
-import main.model.Set;
+import model.Set;
+import view.NewUser;
 
 public class Launcher {
     public static void main(String[] args) {

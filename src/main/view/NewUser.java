@@ -1,4 +1,4 @@
-package main.view;
+package view;
 
 import javax.swing.AbstractAction;
 import javax.swing.ButtonGroup;
@@ -21,14 +21,14 @@ import java.awt.event.ActionEvent;
 //key listening
 import java.awt.event.KeyEvent;
 
-import main.model.Set;
-import main.model.SetState;
-import main.model.SetUserInformation;
+import model.Set;
+import model.SetState;
+import model.SetUserInformation;
 
-import main.controller.Creator;
-import main.controller.Decorator;
-import main.controller.CompositeActionListenerWithPriorities;
-import main.controller.CreateButton;
+import controller.Creator;
+import controller.Decorator;
+import controller.CompositeActionListenerWithPriorities;
+import controller.CreateButton;
 
 public class NewUser extends JFrame {
     private JFrame window;

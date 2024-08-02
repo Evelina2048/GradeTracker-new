@@ -1,4 +1,4 @@
-package main.controller;
+package controller;
 
 import java.io.BufferedReader;
 import java.io.BufferedWriter;
@@ -19,9 +19,9 @@ import java.nio.file.attribute.BasicFileAttributes;
 import java.nio.file.FileVisitResult;
 import java.nio.file.SimpleFileVisitor;
 
-import main.model.SetState;
-import main.model.SetUserInformation;
-import main.model.SetList;
+import model.SetState;
+import model.SetUserInformation;
+import model.SetList;
 
 public class FileHandling {
         private SetState setState;

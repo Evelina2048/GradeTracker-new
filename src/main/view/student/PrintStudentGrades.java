@@ -1,4 +1,4 @@
-package main.view.student;
+package view.student;
 
 import javax.swing.JButton;
 import javax.swing.JFrame;
@@ -10,9 +10,9 @@ import javax.swing.JLabel;
 
 import java.awt.event.ActionListener;
 import java.awt.event.ActionEvent;
-import main.controller.Creator;
-import main.controller.Decorator;
-import main.controller.CreateButton;
+import controller.Creator;
+import controller.Decorator;
+import controller.CreateButton;
 
 public class PrintStudentGrades extends JFrame {
     private JFrame window;

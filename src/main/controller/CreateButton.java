@@ -1,4 +1,4 @@
-package main.controller;
+package controller;
 
 import javax.swing.BorderFactory;
 import javax.swing.JButton;
@@ -13,8 +13,8 @@ import javax.swing.event.DocumentListener;
 import java.awt.Dimension;
 import java.awt.FlowLayout;
 
-import main.model.Set;
-import main.model.SetState;
+import model.Set;
+import model.SetState;
 
 public class CreateButton {
     private JPanel backNextButtonsPanel;

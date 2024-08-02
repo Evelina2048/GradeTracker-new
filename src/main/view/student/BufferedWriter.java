@@ -1,4 +1,4 @@
-package main.view.student;
+package view.student;
 
 public class BufferedWriter {
 

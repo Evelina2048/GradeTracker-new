@@ -1,4 +1,4 @@
-package main.controller;
+package controller;
 
 import javax.swing.JFrame;
 import javax.swing.JLabel;
@@ -15,8 +15,8 @@ import java.awt.Font;
 
 import java.util.ArrayList;
 
-import main.model.Set;
-import main.model.SetState;
+import model.Set;
+import model.SetState;
 
 
 public class Creator {

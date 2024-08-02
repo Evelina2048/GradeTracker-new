@@ -1,4 +1,4 @@
-package main.controller;
+package controller;
 
 import javax.swing.JDialog;
 import javax.swing.JFrame;
@@ -12,10 +12,10 @@ import java.awt.Component;
 
 import java.awt.FlowLayout;
 
-import main.model.GoIntoPanel;
-import main.model.Set;
-import main.model.SetState;
-import main.model.SetUserInformation;
+import model.GoIntoPanel;
+import model.Set;
+import model.SetState;
+import model.SetUserInformation;
 
 import java.io.FileWriter;
 

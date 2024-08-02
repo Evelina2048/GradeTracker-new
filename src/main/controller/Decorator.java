@@ -1,4 +1,4 @@
-package main.controller;
+package controller;
 
 import javax.swing.JButton;
 import javax.swing.JDialog;
@@ -25,11 +25,11 @@ import javax.swing.JTextField;
 import java.awt.Dimension;
 
 import java.io.IOException;
-import main.model.Set;
-import main.model.SetUserInformation;
-import main.model.SetListeners;
-import main.model.SetState;
-import main.view.student.StudentStatCollect;
+import model.Set;
+import model.SetUserInformation;
+import model.SetListeners;
+import model.SetState;
+import view.student.StudentStatCollect;
 
 //files
 import java.nio.file.Files;

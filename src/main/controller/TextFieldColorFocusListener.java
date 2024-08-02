@@ -1,4 +1,4 @@
-package main.controller;
+package controller;
 
 import javax.swing.JFrame;
 import javax.swing.JTextField;
@@ -11,8 +11,8 @@ import java.awt.event.FocusEvent;
 
 import java.awt.FontMetrics;
 
-import main.model.Set;
-import main.model.SetState;
+import model.Set;
+import model.SetState;
 
 public class TextFieldColorFocusListener {
     private JFrame window;

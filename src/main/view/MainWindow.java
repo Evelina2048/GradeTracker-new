@@ -1,4 +1,4 @@
-package main.view;
+package view;
 
 import javax.swing.AbstractAction;
 import javax.swing.ButtonGroup;
@@ -26,14 +26,14 @@ import java.io.FileReader;
 import java.io.FileWriter;
 import java.io.IOException;
 
-import main.model.Set;
-import main.model.SetUserInformation;
+import model.Set;
+import model.SetUserInformation;
 
-import main.view.student.StudentClasses;
-import main.controller.Creator;
-import main.controller.Decorator;
-import main.controller.CreateButton;
-import main.controller.CompositeActionListenerWithPriorities;
+import view.student.StudentClasses;
+import controller.Creator;
+import controller.Decorator;
+import controller.CreateButton;
+import controller.CompositeActionListenerWithPriorities;
 
 public class MainWindow extends JFrame {
 private String studentOrTeacher;

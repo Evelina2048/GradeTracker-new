@@ -1,4 +1,4 @@
-package main.view.student.existing;
+package view.student.existing;
 
 import javax.swing.JButton;
 import javax.swing.JFrame;
@@ -6,9 +6,9 @@ import java.awt.BorderLayout;
 import javax.swing.JPanel;
 import java.awt.event.ActionListener;
 import java.awt.event.ActionEvent;
-import main.controller.Creator;
-import main.model.Set;
-import main.controller.CreateButton;
+import controller.Creator;
+import model.Set;
+import controller.CreateButton;
 
 
 public class EditOrResults extends JFrame {
