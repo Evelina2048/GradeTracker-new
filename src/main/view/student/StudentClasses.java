@@ -104,16 +104,6 @@ public class StudentClasses extends JFrame {
         setState.setCurrentClass("StudentClasses.java");
         window = set.getWindow();
 
-        // ///
-        // window.addWindowListener(new WindowAdapter() {
-        //     @Override
-        //     public void windowClosing(WindowEvent e) {
-        //         if (set.getCurrentSaveButton().isEnabled() && saveButton != null) {
-        //             decorate.areYouSureMessage(null, "closing window", "<html><center> You did not save <br> Close anyways?", 176, 107);
-        //         }
-        //     }
-        // });
-
         WindowAdapter windowCloseAdapter = new WindowAdapter() {
             @Override
             public void windowClosing(WindowEvent e) {
@@ -370,7 +360,7 @@ public class StudentClasses extends JFrame {
                 System.out.println("clicked delete class mode");
                 requestFocusInWindow();
                 deleteMode();
-                saveButton.setEnabled(true);
+                //saveButton.setEnabled(true); //8/3
             }
         });
     }
@@ -495,11 +485,11 @@ public class StudentClasses extends JFrame {
                     JPanel selectedBoxPanel = new JPanel();
                     selectedBoxPanel.add(selectedTextBox); //this also makes the selected textbox invisible
                     create.deleteTextBox(selectedBoxPanel);
-                    saveButton.setEnabled(true);
+                    saveButton.setEnabled(true); //8/3
                 }
 
                 if (yesOrNoDialog[0].equals("yes") || yesOrNoDialog[0].equals("nothing yet")) {
-                    saveButton.setEnabled(true);
+                    saveButton.setEnabled(true); //8/3
                 }
 
 
