@@ -359,7 +359,6 @@ public class StudentClasses extends JFrame {
         fileWrite.debugPrintPanel();
         System.out.println("testing? "+setList.getCurrentPanelList()+ "..."+ fileWrite.getClassList());
         setList.setFinalClassList(fileWrite.getClassList());
-        System.out.println("111 "+setList.getFinalClassList());
     }
 
     private void backToDefaultDeleteButton() {

@@ -98,15 +98,15 @@ public class CreateButton {
             //     System.out.println("removeUpdate/// "+textField.getParent().getParent().getName());//.getParent().getParent().getParent().getName());
             // }
 
-            if (textField.getParent() != null) {
-                Container textFieldParent = textField.getParent();
-                int parentCount = 1;
-                while (textFieldParent.getParent().getName() == null && parentCount < 100) {
-                     parentCount++;
-                     System.out.println("parentcount "+parentCount);
-                }
-                System.out.println("name? "+textFieldParent.getName()+" parentcount"+parentCount);
-            }
+            // if (textField.getParent() != null) {
+            //     Container textFieldParent = textField.getParent();
+            //     int parentCount = 1;
+            //     while (textFieldParent.getParent().getName() == null && parentCount < 100) {
+            //          parentCount++;
+            //          System.out.println("parentcount "+parentCount);
+            //     }
+            //     System.out.println("name? "+textFieldParent.getName()+" parentcount"+parentCount);
+            // }
 
             //set.setEmptiedState(true);
             setState.setEmptiedState(textField, true);
