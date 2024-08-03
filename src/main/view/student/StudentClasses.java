@@ -343,6 +343,7 @@ public class StudentClasses extends JFrame {
         moveClassButton.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent e) {
                 System.out.println("moveClass Mode hit");
+                prepareTextboxForMoveMode();
             }
         });
     }
@@ -421,6 +422,205 @@ public class StudentClasses extends JFrame {
             else {
                 System.out.println("There was an issue in delete mode. student classes" + setState.getTextFieldPanel().getComponent(i).getClass().getName());
             }
+    }
+    }
+
+//     private void addDraggingMouseReleasedListener(JTextField textField, JTextField[] tempTextField) {
+// }
+
+//     private void draggingListeners() {
+//         //
+//     }
+
+    private void fixClassList() {
+        ArrayList<String> fixedClassList = new ArrayList<>();
+        for (int i = 0; i < setState.getTextFieldPanel().getComponentCount(); i++) {
+            JTextField textFieldComponent = (JTextField) setState.getTextFieldPanel().getComponent(i);
+            fixedClassList.add(textFieldComponent.getText());
+            setList.setClassList(fixedClassList);
+        }
+    }
+
+    private void addMouseListenerToTextboxAndFrame(JTextField textField) {
+        turnOffEditability(textField);
+        textField.addMouseListener(new MouseAdapter() {
+            @Override
+            public void mouseClicked(MouseEvent e) {
+                System.out.println("mouselistener #2");
+                System.out.println("clicked");
+                if (selectedTextBox != null) {
+                    selectedTextBox.setForeground(Color.GRAY);
+                    selectedTextBox.setBorder(borderRegular);
+                }
+                Border borderHighlighted = BorderFactory.createLineBorder(Color.decode("#FF6961"), 2); //red
+                textField.setForeground(Color.decode("#FF6961"));
+                selectedTextBox = textField;
+                textField.setBorder(borderHighlighted);
+                removeDeleteClassButtonActionListeners();
+                deleteQuestionButtonAndAction();
+                }}); 
+
+        windowMouseListener();
+    }
+
+    private void turnOffEditability(JTextField textField) {
+        textField.setEditable(false);
+        textField.setFocusable(false);
+    }
+
+
+    private void deleteQuestionButtonAndAction() {
+        final String[] yesOrNoDialog = new String[1];
+        yesOrNoDialog[0] = "nothing yet";
+
+        deleteClassButton.setText("Delete?");
+        window.remove(instructionsPanel);
+        instructionsWordsAndPanel("Hit Delete Button to Delete");
+        String filePath = setUserInformation.getPathToClassInformationFileWithTextField(selectedTextBox);
+        removeDeleteClassButtonActionListeners();
+        deleteClassButton.addActionListener(new ActionListener() {
+            public void actionPerformed(ActionEvent e) {
+                newClassButton.setEnabled(true);
+                moveClassButton.setEnabled(true);
+                //if the file has loaded information attached
+                if (setState.getLoadedState(selectedTextBox) && (fileHandler.fileExists(filePath)) && fileHandler.fileIsNotEmpty(filePath)) {
+                
+                    yesOrNoDialog[0] = decorate.areYouSureMessage(selectedTextBox, "deleting", "<html><center>Deleting this class will optiondelete <br>its loaded information.<br>Do you wish to continue?", 250, 120);
+
+                    selectedTextBox.setForeground(Color.GRAY);
+                    selectedTextBox.setBorder(borderRegular);
+                }
+
+                else {
+                    JPanel selectedBoxPanel = new JPanel();
+                    selectedBoxPanel.add(selectedTextBox); //this also makes the selected textbox invisible
+                    create.deleteTextBox(selectedBoxPanel);
+                    saveButton.setEnabled(true);
+                }
+
+                if (yesOrNoDialog[0].equals("yes") || yesOrNoDialog[0].equals("nothing yet")) {
+                    saveButton.setEnabled(true);
+                }
+
+
+                pickAppropriateInstructionWordsAndPanels();
+
+                leaveDeleteModeButton();
+            }
+            });
+    }
+
+    private void pickAppropriateInstructionWordsAndPanels() {
+        window.remove(instructionsPanel);
+        if (setState.getTextFieldPanel().getComponentCount() > 0) {
+            instructionsWordsAndPanel("Box deleted");
+            System.out.println("boxdeleted");
+            
+        }
+
+        else if (setState.getTextFieldPanel().getComponentCount() == 0) {
+            instructionsWordsAndPanel("All boxes deleted. Leave delete mode to edit.");
+            System.out.println("all boxes deleted");
+            
+        }
+
+        else {
+            System.out.println("an error");
+        }
+    }
+
+    private void removeDeleteClassButtonActionListeners() {//int amountToDelete) {
+        for (ActionListener listener : deleteClassButton.getActionListeners()) {
+            deleteClassButton.removeActionListener(listener);
+        }
+    }
+
+    private void leaveDeleteModeButton() {
+        for (ActionListener listener : deleteClassButton.getActionListeners()) {
+            deleteClassButton.removeActionListener(listener);
+        }
+        deleteClassButton.setText("Leave Delete Mode");
+
+        leaveDeleteModeAction();
+    }
+
+    private void leaveDeleteModeAction() {
+        removeDeleteClassButtonActionListeners();
+        deleteClassButton.addActionListener(new ActionListener() {
+            public void actionPerformed(ActionEvent e) {
+                window.remove(instructionsPanel);
+                instructionsWordsAndPanel("Left Delete Mode. In Edit Mode");
+                backToDefaultDeleteButton();
+                newClassButton.setEnabled(true);
+                moveClassButton.setEnabled(true);
+                for (int i = 0; i < setState.getTextFieldPanel().getComponentCount(); i++) {
+                    JTextField textField = new JTextField();
+                    if (setState.getTextFieldPanel().getComponent(i) instanceof JTextField) {
+                        textField = (JTextField) setState.getTextFieldPanel().getComponent(i);
+                    }
+
+                    else {
+                        textField = goIntoPanel.goIntoPanelReturnTextbox((JPanel) setState.getTextFieldPanel().getComponent(i), 0);
+                    }
+                    textField.setEditable(true);
+                    textField.setFocusable(true);
+                    MouseListener[] listeners = textField.getMouseListeners();
+                    if (listeners.length > 0) {
+                        MouseListener lastListener = listeners[listeners.length - 1];
+                        textField.removeMouseListener(lastListener);
+                    }
+                }
+                return;
+                }
+        });
+    }
+
+    private void windowMouseListener() {
+        window.getContentPane().addMouseListener(new MouseAdapter() {
+            @Override
+            public void mouseClicked(MouseEvent e) {
+                if (selectedTextBox != null) {
+                    selectedTextBox.setForeground(Color.lightGray);
+                    selectedTextBox.setBorder(borderRegular);
+                    selectedTextBox = null;
+                    leaveDeleteModeButton();
+                }
+            }
+        });
+
+    }
+
+    private void hideWindow() {
+        backNextButtonsPanel.setVisible(false);
+        newClassButton.setVisible(false);
+        deleteClassButton.setVisible(false);
+        moveClassButton.setVisible(false);
+        southContainer.setVisible(false);
+        create.getTextFieldContainer().setVisible(false);
+        instructionsPanel.setVisible(false);
+        create.hideContainer();
+        
+        for (MouseListener listener : deleteClassButton.getMouseListeners()) {
+            window.removeMouseListener(listener);
+        }
+
+    }
+
+    private void prepareTextboxForMoveMode() {
+        JTextField[] tempTextField = new JTextField[1];
+        //JLabel[] tempTextField = new JLabel[1];
+        tempTextField[0] = new JTextField("ERROR"); //if not overwritten will show error
+        //tempTextField[0] = new JLabel("ERROR");
+        BufferedImage[] textFieldImage = new BufferedImage[1];
+        textFieldImage[0] = null;
+        Component lastComponent = setState.getTextFieldPanel().getComponent(setState.getTextFieldPanel().getComponentCount()-1);
+        //Bounds lastComponentBounds = lastComponent.getBounds();
+        Rectangle lastComponentBounds = lastComponent.getBounds();
+        JPanel tempTextFieldPanel = setState.getTextFieldPanel();
+        int[] spacedLabelIndex = new int[1];
+
+        for (int i = 0; i < setState.getTextFieldPanel().getComponentCount(); i++) { 
+            JTextField textField = new JTextField();
             //Component currentComponent = setState.getTextFieldPanel().getComponent(i);
 
             //window.setLayout(null);
@@ -628,187 +828,6 @@ public class StudentClasses extends JFrame {
                     }
             });
     }
-    }
-
-//     private void addDraggingMouseReleasedListener(JTextField textField, JTextField[] tempTextField) {
-// }
-
-//     private void draggingListeners() {
-//         //
-//     }
-
-    private void fixClassList() {
-        ArrayList<String> fixedClassList = new ArrayList<>();
-        for (int i = 0; i < setState.getTextFieldPanel().getComponentCount(); i++) {
-            JTextField textFieldComponent = (JTextField) setState.getTextFieldPanel().getComponent(i);
-            fixedClassList.add(textFieldComponent.getText());
-            setList.setClassList(fixedClassList);
-        }
-    }
-
-    private void addMouseListenerToTextboxAndFrame(JTextField textField) {
-        turnOffEditability(textField);
-        textField.addMouseListener(new MouseAdapter() {
-            @Override
-            public void mouseClicked(MouseEvent e) {
-                System.out.println("mouselistener #2");
-                System.out.println("clicked");
-                if (selectedTextBox != null) {
-                    selectedTextBox.setForeground(Color.GRAY);
-                    selectedTextBox.setBorder(borderRegular);
-                }
-                Border borderHighlighted = BorderFactory.createLineBorder(Color.decode("#FF6961"), 2); //red
-                textField.setForeground(Color.decode("#FF6961"));
-                selectedTextBox = textField;
-                textField.setBorder(borderHighlighted);
-                removeDeleteClassButtonActionListeners();
-                deleteQuestionButtonAndAction();
-                }}); 
-
-        windowMouseListener();
-    }
-
-    private void turnOffEditability(JTextField textField) {
-        textField.setEditable(false);
-        textField.setFocusable(false);
-    }
-
-
-    private void deleteQuestionButtonAndAction() {
-        final String[] yesOrNoDialog = new String[1];
-        yesOrNoDialog[0] = "nothing yet";
-
-        deleteClassButton.setText("Delete?");
-        window.remove(instructionsPanel);
-        instructionsWordsAndPanel("Hit Delete Button to Delete");
-        String filePath = setUserInformation.getPathToClassInformationFileWithTextField(selectedTextBox);
-        removeDeleteClassButtonActionListeners();
-        deleteClassButton.addActionListener(new ActionListener() {
-            public void actionPerformed(ActionEvent e) {
-                newClassButton.setEnabled(true);
-                moveClassButton.setEnabled(true);
-                //if the file has loaded information attached
-                if (setState.getLoadedState(selectedTextBox) && (fileHandler.fileExists(filePath)) && fileHandler.fileIsNotEmpty(filePath)) {
-                
-                    yesOrNoDialog[0] = decorate.areYouSureMessage(selectedTextBox, "deleting", "<html><center>Deleting this class will optiondelete <br>its loaded information.<br>Do you wish to continue?", 250, 120);
-
-                    selectedTextBox.setForeground(Color.GRAY);
-                    selectedTextBox.setBorder(borderRegular);
-                }
-
-                else {
-                    JPanel selectedBoxPanel = new JPanel();
-                    selectedBoxPanel.add(selectedTextBox); //this also makes the selected textbox invisible
-                    create.deleteTextBox(selectedBoxPanel);
-                    saveButton.setEnabled(true);
-                }
-
-                if (yesOrNoDialog[0].equals("yes") || yesOrNoDialog[0].equals("nothing yet")) {
-                    saveButton.setEnabled(true);
-                }
-
-
-                pickAppropriateInstructionWordsAndPanels();
-
-                leaveDeleteModeButton();
-            }
-            });
-    }
-
-    private void pickAppropriateInstructionWordsAndPanels() {
-        window.remove(instructionsPanel);
-        if (setState.getTextFieldPanel().getComponentCount() > 0) {
-            instructionsWordsAndPanel("Box deleted");
-            System.out.println("boxdeleted");
-            
-        }
-
-        else if (setState.getTextFieldPanel().getComponentCount() == 0) {
-            instructionsWordsAndPanel("All boxes deleted. Leave delete mode to edit.");
-            System.out.println("all boxes deleted");
-            
-        }
-
-        else {
-            System.out.println("an error");
-        }
-    }
-
-    private void removeDeleteClassButtonActionListeners() {//int amountToDelete) {
-        for (ActionListener listener : deleteClassButton.getActionListeners()) {
-            deleteClassButton.removeActionListener(listener);
-        }
-    }
-
-    private void leaveDeleteModeButton() {
-        for (ActionListener listener : deleteClassButton.getActionListeners()) {
-            deleteClassButton.removeActionListener(listener);
-        }
-        deleteClassButton.setText("Leave Delete Mode");
-
-        leaveDeleteModeAction();
-    }
-
-    private void leaveDeleteModeAction() {
-        removeDeleteClassButtonActionListeners();
-        deleteClassButton.addActionListener(new ActionListener() {
-            public void actionPerformed(ActionEvent e) {
-                window.remove(instructionsPanel);
-                instructionsWordsAndPanel("Left Delete Mode. In Edit Mode");
-                backToDefaultDeleteButton();
-                newClassButton.setEnabled(true);
-                moveClassButton.setEnabled(true);
-                for (int i = 0; i < setState.getTextFieldPanel().getComponentCount(); i++) {
-                    JTextField textField = new JTextField();
-                    if (setState.getTextFieldPanel().getComponent(i) instanceof JTextField) {
-                        textField = (JTextField) setState.getTextFieldPanel().getComponent(i);
-                    }
-
-                    else {
-                        textField = goIntoPanel.goIntoPanelReturnTextbox((JPanel) setState.getTextFieldPanel().getComponent(i), 0);
-                    }
-                    textField.setEditable(true);
-                    textField.setFocusable(true);
-                    MouseListener[] listeners = textField.getMouseListeners();
-                    if (listeners.length > 0) {
-                        MouseListener lastListener = listeners[listeners.length - 1];
-                        textField.removeMouseListener(lastListener);
-                    }
-                }
-                return;
-                }
-        });
-    }
-
-    private void windowMouseListener() {
-        window.getContentPane().addMouseListener(new MouseAdapter() {
-            @Override
-            public void mouseClicked(MouseEvent e) {
-                if (selectedTextBox != null) {
-                    selectedTextBox.setForeground(Color.lightGray);
-                    selectedTextBox.setBorder(borderRegular);
-                    selectedTextBox = null;
-                    leaveDeleteModeButton();
-                }
-            }
-        });
-
-    }
-
-    private void hideWindow() {
-        backNextButtonsPanel.setVisible(false);
-        newClassButton.setVisible(false);
-        deleteClassButton.setVisible(false);
-        moveClassButton.setVisible(false);
-        southContainer.setVisible(false);
-        create.getTextFieldContainer().setVisible(false);
-        instructionsPanel.setVisible(false);
-        create.hideContainer();
-        
-        for (MouseListener listener : deleteClassButton.getMouseListeners()) {
-            window.removeMouseListener(listener);
-        }
-
     }
 
     public class EnterAction extends AbstractAction {
