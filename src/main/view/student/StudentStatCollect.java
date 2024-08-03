@@ -310,8 +310,11 @@ public class StudentStatCollect extends JFrame {
         System.out.println("hi");
         System.out.println("8/3.04 panel count. for: "+setList.getFinalClassList().get(setState.getClassListIndex())+" should be 0-5"+textBoxPanel.getComponentCount());
         //Pattern pattern = Pattern.compile("^(?:[0-9]*(?:.[0-9]+))*\s*$|^[0-9]*\s*$", Pattern.CASE_INSENSITIVE);
-        Pattern pattern = Pattern.compile("^(?:[0-9]*(?:.[0-9]+))*\s*$|^[0-9]*\s*$", Pattern.CASE_INSENSITIVE);
-        correctGradeFormatChecker(pattern);
+        // Pattern patternForGrades = Pattern.compile("^(?:[0-9]*(?:.[0-9]+))*\s*$|^[0-9]*\s*$", Pattern.CASE_INSENSITIVE);
+        // correctBoxFormatChecker(patternForGrades, 4); //for grades
+
+        // Pattern patternForPercentage = Pattern.compile("^[-+]?\\d*\\.?\\d+(e[-+]?\\d+)?%?$", Pattern.CASE_INSENSITIVE);
+        // correctBoxFormatChecker(patternForGrades, 3); //for percentage
         
         //if (textBoxPanel.getComponentCount() == 5 || 8 || 11 || 14 || 17 || 20 || 23 || 26 || 29 || 32) {
         //if ((textBoxPanel.getComponentCount() - 5) % 3 == 0) { //only want to write if 
@@ -391,11 +394,19 @@ public class StudentStatCollect extends JFrame {
                     JTextField creditsTextField = goIntoPanel.goIntoPanelReturnTextbox((JPanel) credits, 0);
                     System.out.println("credits? "+ creditsTextField.getText());
                     String text = creditsTextField.getText();
+
                     Pattern pattern = Pattern.compile("[0-9]+");
                     Matcher matcher = pattern.matcher(text);
                     Boolean matcherBoolean = matcher.find();
 
-                    if (matcherBoolean == true) {
+                    Pattern patternForGrades = Pattern.compile("^(?:[0-9]*(?:.[0-9]+))*\s*$|^[0-9]*\s*$", Pattern.CASE_INSENSITIVE);
+                    Boolean gradesFormatOkay = correctBoxFormatChecker(patternForGrades, 4); //for grades
+            
+                    Pattern patternForPercentage = Pattern.compile("^[-+]?\\d*\\.?\\d+(e[-+]?\\d+)?%?$", Pattern.CASE_INSENSITIVE);
+                    Boolean percentageFormatOkay = correctBoxFormatChecker(patternForPercentage, 3); //for percentage
+
+
+                    if ((matcherBoolean == true) && (gradesFormatOkay) && (percentageFormatOkay)) {
                         System.out.println("Boo");
                         textBoxPanel.removeAll();
 
@@ -406,11 +417,11 @@ public class StudentStatCollect extends JFrame {
                         studentStatCollectLaunch();
                     }
 
-                    else if (matcherBoolean == false) {
+                    else if ((matcherBoolean == false) || (gradesFormatOkay == false) || (percentageFormatOkay == false)) {
                         System.out.println("*HI*");
                         //decorate.errorMessageSetUp();
                         Decorator decorate = new Decorator();
-                        JDialog dialog = decorate.genericPopUpMessage("Credits text is invalid. Must be integer",null,250,90);
+                        JDialog dialog = decorate.genericPopUpMessage("<html><center>Invalid Format.<br>-Credits must be an integer<br>Grades must be numbers separated by spaces<br>-Percentage of Grade must be an integer or decimal",null,400,140);
 
                         //dialog = genericPopUpMessage("<html><center>Please choose an option", button, 200, 90);
                         dialog.setResizable(false);
@@ -461,11 +472,18 @@ public class StudentStatCollect extends JFrame {
                     JTextField creditsTextField = goIntoPanel.goIntoPanelReturnTextbox((JPanel) credits, 0);
                     System.out.println("credits? "+ creditsTextField.getText());
                     String text = creditsTextField.getText();
+
                     Pattern pattern = Pattern.compile("[0-9]+");
                     Matcher matcher = pattern.matcher(text);
                     Boolean matcherBoolean = matcher.find();
 
-                    if (matcherBoolean == true) {
+                    Pattern patternForGrades = Pattern.compile("^(?:[0-9]*(?:.[0-9]+))*\s*$|^[0-9]*\s*$", Pattern.CASE_INSENSITIVE);
+                    Boolean gradesFormatOkay = correctBoxFormatChecker(patternForGrades, 4); //for grades
+            
+                    Pattern patternForPercentage = Pattern.compile("^[-+]?\\d*\\.?\\d+(e[-+]?\\d+)?%?$", Pattern.CASE_INSENSITIVE);
+                    Boolean percentageFormatOkay = correctBoxFormatChecker(patternForPercentage, 3); //for percentage
+
+                    if ((matcherBoolean == true) && (gradesFormatOkay) && (percentageFormatOkay)) {
                         System.out.println("Boo");
                         // visitNextStudentClass();
                         // studentStatCollectLaunch();
@@ -474,10 +492,10 @@ public class StudentStatCollect extends JFrame {
                         new PrintStudentGrades(set.getWindow(), setUserInformation.getStudentOrTeacher(), setUserInformation.getExistingOrNew());
                     }
 
-                    else if (matcherBoolean == false) {
+                    else if ((matcherBoolean == false) || (gradesFormatOkay == false) || (percentageFormatOkay == false)) {
                         System.out.println("*HI*");
                         Decorator decorate = new Decorator();
-                        JDialog dialog = decorate.genericPopUpMessage("Credits text is invalid. Must be integer",null,250,90);
+                        JDialog dialog = decorate.genericPopUpMessage("<html><center>Invalid Format.<br>-Credits must be an integer<br>Grades must be numbers separated by spaces<br>-Percentage of Grade must be an integer or decimal",null,400,140);
                         dialog.setResizable(false);
                         dialog.setLocationRelativeTo(null);
                         dialog.setVisible(true);
@@ -607,9 +625,8 @@ public class StudentStatCollect extends JFrame {
     
 // }
 
-   private void correctGradeFormatChecker(Pattern pattern) {
-    System.out.println("hi");
-        int index = 4;
+   private Boolean correctBoxFormatChecker(Pattern pattern, int index) {
+        //int index = 4;
         for (int i=1; i<=8; i++) { //max num of grade type
             //String text = create.goIntoPanel(classLabelPanel, index);
             String text = goIntoPanel.goIntoPanel(classLabelPanel, index);
@@ -623,8 +640,13 @@ public class StudentStatCollect extends JFrame {
             Matcher matcher = pattern.matcher(text);
             Boolean matcherBoolean = matcher.find();
 
+            if (matcherBoolean == false) {
+                return false;
+            }
+
             System.out.println("matcher works?: "+ matcherBoolean);
         }
+        return true; //got out of loop with every box that was checked, matched.
     }
     //read classes array, first five classes
     public void DisplayClasses() {
