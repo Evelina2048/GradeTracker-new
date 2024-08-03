@@ -1,6 +1,10 @@
 import static org.junit.jupiter.api.Assertions.*;
+
+import javax.swing.JFrame;
+
 import org.junit.jupiter.api.Test;
 
+import view.Launcher;
 import view.student.StudentClasses;
 import model.Set;
 
@@ -29,5 +33,27 @@ public class GradeTrackerTests {
        assertEquals("This is the testcase in this class", str1);
    }
 
+   @Test
+    public void testWindowMade() {
+       Launcher launcher = new Launcher();
+       launcher.initialize();
+       Set set = Set.getInstance();
+       JFrame window = set.getWindow();
+
+       assertEquals(false, window == null);
+   }
+
     // Add more test methods as needed
+
+//     @Test
+//     public void testLauncher() {
+//        Launcher launcher = new Launcher();
+//        launcher.initialize();
+//        Set set = Set.getInstance();
+//        JFrame window = set.getWindow();
+
+//        assertEquals(true, window.isVisible());
+//    }
+
 }
+
