@@ -12,6 +12,7 @@ import java.awt.event.ActionListener;
 import java.awt.event.ActionEvent;
 import controller.Creator;
 import controller.Decorator;
+import model.SetList;
 import controller.CreateButton;
 
 public class PrintStudentGrades extends JFrame {
@@ -19,6 +20,7 @@ public class PrintStudentGrades extends JFrame {
     private JPanel backNextButtonsPanel;
     private Decorator decorate = new Decorator();
     private Creator create;
+    private SetList setList;
     private CreateButton createButton = new CreateButton();
 
     public PrintStudentGrades(JFrame main, String studentOrTeacher, String existingOrNew) {
@@ -30,6 +32,31 @@ public class PrintStudentGrades extends JFrame {
         instructionsPanel = decorate.InstructionsPanelDecorate(instructionsPanel, instructionsWords );
         window.add(instructionsPanel);
         buttonSetUpAction(main, studentOrTeacher, existingOrNew);
+        setList = SetList.getInstance();
+
+
+        //go into file. (For loop of files)
+        /*
+         * for (classes) {
+         *  class.readFileIntoList(pathtofilewithclasslistindex);
+         * }
+         */
+
+         /*
+        for (int i = 0; i < class.getFinalClassList().size();i++) {
+        // class.readFileIntoList(pathtofilewithclasslistindex);
+        }
+         */
+
+        
+        // for (int i = 0; i < setList.getFinalClassList().size();i++) {
+        // // class.readFileIntoList(pathtofilewithclasslistindex);
+        // }
+
+        for (int i = 0; i < setList.getFinalClassList().size();i++) {
+            System.out.println("printgradestest "+setList.getFinalClassList().get(i));
+            // class.readFileIntoList(pathtofilewithclasslistindex);
+        }
     }
 
     public void studentStatCollectLaunch(JFrame main) {
@@ -68,23 +95,23 @@ public class PrintStudentGrades extends JFrame {
     //window.setVisible(true);
 
 
-    public static void main(String[] args) {
-        JFrame main = new JFrame(); // Initialize your main JFrame here
+    // public static void main(String[] args) {
+    //     JFrame main = new JFrame(); // Initialize your main JFrame here
 
-        main.setSize(800, 600); // Set the size as needed
-        main.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE); // Set close operation
-        main.setVisible(true); // Make the frame visible
+    //     main.setSize(800, 600); // Set the size as needed
+    //     main.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE); // Set close operation
+    //     main.setVisible(true); // Make the frame visible
 
-        String studentOrTeacher = "Student"; // Initialize studentOrTeacher
-        String existingOrNew = "Existing"; // Initialize existingOrNew
+    //     String studentOrTeacher = "Student"; // Initialize studentOrTeacher
+    //     String existingOrNew = "Existing"; // Initialize existingOrNew
 
-        SwingUtilities.invokeLater(new Runnable() {
-            @Override
-            public void run() {
-                PrintStudentGrades edit = new PrintStudentGrades(main, studentOrTeacher, existingOrNew);
-            }
-        });
-    }
+    //     SwingUtilities.invokeLater(new Runnable() {
+    //         @Override
+    //         public void run() {
+    //             PrintStudentGrades edit = new PrintStudentGrades(main, studentOrTeacher, existingOrNew);
+    //         }
+    //     });
+    // }
 
 
 //North print grades

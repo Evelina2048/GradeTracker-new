@@ -22,10 +22,9 @@ public class Launcher {
         JFrame window = new JFrame();
         window.setResizable(false);
         set.setWindow(window);
-        // MainWindow main = new MainWindow();
-        // main.show(0,0);
         NewUser newUser = new NewUser();
         newUser.showWindow();
+        //set.setWindow(window);
     }
 }
 

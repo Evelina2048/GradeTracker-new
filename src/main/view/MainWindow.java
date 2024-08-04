@@ -227,13 +227,7 @@ private void backNextButton() {
     JButton nextButton = createButton.nextButtonCreate();
     JPanel nextButtonPanel = new JPanel();
     nextButtonPanel.add(nextButton);
-    // nextButton.addActionListener(new ActionListener() {
-    //     public void actionPerformed(ActionEvent e) {
-    //         doNextButtonProcedure();
-    //     }
-    // });
 
-    //:
     nextButton.addActionListener(new ActionListener() {
         public void actionPerformed(ActionEvent e) {
             actionPriorities.addClassActionListener(new ActionListener() {

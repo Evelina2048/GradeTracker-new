@@ -820,6 +820,14 @@ public class StudentClasses extends JFrame {
     }
     }
 
+    public JButton TESTDELETECLASSBUTTON() {
+        return deleteClassButton;
+    }
+
+    public JButton TESTSAVEBUTTON() {
+        return saveButton;
+    }
+
     public class EnterAction extends AbstractAction {
         @Override
         public void actionPerformed(ActionEvent e) {
