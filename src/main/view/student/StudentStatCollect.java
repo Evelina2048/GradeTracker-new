@@ -359,6 +359,7 @@ public class StudentStatCollect extends JFrame {
         //:
         nextButton.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent e) {
+                actionPriorities.setCurrentClass(currentClass);
                 actionPriorities.addClassActionListener(new ActionListener() {
                     @Override
                     public void actionPerformed(ActionEvent e) {// remember wont run  if just enter without a click

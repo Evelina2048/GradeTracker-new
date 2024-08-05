@@ -343,9 +343,13 @@ public class Gather {
         nextButton.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
+                currentClass = "Gather";
+                actionPriorities.setCurrentClass(currentClass);
                 actionPriorities.addClassActionListener(new ActionListener() {
                     @Override
                     public void actionPerformed(ActionEvent e) { // remember won't run if just enter without a click
+                        // currentClass = "Gather";
+                        // actionPriorities.setCurrentClass(currentClass);
                         System.out.println("enteraction");
                         doNextButtonProcedure();
                     }
@@ -356,6 +360,7 @@ public class Gather {
     }
 
     private void doNextButtonProcedure() {
+        actionPriorities.setCurrentClass(currentClass);
         setUsername();
         set.setWindow(window);
         System.out.println("nextbutton action in gather");

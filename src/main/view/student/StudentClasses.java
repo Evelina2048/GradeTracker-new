@@ -132,7 +132,7 @@ public class StudentClasses extends JFrame {
         loadIfNeeded();
         westPanelCreate();
         buttonSetUpAction();
-        currentClass = "StudentClasses";
+
         actionPriorities.setCurrentClass(currentClass);
     }
 
@@ -236,12 +236,18 @@ public class StudentClasses extends JFrame {
         nextButtonPanel.add(nextButton);
         nextButton.setPreferredSize(new Dimension(87, 29));
 
+        //currentClass = "StudentClasses";
+        //actionPriorities.setCurrentClass(currentClass);
         nextButton.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent e) {
+                currentClass = "StudentClasses";
                 actionPriorities.setCurrentClass(currentClass);
                 actionPriorities.addClassActionListener(new ActionListener() {
+                    // actionPriorities.setCurrentClass(currentClass);
                     @Override
                     public void actionPerformed(ActionEvent e) {// remember wont run  if just enter without a click
+                        currentClass = "StudentClasses";
+                        //actionPriorities.setCurrentClass(currentClass);
                         doNextButtonProcedure();
                     }
                 }, 1, "nextButton", null, currentClass);  // Add this ActionListener with priority 1
@@ -250,6 +256,8 @@ public class StudentClasses extends JFrame {
         return nextButtonPanel;
     }
     private void doNextButtonProcedure() {
+        currentClass = "StudentClasses";
+        //actionPriorities.setCurrentClass(currentClass);
         ArrayList<String> classList;
         classList = fileWrite.getClassList();
 

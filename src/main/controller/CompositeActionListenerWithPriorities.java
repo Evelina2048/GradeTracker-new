@@ -104,7 +104,7 @@ public class CompositeActionListenerWithPriorities implements ActionListener {
                 CompositeActionListenerWithPriorities.this.actionPerformed(
                 new ActionEvent(CompositeActionListenerWithPriorities.this, ActionEvent.ACTION_PERFORMED, "PerformAllActions"));
             } 
-            // else if (listeners.size() == 1) {
+            else if (listeners.size() == 1) {
             //     //decorate.errorMessageSetUp("<html><center>Username already exists.<br> Please choose another.",200,100);
 
 
@@ -124,7 +124,7 @@ public class CompositeActionListenerWithPriorities implements ActionListener {
             //     //decorate.errorMessageSetUp(button);
             //     return;
 
-            // } 
+            } 
             else {
                 System.out.println("Something went wrong in CompositeActionListenerWithPriorities addClassActionListener \u00AF\\_(\u30C4)_/\u00AF");
             }
@@ -163,6 +163,7 @@ public class CompositeActionListenerWithPriorities implements ActionListener {
     if (currentClass == null) {
       currentClass = thisClass;
     }
+    System.out.println("setclassto "+currentClass);
   }
 
   public String getCurrentClass() {
