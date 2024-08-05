@@ -1,0 +1,7 @@
+Credits (optional)
+Grade Type 1
+Percentage of Grade
+Grades(format:# # #)
+100a
+Percentage of Grade
+Grades(format:# # #)
