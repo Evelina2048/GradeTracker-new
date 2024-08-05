@@ -13,6 +13,7 @@ import java.awt.event.ActionEvent;
 import controller.Creator;
 import controller.Decorator;
 import model.SetList;
+import model.SetUserInformation;
 import controller.CreateButton;
 
 public class PrintStudentGrades extends JFrame {
@@ -21,6 +22,7 @@ public class PrintStudentGrades extends JFrame {
     private Decorator decorate = new Decorator();
     private Creator create;
     private SetList setList;
+    private SetUserInformation setUserInformation;
     private CreateButton createButton = new CreateButton();
 
     public PrintStudentGrades(JFrame main, String studentOrTeacher, String existingOrNew) {
@@ -33,28 +35,17 @@ public class PrintStudentGrades extends JFrame {
         window.add(instructionsPanel);
         buttonSetUpAction(main, studentOrTeacher, existingOrNew);
         setList = SetList.getInstance();
+        setUserInformation = SetUserInformation.getInstance();
 
 
         //go into file. (For loop of files)
-        /*
-         * for (classes) {
-         *  class.readFileIntoList(pathtofilewithclasslistindex);
-         * }
-         */
-
-         /*
-        for (int i = 0; i < class.getFinalClassList().size();i++) {
-        // class.readFileIntoList(pathtofilewithclasslistindex);
-        }
-         */
-
-        
         // for (int i = 0; i < setList.getFinalClassList().size();i++) {
-        // // class.readFileIntoList(pathtofilewithclasslistindex);
+        //     System.out.println("printgradestest "+setList.getFinalClassList().get(i));
+        //     // class.readFileIntoList(pathtofilewithclasslistindex);
         // }
-
         for (int i = 0; i < setList.getFinalClassList().size();i++) {
             System.out.println("printgradestest "+setList.getFinalClassList().get(i));
+            String filePathForClass = setUserInformation.getPathToClassInformationFileWithChosenIndex(i);
             // class.readFileIntoList(pathtofilewithclasslistindex);
         }
     }

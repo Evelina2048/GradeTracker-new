@@ -63,6 +63,11 @@ public class SetUserInformation {
         return  "/Users/evy/Documents/GradeTracker-new/src/main/view/UserInfo/StudentInfo/"+getUsername()+"/ClassInformation/"+setList.getFinalClassList().get(setState.getClassListIndex())+".txt";
     }
 
+    public String getPathToClassInformationFileWithChosenIndex(int chosenIndex) {
+        System.out.println("final list in path"+ setList.getFinalClassList()+" "+"/Users/evy/Documents/GradeTracker-new/src/main/view/UserInfo/StudentInfo/"+getUsername()+"/ClassInformation/"+setList.getFinalClassList().get(chosenIndex)+".txt");
+        return  "/Users/evy/Documents/GradeTracker-new/src/main/view/UserInfo/StudentInfo/"+getUsername()+"/ClassInformation/"+setList.getFinalClassList().get(setState.getClassListIndex())+".txt";
+    }
+
     public void setExistingOrNew(String myExistingOrNew) {
         existingOrNew = myExistingOrNew;
     }
