@@ -245,12 +245,14 @@ public class StudentClasses extends JFrame {
             public void actionPerformed(ActionEvent e) {
                 currentClass = "StudentClasses";
                 actionPriorities.setCurrentClass(currentClass);
+                System.out.println("TTT ");
                 actionPriorities.addClassActionListener(new ActionListener() {
                     // actionPriorities.setCurrentClass(currentClass);
                     @Override
                     public void actionPerformed(ActionEvent e) {// remember wont run  if just enter without a click
                         currentClass = "StudentClasses";
                         //actionPriorities.setCurrentClass(currentClass);
+                        System.out.println("UUU ");
                         doNextButtonProcedure();
                     }
                 }, 1, "nextButton", null, currentClass);  // Add this ActionListener with priority 1
@@ -271,9 +273,11 @@ public class StudentClasses extends JFrame {
         create.hideContainer();
 
         System.out.println("thestuffclasslist "+classList+" "+setList.getCurrentPanelList());
+        System.out.println("VVV ");
         StudentStatCollect studentStatCollect = new StudentStatCollect();
         if (fileHandler.fileExists("/Users/evy/Documents/GradeTracker-new/src/main/view/UserInfo/StudentInfo/" + setUserInformation.getUsername() + "/" +"ClassInformation"+"/"+setList.getFinalClassList().get(0) + ".txt")) { //needs to keep path because its with index 0
             create.hideContainer();
+            System.out.println("W ");
             studentStatCollect.studentStatCollectLaunch();
             studentStatCollect.addLoadedBoxes();
         }

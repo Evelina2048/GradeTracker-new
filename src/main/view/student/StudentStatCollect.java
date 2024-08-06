@@ -263,6 +263,8 @@ public class StudentStatCollect extends JFrame {
         }
         //setState.setTextFieldPanel(textBoxPanel); //8/3
         classLabelPanel.add(textBoxPanel);
+        System.out.println("X "+(classLabelPanel==null));
+        sETTEST.SETTESTCLASSLABELPANEL(classLabelPanel);
 
 
 
@@ -297,6 +299,46 @@ public class StudentStatCollect extends JFrame {
         create.windowFix();
 
         sETTEST.SETTESTTEXTBOXPANEL(textBoxPanel);
+
+        System.out.println("YYYY "+textBoxPanel.getComponentCount()+ " visibility "+textBoxPanel.isVisible());
+        Component[] windowComponents = window.getContentPane().getComponents();
+
+        //for (Component component:windowComponents) {
+
+        window.add(classLabelPanel);
+        classLabelPanel.setName("classLabelPanellllllll");
+        sETTEST.SETTESTCLASSLABELPANEL(classLabelPanel);
+        set.setWindow(window);
+
+        System.out.println("windowcomps "+windowComponents.length);
+        //window.removeAll();
+        // for (int i = 0; i<windowComponents.length;i++) {
+        // //for (int i = 1; i<windowComponents.length;i++) {
+        // //for (int i = 1; i<20;i++) {
+        //     Component component = windowComponents[i];
+        //     if ((component.getName()!= null) && component.getName().equals("gridlayout textboxpanel")) {
+        //         System.out.println("YYYY.M "+i);
+        //     }
+
+        //     // if (component instanceof JPanel) {//if (component instanceof JPanel) {
+        //     //     JPanel around = (JPanel) component;
+        //     //     if (around.getComponentCount() >= 2 && ((around.getComponent(1) instanceof JPanel) || (around.getComponent(1) instanceof JTextField))) {
+        //     //     //goIntoPanel.goIntoPanelReturnTextbox((JPanel) around.getComponent(1), 0);
+        //     //     System.out.println("YYYY.L "+i);
+        //     //     }
+        //     // }
+
+        //     //if (component.contains(textField)) {
+        //     // System.out.println("component "+component.getName());
+        //     // System.out.println("componentclasslabelpanelinreadclasscheck " + classLabelPanel.isVisible());
+
+        //     //component.setVisible(false);
+        //     //System.out.println("componentclasslabelpanelinreadclasscheck " + classLabelPanel.isVisible());
+        // }
+        //textBoxPanel.setVisible(true);
+        //window.add(textBoxPanel);
+        System.out.println("ZZZZ "+textBoxPanel.getComponentCount()+ " visibility "+textBoxPanel.isVisible());
+
     }
 
     private void saveAction(JButton saveButton) {

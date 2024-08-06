@@ -45,7 +45,10 @@ public class GoIntoPanel {
 
     public JTextField goIntoPanelReturnTextbox(JPanel panel, int index) {
         Container container = panel;
-        Component component = container.getComponent(index);
+        if (container.getComponentCount() >= 1) {
+            Component component = container.getComponent(index);
+        
+
         if (component instanceof JTextField) {
                 System.out.println("should print last");
                 JTextField textField = (JTextField) component;
@@ -62,10 +65,14 @@ public class GoIntoPanel {
         else {
             System.out.println("im confused " + component.getClass().getName());
         }
+
             //System.out.println("none of these" +component.getClass().getName());
         //return textField;
         JPanel jpanel = (JPanel) component;
         return goIntoPanelReturnTextbox(jpanel, 0);
+
+    }
+    return new JTextField("issue in go Into Panel Return Textbox");
     }
         
     public Boolean checkIfHasPlaceholder(JPanel textFieldPanel2) {

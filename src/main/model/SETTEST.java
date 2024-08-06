@@ -11,6 +11,7 @@ public class SETTEST {
     //Below is for singleton design pattern
     // Static variable to hold the single instance of the class
     private static SETTEST instance;
+    private JPanel classLabelPanel;
 
     // Private constructor to prevent instantiation
     private SETTEST() {}
@@ -31,6 +32,21 @@ public class SETTEST {
     public JPanel GETTESTTEXTBOXPANEL() {
         return TESTTEXTBOXPANEL;
     }
+
+    public void SETTESTCLASSLABELPANEL(JPanel thisClassLabelPanel) {
+        System.out.println("YYY "+(classLabelPanel==null));
+        classLabelPanel = thisClassLabelPanel;
+    }
+
+    public JPanel GETTESTCLASSLABELPANEL() {
+        System.out.println("Z "+(classLabelPanel==null));
+        return classLabelPanel;
+    }
+
+    public void TESTRESETSETTEST() {
+        instance = null;
+    }
+
 
     
 }

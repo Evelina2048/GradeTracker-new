@@ -21,7 +21,7 @@ public class CompositeActionListenerWithPriorities implements ActionListener {
     new TreeMap<Integer,ArrayList<ActionListener>>();
     private boolean isProcessing = false;
     private Set set = Set.getInstance();
-    private String currentClass = "Current class not changed";
+    private String currentClass = null;//"Current class not changed"; //TODO 8/6 7:19am
     private static CompositeActionListenerWithPriorities instance;
     //this.set = Set.getInstance();
     private CompositeActionListenerWithPriorities() {}
@@ -66,6 +66,7 @@ public class CompositeActionListenerWithPriorities implements ActionListener {
 
   public void addClassActionListener(ActionListener a, int priority, String keyCause, JRadioButton button, String listenerSource){
     //System.out.println("currentclass: "+currentClass+" listenersource "+listenerSource);
+    System.out.println("TTT.AAA ");
     //deleteActionListener(a);
     if(!listeners.containsKey(priority)){
       listeners.put(priority,new ArrayList<ActionListener>());
@@ -172,6 +173,14 @@ public class CompositeActionListenerWithPriorities implements ActionListener {
 
   public Map<Integer, ArrayList<ActionListener>> DEBUGLISTENERMAP() {
     return listeners;
+  }
+
+  public void TESTFORCECURRENTCLASS(String thisClass) {
+    currentClass = thisClass;
+  }
+
+  public void TESTRESETACTIONPRIORITIES() {
+    instance = null;
   }
 
 }

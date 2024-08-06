@@ -92,4 +92,8 @@ public class SetUserInformation {
     public ArrayList<String> getDeleteQueue() {
         return deleteQueue;
     }
+
+    public void TESTRESETSETUSERINFORMATION() {
+        instance = null;
+    }
 }
