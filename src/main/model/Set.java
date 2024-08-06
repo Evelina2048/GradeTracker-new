@@ -66,4 +66,8 @@ public class Set {
     public JButton getCurrentSaveButton() {
         return saveButton;
     }
+
+    public void TESTRESETSET() {
+        instance = null;
+    }
 }

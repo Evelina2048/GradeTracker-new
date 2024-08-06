@@ -20,13 +20,15 @@ import model.Set;
 import model.SetState;
 import model.SetUserInformation;
 import model.SetList;
+import model.GoIntoPanel;
+import model.SETTEST;
 
 import controller.Creator;
-import model.GoIntoPanel;
 import controller.Decorator;
 import controller.FileHandling;
 import controller.FileWriting;
 import controller.CompositeActionListenerWithPriorities;
+import controller.CreateButton;
 
 import javax.swing.AbstractAction;
 import javax.swing.JComponent;
@@ -36,7 +38,6 @@ import javax.swing.JPanel;
 import javax.swing.JTextField;
 
 import java.awt.event.KeyEvent;
-import controller.CreateButton;
 
 public class StudentStatCollect extends JFrame {
     private JFrame window;
@@ -47,6 +48,7 @@ public class StudentStatCollect extends JFrame {
     private Set set;
     private SetState setState;
     private SetList setList;
+    private SETTEST sETTEST;
     private String currentClass = "StudentStatCollect Loading";
     
     private SetUserInformation setUserInformation;
@@ -75,6 +77,7 @@ public class StudentStatCollect extends JFrame {
         this.setUserInformation = SetUserInformation.getInstance();
         this.setList = SetList.getInstance();
         this.actionPriorities = CompositeActionListenerWithPriorities.getInstance();
+        this.sETTEST = SETTEST.getInstance();
 
 
         actionPriorities.setCurrentClass(currentClass);
@@ -292,6 +295,8 @@ public class StudentStatCollect extends JFrame {
         // //window.add(classLabelPanel);
         
         create.windowFix();
+
+        sETTEST.SETTESTTEXTBOXPANEL(textBoxPanel);
     }
 
     private void saveAction(JButton saveButton) {

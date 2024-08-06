@@ -20,11 +20,15 @@ public class Launcher {
         Set set;
         set = Set.getInstance();
         JFrame window = new JFrame();
+
         window.setResizable(false);
         set.setWindow(window);
         NewUser newUser = new NewUser();
         newUser.showWindow();
-        //set.setWindow(window);
     }
+
+    // public TESTRESETLAUNCHER () {
+
+    // }
 }
 

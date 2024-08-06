@@ -111,4 +111,8 @@ public class SetState {
     public Font getTextFieldFont() {
         return textFieldFont;
     }
+
+    public void TESTRESETSTATE() {
+        instance = null;
+    }
 }

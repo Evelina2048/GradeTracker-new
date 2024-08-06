@@ -69,6 +69,9 @@ public class StudentClasses extends JFrame {
     AtomicBoolean textFieldEmptied = new AtomicBoolean(false);;
     JButton newClassButton;
     JButton deleteClassButton;
+
+    JButton nextButton;
+    
     JButton moveClassButton;
     JPanel moveClassButtonPanel;
 
@@ -231,7 +234,7 @@ public class StudentClasses extends JFrame {
     }
 
     private JPanel makeNextButtonPanel() {
-        JButton nextButton = createButton.nextButtonCreate();
+        nextButton = createButton.nextButtonCreate();
         JPanel nextButtonPanel = new JPanel();
         nextButtonPanel.add(nextButton);
         nextButton.setPreferredSize(new Dimension(87, 29));
@@ -786,6 +789,10 @@ public class StudentClasses extends JFrame {
 
     public JButton TESTSAVEBUTTON() {
         return saveButton;
+    }
+
+    public JButton TESTNEXTBUTTON() {
+        return nextButton;
     }
 
     public class EnterAction extends AbstractAction {

@@ -262,6 +262,7 @@ public class NewUser extends JFrame {
 
     public void showWindow() {
         window.setLocationRelativeTo(null);
+        set.setWindow(window);
     }
 
     private void addNewUserActionListener() {
