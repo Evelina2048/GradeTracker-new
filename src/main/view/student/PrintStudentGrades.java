@@ -9,9 +9,11 @@ import javax.swing.JPanel;
 import javax.swing.JLabel;
 
 import java.awt.event.ActionListener;
+import java.util.ArrayList;
 import java.awt.event.ActionEvent;
 import controller.Creator;
 import controller.Decorator;
+import controller.FileHandling;
 import model.SetList;
 import model.SetUserInformation;
 import controller.CreateButton;
@@ -23,6 +25,7 @@ public class PrintStudentGrades extends JFrame {
     private Creator create;
     private SetList setList;
     private SetUserInformation setUserInformation;
+    private FileHandling fileHandler = new FileHandling();
     private CreateButton createButton = new CreateButton();
 
     public PrintStudentGrades(JFrame main, String studentOrTeacher, String existingOrNew) {
@@ -43,10 +46,20 @@ public class PrintStudentGrades extends JFrame {
         //     System.out.println("printgradestest "+setList.getFinalClassList().get(i));
         //     // class.readFileIntoList(pathtofilewithclasslistindex);
         // }
+        ArrayList<String> gradeList = new ArrayList<>();
         for (int i = 0; i < setList.getFinalClassList().size();i++) {
             System.out.println("printgradestest "+setList.getFinalClassList().get(i));
             String filePathForClass = setUserInformation.getPathToClassInformationFileWithChosenIndex(i);
-            // class.readFileIntoList(pathtofilewithclasslistindex);
+            ArrayList<String> allList = fileHandler.readFileToList(filePathForClass);
+
+            //grades starts at index 4
+            gradeList.add(allList.get(4));
+            for (int j = 5; j < allList.size(); j+=3) {
+                gradeList.add(allList.get(j));
+
+            }
+            
+
         }
     }
 
