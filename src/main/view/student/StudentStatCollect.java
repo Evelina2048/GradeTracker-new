@@ -35,6 +35,7 @@ import javax.swing.JComponent;
 import javax.swing.JDialog;
 import javax.swing.KeyStroke;
 import javax.swing.JPanel;
+import javax.swing.JLabel;
 import javax.swing.JTextField;
 
 import java.awt.event.KeyEvent;
@@ -45,6 +46,7 @@ public class StudentStatCollect extends JFrame {
     private GoIntoPanel goIntoPanel;
     private JPanel backNextButtonsPanel;
     private JButton newTypeButton;
+    private JButton nextButton; //8/7
     private Set set;
     private SetState setState;
     private SetList setList;
@@ -154,7 +156,7 @@ public class StudentStatCollect extends JFrame {
         saveAction(saveButton);
         saveButton.setEnabled(false);
         
-        JButton nextButton = createButton.nextButtonCreate();
+        nextButton = createButton.nextButtonCreate();
         JPanel nextButtonPanel = new JPanel();
         nextButtonPanel.add(nextButton);
         nextButtonAction(nextButton);
@@ -266,28 +268,6 @@ public class StudentStatCollect extends JFrame {
         System.out.println("X "+(classLabelPanel==null));
         sETTEST.SETTESTCLASSLABELPANEL(classLabelPanel);
 
-
-
-
-        // ////<
-        // //setList.setClassLabelPanel(classLabelPanel);
-        // // ArrayList<String> loadedBoxesList = fileHandler.readFileToList(filePath);
-        // // int numberOfComponents = loadedBoxesList.size();
-        // // numOfBoxes += numberOfComponents;
-        // // boxManageCreate("hello", "JLabel",false);
-        // // for (int i = 0; i < numberOfComponents; i++) {
-        // //     boxManageCreate(loadedBoxesList.get(i), "JTextField", true);
-        // // }
-
-        // //create.hideContainer();
-
-
-
-
-
-        // //classLabelPanel.setBackground(Color.PINK);
-        // //classLabelPanel.setBackground(lightgrayColor);
-        // ////>
         if (numOfBoxes == 0) {
             boxStarterPack();
         }    
@@ -301,43 +281,13 @@ public class StudentStatCollect extends JFrame {
         sETTEST.SETTESTTEXTBOXPANEL(textBoxPanel);
 
         System.out.println("YYYY "+textBoxPanel.getComponentCount()+ " visibility "+textBoxPanel.isVisible());
-        Component[] windowComponents = window.getContentPane().getComponents();
-
-        //for (Component component:windowComponents) {
 
         window.add(classLabelPanel);
-        classLabelPanel.setName("classLabelPanellllllll");
         sETTEST.SETTESTCLASSLABELPANEL(classLabelPanel);
         set.setWindow(window);
 
-        System.out.println("windowcomps "+windowComponents.length);
-        //window.removeAll();
-        // for (int i = 0; i<windowComponents.length;i++) {
-        // //for (int i = 1; i<windowComponents.length;i++) {
-        // //for (int i = 1; i<20;i++) {
-        //     Component component = windowComponents[i];
-        //     if ((component.getName()!= null) && component.getName().equals("gridlayout textboxpanel")) {
-        //         System.out.println("YYYY.M "+i);
-        //     }
-
-        //     // if (component instanceof JPanel) {//if (component instanceof JPanel) {
-        //     //     JPanel around = (JPanel) component;
-        //     //     if (around.getComponentCount() >= 2 && ((around.getComponent(1) instanceof JPanel) || (around.getComponent(1) instanceof JTextField))) {
-        //     //     //goIntoPanel.goIntoPanelReturnTextbox((JPanel) around.getComponent(1), 0);
-        //     //     System.out.println("YYYY.L "+i);
-        //     //     }
-        //     // }
-
-        //     //if (component.contains(textField)) {
-        //     // System.out.println("component "+component.getName());
-        //     // System.out.println("componentclasslabelpanelinreadclasscheck " + classLabelPanel.isVisible());
-
-        //     //component.setVisible(false);
-        //     //System.out.println("componentclasslabelpanelinreadclasscheck " + classLabelPanel.isVisible());
-        // }
-        //textBoxPanel.setVisible(true);
-        //window.add(textBoxPanel);
-        System.out.println("ZZZZ "+textBoxPanel.getComponentCount()+ " visibility "+textBoxPanel.isVisible());
+        //setState.setTextFieldPanel(classLabelPanel);//8/6
+        setState.setTextFieldPanel(textBoxPanel);//8/6
 
     }
 
@@ -373,7 +323,8 @@ public class StudentStatCollect extends JFrame {
 
         //System.out.println("000.1 "+goIntoPanel.goIntoPanelReturnTextbox((JPanel) textBoxPanel.getComponent(1), 0).getText());
         System.out.println("11 textboxpanelcomps "+setState.getTextFieldPanel().getComponentCount() +" textboxpanel "+textBoxPanel.getComponentCount()+" "+ setList.getFinalClassList().get(setState.getClassListIndex()));
-        setState.setTextFieldPanel(textBoxPanel);//8/3
+        //setState.setTextFieldPanel(textBoxPanel);//8/3
+        setState.setTextFieldPanel(classLabelPanel);//8/3
 
         System.out.println("22 textboxpanelcomps "+setState.getTextFieldPanel().getComponentCount()+" "+textBoxPanel.getComponentCount()+setList.getFinalClassList().get(setState.getClassListIndex()));
         //if (fileWrite.howManyPlaceholders() == 0) {
@@ -384,7 +335,6 @@ public class StudentStatCollect extends JFrame {
 
 
         //}
-
 
         if (fileWrite.howManyPlaceholders() > 0) { 
             Decorator decorate = new Decorator();
@@ -510,11 +460,27 @@ public class StudentStatCollect extends JFrame {
             }
             else {
                 //check if credits is valid
-                setState.getTextFieldPanel().getComponent(1);
+                //setState.getTextFieldPanel().getComponent(1);
 
                 //\\
                 //check if credits is valid
-                Component credits = setState.getTextFieldPanel().getComponent(1);
+                System.out.println("looking "+setState.getTextFieldPanel().getName());
+                System.out.println("along "+(setState.getTextFieldPanel() == textBoxPanel));
+                System.out.println("sing "+textBoxPanel.getComponentCount());
+                JPanel credits;
+                credits = (JPanel) textBoxPanel;
+                //for (int i = 0; )
+                // while (credits.getComponentCount() >= 5) {
+
+                // }
+
+                while (credits.getComponentCount() < 5) {
+                    System.out.println("dollar "+credits.getComponentCount());
+                    credits = (JPanel) credits.getComponent(0);
+                }
+                //is greater or equal to 5
+                credits = (JPanel) credits.getComponent(1);
+
                 if (credits instanceof JPanel) {
                     //TODO regex
                     JTextField creditsTextField = goIntoPanel.goIntoPanelReturnTextbox((JPanel) credits, 0);
@@ -531,7 +497,9 @@ public class StudentStatCollect extends JFrame {
                     Pattern patternForPercentage = Pattern.compile("^[-+]?\\d*\\.?\\d+(e[-+]?\\d+)?%?$", Pattern.CASE_INSENSITIVE);
                     Boolean percentageFormatOkay = correctBoxFormatChecker(patternForPercentage, 3); //for percentage
 
+                    //System.out.println("matcherboolstuff"+(matcherBoolean == true) && (gradesFormatOkay) && (percentageFormatOkay));
                     if ((matcherBoolean == true) && (gradesFormatOkay) && (percentageFormatOkay)) {
+                    //if ((matcherBoolean == false) || (gradesFormatOkay == false) || (percentageFormatOkay == false)) {
                         System.out.println("Boo");
                         // visitNextStudentClass();
                         // studentStatCollectLaunch();
@@ -540,6 +508,7 @@ public class StudentStatCollect extends JFrame {
                         new PrintStudentGrades(set.getWindow(), setUserInformation.getStudentOrTeacher(), setUserInformation.getExistingOrNew());
                     }
 
+                   // else if ((matcherBoolean == true) && (gradesFormatOkay) && (percentageFormatOkay)) {
                     else if ((matcherBoolean == false) || (gradesFormatOkay == false) || (percentageFormatOkay == false)) {
                         System.out.println("*HI*");
                         Decorator decorate = new Decorator();
@@ -854,5 +823,9 @@ public class StudentStatCollect extends JFrame {
                 }
             }, 1, "EnterAction", null, currentClass);  // Add this ActionListener with priority 1
         }
+    }
+
+    public JButton TESTNEXTBUTTON() {
+        return nextButton;
     }
     }

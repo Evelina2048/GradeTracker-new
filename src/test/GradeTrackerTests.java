@@ -5,6 +5,8 @@ import javax.swing.JFrame;
 import javax.swing.JPanel;
 import javax.swing.SwingUtilities;
 import java.awt.event.ActionListener;
+import java.util.ArrayList;
+import java.util.logging.FileHandler;
 import java.awt.Component;
 import java.awt.event.ActionEvent;
 
@@ -17,11 +19,14 @@ import controller.Creator;
 import view.Launcher;
 import view.NewUser;
 import view.student.StudentClasses;
+import view.student.StudentStatCollect;
 import model.SETTEST;
 import model.Set;
 import model.SetList;
 import model.SetState;
 import model.SetUserInformation;
+
+import controller.FileHandling;
 
 public class GradeTrackerTests {
     @BeforeEach
@@ -89,6 +94,8 @@ public class GradeTrackerTests {
      StudentClasses studentClasses = new StudentClasses();
      studentClasses.studentClassesLaunch();
 
+     //FileHandling fileHandler = new FileHandler();
+
      JPanel textFieldPanel = new JPanel();
 
      textFieldPanel.add(create.createTextBox("English", "JTextField",false));
@@ -134,52 +141,7 @@ public class GradeTrackerTests {
    //setState.TESTRESETSTATE();
 }
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-//     // Add more test methods as needed
-    @Test
+@Test
     public void testAddingLoaded() {
         //class where deletemode
         SETTEST sETTEST = SETTEST.getInstance();
@@ -213,36 +175,102 @@ public class GradeTrackerTests {
         //System.out.println("textBoxPanelcomponent "+classLabelPanel.getComponentCount());
 
         JFrame window = set.getWindow();
-        //window.add(classLabelPanel);
         Component[] windowComponents = window.getContentPane().getComponents();
         JPanel windZero = (JPanel) windowComponents[0];
-        //JPanel compZero = (JPanel) windowComponents[0];
 
-        //System.out.println("iii"+ compZero.getClass().getName());
-        //JPanel compZeroZero = (JPanel) compZero.getComponent(0);
         for (Component windowComp : windowComponents) {
-        //for (int i = 0; i < windowComponents.length; i++) {
-            //JPanel compzzz = (JPanel) windowComp;
-            //JPanel compzzz = 
-
-            //JPanel compZero = (JPanel) compzzz.getComponent(0);
-
-            //System.out.println("ttt "+compzzz.getName()+ " "+ compzzz.getClass().getName()+ " "+ window.getRootPane().getComponentCount());
-            //System.out.println("ttt "+(classLabelPanel == null));
-            
-            // System.out.println("labelpanel ");
             if (windowComp == classLabelPanel) {
                 windowHasClassLabelPanel = true;
                 break;
             }
 
-            // else {
-            //     System.out.println("wind "+windZero.getComponent(0).getClass().getName());
-            // }
-
         }
         assertTrue(windowHasClassLabelPanel);
    }
 
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+// Add more test methods as needed
+    @Test
+    public void testNewTypeWithLoaded() {
+        SETTEST sETTEST = SETTEST.getInstance();
+        JPanel classLabelPanel;
+        SetUserInformation setUserInformation = SetUserInformation.getInstance();
+        CompositeActionListenerWithPriorities actionPriorities = CompositeActionListenerWithPriorities.getInstance();
+        Launcher.initialize();
+        Set set = Set.getInstance();
+        SetList setList = SetList.getInstance();
+
+        // FileHandler fileHandler = new FileHandler();
+        FileHandling fileHandler = new FileHandling();
+        Boolean windowHasClassLabelPanel = false;
+        setUserInformation.setUsername("TESTNEWTYPEWITHLOADED");
+
+        StudentClasses studentClasses = new StudentClasses();
+        studentClasses.studentClassesLaunch();
+
+        actionPriorities.TESTFORCECURRENTCLASS("StudentClasses");
+
+        StudentStatCollect studentStatCollect = new StudentStatCollect();
+        studentStatCollect.studentStatCollectLaunch();
+        //getfinalclasslist //will be make up of file
+
+        ArrayList<String> myFiles = fileHandler.readFileToList(setUserInformation.getPathToClassTextFile());
+        //setList.setFinalClasslist();
+        setList.setFinalClassList(myFiles);
+        studentStatCollect.addLoadedBoxes();
+
+        JButton nextButton = studentStatCollect.TESTNEXTBUTTON();
+        ActionEvent nextActionEvent = new ActionEvent(nextButton, ActionEvent.ACTION_PERFORMED, "Click");
+        for (ActionListener listener : nextButton.getActionListeners()) {
+            listener.actionPerformed(nextActionEvent);
+        }
+
+        //JButton statNextButton = studentStatCollect.TESTNEXTBUTTON();
+
+        //assertTrue(true);
+   }
 }
 
