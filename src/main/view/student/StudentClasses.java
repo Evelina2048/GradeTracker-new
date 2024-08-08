@@ -445,7 +445,7 @@ public class StudentClasses extends JFrame {
         removeDeleteClassButtonActionListeners();
         deleteClassButton.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent e) {
-                newClassButton.setEnabled(true);
+                //newClassButton.setEnabled(true);
                 moveClassButton.setEnabled(true);
                 //if the file has loaded information attached
                 if (setState.getLoadedState(selectedTextBox) && (fileHandler.fileExists(filePath)) && fileHandler.fileIsNotEmpty(filePath)) {

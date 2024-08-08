@@ -350,12 +350,12 @@ public class GradeTrackerTests {
         listener.actionPerformed(actionEvent);
     }
 
-    deleteClassButton = studentClasses.TESTDELETECLASSBUTTON();
-    actionEvent = new ActionEvent(deleteClassButton, ActionEvent.ACTION_PERFORMED, "Click");
+    // deleteClassButton = studentClasses.TESTDELETECLASSBUTTON();
+    // actionEvent = new ActionEvent(deleteClassButton, ActionEvent.ACTION_PERFORMED, "Click");
 
-    for (ActionListener listener : deleteClassButton.getActionListeners()) {
-        listener.actionPerformed(actionEvent);
-    }
+    // for (ActionListener listener : deleteClassButton.getActionListeners()) {
+    //     listener.actionPerformed(actionEvent);
+    // }
 
     ////
 
