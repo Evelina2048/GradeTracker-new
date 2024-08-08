@@ -10,6 +10,7 @@ import javax.swing.JLabel;
 
 import java.awt.event.ActionListener;
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.awt.event.ActionEvent;
 import controller.Creator;
 import controller.Decorator;
@@ -39,6 +40,7 @@ public class PrintStudentGrades extends JFrame {
         buttonSetUpAction(main, studentOrTeacher, existingOrNew);
         setList = SetList.getInstance();
         setUserInformation = SetUserInformation.getInstance();
+        int gradeBoxTotal = 0;
 
 
         //go into file. (For loop of files)
@@ -46,18 +48,47 @@ public class PrintStudentGrades extends JFrame {
         //     System.out.println("printgradestest "+setList.getFinalClassList().get(i));
         //     // class.readFileIntoList(pathtofilewithclasslistindex);
         // }
-        ArrayList<String> gradeList = new ArrayList<>();
+        ArrayList<ArrayList<String>> gradeList = new ArrayList<>();
         for (int i = 0; i < setList.getFinalClassList().size();i++) {
             System.out.println("printgradestest "+setList.getFinalClassList().get(i));
             String filePathForClass = setUserInformation.getPathToClassInformationFileWithChosenIndex(i);
             ArrayList<String> allList = fileHandler.readFileToList(filePathForClass);
 
             //grades starts at index 4
-            gradeList.add(allList.get(4));
-            for (int j = 5; j < allList.size(); j+=3) {
-                gradeList.add(allList.get(j));
+            //gradeList.add(allList.get(4));
+
+            ArrayList<String> tempList = new ArrayList<String>(Arrays.asList(allList.get(4).split(" ")));
+            gradeList.add(tempList);
+            for (int j = 5; j < allList.size(); j+=3) { //for each grades box
+                //gradeList.add(allList.get(j)); //add contents
+                ArrayList<String> seperatedBySpaceListOfGrades = new ArrayList<>(Arrays.asList(allList.get(j).split(" ")));
+                gradeList.add(seperatedBySpaceListOfGrades);
+                for (int k = 0; k < gradeList.get(j).size(); k++) {
+                    //gradeBoxTotal += (int) gradeList[j][k];
+                    gradeBoxTotal += Integer.parseInt(gradeList.get(j).get(k));
+                    //add to total
+                }
 
             }
+
+            /*for (stuff in gradelist)
+             * //first box
+             * //parse by spaces
+             * //add to total
+            */
+
+            // for (int k = 0; k < gradeList.size(); k++) {
+            // /* //first box
+            //  * //parse by spaces
+            //  * //add to total
+            // */ }
+
+            //ArrayList<String> seperatedBySpaceListOfGrades = new ArrayList<>(Arrays.asList(gradeList.get(allList.get(j)).split(" ")));
+            for (int k = 0; k < gradeList.size(); k++) {
+                
+                //add to total
+            }
+
             
 
         }

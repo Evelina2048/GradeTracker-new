@@ -899,4 +899,8 @@ public class StudentClasses extends JFrame {
         
     }
 
+    public JButton TESTNEWCLASSBUTTON() {
+        return newClassButton;
+    }
+
     }

@@ -3,6 +3,7 @@ import static org.junit.jupiter.api.Assertions.*;
 import javax.swing.JButton;
 import javax.swing.JFrame;
 import javax.swing.JPanel;
+import javax.swing.JTextField;
 import javax.swing.SwingUtilities;
 import java.awt.event.ActionListener;
 import java.util.ArrayList;
@@ -20,6 +21,7 @@ import view.Launcher;
 import view.NewUser;
 import view.student.StudentClasses;
 import view.student.StudentStatCollect;
+import model.GoIntoPanel;
 import model.SETTEST;
 import model.Set;
 import model.SetList;
@@ -27,6 +29,9 @@ import model.SetState;
 import model.SetUserInformation;
 
 import controller.FileHandling;
+
+import java.awt.event.MouseEvent;
+import java.awt.event.MouseListener;
 
 public class GradeTrackerTests {
     @BeforeEach
@@ -79,7 +84,7 @@ public class GradeTrackerTests {
 //    }
 
    @Test
-   public void testGradeTrackerButtonEnabled() {
+   public void testGradeTrackerSaveButtonEnabled() {
      //class where deletemode
 
      Launcher.initialize();
@@ -189,6 +194,48 @@ public class GradeTrackerTests {
    }
 
 
+   //still in progress
+   @Test
+    public void testNewTypeWithLoaded() {
+        SETTEST sETTEST = SETTEST.getInstance();
+        JPanel classLabelPanel;
+        SetUserInformation setUserInformation = SetUserInformation.getInstance();
+        CompositeActionListenerWithPriorities actionPriorities = CompositeActionListenerWithPriorities.getInstance();
+        Launcher.initialize();
+        Set set = Set.getInstance();
+        SetList setList = SetList.getInstance();
+
+        // FileHandler fileHandler = new FileHandler();
+        FileHandling fileHandler = new FileHandling();
+        Boolean windowHasClassLabelPanel = false;
+        setUserInformation.setUsername("TESTNEWTYPEWITHLOADED");
+
+        StudentClasses studentClasses = new StudentClasses();
+        studentClasses.studentClassesLaunch();
+
+        actionPriorities.TESTFORCECURRENTCLASS("StudentClasses");
+
+        StudentStatCollect studentStatCollect = new StudentStatCollect();
+        studentStatCollect.studentStatCollectLaunch();
+        //getfinalclasslist //will be make up of file
+
+        ArrayList<String> myFiles = fileHandler.readFileToList(setUserInformation.getPathToClassTextFile());
+        //setList.setFinalClasslist();
+        setList.setFinalClassList(myFiles);
+        studentStatCollect.addLoadedBoxes();
+
+        JButton nextButton = studentStatCollect.TESTNEXTBUTTON();
+        ActionEvent nextActionEvent = new ActionEvent(nextButton, ActionEvent.ACTION_PERFORMED, "Click");
+        for (ActionListener listener : nextButton.getActionListeners()) {
+            listener.actionPerformed(nextActionEvent);
+        }
+
+        //JButton statNextButton = studentStatCollect.TESTNEXTBUTTON();
+
+        //assertTrue(true);
+   }
+
+
 
 
 
@@ -233,44 +280,90 @@ public class GradeTrackerTests {
 
 
 // Add more test methods as needed
-    @Test
-    public void testNewTypeWithLoaded() {
-        SETTEST sETTEST = SETTEST.getInstance();
-        JPanel classLabelPanel;
-        SetUserInformation setUserInformation = SetUserInformation.getInstance();
-        CompositeActionListenerWithPriorities actionPriorities = CompositeActionListenerWithPriorities.getInstance();
-        Launcher.initialize();
-        Set set = Set.getInstance();
-        SetList setList = SetList.getInstance();
+@Test
+    public void testNewClassButtonDisabledAfterDeleting() {
+       //class where deletemode
+       GoIntoPanel goIntoPanel = new GoIntoPanel();
 
-        // FileHandler fileHandler = new FileHandler();
-        FileHandling fileHandler = new FileHandling();
-        Boolean windowHasClassLabelPanel = false;
-        setUserInformation.setUsername("TESTNEWTYPEWITHLOADED");
+        Launcher.initialize();
+        NewUser newUser = new NewUser();
+        newUser.showWindow();
+
+
+        Creator create = new Creator();
+        SetState setState = SetState.getInstance();
+
 
         StudentClasses studentClasses = new StudentClasses();
         studentClasses.studentClassesLaunch();
 
-        actionPriorities.TESTFORCECURRENTCLASS("StudentClasses");
+        //FileHandling fileHandler = new FileHandler();
 
-        StudentStatCollect studentStatCollect = new StudentStatCollect();
-        studentStatCollect.studentStatCollectLaunch();
-        //getfinalclasslist //will be make up of file
+        JPanel textFieldPanel = new JPanel();
 
-        ArrayList<String> myFiles = fileHandler.readFileToList(setUserInformation.getPathToClassTextFile());
-        //setList.setFinalClasslist();
-        setList.setFinalClassList(myFiles);
-        studentStatCollect.addLoadedBoxes();
+        textFieldPanel.add(create.createTextBox("English", "JTextField",false));
+        textFieldPanel.add(create.createTextBox("Math", "JTextField",false));
 
-        JButton nextButton = studentStatCollect.TESTNEXTBUTTON();
-        ActionEvent nextActionEvent = new ActionEvent(nextButton, ActionEvent.ACTION_PERFORMED, "Click");
-        for (ActionListener listener : nextButton.getActionListeners()) {
-            listener.actionPerformed(nextActionEvent);
+        //JButton saveButton = studentClasses.TESTSAVEBUTTON();
+        JButton saveButton = studentClasses.TESTSAVEBUTTON();
+
+
+        ActionEvent saveActionEvent = new ActionEvent(saveButton, ActionEvent.ACTION_PERFORMED, "Click");
+
+        for (ActionListener listener : saveButton.getActionListeners()) {
+            listener.actionPerformed(saveActionEvent);
         }
 
-        //JButton statNextButton = studentStatCollect.TESTNEXTBUTTON();
+        setState.setTextFieldPanel(textFieldPanel);
 
-        //assertTrue(true);
-   }
+        JButton deleteClassButton = studentClasses.TESTDELETECLASSBUTTON();
+
+        ActionEvent actionEvent = new ActionEvent(deleteClassButton, ActionEvent.ACTION_PERFORMED, "Click");
+
+        for (ActionListener listener : deleteClassButton.getActionListeners()) {
+            listener.actionPerformed(actionEvent);
+        }
+
+        //JTextField english = (JTextField) goIntoPanel.goIntoPanelReturnTextbox((JPanel) textFieldPanel.getComponent(0), 0);
+        JTextField english = (JTextField) textFieldPanel.getComponent(0);
+
+
+        MouseEvent mouseEvent = new MouseEvent(
+            english,                     // Source component
+            MouseEvent.MOUSE_CLICKED,    // Event type (e.g., MOUSE_CLICKED)
+            System.currentTimeMillis(),  // When the event occurred (current time)
+            0,                           // No modifiers (no Shift, Ctrl, etc.)
+            0, 0,                        // X and Y coordinates (could be 0, 0 for simplicity)
+            1,                           // Click count (1 for single click)
+            false                        // Not a popup trigger
+            );
+
+        for (MouseListener listener : english.getMouseListeners()) {
+            listener.mouseClicked(mouseEvent);
+        }
+
+
+    deleteClassButton = studentClasses.TESTDELETECLASSBUTTON();
+    actionEvent = new ActionEvent(deleteClassButton, ActionEvent.ACTION_PERFORMED, "Click");
+
+    for (ActionListener listener : deleteClassButton.getActionListeners()) {
+        listener.actionPerformed(actionEvent);
+    }
+
+    deleteClassButton = studentClasses.TESTDELETECLASSBUTTON();
+    actionEvent = new ActionEvent(deleteClassButton, ActionEvent.ACTION_PERFORMED, "Click");
+
+    for (ActionListener listener : deleteClassButton.getActionListeners()) {
+        listener.actionPerformed(actionEvent);
+    }
+
+    ////
+
+    JButton newClassButton = studentClasses.TESTNEWCLASSBUTTON();
+    actionEvent = new ActionEvent(newClassButton, ActionEvent.ACTION_PERFORMED, "Click");
+
+    assertFalse(newClassButton.isEnabled());
+    //setState.TESTRESETSTATE();
+}
 }
 
