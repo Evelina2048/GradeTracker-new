@@ -63,6 +63,8 @@ public class StudentClasses extends JFrame {
     private JTextField draggedTextField = new JTextField();
     private FileWriting fileWrite = new FileWriting();
     private CompositeActionListenerWithPriorities actionPriorities;
+    private Boolean spacedLabelIndexExists = false;
+    private JTextField spacedLabelBox;
 
     Border borderRegular = BorderFactory.createLineBorder(Color.GRAY, 2);
     JPanel southContainer = new JPanel(new GridLayout(2,1,0,0));
@@ -84,6 +86,8 @@ public class StudentClasses extends JFrame {
     private SetUserInformation setUserInformation;
     private SetList setList;
     private WindowAdapter windowCloseAdapter;
+    private JTextField moveModeLeftBox;
+    private JTextField moveModeRightBox;
 
     JPanel instructionsPanel;
 
@@ -594,16 +598,47 @@ public class StudentClasses extends JFrame {
                     //JTextField leftTextField = (JTextField) ;//(JTextField) e.getSource();
                     
                     //if in between two textFields
+                    if (spacedLabelBox != null) {
+                        //if point not between boxes anymore
+                        //1. save points
+                        
+                        //2.check if cursor point between
+                        //if (!((moveModeLeftBox.getLocation() leftof cursorPoint) && (moveModeRightBox.getLocation() rightof cursorPoint))) {
+                        if   (!(moveModeLeftBox.getBounds().x < cursorPoint.x && cursorPoint.x < (moveModeRightBox.getBounds().x + moveModeRightBox.getBounds().width))) {
+                        
+                        //if not:
+                        //delete it.
+                            JPanel spacedLabelPanel = new JPanel();
+                            spacedLabelPanel.add(spacedLabelBox);
+                            create.deleteTextBox(spacedLabelPanel);
+                            //create.deleteTextBox(spacedLabelBox);
+                        }
+                    }
+
                     if ((layeredPane.getComponentAt(leftPoint) instanceof JTextField && layeredPane.getComponentAt(rightPoint) instanceof JTextField) || (window.getComponentAt(leftPoint) instanceof JTextField && window.getComponentAt(rightPoint) instanceof JTextField)) {
                         Component comp = layeredPane.getComponentAt(leftPoint);
-                        System.out.println("comp "+comp.getClass().getName());
+
+                        if (layeredPane.getComponentAt(rightPoint) != null) {
+                            moveModeRightBox =  (JTextField) layeredPane.getComponentAt(rightPoint);
+                        }
+
+                        else if (window.getComponentAt(rightPoint) != null) {
+                            moveModeRightBox = (JTextField) window.getComponentAt(rightPoint);
+                        }
+
+                        else {
+                            System.out.println("rightpoint not being assigned");
+                        }
+
+                        //System.out.println("comp "+comp.getClass().getName());
                         //ArrayList<JTextField> toDeleteList = new ArrayList<>();
                         ArrayList<JTextField> toAddList = new ArrayList<>();
 
                         for (int i = 0; i < setState.getTextFieldPanel().getComponentCount(); i++) { //loop to find what matches left component
-                            JTextField textFieldComponent = (JTextField) comp;
+                            //JTextField textFieldComponent = (JTextField) comp;
+                            moveModeLeftBox = (JTextField) comp;
                             JTextField componentFromPanel = (JTextField) setState.getTextFieldPanel().getComponent(i);
-                            if (textFieldComponent.getText().equals(componentFromPanel.getText())) { //if this component matches left component
+                            if (moveModeLeftBox.getText().equals(componentFromPanel.getText())) { //if this component matches left component
                             //if (setState.getTextFieldPanel().getComponent(i).getText().equals(window.getComponentAt(leftPoint).getText())) {
                                 //textFieldPanel.getComponent(i+1) = create.createTextBox();
 
@@ -627,6 +662,10 @@ public class StudentClasses extends JFrame {
                         
                         //spacedLabel = (JLabel) create.createTextBox("", "JLabel", false);
                         spacedLabelIndex[0] = tempTextFieldPanel.getComponentCount()-1; //minus 1 to account for starting from 0.
+                        //spacedLabelIndexExists = true;
+
+                        ///
+
                         //System.out.println("spacedlabeltext: "+spacedLabelIndex);
                         textFieldPanel.add(create.createTextBox("", "JLabel", false));
                         //for (int j = 0; j < toDeleteList.size(); j++) {//delete from list
@@ -635,6 +674,49 @@ public class StudentClasses extends JFrame {
                             textFieldPanel.add(toAddList.get(j));
                         }
                     }
+
+                    
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
                     else if (window.getComponentAt(leftPoint) instanceof JTextField && window.getComponentAt(rightPoint) instanceof JTextField) {
                         Component comp = window.getComponentAt(leftPoint);
@@ -778,6 +860,7 @@ public class StudentClasses extends JFrame {
 
                         // Add the new component at the same index
                         tempTextFieldPanel.add(newTextField, spacedLabelIndex[0]);
+                        spacedLabelBox = (JTextField) tempTextFieldPanel.getComponent(spacedLabelIndex[0]);
 
                         create.windowFix();
                         layeredPane.remove(tempTextField[0]);
