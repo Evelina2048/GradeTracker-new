@@ -54,6 +54,26 @@ public class FileHandling {
             return myList;
         }
 
+        // public ArrayList<String> readFileIntoGradeList(String filePathForClass) {
+        //     String line;
+        //     ArrayList<String> myGradeList = new ArrayList<>() {
+                
+        //     };
+        //     try {
+        //         BufferedReader reader = new BufferedReader(new FileReader(filePathForClass));
+        //         while ((line = reader.readLine()) != null ) {
+        //             //System.out.println("printing file..."+ line);
+        //             myGradeList.add(line);                 
+        //         }
+        //         reader.close();
+        //     }
+        //     catch (IOException e) { 
+        //         e.printStackTrace();
+        //     }
+            
+        //     return myGradeList;
+        // }
+
 
         public boolean fileExists(String filePath) {
             System.out.println("fileexistspath "+filePath);
