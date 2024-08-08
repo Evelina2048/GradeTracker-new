@@ -49,9 +49,9 @@ public class PrintStudentGrades extends JFrame {
         //     // class.readFileIntoList(pathtofilewithclasslistindex);
         // }
         ArrayList<ArrayList<String>> gradeList = new ArrayList<>();
-        for (int i = 0; i < setList.getFinalClassList().size();i++) {
-            System.out.println("printgradestest "+setList.getFinalClassList().get(i));
-            String filePathForClass = setUserInformation.getPathToClassInformationFileWithChosenIndex(i);
+        for (int classIndex = 0; classIndex < setList.getFinalClassList().size();classIndex++) {
+            System.out.println("printgradestest "+setList.getFinalClassList().get(classIndex));
+            String filePathForClass = setUserInformation.getPathToClassInformationFileWithChosenIndex(classIndex);
             ArrayList<String> allList = fileHandler.readFileToList(filePathForClass);
 
             //grades starts at index 4
@@ -59,15 +59,17 @@ public class PrintStudentGrades extends JFrame {
 
             ArrayList<String> tempList = new ArrayList<String>(Arrays.asList(allList.get(4).split(" ")));
             gradeList.add(tempList);
-            for (int j = 5; j < allList.size(); j+=3) { //for each grades box
+            for (int boxPanelIndex = 5; boxPanelIndex < allList.size(); boxPanelIndex += 3) { //for each grades box
                 //gradeList.add(allList.get(j)); //add contents
-                ArrayList<String> seperatedBySpaceListOfGrades = new ArrayList<>(Arrays.asList(allList.get(j).split(" ")));
+                ArrayList<String> seperatedBySpaceListOfGrades = new ArrayList<>(Arrays.asList(allList.get(boxPanelIndex).split(" ")));
                 gradeList.add(seperatedBySpaceListOfGrades);
-                for (int k = 0; k < gradeList.get(j).size(); k++) {
+                for (int k = 0; k < gradeList.get(boxPanelIndex).size(); k++) {
                     //gradeBoxTotal += (int) gradeList[j][k];
-                    gradeBoxTotal += Integer.parseInt(gradeList.get(j).get(k));
+                    gradeBoxTotal += Integer.parseInt(gradeList.get(boxPanelIndex).get(k));
                     //add to total
                 }
+
+                int average = gradeBoxTotal/allList.size();
 
             }
 
