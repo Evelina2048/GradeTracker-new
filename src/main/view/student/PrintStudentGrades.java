@@ -59,6 +59,9 @@ public class PrintStudentGrades extends JFrame {
 
             ArrayList<String> tempList = new ArrayList<String>(Arrays.asList(allList.get(4).split(" ")));
             gradeList.add(tempList);
+            for (int percentageOfGradePanelIndex = 3; percentageOfGradePanelIndex < allList.size(); percentageOfGradePanelIndex += 3) {
+                
+            }
             for (int boxPanelIndex = 5; boxPanelIndex < allList.size(); boxPanelIndex += 3) { //for each grades box
                 //gradeList.add(allList.get(j)); //add contents
                 ArrayList<String> seperatedBySpaceListOfGrades = new ArrayList<>(Arrays.asList(allList.get(boxPanelIndex).split(" ")));
@@ -70,6 +73,7 @@ public class PrintStudentGrades extends JFrame {
                 }
 
                 int average = gradeBoxTotal/allList.size();
+                //int totalPercentageOfGrade = 
 
             }
 
@@ -86,10 +90,10 @@ public class PrintStudentGrades extends JFrame {
             // */ }
 
             //ArrayList<String> seperatedBySpaceListOfGrades = new ArrayList<>(Arrays.asList(gradeList.get(allList.get(j)).split(" ")));
-            for (int k = 0; k < gradeList.size(); k++) {
+            // for (int k = 0; k < gradeList.size(); k++) {
                 
-                //add to total
-            }
+            //     //add to total
+            // }
 
             
 
