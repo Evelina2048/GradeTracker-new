@@ -46,7 +46,7 @@ import controller.FileWriting;
 import controller.CompositeActionListenerWithPriorities;
 
 import model.GoIntoPanel;
-
+import model.SETTEST;
 import view.MainWindow;
 import view.student.StudentClasses;
 
@@ -279,6 +279,7 @@ public class StudentClasses extends JFrame {
         System.out.println("thestuffclasslist "+classList+" "+setList.getCurrentPanelList());
         System.out.println("VVV ");
         StudentStatCollect studentStatCollect = new StudentStatCollect();
+        SETTEST.getInstance().TESTSETCURRENTINSTANCE(studentStatCollect);
         if (fileHandler.fileExists("/Users/evy/Documents/GradeTracker-new/src/main/view/UserInfo/StudentInfo/" + setUserInformation.getUsername() + "/" +"ClassInformation"+"/"+setList.getFinalClassList().get(0) + ".txt")) { //needs to keep path because its with index 0
             create.hideContainer();
             System.out.println("W ");

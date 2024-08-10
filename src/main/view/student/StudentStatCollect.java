@@ -124,7 +124,6 @@ public class StudentStatCollect extends JFrame {
         else {
             testTextField = (JTextField) setState.getTextFieldPanel().getComponent(1);
         }
-        System.out.println("1111dirt "+testTextField.getText());
     }
 
     public void buttonSetUpAction() {
@@ -227,7 +226,6 @@ public class StudentStatCollect extends JFrame {
         set.setWindow(window);
 
         setState.setTextFieldPanel(textBoxPanel);
-
     }
 
     private void saveAction(JButton saveButton) {
@@ -279,7 +277,19 @@ public class StudentStatCollect extends JFrame {
             if (setState.getClassListIndex()+1 <= setList.getFinalClassList().size()) {
                 System.out.println("the jlabel name: "+setList.getFinalClassList().get(setState.getClassListIndex()));
 
-                Component credits = setState.getTextFieldPanel().getComponent(1);
+                Component credits = new JPanel();
+                if (setState.getTextFieldPanel().getComponentCount() >= 2) {
+                    credits = setState.getTextFieldPanel().getComponent(1);
+                }
+
+                else if (textBoxPanel.getComponentCount() >= 2) {
+                    credits = textBoxPanel.getComponent(1);
+                }
+
+                else {
+                    System.out.println("somethingwentwrongin studentstatcollect credits");
+                }
+
                 if (credits instanceof JPanel) {
                     JTextField creditsTextField = goIntoPanel.goIntoPanelReturnTextbox((JPanel) credits, 0);
                     String text = creditsTextField.getText();
@@ -378,6 +388,7 @@ public class StudentStatCollect extends JFrame {
         else { //first time visiting next class
             hideWindow();
             StudentStatCollect studentStatCollect = new StudentStatCollect();
+            sETTEST.TESTSETCURRENTINSTANCE(studentStatCollect);
 
             studentStatCollect.DisplayClasses();
             textBoxPanel = setState.getTextFieldPanel();

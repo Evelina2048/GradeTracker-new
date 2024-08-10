@@ -5,6 +5,8 @@ import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
 
+import view.student.StudentStatCollect;
+
 public class SETTEST {
     private JPanel TESTTEXTBOXPANEL;
 
@@ -12,6 +14,7 @@ public class SETTEST {
     // Static variable to hold the single instance of the class
     private static SETTEST instance;
     private JPanel classLabelPanel;
+    private StudentStatCollect studentStatCollect;
 
     // Private constructor to prevent instantiation
     private SETTEST() {}
@@ -45,6 +48,13 @@ public class SETTEST {
 
     public void TESTRESETSETTEST() {
         instance = null;
+    }
+
+    public void TESTSETCURRENTINSTANCE(StudentStatCollect thisInstance) {
+        studentStatCollect = thisInstance;
+    }
+    public StudentStatCollect TESTGETCURRENTINSTANCE() {
+        return studentStatCollect;
     }
 
 

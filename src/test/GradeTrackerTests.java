@@ -8,6 +8,7 @@ import javax.swing.SwingUtilities;
 import java.awt.event.ActionListener;
 import java.util.ArrayList;
 import java.util.logging.FileHandler;
+import java.awt.AWTException;
 import java.awt.Component;
 import java.awt.event.ActionEvent;
 
@@ -27,11 +28,14 @@ import model.Set;
 import model.SetList;
 import model.SetState;
 import model.SetUserInformation;
-
+import model.TESTFUNCTSFOREASYTESTING;
 import controller.FileHandling;
 
 import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
+
+import java.awt.Robot;
+import java.awt.event.KeyEvent;
 
 public class GradeTrackerTests {
     @BeforeEach
@@ -235,6 +239,93 @@ public class GradeTrackerTests {
         //assertTrue(true);
    }
 
+   @Test
+   public void testNewClassButtonDisabledAfterDeleting() {
+      //class where deletemode
+      GoIntoPanel goIntoPanel = new GoIntoPanel();
+
+       Launcher.initialize();
+       NewUser newUser = new NewUser();
+       newUser.showWindow();
+
+
+       Creator create = new Creator();
+       SetState setState = SetState.getInstance();
+
+
+       StudentClasses studentClasses = new StudentClasses();
+       studentClasses.studentClassesLaunch();
+
+       //FileHandling fileHandler = new FileHandler();
+
+       JPanel textFieldPanel = new JPanel();
+
+       textFieldPanel.add(create.createTextBox("English", "JTextField",false));
+       textFieldPanel.add(create.createTextBox("Math", "JTextField",false));
+
+       //JButton saveButton = studentClasses.TESTSAVEBUTTON();
+       JButton saveButton = studentClasses.TESTSAVEBUTTON();
+
+
+       ActionEvent saveActionEvent = new ActionEvent(saveButton, ActionEvent.ACTION_PERFORMED, "Click");
+
+       for (ActionListener listener : saveButton.getActionListeners()) {
+           listener.actionPerformed(saveActionEvent);
+       }
+
+       setState.setTextFieldPanel(textFieldPanel);
+
+       JButton deleteClassButton = studentClasses.TESTDELETECLASSBUTTON();
+
+       ActionEvent actionEvent = new ActionEvent(deleteClassButton, ActionEvent.ACTION_PERFORMED, "Click");
+
+       for (ActionListener listener : deleteClassButton.getActionListeners()) {
+           listener.actionPerformed(actionEvent);
+       }
+
+       //JTextField english = (JTextField) goIntoPanel.goIntoPanelReturnTextbox((JPanel) textFieldPanel.getComponent(0), 0);
+       JTextField english = (JTextField) textFieldPanel.getComponent(0);
+
+
+       MouseEvent mouseEvent = new MouseEvent(
+           english,                     // Source component
+           MouseEvent.MOUSE_CLICKED,    // Event type (e.g., MOUSE_CLICKED)
+           System.currentTimeMillis(),  // When the event occurred (current time)
+           0,                           // No modifiers (no Shift, Ctrl, etc.)
+           0, 0,                        // X and Y coordinates (could be 0, 0 for simplicity)
+           1,                           // Click count (1 for single click)
+           false                        // Not a popup trigger
+           );
+
+       for (MouseListener listener : english.getMouseListeners()) {
+           listener.mouseClicked(mouseEvent);
+       }
+
+
+   deleteClassButton = studentClasses.TESTDELETECLASSBUTTON();
+   actionEvent = new ActionEvent(deleteClassButton, ActionEvent.ACTION_PERFORMED, "Click");
+
+   for (ActionListener listener : deleteClassButton.getActionListeners()) {
+       listener.actionPerformed(actionEvent);
+   }
+
+   // deleteClassButton = studentClasses.TESTDELETECLASSBUTTON();
+   // actionEvent = new ActionEvent(deleteClassButton, ActionEvent.ACTION_PERFORMED, "Click");
+
+   // for (ActionListener listener : deleteClassButton.getActionListeners()) {
+   //     listener.actionPerformed(actionEvent);
+   // }
+
+   ////
+
+   JButton newClassButton = studentClasses.TESTNEWCLASSBUTTON();
+   actionEvent = new ActionEvent(newClassButton, ActionEvent.ACTION_PERFORMED, "Click");
+
+   assertFalse(newClassButton.isEnabled());
+   //setState.TESTRESETSTATE();
+}
+
+
 
 
 
@@ -281,55 +372,69 @@ public class GradeTrackerTests {
 
 // Add more test methods as needed
 @Test
-    public void testNewClassButtonDisabledAfterDeleting() {
-       //class where deletemode
-       GoIntoPanel goIntoPanel = new GoIntoPanel();
-
-        Launcher.initialize();
-        NewUser newUser = new NewUser();
-        newUser.showWindow();
+public void testToStudentStatNoErrors() {
+    // TESTFUNCTSFOREASYTESTING testFuncts = TESTFUNCTSFOREASYTESTING.getInstance();
+    // //SetList setList = SetList.getInstance();
+    // testFuncts.goToClassesAddEnglishAndMath();
+    // testFuncts.goToStudentStatWithNewStatsAndNextLoaded();
 
 
-        Creator create = new Creator();
-        SetState setState = SetState.getInstance();
+    //1go to student classes and add stuff
+    GoIntoPanel goIntoPanel = new GoIntoPanel();
+
+    Launcher.initialize();
+    NewUser newUser = new NewUser();
+    newUser.showWindow();
 
 
-        StudentClasses studentClasses = new StudentClasses();
-        studentClasses.studentClassesLaunch();
-
-        //FileHandling fileHandler = new FileHandler();
-
-        JPanel textFieldPanel = new JPanel();
-
-        textFieldPanel.add(create.createTextBox("English", "JTextField",false));
-        textFieldPanel.add(create.createTextBox("Math", "JTextField",false));
-
-        //JButton saveButton = studentClasses.TESTSAVEBUTTON();
-        JButton saveButton = studentClasses.TESTSAVEBUTTON();
+    Creator create = new Creator();
+    SetState setState = SetState.getInstance();
 
 
-        ActionEvent saveActionEvent = new ActionEvent(saveButton, ActionEvent.ACTION_PERFORMED, "Click");
+    StudentClasses studentClasses = new StudentClasses();
+    studentClasses.studentClassesLaunch();
 
-        for (ActionListener listener : saveButton.getActionListeners()) {
-            listener.actionPerformed(saveActionEvent);
-        }
+    //FileHandling fileHandler = new FileHandler();
 
-        setState.setTextFieldPanel(textFieldPanel);
+    JPanel textFieldPanel = new JPanel();
 
-        JButton deleteClassButton = studentClasses.TESTDELETECLASSBUTTON();
+    textFieldPanel.add(create.createTextBox("English", "JTextField",false));
+    textFieldPanel.add(create.createTextBox("Math", "JTextField",false));
 
-        ActionEvent actionEvent = new ActionEvent(deleteClassButton, ActionEvent.ACTION_PERFORMED, "Click");
+    //JButton saveButton = studentClasses.TESTSAVEBUTTON();
+    JButton saveButton = studentClasses.TESTSAVEBUTTON();
 
-        for (ActionListener listener : deleteClassButton.getActionListeners()) {
-            listener.actionPerformed(actionEvent);
-        }
 
-        //JTextField english = (JTextField) goIntoPanel.goIntoPanelReturnTextbox((JPanel) textFieldPanel.getComponent(0), 0);
-        JTextField english = (JTextField) textFieldPanel.getComponent(0);
+    ActionEvent saveActionEvent = new ActionEvent(saveButton, ActionEvent.ACTION_PERFORMED, "Click");
 
+    for (ActionListener listener : saveButton.getActionListeners()) {
+        listener.actionPerformed(saveActionEvent);
+    }
+
+    setState.setTextFieldPanel(textFieldPanel);
+    //1
+
+    //2goIntoStudentStatCollect
+    JButton nextButton = studentClasses.TESTNEXTBUTTON();
+        ActionEvent nextActionEvent = new ActionEvent(nextButton, ActionEvent.ACTION_PERFORMED, "Click");
+        for (ActionListener listener : nextButton.getActionListeners()) {
+            listener.actionPerformed(nextActionEvent);
+    }
+    //2
+
+
+    //3go into each box and add "1"
+    Robot robot;
+    try {
+        robot = new Robot();
+        SETTEST sETTEST = SETTEST.getInstance();
+        //JPanel textBoxPanel = sETTEST.GETTESTTEXTBOXPANEL();
+        //JPanel textFieldPanel = setState.getTextFieldPanel();
+        for (int i = 0; i < textFieldPanel.getComponentCount(); i++) {
+        JTextField box = (JTextField) textFieldPanel.getComponent(i);
 
         MouseEvent mouseEvent = new MouseEvent(
-            english,                     // Source component
+            box,                     // Source component
             MouseEvent.MOUSE_CLICKED,    // Event type (e.g., MOUSE_CLICKED)
             System.currentTimeMillis(),  // When the event occurred (current time)
             0,                           // No modifiers (no Shift, Ctrl, etc.)
@@ -338,32 +443,36 @@ public class GradeTrackerTests {
             false                        // Not a popup trigger
             );
 
-        for (MouseListener listener : english.getMouseListeners()) {
+        for (MouseListener listener : box.getMouseListeners()) {
             listener.mouseClicked(mouseEvent);
+            //in box type 1
+            // Simulate typing "1"
+            robot.keyPress(KeyEvent.VK_1);
+            robot.keyRelease(KeyEvent.VK_1);
         }
-
-
-    deleteClassButton = studentClasses.TESTDELETECLASSBUTTON();
-    actionEvent = new ActionEvent(deleteClassButton, ActionEvent.ACTION_PERFORMED, "Click");
-
-    for (ActionListener listener : deleteClassButton.getActionListeners()) {
-        listener.actionPerformed(actionEvent);
+        }
+    } catch (AWTException e) {
+        // TODO Auto-generated catch block
+        e.printStackTrace();
     }
 
-    // deleteClassButton = studentClasses.TESTDELETECLASSBUTTON();
-    // actionEvent = new ActionEvent(deleteClassButton, ActionEvent.ACTION_PERFORMED, "Click");
+//3
+SETTEST sETTEST = SETTEST.getInstance();
+StudentStatCollect studentStatCollect = sETTEST.TESTGETCURRENTINSTANCE();
+System.out.println("isstudentstatcollectnull? "+ (studentStatCollect==null));
 
-    // for (ActionListener listener : deleteClassButton.getActionListeners()) {
-    //     listener.actionPerformed(actionEvent);
-    // }
-
-    ////
-
-    JButton newClassButton = studentClasses.TESTNEWCLASSBUTTON();
-    actionEvent = new ActionEvent(newClassButton, ActionEvent.ACTION_PERFORMED, "Click");
-
-    assertFalse(newClassButton.isEnabled());
-    //setState.TESTRESETSTATE();
+//go next stat
+//
+nextButton = studentStatCollect.TESTNEXTBUTTON();
+nextActionEvent = new ActionEvent(nextButton, ActionEvent.ACTION_PERFORMED, "Click");
+for (ActionListener listener : nextButton.getActionListeners()) {
+    listener.actionPerformed(nextActionEvent);
 }
 }
 
+// ActionEvent nextActionEvent = new ActionEvent(nextButton, ActionEvent.ACTION_PERFORMED, "Click");
+// for (ActionListener listener : nextButton.getActionListeners()) {
+//     listener.actionPerformed(nextActionEvent);
+// }
+//
+} //gradetrackerclassend
