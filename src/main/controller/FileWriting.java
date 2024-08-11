@@ -56,11 +56,9 @@ public void writeFolderToFile() {
 
 private void decideIfWrite(Component component, BufferedWriter writer) {
     textField = (JTextField) component;
-    System.out.println("7777");
     Boolean studentStatNonWritablePlaceholder = setState.getEmptiedState(textField) == false && setState.getCurrentClass() == "StudentStatCollect.java" && !textField.getText().equals("Credits (Optional)");
 
     if (setState.getEmptiedState(textField) == true) {
-        System.out.println("8888");
         tryToWrite(writer);
     }
     else if (studentStatNonWritablePlaceholder) {
@@ -69,13 +67,10 @@ private void decideIfWrite(Component component, BufferedWriter writer) {
 }
 
 private void tryToWrite(BufferedWriter writer) {
-    System.out.println("9999");
     text = textField.getText().trim();
     if (!text.isEmpty()) {
         try {
-            System.out.println("10 10 10 10 text "+text);
             if (attachedBoxes == maxAttachedBoxes) {
-                System.out.println("11 11 11 11");
                 writer.write(text + "\n");
                 System.out.println("classlisr "+classList);
             }
@@ -92,7 +87,6 @@ public void writeTextToFile(){ //Student Classes and Stat
     setState.setCanContinue(true);
     debugPrintPanel();
     setUserInformation.getUsername();
-    System.out.println("111");
     debugPrintPanel();
     tryToWriteWithoutAppend();
 
@@ -100,21 +94,17 @@ public void writeTextToFile(){ //Student Classes and Stat
 
 private void tryToWriteWithoutAppend() {
     filePath = set.getFilePath();
-    System.out.println("222");
     try (BufferedWriter writer = new BufferedWriter(new FileWriter(filePath))) {
-        //System.out.println("333 panel comp count "+setState.getTextFieldPanel().getComponentCount()+ " first comp"+ setState.getTextFieldPanel().getComponent(1));
         if (!classList.isEmpty()) {
            classList.clear();
         }
 
         for (Component component : setState.getTextFieldPanel().getComponents()) {
             if (component instanceof JTextField ) {
-                System.out.println("444.1");
                 tryToWriteTextFieldWithoutAppend(component, writer); //student stat
                 setState.setCanContinue(true);
             }
             else if (component instanceof JPanel) {
-                System.out.println("444.2");
                 writeTextToFileWithAppend((JPanel) component);
             }
             else {
@@ -190,17 +180,14 @@ private void seeHowManyPlaceholdersToSkip() {
 
 private void writeTextToFileWithAppend(JPanel panel) { //student classes
     filePath = set.getFilePath();
-    System.out.println("555");
     try (BufferedWriter writer = new BufferedWriter(new FileWriter(filePath, true))) {
         for (Component component : panel.getComponents()) {
             if (component instanceof JTextField) {
-                System.out.println("666.1");
                 decideIfWrite(component, writer);
                 
             }
 
             if (component instanceof JPanel) {
-                System.out.println("666.2");
                 writeTextToFileWithAppend((JPanel) component);
             }
         }
@@ -260,29 +247,71 @@ public  ArrayList<String> getClassList() {
 }
 
 public int howManyPlaceholders() {
+    System.out.println("skelator 1111 ");
+    int placeholderAmount = 00000;
+    JPanel tempTextFieldPanel = setState.getTextFieldPanel();
+    // if (tempTextFieldPanel.getComponentCount() >=5) {
+    placeholderAmount = iteratePanel();
+    // }
+    
+    // else if ((tempTextFieldPanel.getComponentCount() >=1) && (tempTextFieldPanel.getComponentCount() < 5)) {
+    //     while (tempTextFieldPanel.getComponentCount() < 5) {
+    //         if (textFieldPanel.getComponentCount() >= 1) {
+    //             textFieldPanel = (JPanel) textFieldPanel.getComponent(0);
+    //         }
+
+    //         else  {
+    //             System.out.println("textfieldpanel.getComponent(0) does not exist");
+    //             break;
+    //         }
+    //     }
+    //     if (tempTextFieldPanel.getComponentCount() >= 5) {
+    //         placeholderAmount = iteratePanel();
+    //     }
+    //}
+
+    // else {
+    //     System.out.println("temptextfieldpanel is empty");
+    // }
+    return placeholderAmount;
+}
+
+private int iteratePanel() {
+    //System.out.println("skelator 2222 "+ placeholderAmount+ "fieldpanelcount "+setState.getTextFieldPanel().getComponentCount());
     GoIntoPanel goIntoPanel = new GoIntoPanel();
     int placeholderAmount = 0;
     JTextField returnedBox = new JTextField("howmanyplaceholdersnotchanged");
-    System.out.println("component amount"+setState.getTextFieldPanel().getComponentCount());
-    for (int i = 1; i < setState.getTextFieldPanel().getComponentCount(); i++) {
-        System.out.println("instance of "+setState.getTextFieldPanel().getComponent(i).getClass().getName());
-        Component component = setState.getTextFieldPanel().getComponent(i);
-        if (component instanceof JTextField && setState.getEmptiedState(textField) == false) {
-            placeholderAmount++;
-        }
-        else if (component instanceof JPanel) {
-            returnedBox = goIntoPanel.goIntoPanelReturnTextbox(setState.getTextFieldPanel(), i);
-            System.out.println("returnedboxshouldbeseventimes " + returnedBox.getText());
-            if (setState.getEmptiedState(returnedBox) == false) {
-                System.out.println("in jpanel "+ returnedBox.getText());
+
+    for (int i = 0; i < setState.getTextFieldPanel().getComponentCount(); i++) {
+        //for (int i = 1; i < setState.getTextBoxPanel().getComponentCount(); i++) {
+            //getTextBoxPanel()
+            System.out.println("skelator 3333 "+ placeholderAmount);
+            System.out.println("instance of "+setState.getTextFieldPanel().getComponent(i).getClass().getName());
+            Component component = setState.getTextFieldPanel().getComponent(i);
+            if (component instanceof JTextField && setState.getEmptiedState(textField) == false) {
+                System.out.println("skelator 3333.1 "+ placeholderAmount);
                 placeholderAmount++;
             }
-        }
-        else {
-            System.out.println("component is something else. Something went wrong"+ component.getClass().getName());
-        }
+            else if (component instanceof JPanel) {
+                System.out.println("skelator 3333.2 "+ placeholderAmount);
+                returnedBox = goIntoPanel.goIntoPanelReturnTextbox(setState.getTextFieldPanel(), i);
+                //System.out.println("returnedboxshouldbeseventimes " + returnedBox.getText());
+                if (setState.getEmptiedState(returnedBox) == false) {
+                    System.out.println("in jpanel placeholder "+ returnedBox.getText());
+                    placeholderAmount++;
+                }
 
-        //placeholderAmount--; //for jlabel
+                else {
+                    System.out.println("not a placeholder "+returnedBox.getText());
+                } 
+            }
+            else {
+                System.out.println("skelator 3333.3 "+ placeholderAmount);
+                System.out.println("component is something else. Something went wrong"+ component.getClass().getName());
+            }
+    
+            //placeholderAmount--; //for jlabel
+            System.out.println("skelator 4444 "+placeholderAmount);
     }
     return placeholderAmount;
 }

@@ -50,13 +50,13 @@ public class GoIntoPanel {
         
 
         if (component instanceof JTextField) {
-                System.out.println("should print last");
+                //System.out.println("should print last");
                 JTextField textField = (JTextField) component;
-                System.out.println("textfield text and stuff "+textField.getText()+ " emptiedstate "+setState.getEmptiedState(textField));
+                //System.out.println("textfield text and stuff "+textField.getText()+ " emptiedstate "+setState.getEmptiedState(textField));
                 return textField;
             } 
         else if (component instanceof JPanel) {
-            System.out.println("should print first");
+            //System.out.println("should print first");
                 JPanel jpanel = (JPanel) component;
                 //TODO was goIntoPanel(jpanel, 0);
                 goIntoPanelReturnTextbox(jpanel, 0);

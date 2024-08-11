@@ -509,15 +509,23 @@ public void testRightPlaceholders() {
     ArrayList<String> myFiles = fileHandler.readFileToList(setUserInformation.getPathToClassTextFile());
     //setList.setFinalClasslist();
     setList.setFinalClassList(myFiles);
-    studentStatCollect.addLoadedBoxes();
+    //studentStatCollect.addLoadedBoxes();
 
-    JButton nextButton = studentStatCollect.TESTNEXTBUTTON();
-    ActionEvent nextActionEvent = new ActionEvent(nextButton, ActionEvent.ACTION_PERFORMED, "Click");
-    for (ActionListener listener : nextButton.getActionListeners()) {
-        listener.actionPerformed(nextActionEvent);
+    JButton newTypeButton = studentStatCollect.TESTNEWTYPEBUTTON();
+    ActionEvent newTypeActionEvent = new ActionEvent(newTypeButton, ActionEvent.ACTION_PERFORMED, "Click");
+    for (ActionListener listener : newTypeButton.getActionListeners()) {
+        listener.actionPerformed(newTypeActionEvent);
     }
 
+    // JButton nextButton = studentStatCollect.TESTNEXTBUTTON();
+    // ActionEvent nextActionEvent = new ActionEvent(nextButton, ActionEvent.ACTION_PERFORMED, "Click");
+    // for (ActionListener listener : nextButton.getActionListeners()) {
+    //     listener.actionPerformed(nextActionEvent);
+    // }
+
+    System.out.println("numberofplaceholders "+fileWrite.howManyPlaceholders());
     //(fileHandler.howManyPlaceholders());
+
     assertEquals(3, fileWrite.howManyPlaceholders());
    }
 //     SETTEST sETTEST = SETTEST.getInstance();

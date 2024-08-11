@@ -239,12 +239,17 @@ public class StudentStatCollect extends JFrame {
     }
 
     private void saveButtonAction() {
+        System.out.println("textboxpanel comps D"+setState.getTextFieldPanel().getComponentCount());
         set.setFilePath(setUserInformation.getPathToClassInformationFileWithIndex());
+        System.out.println("textboxpanel comps E"+setState.getTextFieldPanel().getComponentCount());
         create.setTextFieldContainer(setState.getTextFieldPanel());
+        System.out.println("textboxpanel comps F"+setState.getTextFieldPanel().getComponentCount());
 
-        setState.setTextFieldPanel(classLabelPanel);
+        //setState.setTextFieldPanel(classLabelPanel); //TODO if you see issue with boxes being weird, this prob source of bug
+        System.out.println("textboxpanel comps G"+setState.getTextFieldPanel().getComponentCount());
 
         fileWrite.writeTextToFile();
+        System.out.println("textboxpanel comps H"+setState.getTextFieldPanel().getComponentCount());
         System.out.println("up Y "+ fileWrite.howManyPlaceholders());
 
         if (fileWrite.howManyPlaceholders() > 0) { 
@@ -266,6 +271,7 @@ public class StudentStatCollect extends JFrame {
                     public void actionPerformed(ActionEvent e) {// remember wont run  if just enter without a click
                         System.out.println("enteraction");
                         System.out.println("bad1111");
+                        System.out.println("textboxpanel comps B"+setState.getTextFieldPanel().getComponentCount());
                         doNextButtonProcedure();
                     }
                 }, 1, "nextButton", null, currentClass);  // Add this ActionListener with priority 1
@@ -274,6 +280,7 @@ public class StudentStatCollect extends JFrame {
     }
 
     public void doNextButtonProcedure() {
+        System.out.println("textboxpanel comps C"+setState.getTextFieldPanel().getComponentCount());
         System.out.println("up X");
         saveButtonAction();
         System.out.println("bad");
@@ -422,7 +429,9 @@ public class StudentStatCollect extends JFrame {
        //flowlayout allows resizing of width
         newTypeButton.addActionListener(new ActionListener() {
         public void actionPerformed(ActionEvent e) {
+            System.out.println("textboxpanel comps -Z"+setState.getTextFieldPanel().getComponentCount());
             newSet();
+            System.out.println("textboxpanel comps -Y"+setState.getTextFieldPanel().getComponentCount());
         }
         });
         JPanel delTypeButtonPanel = deleteButtonPanel();
@@ -529,6 +538,7 @@ public class StudentStatCollect extends JFrame {
         boxManageCreate("Grades(format:# # #)", "JTextField",false);
         setState.setCanContinue(true);
         setState.setTextFieldPanel(textBoxPanel);
+        System.out.println("textboxpanel comps A"+setState.getTextFieldPanel().getComponentCount());
     }
 
     public class EnterAction extends AbstractAction {
@@ -548,5 +558,9 @@ public class StudentStatCollect extends JFrame {
 
     public JButton TESTNEXTBUTTON() {
         return nextButton;
+    }
+
+    public JButton TESTNEWTYPEBUTTON() {
+        return newTypeButton;
     }
     }
