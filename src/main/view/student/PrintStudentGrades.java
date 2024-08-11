@@ -52,19 +52,22 @@ public class PrintStudentGrades extends JFrame {
         for (int classIndex = 0; classIndex < setList.getFinalClassList().size();classIndex++) {
             System.out.println("printgradestest "+setList.getFinalClassList().get(classIndex));
             String filePathForClass = setUserInformation.getPathToClassInformationFileWithChosenIndex(classIndex);
-            ArrayList<String> allList = fileHandler.readFileToList(filePathForClass);
+            ArrayList<String> allTextListForClass = fileHandler.readFileToList(filePathForClass);
+
 
             //grades starts at index 4
             //gradeList.add(allList.get(4));
 
-            ArrayList<String> tempList = new ArrayList<String>(Arrays.asList(allList.get(4).split(" ")));
+            ArrayList<String> tempList = new ArrayList<String>(Arrays.asList(allTextListForClass.get(4).split(" ")));
             gradeList.add(tempList);
-            for (int percentageOfGradePanelIndex = 3; percentageOfGradePanelIndex < allList.size(); percentageOfGradePanelIndex += 3) {
-                
+
+            ArrayList<String> percentageOfGradeList = new ArrayList<>();
+            for (int percentageOfGradePanelIndex = 3; percentageOfGradePanelIndex < allTextListForClass.size(); percentageOfGradePanelIndex += 3) {
+                percentageOfGradeList.add(allTextListForClass.get(percentageOfGradePanelIndex));
             }
-            for (int boxPanelIndex = 5; boxPanelIndex < allList.size(); boxPanelIndex += 3) { //for each grades box
+            for (int boxPanelIndex = 5; boxPanelIndex < allTextListForClass.size(); boxPanelIndex += 3) { //for each grades box
                 //gradeList.add(allList.get(j)); //add contents
-                ArrayList<String> seperatedBySpaceListOfGrades = new ArrayList<>(Arrays.asList(allList.get(boxPanelIndex).split(" ")));
+                ArrayList<String> seperatedBySpaceListOfGrades = new ArrayList<>(Arrays.asList(allTextListForClass.get(boxPanelIndex).split(" ")));
                 gradeList.add(seperatedBySpaceListOfGrades);
                 for (int k = 0; k < gradeList.get(boxPanelIndex).size(); k++) {
                     //gradeBoxTotal += (int) gradeList[j][k];
@@ -72,7 +75,7 @@ public class PrintStudentGrades extends JFrame {
                     //add to total
                 }
 
-                int average = gradeBoxTotal/allList.size();
+                int average = gradeBoxTotal/allTextListForClass.size();
                 //int totalPercentageOfGrade = 
 
             }
