@@ -30,6 +30,7 @@ import model.SetState;
 import model.SetUserInformation;
 import model.TESTFUNCTSFOREASYTESTING;
 import controller.FileHandling;
+import controller.FileWriting;
 
 import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
@@ -234,6 +235,7 @@ public class GradeTrackerTests {
             listener.actionPerformed(nextActionEvent);
         }
 
+
         //JButton statNextButton = studentStatCollect.TESTNEXTBUTTON();
 
         //assertTrue(true);
@@ -370,11 +372,13 @@ public class GradeTrackerTests {
 
 
 
+//in progress
+
 // Add more test methods as needed
 @Test
-public void testToStudentStatNoErrors() {
-    // TESTFUNCTSFOREASYTESTING testFuncts = TESTFUNCTSFOREASYTESTING.getInstance();
-    // //SetList setList = SetList.getInstance();
+public void testToStudentStatNoErrors() { //Fix
+    // TESTFUNCTSFOREASYTESTING testFuncts = TESTFUNCTSFOREASYTESTING.getInstance();//Fix
+    // //SetList setList = SetList.getInstance();//Fix
     // testFuncts.goToClassesAddEnglishAndMath();
     // testFuncts.goToStudentStatWithNewStatsAndNextLoaded();
 
@@ -407,7 +411,7 @@ public void testToStudentStatNoErrors() {
 
     ActionEvent saveActionEvent = new ActionEvent(saveButton, ActionEvent.ACTION_PERFORMED, "Click");
 
-    for (ActionListener listener : saveButton.getActionListeners()) {
+    for (ActionListener listener : saveButton.getActionListeners()) {//Fix
         listener.actionPerformed(saveActionEvent);
     }
 
@@ -435,7 +439,7 @@ public void testToStudentStatNoErrors() {
 
         MouseEvent mouseEvent = new MouseEvent(
             box,                     // Source component
-            MouseEvent.MOUSE_CLICKED,    // Event type (e.g., MOUSE_CLICKED)
+            MouseEvent.MOUSE_CLICKED,    // Event type (e.g., MOUSE_CLICKED) //Fix
             System.currentTimeMillis(),  // When the event occurred (current time)
             0,                           // No modifiers (no Shift, Ctrl, etc.)
             0, 0,                        // X and Y coordinates (could be 0, 0 for simplicity)
@@ -452,7 +456,6 @@ public void testToStudentStatNoErrors() {
         }
         }
     } catch (AWTException e) {
-        // TODO Auto-generated catch block
         e.printStackTrace();
     }
 
@@ -468,11 +471,82 @@ nextActionEvent = new ActionEvent(nextButton, ActionEvent.ACTION_PERFORMED, "Cli
 for (ActionListener listener : nextButton.getActionListeners()) {
     listener.actionPerformed(nextActionEvent);
 }
-}
+} //Fix
 
 // ActionEvent nextActionEvent = new ActionEvent(nextButton, ActionEvent.ACTION_PERFORMED, "Click");
 // for (ActionListener listener : nextButton.getActionListeners()) {
 //     listener.actionPerformed(nextActionEvent);
 // }
 //
-} //gradetrackerclassend
+//} //gradetrackerclassend
+//Fix
+
+@Test
+public void testRightPlaceholders() {
+    SETTEST sETTEST = SETTEST.getInstance();
+    JPanel classLabelPanel;
+    SetUserInformation setUserInformation = SetUserInformation.getInstance();
+    CompositeActionListenerWithPriorities actionPriorities = CompositeActionListenerWithPriorities.getInstance();
+    Launcher.initialize();
+    Set set = Set.getInstance();
+    SetList setList = SetList.getInstance();
+
+    // FileHandler fileHandler = new FileHandler();
+    FileHandling fileHandler = new FileHandling();
+    FileWriting fileWrite = new FileWriting();
+    Boolean windowHasClassLabelPanel = false;
+    setUserInformation.setUsername("TESTNEWTYPEWITHLOADED");
+
+    StudentClasses studentClasses = new StudentClasses();
+    studentClasses.studentClassesLaunch();
+
+    actionPriorities.TESTFORCECURRENTCLASS("StudentClasses");
+
+    StudentStatCollect studentStatCollect = new StudentStatCollect();
+    studentStatCollect.studentStatCollectLaunch();
+    //getfinalclasslist //will be make up of file
+
+    ArrayList<String> myFiles = fileHandler.readFileToList(setUserInformation.getPathToClassTextFile());
+    //setList.setFinalClasslist();
+    setList.setFinalClassList(myFiles);
+    studentStatCollect.addLoadedBoxes();
+
+    JButton nextButton = studentStatCollect.TESTNEXTBUTTON();
+    ActionEvent nextActionEvent = new ActionEvent(nextButton, ActionEvent.ACTION_PERFORMED, "Click");
+    for (ActionListener listener : nextButton.getActionListeners()) {
+        listener.actionPerformed(nextActionEvent);
+    }
+
+    //(fileHandler.howManyPlaceholders());
+    assertEquals(3, fileWrite.howManyPlaceholders());
+   }
+//     SETTEST sETTEST = SETTEST.getInstance();
+//     JPanel classLabelPanel;
+//     SetUserInformation setUserInformation = SetUserInformation.getInstance();
+//     CompositeActionListenerWithPriorities actionPriorities = CompositeActionListenerWithPriorities.getInstance();
+//     Launcher.initialize();
+//     Set set = Set.getInstance();
+//     SetList setList = SetList.getInstance();
+
+//     // FileHandler fileHandler = new FileHandler();
+//     FileHandling fileHandler = new FileHandling();
+//     Boolean windowHasClassLabelPanel = false;
+//     setUserInformation.setUsername("TESTNEWTYPEWITHLOADED");
+
+//     StudentClasses studentClasses = new StudentClasses();
+//     studentClasses.studentClassesLaunch();
+
+//     actionPriorities.TESTFORCECURRENTCLASS("StudentClasses");
+
+//     StudentStatCollect studentStatCollect = new StudentStatCollect();
+//     studentStatCollect.studentStatCollectLaunch();
+//     //getfinalclasslist //will be make up of file
+
+//     ArrayList<String> myFiles = fileHandler.readFileToList(setUserInformation.getPathToClassTextFile());
+//     setList.setFinalClassList(myFiles);
+//     studentStatCollect.addLoadedBoxes();
+
+
+
+
+}

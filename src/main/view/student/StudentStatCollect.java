@@ -245,12 +245,15 @@ public class StudentStatCollect extends JFrame {
         setState.setTextFieldPanel(classLabelPanel);
 
         fileWrite.writeTextToFile();
+        System.out.println("up Y "+ fileWrite.howManyPlaceholders());
 
         if (fileWrite.howManyPlaceholders() > 0) { 
             Decorator decorate = new Decorator();
+            System.out.println("up Z");
             decorate.areYouSureMessage(null, "studentStatsEmpty", "Remove placeholder(s) to continue?", 230, 90);
             setState.setCanContinue(false);
         }
+        
 
     }
 
@@ -262,6 +265,7 @@ public class StudentStatCollect extends JFrame {
                     @Override
                     public void actionPerformed(ActionEvent e) {// remember wont run  if just enter without a click
                         System.out.println("enteraction");
+                        System.out.println("bad1111");
                         doNextButtonProcedure();
                     }
                 }, 1, "nextButton", null, currentClass);  // Add this ActionListener with priority 1
@@ -270,7 +274,9 @@ public class StudentStatCollect extends JFrame {
     }
 
     public void doNextButtonProcedure() {
+        System.out.println("up X");
         saveButtonAction();
+        System.out.println("bad");
         if(setState.getCanContinue()) {
                 setState.incrementClassListIndex();
 

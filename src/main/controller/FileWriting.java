@@ -151,7 +151,8 @@ private void tryToWriteTextFieldWithoutAppend(Component component, BufferedWrite
                 attachedBoxes++;
             }
     }
-    else if (setState.getEmptiedState(textField) == false) {//TODO
+    
+    else if (setState.getEmptiedState(textField) == false) {
         seeHowManyPlaceholdersToSkip();
         System.out.println("placeholder count: "+placeholderCount);
         
