@@ -9,6 +9,7 @@ import javax.swing.JPanel;
 
 import controller.CompositeActionListenerWithPriorities;
 import controller.FileHandling;
+import controller.FileWriting;
 import view.student.StudentStatCollect;
 
 import javax.swing.JTextField;
@@ -155,6 +156,21 @@ public class TESTFUNCTSFOREASYTESTING {
 
      setState.setTextFieldPanel(textFieldPanel);
 }
+
+//
+    public void goToStudentClasses() {
+        CompositeActionListenerWithPriorities actionPriorities = CompositeActionListenerWithPriorities.getInstance();
+        Launcher.initialize();
+        // FileHandler fileHandler = new FileHandler();
+        //setUserInformation.setUsername("TESTNEWTYPEWITHLOADED");
+
+        StudentClasses studentClasses = new StudentClasses();
+        studentClasses.studentClassesLaunch();
+
+        actionPriorities.TESTFORCECURRENTCLASS("StudentClasses");
+
+    }
+//
 
 
     

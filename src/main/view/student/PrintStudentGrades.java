@@ -61,10 +61,11 @@ public class PrintStudentGrades extends JFrame {
             ArrayList<String> tempList = new ArrayList<String>(Arrays.asList(allTextListForClass.get(4).split(" ")));
             gradeList.add(tempList);
 
-            ArrayList<String> percentageOfGradeList = new ArrayList<>();
+            ArrayList<Integer> percentageOfGradeList = new ArrayList<>();
             for (int percentageOfGradePanelIndex = 3; percentageOfGradePanelIndex < allTextListForClass.size(); percentageOfGradePanelIndex += 3) {
-                percentageOfGradeList.add(allTextListForClass.get(percentageOfGradePanelIndex));
+                percentageOfGradeList.add(Integer.parseInt(allTextListForClass.get(percentageOfGradePanelIndex)));
             }
+            ArrayList<Integer> listOfAverages = new ArrayList<>();
             for (int boxPanelIndex = 5; boxPanelIndex < allTextListForClass.size(); boxPanelIndex += 3) { //for each grades box
                 //gradeList.add(allList.get(j)); //add contents
                 ArrayList<String> seperatedBySpaceListOfGrades = new ArrayList<>(Arrays.asList(allTextListForClass.get(boxPanelIndex).split(" ")));
@@ -76,8 +77,14 @@ public class PrintStudentGrades extends JFrame {
                 }
 
                 int average = gradeBoxTotal/allTextListForClass.size();
-                //int totalPercentageOfGrade = 
+                listOfAverages.add(average);
+                //int totalPercentageOfGrade =
 
+            }
+
+            ArrayList<Integer> amountOfFinalGrade = new ArrayList<>();
+            for (int boxSetIndex = 0; boxSetIndex < gradeList.size(); boxSetIndex++) {
+                amountOfFinalGrade.add((listOfAverages.get(boxSetIndex))*(percentageOfGradeList.get(boxSetIndex)));
             }
 
             /*for (stuff in gradelist)

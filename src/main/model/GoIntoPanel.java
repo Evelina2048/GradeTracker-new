@@ -68,8 +68,10 @@ public class GoIntoPanel {
 
             //System.out.println("none of these" +component.getClass().getName());
         //return textField;
-        JPanel jpanel = (JPanel) component;
-        return goIntoPanelReturnTextbox(jpanel, 0);
+        if (component instanceof JPanel) {
+            JPanel jpanel = (JPanel) component;
+            return goIntoPanelReturnTextbox(jpanel, 0);
+        }
 
     }
     return new JTextField("issue in go Into Panel Return Textbox");
