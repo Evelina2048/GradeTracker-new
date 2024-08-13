@@ -1,6 +1,7 @@
 package model;
 
 import javax.swing.JFrame;
+import javax.swing.JLabel;
 import javax.swing.JTextField;
 import javax.swing.JPanel;
 
@@ -62,6 +63,9 @@ public class GoIntoPanel {
                 goIntoPanelReturnTextbox(jpanel, 0);
             }
         
+        // else if (component instanceof JLabel) {
+        //     return textField;
+        // }
         else {
             System.out.println("im confused " + component.getClass().getName());
         }
@@ -92,4 +96,45 @@ public class GoIntoPanel {
             }}
             return true;
     }
+
+    public String goIntoPanelReturnType(JPanel panel) {
+        Container container = panel;
+        if (container.getComponentCount() >= 1) {
+            Component component = container.getComponent(0);
+
+        if (component instanceof JTextField) {
+                System.out.println("should print last");
+                JTextField textField = (JTextField) component;
+                //System.out.println("textfield text and stuff "+textField.getText()+ " emptiedstate "+setState.getEmptiedState(textField));
+                return textField.getClass().getName();
+            } 
+
+        else if (component instanceof JLabel) {
+            JLabel jlabel = (JLabel) component;
+
+            return jlabel.getClass().getName();
+        }
+        else if (component instanceof JPanel) {
+                System.out.println("should print first");
+                JPanel jpanel = (JPanel) component;
+                //TODO was goIntoPanel(jpanel, 0);
+                return goIntoPanelReturnType((JPanel) panel.getComponent(0));
+            }
+        
+        // else if (component instanceof JLabel) {
+        //     return textField;
+        // }
+        else {
+            System.out.println("im confused in return type" + component.getClass().getName());
+        }
+
+            //System.out.println("none of these" +component.getClass().getName());
+        //return textField;
+        // if (component instanceof JPanel) {
+        //     JPanel jpanel = (JPanel) component;
+        //     return goIntoPanelReturnTextbox(jpanel, 0);
+        // }
+        }
+        return "Some issue in goIntoPanelReturnType";
+}
 }

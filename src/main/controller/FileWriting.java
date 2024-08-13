@@ -2,6 +2,7 @@ package controller;
 
 import javax.swing.JDialog;
 import javax.swing.JFrame;
+import javax.swing.JLabel;
 import javax.swing.JTextField;
 import javax.swing.JPanel;
 import java.io.IOException;
@@ -248,10 +249,26 @@ public  ArrayList<String> getClassList() {
 
 public int howManyPlaceholders() {
     System.out.println("skelator 1111 ");
+    GoIntoPanel goIntoPanel = new GoIntoPanel();
     int placeholderAmount = 00000;
     JPanel tempTextFieldPanel = setState.getTextFieldPanel();
     // if (tempTextFieldPanel.getComponentCount() >=5) {
-    placeholderAmount = iteratePanel();
+        JLabel l = new JLabel();
+        JPanel p = new JPanel();
+        System.out.println("jlabel. jpanel "+l.getClass().getName()+ " "+ p.getClass().getName()+ "<><><> "+goIntoPanel.goIntoPanelReturnType(tempTextFieldPanel));
+    if (goIntoPanel.goIntoPanelReturnType(tempTextFieldPanel) == "javax.swing.JLabel") {
+        placeholderAmount = iteratePanel(1);
+    }
+
+    else if ((goIntoPanel.goIntoPanelReturnType(tempTextFieldPanel) == "javax.swing.JPanel")||(goIntoPanel.goIntoPanelReturnType(tempTextFieldPanel) == "javax.swing.JTextField")) {
+        placeholderAmount = iteratePanel(0);
+    }
+
+    else {
+        System.out.println("issue in howManyPlaceholders");
+    }
+
+
     // }
     
     // else if ((tempTextFieldPanel.getComponentCount() >=1) && (tempTextFieldPanel.getComponentCount() < 5)) {
@@ -276,7 +293,7 @@ public int howManyPlaceholders() {
     return placeholderAmount;
 }
 
-private int iteratePanel() {
+private int iteratePanel(int labelOrNotIndex) {
     //System.out.println("skelator 2222 "+ placeholderAmount+ "fieldpanelcount "+setState.getTextFieldPanel().getComponentCount());
     GoIntoPanel goIntoPanel = new GoIntoPanel();
     int placeholderAmount = 0;
@@ -297,7 +314,7 @@ private int iteratePanel() {
                 returnedBox = goIntoPanel.goIntoPanelReturnTextbox(setState.getTextFieldPanel(), i);
                 //System.out.println("returnedboxshouldbeseventimes " + returnedBox.getText());
                 if (setState.getEmptiedState(returnedBox) == false) {
-                    System.out.println("in jpanel placeholder "+ returnedBox.getText());
+                    System.out.println("in jpanel placeholder look "+ returnedBox.getText());
                     placeholderAmount++;
                 }
 

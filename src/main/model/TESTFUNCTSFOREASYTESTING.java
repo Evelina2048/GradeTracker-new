@@ -3,45 +3,26 @@ package model;
 import java.util.ArrayList;
 
 import javax.swing.JButton;
-import javax.swing.JFrame;
-import javax.swing.JLabel;
 import javax.swing.JPanel;
 
 import controller.CompositeActionListenerWithPriorities;
 import controller.FileHandling;
-import controller.FileWriting;
 import view.student.StudentStatCollect;
 
-import javax.swing.JTextField;
-import javax.swing.SwingUtilities;
 import java.awt.event.ActionListener;
-import java.util.logging.FileHandler;
-import java.awt.Component;
 import java.awt.event.ActionEvent;
 
 import controller.Creator;
 import view.Launcher;
-import view.NewUser;
 import view.student.StudentClasses;
-import model.GoIntoPanel;
-import model.SETTEST;
-import model.Set;
-import model.SetList;
-import model.SetState;
-import model.SetUserInformation;
-
 import java.awt.event.MouseListener;
 
 import java.awt.event.MouseEvent;
-import java.awt.event.MouseListener;
 
 public class TESTFUNCTSFOREASYTESTING {
-    private JPanel TESTTEXTBOXPANEL;
-
     //Below is for singleton design pattern
     // Static variable to hold the single instance of the class
     private static TESTFUNCTSFOREASYTESTING instance;
-    private JPanel classLabelPanel;
 
     CompositeActionListenerWithPriorities actionPriorities = CompositeActionListenerWithPriorities.getInstance();
     FileHandling fileHandler = new FileHandling();

@@ -252,13 +252,12 @@ public class StudentStatCollect extends JFrame {
         System.out.println("textboxpanel comps H"+setState.getTextFieldPanel().getComponentCount());
         System.out.println("up Y "+ fileWrite.howManyPlaceholders());
 
-        if (fileWrite.howManyPlaceholders() > 0) { 
+        if (fileWrite.howManyPlaceholders() > 0) {
             Decorator decorate = new Decorator();
-            System.out.println("up Z");
+            System.out.println("up Z how many placeholders? "+fileWrite.howManyPlaceholders());
             decorate.areYouSureMessage(null, "studentStatsEmpty", "Remove placeholder(s) to continue?", 230, 90);
             setState.setCanContinue(false);
         }
-        
 
     }
 
