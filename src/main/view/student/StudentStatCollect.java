@@ -269,7 +269,7 @@ public class StudentStatCollect extends JFrame {
                     @Override
                     public void actionPerformed(ActionEvent e) {// remember wont run  if just enter without a click
                         System.out.println("enteraction");
-                        System.out.println("bad1111");
+                        System.out.println("sleep1111");
                         System.out.println("textboxpanel comps B"+setState.getTextFieldPanel().getComponentCount());
                         doNextButtonProcedure();
                     }
@@ -281,11 +281,14 @@ public class StudentStatCollect extends JFrame {
     public void doNextButtonProcedure() {
         System.out.println("textboxpanel comps C"+setState.getTextFieldPanel().getComponentCount());
         System.out.println("up X");
+        System.out.println("sleep2222 "+ setState.getCanContinue());
+        System.out.println("sleep2222.05");
         saveButtonAction();
-        System.out.println("bad");
+        System.out.println("sleep2222.1"+ setState.getCanContinue());
         if(setState.getCanContinue()) {
                 setState.incrementClassListIndex();
 
+                System.out.println("sleep2222.3");
             if (setState.getClassListIndex()+1 <= setList.getFinalClassList().size()) {
                 System.out.println("the jlabel name: "+setList.getFinalClassList().get(setState.getClassListIndex()));
 
@@ -351,6 +354,7 @@ public class StudentStatCollect extends JFrame {
                 //is greater or equal to 5
                 credits = (JPanel) credits.getComponent(1);
 
+                System.out.println("sleep2222.4");
                 if (credits instanceof JPanel) {
                     JTextField creditsTextField = goIntoPanel.goIntoPanelReturnTextbox((JPanel) credits, 0);
                     String text = creditsTextField.getText();
@@ -364,9 +368,10 @@ public class StudentStatCollect extends JFrame {
 
                     Pattern patternForPercentage = Pattern.compile("^[-+]?\\d*\\.?\\d+(e[-+]?\\d+)?%?$", Pattern.CASE_INSENSITIVE);
                     Boolean percentageFormatOkay = correctBoxFormatChecker(patternForPercentage, 3); //for percentage
-
+                    System.out.println("sleep2222.5");
                     if ((matcherBoolean == true) && (gradesFormatOkay) && (percentageFormatOkay)) {
                         hideWindow();
+                        System.out.println("sleep3333");
                         new PrintStudentGrades(set.getWindow(), setUserInformation.getStudentOrTeacher(), setUserInformation.getExistingOrNew());
                     }
 

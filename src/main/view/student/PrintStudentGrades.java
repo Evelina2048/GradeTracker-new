@@ -17,6 +17,7 @@ import controller.Decorator;
 import controller.FileHandling;
 import model.SetList;
 import model.SetUserInformation;
+import controller.CompositeActionListenerWithPriorities;
 import controller.CreateButton;
 
 public class PrintStudentGrades extends JFrame {
@@ -30,7 +31,10 @@ public class PrintStudentGrades extends JFrame {
     private CreateButton createButton = new CreateButton();
 
     public PrintStudentGrades(JFrame main, String studentOrTeacher, String existingOrNew) {
+        System.out.println("sleep4444");
         System.out.println("in print student grades");
+        CompositeActionListenerWithPriorities actionPriorities = CompositeActionListenerWithPriorities.getInstance();
+        actionPriorities.setCurrentClass("PrintStudentGrades");
         studentStatCollectLaunch(main);
         //createNewTypeButton();
         JLabel instructionsWords = new JLabel("Grades");

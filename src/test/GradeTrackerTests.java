@@ -167,14 +167,12 @@ public class GradeTrackerTests {
 
         actionPriorities.TESTFORCECURRENTCLASS("StudentClasses");
 
-        JButton nextButton = studentClasses.TESTNEXTBUTTON();
-        ActionEvent nextActionEvent = new ActionEvent(nextButton, ActionEvent.ACTION_PERFORMED, "Click");
-        for (ActionListener listener : nextButton.getActionListeners()) {
-            listener.actionPerformed(nextActionEvent);
-        }
-
-        //JPanel textBoxPanel = sETTEST.GETTESTTEXTBOXPANEL();
-        //actionPriorities.TESTFORCECURRENTCLASS("StudentStatCollect");
+        // JButton nextButton = studentClasses.TESTNEXTBUTTON();
+        // ActionEvent nextActionEvent = new ActionEvent(nextButton, ActionEvent.ACTION_PERFORMED, "Click");
+        // for (ActionListener listener : nextButton.getActionListeners()) {
+        //     listener.actionPerformed(nextActionEvent);
+        // }
+        TESTFUNCTSFOREASYTESTING.getInstance().studentClassesNextButton(studentClasses);
 
         classLabelPanel = sETTEST.GETTESTCLASSLABELPANEL();
         System.out.println("classlabelpanel"+ (classLabelPanel==null));

@@ -153,6 +153,13 @@ public class TESTFUNCTSFOREASYTESTING {
     }
 //
 
+public void studentClassesNextButton(StudentClasses studentClasses) {
+    JButton nextButton = studentClasses.TESTNEXTBUTTON();
+    ActionEvent nextActionEvent = new ActionEvent(nextButton, ActionEvent.ACTION_PERFORMED, "Click");
+    for (ActionListener listener : nextButton.getActionListeners()) {
+        listener.actionPerformed(nextActionEvent);
+    }
+}
 
     
 }
