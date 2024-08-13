@@ -53,6 +53,7 @@ public class PrintStudentGrades extends JFrame {
         //     // class.readFileIntoList(pathtofilewithclasslistindex);
         // }
         ArrayList<ArrayList<String>> gradeList = new ArrayList<>();
+        ArrayList<Integer> amountOfFinalGrade = new ArrayList<>();
         for (int classIndex = 0; classIndex < setList.getFinalClassList().size();classIndex++) {
             System.out.println("printgradestest "+setList.getFinalClassList().get(classIndex));
             String filePathForClass = setUserInformation.getPathToClassInformationFileWithChosenIndex(classIndex);
@@ -86,7 +87,6 @@ public class PrintStudentGrades extends JFrame {
 
             }
 
-            ArrayList<Integer> amountOfFinalGrade = new ArrayList<>();
             for (int boxSetIndex = 0; boxSetIndex < gradeList.size(); boxSetIndex++) {
                 amountOfFinalGrade.add((listOfAverages.get(boxSetIndex))*(percentageOfGradeList.get(boxSetIndex)));
             }
@@ -111,6 +111,11 @@ public class PrintStudentGrades extends JFrame {
 
             
 
+        }
+
+        float total = 0;
+        for (int i = 0; i<amountOfFinalGrade.size(); i++) {
+            total += amountOfFinalGrade.get(0);
         }
     }
 
