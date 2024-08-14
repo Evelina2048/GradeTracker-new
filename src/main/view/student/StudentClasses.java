@@ -503,6 +503,7 @@ public class StudentClasses extends JFrame {
 
                     if (tempTextField[0].getText().equals("ERROR")){
                     tempTextField[0] = create.createTextBox(draggedTextField.getText(), "JTextField", false);
+                    //tempTextField[0].setBounds(draggedTextField.getBounds());
                     //tempTextField[0] = new JLabel("Hello <3");
                     tempTextField[0].setOpaque(true);
                     }
@@ -512,7 +513,10 @@ public class StudentClasses extends JFrame {
                     }
 
                    // tempTextField[0].repaint();
-                    tempTextField[0].setBounds(e.getX(), e.getY(), 144, 30);
+
+                   System.out.println("draggedfield "+tempTextField[0].getBounds());
+                    tempTextField[0].setBounds(e.getX(), e.getY(), 144, 50);
+                   
                     //tempTextField[0].setForeground(new Color(230, 230, 230));
 
                     //tempTextField[0].repaint();
@@ -591,7 +595,10 @@ public class StudentClasses extends JFrame {
                         //tempTextFieldPanel.getComponent(spacedLabelIndex[0]) = create.createTextBox(draggedTextField.getText(), "JTextField", false);
 
                         // Create the new text field with the text from draggedTextField
-                        JTextField newTextField = new JTextField(draggedTextField.getText());
+                        //JTextField newTextField = new JTextField(draggedTextField.getText());
+                        //newTextField.setBounds();
+                        //JTextField newTextField = create.createTextBox(currentClass, currentClass, spacedLabelIndexExists)
+                        JTextField newTextField = create.createTextBox(tempTextField[0].getText(), "JTextField",setState.getLoadedState(tempTextField[0]));
 
                         // Remove the old component at the specified index
                         Component oldComponent = tempTextFieldPanel.getComponent(spacedLabelIndex[0]);
