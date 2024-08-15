@@ -22,6 +22,8 @@ public class SetList {
     private JLabel DEBUGMARKEDBOX;
     private JPanel classLabelPanel;
 
+    private ArrayList<Integer> gradeNumber;
+
     // Private constructor to prevent instantiation
     private SetList() {}
 
@@ -74,5 +76,13 @@ public class SetList {
 
     public JPanel getClassLabelPanel() {
         return classLabelPanel;
+    }
+
+    public void addGradeTypeList(int thisGradeNumber) {
+        gradeNumber.add(thisGradeNumber);
+    }
+
+    public ArrayList<Integer> getGradeTypeList() {
+        return gradeNumber;
     }
 }

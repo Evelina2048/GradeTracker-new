@@ -117,6 +117,14 @@ public class PrintStudentGrades extends JFrame {
         for (int i = 0; i<amountOfFinalGrade.size(); i++) {
             total += amountOfFinalGrade.get(0);
         }
+
+        ArrayList <Integer> gradeTypeList = setList.getGradeTypeList();
+        int gradeTypeAmount = setList.getCurrentClassIndex();
+        JPanel allContainer = new JPanel(new GridLayout(2,gradeTypeAmount,5,5));
+
+        
+
+
     }
 
     public void studentStatCollectLaunch(JFrame main) {
