@@ -119,7 +119,7 @@ public class PrintStudentGrades extends JFrame {
         }
 
         ArrayList <Integer> gradeTypeList = setList.getGradeTypeList();
-        int gradeTypeAmount = setList.getCurrentClassIndex();
+        int gradeTypeAmount = gradeTypeList.get(0);//setList.getCurrentClassIndex();
         JPanel allContainer = new JPanel(new GridLayout(2,gradeTypeAmount,5,5));
 
         
