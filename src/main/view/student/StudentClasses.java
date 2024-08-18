@@ -415,11 +415,37 @@ public class StudentClasses extends JFrame {
                     //JTextField leftTextField = (JTextField) ;//(JTextField) e.getSource();
                     
                     //if in between two textFields
+                    System.out.println("layered stuff " + 
+                    (
+                    (layeredPane.getComponentAt(leftPoint)).getClass().getName() + " " +
+                    (layeredPane.getComponentAt(rightPoint)).getClass().getName() + " " +
+                    (window.getComponentAt(leftPoint)).getClass().getName() + " " +
+                    (window.getComponentAt(rightPoint)).getClass().getName() + " "
+                    )
+                    );
+
+                    //if ((layeredPane.getComponentAt(leftPoint) instanceof JTextField && layeredPane.getComponentAt(rightPoint) instanceof JTextField) || (window.getComponentAt(leftPoint) instanceof JTextField && window.getComponentAt(rightPoint) instanceof JTextField)) {
                     if ((layeredPane.getComponentAt(leftPoint) instanceof JTextField && layeredPane.getComponentAt(rightPoint) instanceof JTextField) || (window.getComponentAt(leftPoint) instanceof JTextField && window.getComponentAt(rightPoint) instanceof JTextField)) {
                         Component comp = layeredPane.getComponentAt(leftPoint);
                         System.out.println("comp "+comp.getClass().getName());
                         //ArrayList<JTextField> toDeleteList = new ArrayList<>();
                         ArrayList<JTextField> toAddList = new ArrayList<>();
+                        if (spacedLabelBox != null) {
+                            //if point not between boxes anymore
+                            //1. save points
+                            
+                            //2.check if cursor point between
+                            //if (!((moveModeLeftBox.getLocation() leftof cursorPoint) && (moveModeRightBox.getLocation() rightof cursorPoint))) {
+                            if   (!(moveModeLeftBox.getBounds().x < cursorPoint.x && cursorPoint.x < (moveModeRightBox.getBounds().x + moveModeRightBox.getBounds().width))) {
+                            System.out.println("hiyaaaaaaa");
+                            //if not:
+                            //delete it.
+                                JPanel spacedLabelPanel = new JPanel();
+                                spacedLabelPanel.add(spacedLabelBox);
+                                create.deleteTextBox(spacedLabelPanel);
+                                //create.deleteTextBox(spacedLabelBox);
+                            }
+                        }
 
                         for (int i = 0; i < setState.getTextFieldPanel().getComponentCount(); i++) { //loop to find what matches left component
                             JTextField textFieldComponent = (JTextField) comp;
@@ -462,38 +488,6 @@ public class StudentClasses extends JFrame {
                         System.out.println("comp2 "+comp.getClass().getName());
                     }
 
-
-                    // if () {
-
-                    // }
-                    //Component 
-                    // if (window.getComponentAt(leftPoint) instanceof JTextField) {
-                    //     JTextField componentToLeft = (JTextField) SwingUtilities.getDeepestComponentAt(window, leftPoint.x, leftPoint.y);
-                    //     System.out.println("about to text: "+componentToLeft.getText());
-                    // }
-
-                    // else if (window.getComponentAt(leftPoint) instanceof JFrame){
-                    //     JFrame jframe = (JFrame) window.getComponentAt(leftPoint);
-                    //     Component compon = jframe.getContentPane(;
-
-                    //     System.out.println("is jframe instance?"+ (compon instanceof JTextField));
-                    //     System.out.println("is a instance of jframe "+ window.getComponentAt(leftPoint).getClass().getName()); //SwingUtilities.getDeepestComponentAt(window, leftPoint.x, leftPoint.y));//
-                        
-                    // }
-
-                    // else if (window.getComponentAt(leftPoint) != null){
-                    //     //System.out.println("is a instance of"+ window.getComponentAt(leftPoint).getClass().getName()); //SwingUtilities.getDeepestComponentAt(window, leftPoint.x, leftPoint.y));//
-                    //     //JTextField()
-                    // }
-                    
-                    // else {
-                    //     System.out.println("failing atm");
-                    // }
-                    //
-                    //if ( lastComponent == currentComponent) {
-
-                        
-                    //}
                     JTextField newBackgroundField = new JTextField("EMPTY");
                     
                     if (draggedTextField != null) { 
@@ -516,21 +510,6 @@ public class StudentClasses extends JFrame {
 
                    System.out.println("draggedfield "+tempTextField[0].getBounds());
                     tempTextField[0].setBounds(e.getX(), e.getY(), 144, 50);
-                   
-                    //tempTextField[0].setForeground(new Color(230, 230, 230));
-
-                    //tempTextField[0].repaint();
-
-                    // Rectangle bounds = new Rectangle(e.getX() - draggedTextField.getWidth() / 2,
-                    // e.getY() - draggedTextField.getHeight() / 2,
-                    // draggedTextField.getWidth(), 
-                    // draggedTextField.getHeight());
-
-                    //draggedTextField.repaint(bounds);
-                    //tempTextField[0].repaint();
-
-                    //System.out.println("temptextfield "+ tempTextField[0].getText());
-                    //draggedTextField.setVisible(false);
                     
                     if (!layeredPane.isAncestorOf(tempTextField[0])) {
                         newBackgroundField = create.createTextBox(draggedTextField.getText(), "JTextField", false);//"BACK");

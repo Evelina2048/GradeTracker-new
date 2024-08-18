@@ -5,7 +5,9 @@ import javax.swing.JFrame;
 import javax.swing.SwingUtilities;
 
 import java.awt.BorderLayout;
+import java.awt.GridLayout;
 import javax.swing.JPanel;
+import javax.swing.JTextField;
 import javax.swing.JLabel;
 
 import java.awt.event.ActionListener;
@@ -31,7 +33,6 @@ public class PrintStudentGrades extends JFrame {
     private CreateButton createButton = new CreateButton();
 
     public PrintStudentGrades(JFrame main, String studentOrTeacher, String existingOrNew) {
-        System.out.println("sleep4444");
         System.out.println("in print student grades");
         CompositeActionListenerWithPriorities actionPriorities = CompositeActionListenerWithPriorities.getInstance();
         actionPriorities.setCurrentClass("PrintStudentGrades");
@@ -54,9 +55,10 @@ public class PrintStudentGrades extends JFrame {
         // }
         ArrayList<ArrayList<String>> gradeList = new ArrayList<>();
         ArrayList<Integer> amountOfFinalGrade = new ArrayList<>();
-        for (int classIndex = 0; classIndex < setList.getFinalClassList().size();classIndex++) {
+        for (int classIndex = 0; classIndex < setList.getFinalClassList().size(); classIndex++) {
             System.out.println("printgradestest "+setList.getFinalClassList().get(classIndex));
             String filePathForClass = setUserInformation.getPathToClassInformationFileWithChosenIndex(classIndex);
+            System.out.println("made it past first");
             ArrayList<String> allTextListForClass = fileHandler.readFileToList(filePathForClass);
 
 
@@ -121,6 +123,10 @@ public class PrintStudentGrades extends JFrame {
         ArrayList <Integer> gradeTypeList = setList.getGradeTypeList();
         int gradeTypeAmount = gradeTypeList.get(0);//setList.getCurrentClassIndex();
         JPanel allContainer = new JPanel(new GridLayout(2,gradeTypeAmount,5,5));
+
+        allContainer.add(new JTextField("allContainerBox"));
+
+        window.add(allContainer);
 
         
 

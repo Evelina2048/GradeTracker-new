@@ -160,8 +160,6 @@ public class GradeTrackerTests {
         Boolean windowHasClassLabelPanel = false;
         setUserInformation.setUsername("TESTHELLO");
 
-        //System.out.println("1111 "+window.getComponentCount());
-
         StudentClasses studentClasses = new StudentClasses();
         studentClasses.studentClassesLaunch();
 

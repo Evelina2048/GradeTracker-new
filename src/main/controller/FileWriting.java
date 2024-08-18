@@ -248,73 +248,62 @@ public  ArrayList<String> getClassList() {
 }
 
 public int howManyPlaceholders() {
-    System.out.println("skelator 1111 ");
+    System.out.println("1111in how many placeholders " + +setState.getTextFieldPanel().getComponentCount());
     GoIntoPanel goIntoPanel = new GoIntoPanel();
     int placeholderAmount = 00000;
     JPanel tempTextFieldPanel = setState.getTextFieldPanel();
     // if (tempTextFieldPanel.getComponentCount() >=5) {
         JLabel l = new JLabel();
         JPanel p = new JPanel();
-        System.out.println("jlabel. jpanel "+l.getClass().getName()+ " "+ p.getClass().getName()+ "<><><> "+goIntoPanel.goIntoPanelReturnType(tempTextFieldPanel));
-    if (goIntoPanel.goIntoPanelReturnType(tempTextFieldPanel) == "javax.swing.JLabel") {
-        placeholderAmount = iteratePanel(1);
+        System.out.println("jlabel. jpanel "+l.getClass().getName()+ " "+ p.getClass().getName()+ "<><><> "+goIntoPanel.goIntoPanelReturnTypeOfFirstComponentInPanel(tempTextFieldPanel));
+
+        String compZero = goIntoPanel.goIntoPanelReturnTypeOfFirstComponentInPanel((JPanel) tempTextFieldPanel.getComponent(0));
+        String compOne = goIntoPanel.goIntoPanelReturnTypeOfFirstComponentInPanel((JPanel) tempTextFieldPanel.getComponent(1));
+        System.out.println("compOne "+ compOne);
+        System.out.println("(goIntoPanel.goIntoPanelReturnTypeOfFirstComponentInPanel(tempTextFieldPanel).equals(javax.swing.JTextField) "+ (goIntoPanel.goIntoPanelReturnTypeOfFirstComponentInPanel((JPanel) tempTextFieldPanel.getComponent(1)).equals("javax.swing.JTextField")));
+    if ((compOne).equals("javax.swing.JLabel")) { //commented 8/18
+        placeholderAmount = iteratePanelForHowManyPlaceholders(1);
     }
 
-    else if ((goIntoPanel.goIntoPanelReturnType(tempTextFieldPanel) == "javax.swing.JPanel")||(goIntoPanel.goIntoPanelReturnType(tempTextFieldPanel) == "javax.swing.JTextField")) {
-        placeholderAmount = iteratePanel(0);
+    else if ((compZero.equals("javax.swing.JPanel"))) {
+        System.out.println("step 2.2");
+        placeholderAmount = iteratePanelForHowManyPlaceholders(0);
+    }
+
+    else if ((goIntoPanel.goIntoPanelReturnTypeOfFirstComponentInPanel(tempTextFieldPanel).equals("javax.swing.JTextField"))) {
+        System.out.println("step 2.3");
+        placeholderAmount = iteratePanelForHowManyPlaceholders(0);
+    }
+
+    else if (compZero.equals("javax.swing.JLabel")) {
+        //System.out.println("hiiiiii ima need more info friend like your component count "+ tempTextFieldPanel.getComponentCount()+" and what comp(0) text is "+ (goIntoPanel.goIntoPanelReturnTextbox(((JPanel) tempTextFieldPanel.getComponent(0)),0)).getText());
+        placeholderAmount = iteratePanelForHowManyPlaceholders(1); //causing error 1111
+        
     }
 
     else {
-        System.out.println("issue in howManyPlaceholders");
+        System.out.println("issue in howManyPlaceholders "+ goIntoPanel.goIntoPanelReturnTypeOfFirstComponentInPanel(tempTextFieldPanel));
     }
 
-
-    // }
-    
-    // else if ((tempTextFieldPanel.getComponentCount() >=1) && (tempTextFieldPanel.getComponentCount() < 5)) {
-    //     while (tempTextFieldPanel.getComponentCount() < 5) {
-    //         if (textFieldPanel.getComponentCount() >= 1) {
-    //             textFieldPanel = (JPanel) textFieldPanel.getComponent(0);
-    //         }
-
-    //         else  {
-    //             System.out.println("textfieldpanel.getComponent(0) does not exist");
-    //             break;
-    //         }
-    //     }
-    //     if (tempTextFieldPanel.getComponentCount() >= 5) {
-    //         placeholderAmount = iteratePanel();
-    //     }
-    //}
-
-    // else {
-    //     System.out.println("temptextfieldpanel is empty");
-    // }
     return placeholderAmount;
 }
 
-private int iteratePanel(int labelOrNotIndex) {
-    //System.out.println("skelator 2222 "+ placeholderAmount+ "fieldpanelcount "+setState.getTextFieldPanel().getComponentCount());
+private int iteratePanelForHowManyPlaceholders(int labelOrNotIndex) {
     GoIntoPanel goIntoPanel = new GoIntoPanel();
     int placeholderAmount = 0;
     JTextField returnedBox = new JTextField("howmanyplaceholdersnotchanged");
 
-    for (int i = 0; i < setState.getTextFieldPanel().getComponentCount(); i++) {
-        //for (int i = 1; i < setState.getTextBoxPanel().getComponentCount(); i++) {
-            //getTextBoxPanel()
-            System.out.println("skelator 3333 "+ placeholderAmount);
-            System.out.println("instance of "+setState.getTextFieldPanel().getComponent(i).getClass().getName());
+    for (int i = labelOrNotIndex; i < setState.getTextFieldPanel().getComponentCount(); i++) {
             Component component = setState.getTextFieldPanel().getComponent(i);
             if (component instanceof JTextField && setState.getEmptiedState(textField) == false) {
-                System.out.println("skelator 3333.1 "+ placeholderAmount);
+                System.out.println("is a placeholder1 "+ returnedBox.getText());
                 placeholderAmount++;
             }
             else if (component instanceof JPanel) {
-                System.out.println("skelator 3333.2 "+ placeholderAmount);
                 returnedBox = goIntoPanel.goIntoPanelReturnTextbox(setState.getTextFieldPanel(), i);
                 //System.out.println("returnedboxshouldbeseventimes " + returnedBox.getText());
                 if (setState.getEmptiedState(returnedBox) == false) {
-                    System.out.println("in jpanel placeholder look "+ returnedBox.getText());
+                    System.out.println("is a placeholder2 "+ returnedBox.getText());
                     placeholderAmount++;
                 }
 
@@ -323,12 +312,9 @@ private int iteratePanel(int labelOrNotIndex) {
                 } 
             }
             else {
-                System.out.println("skelator 3333.3 "+ placeholderAmount);
                 System.out.println("component is something else. Something went wrong"+ component.getClass().getName());
             }
     
-            //placeholderAmount--; //for jlabel
-            System.out.println("skelator 4444 "+placeholderAmount);
     }
     return placeholderAmount;
 }

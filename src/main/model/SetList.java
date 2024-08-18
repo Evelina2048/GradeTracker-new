@@ -22,7 +22,7 @@ public class SetList {
     private JLabel DEBUGMARKEDBOX;
     private JPanel classLabelPanel;
 
-    private ArrayList<Integer> gradeNumber;
+    private ArrayList<Integer> gradeNumber = new ArrayList<>();
 
     // Private constructor to prevent instantiation
     private SetList() {}

@@ -226,6 +226,9 @@ public class StudentStatCollect extends JFrame {
         set.setWindow(window);
 
         setState.setTextFieldPanel(textBoxPanel);
+
+        //determine gradetypenumber starting amount
+        typeNumber = (textBoxPanel.getComponentCount()-2)/3;
     }
 
     private void saveAction(JButton saveButton) {
@@ -269,7 +272,6 @@ public class StudentStatCollect extends JFrame {
                     @Override
                     public void actionPerformed(ActionEvent e) {// remember wont run  if just enter without a click
                         System.out.println("enteraction");
-                        System.out.println("sleep1111");
                         System.out.println("textboxpanel comps B"+setState.getTextFieldPanel().getComponentCount());
                         doNextButtonProcedure();
                     }
@@ -278,32 +280,50 @@ public class StudentStatCollect extends JFrame {
         });
     }
 
-    public void doNextButtonProcedure() {
-        System.out.println("textboxpanel comps C"+setState.getTextFieldPanel().getComponentCount());
-        System.out.println("up X");
-        System.out.println("sleep2222 "+ setState.getCanContinue());
-        System.out.println("sleep2222.05");
+    public void doNextButtonProcedure() {;
         saveButtonAction();
-        System.out.println("sleep2222.1"+ setState.getCanContinue());
         if(setState.getCanContinue()) {
                 setState.incrementClassListIndex();
+                if (typeNumber!=0) {
+                    setList.addGradeTypeList(typeNumber); }
+                else {
+                    System.out.println("home "+setState.getTextFieldPanel().getComponentCount());
 
-                System.out.println("sleep2222.3");
+                }
+
             if (setState.getClassListIndex()+1 <= setList.getFinalClassList().size()) {
                 System.out.println("the jlabel name: "+setList.getFinalClassList().get(setState.getClassListIndex()));
 
-                Component credits = new JPanel();
-                if (setState.getTextFieldPanel().getComponentCount() >= 2) {
-                    credits = setState.getTextFieldPanel().getComponent(1);
-                }
+                // Component credits = new JPanel();
+                // if (setState.getTextFieldPanel().getComponentCount() >= 2) {
+                //     credits = setState.getTextFieldPanel().getComponent(1);
+                // }
 
-                else if (textBoxPanel.getComponentCount() >= 2) {
-                    credits = textBoxPanel.getComponent(1);
-                }
+                // else if (textBoxPanel.getComponentCount() >= 2) {
+                //     credits = textBoxPanel.getComponent(1);
+                // }
 
-                else {
-                    System.out.println("somethingwentwrongin studentstatcollect credits");
+                // else {
+                //     System.out.println("somethingwentwrongin studentstatcollect credits");
+                // }
+                JPanel credits;
+                credits = (JPanel) textBoxPanel;
+                
+                while (credits.getComponentCount() < 5) {
+                    System.out.println("dollar "+credits.getComponentCount());
+                    credits = (JPanel) credits.getComponent(0);
                 }
+                //is greater or equal to 5
+                credits = (JPanel) credits.getComponent(1);
+
+                ////
+                // while (credits.getComponentCount() < 5) {
+                //     System.out.println("dollar "+credits.getComponentCount());
+                //     credits = (JPanel) credits.getComponent(0);
+                // }
+                // //is greater or equal to 5
+                // credits = (JPanel) credits.getComponent(1);
+                ////
 
                 if (credits instanceof JPanel) {
                     JTextField creditsTextField = goIntoPanel.goIntoPanelReturnTextbox((JPanel) credits, 0);
@@ -318,7 +338,6 @@ public class StudentStatCollect extends JFrame {
             
                     Pattern patternForPercentage = Pattern.compile("^[-+]?\\d*\\.?\\d+(e[-+]?\\d+)?%?$", Pattern.CASE_INSENSITIVE);
                     Boolean percentageFormatOkay = correctBoxFormatChecker(patternForPercentage, 3); //for percentage
-
 
                     if ((matcherBoolean == true) && (gradesFormatOkay) && (percentageFormatOkay)) {
                         textBoxPanel.removeAll();
@@ -354,7 +373,6 @@ public class StudentStatCollect extends JFrame {
                 //is greater or equal to 5
                 credits = (JPanel) credits.getComponent(1);
 
-                System.out.println("sleep2222.4");
                 if (credits instanceof JPanel) {
                     JTextField creditsTextField = goIntoPanel.goIntoPanelReturnTextbox((JPanel) credits, 0);
                     String text = creditsTextField.getText();
@@ -368,10 +386,8 @@ public class StudentStatCollect extends JFrame {
 
                     Pattern patternForPercentage = Pattern.compile("^[-+]?\\d*\\.?\\d+(e[-+]?\\d+)?%?$", Pattern.CASE_INSENSITIVE);
                     Boolean percentageFormatOkay = correctBoxFormatChecker(patternForPercentage, 3); //for percentage
-                    System.out.println("sleep2222.5");
                     if ((matcherBoolean == true) && (gradesFormatOkay) && (percentageFormatOkay)) {
                         hideWindow();
-                        System.out.println("sleep3333");
                         new PrintStudentGrades(set.getWindow(), setUserInformation.getStudentOrTeacher(), setUserInformation.getExistingOrNew());
                     }
 
@@ -542,7 +558,7 @@ public class StudentStatCollect extends JFrame {
         boxManageCreate("Grades(format:# # #)", "JTextField",false);
         setState.setCanContinue(true);
         setState.setTextFieldPanel(textBoxPanel);
-        System.out.println("textboxpanel comps A"+setState.getTextFieldPanel().getComponentCount());
+        System.out.println("textboxpanel comps A"+setState.getTextFieldPanel().getComponentCount()+ " hmp "+ fileWrite.howManyPlaceholders());
     }
 
     public class EnterAction extends AbstractAction {

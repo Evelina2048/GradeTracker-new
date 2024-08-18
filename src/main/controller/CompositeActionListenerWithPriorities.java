@@ -1,6 +1,5 @@
 package controller;
 
-import java.awt.Color;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.util.ArrayList;
@@ -11,17 +10,12 @@ import java.util.TreeSet;
 
 import javax.swing.JRadioButton;
 import javax.swing.Timer;
-import javax.swing.UIManager;
-import controller.Decorator;
-
-import model.Set;
 
 public class CompositeActionListenerWithPriorities implements ActionListener {
   private Map<Integer, ArrayList<ActionListener>> listeners = 
     new TreeMap<Integer,ArrayList<ActionListener>>();
     private boolean isProcessing = false;
-    private Set set = Set.getInstance();
-    private String currentClass = null;//"Current class not changed"; //TODO 8/6 7:19am
+    private String currentClass = null;//"Current class not changed";
     private static CompositeActionListenerWithPriorities instance;
     //this.set = Set.getInstance();
     private CompositeActionListenerWithPriorities() {}
@@ -97,7 +91,7 @@ public class CompositeActionListenerWithPriorities implements ActionListener {
       Timer timer = new Timer(1, new ActionListener() {
         @Override
         public void actionPerformed(ActionEvent e) {
-            Decorator decorate = new Decorator();
+            new Decorator();
 
             if (listeners.size() == 2) {
                 // Correctly reference the outer class for the action event
@@ -145,10 +139,6 @@ public class CompositeActionListenerWithPriorities implements ActionListener {
   public int DEBUGLISTENERSIZE() {
     //System.out.println(listeners.size());
     return listeners.size();
-  }
-
-  private void performAllActions() {
-    actionPerformed(new ActionEvent(this, ActionEvent.ACTION_PERFORMED, "PerformAllActions"));
   }
 
   public interface EnterKeyListener extends ActionListener {
