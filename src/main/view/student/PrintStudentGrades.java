@@ -17,6 +17,7 @@ import java.awt.event.ActionEvent;
 import controller.Creator;
 import controller.Decorator;
 import controller.FileHandling;
+import model.Set;
 import model.SetList;
 import model.SetUserInformation;
 import controller.CompositeActionListenerWithPriorities;
@@ -31,18 +32,24 @@ public class PrintStudentGrades extends JFrame {
     private SetUserInformation setUserInformation;
     private FileHandling fileHandler = new FileHandling();
     private CreateButton createButton = new CreateButton();
+    private int whichCurrClassIndex;
 
     public PrintStudentGrades(JFrame main, String studentOrTeacher, String existingOrNew) {
+        whichCurrClassIndex = 1;
+        printStudentGradesLaunch();
+    }
+
+    public void printStudentGradesLaunch() {
         System.out.println("in print student grades");
         CompositeActionListenerWithPriorities actionPriorities = CompositeActionListenerWithPriorities.getInstance();
         actionPriorities.setCurrentClass("PrintStudentGrades");
-        studentStatCollectLaunch(main);
+        studentStatCollectLaunch();
         //createNewTypeButton();
         JLabel instructionsWords = new JLabel("Grades");
         JPanel instructionsPanel = new JPanel();
         instructionsPanel = decorate.InstructionsPanelDecorate(instructionsPanel, instructionsWords );
         window.add(instructionsPanel);
-        buttonSetUpAction(main, studentOrTeacher, existingOrNew);
+        buttonSetUpAction();
         setList = SetList.getInstance();
         setUserInformation = SetUserInformation.getInstance();
         int gradeBoxTotal = 0;
@@ -65,7 +72,8 @@ public class PrintStudentGrades extends JFrame {
             //grades starts at index 4
             //gradeList.add(allList.get(4));
 
-            ArrayList<String> tempList = new ArrayList<String>(Arrays.asList(allTextListForClass.get(4).split(" ")));
+            printArray(allTextListForClass);
+            ArrayList<String> tempList = new ArrayList<String>(Arrays.asList(allTextListForClass.get(3).split(" ")));
             gradeList.add(tempList);
 
             ArrayList<Integer> percentageOfGradeList = new ArrayList<>();
@@ -121,25 +129,26 @@ public class PrintStudentGrades extends JFrame {
         }
 
         ArrayList <Integer> gradeTypeList = setList.getGradeTypeList();
-        int gradeTypeAmount = gradeTypeList.get(0);//setList.getCurrentClassIndex();
+        int gradeTypeAmount = gradeTypeList.get(whichCurrClassIndex);//setList.getCurrentClassIndex();
         JPanel allContainer = new JPanel(new GridLayout(2,gradeTypeAmount,5,5));
 
-        allContainer.add(new JTextField("allContainerBox"));
+        //allContainer.add(new JTextField("allContainerBox"));
+        allContainer.add(create.createTextBox("Average", "JLabel", false));
+        allContainer.add(create.createTextBox("Perc. of final grade", "JLabel", false));
+        allContainer.add(create.createTextBox("Contribution", "JLabel", false));
+        allContainer.add(create.createTextBox("Contribution", "JLabel", false));
 
         window.add(allContainer);
 
-        
-
-
     }
 
-    public void studentStatCollectLaunch(JFrame main) {
+    public void studentStatCollectLaunch() {
         System.out.println("in student grades");
-        this.window = main;
+        this.window = Set.getInstance().getWindow();
         window.setTitle("PrintStudentGrades");
     }
 
-    public void buttonSetUpAction(JFrame main, String studentOrTeacher, String existingOrNew) {
+    public void buttonSetUpAction() {
         JButton backButton = createButton.backButtonCreate();
         JPanel backButtonPanel = new JPanel();
         backButtonPanel.add(backButton);
@@ -161,9 +170,22 @@ public class PrintStudentGrades extends JFrame {
         JButton nextButton = createButton.nextButtonCreate();
         JPanel nextButtonPanel = new JPanel();
         nextButtonPanel.add(nextButton);
-        nextButton.setEnabled(false);
+        //nextButton.setEnabled(false); //commented 8/18
+        nextButton.addActionListener(new ActionListener() {
+            public void actionPerformed(ActionEvent e) {
+                whichCurrClassIndex++;
+                printStudentGradesLaunch();
+            }
+        });
         backNextButtonsPanel = createButton.makeBackNextButtonsPanel(backButtonPanel, saveButtonPanel, nextButtonPanel);
         window.add(backNextButtonsPanel, BorderLayout.SOUTH);
+    }
+
+    public void printArray(ArrayList<String> list) {
+        for (int i = 0; i < list.size(); i++) {
+            System.out.println("item "+list.get(0));
+        }
+
     }
 
     //window.setVisible(true);

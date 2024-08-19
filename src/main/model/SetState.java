@@ -5,6 +5,9 @@ import java.util.HashMap;
 
 import javax.swing.JPanel;
 import javax.swing.JTextField;
+
+import view.student.StudentStatCollect;
+
 import java.awt.Component;
 
 import java.awt.Font;
@@ -19,6 +22,7 @@ public class SetState {
     private String currentClass;
     private Boolean canContinue = true;
     private Font textFieldFont;
+    private StudentStatCollect studentStatCollect;
 
     //Below is for singleton design pattern
     // Static variable to hold the single instance of the class
@@ -114,5 +118,13 @@ public class SetState {
 
     public void TESTRESETSTATE() {
         instance = null;
+    }
+
+    public void setStudentStatCollect(StudentStatCollect thisStudentStatCollect) {
+        studentStatCollect = thisStudentStatCollect;
+    }
+
+    public StudentStatCollect getStudentStatCollect() {
+        return studentStatCollect;
     }
 }
