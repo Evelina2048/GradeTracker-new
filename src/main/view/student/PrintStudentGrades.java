@@ -80,6 +80,12 @@ public class PrintStudentGrades extends JFrame {
             for (int percentageOfGradePanelIndex = 3; percentageOfGradePanelIndex < allTextListForClass.size(); percentageOfGradePanelIndex += 3) {
                 percentageOfGradeList.add(Integer.parseInt(allTextListForClass.get(percentageOfGradePanelIndex)));
             }
+
+            ArrayList<Integer> gradeTypeList = new ArrayList<>();
+            for (int gradeTypePanelIndex = 2; gradeTypePanelIndex < allTextListForClass.size(); gradeTypePanelIndex += 3) {
+                gradeTypeList.add(Integer.parseInt(allTextListForClass.get(gradeTypePanelIndex)));
+            }
+
             ArrayList<Integer> listOfAverages = new ArrayList<>();
             for (int boxPanelIndex = 5; boxPanelIndex < allTextListForClass.size(); boxPanelIndex += 3) { //for each grades box
                 //gradeList.add(allList.get(j)); //add contents
@@ -128,8 +134,8 @@ public class PrintStudentGrades extends JFrame {
             total += amountOfFinalGrade.get(0);
         }
 
-        ArrayList <Integer> gradeTypeList = setList.getGradeTypeList();
-        int gradeTypeAmount = gradeTypeList.get(whichCurrClassIndex);//setList.getCurrentClassIndex();
+        ArrayList <Integer> gradeTypeNumberList = setList.getGradeTypeList();
+        int gradeTypeAmount = gradeTypeNumberList.get(whichCurrClassIndex);//setList.getCurrentClassIndex();
         JPanel allContainer = new JPanel(new GridLayout(2,gradeTypeAmount,5,5));
 
         //allContainer.add(new JTextField("allContainerBox"));
