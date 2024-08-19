@@ -23,6 +23,7 @@ public class SetState {
     private Boolean canContinue = true;
     private Font textFieldFont;
     private StudentStatCollect studentStatCollect;
+    private String actionCause;
 
     //Below is for singleton design pattern
     // Static variable to hold the single instance of the class
@@ -126,5 +127,13 @@ public class SetState {
 
     public StudentStatCollect getStudentStatCollect() {
         return studentStatCollect;
+    }
+
+    public void setAreYouSureMessageCause(String thisActionCause) {
+        actionCause = thisActionCause;
+    }
+
+    public String getAreYouSureMessageCause() {
+        return actionCause;
     }
 }

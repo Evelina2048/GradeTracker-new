@@ -481,4 +481,52 @@ public void testRightPlaceholders() {
     assertEquals(3, fileWrite.howManyPlaceholders());
    }
 
+
+   @Test
+   public void testRightClassGoingBack() {
+       SetUserInformation setUserInformation = SetUserInformation.getInstance();
+       // CompositeActionListenerWithPriorities actionPriorities = CompositeActionListenerWithPriorities.getInstance();
+       // Launcher.initialize();
+       SetList setList = SetList.getInstance();
+   
+       // // FileHandler fileHandler = new FileHandler();
+       FileHandling fileHandler = new FileHandling();
+       FileWriting fileWrite = new FileWriting();
+       setUserInformation.setUsername("TESTNEWTYPEWITHLOADED");
+   
+       TESTFUNCTSFOREASYTESTING testFuncts = TESTFUNCTSFOREASYTESTING.getInstance();
+       testFuncts.goToStudentClasses();
+   
+       // StudentClasses studentClasses = new StudentClasses();
+       // studentClasses.studentClassesLaunch();
+   
+       // actionPriorities.TESTFORCECURRENTCLASS("StudentClasses");
+   
+       StudentStatCollect studentStatCollect = new StudentStatCollect();
+       studentStatCollect.studentStatCollectLaunch();
+       //getfinalclasslist //will be make up of file
+   
+       ArrayList<String> myFiles = fileHandler.readFileToList(setUserInformation.getPathToClassTextFile());
+       setList.setFinalClassList(myFiles);
+   
+       JButton newTypeButton = studentStatCollect.TESTNEWTYPEBUTTON();
+       ActionEvent newTypeActionEvent = new ActionEvent(newTypeButton, ActionEvent.ACTION_PERFORMED, "Click");
+       for (ActionListener listener : newTypeButton.getActionListeners()) {
+           listener.actionPerformed(newTypeActionEvent);
+       }
+
+       JButton backButton = studentStatCollect.TESTBACKBUTTON();
+       ActionEvent backActionEvent = new ActionEvent(backButton, ActionEvent.ACTION_PERFORMED, "Click");
+       for (ActionListener listener : backButton.getActionListeners()) {
+           listener.actionPerformed(backActionEvent);
+       }
+
+       CompositeActionListenerWithPriorities.getInstance().getCurrentClass();
+
+   
+       System.out.println("currrclass "+CompositeActionListenerWithPriorities.getInstance().getCurrentClass());
+   
+       assertEquals(CompositeActionListenerWithPriorities.getInstance().getCurrentClass(), "StudentClasses");
+      }
+
 }

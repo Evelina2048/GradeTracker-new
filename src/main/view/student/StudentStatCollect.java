@@ -44,7 +44,8 @@ public class StudentStatCollect extends JFrame {
     private GoIntoPanel goIntoPanel;
     private JPanel backNextButtonsPanel;
     private JButton newTypeButton;
-    private JButton nextButton; //8/7
+    private JButton nextButton;
+    private JButton backButton;
     private Set set;
     private SetState setState;
     private SetList setList;
@@ -127,7 +128,7 @@ public class StudentStatCollect extends JFrame {
     }
 
     public void buttonSetUpAction() {
-        JButton backButton = createButton.backButtonCreate();
+        backButton = createButton.backButtonCreate();
         JPanel backButtonPanel = new JPanel();
         backButtonPanel.add(backButton);
         backAction(backButton);
@@ -162,13 +163,13 @@ public class StudentStatCollect extends JFrame {
                 actionPriorities.addClassActionListener(b -> {
                     if(setState.getCanContinue()) {
                         System.out.println("classlabelpanel "+classLabelPanel.getComponentCount());
-                        saveButtonAction();
+                        saveButtonAction("backButton");
                         if (setState.getClassListIndex() == 0) { //case for back to classes
                             System.out.println("hidewindow1");
                             hideWindow();
                             StudentClasses studentClasses = new StudentClasses();
                             studentClasses.studentClassesLaunch();
-                            saveButtonAction();
+                            saveButtonAction("backButton");
                         }
                         else if (setState.getClassListIndex() > 0) {
                             goToPreviousClasses();      
@@ -180,7 +181,7 @@ public class StudentStatCollect extends JFrame {
     }
 
     private void goToPreviousClasses() {
-        saveButtonAction();
+        saveButtonAction("backButton");
         if (setState.getCanContinue()) {
             setState.decrementClassListIndex();
 
@@ -236,12 +237,12 @@ public class StudentStatCollect extends JFrame {
             public void actionPerformed(ActionEvent e) {
                 //check if textbox is vaild
                 saveButton.setEnabled(false);
-                saveButtonAction();
+                saveButtonAction("Neither");
             }
         });
     }
 
-    private void saveButtonAction() {
+    private void saveButtonAction(String actionCause) {
         System.out.println("textboxpanel comps D"+setState.getTextFieldPanel().getComponentCount());
         set.setFilePath(setUserInformation.getPathToClassInformationFileWithIndex());
         System.out.println("textboxpanel comps E"+setState.getTextFieldPanel().getComponentCount());
@@ -259,6 +260,7 @@ public class StudentStatCollect extends JFrame {
             Decorator decorate = new Decorator();
             System.out.println("up Z how many placeholders? "+fileWrite.howManyPlaceholders());
             setState.setStudentStatCollect(this);
+            setState.setAreYouSureMessageCause(actionCause);
             decorate.areYouSureMessage(null, "studentStatsEmpty", "Remove placeholder(s) to continue?", 230, 90); //error 2222
             setState.setCanContinue(false);
         }
@@ -283,7 +285,7 @@ public class StudentStatCollect extends JFrame {
 
     public void doNextButtonProcedure() {
 
-        saveButtonAction(); //err 1111
+        saveButtonAction("nextButton"); //err 1111
         if(setState.getCanContinue()) {
                 setState.incrementClassListIndex();
                 if (typeNumber!=0) {
@@ -693,5 +695,9 @@ public class StudentStatCollect extends JFrame {
 
     public JButton TESTNEWTYPEBUTTON() {
         return newTypeButton;
+    }
+
+    public JButton TESTBACKBUTTON() {
+        return backButton;
     }
     }

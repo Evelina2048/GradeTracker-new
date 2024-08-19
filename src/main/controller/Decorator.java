@@ -215,6 +215,7 @@ public class Decorator {
 
     private void reasonIsStudentStatsEmptyYes() {
         //go to next class or print class
+        String actionCause = setState.getAreYouSureMessageCause();
 
         //setState.incrementClassListIndex();
         StudentStatCollect studentStat = setState.getStudentStatCollect();//new StudentStatCollect();
