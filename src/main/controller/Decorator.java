@@ -26,6 +26,7 @@ import java.awt.Dimension;
 
 import java.io.IOException;
 import model.Set;
+import model.SetList;
 import model.SetUserInformation;
 import model.SetListeners;
 import model.SetState;
@@ -118,8 +119,9 @@ public class Decorator {
         dialog.add(noButton);
         dialog.setSize(width,height); //250, 120
         
-        yesButtonActionListener(yesButton);
+        yesButtonActionListener(yesButton); //error 3333
         noButtonActionListener(noButton);
+
         //dialogCloseActionListener();
         dialog.setLocationRelativeTo(window);
         dialog.setVisible(true);
@@ -130,8 +132,7 @@ public class Decorator {
     private void yesButtonActionListener(JButton yesButton) {
         yesButton.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent e) { 
-               yesButtonAction();
-               //dialog.dispose(); 
+               yesButtonAction(); //error 4444
             }
         });
         yesOrNoDialog = "yes";
@@ -143,7 +144,7 @@ public class Decorator {
          }  
 
          else if (reason == "studentStatsEmpty") {
-            reasonIsStudentStatsEmptyYes();
+            reasonIsStudentStatsEmptyYes(); //error 5555
          }
 
          else if (reason == "closing window") {
@@ -215,12 +216,36 @@ public class Decorator {
     private void reasonIsStudentStatsEmptyYes() {
         //go to next class or print class
 
-        //TODO
-        StudentStatCollect studentStat = new StudentStatCollect();
-        //studentStat.visitNextStudentClass();
-        studentStat.doNextButtonProcedure();
+        //setState.incrementClassListIndex();
+        StudentStatCollect studentStat = setState.getStudentStatCollect();//new StudentStatCollect();
+
+        studentStat.doNextButtonProcedure2(); //error 6666
+        //studentStat.addLoadedBoxes();
+
+        
+        System.out.println("dialog visi "+dialog.isVisible());
         dialog.setVisible(false);
-        dialog.dispose();
+        dialog.dispose(); //commented 8/18
+        // System.out.println("dialog visi "+dialog.isVisible());
+
+
+
+        // StudentStatCollect studentStatCollect = new StudentStatCollect();
+        // Creator create = new Creator();
+        // FileHandling fileHandler = new FileHandling();
+        // SetState.getInstance().incrementClassListIndex();
+
+        // if (fileHandler.fileExists("/Users/evy/Documents/GradeTracker-new/src/main/view/UserInfo/StudentInfo/" + setUserInformation.getUsername() + "/" +"ClassInformation"+"/"+SetList.getInstance().getFinalClassList().get(SetState.getInstance().getClassListIndex()) + ".txt")) { //needs to keep path because its with index 0
+        //     create.hideContainer();
+        //     System.out.println("W ");
+        //     studentStatCollect.studentStatCollectLaunch();
+        //     studentStatCollect.addLoadedBoxes();
+        // }
+
+        // else {
+        //     studentStatCollect.studentStatCollectLaunch();
+        //     studentStatCollect.DisplayClasses();
+        // }
     }
 
     public void deleteFocusListeners(int amount) {
