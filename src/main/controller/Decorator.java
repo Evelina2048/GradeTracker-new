@@ -132,7 +132,7 @@ public class Decorator {
     private void yesButtonActionListener(JButton yesButton) {
         yesButton.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent e) { 
-               yesButtonAction(); //error 4444
+               yesButtonAction();
             }
         });
         yesOrNoDialog = "yes";
@@ -144,7 +144,7 @@ public class Decorator {
          }  
 
          else if (reason == "studentStatsEmpty") {
-            reasonIsStudentStatsEmptyYes(); //error 5555
+            reasonIsStudentStatsEmptyYes();
          }
 
          else if (reason == "closing window") {
@@ -219,11 +219,39 @@ public class Decorator {
 
         //setState.incrementClassListIndex();
         StudentStatCollect studentStat = setState.getStudentStatCollect();//new StudentStatCollect();
+        if (actionCause.equals("nextButton")) {
 
-        studentStat.doNextButtonProcedure2(); //error 6666
+        studentStat.doNextButtonProcedure2();
+        }
+
+        else if (actionCause.equals("backButton")) {
+            JButton backButton = studentStat.TESTBACKBUTTON();
+            ActionEvent backActionEvent = new ActionEvent(backButton, ActionEvent.ACTION_PERFORMED, "Click");
+            for (ActionListener listener : backButton.getActionListeners()) {
+                listener.actionPerformed(backActionEvent);
+            }
+            // CompositeActionListenerWithPriorities actionPriorities = CompositeActionListenerWithPriorities.getInstance();
+            // JPanel textBoxPanel = setState.getTextFieldPanel();
+            // if (textBoxPanel.getComponentCount() >= 2) {
+            //     //goIntoPanel.goIntoPanelReturnTextbox((JPanel) textBoxPanel.getComponent(1), 0);
+            // }
+            // actionPriorities.setCurrentClass("StudentStat");
+            //     if(setState.getCanContinue()) {
+            //         studentStat.saveButtonAction("backButton");
+            //         if (setState.getClassListIndex() == 0) { //case for back to classes
+            //             System.out.println("hidewindow1");
+            //             studentStat.hideWindow();
+            //             StudentClasses studentClasses = new StudentClasses();
+            //             studentClasses.studentClassesLaunch();
+            //             studentStat.saveButtonAction("backButton");
+            //         }
+            //         else if (setState.getClassListIndex() > 0) {
+            //             studentStat.goToPreviousClasses();
+            //         }
+        }
         //studentStat.addLoadedBoxes();
 
-        
+
         System.out.println("dialog visi "+dialog.isVisible());
         dialog.setVisible(false);
         dialog.dispose(); //commented 8/18

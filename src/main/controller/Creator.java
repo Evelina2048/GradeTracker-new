@@ -147,9 +147,15 @@ public class Creator {
             Decorator decorate = new Decorator();
             System.out.println("hi creating jlabel for "+placeholder+" which is loaded? "+boxLoaded);
             JLabel toAddType = new JLabel(placeholder);
-            Font currentTextFieldFont = setState.getTextFieldFont();
-            Font boldFont = new Font(currentTextFieldFont.getFontName(), Font.BOLD, currentTextFieldFont.getSize());
-            toAddType.setFont(boldFont);
+            if (setState.getTextFieldFont() != null) {
+                Font currentTextFieldFont = setState.getTextFieldFont();
+                Font boldFont = new Font(currentTextFieldFont.getFontName(), Font.BOLD, currentTextFieldFont.getSize());
+                toAddType.setFont(boldFont);
+            }
+
+            else {
+                System.out.println("TEXTFIELDFONTISNULL");
+            }
             toAddType.setForeground(Color.gray);
 
             //toAddType.setForeground(Color.darkGray);

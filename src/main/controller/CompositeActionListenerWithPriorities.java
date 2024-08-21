@@ -29,21 +29,40 @@ public class CompositeActionListenerWithPriorities implements ActionListener {
 
   @Override
   public void actionPerformed(ActionEvent e) {
-    if (isProcessing) {
-      return; // Prevent re-entry
+  //   if (isProcessing) {
+  //     return; // Prevent re-entry
+  //   }
+  //   isProcessing = true;
+  //   TreeSet<Integer> t = new TreeSet<Integer>();
+  //   t.addAll(listeners.keySet());
+  //   Iterator<Integer> it = t.descendingIterator();
+  //   while(it.hasNext()){
+  //     int x = it.next();
+  //     ArrayList<ActionListener> l = listeners.get(x);
+  //     for(ActionListener a : l){
+  //       a.actionPerformed(e);
+  //     }
+  //   }
+  //   reset();
+  if (isProcessing) {
+    return; // Prevent re-entry
+}
+isProcessing = true;
+
+try {
+    TreeSet<Integer> priorities = new TreeSet<>(listeners.keySet()); // Create a copy of the key set
+
+    for (int priority : priorities.descendingSet()) {
+        ArrayList<ActionListener> listenerList = new ArrayList<>(listeners.get(priority)); // Make a copy of the list
+
+        for (ActionListener listener : listenerList) {
+            listener.actionPerformed(e); // Execute the action
+        }
     }
-    isProcessing = true;
-    TreeSet<Integer> t = new TreeSet<Integer>();
-    t.addAll(listeners.keySet());
-    Iterator<Integer> it = t.descendingIterator();
-    while(it.hasNext()){
-      int x = it.next();
-      ArrayList<ActionListener> l = listeners.get(x);
-      for(ActionListener a : l){
-        a.actionPerformed(e);
-      }
-    }
-    reset();
+} finally {
+    reset(); // Reset the processing state
+    isProcessing = false;
+}
   }
   
   public boolean deleteActionListener(ActionListener a){

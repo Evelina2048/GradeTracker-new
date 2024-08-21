@@ -529,4 +529,27 @@ public void testRightPlaceholders() {
        assertEquals(CompositeActionListenerWithPriorities.getInstance().getCurrentClass(), "StudentClasses");
       }
 
+    
+    @Test 
+    public void testBackFromSecondClass() {
+       // FileHandling fileHandler = new FileHandling();
+        TESTFUNCTSFOREASYTESTING.getInstance().goToStudentStatAndNextLoaded();
+        StudentStatCollect studentStatCollect = SETTEST.getInstance().TESTGETCURRENTINSTANCE();
+
+        JButton backButton = studentStatCollect.TESTBACKBUTTON();
+       ActionEvent backActionEvent = new ActionEvent(backButton, ActionEvent.ACTION_PERFORMED, "Click");
+       for (ActionListener listener : backButton.getActionListeners()) {
+           listener.actionPerformed(backActionEvent);
+       }
+
+       JPanel textBoxPanel = SETTEST.getInstance().GETTESTTEXTBOXPANEL();
+
+       assertEquals(5, textBoxPanel.getComponentCount());
+
+        System.out.println("hi "+CompositeActionListenerWithPriorities.getInstance().getCurrentClass());
+        //.goToClassesAddEnglishAndMath();
+
+
+    }
+
 }

@@ -89,6 +89,10 @@ public class SetState {
         classListIndex--;
     }
 
+    // public void TESTFORCESETCLASSLISTINDEX(int classindex) {
+    //     classListIndex = classindex;
+    // }
+
     public int getClassListIndex() {
         return classListIndex;
     }

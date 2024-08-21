@@ -1,25 +1,16 @@
 package model;
 
 import java.util.ArrayList;
-import java.util.HashMap;
-
-import javax.swing.JLabel;
 import javax.swing.JPanel;
-import javax.swing.JTextField;
 
 public class SetList {
     private ArrayList<String> classList;
-    private JPanel textFieldPanel;
-    private HashMap<JTextField, Boolean> textFieldEmptiedMap = new HashMap<>();
-    private HashMap<JTextField, Boolean> textFieldLoadedMap = new HashMap<>();
-    private int classListIndex = 0;
     private ArrayList<String> finalClassList;
 
     //Below is for singleton design pattern
     // Static variable to hold the single instance of the class
     private static SetList instance;
 
-    private JLabel DEBUGMARKEDBOX;
     private JPanel classLabelPanel;
 
     private ArrayList<Integer> gradeNumber = new ArrayList<>();

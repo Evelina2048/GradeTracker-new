@@ -2,6 +2,7 @@ package view.student;
 
 import javax.swing.JButton;
 import javax.swing.JFrame;
+import javax.swing.JLabel;
 
 import java.awt.BorderLayout;
 import java.awt.GridLayout;
@@ -78,6 +79,8 @@ public class StudentStatCollect extends JFrame {
         this.setList = SetList.getInstance();
         this.actionPriorities = CompositeActionListenerWithPriorities.getInstance();
         this.sETTEST = SETTEST.getInstance();
+
+        SETTEST.getInstance().TESTSETCURRENTINSTANCE(this);
 
 
         actionPriorities.setCurrentClass(currentClass);
@@ -172,7 +175,7 @@ public class StudentStatCollect extends JFrame {
                             saveButtonAction("backButton");
                         }
                         else if (setState.getClassListIndex() > 0) {
-                            goToPreviousClasses();      
+                            goToPreviousClasses();
                         }
                     }
                 }, 2, "backButton",null, currentClass);
@@ -181,6 +184,7 @@ public class StudentStatCollect extends JFrame {
     }
 
     private void goToPreviousClasses() {
+        
         saveButtonAction("backButton");
         if (setState.getCanContinue()) {
             setState.decrementClassListIndex();
@@ -193,6 +197,9 @@ public class StudentStatCollect extends JFrame {
 
             setList.getClassLabelPanel().removeAll();
             classLabelPanel.removeAll();
+            textBoxPanel.removeAll();
+            SETTEST.getInstance().SETTESTTEXTBOXPANEL(textBoxPanel);
+            SETTEST.getInstance().TESTSETCURRENTINSTANCE(this);
             addLoadedBoxes();
         }
     }
@@ -254,8 +261,8 @@ public class StudentStatCollect extends JFrame {
 
         fileWrite.writeTextToFile();
         System.out.println("textboxpanel comps H"+setState.getTextFieldPanel().getComponentCount());
-        System.out.println("up Y "+ fileWrite.howManyPlaceholders());
-
+        //System.out.println("up Y "+ fileWrite.howManyPlaceholders());
+        
         if (fileWrite.howManyPlaceholders() > 0) {
             Decorator decorate = new Decorator();
             System.out.println("up Z how many placeholders? "+fileWrite.howManyPlaceholders());
@@ -284,8 +291,7 @@ public class StudentStatCollect extends JFrame {
     }
 
     public void doNextButtonProcedure() {
-
-        saveButtonAction("nextButton"); //err 1111
+        saveButtonAction("nextButton");
         if(setState.getCanContinue()) {
                 setState.incrementClassListIndex();
                 if (typeNumber!=0) {
@@ -315,9 +321,20 @@ public class StudentStatCollect extends JFrame {
                 
                 while (credits.getComponentCount() < 5) {
                     System.out.println("dollar "+credits.getComponentCount());
-                    credits = (JPanel) credits.getComponent(0);
+                    if (credits.getComponent(0) instanceof JPanel) {
+                        credits = (JPanel) credits.getComponent(0);
+                    }
+
+                    else if (credits.getComponent(0) instanceof JLabel) {
+                        break;
+                    }
+
+                    else {
+                        System.out.println("Something went wrong in studentstat donextbuttonprcedure");
+                    }
                 }
                 //is greater or equal to 5
+                ////if (credits.getComponent(0) instanceof JLabel)
                 credits = (JPanel) credits.getComponent(1);
 
                 ////
@@ -530,6 +547,7 @@ public class StudentStatCollect extends JFrame {
                 boxStarterPack();
             }
             create.windowFix();
+            SETTEST.getInstance().TESTSETCURRENTINSTANCE(this);
         }
         else { //first time visiting next class
             hideWindow();

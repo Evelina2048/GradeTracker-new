@@ -41,6 +41,15 @@ public class TESTFUNCTSFOREASYTESTING {
     }
 
     public void goToStudentStatAndNextLoaded() {
+        Launcher.initialize();
+        SetUserInformation.getInstance().setUsername("TESTHELLO");
+
+        //
+        // ArrayList<String> myFiles = fileHandler.readFileToList(SetUserInformation.getInstance().getPathToClassTextFile());
+        // //setList.setFinalClasslist();
+        // SetList.getInstance().setFinalClassList(myFiles);
+        //
+        //SetState.getInstance().TESTFORCESETCLASSLISTINDEX(0);
         CompositeActionListenerWithPriorities actionPriorities = CompositeActionListenerWithPriorities.getInstance();
         FileHandling fileHandler = new FileHandling();
         SetList setList = SetList.getInstance();
@@ -53,6 +62,7 @@ public class TESTFUNCTSFOREASYTESTING {
     
         ArrayList<String> myFiles = fileHandler.readFileToList(setUserInformation.getPathToClassTextFile());
         //setList.setFinalClasslist();
+        System.out.println("hsofeow "+myFiles);
         setList.setFinalClassList(myFiles);
         studentStatCollect.addLoadedBoxes();
     
@@ -113,7 +123,7 @@ public class TESTFUNCTSFOREASYTESTING {
     SetState setState = SetState.getInstance();
     StudentClasses studentClasses = new StudentClasses();
     studentClasses.studentClassesLaunch();
-    FileHandling fileHandler = new FileHandling();
+    //FileHandling fileHandler = new FileHandling();
     SetUserInformation setUserInformation = SetUserInformation.getInstance();
     setUserInformation.setUsername("TESTGOTOCLASSESADDENGLISHANDMATH");
 
@@ -124,7 +134,7 @@ public class TESTFUNCTSFOREASYTESTING {
      textFieldPanel.add(create.createTextBox("Math", "JTextField",false));
 
      ArrayList<String> myFiles = fileHandler.readFileToList(setUserInformation.getPathToClassTextFile());
-     System.out.println("myfilesnull? "+ (myFiles.size()));
+     System.out.println("myfilesnull? "+ (myFiles));
      SetList.getInstance().setFinalClassList(myFiles);
 
      JButton saveButton = studentClasses.TESTSAVEBUTTON();

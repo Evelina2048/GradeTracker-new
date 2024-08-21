@@ -248,7 +248,6 @@ public  ArrayList<String> getClassList() {
 }
 
 public int howManyPlaceholders() {
-    System.out.println("1111in how many placeholders " + +setState.getTextFieldPanel().getComponentCount());
     GoIntoPanel goIntoPanel = new GoIntoPanel();
     int placeholderAmount = 00000;
     JPanel tempTextFieldPanel = setState.getTextFieldPanel();
@@ -257,10 +256,28 @@ public int howManyPlaceholders() {
         JPanel p = new JPanel();
         System.out.println("jlabel. jpanel "+l.getClass().getName()+ " "+ p.getClass().getName()+ "<><><> "+goIntoPanel.goIntoPanelReturnTypeOfFirstComponentInPanel(tempTextFieldPanel));
 
-        String compZero = goIntoPanel.goIntoPanelReturnTypeOfFirstComponentInPanel((JPanel) tempTextFieldPanel.getComponent(0));
-        String compOne = goIntoPanel.goIntoPanelReturnTypeOfFirstComponentInPanel((JPanel) tempTextFieldPanel.getComponent(1));
-        System.out.println("compOne "+ compOne);
-        System.out.println("(goIntoPanel.goIntoPanelReturnTypeOfFirstComponentInPanel(tempTextFieldPanel).equals(javax.swing.JTextField) "+ (goIntoPanel.goIntoPanelReturnTypeOfFirstComponentInPanel((JPanel) tempTextFieldPanel.getComponent(1)).equals("javax.swing.JTextField")));
+        String compZero = "Something went wrong with compZero in how many placeholders";
+        String compOne = "Something went wrong with compOne in how many placeholders";
+
+        if (tempTextFieldPanel.getComponent(0) instanceof JPanel) {
+            compZero = goIntoPanel.goIntoPanelReturnTypeOfFirstComponentInPanel((JPanel) tempTextFieldPanel.getComponent(0));
+        }
+        
+        else if (tempTextFieldPanel.getComponent(0) instanceof JTextField) {
+            compZero = "javax.swing.JTextField";
+        }
+
+        else if (tempTextFieldPanel.getComponent(1) instanceof JPanel) {
+            compOne = goIntoPanel.goIntoPanelReturnTypeOfFirstComponentInPanel((JPanel) tempTextFieldPanel.getComponent(1));
+        }
+        
+        else if (tempTextFieldPanel.getComponent(0) instanceof JTextField) {
+            compOne = "javax.swing.JTextField";
+        }
+
+        //String compOne = goIntoPanel.goIntoPanelReturnTypeOfFirstComponentInPanel((JPanel) tempTextFieldPanel.getComponent(1));
+        //System.out.println("compOne "+ compOne);
+        //System.out.println("(goIntoPanel.goIntoPanelReturnTypeOfFirstComponentInPanel(tempTextFieldPanel).equals(javax.swing.JTextField) "+ (goIntoPanel.goIntoPanelReturnTypeOfFirstComponentInPanel((JPanel) tempTextFieldPanel.getComponent(1)).equals("javax.swing.JTextField")));
     if ((compOne).equals("javax.swing.JLabel")) { //commented 8/18
         placeholderAmount = iteratePanelForHowManyPlaceholders(1);
     }
@@ -277,7 +294,7 @@ public int howManyPlaceholders() {
 
     else if (compZero.equals("javax.swing.JLabel")) {
         //System.out.println("hiiiiii ima need more info friend like your component count "+ tempTextFieldPanel.getComponentCount()+" and what comp(0) text is "+ (goIntoPanel.goIntoPanelReturnTextbox(((JPanel) tempTextFieldPanel.getComponent(0)),0)).getText());
-        placeholderAmount = iteratePanelForHowManyPlaceholders(1); //causing error 1111
+        placeholderAmount = iteratePanelForHowManyPlaceholders(1);
         
     }
 
