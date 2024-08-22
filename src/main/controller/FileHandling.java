@@ -35,16 +35,12 @@ public class FileHandling {
         }
 
         public ArrayList<String> readFileToList(String filePath) {
-            System.out.println("1111");
             String line;
             ArrayList<String> myList = new ArrayList<>() {
-                
             };
             try {
-                System.out.println("2222 filePath " + filePath);
                 BufferedReader reader = new BufferedReader(new FileReader(filePath));
                 while ((line = reader.readLine()) != null) {
-                    System.out.println("3333");
                     //System.out.println("printing file..."+ line);
                     myList.add(line);                 
                 }
@@ -53,7 +49,6 @@ public class FileHandling {
             catch (IOException e) { 
                 e.printStackTrace();
             }
-            System.out.println("4444 "+myList);
             return myList;
         }
 
