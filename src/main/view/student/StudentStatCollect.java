@@ -163,12 +163,14 @@ public class StudentStatCollect extends JFrame {
     private void backAction(JButton backButton) {
         backButton.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent e) {
+                System.out.println("1111 ");
                 if (textBoxPanel.getComponentCount() >= 2) {
                     //goIntoPanel.goIntoPanelReturnTextbox((JPanel) textBoxPanel.getComponent(1), 0);
                 }//TODO maybe bug?
                 actionPriorities.setCurrentClass(currentClass);
                 actionPriorities.addClassActionListener(b -> {
                     if(setState.getCanContinue()) {
+                        System.out.println("2222 ");
                         System.out.println("classlabelpanel "+classLabelPanel.getComponentCount());
                         //saveButtonAction("backButton"); //8/22
                         if (setState.getClassListIndex() == 0) { //case for back to classes
@@ -179,6 +181,7 @@ public class StudentStatCollect extends JFrame {
                             saveButtonAction("backButton");
                         }
                         else if (setState.getClassListIndex() > 0) {
+                            System.out.println("3333 ");
                             goToPreviousClasses();
                         }
                     }
@@ -188,9 +191,11 @@ public class StudentStatCollect extends JFrame {
     }
 
     private void goToPreviousClasses() {
+        System.out.println("4444 ");
         saveButtonAction("backButton");
-        if (setState.getCanContinue()) {
+        //if (setState.getCanContinue()) { //8/24 //TODO 8/24
             setState.decrementClassListIndex();
+            System.out.println("5555 ");
 
             Component[] windowComponents = window.getContentPane().getComponents();
             for (int i = 22; i<23;i++) {
@@ -204,7 +209,7 @@ public class StudentStatCollect extends JFrame {
             SETTEST.getInstance().SETTESTTEXTBOXPANEL(textBoxPanel);
             SETTEST.getInstance().TESTSETCURRENTINSTANCE(this);
             addLoadedBoxes();
-        }
+        //}
     }
 
     public void addLoadedBoxes() {
