@@ -91,23 +91,33 @@ public class PrintStudentGrades extends JFrame {
             }
 
             listOfAverages = new ArrayList<>();
-            for (int boxPanelIndex = 5; boxPanelIndex < allTextListForClass.size(); boxPanelIndex += 3) { //for each grades box
+            System.out.println("listofaverages -3 "+allTextListForClass);
+            for (int boxPanelIndex = 3; boxPanelIndex < allTextListForClass.size(); boxPanelIndex += 3) { //for each grades box
                 //gradeList.add(allList.get(j)); //add contents
                 ArrayList<String> seperatedBySpaceListOfGrades = new ArrayList<>(Arrays.asList(allTextListForClass.get(boxPanelIndex).split(" ")));
                 gradeList.add(seperatedBySpaceListOfGrades);
-                for (int k = 0; k < gradeList.get(boxPanelIndex).size(); k++) {
-                    //gradeBoxTotal += (int) gradeList[j][k];
-                    gradeBoxTotal += Integer.parseInt(gradeList.get(boxPanelIndex).get(k));
-                    //add to total
+                System.out.println(("listofaverages -2.2 "+seperatedBySpaceListOfGrades.get(0)));
+                //System.out.println(("listofaverages -2.1 "+gradeList.get(0).size()));
+                //System.out.println(("listofaverages -2.01 "+gradeList.get(seperatedBySpaceListOfGrades).size()));
+                //for (int k = 0; k < gradeList.get(boxPanelIndex).size(); k++) {
+                for (int k = 0; k < seperatedBySpaceListOfGrades.size(); k++) {
+                //     //gradeBoxTotal += (int) gradeList[j][k];
+                    gradeBoxTotal += Integer.parseInt(seperatedBySpaceListOfGrades.get(k));
+                //     //add to total
                 }
 
                 int average = gradeBoxTotal/allTextListForClass.size();
+                System.out.println("listofaverages -2 "+average);
                 listOfAverages.add(average);
+                System.out.println("listofaverages -1 "+listOfAverages);
                 //int totalPercentageOfGrade =
 
             }
 
             for (int boxSetIndex = 0; boxSetIndex < gradeList.size(); boxSetIndex++) {
+                System.out.println("listofaverages "+listOfAverages);
+                System.out.println("listofaverages2 "+percentageOfGradeList);
+                System.out.println("listofaverages3 "+boxSetIndex);
                 amountOfFinalGrade.add((listOfAverages.get(boxSetIndex))*(percentageOfGradeList.get(boxSetIndex)));
             }
 
