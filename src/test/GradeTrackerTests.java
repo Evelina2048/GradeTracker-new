@@ -31,7 +31,7 @@ import controller.FileWriting;
 
 import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
-
+import java.io.IOException;
 import java.awt.Robot;
 import java.awt.event.KeyEvent;
 
@@ -485,6 +485,7 @@ public void testRightPlaceholders() {
    @Test
    public void testRightClassGoingBack() {
        SetUserInformation setUserInformation = SetUserInformation.getInstance();
+       setUserInformation.setUsername("TESTNEWTYPEWITHLOADED");
        // CompositeActionListenerWithPriorities actionPriorities = CompositeActionListenerWithPriorities.getInstance();
        // Launcher.initialize();
        SetList setList = SetList.getInstance();
@@ -492,7 +493,6 @@ public void testRightPlaceholders() {
        // // FileHandler fileHandler = new FileHandler();
        FileHandling fileHandler = new FileHandling();
        FileWriting fileWrite = new FileWriting();
-       setUserInformation.setUsername("TESTNEWTYPEWITHLOADED");
    
        TESTFUNCTSFOREASYTESTING testFuncts = TESTFUNCTSFOREASYTESTING.getInstance();
        testFuncts.goToStudentClasses();
@@ -552,4 +552,97 @@ public void testRightPlaceholders() {
 
     }
 
+    @Test 
+    public void testBackFromSecondClassThenNext() {
+        FileHandling fileHandler = new FileHandling();
+        Launcher.initialize();
+
+        SetUserInformation setUserInformation = SetUserInformation.getInstance();
+        setUserInformation.setUsername("TESTBACKFROMSECONDCLASSTHENNEXT");
+        FileWriting fileWrite = new FileWriting();
+        fileWrite.writeFolderToFile();
+
+        SetState setState = SetState.getInstance();
+        StudentClasses studentClasses = new StudentClasses();
+        studentClasses.studentClassesLaunch();
+        CompositeActionListenerWithPriorities.getInstance().TESTFORCECURRENTCLASS("StudentClasses");
+        //FileHandling fileHandler = new FileHandling();
+
+        Creator create = new Creator();
+        JPanel textFieldPanel = new JPanel();
+
+        textFieldPanel.add(create.createTextBox("English", "JTextField",false));
+        textFieldPanel.add(create.createTextBox("Math", "JTextField",false));
+
+        //fileWrite.writeTextToFile();
+        //studentClasses.TESTWRITETYPE();
+        //ArrayList<String> myFiles = fileHandler.readFileToList(setUserInformation.getPathToClassTextFile());
+        //System.out.println("myfilesnull? "+ (myFiles));
+        //SetList.getInstance().setFinalClassList(myFiles);
+
+        // JButton saveButton = studentClasses.TESTSAVEBUTTON();
+        // ActionEvent saveActionEvent = new ActionEvent(saveButton, ActionEvent.ACTION_PERFORMED, "Click");
+        // for (ActionListener listener : saveButton.getActionListeners()) {
+        //     listener.actionPerformed(saveActionEvent);
+        // }
+
+        setState.setTextFieldPanel(textFieldPanel);
+
+        fileWrite.TESTFORCECLASSLISTADD("English");
+        fileWrite.TESTFORCECLASSLISTADD("Math");
+        fileWrite.TESTFORCEFINALLIST();
+        System.out.println("setlist "+SetList.getInstance().getFinalClassList());
+
+       JButton nextButton = studentClasses.TESTNEXTBUTTON();
+       ActionEvent nextActionEvent = new ActionEvent(nextButton, ActionEvent.ACTION_PERFORMED, "Click");
+       //nextButton.doClick();
+       for (ActionListener listener : nextButton.getActionListeners()) {
+           listener.actionPerformed(nextActionEvent);
+       }
+
+       System.out.println("final class list: "+ SetList.getInstance().getFinalClassList());
+
+        //
+       //StudentStatCollect studentStatCollect = SETTEST.getInstance().TESTGETCURRENTINSTANCE();
+       StudentStatCollect studentStatCollect = SETTEST.getInstance().TESTGETCURRENTINSTANCE();
+
+
+       nextButton = studentStatCollect.TESTNEXTBUTTON();
+       nextActionEvent = new ActionEvent(nextButton, ActionEvent.ACTION_PERFORMED, "Click");
+       for (ActionListener listener : nextButton.getActionListeners()) {
+           listener.actionPerformed(nextActionEvent);
+       }
+
+        //
+
+        //::
+        studentStatCollect = SETTEST.getInstance().TESTGETCURRENTINSTANCE();
+
+        JButton backButton = studentStatCollect.TESTBACKBUTTON();
+        ActionEvent backActionEvent = new ActionEvent(backButton, ActionEvent.ACTION_PERFORMED, "Click");
+        for (ActionListener listener : backButton.getActionListeners()) {
+            listener.actionPerformed(backActionEvent);
+        }
+ 
+        //::
+        studentStatCollect = SETTEST.getInstance().TESTGETCURRENTINSTANCE();
+
+       nextButton = studentStatCollect.TESTNEXTBUTTON();
+       nextActionEvent = new ActionEvent(nextButton, ActionEvent.ACTION_PERFORMED, "Click");
+       for (ActionListener listener : nextButton.getActionListeners()) {
+           listener.actionPerformed(nextActionEvent);
+       }
+
+       //fileHandler = new FileHandling();
+
+       try {
+        FileHandling.deleteClass("/Users/evy/Documents/GradeTracker-new/target/classes/view/UserInfo/StudentInfo/TESTBACKFROMSECONDCLASSTHENNEXT");
+    } catch (IOException e) {
+        // TODO Auto-generated catch block
+        e.printStackTrace();
+    }
+
 }
+        //TESTFUNCTSFOREASYTESTING.getInstance().goToClassesAddEnglishAndMath();
+    }
+

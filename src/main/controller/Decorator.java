@@ -100,7 +100,6 @@ public class Decorator {
     }
 
     public String areYouSureMessage(JTextField importedTextField, String myReason, String text, int width, int height) {
-        System.out.println("7777");
         reason = myReason;
         textField = importedTextField;
         dialog = new JDialog(window, true);
@@ -131,10 +130,8 @@ public class Decorator {
     }
 
     private void yesButtonActionListener(JButton yesButton) {
-        System.out.println("8888");
         yesButton.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent e) { 
-               System.out.println("9999");
                yesButtonAction();
             }
         });
@@ -142,13 +139,11 @@ public class Decorator {
     }
 
     private void yesButtonAction() {
-        System.out.println("10 10 10 10");
          if (reason == "deleting") {   
             reasonIsDeletingActionYes();
          }  
 
          else if (reason == "studentStatsEmpty") {
-            System.out.println("11 11 11 11");
             reasonIsStudentStatsEmptyYes();
          }
 
@@ -219,7 +214,6 @@ public class Decorator {
     }
 
     private void reasonIsStudentStatsEmptyYes() {
-        System.out.println("12 12 12 12");
         //go to next class or print class
         String actionCause = setState.getAreYouSureMessageCause();
 
@@ -231,7 +225,6 @@ public class Decorator {
         }
 
         else if (actionCause.equals("backButton")) {
-            System.out.println("13 13 13 13");
             JButton backButton = studentStat.TESTBACKBUTTON();
             ActionEvent backActionEvent = new ActionEvent(backButton, ActionEvent.ACTION_PERFORMED, "Click");
             for (ActionListener listener : backButton.getActionListeners()) {

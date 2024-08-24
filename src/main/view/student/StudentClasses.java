@@ -17,18 +17,18 @@ import javax.swing.border.Border;
 import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
 import java.awt.Color;
-import java.awt.Component;
+//import java.awt.Component;
 import java.awt.event.MouseAdapter;
 import java.awt.GridLayout;
 import java.awt.event.ActionListener;
 import java.awt.event.ActionEvent;
 import java.awt.event.KeyEvent;
 import java.awt.image.BufferedImage;
-import java.awt.Point;
-import java.awt.event.MouseMotionAdapter;
+//import java.awt.Point;
+//import java.awt.event.MouseMotionAdapter;
 import java.awt.event.WindowAdapter;
 import java.awt.event.WindowEvent;
-import java.awt.Rectangle;
+//import java.awt.Rectangle;
 
 import java.util.ArrayList;
 import java.util.concurrent.atomic.AtomicBoolean;
@@ -60,12 +60,10 @@ public class StudentClasses extends JFrame {
     private JPanel backNextButtonsPanel;
     private JButton saveButton;
     private JTextField selectedTextBox;
-    private JTextField draggedTextField = new JTextField();
+    //private JTextField draggedTextField = new JTextField();
     private FileWriting fileWrite = new FileWriting();
     private CompositeActionListenerWithPriorities actionPriorities;
-    private Boolean spacedLabelIndexExists = false;
-    private JTextField spacedLabelBox;
-
+    //private Boolean spacedLabelIndexExists = false;
     Border borderRegular = BorderFactory.createLineBorder(Color.GRAY, 2);
     JPanel southContainer = new JPanel(new GridLayout(2,1,0,0));
     AtomicBoolean textFieldEmptied = new AtomicBoolean(false);;
@@ -86,9 +84,7 @@ public class StudentClasses extends JFrame {
     private SetUserInformation setUserInformation;
     private SetList setList;
     private WindowAdapter windowCloseAdapter;
-    private JTextField moveModeLeftBox;
-    private JTextField moveModeRightBox;
-
+    //private JTextField moveModeLeftBox;
     JPanel instructionsPanel;
 
     public StudentClasses() {
@@ -247,6 +243,7 @@ public class StudentClasses extends JFrame {
         //actionPriorities.setCurrentClass(currentClass);
         nextButton.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent e) {
+                System.out.println("1111");
                 currentClass = "StudentClasses";
                 actionPriorities.setCurrentClass(currentClass);
                 System.out.println("TTT ");
@@ -265,10 +262,10 @@ public class StudentClasses extends JFrame {
         return nextButtonPanel;
     }
     private void doNextButtonProcedure() {
+        System.out.println("2222");
         currentClass = "StudentClasses";
-        //actionPriorities.setCurrentClass(currentClass);
-        ArrayList<String> classList;
-        classList = fileWrite.getClassList();
+        //ArrayList<String> classList; //8/23
+        //classList = fileWrite.getClassList();
 
         writeType();
         System.out.println("nextbuttonhit");
@@ -276,13 +273,10 @@ public class StudentClasses extends JFrame {
         hideWindow();
         create.hideContainer();
 
-        System.out.println("thestuffclasslist "+classList+" "+setList.getCurrentPanelList());
-        System.out.println("VVV ");
         StudentStatCollect studentStatCollect = new StudentStatCollect();
         SETTEST.getInstance().TESTSETCURRENTINSTANCE(studentStatCollect);
         if (fileHandler.fileExists("/Users/evy/Documents/GradeTracker-new/src/main/view/UserInfo/StudentInfo/" + setUserInformation.getUsername() + "/" +"ClassInformation"+"/"+setList.getFinalClassList().get(0) + ".txt")) { //needs to keep path because its with index 0
             create.hideContainer();
-            System.out.println("W ");
             studentStatCollect.studentStatCollectLaunch();
             studentStatCollect.addLoadedBoxes();
         }
@@ -317,9 +311,6 @@ public class StudentClasses extends JFrame {
 
     private void moveClassButton() {
         moveClassButton = new JButton("Move Classes");
-        //moveClassButtonPanel = new JPanel();
-        //moveClassButtonPanel.setSize(new Dimension(150, 50));
-        //moveClassButtonPanel.add(moveClassButton);
         moveClassButton.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent e) {
                 System.out.println("moveClass Mode hit");
@@ -329,12 +320,14 @@ public class StudentClasses extends JFrame {
     }
 
     private void writeType() {
+        System.out.println("3333");
         System.out.println("set.getcurrentpanellist "+setList.getCurrentPanelList());
         set.setFilePath(setUserInformation.getPathToClassTextFile());
         fileWrite.writeTextToFile();
         fileWrite.debugPrintPanel();
         System.out.println("testing? "+setList.getCurrentPanelList()+ "..."+ fileWrite.getClassList());
         setList.setFinalClassList(fileWrite.getClassList());
+        System.out.println("5555 setfinalclasslist "+setList.getFinalClassList());
     }
 
     private void backToDefaultDeleteButton() {
@@ -378,14 +371,12 @@ public class StudentClasses extends JFrame {
     tempTextField[0] = new JTextField("ERROR"); //if not overwritten will show error
     //tempTextField[0] = new JLabel("ERROR");
     textFieldImage[0] = null;
-    Component lastComponent = setState.getTextFieldPanel().getComponent(setState.getTextFieldPanel().getComponentCount()-1);
-    //Bounds lastComponentBounds = lastComponent.getBounds();
-    Rectangle lastComponentBounds = lastComponent.getBounds();
-    JPanel tempTextFieldPanel = setState.getTextFieldPanel();
-    int[] spacedLabelIndex = new int[1];
+    //Component lastComponent = setState.getTextFieldPanel().getComponent(setState.getTextFieldPanel().getComponentCount()-1);
+    //Rectangle lastComponentBounds = lastComponent.getBounds();
+    //int[] spacedLabelIndex = new int[1];
     //88
 
-        for (int i = 0; i < setState.getTextFieldPanel().getComponentCount(); i++) { 
+        for (int i = 0; i < setState.getTextFieldPanel().getComponentCount(); i++) {
             JTextField textField = new JTextField();
             if (setState.getTextFieldPanel().getComponent(i) instanceof JTextField) {
                 textField = (JTextField) setState.getTextFieldPanel().getComponent(i);
@@ -604,22 +595,20 @@ public class StudentClasses extends JFrame {
 //         //
 //     }
 
-    private void fixClassList() {
-        ArrayList<String> fixedClassList = new ArrayList<>();
-        for (int i = 0; i < setState.getTextFieldPanel().getComponentCount(); i++) {
-            JTextField textFieldComponent = (JTextField) setState.getTextFieldPanel().getComponent(i);
-            fixedClassList.add(textFieldComponent.getText());
-            setList.setClassList(fixedClassList);
-        }
-    }
+    // private void fixClassList() {
+    //     ArrayList<String> fixedClassList = new ArrayList<>();
+    //     for (int i = 0; i < setState.getTextFieldPanel().getComponentCount(); i++) {
+    //         JTextField textFieldComponent = (JTextField) setState.getTextFieldPanel().getComponent(i);
+    //         fixedClassList.add(textFieldComponent.getText());
+    //         setList.setClassList(fixedClassList);
+    //     }
+    // }
 
     private void addMouseListenerToTextboxAndFrame(JTextField textField) {
         turnOffEditability(textField);
         textField.addMouseListener(new MouseAdapter() {
             @Override
             public void mouseClicked(MouseEvent e) {
-                System.out.println("mouselistener #2");
-                System.out.println("clicked");
                 if (selectedTextBox != null) {
                     selectedTextBox.setForeground(Color.GRAY);
                     selectedTextBox.setBorder(borderRegular);
@@ -630,7 +619,7 @@ public class StudentClasses extends JFrame {
                 textField.setBorder(borderHighlighted);
                 removeDeleteClassButtonActionListeners();
                 deleteQuestionButtonAndAction();
-                }}); 
+                }});
 
         windowMouseListener();
     }
@@ -644,7 +633,6 @@ public class StudentClasses extends JFrame {
     private void deleteQuestionButtonAndAction() {
         final String[] yesOrNoDialog = new String[1];
         yesOrNoDialog[0] = "nothing yet";
-
         deleteClassButton.setText("Delete?");
         window.remove(instructionsPanel);
         instructionsWordsAndPanel("Hit Delete Button to Delete");
@@ -652,7 +640,6 @@ public class StudentClasses extends JFrame {
         removeDeleteClassButtonActionListeners();
         deleteClassButton.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent e) {
-                //newClassButton.setEnabled(true);
                 moveClassButton.setEnabled(true);
                 //if the file has loaded information attached
                 if (setState.getLoadedState(selectedTextBox) && (fileHandler.fileExists(filePath)) && fileHandler.fileIsNotEmpty(filePath)) {
@@ -775,228 +762,228 @@ public class StudentClasses extends JFrame {
     }
 
     private void prepareTextboxForMoveMode() {
-        //''''
-        JTextField[] tempTextField = new JTextField[1];
-        //JLabel[] tempTextField = new JLabel[1];
-        tempTextField[0] = new JTextField("ERROR"); //if not overwritten will show error
-        //tempTextField[0] = new JLabel("ERROR");
-        BufferedImage[] textFieldImage = new BufferedImage[1];
-        textFieldImage[0] = null;
-        Component lastComponent = setState.getTextFieldPanel().getComponent(setState.getTextFieldPanel().getComponentCount()-1);
-        //Bounds lastComponentBounds = lastComponent.getBounds();
-        Rectangle lastComponentBounds = lastComponent.getBounds();
-        JPanel tempTextFieldPanel = setState.getTextFieldPanel();
-        int[] spacedLabelIndex = new int[1];
+        // //''''
+        // JTextField[] tempTextField = new JTextField[1];
+        // //JLabel[] tempTextField = new JLabel[1];
+        // tempTextField[0] = new JTextField("ERROR"); //if not overwritten will show error
+        // //tempTextField[0] = new JLabel("ERROR");
+        // BufferedImage[] textFieldImage = new BufferedImage[1];
+        // textFieldImage[0] = null;
+        // Component lastComponent = setState.getTextFieldPanel().getComponent(setState.getTextFieldPanel().getComponentCount()-1);
+        // //Bounds lastComponentBounds = lastComponent.getBounds();
+        // Rectangle lastComponentBounds = lastComponent.getBounds();
+        // JPanel tempTextFieldPanel = setState.getTextFieldPanel();
+        // int[] spacedLabelIndex = new int[1];
 
-        for (int i = 0; i < setState.getTextFieldPanel().getComponentCount(); i++) { 
-            JTextField textField = new JTextField();
-            //Component currentComponent = setState.getTextFieldPanel().getComponent(i);
+        // for (int i = 0; i < setState.getTextFieldPanel().getComponentCount(); i++) { 
+        //     JTextField textField = new JTextField();
+        //     //Component currentComponent = setState.getTextFieldPanel().getComponent(i);
 
-            //window.setLayout(null);
-            textField.addMouseMotionListener(new MouseMotionAdapter() {
-                public void mouseDragged(MouseEvent e) {
+        //     //window.setLayout(null);
+        //     textField.addMouseMotionListener(new MouseMotionAdapter() {
+        //         public void mouseDragged(MouseEvent e) {
 
-                    //
-                    Point cursorPoint = e.getPoint();
-                    Point leftPoint = new Point(cursorPoint.x - 40, cursorPoint.y);
-                    Point rightPoint = new Point(cursorPoint.x - 40, cursorPoint.y);
-                    Boolean matchFound = false;
-                    JPanel textFieldPanel = setState.getTextFieldPanel();
-                    //int saveI;
-                    //JTextField leftTextField = (JTextField) ;//(JTextField) e.getSource();
+        //             //
+        //             Point cursorPoint = e.getPoint();
+        //             Point leftPoint = new Point(cursorPoint.x - 40, cursorPoint.y);
+        //             Point rightPoint = new Point(cursorPoint.x - 40, cursorPoint.y);
+        //             Boolean matchFound = false;
+        //             JPanel textFieldPanel = setState.getTextFieldPanel();
+        //             //int saveI;
+        //             //JTextField leftTextField = (JTextField) ;//(JTextField) e.getSource();
                     
-                    //if in between two textFields
-                    if ((layeredPane.getComponentAt(leftPoint) instanceof JTextField && layeredPane.getComponentAt(rightPoint) instanceof JTextField) || (window.getComponentAt(leftPoint) instanceof JTextField && window.getComponentAt(rightPoint) instanceof JTextField)) {
-                        Component comp = layeredPane.getComponentAt(leftPoint);
-                        System.out.println("comp "+comp.getClass().getName());
-                        //ArrayList<JTextField> toDeleteList = new ArrayList<>();
-                        ArrayList<JTextField> toAddList = new ArrayList<>();
+        //             //if in between two textFields
+        //             if ((layeredPane.getComponentAt(leftPoint) instanceof JTextField && layeredPane.getComponentAt(rightPoint) instanceof JTextField) || (window.getComponentAt(leftPoint) instanceof JTextField && window.getComponentAt(rightPoint) instanceof JTextField)) {
+        //                 Component comp = layeredPane.getComponentAt(leftPoint);
+        //                 System.out.println("comp "+comp.getClass().getName());
+        //                 //ArrayList<JTextField> toDeleteList = new ArrayList<>();
+        //                 ArrayList<JTextField> toAddList = new ArrayList<>();
 
-                        for (int i = 0; i < setState.getTextFieldPanel().getComponentCount(); i++) { //loop to find what matches left component
-                            JTextField textFieldComponent = (JTextField) comp;
-                            JTextField componentFromPanel = (JTextField) setState.getTextFieldPanel().getComponent(i);
-                            if (textFieldComponent.getText().equals(componentFromPanel.getText())) { //if this component matches left component
-                            //if (setState.getTextFieldPanel().getComponent(i).getText().equals(window.getComponentAt(leftPoint).getText())) {
-                                //textFieldPanel.getComponent(i+1) = create.createTextBox();
+        //                 for (int i = 0; i < setState.getTextFieldPanel().getComponentCount(); i++) { //loop to find what matches left component
+        //                     JTextField textFieldComponent = (JTextField) comp;
+        //                     JTextField componentFromPanel = (JTextField) setState.getTextFieldPanel().getComponent(i);
+        //                     if (textFieldComponent.getText().equals(componentFromPanel.getText())) { //if this component matches left component
+        //                     //if (setState.getTextFieldPanel().getComponent(i).getText().equals(window.getComponentAt(leftPoint).getText())) {
+        //                         //textFieldPanel.getComponent(i+1) = create.createTextBox();
 
-                                //textFieldPanel.add(create.createTextBox("(:", "JTextField", false));
-                                //extFieldPanel.add(create.createTextBox("", "JTextField", false));
+        //                         //textFieldPanel.add(create.createTextBox("(:", "JTextField", false));
+        //                         //extFieldPanel.add(create.createTextBox("", "JTextField", false));
 
-                                create.windowFix();
-                                //int saveI = i;
-                                matchFound = true;
-                                break;
-                            //}
-                            }
-                            else if (matchFound) {
-                                //toAddList.add((JTextField) setState.getTextFieldPanel().getComponent(i));
-                                toAddList.add((JTextField) tempTextFieldPanel.getComponent(i));
-                                JPanel panel = new JPanel();
-                                panel.add(tempTextFieldPanel.getComponent(i));
-                                create.deleteTextBox(panel);
-                            }
-                        }
+        //                         create.windowFix();
+        //                         //int saveI = i;
+        //                         matchFound = true;
+        //                         break;
+        //                     //}
+        //                     }
+        //                     else if (matchFound) {
+        //                         //toAddList.add((JTextField) setState.getTextFieldPanel().getComponent(i));
+        //                         toAddList.add((JTextField) tempTextFieldPanel.getComponent(i));
+        //                         JPanel panel = new JPanel();
+        //                         panel.add(tempTextFieldPanel.getComponent(i));
+        //                         create.deleteTextBox(panel);
+        //                     }
+        //                 }
                         
-                        //spacedLabel = (JLabel) create.createTextBox("", "JLabel", false);
-                        spacedLabelIndex[0] = tempTextFieldPanel.getComponentCount()-1; //minus 1 to account for starting from 0.
-                        //System.out.println("spacedlabeltext: "+spacedLabelIndex);
-                        textFieldPanel.add(create.createTextBox("", "JLabel", false));
-                        //for (int j = 0; j < toDeleteList.size(); j++) {//delete from list
-                        //}
-                        for (int j = 0; j < toAddList.size(); j++) {//delete from list
-                            textFieldPanel.add(toAddList.get(j));
-                        }
-                    }
+        //                 //spacedLabel = (JLabel) create.createTextBox("", "JLabel", false);
+        //                 spacedLabelIndex[0] = tempTextFieldPanel.getComponentCount()-1; //minus 1 to account for starting from 0.
+        //                 //System.out.println("spacedlabeltext: "+spacedLabelIndex);
+        //                 textFieldPanel.add(create.createTextBox("", "JLabel", false));
+        //                 //for (int j = 0; j < toDeleteList.size(); j++) {//delete from list
+        //                 //}
+        //                 for (int j = 0; j < toAddList.size(); j++) {//delete from list
+        //                     textFieldPanel.add(toAddList.get(j));
+        //                 }
+        //             }
 
-                    else if (window.getComponentAt(leftPoint) instanceof JTextField && window.getComponentAt(rightPoint) instanceof JTextField) {
-                        Component comp = window.getComponentAt(leftPoint);
-                        System.out.println("comp2 "+comp.getClass().getName());
-                    }
+        //             else if (window.getComponentAt(leftPoint) instanceof JTextField && window.getComponentAt(rightPoint) instanceof JTextField) {
+        //                 Component comp = window.getComponentAt(leftPoint);
+        //                 System.out.println("comp2 "+comp.getClass().getName());
+        //             }
 
 
-                    // if () {
+        //             // if () {
 
-                    // }
-                    //Component 
-                    // if (window.getComponentAt(leftPoint) instanceof JTextField) {
-                    //     JTextField componentToLeft = (JTextField) SwingUtilities.getDeepestComponentAt(window, leftPoint.x, leftPoint.y);
-                    //     System.out.println("about to text: "+componentToLeft.getText());
-                    // }
+        //             // }
+        //             //Component 
+        //             // if (window.getComponentAt(leftPoint) instanceof JTextField) {
+        //             //     JTextField componentToLeft = (JTextField) SwingUtilities.getDeepestComponentAt(window, leftPoint.x, leftPoint.y);
+        //             //     System.out.println("about to text: "+componentToLeft.getText());
+        //             // }
 
-                    // else if (window.getComponentAt(leftPoint) instanceof JFrame){
-                    //     JFrame jframe = (JFrame) window.getComponentAt(leftPoint);
-                    //     Component compon = jframe.getContentPane(;
+        //             // else if (window.getComponentAt(leftPoint) instanceof JFrame){
+        //             //     JFrame jframe = (JFrame) window.getComponentAt(leftPoint);
+        //             //     Component compon = jframe.getContentPane(;
 
-                    //     System.out.println("is jframe instance?"+ (compon instanceof JTextField));
-                    //     System.out.println("is a instance of jframe "+ window.getComponentAt(leftPoint).getClass().getName()); //SwingUtilities.getDeepestComponentAt(window, leftPoint.x, leftPoint.y));//
+        //             //     System.out.println("is jframe instance?"+ (compon instanceof JTextField));
+        //             //     System.out.println("is a instance of jframe "+ window.getComponentAt(leftPoint).getClass().getName()); //SwingUtilities.getDeepestComponentAt(window, leftPoint.x, leftPoint.y));//
                         
-                    // }
+        //             // }
 
-                    // else if (window.getComponentAt(leftPoint) != null){
-                    //     //System.out.println("is a instance of"+ window.getComponentAt(leftPoint).getClass().getName()); //SwingUtilities.getDeepestComponentAt(window, leftPoint.x, leftPoint.y));//
-                    //     //JTextField()
-                    // }
+        //             // else if (window.getComponentAt(leftPoint) != null){
+        //             //     //System.out.println("is a instance of"+ window.getComponentAt(leftPoint).getClass().getName()); //SwingUtilities.getDeepestComponentAt(window, leftPoint.x, leftPoint.y));//
+        //             //     //JTextField()
+        //             // }
                     
-                    // else {
-                    //     System.out.println("failing atm");
-                    // }
-                    //
-                    //if ( lastComponent == currentComponent) {
+        //             // else {
+        //             //     System.out.println("failing atm");
+        //             // }
+        //             //
+        //             //if ( lastComponent == currentComponent) {
 
                         
-                    //}
-                    JTextField newBackgroundField = new JTextField("EMPTY");
+        //             //}
+        //             JTextField newBackgroundField = new JTextField("EMPTY");
                     
-                    if (draggedTextField != null) { 
-                        draggedTextField = (JTextField) e.getSource();
-                        //newBackgroundField = (JTextField) e.getSource();
-                    }
+        //             if (draggedTextField != null) { 
+        //                 draggedTextField = (JTextField) e.getSource();
+        //                 //newBackgroundField = (JTextField) e.getSource();
+        //             }
 
-                    if (tempTextField[0].getText().equals("ERROR")){
-                    tempTextField[0] = create.createTextBox(draggedTextField.getText(), "JTextField", false);
-                    //tempTextField[0] = new JLabel("Hello <3");
-                    tempTextField[0].setOpaque(true);
-                    }
+        //             if (tempTextField[0].getText().equals("ERROR")){
+        //             tempTextField[0] = create.createTextBox(draggedTextField.getText(), "JTextField", false);
+        //             //tempTextField[0] = new JLabel("Hello <3");
+        //             tempTextField[0].setOpaque(true);
+        //             }
 
-                    if ((draggedTextField.getX() > tempTextField[0].getX()) && (draggedTextField.getY() > tempTextField[0].getY())) {
-                        System.out.println("made it :) ");
-                    }
+        //             if ((draggedTextField.getX() > tempTextField[0].getX()) && (draggedTextField.getY() > tempTextField[0].getY())) {
+        //                 System.out.println("made it :) ");
+        //             }
 
-                   // tempTextField[0].repaint();
-                    tempTextField[0].setBounds(e.getX(), e.getY(), 144, 30);
-                    //tempTextField[0].setForeground(new Color(230, 230, 230));
+        //            // tempTextField[0].repaint();
+        //             tempTextField[0].setBounds(e.getX(), e.getY(), 144, 30);
+        //             //tempTextField[0].setForeground(new Color(230, 230, 230));
 
-                    //tempTextField[0].repaint();
+        //             //tempTextField[0].repaint();
 
-                    // Rectangle bounds = new Rectangle(e.getX() - draggedTextField.getWidth() / 2,
-                    // e.getY() - draggedTextField.getHeight() / 2,
-                    // draggedTextField.getWidth(), 
-                    // draggedTextField.getHeight());
+        //             // Rectangle bounds = new Rectangle(e.getX() - draggedTextField.getWidth() / 2,
+        //             // e.getY() - draggedTextField.getHeight() / 2,
+        //             // draggedTextField.getWidth(), 
+        //             // draggedTextField.getHeight());
 
-                    //draggedTextField.repaint(bounds);
-                    //tempTextField[0].repaint();
+        //             //draggedTextField.repaint(bounds);
+        //             //tempTextField[0].repaint();
 
-                    //System.out.println("temptextfield "+ tempTextField[0].getText());
-                    //draggedTextField.setVisible(false);
+        //             //System.out.println("temptextfield "+ tempTextField[0].getText());
+        //             //draggedTextField.setVisible(false);
                     
-                    if (!layeredPane.isAncestorOf(tempTextField[0])) {
-                        newBackgroundField = create.createTextBox(draggedTextField.getText(), "JTextField", false);//"BACK");
-                        newBackgroundField.setForeground(Color.lightGray);
-                        newBackgroundField.setBounds(draggedTextField.getX(), draggedTextField.getY(), draggedTextField.getWidth(), draggedTextField.getHeight());
+        //             if (!layeredPane.isAncestorOf(tempTextField[0])) {
+        //                 newBackgroundField = create.createTextBox(draggedTextField.getText(), "JTextField", false);//"BACK");
+        //                 newBackgroundField.setForeground(Color.lightGray);
+        //                 newBackgroundField.setBounds(draggedTextField.getX(), draggedTextField.getY(), draggedTextField.getWidth(), draggedTextField.getHeight());
 
-                        //newBackgroundField.setFocu
+        //                 //newBackgroundField.setFocu
 
-                        draggedTextField.setBounds(0, 0,layeredPane.getWidth(), layeredPane.getHeight());
-                        draggedTextField.setVisible(false);
+        //                 draggedTextField.setBounds(0, 0,layeredPane.getWidth(), layeredPane.getHeight());
+        //                 draggedTextField.setVisible(false);
 
-                        newBackgroundField.setOpaque(true);
-                        newBackgroundField.setVisible(true);
+        //                 newBackgroundField.setOpaque(true);
+        //                 newBackgroundField.setVisible(true);
 
-                        layeredPane.add(tempTextField[0], Integer.valueOf(JLayeredPane.DRAG_LAYER));
-                        newBackgroundField.setEditable(false);
-                        layeredPane.add(newBackgroundField, Integer.valueOf(JLayeredPane.FRAME_CONTENT_LAYER));
-                        layeredPane.setVisible(true);
-                        tempTextField[0].setOpaque(true);
-                        tempTextField[0].setVisible(true);
-                    }
-                    //newBackgroundField.setEditable(false);
-                    //tempTextField[0].repaint();
+        //                 layeredPane.add(tempTextField[0], Integer.valueOf(JLayeredPane.DRAG_LAYER));
+        //                 newBackgroundField.setEditable(false);
+        //                 layeredPane.add(newBackgroundField, Integer.valueOf(JLayeredPane.FRAME_CONTENT_LAYER));
+        //                 layeredPane.setVisible(true);
+        //                 tempTextField[0].setOpaque(true);
+        //                 tempTextField[0].setVisible(true);
+        //             }
+        //             //newBackgroundField.setEditable(false);
+        //             //tempTextField[0].repaint();
 
 
                     
-                    //layeredPane.add(waterfalls);
-                    // if (textFieldImage[0] == null) {
-                    //     textFieldImage[0] = new BufferedImage(draggedTextField.getWidth(), draggedTextField.getHeight(), BufferedImage.TYPE_INT_ARGB);
-                    //     Graphics2D g2d = textFieldImage[0].createGraphics();
-                    //     tempTextField[0].paint(g2d); // Render the JTextField onto the BufferedImage
-                    //     g2d.dispose();
-                    // }
+        //             //layeredPane.add(waterfalls);
+        //             // if (textFieldImage[0] == null) {
+        //             //     textFieldImage[0] = new BufferedImage(draggedTextField.getWidth(), draggedTextField.getHeight(), BufferedImage.TYPE_INT_ARGB);
+        //             //     Graphics2D g2d = textFieldImage[0].createGraphics();
+        //             //     tempTextField[0].paint(g2d); // Render the JTextField onto the BufferedImage
+        //             //     g2d.dispose();
+        //             // }
     
-                    // int x = e.getXOnScreen() - textFieldImage[0].getWidth() / 2;
-                    // int y = e.getYOnScreen() - textFieldImage[0].getHeight() / 2;
+        //             // int x = e.getXOnScreen() - textFieldImage[0].getWidth() / 2;
+        //             // int y = e.getYOnScreen() - textFieldImage[0].getHeight() / 2;
 
-                    // // Create a new BufferedImage to draw the image onto
-                    // BufferedImage tempImage = new BufferedImage(layeredPane.getWidth(), layeredPane.getHeight(), BufferedImage.TYPE_INT_ARGB);
-                    // Graphics2D g = tempImage.createGraphics();
-                    // //g.drawImage(textFieldImage[0], x, y, null);
-                    // g.dispose();
+        //             // // Create a new BufferedImage to draw the image onto
+        //             // BufferedImage tempImage = new BufferedImage(layeredPane.getWidth(), layeredPane.getHeight(), BufferedImage.TYPE_INT_ARGB);
+        //             // Graphics2D g = tempImage.createGraphics();
+        //             // //g.drawImage(textFieldImage[0], x, y, null);
+        //             // g.dispose();
 
-                    // // Paint the BufferedImage onto the layeredPane
-                    // Graphics gPane = layeredPane.getGraphics();
-                    // gPane.drawImage(tempImage, 0, 0, null);
-                    // gPane.dispose();
+        //             // // Paint the BufferedImage onto the layeredPane
+        //             // Graphics gPane = layeredPane.getGraphics();
+        //             // gPane.drawImage(tempImage, 0, 0, null);
+        //             // gPane.dispose();
 
-                    // if (!layeredPane.isAncestorOf(tempTextField[0])) {
-                    //     layeredPane.add(tempTextField[0], Integer.valueOf(JLayeredPane.DRAG_LAYER));
-                    // }
-                    // layeredPane.setVisible(true);
-                    // tempTextField[0].setOpaque(true);
-                    // tempTextField[0].setVisible(true);
+        //             // if (!layeredPane.isAncestorOf(tempTextField[0])) {
+        //             //     layeredPane.add(tempTextField[0], Integer.valueOf(JLayeredPane.DRAG_LAYER));
+        //             // }
+        //             // layeredPane.setVisible(true);
+        //             // tempTextField[0].setOpaque(true);
+        //             // tempTextField[0].setVisible(true);
 
-                }
-            });
+        //         }
+        //     });
             
-            textField.addMouseListener(new MouseAdapter() {
-            //tempTextField[0].addMouseListener( new MouseAdapter() {
-                    public void mouseReleased(MouseEvent e) {
-                        //tempTextFieldPanel.getComponent(spacedLabelIndex[0]) = create.createTextBox(draggedTextField.getText(), "JTextField", false);
+        //     textField.addMouseListener(new MouseAdapter() {
+        //     //tempTextField[0].addMouseListener( new MouseAdapter() {
+        //             public void mouseReleased(MouseEvent e) {
+        //                 //tempTextFieldPanel.getComponent(spacedLabelIndex[0]) = create.createTextBox(draggedTextField.getText(), "JTextField", false);
 
-                        // Create the new text field with the text from draggedTextField
-                        JTextField newTextField = new JTextField(draggedTextField.getText());
+        //                 // Create the new text field with the text from draggedTextField
+        //                 JTextField newTextField = new JTextField(draggedTextField.getText());
 
-                        // Remove the old component at the specified index
-                        Component oldComponent = tempTextFieldPanel.getComponent(spacedLabelIndex[0]);
-                        tempTextFieldPanel.remove(oldComponent);
+        //                 // Remove the old component at the specified index
+        //                 Component oldComponent = tempTextFieldPanel.getComponent(spacedLabelIndex[0]);
+        //                 tempTextFieldPanel.remove(oldComponent);
 
-                        // Add the new component at the same index
-                        tempTextFieldPanel.add(newTextField, spacedLabelIndex[0]);
+        //                 // Add the new component at the same index
+        //                 tempTextFieldPanel.add(newTextField, spacedLabelIndex[0]);
 
-                        create.windowFix();
-                        layeredPane.remove(tempTextField[0]);
-                        fixClassList();
-                    }
-            });
-    }
+        //                 create.windowFix();
+        //                 layeredPane.remove(tempTextField[0]);
+        //                 fixClassList();
+        //             }
+        //     });
+   // }
         //''''
         
     }
@@ -1032,6 +1019,16 @@ public class StudentClasses extends JFrame {
 
     public JButton TESTNEWCLASSBUTTON() {
         return newClassButton;
+    }
+
+
+    public void TESTWRITETYPE() {
+        System.out.println("set.getcurrentpanellist "+setList.getCurrentPanelList());
+        set.setFilePath(setUserInformation.getPathToClassTextFile());
+        fileWrite.writeTextToFile();
+        fileWrite.debugPrintPanel();
+        System.out.println("testing? "+setList.getCurrentPanelList()+ "..."+ fileWrite.getClassList());
+        setList.setFinalClassList(fileWrite.getClassList());
     }
 
     }

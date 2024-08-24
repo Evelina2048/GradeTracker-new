@@ -73,6 +73,7 @@ public class StudentStatCollect extends JFrame {
     //private JPanel thisClassPanel = new JPanel();
 
     public StudentStatCollect() {
+        SETTEST.getInstance().TESTSETCURRENTINSTANCE(this);
         this.set = Set.getInstance();
         this.setState = SetState.getInstance();
         this.setUserInformation = SetUserInformation.getInstance();
@@ -119,15 +120,18 @@ public class StudentStatCollect extends JFrame {
         actionPriorities.setCurrentClass(currentClass);
 
 
-        JTextField testTextField = new JTextField("Error");
+        //JTextField testTextField = new JTextField("Error"); //8/23
         if (textBoxPanel.getComponentCount() < 2) {
         }
         else if (textBoxPanel.getComponent(1) instanceof JPanel) {
-            testTextField = (JTextField) goIntoPanel.goIntoPanelReturnTextbox((JPanel) textBoxPanel.getComponent(1), 0);
+            goIntoPanel.goIntoPanelReturnTextbox((JPanel) textBoxPanel.getComponent(1), 0);
         }
         else {
-            testTextField = (JTextField) setState.getTextFieldPanel().getComponent(1);
+            setState.getTextFieldPanel().getComponent(1);
         }
+
+        //newSet();
+        textBoxPanel.setVisible(true);
     }
 
     public void buttonSetUpAction() {
@@ -159,14 +163,12 @@ public class StudentStatCollect extends JFrame {
     private void backAction(JButton backButton) {
         backButton.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent e) {
-                System.out.println("1111");
                 if (textBoxPanel.getComponentCount() >= 2) {
                     //goIntoPanel.goIntoPanelReturnTextbox((JPanel) textBoxPanel.getComponent(1), 0);
                 }//TODO maybe bug?
                 actionPriorities.setCurrentClass(currentClass);
                 actionPriorities.addClassActionListener(b -> {
                     if(setState.getCanContinue()) {
-                        System.out.println("2222");
                         System.out.println("classlabelpanel "+classLabelPanel.getComponentCount());
                         //saveButtonAction("backButton"); //8/22
                         if (setState.getClassListIndex() == 0) { //case for back to classes
@@ -177,7 +179,6 @@ public class StudentStatCollect extends JFrame {
                             saveButtonAction("backButton");
                         }
                         else if (setState.getClassListIndex() > 0) {
-                            System.out.println("3333");
                             goToPreviousClasses();
                         }
                     }
@@ -187,7 +188,6 @@ public class StudentStatCollect extends JFrame {
     }
 
     private void goToPreviousClasses() {
-        System.out.println("4444");
         saveButtonAction("backButton");
         if (setState.getCanContinue()) {
             setState.decrementClassListIndex();
@@ -253,7 +253,7 @@ public class StudentStatCollect extends JFrame {
     }
 
     private void saveButtonAction(String actionCause) {
-        System.out.println("5555");
+        SETTEST.getInstance().TESTSETCURRENTINSTANCE(this);
         System.out.println("textboxpanel comps D"+setState.getTextFieldPanel().getComponentCount());
         set.setFilePath(setUserInformation.getPathToClassInformationFileWithIndex());
         System.out.println("textboxpanel comps E"+setState.getTextFieldPanel().getComponentCount());
@@ -268,14 +268,15 @@ public class StudentStatCollect extends JFrame {
         //System.out.println("up Y "+ fileWrite.howManyPlaceholders());
         
         if (fileWrite.howManyPlaceholders() > 0) {
-            System.out.println("6666");
             Decorator decorate = new Decorator();
             System.out.println("up Z how many placeholders? "+fileWrite.howManyPlaceholders()+" current class "+ setList.getFinalClassList().get(setState.getClassListIndex()));
             setState.setStudentStatCollect(this);
             setState.setAreYouSureMessageCause(actionCause);
-            decorate.areYouSureMessage(null, "studentStatsEmpty", "Remove placeholder(s) to continue?", 230, 90); //error 2222
+            decorate.areYouSureMessage(null, "studentStatsEmpty", "Remove placeholder(s) to continue?", 230, 90);
             setState.setCanContinue(false);
         }
+
+        SETTEST.getInstance().TESTSETCURRENTINSTANCE(this);
 
     }
 
@@ -545,7 +546,6 @@ public class StudentStatCollect extends JFrame {
     public void visitNextStudentClass() {
         String filePath = setUserInformation.getPathToClassInformationFileWithIndex();
         if (fileHandler.fileExists(filePath)) {
-
             addLoadedBoxes();
             classLabelPanel.add(textBoxPanel);
             if (textBoxPanel.getComponentCount() <= 1) { //The reason it is <=1 and not 0, is to account for the classLabel
@@ -553,10 +553,12 @@ public class StudentStatCollect extends JFrame {
             }
             create.windowFix();
             SETTEST.getInstance().TESTSETCURRENTINSTANCE(this);
+
         }
         else { //first time visiting next class
             hideWindow();
             StudentStatCollect studentStatCollect = new StudentStatCollect();
+            System.out.println("textfieldpanelcount "+setState.getTextFieldPanel().getComponentCount());
             sETTEST.TESTSETCURRENTINSTANCE(studentStatCollect);
 
             studentStatCollect.DisplayClasses();
@@ -694,7 +696,7 @@ public class StudentStatCollect extends JFrame {
         boxManageCreate("Grades(format:# # #)", "JTextField",false);
         setState.setCanContinue(true);
         setState.setTextFieldPanel(textBoxPanel);
-        System.out.println("textboxpanel comps A"+setState.getTextFieldPanel().getComponentCount()+ " hmp "+ fileWrite.howManyPlaceholders());
+        //System.out.println("textboxpanel comps A"+setState.getTextFieldPanel().getComponentCount()+ " hmp "+ fileWrite.howManyPlaceholders());
     }
 
     public class EnterAction extends AbstractAction {

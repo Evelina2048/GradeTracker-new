@@ -15,6 +15,7 @@ import java.awt.FlowLayout;
 
 import model.GoIntoPanel;
 import model.Set;
+import model.SetList;
 import model.SetState;
 import model.SetUserInformation;
 
@@ -85,6 +86,7 @@ private void tryToWrite(BufferedWriter writer) {
 }
 
 public void writeTextToFile(){ //Student Classes and Stat
+    System.out.println(".1111");
     setState.setCanContinue(true);
     debugPrintPanel();
     setUserInformation.getUsername();
@@ -94,14 +96,18 @@ public void writeTextToFile(){ //Student Classes and Stat
 }
 
 private void tryToWriteWithoutAppend() {
+    System.out.println(".2222");
     filePath = set.getFilePath();
     try (BufferedWriter writer = new BufferedWriter(new FileWriter(filePath))) {
         if (!classList.isEmpty()) {
            classList.clear();
         }
 
+        System.out.println(".3333");
         for (Component component : setState.getTextFieldPanel().getComponents()) {
+            System.out.println(".4444");
             if (component instanceof JTextField ) {
+                System.out.println(".5555.1");
                 tryToWriteTextFieldWithoutAppend(component, writer); //student stat
                 setState.setCanContinue(true);
             }
@@ -120,13 +126,20 @@ private void tryToWriteWithoutAppend() {
 private void tryToWriteTextFieldWithoutAppend(Component component, BufferedWriter writer) { //student stat
     JTextField textField = (JTextField) component;
     if (setState.getEmptiedState(textField) == true && attachedBoxes == maxAttachedBoxes) {
+        System.out.println(".7777");
         String text = textField.getText().trim();
         if (!text.isEmpty()) {
+            System.out.println(".8888");
             if (attachedBoxes == maxAttachedBoxes) {
-                //TODO classlist
                 if (actionPriorities.getCurrentClass() == "StudentClasses" && !classList.contains(text)) {
                     classList.add(text);
                 }
+
+                // //TODO may cause writing bug
+                // else if (actionPriorities.getCurrentClass() == "StudentStatCollect" && !classList.contains(text)) {
+                //     System.out.println(".9999");
+                //     classList.add(text);
+                // }
 
                 else {
                 classList.add(text);
@@ -244,6 +257,7 @@ public void debugPrintPanel() {
 }
 
 public  ArrayList<String> getClassList() {
+    System.out.println("4444 classlist "+classList);
     return classList;
 }
 
@@ -339,4 +353,11 @@ private int iteratePanelForHowManyPlaceholders(int labelOrNotIndex) {
 // public void getClassList() {
 //     return classList;
 // }
+public void TESTFORCECLASSLISTADD(String text) {
+    classList.add(text);
+}
+
+public void TESTFORCEFINALLIST() {
+    SetList.getInstance().setFinalClassList(classList);
+}
 }
