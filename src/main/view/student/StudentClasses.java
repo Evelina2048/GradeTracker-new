@@ -243,7 +243,6 @@ public class StudentClasses extends JFrame {
         //actionPriorities.setCurrentClass(currentClass);
         nextButton.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent e) {
-                System.out.println("1111");
                 currentClass = "StudentClasses";
                 actionPriorities.setCurrentClass(currentClass);
                 System.out.println("TTT ");
@@ -262,7 +261,6 @@ public class StudentClasses extends JFrame {
         return nextButtonPanel;
     }
     private void doNextButtonProcedure() {
-        System.out.println("2222");
         currentClass = "StudentClasses";
         //ArrayList<String> classList; //8/23
         //classList = fileWrite.getClassList();
@@ -320,14 +318,12 @@ public class StudentClasses extends JFrame {
     }
 
     private void writeType() {
-        System.out.println("3333");
         System.out.println("set.getcurrentpanellist "+setList.getCurrentPanelList());
         set.setFilePath(setUserInformation.getPathToClassTextFile());
         fileWrite.writeTextToFile();
         fileWrite.debugPrintPanel();
         System.out.println("testing? "+setList.getCurrentPanelList()+ "..."+ fileWrite.getClassList());
         setList.setFinalClassList(fileWrite.getClassList());
-        System.out.println("5555 setfinalclasslist "+setList.getFinalClassList());
     }
 
     private void backToDefaultDeleteButton() {

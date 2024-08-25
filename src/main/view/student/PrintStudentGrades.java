@@ -114,10 +114,13 @@ public class PrintStudentGrades extends JFrame {
 
             }
 
-            for (int boxSetIndex = 0; boxSetIndex < gradeList.size(); boxSetIndex++) {
+            //for (int boxSetIndex = 0; boxSetIndex < gradeList.size(); boxSetIndex++) { //8/24
+            for (int boxSetIndex = 0; boxSetIndex < listOfAverages.size(); boxSetIndex++) {
+                System.out.println("listofaverages-.01 "+listOfAverages);
                 System.out.println("listofaverages "+listOfAverages);
-                System.out.println("listofaverages2 "+percentageOfGradeList);
-                System.out.println("listofaverages3 "+boxSetIndex);
+                System.out.println("listofaverages2 "+(listOfAverages.get(boxSetIndex)));
+                System.out.println("listofaverages3 "+(percentageOfGradeList));
+                System.out.println("listofaverages4 "+(percentageOfGradeList.get(boxSetIndex)));
                 amountOfFinalGrade.add((listOfAverages.get(boxSetIndex))*(percentageOfGradeList.get(boxSetIndex)));
             }
 

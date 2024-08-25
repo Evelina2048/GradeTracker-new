@@ -119,7 +119,7 @@ public class Decorator {
         dialog.add(noButton);
         dialog.setSize(width,height); //250, 120
         
-        yesButtonActionListener(yesButton); //error 3333
+        yesButtonActionListener(yesButton);
         noButtonActionListener(noButton);
 
         //dialogCloseActionListener();
