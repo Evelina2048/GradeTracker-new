@@ -123,6 +123,7 @@ public class Decorator {
         noButtonActionListener(noButton);
 
         //dialogCloseActionListener();
+
         dialog.setLocationRelativeTo(window);
         dialog.setVisible(true);
 

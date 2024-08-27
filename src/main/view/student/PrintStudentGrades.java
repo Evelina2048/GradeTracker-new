@@ -156,12 +156,19 @@ public class PrintStudentGrades extends JFrame {
         JPanel allContainer = new JPanel(new GridLayout(2,gradeTypeAmount,5,5));
 
         //allContainer.add(new JTextField("allContainerBox"));
+        Creator create = new Creator();
         allContainer.add(create.createTextBox("Average", "JLabel", false));
         allContainer.add(create.createTextBox("Perc. of final grade", "JLabel", false));
         allContainer.add(create.createTextBox("Contribution", "JLabel", false));
         allContainer.add(create.createTextBox(gradeTypeList.get(0), "JLabel", false));
 
-        for (int i = 0; i < gradeTypeNumberList.size(); i++) {
+
+        for (int i = 0; i < gradeTypeNumberList.get(whichCurrClassIndex); i++) {
+            System.out.println("i "+gradeTypeNumberList);
+            System.out.println("i "+listOfAverages);
+            System.out.println("i "+i);
+            System.out.println("i "+listOfAverages.get(i));
+
             allContainer.add(create.createTextBox(String.valueOf(listOfAverages.get(i)), "JLabel", false));
             allContainer.add(create.createTextBox(String.valueOf(percentageOfGradeList.get(i)), "JLabel", false));
             allContainer.add(create.createTextBox(String.valueOf(amountOfFinalGrade.get(i)), "JLabel", false));

@@ -42,6 +42,12 @@ import controller.FileWriting;
 import java.awt.event.KeyEvent;
 
 
+import java.awt.event.MouseEvent;
+        import java.awt.event.MouseListener;
+        import java.awt.Component;
+        import java.awt.event.MouseAdapter;
+
+
 //import class files
 
 public class Gather {
@@ -104,6 +110,7 @@ public class Gather {
         this.create = new Creator();
         makeUsernameBox();
         gatherLaunch();
+
     }
 
     public void gatherLaunch () {

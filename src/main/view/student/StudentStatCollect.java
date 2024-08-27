@@ -39,6 +39,11 @@ import javax.swing.JTextField;
 
 import java.awt.event.KeyEvent;
 
+import java.awt.event.MouseEvent;
+import java.awt.event.MouseListener;
+
+import java.awt.event.MouseAdapter;
+
 public class StudentStatCollect extends JFrame {
     private JFrame window;
     private Creator create;
@@ -70,6 +75,9 @@ public class StudentStatCollect extends JFrame {
     private int typeNumber = 0;
     private int numOfBoxes = 0;
     private int maxBoxes = 26;
+
+
+    JPanel credits;
     //private JPanel thisClassPanel = new JPanel();
 
     public StudentStatCollect() {
@@ -303,6 +311,8 @@ public class StudentStatCollect extends JFrame {
 
     public void doNextButtonProcedure() {
         saveButtonAction("nextButton");
+        //create.hideContainer();
+        //hideWindow();
         if(setState.getCanContinue()) {
                 setState.incrementClassListIndex();
                 if (typeNumber!=0) {
@@ -314,6 +324,9 @@ public class StudentStatCollect extends JFrame {
 
             if (setState.getClassListIndex()+1 <= setList.getFinalClassList().size()) {
                 System.out.println("the jlabel name: "+setList.getFinalClassList().get(setState.getClassListIndex()));
+                //create.hideContainer();
+                //hideWindow();
+                boxManageCreate(setList.getFinalClassList().get(setState.getClassListIndex())+"PAC", "JLabel", false); //necessary
 
                 // Component credits = new JPanel();
                 // if (setState.getTextFieldPanel().getComponentCount() >= 2) {
@@ -327,7 +340,8 @@ public class StudentStatCollect extends JFrame {
                 // else {
                 //     System.out.println("somethingwentwrongin studentstatcollect credits");
                 // }
-                JPanel credits;
+                //JPanel credits;
+
                 credits = (JPanel) textBoxPanel;
                 
                 while (credits.getComponentCount() < 5) {
@@ -395,7 +409,6 @@ public class StudentStatCollect extends JFrame {
                 }
             }
             else {
-                JPanel credits;
                 credits = (JPanel) textBoxPanel;
                 
                 while (credits.getComponentCount() < 5) {
@@ -436,7 +449,50 @@ public class StudentStatCollect extends JFrame {
                     }
             }
         }
+
         }
+        
+        if (setState.getClassListIndex() >= 2) {
+            //newSet();
+        }
+
+        //boxManageCreate("Grade Type "+typeNumber, "JTextField",false);
+
+        // if (numOfBoxes < maxBoxes) {
+        //     //textBoxPanel.add(create.typeBox(placeholder, type, boxLoaded));
+        //     classLabelPanel.add(textBoxPanel);
+        //     create.windowFix();
+        //     numOfBoxes++;
+        // }
+        // else if (numOfBoxes == maxBoxes) {
+        //     Decorator decorate = new Decorator();
+        //     decorate.maximumAmountReachedPopup();
+        //     setState.setCanContinue(false);
+        // }
+
+        //classLabelPanel.setVisible(true);
+        //textBoxPanel.setVisible(true);
+        //setState.setTextFieldPanel(textBoxPanel);
+
+
+        ///"""
+        //Decorator decorate = new Decorator();
+        ///decorate.areYouSureMessage(null, "closing window", "<html><center> You did not save <br> Close anyways?", 176, 107);
+
+        //classLabelPanel.setVisible(false);
+        
+        //textFieldPanel.setVisible(false);
+        
+
+        //credits.setVisible(false);
+
+        // if (setState.getClassListIndex() >= 2) {
+        //     System.out.println("hiya");
+        //     //textBoxPanel.setVisible(false);
+        //     classLabelPanel.setVisible(false);
+        // }
+        
+
     }
 
     public void doNextButtonProcedure2() {
@@ -454,7 +510,8 @@ public class StudentStatCollect extends JFrame {
         if (setState.getClassListIndex()+1 <= setList.getFinalClassList().size()) {
             System.out.println("the jlabel name: "+setList.getFinalClassList().get(setState.getClassListIndex()));
 
-            JPanel credits;
+            //JPanel credits;
+
             //credits = (JPanel) textBoxPanel;
             credits = SetState.getInstance().getTextFieldPanel();
             
@@ -503,7 +560,8 @@ public class StudentStatCollect extends JFrame {
             }
         }
         else {
-            JPanel credits;
+            //JPanel credits;
+
             //credits = (JPanel) textBoxPanel;
             credits = SetState.getInstance().getTextFieldPanel();
             
@@ -546,6 +604,18 @@ public class StudentStatCollect extends JFrame {
             }
         }
         }
+        //newtype
+        
+        //window.getContentPane().getComponents();
+        //typeNumber++;
+
+        // boxManageCreate("Grade Type "+typeNumber, "JTextField",false);
+        // boxManageCreate("Percentage of Grade", "JTextField",false);
+        // boxManageCreate("Grades(format:# # #)", "JTextField",false);
+
+        setState.setCanContinue(true);
+        //setState.setTextFieldPanel(textBoxPanel);
+        
     }
 
     public void visitNextStudentClass() {
@@ -566,6 +636,7 @@ public class StudentStatCollect extends JFrame {
             System.out.println("textfieldpanelcount "+setState.getTextFieldPanel().getComponentCount());
             sETTEST.TESTSETCURRENTINSTANCE(studentStatCollect);
 
+            studentStatCollect.studentStatCollectLaunch();
             studentStatCollect.DisplayClasses();
             textBoxPanel = setState.getTextFieldPanel();
         }
@@ -688,8 +759,17 @@ public class StudentStatCollect extends JFrame {
             decorate.maximumAmountReachedPopup();
             setState.setCanContinue(false);
         }
-        classLabelPanel.setVisible(true);
+
+        // if (setState.getClassListIndex() >= 2) {
+        //     System.out.println("its being activate 1111");
+        //     textBoxPanel.add(create.typeBox(setList.getFinalClassList().get(setState.getClassListIndex())+"PAC", "JLabel", false));
+        // }
+
+        classLabelPanel.setVisible(true); //8/26
+        //classLabelPanel.setVisible(false);
         textBoxPanel.setVisible(true);
+
+
         setState.setTextFieldPanel(textBoxPanel);
     }
 

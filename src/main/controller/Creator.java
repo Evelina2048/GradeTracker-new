@@ -2,6 +2,7 @@ package controller;
 
 import javax.swing.JFrame;
 import javax.swing.JLabel;
+import javax.swing.JLayeredPane;
 import javax.swing.JTextField;
 import javax.swing.JPanel;
 
@@ -144,9 +145,11 @@ public class Creator {
 
         else if(my_type.equals("JLabel")) {
             System.out.println("jlabel to be created");
-            Decorator decorate = new Decorator();
             System.out.println("hi creating jlabel for "+placeholder+" which is loaded? "+boxLoaded);
             JLabel toAddType = new JLabel(placeholder);
+            //window.setLayer(toAddType, JLayeredPane.PALETTE_LAYER);
+            //JTextField toAddType = new JTextField(placeholder);
+
             if (setState.getTextFieldFont() != null) {
                 Font currentTextFieldFont = setState.getTextFieldFont();
                 Font boldFont = new Font(currentTextFieldFont.getFontName(), Font.BOLD, currentTextFieldFont.getSize());
@@ -158,7 +161,7 @@ public class Creator {
             }
             toAddType.setForeground(Color.gray);
 
-            //toAddType.setForeground(Color.darkGray);
+            toAddType.setVisible(true);
             gradeTypePanel.add(toAddType);
         }
         gradeTypePanel.setPreferredSize(new Dimension( 155,50));
@@ -181,7 +184,7 @@ public class Creator {
     //             JTextField textField = (JTextField) component;
     //             String text = textField.getText();
     //             return text;
-    //         } 
+    //         }
     //     else if (component instanceof JPanel) {
     //             JPanel jpanel = (JPanel) component;
     //             String text = goIntoPanel(jpanel, 0);

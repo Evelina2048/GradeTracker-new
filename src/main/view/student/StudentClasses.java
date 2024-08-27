@@ -50,6 +50,8 @@ import model.SETTEST;
 import view.MainWindow;
 import view.student.StudentClasses;
 
+import java.awt.Component;
+
 public class StudentClasses extends JFrame {
     private JFrame window;
 
@@ -109,9 +111,32 @@ public class StudentClasses extends JFrame {
                     decorate.areYouSureMessage(null, "closing window", "<html><center> You did not save <br> Close anyways?", 176, 107);
                 }
             }
+
+            @Override
+            public void windowGainedFocus(WindowEvent e) {
+                System.out.println("Window gained focus");
+    }
         };
 
         window.addWindowListener(windowCloseAdapter);
+
+        //p
+        window.getContentPane().addMouseListener(new MouseAdapter() {
+            @Override
+            public void mouseClicked(MouseEvent e) {
+                System.out.println("clickkkkk");
+                Component component = window.getComponentAt(e.getPoint());
+                if (component != null) {
+                    System.out.println("Component type at clicked point: " + component.getClass().getName() + " " + component.getName());
+                    //omponent.setVisible(false);
+                    //create.windowFix();
+                } else {
+                    System.out.println("No component at clicked point.");
+                }
+            }
+        });
+        //p
+        
         window.setName("window");
         create = new Creator();
         decorate = new Decorator();
@@ -121,6 +146,10 @@ public class StudentClasses extends JFrame {
         EnterAction enterAction = new EnterAction();
         window.getRootPane().getInputMap(JComponent.WHEN_IN_FOCUSED_WINDOW).put(KeyStroke.getKeyStroke(KeyEvent.VK_ENTER, 0), "enterAction");
         window.getRootPane().getActionMap().put("enterAction", enterAction);
+
+
+        //
+        //
         
         window.setTitle("StudentClasses");
 
