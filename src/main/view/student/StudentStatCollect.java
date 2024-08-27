@@ -138,7 +138,6 @@ public class StudentStatCollect extends JFrame {
             setState.getTextFieldPanel().getComponent(1);
         }
 
-        //newSet();
         textBoxPanel.setVisible(true);
     }
 
@@ -642,6 +641,14 @@ public class StudentStatCollect extends JFrame {
             //studentStatCollect.studentStatCollectLaunch();
             studentStatCollect.DisplayClasses();
             textBoxPanel = setState.getTextFieldPanel();
+        }
+
+        //newSet(); //1:07PM
+
+        //classLabelPanel.add(textBoxPanel);
+        if (setState.getClassListIndex() >= 2) {
+        classLabelPanel.add(textBoxPanel); //1:19pm creates issue when commented out :)
+        classLabelPanel.setVisible(true); //1:40pm
         }
 
     }
