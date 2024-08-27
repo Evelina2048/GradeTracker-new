@@ -389,8 +389,11 @@ public class StudentStatCollect extends JFrame {
                         textBoxPanel.removeAll();
 
                         setState.setTextFieldPanel(textBoxPanel);
+
+                        studentStatCollectLaunch(); //before 8/27 was below
                         visitNextStudentClass();
-                        studentStatCollectLaunch();
+
+                        
                     }
 
                     else if ((matcherBoolean == false) || (gradesFormatOkay == false) || (percentageFormatOkay == false)) {
@@ -540,8 +543,8 @@ public class StudentStatCollect extends JFrame {
                     textBoxPanel.removeAll();
 
                     setState.setTextFieldPanel(textBoxPanel);
+                    studentStatCollectLaunch(); //before 8/27 was below visitnextstudentclass
                     visitNextStudentClass();
-                    studentStatCollectLaunch();
                 }
 
                 else if ((matcherBoolean == false) || (gradesFormatOkay == false) || (percentageFormatOkay == false)) {
@@ -636,7 +639,7 @@ public class StudentStatCollect extends JFrame {
             System.out.println("textfieldpanelcount "+setState.getTextFieldPanel().getComponentCount());
             sETTEST.TESTSETCURRENTINSTANCE(studentStatCollect);
 
-            studentStatCollect.studentStatCollectLaunch();
+            //studentStatCollect.studentStatCollectLaunch();
             studentStatCollect.DisplayClasses();
             textBoxPanel = setState.getTextFieldPanel();
         }
@@ -677,137 +680,127 @@ public class StudentStatCollect extends JFrame {
 
         create.windowFix();
     }
-
-   private JPanel deleteButtonPanel() {
-    JButton deleteTypeButton = new JButton("Delete Type");
-        deleteTypeButton.setPreferredSize(new Dimension(90, 50));
-        deleteTypeButton.addActionListener(new ActionListener() {
-        public void actionPerformed(ActionEvent e) {
-            if (textBoxPanel.getComponentCount() >= 8) {
-                create.deleteTextBox(textBoxPanel);
-                create.deleteTextBox(textBoxPanel);
-                create.deleteTextBox(textBoxPanel);
-                numOfBoxes = numOfBoxes - 3;
-                typeNumber--;
-
-                createButton.saveButtonEnable();
-            }
-    }
-    });
-    JPanel delTypeButtonPanel = new JPanel(new BorderLayout());
-    delTypeButtonPanel.add(deleteTypeButton,BorderLayout.NORTH);
-    return delTypeButtonPanel;
-    }
-
-    private Boolean correctBoxFormatChecker(Pattern pattern, int index) {
-        //int index = 4;
-        for (int i=1; i<=8; i++) { //max num of grade type
-            String text = goIntoPanel.goIntoPanel(classLabelPanel, index);
-
-            if (text.equals("does not exist")) {
-                System.out.println("fail");
-                break;
-            }
-            index = index + 3;
-            Matcher matcher = pattern.matcher(text);
-            Boolean matcherBoolean = matcher.find();
-
-            if (matcherBoolean == false) {
-                return false;
-            }
-
-            System.out.println("matcher works?: "+ matcherBoolean);
-        }
-        return true; //got out of loop with every box that was checked, matched.
-    }
-    //read classes array, first five classes
-    public void DisplayClasses() {
-        setUserInformation.getUsername();
-        ArrayList<String> typeList = setList.getCurrentPanelList();
-        readClass(typeList);
-        setState.setTextFieldPanel(textBoxPanel);
-    }
-
-    private void readClass(ArrayList<String> typeList) {
-        boxManageCreate(setList.getFinalClassList().get(setState.getClassListIndex())+"AHC", "JLabel", false); //necessary
-        boxManageCreate("Credits (optional)", "JTextField", false);
-        newSet();
-        classLabelPanel.setName("classlabelpanelinreadclass");
-        setList.setClassLabelPanel(classLabelPanel);
-
-        window.add(classLabelPanel, BorderLayout.CENTER);
-        create.windowFix();
-    }
-
-    private void hideWindow() {
-        create.hideContainer();
-        backNextButtonsPanel.setVisible(false);
-        newDelContainerFlow.setVisible(false);
-        classLabelPanel.setVisible(false);
-        textBoxPanel.setVisible(false);
-    }
-
-    private void boxManageCreate(String placeholder, String type, Boolean boxLoaded) {
-        if (numOfBoxes < maxBoxes) {
-            textBoxPanel.add(create.typeBox(placeholder, type, boxLoaded));
-            classLabelPanel.add(textBoxPanel);
-            create.windowFix();
-            numOfBoxes++;
-        }
-        else if (numOfBoxes == maxBoxes) {
-            Decorator decorate = new Decorator();
-            decorate.maximumAmountReachedPopup();
-            setState.setCanContinue(false);
-        }
-
-        // if (setState.getClassListIndex() >= 2) {
-        //     System.out.println("its being activate 1111");
-        //     textBoxPanel.add(create.typeBox(setList.getFinalClassList().get(setState.getClassListIndex())+"PAC", "JLabel", false));
-        // }
-
-        classLabelPanel.setVisible(true); //8/26
-        //classLabelPanel.setVisible(false);
-        textBoxPanel.setVisible(true);
-
-
-        setState.setTextFieldPanel(textBoxPanel);
-    }
-
-    private void newSet() {
-        window.getContentPane().getComponents();
-        typeNumber++;
-        boxManageCreate("Grade Type "+typeNumber, "JTextField",false);
-        boxManageCreate("Percentage of Grade", "JTextField",false);
-        boxManageCreate("Grades(format:# # #)", "JTextField",false);
-        setState.setCanContinue(true);
-        setState.setTextFieldPanel(textBoxPanel);
-        //System.out.println("textboxpanel comps A"+setState.getTextFieldPanel().getComponentCount()+ " hmp "+ fileWrite.howManyPlaceholders());
-    }
-
-    public class EnterAction extends AbstractAction {
-        @Override
-        public void actionPerformed(ActionEvent e) {
-            System.out.println("hi");
-            actionPriorities.setCurrentClass(currentClass);
-            actionPriorities.addClassActionListener(new ActionListener() {
-                @Override
-                public void actionPerformed(ActionEvent e) { // remember won't run if just enter without a click
-                    System.out.println("enteraction");
-                    doNextButtonProcedure();
+    private JPanel deleteButtonPanel() {
+        JButton deleteTypeButton = new JButton("Delete Type");
+            deleteTypeButton.setPreferredSize(new Dimension(90, 50));
+            deleteTypeButton.addActionListener(new ActionListener() {
+            public void actionPerformed(ActionEvent e) {
+                if (textBoxPanel.getComponentCount() >= 8) {
+                    create.deleteTextBox(textBoxPanel);
+                    create.deleteTextBox(textBoxPanel);
+                    create.deleteTextBox(textBoxPanel);
+                    numOfBoxes = numOfBoxes - 3;
+                    typeNumber--;
+    
+                    createButton.saveButtonEnable();
                 }
-            }, 1, "EnterAction", null, currentClass);  // Add this ActionListener with priority 1
         }
-    }
-
-    public JButton TESTNEXTBUTTON() {
-        return nextButton;
-    }
-
-    public JButton TESTNEWTYPEBUTTON() {
-        return newTypeButton;
-    }
-
-    public JButton TESTBACKBUTTON() {
-        return backButton;
-    }
-    }
+        });
+        JPanel delTypeButtonPanel = new JPanel(new BorderLayout());
+        delTypeButtonPanel.add(deleteTypeButton,BorderLayout.NORTH);
+        return delTypeButtonPanel;
+        }
+    
+        private Boolean correctBoxFormatChecker(Pattern pattern, int index) {
+            //int index = 4;
+            for (int i=1; i<=8; i++) { //max num of grade type
+                String text = goIntoPanel.goIntoPanel(classLabelPanel, index);
+    
+                if (text.equals("does not exist")) {
+                    System.out.println("fail");
+                    break;
+                }
+                index = index + 3;
+                Matcher matcher = pattern.matcher(text);
+                Boolean matcherBoolean = matcher.find();
+    
+                if (matcherBoolean == false) {
+                    return false;
+                }
+    
+                System.out.println("matcher works?: "+ matcherBoolean);
+            }
+            return true; //got out of loop with every box that was checked, matched.
+        }
+        //read classes array, first five classes
+        public void DisplayClasses() {
+            setUserInformation.getUsername();
+            ArrayList<String> typeList = setList.getCurrentPanelList();
+            readClass(typeList);
+            setState.setTextFieldPanel(textBoxPanel);
+        }
+    
+        private void readClass(ArrayList<String> typeList) {
+            boxManageCreate(setList.getFinalClassList().get(setState.getClassListIndex())+"AHC", "JLabel", false); //necessary
+            boxManageCreate("Credits (optional)", "JTextField", false);
+            newSet();
+            classLabelPanel.setName("classlabelpanelinreadclass");
+            setList.setClassLabelPanel(classLabelPanel);
+    
+            window.add(classLabelPanel, BorderLayout.CENTER);
+            create.windowFix();
+        }
+    
+        private void hideWindow() {
+            create.hideContainer();
+            backNextButtonsPanel.setVisible(false);
+            newDelContainerFlow.setVisible(false);
+            classLabelPanel.setVisible(false);
+            textBoxPanel.setVisible(false);
+        }
+    
+        private void boxManageCreate(String placeholder, String type, Boolean boxLoaded) {
+            if (numOfBoxes < maxBoxes) {
+                textBoxPanel.add(create.typeBox(placeholder, type, boxLoaded));
+                classLabelPanel.add(textBoxPanel);
+                create.windowFix();
+                numOfBoxes++;
+            }
+            else if (numOfBoxes == maxBoxes) {
+                Decorator decorate = new Decorator();
+                decorate.maximumAmountReachedPopup();
+                setState.setCanContinue(false);
+            }
+            classLabelPanel.setVisible(true);
+            textBoxPanel.setVisible(true);
+            setState.setTextFieldPanel(textBoxPanel);
+        }
+    
+        private void newSet() {
+            window.getContentPane().getComponents();
+            typeNumber++;
+            boxManageCreate("Grade Type "+typeNumber, "JTextField",false);
+            boxManageCreate("Percentage of Grade", "JTextField",false);
+            boxManageCreate("Grades(format:# # #)", "JTextField",false);
+            setState.setCanContinue(true);
+            setState.setTextFieldPanel(textBoxPanel);
+            //System.out.println("textboxpanel comps A"+setState.getTextFieldPanel().getComponentCount()+ " hmp "+ fileWrite.howManyPlaceholders());
+        }
+    
+        public class EnterAction extends AbstractAction {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                System.out.println("hi");
+                actionPriorities.setCurrentClass(currentClass);
+                actionPriorities.addClassActionListener(new ActionListener() {
+                    @Override
+                    public void actionPerformed(ActionEvent e) { // remember won't run if just enter without a click
+                        System.out.println("enteraction");
+                        doNextButtonProcedure();
+                    }
+                }, 1, "EnterAction", null, currentClass);  // Add this ActionListener with priority 1
+            }
+        }
+    
+        public JButton TESTNEXTBUTTON() {
+            return nextButton;
+        }
+    
+        public JButton TESTNEWTYPEBUTTON() {
+            return newTypeButton;
+        }
+    
+        public JButton TESTBACKBUTTON() {
+            return backButton;
+        }
+        }
