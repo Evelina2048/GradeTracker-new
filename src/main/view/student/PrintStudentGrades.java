@@ -5,9 +5,9 @@ import javax.swing.JFrame;
 import javax.swing.SwingUtilities;
 
 import java.awt.BorderLayout;
+import java.awt.Component;
 import java.awt.GridLayout;
 import javax.swing.JPanel;
-import javax.swing.JTextField;
 import javax.swing.JLabel;
 
 import java.awt.event.ActionListener;
@@ -54,12 +54,6 @@ public class PrintStudentGrades extends JFrame {
         setUserInformation = SetUserInformation.getInstance();
         int gradeBoxTotal = 0;
 
-
-        //go into file. (For loop of files)
-        // for (int i = 0; i < setList.getFinalClassList().size();i++) {
-        //     System.out.println("printgradestest "+setList.getFinalClassList().get(i));
-        //     // class.readFileIntoList(pathtofilewithclasslistindex);
-        // }
         ArrayList<ArrayList<String>> gradeList = new ArrayList<>();
         ArrayList<Integer> amountOfFinalGrade = new ArrayList<>();
         ArrayList<String> gradeTypeList = new ArrayList<>();
@@ -93,13 +87,9 @@ public class PrintStudentGrades extends JFrame {
             listOfAverages = new ArrayList<>();
             System.out.println("listofaverages -3 "+allTextListForClass);
             for (int boxPanelIndex = 3; boxPanelIndex < allTextListForClass.size(); boxPanelIndex += 3) { //for each grades box
-                //gradeList.add(allList.get(j)); //add contents
                 ArrayList<String> seperatedBySpaceListOfGrades = new ArrayList<>(Arrays.asList(allTextListForClass.get(boxPanelIndex).split(" ")));
                 gradeList.add(seperatedBySpaceListOfGrades);
                 System.out.println(("listofaverages -2.2 "+seperatedBySpaceListOfGrades.get(0)));
-                //System.out.println(("listofaverages -2.1 "+gradeList.get(0).size()));
-                //System.out.println(("listofaverages -2.01 "+gradeList.get(seperatedBySpaceListOfGrades).size()));
-                //for (int k = 0; k < gradeList.get(boxPanelIndex).size(); k++) {
                 for (int k = 0; k < seperatedBySpaceListOfGrades.size(); k++) {
                 //     //gradeBoxTotal += (int) gradeList[j][k];
                     gradeBoxTotal += Integer.parseInt(seperatedBySpaceListOfGrades.get(k));
@@ -110,7 +100,6 @@ public class PrintStudentGrades extends JFrame {
                 System.out.println("listofaverages -2 "+average);
                 listOfAverages.add(average);
                 System.out.println("listofaverages -1 "+listOfAverages);
-                //int totalPercentageOfGrade =
 
             }
 
@@ -124,26 +113,6 @@ public class PrintStudentGrades extends JFrame {
                 amountOfFinalGrade.add((listOfAverages.get(boxSetIndex))*(percentageOfGradeList.get(boxSetIndex)));
             }
 
-            /*for (stuff in gradelist)
-             * //first box
-             * //parse by spaces
-             * //add to total
-            */
-
-            // for (int k = 0; k < gradeList.size(); k++) {
-            // /* //first box
-            //  * //parse by spaces
-            //  * //add to total
-            // */ }
-
-            //ArrayList<String> seperatedBySpaceListOfGrades = new ArrayList<>(Arrays.asList(gradeList.get(allList.get(j)).split(" ")));
-            // for (int k = 0; k < gradeList.size(); k++) {
-                
-            //     //add to total
-            // }
-
-            
-
         }
 
         float total = 0;
@@ -156,12 +125,13 @@ public class PrintStudentGrades extends JFrame {
         JPanel allContainer = new JPanel(new GridLayout(2,gradeTypeAmount,5,5));
 
         //allContainer.add(new JTextField("allContainerBox"));
+        System.out.println("1111 ");
         Creator create = new Creator();
-        allContainer.add(create.createTextBox("Average", "JLabel", false));
-        allContainer.add(create.createTextBox("Perc. of final grade", "JLabel", false));
-        allContainer.add(create.createTextBox("Contribution", "JLabel", false));
-        allContainer.add(create.createTextBox(gradeTypeList.get(0), "JLabel", false));
-
+        allContainer.add(new JLabel("Average"));//create.createTextBox("Average", "JLabel", false));
+        allContainer.add(new JLabel("Perc. of final grade"));//allContainer.add(create.createTextBox("Perc. of final grade", "JLabel", false));
+        allContainer.add(new JLabel("Contribution"));//allContainer.add(create.createTextBox("Contribution", "JLabel", false));
+        allContainer.add(new JLabel(gradeTypeList.get(0)));//allContainer.add(create.createTextBox(gradeTypeList.get(0), "JLabel", false));
+        System.out.println("4444 ");
 
         for (int i = 0; i < gradeTypeNumberList.get(whichCurrClassIndex); i++) {
             System.out.println("i "+gradeTypeNumberList);
@@ -169,12 +139,20 @@ public class PrintStudentGrades extends JFrame {
             System.out.println("i "+i);
             System.out.println("i "+listOfAverages.get(i));
 
-            allContainer.add(create.createTextBox(String.valueOf(listOfAverages.get(i)), "JLabel", false));
-            allContainer.add(create.createTextBox(String.valueOf(percentageOfGradeList.get(i)), "JLabel", false));
-            allContainer.add(create.createTextBox(String.valueOf(amountOfFinalGrade.get(i)), "JLabel", false));
+            allContainer.add(new JLabel(String.valueOf(listOfAverages.get(i))));//allContainer.add(create.createTextBox(String.valueOf(listOfAverages.get(i)), "JLabel", false));
+            allContainer.add(new JLabel(String.valueOf(percentageOfGradeList.get(i))));//allContainer.add(create.createTextBox(String.valueOf(percentageOfGradeList.get(i)), "JLabel", false));
+            allContainer.add(new JLabel(String.valueOf(amountOfFinalGrade.get(i))));//allContainer.add(create.createTextBox(String.valueOf(amountOfFinalGrade.get(i)), "JLabel", false));
         }
 
         window.add(allContainer);
+
+
+        JFrame window = Set.getInstance().getWindow();
+        Component[] windowComponents = window.getContentPane().getComponents();
+
+        for (Component windowComp : windowComponents) {
+            System.out.println("compcount " + windowComponents.length + " classname "+ windowComp.getClass().getName() + " regname "+windowComp.getName() + " isvisible "+windowComp.isVisible());
+        }
 
     }
 

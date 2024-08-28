@@ -121,10 +121,8 @@ private void tryToWriteWithoutAppend() {
 private void tryToWriteTextFieldWithoutAppend(Component component, BufferedWriter writer) { //student stat
     JTextField textField = (JTextField) component;
     if (setState.getEmptiedState(textField) == true && attachedBoxes == maxAttachedBoxes) {
-        System.out.println(".7777");
         String text = textField.getText().trim();
         if (!text.isEmpty()) {
-            System.out.println(".8888");
             if (attachedBoxes == maxAttachedBoxes) {
                 if (actionPriorities.getCurrentClass() == "StudentClasses" && !classList.contains(text)) {
                     classList.add(text);
@@ -132,7 +130,6 @@ private void tryToWriteTextFieldWithoutAppend(Component component, BufferedWrite
 
                 // //TODO may cause writing bug
                 // else if (actionPriorities.getCurrentClass() == "StudentStatCollect" && !classList.contains(text)) {
-                //     System.out.println(".9999");
                 //     classList.add(text);
                 // }
 

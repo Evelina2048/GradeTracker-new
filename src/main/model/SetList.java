@@ -1,6 +1,8 @@
 package model;
 
 import java.util.ArrayList;
+
+import javax.swing.JFrame;
 import javax.swing.JPanel;
 
 public class SetList {
@@ -75,5 +77,11 @@ public class SetList {
 
     public ArrayList<Integer> getGradeTypeList() {
         return gradeNumber;
+    }
+
+    public void removeStudentStatCollectSettings() {
+        JFrame window = Set.getInstance().getWindow();
+        window.remove(classLabelPanel);
+        
     }
 }
