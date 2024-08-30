@@ -62,6 +62,7 @@ public class SetUserInformation {
         //System.out.println("final list in path"+ setList.getFinalClassList()+" "+"/Users/evy/Documents/GradeTracker-new/src/main/view/UserInfo/StudentInfo/"+getUsername()+"/ClassInformation/"+setList.getFinalClassList().get(setState.getClassListIndex())+".txt");
         System.out.println("final list in path"+ setList.getFinalClassList());
         System.out.println("number 2 "+setList.getFinalClassList().get(setState.getClassListIndex()));
+
         return  "/Users/evy/Documents/GradeTracker-new/src/main/view/UserInfo/StudentInfo/"+getUsername()+"/ClassInformation/"+setList.getFinalClassList().get(setState.getClassListIndex())+".txt";
     }
 

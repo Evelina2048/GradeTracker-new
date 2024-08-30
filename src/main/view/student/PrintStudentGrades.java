@@ -35,7 +35,7 @@ public class PrintStudentGrades extends JFrame {
     private int whichCurrClassIndex;
 
     public PrintStudentGrades(JFrame main, String studentOrTeacher, String existingOrNew) {
-        whichCurrClassIndex = 1;
+        whichCurrClassIndex = 0;
         printStudentGradesLaunch();
     }
 
@@ -197,7 +197,7 @@ public class PrintStudentGrades extends JFrame {
 
     public void printArray(ArrayList<String> list) {
         for (int i = 0; i < list.size(); i++) {
-            System.out.println("item "+list.get(0));
+            System.out.println("item "+list.get(i));
         }
 
     }
