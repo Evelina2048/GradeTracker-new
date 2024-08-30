@@ -129,6 +129,13 @@ public class Creator {
         textFieldPanel.setVisible(false);
     }
 
+    public void removeContainer() {
+        JFrame window = set.getWindow();
+
+        window.remove(textFieldContainer);
+        window.remove(textFieldPanel);
+    }
+
     public void setClassList() {
         //set.setClassList(classList);
     }

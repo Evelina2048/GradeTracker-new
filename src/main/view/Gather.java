@@ -315,7 +315,7 @@ public class Gather {
 
         private void backButtonAction() {
             System.out.println("hidewindow1");
-            hideWindow(); 
+            hideWindow();
             NewUser newUser = new NewUser();
             newUser.newUserSetup();
             System.out.println("back button new user "+actionPriorities.getCurrentClass());
@@ -389,6 +389,7 @@ public class Gather {
         else if (textFieldFilled) { //good case
             if (existingOrNew.trim().equals("New User")) { //if new user,
                 hideWindow();
+                removeFromWindow();
                 MainWindow main = new MainWindow();
                 main.setButtonSelected();
             }
@@ -449,6 +450,13 @@ public class Gather {
         instructionsPanel.setVisible(false);
         choicesPanel.setVisible(false);
         backNextButtonsPanel.setVisible(false);
+    }
+
+    private void removeFromWindow() {
+        JFrame window = set.getWindow();
+        window.remove(instructionsPanel);
+        window.remove(choicesPanel);
+        window.remove(backNextButtonsPanel);
     }
 
     public class EnterAction extends AbstractAction {

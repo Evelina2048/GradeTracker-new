@@ -459,6 +459,14 @@ public class Decorator {
         return currentTextFieldFont;
     }
 
+
+    public void removeForNewUserWindow(JPanel instructionsPanel, JPanel choicesPanel, JPanel backNextButtonsPanel) {
+        JFrame window = Set.getInstance().getWindow();
+        window.remove(instructionsPanel);
+        window.remove(choicesPanel);
+        window.remove(backNextButtonsPanel);   
+    }
+
     // public void errorMessageSetUp(String labelWords, int width, int height, JRad) {
     //     JDialog dialog = new JDialog(window, true);
     //     dialog.setResizable(false);

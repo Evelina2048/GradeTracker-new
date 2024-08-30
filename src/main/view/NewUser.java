@@ -211,6 +211,7 @@ public class NewUser extends JFrame {
         System.out.println("in the do next button procedure in new user");
         if (newUserButton.isSelected() || existingButton.isSelected()){//moveOnPossible) {
             decorate.hideWindow(instructionsPanel, choicesPanel, backNextButtonsPanel);
+            decorate.removeForNewUserWindow(instructionsPanel, choicesPanel, backNextButtonsPanel);
             set.setWindow(window);
 
             if (originalExistingOrNew != existingOrNew) { //user changed the existing or new

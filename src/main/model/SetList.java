@@ -84,4 +84,7 @@ public class SetList {
         window.remove(classLabelPanel);
         
     }
+
+
+
 }

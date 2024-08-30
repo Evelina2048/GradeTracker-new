@@ -158,6 +158,7 @@ public class StudentStatCollect extends JFrame {
         nextButtonPanel.add(nextButton);
         nextButtonAction(nextButton);
         backNextButtonsPanel = createButton.makeBackNextButtonsPanel(backButtonPanel, saveButtonPanel, nextButtonPanel);
+        backNextButtonsPanel.setName("backnextbuttonspanel studentstatcollect");
         window.add(backNextButtonsPanel, BorderLayout.SOUTH);
     }
 
@@ -188,6 +189,40 @@ public class StudentStatCollect extends JFrame {
                         }
                         else if (setState.getClassListIndex() > 0) {
                             goToPreviousClasses();
+                            ///removeVariablesInWindow();
+                            //SetList.getInstance().removeStudentStatCollectSettings();
+                            //create.hideContainer();
+
+                            JFrame window = Set.getInstance().getWindow();
+                            Component[] windowComponents = window.getContentPane().getComponents();
+                            for (int k = 0; k<8;k++) {
+                                Component component = windowComponents[k];
+                                component.setVisible(false);
+                                window.remove(component);
+                            }
+                            //SetList.getInstance().removeStudentStatCollectSettings();
+                            // Component[] windowComponents2 = window.getContentPane().getComponents();
+                            // for (int k = 2; k<=6;k++) {
+                            //     Component component = windowComponents2[k];
+                            //     component.setVisible(false);
+                            //     window.remove(component);
+                            // }
+
+                            Component[] windowComponents2 = window.getContentPane().getComponents();
+                            for (int k = 2; k<=10;k++) {
+                                Component component = windowComponents2[k];
+                                component.setVisible(false);
+                                window.remove(component);
+                            }
+
+                            Component[] windowComponents3 = window.getContentPane().getComponents();
+                            int i = 0;
+                            for (Component windowComp : windowComponents3) {
+                                System.out.println("compcount " + i + " classname "+ windowComp.getClass().getName() + " regname "+windowComp.getName() + " isvisible "+windowComp.isVisible());
+                                i++;
+                            }
+
+                            // Component[] windowComponents = window.getContentPane().getComponents();
                         }
                     }
                 }, 2, "backButton",null, currentClass);
@@ -200,11 +235,11 @@ public class StudentStatCollect extends JFrame {
         //if (setState.getCanContinue()) { //8/24 //TODO 8/24
             setState.decrementClassListIndex();
 
-            Component[] windowComponents = window.getContentPane().getComponents();
-            for (int i = 22; i<23;i++) {
-                Component component = windowComponents[i];
-                component.setVisible(false);
-            }
+            // Component[] windowComponents = window.getContentPane().getComponents();
+            // for (int i = 22; i<23;i++) {
+            //     Component component = windowComponents[i];
+            //     component.setVisible(false);
+            // }
 
             setList.getClassLabelPanel().removeAll();
             classLabelPanel.removeAll();
@@ -431,7 +466,7 @@ public class StudentStatCollect extends JFrame {
                     Boolean percentageFormatOkay = correctBoxFormatChecker(patternForPercentage, 3); //for percentage
                     if ((matcherBoolean == true) && (gradesFormatOkay) && (percentageFormatOkay)) {
                         hideWindow();
-                        removeVaraiblesInWindow();
+                        removeVariablesInWindow();
                         new PrintStudentGrades(set.getWindow(), setUserInformation.getStudentOrTeacher(), setUserInformation.getExistingOrNew());
                     }
 
@@ -781,7 +816,7 @@ public class StudentStatCollect extends JFrame {
             //System.out.println("textboxpanel comps A"+setState.getTextFieldPanel().getComponentCount()+ " hmp "+ fileWrite.howManyPlaceholders());
         }
 
-        private void removeVaraiblesInWindow() {
+        private void removeVariablesInWindow() {
             //newDelContainerFlow.dispose();
             window.remove(newDelContainerFlow);
             window.remove(classLabelPanel);
@@ -798,6 +833,7 @@ public class StudentStatCollect extends JFrame {
                     public void actionPerformed(ActionEvent e) { // remember won't run if just enter without a click
                         System.out.println("enteraction");
                         doNextButtonProcedure();
+                        
                     }
                 }, 1, "EnterAction", null, currentClass);  // Add this ActionListener with priority 1
             }

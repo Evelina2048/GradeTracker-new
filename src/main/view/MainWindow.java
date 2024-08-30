@@ -216,7 +216,8 @@ private void backNextButton() {
         public void actionPerformed(ActionEvent e) {
             actionPriorities.setCurrentClass(currentClass);
             actionPriorities.addClassActionListener(b -> {
-                decorate.hideWindow(instructionsPanel, choicesPanel, backNextButtonsPanel);    
+                decorate.hideWindow(instructionsPanel, choicesPanel, backNextButtonsPanel);
+                decorate.removeForNewUserWindow(instructionsPanel, choicesPanel, backNextButtonsPanel);
                 doBackButtonProcedure();
             }, 2, "backButton",null, currentClass);
     }});

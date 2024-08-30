@@ -229,7 +229,8 @@ public class StudentClasses extends JFrame {
                     @Override
                     public void actionPerformed(ActionEvent e) {// remember wont run  if just enter without a click
                         saveButtonAction();
-                        hideWindow(); 
+                        hideWindow();
+
                         set.setWindow(window);
                         MainWindow main = new MainWindow();
                         main.MainWindowLaunch();
@@ -298,6 +299,7 @@ public class StudentClasses extends JFrame {
         System.out.println("nextbuttonhit");
         fileWrite.writeTextToFile();
         hideWindow();
+        removeFromWindow();
         create.hideContainer();
 
         StudentStatCollect studentStatCollect = new StudentStatCollect();
@@ -784,6 +786,18 @@ public class StudentClasses extends JFrame {
             window.removeMouseListener(listener);
         }
 
+    }
+
+    private void removeFromWindow() {
+        window.remove(backNextButtonsPanel);
+        window.remove(newClassButton);
+        window.remove(deleteClassButton);
+        window.remove(moveClassButton);
+        window.remove(southContainer);
+        window.remove(create.getTextFieldContainer());
+        window.remove(instructionsPanel);
+
+        create.removeContainer();
     }
 
     private void prepareTextboxForMoveMode() {
