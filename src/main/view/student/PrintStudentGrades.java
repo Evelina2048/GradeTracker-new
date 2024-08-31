@@ -122,7 +122,7 @@ public class PrintStudentGrades extends JFrame {
 
         ArrayList <Integer> gradeTypeNumberList = setList.getGradeTypeList();
         int gradeTypeAmount = gradeTypeNumberList.get(whichCurrClassIndex);//setList.getCurrentClassIndex();
-        JPanel allContainer = new JPanel(new GridLayout(2,gradeTypeAmount,5,5));
+        JPanel allContainer = new JPanel(new GridLayout(2,gradeTypeAmount,5,5)); //rows,cols
 
         //allContainer.add(new JTextField("allContainerBox"));
         System.out.println("1111 ");
@@ -172,14 +172,14 @@ public class PrintStudentGrades extends JFrame {
             }
         });
 
-        JButton saveButton = createButton.saveButtonCreate();
-        JPanel saveButtonPanel = new JPanel();
-        saveButtonPanel.add(saveButton);
-        saveButton.addActionListener(new ActionListener() {
-            public void actionPerformed(ActionEvent e) {
-                //nextButtonAction(existingOrNew, studentOrTeacher);
-            }
-        });
+        //JButton saveButton = createButton.saveButtonCreate();
+        // JPanel saveButtonPanel = new JPanel();
+        // saveButtonPanel.add(saveButton);
+        // saveButton.addActionListener(new ActionListener() {
+        //     public void actionPerformed(ActionEvent e) {
+        //         //nextButtonAction(existingOrNew, studentOrTeacher);
+        //     }
+        // });
 
         JButton nextButton = createButton.nextButtonCreate();
         JPanel nextButtonPanel = new JPanel();
@@ -191,7 +191,8 @@ public class PrintStudentGrades extends JFrame {
                 printStudentGradesLaunch();
             }
         });
-        backNextButtonsPanel = createButton.makeBackNextButtonsPanel(backButtonPanel, saveButtonPanel, nextButtonPanel);
+        //backNextButtonsPanel = createButton.makeBackNextButtonsPanel(backButtonPanel, saveButtonPanel, nextButtonPanel);
+        backNextButtonsPanel = createButton.makeBackNextButtonsPanel(backButtonPanel, new JPanel(), nextButtonPanel);
         window.add(backNextButtonsPanel, BorderLayout.SOUTH);
     }
 
