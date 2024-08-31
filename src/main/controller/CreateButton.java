@@ -14,6 +14,7 @@ import java.awt.Dimension;
 import java.awt.FlowLayout;
 
 import model.Set;
+import model.SetList;
 import model.SetState;
 
 public class CreateButton {
@@ -41,8 +42,14 @@ public class CreateButton {
     }
 
     public JButton saveButtonCreate() {
-        saveButton = new JButton("Save");
+        saveButton = new JButton("Save "+ CompositeActionListenerWithPriorities.getInstance().getCurrentClass());
         set.setCurrentSaveButton(saveButton);
+
+        if ((CompositeActionListenerWithPriorities.getInstance().getCurrentClass()!= null) && CompositeActionListenerWithPriorities.getInstance().getCurrentClass().equals("StudentStatCollect")) {
+            saveButton.setText("Save" + SetList.getInstance().getFinalClassList().get(SetState.getInstance().getClassListIndex()));
+        }
+        //window.remove(saveButton);
+        //removeFromWindow();
 
         return saveButton;
     }
@@ -130,6 +137,12 @@ public class CreateButton {
             System.err.println("savebutton is null");
         }
         //saveButton.setEnabled(true);
+    }
+
+    public void removeFromWindow() {
+        set.getWindow().remove(backNextButtonsPanel);
+        set.getWindow().remove(saveButton);
+        set.removeSave();
     }
 
 }

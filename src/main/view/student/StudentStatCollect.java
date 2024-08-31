@@ -136,9 +136,12 @@ public class StudentStatCollect extends JFrame {
         backButtonPanel.add(backButton);
         backAction(backButton);
         JButton saveButton = createButton.saveButtonCreate();
+        System.out.println("1111 "+(saveButton==set.getCurrentSaveButton()));
         JPanel saveButtonPanel = new JPanel();
         saveButton.setEnabled(false);
+        System.out.println("2222 "+(saveButton==set.getCurrentSaveButton()));
         saveButtonPanel.add(saveButton);
+        System.out.println("3333 "+(saveButton==set.getCurrentSaveButton()));
         saveAction(saveButton);
         saveButton.setEnabled(false);
 
@@ -255,9 +258,11 @@ public class StudentStatCollect extends JFrame {
     }
 
     private void saveAction(JButton saveButton) {
+        System.out.println("4444 "+(saveButton==set.getCurrentSaveButton()));
         saveButton.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent e) {
                 //check if textbox is vaild
+                System.out.println("5555 "+(saveButton==set.getCurrentSaveButton()));
                 saveButton.setEnabled(false);
                 saveButtonAction("Neither");
             }
@@ -354,8 +359,12 @@ public class StudentStatCollect extends JFrame {
 
                         setState.setTextFieldPanel(textBoxPanel);
 
+                        window.remove(backNextButtonsPanel);
+                        window.remove(set.getCurrentSaveButton());
+                        //window.remove(saveButton)
                         studentStatCollectLaunch(); //before 8/27 was below
                         visitNextStudentClass();
+                        buttonSetUpAction();
                     }
 
                     else if ((matcherBoolean == false) || (gradesFormatOkay == false) || (percentageFormatOkay == false)) {
@@ -462,6 +471,7 @@ public class StudentStatCollect extends JFrame {
                     setState.setTextFieldPanel(textBoxPanel);
                     studentStatCollectLaunch(); //before 8/27 was below visitnextstudentclass
                     visitNextStudentClass();
+                    buttonSetUpAction();
                 }
 
                 else if ((matcherBoolean == false) || (gradesFormatOkay == false) || (percentageFormatOkay == false)) {
@@ -539,6 +549,21 @@ public class StudentStatCollect extends JFrame {
 
         }
         else { //first time visiting next class
+            createButton.removeFromWindow();
+            window.remove(backNextButtonsPanel);
+            set.getWindow().remove(backNextButtonsPanel);
+            set.getCurrentSaveButton().setVisible(false);
+
+            JFrame window = Set.getInstance().getWindow();
+            Component[] windowComponents = window.getContentPane().getComponents();
+
+            for (Component windowComp : windowComponents) {
+                if (windowComp == backNextButtonsPanel) {
+                    System.out.println("hi handsome ;)");
+                }
+                System.out.println("compcount " + windowComponents.length + " classname "+ windowComp.getClass().getName() + " regname "+windowComp.getName() + " isvisible "+windowComp.isVisible());
+            }
+
             hideWindow();
             StudentStatCollect studentStatCollect = new StudentStatCollect();
             System.out.println("textfieldpanelcount "+setState.getTextFieldPanel().getComponentCount());
@@ -688,6 +713,7 @@ public class StudentStatCollect extends JFrame {
         private void removeVariablesInWindow() {
             window.remove(newDelContainerFlow);
             window.remove(classLabelPanel);
+            window.remove(backNextButtonsPanel);
             SetList.getInstance().removeStudentStatCollectSettings();
         }
     

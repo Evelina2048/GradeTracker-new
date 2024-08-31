@@ -107,7 +107,8 @@ public class StudentClasses extends JFrame {
         WindowAdapter windowCloseAdapter = new WindowAdapter() {
             @Override
             public void windowClosing(WindowEvent e) {
-                if (set.getCurrentSaveButton().isEnabled() && saveButton != null) {
+                System.out.println("isenabled "+set.getCurrentSaveButton().isEnabled() + " getcurrentsavebuttonnull "+ (set.getCurrentSaveButton() != null));
+                if (set.getCurrentSaveButton().isEnabled() && (set.getCurrentSaveButton() != null)) {
                     decorate.areYouSureMessage(null, "closing window", "<html><center> You did not save <br> Close anyways?", 176, 107);
                 }
             }
@@ -247,6 +248,7 @@ public class StudentClasses extends JFrame {
         saveButton = createButton.saveButtonCreate();
 
         saveButton.setEnabled(false);
+        System.out.println("disabled1");
         JPanel saveButtonPanel = new JPanel();
         saveButtonPanel.add(saveButton);
         saveButton.addActionListener(new ActionListener() {
@@ -261,6 +263,7 @@ public class StudentClasses extends JFrame {
     private void saveButtonAction() {
         writeType();
         saveButton.setEnabled(false);
+        System.out.println("disabled2");
     }
 
     private JPanel makeNextButtonPanel() {

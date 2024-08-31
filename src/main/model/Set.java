@@ -70,4 +70,8 @@ public class Set {
     public void TESTRESETSET() {
         instance = null;
     }
+
+    public void removeSave() {
+        window.remove(saveButton);
+    }
 }

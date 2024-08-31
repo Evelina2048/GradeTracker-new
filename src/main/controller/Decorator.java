@@ -467,6 +467,10 @@ public class Decorator {
         window.remove(backNextButtonsPanel);   
     }
 
+    // public void removeButtonsPanel() {
+    //     window.remove(backNextButtonsPanel);
+    // }
+
     // public void errorMessageSetUp(String labelWords, int width, int height, JRad) {
     //     JDialog dialog = new JDialog(window, true);
     //     dialog.setResizable(false);
