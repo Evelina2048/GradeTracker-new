@@ -71,6 +71,8 @@ public class StudentStatCollect extends JFrame {
     private int numOfBoxes = 0;
     private int maxBoxes = 26;
 
+    private StudentStatCollect currentInstance;
+
 
     JPanel credits;
 
@@ -95,6 +97,7 @@ public class StudentStatCollect extends JFrame {
     }
 
     public void studentStatCollectLaunch() {
+        currentInstance = this;
         window.setName("window");
         container.setName("contianer");
         textBoxPanel.setName("gridlayout textboxpanel");
@@ -198,14 +201,24 @@ public class StudentStatCollect extends JFrame {
                                 window.remove(component);
                             }
 
-                            Component[] windowComponents3 = window.getContentPane().getComponents();
-                            int i = 0;
-                            for (Component windowComp : windowComponents3) {
-                                System.out.println("compcount " + i + " classname "+ windowComp.getClass().getName() + " regname "+windowComp.getName() + " isvisible "+windowComp.isVisible());
-                                i++;
-                            }
+                            // Component[] windowComponents3 = window.getContentPane().getComponents();
+                            // int i = 0;
+                            // for (Component windowComp : windowComponents3) {
+                            //     System.out.println("compcount " + i + " classname "+ windowComp.getClass().getName() + " regname "+windowComp.getName() + " isvisible "+windowComp.isVisible());
+                            //     i++;
+                            // }
                         }
                     }
+                    else if (fileWrite.howManyPlaceholders() > 0) {
+                        Decorator decorate = new Decorator();
+                        System.out.println("up Z how many placeholders? "+fileWrite.howManyPlaceholders()+" current class "+ setList.getFinalClassList().get(setState.getClassListIndex()));
+                        //setState.setStudentStatCollect(this);
+                        SetState.getInstance().setStudentStatCollect(currentInstance);
+                        SetState.getInstance().setAreYouSureMessageCause("backButton");
+                        decorate.areYouSureMessage(null, "studentStatsEmpty", "Remove placeholder(s) to continue?", 230, 90);
+                        setState.setCanContinue(false);
+                    }
+
                 }, 2, "backButton",null, currentClass);
         }});
     }
@@ -406,6 +419,9 @@ public class StudentStatCollect extends JFrame {
                     Pattern patternForPercentage = Pattern.compile("^[-+]?\\d*\\.?\\d+(e[-+]?\\d+)?%?$", Pattern.CASE_INSENSITIVE);
                     Boolean percentageFormatOkay = correctBoxFormatChecker(patternForPercentage, 3); //for percentage
                     if ((matcherBoolean == true) && (gradesFormatOkay) && (percentageFormatOkay)) {
+                        //window.remove(newdelcontainerflow);
+                        window.remove(newDelContainerFlow);
+                        //window.remove(newDelContainer);
                         hideWindow();
                         removeVariablesInWindow();
                         new PrintStudentGrades(set.getWindow(), setUserInformation.getStudentOrTeacher(), setUserInformation.getExistingOrNew());
@@ -514,6 +530,8 @@ public class StudentStatCollect extends JFrame {
                 Boolean percentageFormatOkay = correctBoxFormatChecker(patternForPercentage, 3); //for percentage
                 if ((matcherBoolean == true) && (gradesFormatOkay) && (percentageFormatOkay)) {
                     hideWindow();
+                    window.remove(newDelContainerFlow);
+                    removeVariablesInWindow();
                     new PrintStudentGrades(set.getWindow(), setUserInformation.getStudentOrTeacher(), setUserInformation.getExistingOrNew());
                 }
 

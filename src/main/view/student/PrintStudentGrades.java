@@ -123,6 +123,9 @@ public class PrintStudentGrades extends JFrame {
         ArrayList <Integer> gradeTypeNumberList = setList.getGradeTypeList();
         int gradeTypeAmount = gradeTypeNumberList.get(whichCurrClassIndex);//setList.getCurrentClassIndex();
         JPanel allContainer = new JPanel(new GridLayout(2,gradeTypeAmount,5,5)); //rows,cols
+        JPanel borderContainer = new JPanel(new BorderLayout());
+        borderContainer.add(new JLabel("placeholdType"),BorderLayout.NORTH);
+        borderContainer.add(allContainer,BorderLayout.CENTER);
 
         //allContainer.add(new JTextField("allContainerBox"));
         System.out.println("1111 ");
@@ -130,28 +133,36 @@ public class PrintStudentGrades extends JFrame {
         allContainer.add(new JLabel("Average"));//create.createTextBox("Average", "JLabel", false));
         allContainer.add(new JLabel("Perc. of final grade"));//allContainer.add(create.createTextBox("Perc. of final grade", "JLabel", false));
         allContainer.add(new JLabel("Contribution"));//allContainer.add(create.createTextBox("Contribution", "JLabel", false));
-        allContainer.add(new JLabel(gradeTypeList.get(0)));//allContainer.add(create.createTextBox(gradeTypeList.get(0), "JLabel", false));
+        //allContainer.add(new JLabel(gradeTypeList.get(0)));//allContainer.add(create.createTextBox(gradeTypeList.get(0), "JLabel", false));
         System.out.println("4444 ");
 
         for (int i = 0; i < gradeTypeNumberList.get(whichCurrClassIndex); i++) {
             System.out.println("i "+gradeTypeNumberList);
             System.out.println("i "+listOfAverages);
             System.out.println("i "+i);
+            System.out.println("listofaverages.get(i) "+ listOfAverages.get(i));
             System.out.println("i "+listOfAverages.get(i));
 
             allContainer.add(new JLabel(String.valueOf(listOfAverages.get(i))));//allContainer.add(create.createTextBox(String.valueOf(listOfAverages.get(i)), "JLabel", false));
             allContainer.add(new JLabel(String.valueOf(percentageOfGradeList.get(i))));//allContainer.add(create.createTextBox(String.valueOf(percentageOfGradeList.get(i)), "JLabel", false));
             allContainer.add(new JLabel(String.valueOf(amountOfFinalGrade.get(i))));//allContainer.add(create.createTextBox(String.valueOf(amountOfFinalGrade.get(i)), "JLabel", false));
         }
+        window.add(borderContainer);
+        //window.add(allContainer);
 
-        window.add(allContainer);
 
+        // JFrame window = Set.getInstance().getWindow();
+        // Component[] windowComponents = window.getContentPane().getComponents();
 
-        JFrame window = Set.getInstance().getWindow();
-        Component[] windowComponents = window.getContentPane().getComponents();
+        // for (Component windowComp : windowComponents) {
+        //     System.out.println("compcount " + windowComponents.length + " classname "+ windowComp.getClass().getName() + " regname "+windowComp.getName() + " isvisible "+windowComp.isVisible());
+        // }
 
-        for (Component windowComp : windowComponents) {
-            System.out.println("compcount " + windowComponents.length + " classname "+ windowComp.getClass().getName() + " regname "+windowComp.getName() + " isvisible "+windowComp.isVisible());
+        Component[] windowComponents3 = window.getContentPane().getComponents();
+        int i = 0;
+        for (Component windowComp : windowComponents3) {
+            System.out.println("compcount " + i + " classname "+ windowComp.getClass().getName() + " regname "+windowComp.getName() + " isvisible "+windowComp.isVisible());
+            i++;
         }
 
     }
