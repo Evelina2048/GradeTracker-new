@@ -128,13 +128,11 @@ public class PrintStudentGrades extends JFrame {
         borderContainer.add(allContainer,BorderLayout.CENTER);
 
         //allContainer.add(new JTextField("allContainerBox"));
-        System.out.println("1111 ");
         Creator create = new Creator();
         allContainer.add(new JLabel("Average"));//create.createTextBox("Average", "JLabel", false));
         allContainer.add(new JLabel("Perc. of final grade"));//allContainer.add(create.createTextBox("Perc. of final grade", "JLabel", false));
         allContainer.add(new JLabel("Contribution"));//allContainer.add(create.createTextBox("Contribution", "JLabel", false));
         //allContainer.add(new JLabel(gradeTypeList.get(0)));//allContainer.add(create.createTextBox(gradeTypeList.get(0), "JLabel", false));
-        System.out.println("4444 ");
 
         for (int i = 0; i < gradeTypeNumberList.get(whichCurrClassIndex); i++) {
             System.out.println("i "+gradeTypeNumberList);

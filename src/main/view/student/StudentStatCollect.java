@@ -139,12 +139,9 @@ public class StudentStatCollect extends JFrame {
         backButtonPanel.add(backButton);
         backAction(backButton);
         JButton saveButton = createButton.saveButtonCreate();
-        System.out.println("1111 "+(saveButton==set.getCurrentSaveButton()));
         JPanel saveButtonPanel = new JPanel();
         saveButton.setEnabled(false);
-        System.out.println("2222 "+(saveButton==set.getCurrentSaveButton()));
         saveButtonPanel.add(saveButton);
-        System.out.println("3333 "+(saveButton==set.getCurrentSaveButton()));
         saveAction(saveButton);
         saveButton.setEnabled(false);
 
@@ -166,17 +163,20 @@ public class StudentStatCollect extends JFrame {
                 actionPriorities.setCurrentClass(currentClass);
                 actionPriorities.addClassActionListener(b -> {
                     System.out.println("hfwehofohe filewrite how many placeholders "+fileWrite.howManyPlaceholders());
-                    if(setState.getCanContinue() && (fileWrite.howManyPlaceholders() == 0)) {
+                    if(setState.getCanContinue()) {//&& (fileWrite.howManyPlaceholders() == 0)) {
                         System.out.println("classlabelpanel "+classLabelPanel.getComponentCount());
                         //saveButtonAction("backButton"); //8/22
-                        if (setState.getClassListIndex() == 0) { //case for back to classes
-                            System.out.println("hidewindow1");
+                        create.setTextFieldContainer(setState.getTextFieldPanel());
+                        System.out.println("hfwehofohe2 filewrite how many placeholders "+fileWrite.howManyPlaceholders());
+                        if (setState.getClassListIndex() == 0 && (fileWrite.howManyPlaceholders() == 0)) { //case for back to classes
+                            System.out.println("hidewindow1 "+ fileWrite.howManyPlaceholders());
                             hideWindow();
                             StudentClasses studentClasses = new StudentClasses();
                             studentClasses.studentClassesLaunch();
                             saveButtonAction("backButton");
                         }
                         else if (setState.getClassListIndex() > 0) {
+                            System.out.println("hidewindow111");
                             goToPreviousClasses();
 
                             JFrame window = Set.getInstance().getWindow();
@@ -209,15 +209,15 @@ public class StudentStatCollect extends JFrame {
                             // }
                         }
                     }
-                    else if (fileWrite.howManyPlaceholders() > 0) {
-                        Decorator decorate = new Decorator();
-                        System.out.println("up Z how many placeholders? "+fileWrite.howManyPlaceholders()+" current class "+ setList.getFinalClassList().get(setState.getClassListIndex()));
-                        //setState.setStudentStatCollect(this);
-                        SetState.getInstance().setStudentStatCollect(currentInstance);
-                        SetState.getInstance().setAreYouSureMessageCause("backButton");
-                        decorate.areYouSureMessage(null, "studentStatsEmpty", "Remove placeholder(s) to continue?", 230, 90);
-                        setState.setCanContinue(false);
-                    }
+                    // else if (fileWrite.howManyPlaceholders() > 0) {
+                    //     Decorator decorate = new Decorator();
+                    //     System.out.println("up Z how many placeholders? "+fileWrite.howManyPlaceholders()+" current class "+ setList.getFinalClassList().get(setState.getClassListIndex()));
+                    //     //setState.setStudentStatCollect(this);
+                    //     SetState.getInstance().setStudentStatCollect(currentInstance);
+                    //     SetState.getInstance().setAreYouSureMessageCause("backButton");
+                    //     decorate.areYouSureMessage(null, "studentStatsEmpty", "Remove placeholder(s) to continue?", 230, 90);
+                    //     setState.setCanContinue(false);
+                    // }
 
                 }, 2, "backButton",null, currentClass);
         }});
@@ -271,11 +271,9 @@ public class StudentStatCollect extends JFrame {
     }
 
     private void saveAction(JButton saveButton) {
-        System.out.println("4444 "+(saveButton==set.getCurrentSaveButton()));
         saveButton.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent e) {
                 //check if textbox is vaild
-                System.out.println("5555 "+(saveButton==set.getCurrentSaveButton()));
                 saveButton.setEnabled(false);
                 saveButtonAction("Neither");
             }

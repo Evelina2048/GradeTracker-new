@@ -324,14 +324,14 @@ private int iteratePanelForHowManyPlaceholders(int labelOrNotIndex) {
             else if (component instanceof JPanel) {
                 returnedBox = goIntoPanel.goIntoPanelReturnTextbox(setState.getTextFieldPanel(), i);
                 //System.out.println("returnedboxshouldbeseventimes " + returnedBox.getText());
-                if (setState.getEmptiedState(returnedBox) == false) {
+                if (setState.getEmptiedState(returnedBox) == false && (returnedBox.getText().equals("Credits (Optional)"))) {
                     System.out.println("is a placeholder2 "+ returnedBox.getText());
                     placeholderAmount++;
                 }
 
                 else {
                     System.out.println("not a placeholder "+returnedBox.getText());
-                } 
+                }
             }
             else {
                 System.out.println("component is something else. Something went wrong"+ component.getClass().getName());

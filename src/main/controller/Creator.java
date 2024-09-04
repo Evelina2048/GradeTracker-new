@@ -51,7 +51,6 @@ public class Creator {
         int width = 144;
         int height = 50;
         Decorator decorate = new Decorator();
-        System.out.println("2222 ");
         if (textboxCounter < 30 && my_type.equals("JTextField")) {
             textboxCounter++;
             textField = decorate.decorateTextBox(placeholder);
@@ -69,7 +68,6 @@ public class Creator {
             decorate.maximumAmountReachedPopup(); 
         }
         else if (my_type.equals("JLabel")) {
-            System.out.println("3333 ");
             JLabel toAddType = new JLabel(placeholder);
             textFieldPanel.add(toAddType);
         }
