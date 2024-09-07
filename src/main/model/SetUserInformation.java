@@ -41,21 +41,29 @@ public class SetUserInformation {
     }
 
     public String getPathToUsernameFolder() {
-        return "/Users/evy/Documents/GradeTracker-new/src/main/view/UserInfo/StudentInfo/"+getUsername();
+        //return "/Users/evy/Documents/GradeTracker-new/src/main/view/UserInfo/StudentInfo/"+getUsername();
+        return "~/Documents/GradeTracker-new/src/main/view/UserInfo/StudentInfo/"+getUsername();
     }
 
     public String getPathToClassInformationFolder() {
         //return;
-        return "/Users/evy/Documents/GradeTracker-new/src/main/view/UserInfo/StudentInfo/"+getUsername()+"/ClassInformation/";
+        //return "/Users/evy/Documents/GradeTracker-new/src/main/view/UserInfo/StudentInfo/"+getUsername()+"/ClassInformation/";
+        String usernameFolder = getPathToUsernameFolder();
+        return usernameFolder+"/ClassInformation/";
     }
 
     public String getPathToClassTextFile() {
         //return;
-        return "/Users/evy/Documents/GradeTracker-new/src/main/view/UserInfo/StudentInfo/"+getUsername()+"/ClassInformation/class.txt";
+        //return "/Users/evy/Documents/GradeTracker-new/src/main/view/UserInfo/StudentInfo/"+getUsername()+"/ClassInformation/class.txt"; //KEEP
+        //return "/home/eaguenther/Documents/GradeTracker-new/src/main/view/UserInfo/StudentInfo/"+getUsername()+"/ClassInformation/class.txt";
+        String classInfoFolder = getPathToClassInformationFolder();
+        return classInfoFolder+"/class.txt";
     }
 
     public String getPathToClassInformationFileWithTextField(JTextField textField) {
-        return "/Users/evy/Documents/GradeTracker-new/src/main/view/UserInfo/StudentInfo/"+getUsername()+"/ClassInformation/"+textField.getText()+".txt";
+        //return "/Users/evy/Documents/GradeTracker-new/src/main/view/UserInfo/StudentInfo/"+getUsername()+"/ClassInformation/"+textField.getText()+".txt";
+        String classInfoFolder = getPathToClassInformationFolder();
+        return classInfoFolder+textField.getText()+".txt";
     }
 
     public String getPathToClassInformationFileWithIndex() {
@@ -63,12 +71,16 @@ public class SetUserInformation {
         System.out.println("final list in path"+ setList.getFinalClassList());
         System.out.println("number 2 "+setList.getFinalClassList().get(setState.getClassListIndex()));
 
-        return  "/Users/evy/Documents/GradeTracker-new/src/main/view/UserInfo/StudentInfo/"+getUsername()+"/ClassInformation/"+setList.getFinalClassList().get(setState.getClassListIndex())+".txt";
+        //return  "/Users/evy/Documents/GradeTracker-new/src/main/view/UserInfo/StudentInfo/"+getUsername()+"/ClassInformation/"+setList.getFinalClassList().get(setState.getClassListIndex())+".txt";
+        String classInfoFolder = getPathToClassInformationFolder();
+        return  classInfoFolder+setList.getFinalClassList().get(setState.getClassListIndex())+".txt";
     }
 
     public String getPathToClassInformationFileWithChosenIndex(int chosenIndex) {
         System.out.println("final list in path"+ setList.getFinalClassList()+" "+"/Users/evy/Documents/GradeTracker-new/src/main/view/UserInfo/StudentInfo/"+getUsername()+"/ClassInformation/"+setList.getFinalClassList().get(chosenIndex)+".txt");
-        return  "/Users/evy/Documents/GradeTracker-new/src/main/view/UserInfo/StudentInfo/"+getUsername()+"/ClassInformation/"+setList.getFinalClassList().get(chosenIndex)+".txt";
+        //return  "/Users/evy/Documents/GradeTracker-new/src/main/view/UserInfo/StudentInfo/"+getUsername()+"/ClassInformation/"+setList.getFinalClassList().get(chosenIndex)+".txt";
+        String classInfoFolder = getPathToClassInformationFolder();
+        return classInfoFolder+setList.getFinalClassList().get(chosenIndex)+".txt";
     }
 
     public void setExistingOrNew(String myExistingOrNew) {
@@ -88,8 +100,8 @@ public class SetUserInformation {
     }
 
     public void addDeleteToQueue(String text) {
-        deleteQueue.add("/Users/evy/Documents/GradeTracker-new/target/classes/main/view/UserInfo/StudentInfo/"+getUsername()+"/ClassInformation/"+text+".txt");
-
+        //deleteQueue.add("/Users/evy/Documents/GradeTracker-new/target/classes/main/view/UserInfo/StudentInfo/"+getUsername()+"/ClassInformation/"+text+".txt");
+        deleteQueue.add("~/Documents/GradeTracker-new/target/classes/main/view/UserInfo/StudentInfo/"+getUsername()+"/ClassInformation/"+text+".txt");
     }
 
     public ArrayList<String> getDeleteQueue() {

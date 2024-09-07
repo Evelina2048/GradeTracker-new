@@ -52,8 +52,10 @@ public void writeFolderToFile() {
     String folderPath = setUserInformation.getPathToClassInformationFolder();
     File folder = new File(folderPath);
     if (!folder.exists()) {
+        System.out.println("hiya");
         folder.mkdirs();
     }
+    System.out.println("hello. file exists? "+ folder.exists());
 }
 
 private void decideIfWrite(Component component, BufferedWriter writer) {
@@ -253,6 +255,8 @@ public  ArrayList<String> getClassList() {
 }
 
 public int howManyPlaceholders() {
+    System.out.println("4444");
+
     GoIntoPanel goIntoPanel = new GoIntoPanel();
     int placeholderAmount = 00000;
     JPanel tempTextFieldPanel = setState.getTextFieldPanel();
@@ -266,38 +270,47 @@ public int howManyPlaceholders() {
 
         if (tempTextFieldPanel.getComponent(0) instanceof JPanel) {
             compZero = goIntoPanel.goIntoPanelReturnTypeOfFirstComponentInPanel((JPanel) tempTextFieldPanel.getComponent(0));
+
         }
         
         else if (tempTextFieldPanel.getComponent(0) instanceof JTextField) {
             compZero = "javax.swing.JTextField";
+            System.out.println("5555.2");
+
         }
 
         else if (tempTextFieldPanel.getComponent(1) instanceof JPanel) {
             compOne = goIntoPanel.goIntoPanelReturnTypeOfFirstComponentInPanel((JPanel) tempTextFieldPanel.getComponent(1));
+
         }
         
         else if (tempTextFieldPanel.getComponent(0) instanceof JTextField) {
             compOne = "javax.swing.JTextField";
+
         }
 
         //String compOne = goIntoPanel.goIntoPanelReturnTypeOfFirstComponentInPanel((JPanel) tempTextFieldPanel.getComponent(1));
         //System.out.println("compOne "+ compOne);
         //System.out.println("(goIntoPanel.goIntoPanelReturnTypeOfFirstComponentInPanel(tempTextFieldPanel).equals(javax.swing.JTextField) "+ (goIntoPanel.goIntoPanelReturnTypeOfFirstComponentInPanel((JPanel) tempTextFieldPanel.getComponent(1)).equals("javax.swing.JTextField")));
     if ((compOne).equals("javax.swing.JLabel")) { //commented 8/18
+        //System.out.println("6666.1");
         placeholderAmount = iteratePanelForHowManyPlaceholders(1);
     }
 
     else if ((compZero.equals("javax.swing.JPanel"))) {
+        // System.out.println("6666.2");
         System.out.println("step 2.2");
         placeholderAmount = iteratePanelForHowManyPlaceholders(0);
     }
 
     else if ((goIntoPanel.goIntoPanelReturnTypeOfFirstComponentInPanel(tempTextFieldPanel).equals("javax.swing.JTextField"))) {
         System.out.println("step 2.3");
+        System.out.println("6666.3");
         placeholderAmount = iteratePanelForHowManyPlaceholders(0);
     }
 
     else if (compZero.equals("javax.swing.JLabel")) {
+        //System.out.println("6666.4");
         //System.out.println("hiiiiii ima need more info friend like your component count "+ tempTextFieldPanel.getComponentCount()+" and what comp(0) text is "+ (goIntoPanel.goIntoPanelReturnTextbox(((JPanel) tempTextFieldPanel.getComponent(0)),0)).getText());
         placeholderAmount = iteratePanelForHowManyPlaceholders(1);
         
@@ -314,29 +327,40 @@ private int iteratePanelForHowManyPlaceholders(int labelOrNotIndex) {
     GoIntoPanel goIntoPanel = new GoIntoPanel();
     int placeholderAmount = 0;
     JTextField returnedBox = new JTextField("howmanyplaceholdersnotchanged");
-
+    System.out.println("7777 should be greater than zero "+setState.getTextFieldPanel().getComponentCount());
     for (int i = labelOrNotIndex; i < setState.getTextFieldPanel().getComponentCount(); i++) {
+        System.out.println("8888");
             Component component = setState.getTextFieldPanel().getComponent(i);
             if (component instanceof JTextField && setState.getEmptiedState(textField) == false) {
+                System.out.println("9999.1");
                 System.out.println("is a placeholder1 "+ returnedBox.getText());
                 placeholderAmount++;
+                setState.setCanContinue(false);
             }
             else if (component instanceof JPanel) {
+                System.out.println("9999.2");
                 returnedBox = goIntoPanel.goIntoPanelReturnTextbox(setState.getTextFieldPanel(), i);
                 //System.out.println("returnedboxshouldbeseventimes " + returnedBox.getText());
-                if (setState.getEmptiedState(returnedBox) == false && (returnedBox.getText().equals("Credits (Optional)"))) {
+                if (setState.getEmptiedState(returnedBox) == false && (!returnedBox.getText().equals("Credits (Optional)"))) {
                     System.out.println("is a placeholder2 "+ returnedBox.getText());
                     placeholderAmount++;
+                    setState.setCanContinue(false);
                 }
+                // else if (setState.getEmptied)
 
                 else {
                     System.out.println("not a placeholder "+returnedBox.getText());
                 }
             }
             else {
+                System.out.println("9999.3");
                 System.out.println("component is something else. Something went wrong"+ component.getClass().getName());
             }
     
+    }
+
+    if (placeholderAmount == 0) {
+        setState.setCanContinue(true);
     }
     return placeholderAmount;
 }

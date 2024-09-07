@@ -322,6 +322,7 @@ public class Gather {
 
     private void nextButtonAddActionListener() {
 
+        //:
         nextButton.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
@@ -338,6 +339,7 @@ public class Gather {
                 }, 1, "nextButton", null, currentClass);  // Add this ActionListener with priority 1
             }
         });
+        //:
     }
 
     private void doNextButtonProcedure() {
@@ -434,6 +436,10 @@ public class Gather {
     }
 
     public class EnterAction extends AbstractAction {
+        // @Override
+        // public void actionPerformed(ActionEvent e) {
+        //     doNextButtonProcedure();
+        // }
 
         @Override
         public void actionPerformed(ActionEvent e) {

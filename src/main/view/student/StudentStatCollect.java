@@ -155,13 +155,16 @@ public class StudentStatCollect extends JFrame {
     }
 
     private void backAction(JButton backButton) {
+        System.out.println("1111");
         backButton.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent e) {
+                System.out.println("2222");
                 if (textBoxPanel.getComponentCount() >= 2) {
                     //goIntoPanel.goIntoPanelReturnTextbox((JPanel) textBoxPanel.getComponent(1), 0);
                 }//TODO maybe bug?
                 actionPriorities.setCurrentClass(currentClass);
                 actionPriorities.addClassActionListener(b -> {
+                    System.out.println("3333");
                     System.out.println("hfwehofohe filewrite how many placeholders "+fileWrite.howManyPlaceholders());
                     if(setState.getCanContinue()) {//&& (fileWrite.howManyPlaceholders() == 0)) {
                         System.out.println("classlabelpanel "+classLabelPanel.getComponentCount());
