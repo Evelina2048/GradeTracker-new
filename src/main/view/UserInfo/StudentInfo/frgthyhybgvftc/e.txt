@@ -1,5 +1,0 @@
-test
-tests
-e
-Percentage of Grade
-Grades(format:# # #)

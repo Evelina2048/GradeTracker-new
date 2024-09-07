@@ -41,13 +41,6 @@ import controller.FileWriting;
 
 import java.awt.event.KeyEvent;
 
-
-import java.awt.event.MouseEvent;
-        import java.awt.event.MouseListener;
-        import java.awt.Component;
-        import java.awt.event.MouseAdapter;
-
-
 //import class files
 
 public class Gather {
@@ -57,8 +50,6 @@ public class Gather {
     private Set set;
     private SetState setState;
     private SetUserInformation setUserInformation;
-
-    private Creator create;
 
     private SetListeners setListeners;
     private FileWriting fileWrite = new FileWriting();
@@ -103,11 +94,7 @@ public class Gather {
         setUserInformation.getStudentOrTeacher();
         pathToUsernameFolder = setUserInformation.getPathToUsernameFolder();
         window = set.getWindow();
-        //new Creator();
-        //Creator create = new Creator();
 
-        //System.out.println();
-        this.create = new Creator();
         makeUsernameBox();
         gatherLaunch();
 
@@ -115,9 +102,7 @@ public class Gather {
 
     public void gatherLaunch () {
         actionPriorities.setCurrentClass("Gather Loading");
-        //set.setCurrentClass("Gather");
-        //actionPriorities.setCurrentClass("Gather"); //needs to be set here as well because if going between classes really quick on multiple threads, want to make sure actionPriorities has the right class. And using integers that represent view order for comparison logic in class
-        
+
         window.setTitle("Gather");
         window = set.getWindow();
 
@@ -150,14 +135,12 @@ public class Gather {
         }
         else if (setUserInformation.getUsername() == null && set.getNewOrExistingChanged() == true) { //user came back to gather after changing newuser setting
             System.out.println("whatToSetTextFieldTo opt 2");
-            textField = decorate.decorateTextBox("Enter user name");//create.createTextBox("Enter user name", "JTextField", false);
-            //setState.setLoadedState(textField, false);
-            //setState.setEmptiedState(textField, false);
+            textField = decorate.decorateTextBox("Enter user name");
         }
 
         else {
             System.out.println("whatToSetTextFieldTo opt 3 username: "+setUserInformation.getUsername());
-            textField = decorate.decorateTextBox(setUserInformation.getUsername());//create.createTextBox(setUserInformation.getUsername(), "JTextField", true);//
+            textField = decorate.decorateTextBox(setUserInformation.getUsername());
             setState.setLoadedState(textField, true);
 
             setState.setEmptiedState(textField, true);
@@ -294,8 +277,6 @@ public class Gather {
         makeNextButton();
         backNextButtonsPanel = createButton.makeBackNextButtonsPanel(backButtonPanel,saveButtonPanel, nextButtonPanel);
         window.add(backNextButtonsPanel, BorderLayout.SOUTH);
-        //currentClass = "Gather";
-        //actionPriorities.setCurrentClass(currentClass);
     }
 
     private void makeBackButton() {
@@ -340,13 +321,7 @@ public class Gather {
     }
 
     private void nextButtonAddActionListener() {
-        // nextButton.addActionListener(new ActionListener() {
-        //     public void actionPerformed(ActionEvent e) {
-        //         doNextButtonProcedure();
-        //     }
-        // });
 
-        //:
         nextButton.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
@@ -363,7 +338,6 @@ public class Gather {
                 }, 1, "nextButton", null, currentClass);  // Add this ActionListener with priority 1
             }
         });
-        //:
     }
 
     private void doNextButtonProcedure() {
@@ -460,10 +434,6 @@ public class Gather {
     }
 
     public class EnterAction extends AbstractAction {
-        // @Override
-        // public void actionPerformed(ActionEvent e) {
-        //     doNextButtonProcedure();
-        // }
 
         @Override
         public void actionPerformed(ActionEvent e) {

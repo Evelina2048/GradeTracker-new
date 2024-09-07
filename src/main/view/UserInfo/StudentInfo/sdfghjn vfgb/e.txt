@@ -1,8 +1,0 @@
-Credits (optional)
-Grade Type 2
-Percentage of Grade
-Grades(format:# # #)
-hello
-Grade Type 6
-Percentage of Grade
-Grades(format:# # #)
