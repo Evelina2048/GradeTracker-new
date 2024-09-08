@@ -155,17 +155,15 @@ public class StudentStatCollect extends JFrame {
     }
 
     private void backAction(JButton backButton) {
-        System.out.println("1111");
         backButton.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent e) {
-                System.out.println("2222");
                 if (textBoxPanel.getComponentCount() >= 2) {
                     //goIntoPanel.goIntoPanelReturnTextbox((JPanel) textBoxPanel.getComponent(1), 0);
                 }//TODO maybe bug?
                 actionPriorities.setCurrentClass(currentClass);
                 actionPriorities.addClassActionListener(b -> {
-                    System.out.println("3333");
                     System.out.println("hfwehofohe filewrite how many placeholders "+fileWrite.howManyPlaceholders());
+                    System.out.println("11 11 11 11 set.getcancontinue "+ setState.getCanContinue());
                     if(setState.getCanContinue()) {//&& (fileWrite.howManyPlaceholders() == 0)) {
                         System.out.println("classlabelpanel "+classLabelPanel.getComponentCount());
                         //saveButtonAction("backButton"); //8/22
@@ -212,15 +210,15 @@ public class StudentStatCollect extends JFrame {
                             // }
                         }
                     }
-                    // else if (fileWrite.howManyPlaceholders() > 0) {
-                    //     Decorator decorate = new Decorator();
-                    //     System.out.println("up Z how many placeholders? "+fileWrite.howManyPlaceholders()+" current class "+ setList.getFinalClassList().get(setState.getClassListIndex()));
-                    //     //setState.setStudentStatCollect(this);
-                    //     SetState.getInstance().setStudentStatCollect(currentInstance);
-                    //     SetState.getInstance().setAreYouSureMessageCause("backButton");
-                    //     decorate.areYouSureMessage(null, "studentStatsEmpty", "Remove placeholder(s) to continue?", 230, 90);
-                    //     setState.setCanContinue(false);
-                    // }
+                    else if (fileWrite.howManyPlaceholders() > 0) {
+                        Decorator decorate = new Decorator();
+                        System.out.println("up Z how many placeholders? "+fileWrite.howManyPlaceholders()+" current class "+ setList.getFinalClassList().get(setState.getClassListIndex()));
+                        //setState.setStudentStatCollect(this);
+                        SetState.getInstance().setStudentStatCollect(currentInstance);
+                        SetState.getInstance().setAreYouSureMessageCause("backButton"); //TODO areyousuremessage
+                        decorate.areYouSureMessage(null, "studentStatsEmpty", "Remove placeholder(s) to continue?", 230, 90);
+                        setState.setCanContinue(false);
+                    }
 
                 }, 2, "backButton",null, currentClass);
         }});

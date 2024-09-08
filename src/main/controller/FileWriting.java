@@ -255,7 +255,6 @@ public  ArrayList<String> getClassList() {
 }
 
 public int howManyPlaceholders() {
-    System.out.println("4444");
 
     GoIntoPanel goIntoPanel = new GoIntoPanel();
     int placeholderAmount = 00000;
@@ -275,7 +274,6 @@ public int howManyPlaceholders() {
         
         else if (tempTextFieldPanel.getComponent(0) instanceof JTextField) {
             compZero = "javax.swing.JTextField";
-            System.out.println("5555.2");
 
         }
 
@@ -289,17 +287,12 @@ public int howManyPlaceholders() {
 
         }
 
-        //String compOne = goIntoPanel.goIntoPanelReturnTypeOfFirstComponentInPanel((JPanel) tempTextFieldPanel.getComponent(1));
-        //System.out.println("compOne "+ compOne);
         //System.out.println("(goIntoPanel.goIntoPanelReturnTypeOfFirstComponentInPanel(tempTextFieldPanel).equals(javax.swing.JTextField) "+ (goIntoPanel.goIntoPanelReturnTypeOfFirstComponentInPanel((JPanel) tempTextFieldPanel.getComponent(1)).equals("javax.swing.JTextField")));
     if ((compOne).equals("javax.swing.JLabel")) { //commented 8/18
-        //System.out.println("6666.1");
         placeholderAmount = iteratePanelForHowManyPlaceholders(1);
     }
 
     else if ((compZero.equals("javax.swing.JPanel"))) {
-        // System.out.println("6666.2");
-        System.out.println("step 2.2");
         placeholderAmount = iteratePanelForHowManyPlaceholders(0);
     }
 
