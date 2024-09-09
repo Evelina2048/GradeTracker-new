@@ -100,6 +100,7 @@ public class Decorator {
     }
 
     public String areYouSureMessage(JTextField importedTextField, String myReason, String text, int width, int height) {
+        System.out.println("4444");
         reason = myReason;
         textField = importedTextField;
         dialog = new JDialog(window, true);
@@ -133,6 +134,7 @@ public class Decorator {
     private void yesButtonActionListener(JButton yesButton) {
         yesButton.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent e) { 
+                System.out.println("5555");
                yesButtonAction();
             }
         });
@@ -140,11 +142,13 @@ public class Decorator {
     }
 
     private void yesButtonAction() {
+        System.out.println("6666");
          if (reason == "deleting") {   
             reasonIsDeletingActionYes();
          }  
 
          else if (reason == "studentStatsEmpty") {
+            System.out.println("7777");
             reasonIsStudentStatsEmptyYes();
          }
 
@@ -216,6 +220,7 @@ public class Decorator {
 
     private void reasonIsStudentStatsEmptyYes() {
         //go to next class or print class
+        System.out.println("8888 cause "+setState.getAreYouSureMessageCause());
         String actionCause = setState.getAreYouSureMessageCause();
 
         //setState.incrementClassListIndex();
@@ -226,11 +231,18 @@ public class Decorator {
         }
 
         else if (actionCause.equals("backButton")) {
+            System.out.println("9999 studentstatnull? "+(studentStat ==null));
             JButton backButton = studentStat.TESTBACKBUTTON();
-            ActionEvent backActionEvent = new ActionEvent(backButton, ActionEvent.ACTION_PERFORMED, "Click");
-            for (ActionListener listener : backButton.getActionListeners()) {
-                 listener.actionPerformed(backActionEvent);
-            } //8/22
+            //make sure you can go back even with placeholders:
+            setState.setCanContinue(true);
+            System.out.println("! cancont "+setState.getCanContinue());
+            // ActionEvent backActionEvent = new ActionEvent(backButton, ActionEvent.ACTION_PERFORMED, "Click");
+            // for (ActionListener listener : backButton.getActionListeners()) {
+            //     System.out.println("10 10 10 10 "+setState.getCanContinue());
+            //      listener.actionPerformed(backActionEvent);
+            // } //8/22
+            studentStat.backAction2();
+            //backButton.doClick();
 
 
             // CompositeActionListenerWithPriorities actionPriorities = CompositeActionListenerWithPriorities.getInstance();

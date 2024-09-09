@@ -298,12 +298,10 @@ public int howManyPlaceholders() {
 
     else if ((goIntoPanel.goIntoPanelReturnTypeOfFirstComponentInPanel(tempTextFieldPanel).equals("javax.swing.JTextField"))) {
         System.out.println("step 2.3");
-        System.out.println("6666.3");
         placeholderAmount = iteratePanelForHowManyPlaceholders(0);
     }
 
     else if (compZero.equals("javax.swing.JLabel")) {
-        //System.out.println("6666.4");
         //System.out.println("hiiiiii ima need more info friend like your component count "+ tempTextFieldPanel.getComponentCount()+" and what comp(0) text is "+ (goIntoPanel.goIntoPanelReturnTextbox(((JPanel) tempTextFieldPanel.getComponent(0)),0)).getText());
         placeholderAmount = iteratePanelForHowManyPlaceholders(1);
         
@@ -320,18 +318,14 @@ private int iteratePanelForHowManyPlaceholders(int labelOrNotIndex) {
     GoIntoPanel goIntoPanel = new GoIntoPanel();
     int placeholderAmount = 0;
     JTextField returnedBox = new JTextField("howmanyplaceholdersnotchanged");
-    System.out.println("7777 should be greater than zero "+setState.getTextFieldPanel().getComponentCount());
     for (int i = labelOrNotIndex; i < setState.getTextFieldPanel().getComponentCount(); i++) {
-        System.out.println("8888");
             Component component = setState.getTextFieldPanel().getComponent(i);
             if (component instanceof JTextField && setState.getEmptiedState(textField) == false) {
-                System.out.println("9999.1");
                 System.out.println("is a placeholder1 "+ returnedBox.getText());
                 placeholderAmount++;
                 setState.setCanContinue(false);
             }
             else if (component instanceof JPanel) {
-                System.out.println("9999.2");
                 returnedBox = goIntoPanel.goIntoPanelReturnTextbox(setState.getTextFieldPanel(), i);
                 //System.out.println("returnedboxshouldbeseventimes " + returnedBox.getText());
                 if (setState.getEmptiedState(returnedBox) == false && (!returnedBox.getText().equals("Credits (Optional)"))) {
@@ -346,7 +340,6 @@ private int iteratePanelForHowManyPlaceholders(int labelOrNotIndex) {
                 }
             }
             else {
-                System.out.println("9999.3");
                 System.out.println("component is something else. Something went wrong"+ component.getClass().getName());
             }
     

@@ -29,6 +29,7 @@ public class CompositeActionListenerWithPriorities implements ActionListener {
 
   @Override
   public void actionPerformed(ActionEvent e) {
+    System.out.println("1111.5");
   //   if (isProcessing) {
   //     return; // Prevent re-entry
   //   }
@@ -50,12 +51,14 @@ public class CompositeActionListenerWithPriorities implements ActionListener {
 isProcessing = true;
 
 try {
+  System.out.println("1111.6");
     TreeSet<Integer> priorities = new TreeSet<>(listeners.keySet()); // Create a copy of the key set
-
+    System.out.println("1111.7 "+priorities.descendingSet());
     for (int priority : priorities.descendingSet()) {
         ArrayList<ActionListener> listenerList = new ArrayList<>(listeners.get(priority)); // Make a copy of the list
-
+        System.out.println("1111.8");
         for (ActionListener listener : listenerList) {
+          System.out.println("1111.9");
             listener.actionPerformed(e); // Execute the action
         }
     }
@@ -80,11 +83,13 @@ try {
   public void addClassActionListener(ActionListener a, int priority, String keyCause, JRadioButton button, String listenerSource){
     //System.out.println("currentclass: "+currentClass+" listenersource "+listenerSource);
     System.out.println("TTT.AAA ");
+    System.out.println("1111.3 size before "+listeners.size()+" is the priority empty "+(listeners.get(priority) == null));
     //deleteActionListener(a);
     if(!listeners.containsKey(priority)){
       listeners.put(priority,new ArrayList<ActionListener>());
     }
     listeners.get(priority).add(a);
+    System.out.println("1111.31 size after "+listeners.size()+" plus priority "+priority);
 
     if (listeners.size() == 2) {
       System.out.println("its being run and stuff 1");
@@ -100,6 +105,7 @@ try {
     //System.out.println("adding action listener currentclass: "+currentClass+" listenersource "+listenerSource);
     System.out.println("should be here: currentclass "+currentClass+ " listenersource "+listenerSource+" keyCause "+ keyCause);
     if (currentClass == listenerSource && !keyCause.equals("click")) {
+      System.out.println("1111.4. current class "+currentClass);
       //ActionEvent event = new ActionEvent(this, ActionEvent.ACTION_PERFORMED, "PerformThisAction");
      // System.out.println("its being run and stuff 2. current class "+ currentClass);
       CompositeActionListenerWithPriorities.this.actionPerformed(new ActionEvent(CompositeActionListenerWithPriorities.this, ActionEvent.ACTION_PERFORMED, "PerformThisActions"));
