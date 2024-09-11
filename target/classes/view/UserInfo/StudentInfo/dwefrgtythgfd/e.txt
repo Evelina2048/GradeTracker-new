@@ -1,0 +1,7 @@
+1
+Grade Type 1
+Percentage of Grade
+Grades(format:# # #)
+Grade Type 2
+Percentage of Grade
+Grades(format:# # #)

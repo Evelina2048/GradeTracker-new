@@ -216,11 +216,9 @@ public class StudentStatCollect extends JFrame {
                         System.out.println("3333");
                         Decorator decorate = new Decorator();
                         System.out.println("up Z how many placeholders? "+fileWrite.howManyPlaceholders()+" current class "+ setList.getFinalClassList().get(setState.getClassListIndex()));
-                        //setState.setStudentStatCollect(this);
                         SetState.getInstance().setStudentStatCollect(currentInstance);
                         SetState.getInstance().setAreYouSureMessageCause("backButton"); //TODO areyousuremessage
                         decorate.areYouSureMessage(null, "studentStatsEmpty", "Remove placeholder(s) to continue?", 230, 90);
-                        //setState.setCanContinue(false);
                     }
 
                 }, 2, "backButton",null, currentClass);
@@ -228,69 +226,32 @@ public class StudentStatCollect extends JFrame {
     }
 
     public void backAction2() { //necessary because if the user tries to go back with placeholders and clicks "yes" option, will get stuck in an infinite loop when back action recalled.
-        //System.out.println("hfwehofohe filewrite how many placeholders "+fileWrite.howManyPlaceholders());
-                    System.out.println("A2222 "+setState.getCanContinue());
-                    if(setState.getCanContinue()) {//&& (fileWrite.howManyPlaceholders() == 0)) {
-                        System.out.println("B2222");
-                        System.out.println("classlabelpanel "+classLabelPanel.getComponentCount());
-                        //saveButtonAction("backButton"); //8/22
-                        create.setTextFieldContainer(setState.getTextFieldPanel());
-                        //System.out.println("hfwehofohe2 filewrite how many placeholders "+fileWrite.howManyPlaceholders());
-                        if (setState.getClassListIndex() == 0) { //case for back to classes
-                            System.out.println("C2222");
-                            System.out.println("hidewindow1 "+ fileWrite.howManyPlaceholders());
-                            hideWindow();
-                            StudentClasses studentClasses = new StudentClasses();
-                            studentClasses.studentClassesLaunch();
-                            saveButtonAction("backButton");
-                        }
-                        else if (setState.getClassListIndex() > 0) {
-                            System.out.println("hidewindow111");
-                            goToPreviousClasses();
-
-                            JFrame window = Set.getInstance().getWindow();
-                            Component[] windowComponents = window.getContentPane().getComponents();
-                            for (int k = 0; k<8;k++) {
-                                Component component = windowComponents[k];
-                                component.setVisible(false);
-                                window.remove(component);
-                            }
-                            //SetList.getInstance().removeStudentStatCollectSettings();
-                            // Component[] windowComponents2 = window.getContentPane().getComponents();
-                            // for (int k = 2; k<=6;k++) {
-                            //     Component component = windowComponents2[k];
-                            //     component.setVisible(false);
-                            //     window.remove(component);
-                            // }
-
-                            Component[] windowComponents2 = window.getContentPane().getComponents();
-                            for (int k = 2; k<=10;k++) {
-                                Component component = windowComponents2[k];
-                                component.setVisible(false);
-                                window.remove(component);
-                            }
-
-                            // Component[] windowComponents3 = window.getContentPane().getComponents();
-                            // int i = 0;
-                            // for (Component windowComp : windowComponents3) {
-                            //     System.out.println("compcount " + i + " classname "+ windowComp.getClass().getName() + " regname "+windowComp.getName() + " isvisible "+windowComp.isVisible());
-                            //     i++;
-                            // }
-                        }
-                    }
-                    setState.setCanContinue(false);
-                    // else if (fileWrite.howManyPlaceholders() > 0) {
-                    //     System.out.println("3333");
-                    //     Decorator decorate = new Decorator();
-                    //     System.out.println("up Z how many placeholders? "+fileWrite.howManyPlaceholders()+" current class "+ setList.getFinalClassList().get(setState.getClassListIndex()));
-                    //     //setState.setStudentStatCollect(this);
-                    //     SetState.getInstance().setStudentStatCollect(currentInstance);
-                    //     SetState.getInstance().setAreYouSureMessageCause("backButton"); //TODO areyousuremessage
-                    //     decorate.areYouSureMessage(null, "studentStatsEmpty", "Remove placeholder(s) to continue?", 230, 90);
-                    //     //setState.setCanContinue(false);
-                    // }
-
-
+        if(setState.getCanContinue()) {//&& (fileWrite.howManyPlaceholders() == 0)) {
+            create.setTextFieldContainer(setState.getTextFieldPanel());
+            if (setState.getClassListIndex() == 0) { //case for back to classes
+                hideWindow();
+                StudentClasses studentClasses = new StudentClasses();
+                studentClasses.studentClassesLaunch();
+                //saveButtonAction("backButton");
+            }
+            else if (setState.getClassListIndex() > 0) {
+                goToPreviousClasses();
+                JFrame window = Set.getInstance().getWindow();
+                Component[] windowComponents = window.getContentPane().getComponents();
+                for (int k = 0; k<8;k++) {
+                    Component component = windowComponents[k];
+                    component.setVisible(false);
+                    window.remove(component);
+                }
+                Component[] windowComponents2 = window.getContentPane().getComponents();
+                for (int k = 2; k<=10;k++) {
+                    Component component = windowComponents2[k];
+                    component.setVisible(false);
+                    window.remove(component);
+                }
+            }
+        }
+        setState.setCanContinue(false);
     }
 
     private void goToPreviousClasses() {
