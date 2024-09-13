@@ -14,6 +14,7 @@ public class SetList {
     private static SetList instance;
 
     private JPanel classLabelPanel;
+    private JPanel readClassLabelPanel;
 
     private ArrayList<Integer> gradeNumber = new ArrayList<>();
 
@@ -67,6 +68,10 @@ public class SetList {
         classLabelPanel = thisClassLabelPanel;
     }
 
+    public void setReadClassLabelPanel(JPanel thisReadClassLabelPanel) {
+        readClassLabelPanel = thisReadClassLabelPanel;
+    }
+
     public JPanel getClassLabelPanel() {
         return classLabelPanel;
     }
@@ -82,6 +87,12 @@ public class SetList {
     public void removeStudentStatCollectSettings() {
         JFrame window = Set.getInstance().getWindow();
         window.remove(classLabelPanel);
+        
+    }
+
+    public void removeStudentStatCollectReadClassLabelPanel() {
+        JFrame window = Set.getInstance().getWindow();
+        window.remove(readClassLabelPanel);
         
     }
 
