@@ -172,14 +172,11 @@ public class StudentStatCollect extends JFrame {
                         create.setTextFieldContainer(setState.getTextFieldPanel());
                         System.out.println("hfwehofohe2 filewrite how many placeholders "+fileWrite.howManyPlaceholders());
                         if (setState.getClassListIndex() == 0 && (fileWrite.howManyPlaceholders() == 0)) { //case for back to classes
-                            System.out.println("1111 placeholders "+fileWrite.howManyPlaceholders());
                             System.out.println("hidewindow1 "+ fileWrite.howManyPlaceholders());
                             hideWindow();
                             StudentClasses studentClasses = new StudentClasses();
-                            System.out.println("1111.1 "+fileWrite.howManyPlaceholders());
                             saveButtonAction("backButton");
                             studentClasses.studentClassesLaunch();
-                            System.out.println("1111.2 "+fileWrite.howManyPlaceholders());
                             // saveButtonAction("backButton"); //was uncommented before 9/11 7:03pm
                         }
                         else if (setState.getClassListIndex() > 0) {
@@ -315,15 +312,16 @@ public class StudentStatCollect extends JFrame {
     }
 
     private void saveButtonAction(String actionCause) {
-        System.out.println("2222 placeholders "+fileWrite.howManyPlaceholders());
+        System.out.println("3333 "+fileWrite.howManyPlaceholders());
         SETTEST.getInstance().TESTSETCURRENTINSTANCE(this);
         set.setFilePath(setUserInformation.getPathToClassInformationFileWithIndex());
         create.setTextFieldContainer(setState.getTextFieldPanel());
 
         //setState.setTextFieldPanel(classLabelPanel); //TODO if you see issue with boxes being weird, this prob source of bug //8/30
 
-        System.out.println("3333 placeholders "+fileWrite.howManyPlaceholders());
+        System.out.println("4444 "+fileWrite.howManyPlaceholders());
         fileWrite.writeTextToFile();
+        System.out.println("5555 "+fileWrite.howManyPlaceholders());
 
         if (fileWrite.howManyPlaceholders() > 0) {
             Decorator decorate = new Decorator();
@@ -355,6 +353,7 @@ public class StudentStatCollect extends JFrame {
     }
 
     public void doNextButtonProcedure() {
+        System.out.println("2222 "+fileWrite.howManyPlaceholders());
         saveButtonAction("nextButton");
         if(setState.getCanContinue()) {
                 setState.incrementClassListIndex();
@@ -400,8 +399,9 @@ public class StudentStatCollect extends JFrame {
 
                     Pattern patternForPercentage = Pattern.compile("^[-+]?\\d*\\.?\\d+(e[-+]?\\d+)?%?$", Pattern.CASE_INSENSITIVE);
                     Boolean percentageFormatOkay = correctBoxFormatChecker(patternForPercentage, 3); //for percentage
+                    Boolean creditsFieldChanged = (setState.getEmptiedState(creditsTextField) != false);//(!creditsTextField.getText().equals("Credits (optional)"));
 
-                    if ((matcherBoolean == true) && (gradesFormatOkay) && (percentageFormatOkay)) {
+                    if (((matcherBoolean == true) || !creditsFieldChanged) && (gradesFormatOkay) && (percentageFormatOkay)) {
                         textBoxPanel.removeAll();
 
                         setState.setTextFieldPanel(textBoxPanel);
@@ -414,7 +414,7 @@ public class StudentStatCollect extends JFrame {
                         buttonSetUpAction();
                     }
 
-                    else if ((matcherBoolean == false) || (gradesFormatOkay == false) || (percentageFormatOkay == false)) {
+                    else if (((matcherBoolean == false) && creditsFieldChanged) || (gradesFormatOkay == false) || (percentageFormatOkay == false)) {
                         Decorator decorate = new Decorator();
                         JDialog dialog = decorate.genericPopUpMessage("<html><center>Invalid Format.<br>-Credits must be an integer<br>Grades must be numbers separated by spaces<br>-Percentage of Grade must be an integer or decimal",null,400,140);
 
@@ -452,7 +452,9 @@ public class StudentStatCollect extends JFrame {
 
                     Pattern patternForPercentage = Pattern.compile("^[-+]?\\d*\\.?\\d+(e[-+]?\\d+)?%?$", Pattern.CASE_INSENSITIVE);
                     Boolean percentageFormatOkay = correctBoxFormatChecker(patternForPercentage, 3); //for percentage
-                    if ((matcherBoolean == true) && (gradesFormatOkay) && (percentageFormatOkay)) {
+                    Boolean creditsFieldChanged = (setState.getEmptiedState(creditsTextField) != false);//(!creditsTextField.getText().equals("Credits (optional)"));
+
+                    if (((matcherBoolean == true)|| !creditsFieldChanged) && (gradesFormatOkay) && (percentageFormatOkay)) {
                         //window.remove(newdelcontainerflow);
                         window.remove(newDelContainerFlow);
                         //window.remove(newDelContainer);
@@ -461,7 +463,7 @@ public class StudentStatCollect extends JFrame {
                         new PrintStudentGrades(set.getWindow(), setUserInformation.getStudentOrTeacher(), setUserInformation.getExistingOrNew());
                     }
 
-                    else if ((matcherBoolean == false) || (gradesFormatOkay == false) || (percentageFormatOkay == false)) {
+                    else if (((matcherBoolean == false) && creditsFieldChanged) || (gradesFormatOkay == false) || (percentageFormatOkay == false)) {
                         Decorator decorate = new Decorator();
                         JDialog dialog = decorate.genericPopUpMessage("<html><center>Invalid Format.<br>-Credits must be an integer<br>Grades must be numbers separated by spaces<br>-Percentage of Grade must be an integer or decimal",null,400,140);
                         dialog.setResizable(false);
@@ -478,7 +480,7 @@ public class StudentStatCollect extends JFrame {
         }
     }
 
-    public void doNextButtonProcedure2() {
+    public void doNextButtonProcedure2() { //necessary to prevent endless loop when need nextbutton action "areyousure" popup.
 
         if(setState.getCanContinue()) {
             setState.incrementClassListIndex();
@@ -514,8 +516,9 @@ public class StudentStatCollect extends JFrame {
 
                 Pattern patternForPercentage = Pattern.compile("^[-+]?\\d*\\.?\\d+(e[-+]?\\d+)?%?$", Pattern.CASE_INSENSITIVE);
                 Boolean percentageFormatOkay = correctBoxFormatChecker(patternForPercentage, 3); //for percentage
+                Boolean creditsFieldChanged = (setState.getEmptiedState(creditsTextField) != false);//(!creditsTextField.getText().equals("Credits (optional)"));
 
-                if ((matcherBoolean == true) && (gradesFormatOkay) && (percentageFormatOkay)) {
+                if (((matcherBoolean == true)|| !creditsFieldChanged) && (gradesFormatOkay) && (percentageFormatOkay)) {
                     textBoxPanel.removeAll();
 
                     setState.setTextFieldPanel(textBoxPanel);
@@ -524,7 +527,7 @@ public class StudentStatCollect extends JFrame {
                     buttonSetUpAction();
                 }
 
-                else if ((matcherBoolean == false) || (gradesFormatOkay == false) || (percentageFormatOkay == false)) {
+                else if (((matcherBoolean == false) && creditsFieldChanged) || (gradesFormatOkay == false) || (percentageFormatOkay == false)) {
                     Decorator decorate = new Decorator();
                     JDialog dialog = decorate.genericPopUpMessage("<html><center>Invalid Format.<br>-Credits must be an integer<br>Grades must be numbers separated by spaces<br>-Percentage of Grade must be an integer or decimal",null,400,140);
 
@@ -562,14 +565,15 @@ public class StudentStatCollect extends JFrame {
 
                 Pattern patternForPercentage = Pattern.compile("^[-+]?\\d*\\.?\\d+(e[-+]?\\d+)?%?$", Pattern.CASE_INSENSITIVE);
                 Boolean percentageFormatOkay = correctBoxFormatChecker(patternForPercentage, 3); //for percentage
-                if ((matcherBoolean == true) && (gradesFormatOkay) && (percentageFormatOkay)) {
+                Boolean creditsFieldChanged = (setState.getEmptiedState(creditsTextField) != false);//(!creditsTextField.getText().equals("Credits (optional)"));
+                if ((((matcherBoolean == true)|| !creditsFieldChanged) || !creditsFieldChanged) && (gradesFormatOkay) && (percentageFormatOkay)) {
                     hideWindow();
                     window.remove(newDelContainerFlow);
                     removeVariablesInWindow();
                     new PrintStudentGrades(set.getWindow(), setUserInformation.getStudentOrTeacher(), setUserInformation.getExistingOrNew());
                 }
 
-                else if ((matcherBoolean == false) || (gradesFormatOkay == false) || (percentageFormatOkay == false)) {
+                else if (((matcherBoolean == false) && creditsFieldChanged) || (gradesFormatOkay == false) || (percentageFormatOkay == false)) {
                     Decorator decorate = new Decorator();
                     JDialog dialog = decorate.genericPopUpMessage("<html><center>Invalid Format.<br>-Credits must be an integer<br>Grades must be numbers separated by spaces<br>-Percentage of Grade must be an integer or decimal",null,400,140);
                     dialog.setResizable(false);
@@ -820,6 +824,7 @@ public class StudentStatCollect extends JFrame {
                     @Override
                     public void actionPerformed(ActionEvent e) { // remember won't run if just enter without a click
                         System.out.println("enteraction");
+                        System.out.println("1111 "+fileWrite.howManyPlaceholders());
                         doNextButtonProcedure();
                         //newSet(); //12:16
                         //window.getContentPane().getComponents();

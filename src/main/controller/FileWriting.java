@@ -234,9 +234,17 @@ public void deleteLines(String importedFilePath, String text) {
     filePath = importedFilePath;
     //read to array list
     ArrayList<String> lines = fileHandler.readFileToList(filePath);
+    System.out.println("lines "+lines);
     if (!lines.isEmpty()) {            
         lines.remove(lines.size() -1);
-        classList.remove(classList.size() -1);
+        System.out.println("linesSecond "+lines+" class list "+classList);
+        if (classList.size() > 0) {
+            classList.remove(classList.size() -1);
+        } 
+        else{  
+        System.out.println("in delete lines, class list is empty");
+        }
+
 }
     fileHandler.writeArrayListToFile(filePath, lines);
 }
@@ -255,6 +263,7 @@ public  ArrayList<String> getClassList() {
 }
 
 public int howManyPlaceholders() {
+    System.out.println("5555 ");
 
     GoIntoPanel goIntoPanel = new GoIntoPanel();
     int placeholderAmount = 00000;
@@ -320,7 +329,7 @@ private int iteratePanelForHowManyPlaceholders(int labelOrNotIndex) {
     JTextField returnedBox = new JTextField("howmanyplaceholdersnotchanged");
     for (int i = labelOrNotIndex; i < setState.getTextFieldPanel().getComponentCount(); i++) {
             Component component = setState.getTextFieldPanel().getComponent(i);
-            if (component instanceof JTextField && setState.getEmptiedState(textField) == false) {
+            if (component instanceof JTextField && setState.getEmptiedState(textField) == false  && (!returnedBox.getText().equals("Credits (optional)"))) {
                 System.out.println("is a placeholder1 "+ returnedBox.getText());
                 placeholderAmount++;
                 setState.setCanContinue(false);
@@ -328,7 +337,7 @@ private int iteratePanelForHowManyPlaceholders(int labelOrNotIndex) {
             else if (component instanceof JPanel) {
                 returnedBox = goIntoPanel.goIntoPanelReturnTextbox(setState.getTextFieldPanel(), i);
                 //System.out.println("returnedboxshouldbeseventimes " + returnedBox.getText());
-                if (setState.getEmptiedState(returnedBox) == false && (!returnedBox.getText().equals("Credits (Optional)"))) {
+                if (setState.getEmptiedState(returnedBox) == false && (!returnedBox.getText().equals("Credits (optional)"))) {
                     System.out.println("is a placeholder2 "+ returnedBox.getText());
                     placeholderAmount++;
                     setState.setCanContinue(false);

@@ -126,6 +126,7 @@ public class PrintStudentGrades extends JFrame {
         JPanel borderContainer = new JPanel(new BorderLayout());
         borderContainer.add(new JLabel("placeholdType"),BorderLayout.NORTH);
         borderContainer.add(allContainer,BorderLayout.CENTER);
+        borderContainer.add(new JLabel("Final Grade: "+total),BorderLayout.SOUTH);
 
         //allContainer.add(new JTextField("allContainerBox"));
         Creator create = new Creator();
