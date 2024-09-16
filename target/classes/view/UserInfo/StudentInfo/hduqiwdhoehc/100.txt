@@ -1,0 +1,25 @@
+80
+Grade Type 1
+Percentage of Grade
+Grades(format:# # #)
+Grade Type 2
+Percentage of Grade
+Grades(format:# # #)
+Grade Type 3
+Percentage of Grade
+Grades(format:# # #)
+Grade Type 4
+Percentage of Grade
+Grades(format:# # #)
+Grade Type 5
+Percentage of Grade
+Grades(format:# # #)
+Grade Type 6
+Percentage of Grade
+Grades(format:# # #)
+Grade Type 7
+Percentage of Grade
+Grades(format:# # #)
+Grade Type 9
+Percentage of Grade
+Grades(format:# # #)
