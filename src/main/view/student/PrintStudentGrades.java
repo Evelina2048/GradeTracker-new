@@ -34,6 +34,13 @@ public class PrintStudentGrades extends JFrame {
     private CreateButton createButton = new CreateButton();
     private int whichCurrClassIndex;
 
+    private ArrayList<String> gradeTypeList;
+    private ArrayList<String> allTextListForClass;
+    private ArrayList<Integer> percentageOfGradeList;
+    private ArrayList<Integer> listOfAverages;
+    private ArrayList<ArrayList<String>> gradeList;
+    private ArrayList<Integer> amountOfFinalGrade;
+
     public PrintStudentGrades(JFrame main, String studentOrTeacher, String existingOrNew) {
         whichCurrClassIndex = 0;
         printStudentGradesLaunch();
@@ -52,75 +59,63 @@ public class PrintStudentGrades extends JFrame {
         buttonSetUpAction();
         setList = SetList.getInstance();
         setUserInformation = SetUserInformation.getInstance();
-        int gradeBoxTotal = 0;
 
-        ArrayList<ArrayList<String>> gradeList = new ArrayList<>();
-        ArrayList<Integer> amountOfFinalGrade = new ArrayList<>();
-        ArrayList<String> gradeTypeList = new ArrayList<>();
-        ArrayList<Integer> listOfAverages = new ArrayList<>(); //8/21
-        ArrayList<Integer> percentageOfGradeList = new ArrayList<>();
+        gradeList = new ArrayList<>();
+        amountOfFinalGrade = new ArrayList<>();
+        gradeTypeList = new ArrayList<>();
+        listOfAverages = new ArrayList<>(); //8/21
+        percentageOfGradeList = new ArrayList<>();
         //ArrayList<String> listOfAverages = new ArrayList<>();
-        for (int classIndex = 0; classIndex < setList.getFinalClassList().size(); classIndex++) {
+        for (int classIndex = 0; classIndex < setList.getFinalClassList().size(); classIndex++) { //go through classes
             System.out.println("printgradestest "+setList.getFinalClassList().get(classIndex));
             String filePathForClass = setUserInformation.getPathToClassInformationFileWithChosenIndex(classIndex);
             System.out.println("made it past first");
-            ArrayList<String> allTextListForClass = fileHandler.readFileToList(filePathForClass);
+            allTextListForClass = fileHandler.readFileToList(filePathForClass);
 
 
             //grades starts at index 4
             //gradeList.add(allList.get(4));
 
             printArray(allTextListForClass);
+
             ArrayList<String> tempList = new ArrayList<String>(Arrays.asList(allTextListForClass.get(3).split(" ")));
-            gradeList.add(tempList);
+            gradeList.add(tempList); //get grades sect for class
 
-            //percentageOfGradeList = new ArrayList<>();
-            for (int percentageOfGradePanelIndex = 3; percentageOfGradePanelIndex < allTextListForClass.size(); percentageOfGradePanelIndex += 3) {
-                percentageOfGradeList.add(Integer.parseInt(allTextListForClass.get(percentageOfGradePanelIndex)));
-            }
+            makePercentageOfGradeList();
 
-            gradeTypeList = new ArrayList<>();
-            for (int gradeTypePanelIndex = 2; gradeTypePanelIndex < allTextListForClass.size(); gradeTypePanelIndex += 3) {
-                gradeTypeList.add(allTextListForClass.get(gradeTypePanelIndex));
-            }
+            makeGradeTypeList();
 
-            listOfAverages = new ArrayList<>();
-            System.out.println("listofaverages -3 "+allTextListForClass);
-            for (int boxPanelIndex = 3; boxPanelIndex < allTextListForClass.size(); boxPanelIndex += 3) { //for each grades box
-                ArrayList<String> seperatedBySpaceListOfGrades = new ArrayList<>(Arrays.asList(allTextListForClass.get(boxPanelIndex).split(" ")));
-                gradeList.add(seperatedBySpaceListOfGrades);
-                System.out.println(("listofaverages -2.2 "+seperatedBySpaceListOfGrades.get(0)));
-                for (int k = 0; k < seperatedBySpaceListOfGrades.size(); k++) {
-                //     //gradeBoxTotal += (int) gradeList[j][k];
-                    gradeBoxTotal += Integer.parseInt(seperatedBySpaceListOfGrades.get(k));
-                //     //add to total
-                }
+            makeListOfAveragesList();
 
-                int average = gradeBoxTotal/allTextListForClass.size();
-                System.out.println("listofaverages -2 "+average);
-                listOfAverages.add(average);
-                System.out.println("listofaverages -1 "+listOfAverages);
-
-            }
-
-            //for (int boxSetIndex = 0; boxSetIndex < gradeList.size(); boxSetIndex++) { //8/24
-            for (int boxSetIndex = 0; boxSetIndex < listOfAverages.size(); boxSetIndex++) {
-                System.out.println("listofaverages-.01 "+listOfAverages);
-                System.out.println("listofaverages "+listOfAverages);
-                System.out.println("listofaverages2 "+(listOfAverages.get(boxSetIndex)));
-                System.out.println("listofaverages3 "+(percentageOfGradeList));
-                System.out.println("listofaverages4 "+(percentageOfGradeList.get(boxSetIndex)));
-                amountOfFinalGrade.add((listOfAverages.get(boxSetIndex))*(percentageOfGradeList.get(boxSetIndex)));
-            }
+            makeAmountOfFinalGradeList();
 
         }
 
-        float total = 0;
-        for (int i = 0; i<amountOfFinalGrade.size(); i++) {
-            total += amountOfFinalGrade.get(0);
+        float total = getGradeTotal();
+
+        addEverythingToWindow(total);
+        //window.add(allContainer);
+
+
+        // JFrame window = Set.getInstance().getWindow();
+        // Component[] windowComponents = window.getContentPane().getComponents();
+
+        // for (Component windowComp : windowComponents) {
+        //     System.out.println("compcount " + windowComponents.length + " classname "+ windowComp.getClass().getName() + " regname "+windowComp.getName() + " isvisible "+windowComp.isVisible());
+        // }
+
+        Component[] windowComponents3 = window.getContentPane().getComponents();
+        int i = 0;
+        for (Component windowComp : windowComponents3) {
+            System.out.println("compcount " + i + " classname "+ windowComp.getClass().getName() + " regname "+windowComp.getName() + " isvisible "+windowComp.isVisible());
+            i++;
         }
 
+    }
+
+    private void addEverythingToWindow(float total) {
         ArrayList <Integer> gradeTypeNumberList = setList.getGradeTypeList();
+        
         int gradeTypeAmount = gradeTypeNumberList.get(whichCurrClassIndex);//setList.getCurrentClassIndex();
         JPanel allContainer = new JPanel(new GridLayout(2,gradeTypeAmount,5,5)); //rows,cols
         JPanel borderContainer = new JPanel(new BorderLayout());
@@ -147,23 +142,62 @@ public class PrintStudentGrades extends JFrame {
             allContainer.add(new JLabel(String.valueOf(amountOfFinalGrade.get(i))));//allContainer.add(create.createTextBox(String.valueOf(amountOfFinalGrade.get(i)), "JLabel", false));
         }
         window.add(borderContainer);
-        //window.add(allContainer);
+    }
 
-
-        // JFrame window = Set.getInstance().getWindow();
-        // Component[] windowComponents = window.getContentPane().getComponents();
-
-        // for (Component windowComp : windowComponents) {
-        //     System.out.println("compcount " + windowComponents.length + " classname "+ windowComp.getClass().getName() + " regname "+windowComp.getName() + " isvisible "+windowComp.isVisible());
-        // }
-
-        Component[] windowComponents3 = window.getContentPane().getComponents();
-        int i = 0;
-        for (Component windowComp : windowComponents3) {
-            System.out.println("compcount " + i + " classname "+ windowComp.getClass().getName() + " regname "+windowComp.getName() + " isvisible "+windowComp.isVisible());
-            i++;
+    private float getGradeTotal() {
+        float total = 0;
+        for (int i = 0; i<amountOfFinalGrade.size(); i++) {
+            total += amountOfFinalGrade.get(0);
         }
+        return total;
+    }
 
+    private void makeAmountOfFinalGradeList() {
+        //for (int boxSetIndex = 0; boxSetIndex < gradeList.size(); boxSetIndex++) { //8/24
+        for (int boxSetIndex = 0; boxSetIndex < listOfAverages.size(); boxSetIndex++) {
+            System.out.println("listofaverages-.01 "+listOfAverages);
+            System.out.println("listofaverages "+listOfAverages);
+            System.out.println("listofaverages2 "+(listOfAverages.get(boxSetIndex)));
+            System.out.println("listofaverages3 "+(percentageOfGradeList));
+            System.out.println("listofaverages4 "+(percentageOfGradeList.get(boxSetIndex)));
+            amountOfFinalGrade.add((listOfAverages.get(boxSetIndex))*(percentageOfGradeList.get(boxSetIndex)));
+        }
+    }
+
+    private void makeListOfAveragesList() {
+        listOfAverages = new ArrayList<>();
+        int gradeBoxTotal = 0;
+        System.out.println("listofaverages -3 "+allTextListForClass);
+        for (int boxPanelIndex = 3; boxPanelIndex < allTextListForClass.size(); boxPanelIndex += 3) { //for each grades box
+            ArrayList<String> seperatedBySpaceListOfGrades = new ArrayList<>(Arrays.asList(allTextListForClass.get(boxPanelIndex).split(" ")));
+            gradeList.add(seperatedBySpaceListOfGrades);
+            System.out.println(("listofaverages -2.2 "+seperatedBySpaceListOfGrades.get(0)));
+            for (int k = 0; k < seperatedBySpaceListOfGrades.size(); k++) {
+            //     //gradeBoxTotal += (int) gradeList[j][k];
+                gradeBoxTotal += Integer.parseInt(seperatedBySpaceListOfGrades.get(k));
+            //     //add to total
+            }
+
+            int average = gradeBoxTotal/allTextListForClass.size();
+            System.out.println("listofaverages -2 "+average);
+            listOfAverages.add(average);
+            System.out.println("listofaverages -1 "+listOfAverages);
+
+        }
+    }
+
+    private void makeGradeTypeList() {
+        gradeTypeList = new ArrayList<>();
+        for (int gradeTypePanelIndex = 2; gradeTypePanelIndex < allTextListForClass.size(); gradeTypePanelIndex += 3) {
+            gradeTypeList.add(allTextListForClass.get(gradeTypePanelIndex));
+        }
+    }
+
+    private void makePercentageOfGradeList() {
+        //percentageOfGradeList = new ArrayList<>();
+        for (int percentageOfGradePanelIndex = 3; percentageOfGradePanelIndex < allTextListForClass.size(); percentageOfGradePanelIndex += 3) {
+            percentageOfGradeList.add(Integer.parseInt(allTextListForClass.get(percentageOfGradePanelIndex)));
+        }
     }
 
     public void studentStatCollectLaunch() {
