@@ -364,72 +364,6 @@ public class StudentStatCollect extends JFrame {
 
                 }
 
-            if (setState.getClassListIndex()+1 <= setList.getFinalClassList().size()) {
-                System.out.println("the jlabel name: "+setList.getFinalClassList().get(setState.getClassListIndex()));
-                boxManageCreate(setList.getFinalClassList().get(setState.getClassListIndex())+"PAC", "JLabel", false); //necessary
-
-                credits = (JPanel) textBoxPanel;
-
-                while (credits.getComponentCount() < 5) {
-                    if (credits.getComponent(0) instanceof JPanel) {
-                        credits = (JPanel) credits.getComponent(0);
-                    }
-
-                    else if (credits.getComponent(0) instanceof JLabel) {
-                        break;
-                    }
-
-                    else {
-                        System.out.println("Something went wrong in studentstat donextbuttonprcedure");
-                    }
-                }
-                //is greater or equal to 5
-                credits = (JPanel) credits.getComponent(1);
-
-                if (credits instanceof JPanel) {
-                    JTextField creditsTextField = goIntoPanel.goIntoPanelReturnTextbox((JPanel) credits, 0);
-                    String text = creditsTextField.getText();
-
-                    Pattern pattern = Pattern.compile("[0-9]+");
-                    Matcher matcher = pattern.matcher(text);
-                    Boolean matcherBoolean = matcher.find();
-
-                    Pattern patternForGrades = Pattern.compile("^(?:[0-9]*(?:.[0-9]+))*\s*$|^[0-9]*\s*$", Pattern.CASE_INSENSITIVE);
-                    Boolean gradesFormatOkay = correctBoxFormatChecker(patternForGrades, 4); //for grades
-
-                    Pattern patternForPercentage = Pattern.compile("^[-+]?\\d*\\.?\\d+(e[-+]?\\d+)?%?$", Pattern.CASE_INSENSITIVE);
-                    Boolean percentageFormatOkay = correctBoxFormatChecker(patternForPercentage, 3); //for percentage
-                    Boolean creditsFieldChanged = (setState.getEmptiedState(creditsTextField) != false);//(!creditsTextField.getText().equals("Credits (optional)"));
-
-                    if (((matcherBoolean == true) || !creditsFieldChanged) && (gradesFormatOkay) && (percentageFormatOkay)) {
-                        textBoxPanel.removeAll();
-
-                        setState.setTextFieldPanel(textBoxPanel);
-
-                        window.remove(backNextButtonsPanel);
-                        window.remove(set.getCurrentSaveButton());
-                        //window.remove(saveButton)
-                        studentStatCollectLaunch(); //before 8/27 was below
-                        visitNextStudentClass();
-                        buttonSetUpAction();
-                    }
-
-                    else if (((matcherBoolean == false) && creditsFieldChanged) || (gradesFormatOkay == false) || (percentageFormatOkay == false)) {
-                        Decorator decorate = new Decorator();
-                        JDialog dialog = decorate.genericPopUpMessage("<html><center>Invalid Format.<br>-Credits must be an integer<br>Grades must be numbers separated by spaces<br>-Percentage of Grade must be an integer or decimal",null,400,140);
-
-                        dialog.setResizable(false);
-                        dialog.setLocationRelativeTo(null);
-                        dialog.setVisible(true);
-                    }
-
-                    else {
-                        System.out.println("matcher credit boolean, something wrong");
-                    }
-
-                }
-            }
-            else {
                 credits = (JPanel) textBoxPanel;
 
                 while (credits.getComponentCount() < 5) {
@@ -454,13 +388,15 @@ public class StudentStatCollect extends JFrame {
                     Boolean percentageFormatOkay = correctBoxFormatChecker(patternForPercentage, 3); //for percentage
                     Boolean creditsFieldChanged = (setState.getEmptiedState(creditsTextField) != false);//(!creditsTextField.getText().equals("Credits (optional)"));
 
+                    //
+                    if ((setState.getClassListIndex()+1 <= setList.getFinalClassList().size())&&((matcherBoolean == true)|| !creditsFieldChanged) && (gradesFormatOkay) && (percentageFormatOkay)) {
+                        allPassedGoToStudentStats();
+                    }
+
+                    //
+
                     if (((matcherBoolean == true)|| !creditsFieldChanged) && (gradesFormatOkay) && (percentageFormatOkay)) {
-                        //window.remove(newdelcontainerflow);
-                        window.remove(newDelContainerFlow);
-                        //window.remove(newDelContainer);
-                        hideWindow();
-                        removeVariablesInWindow();
-                        new PrintStudentGrades(set.getWindow(), setUserInformation.getStudentOrTeacher(), setUserInformation.getExistingOrNew());
+                        goToPrintStudentGrades();
                     }
 
                     else if (((matcherBoolean == false) && creditsFieldChanged) || (gradesFormatOkay == false) || (percentageFormatOkay == false)) {
@@ -475,9 +411,30 @@ public class StudentStatCollect extends JFrame {
                         System.out.println("matcher credit boolean, something wrong");
                     }
             }
-        }
+        //}
 
         }
+    }
+    public void allPassedGoToStudentStats() {
+        textBoxPanel.removeAll();
+
+        setState.setTextFieldPanel(textBoxPanel);
+
+        window.remove(backNextButtonsPanel);
+        window.remove(set.getCurrentSaveButton());
+        //window.remove(saveButton)
+        studentStatCollectLaunch(); //before 8/27 was below
+        visitNextStudentClass();
+        buttonSetUpAction();
+    }
+
+    public void goToPrintStudentGrades() {
+        //window.remove(newdelcontainerflow);
+        window.remove(newDelContainerFlow);
+        //window.remove(newDelContainer);
+        hideWindow();
+        removeVariablesInWindow();
+        new PrintStudentGrades(set.getWindow(), setUserInformation.getStudentOrTeacher(), setUserInformation.getExistingOrNew());
     }
 
     public void doNextButtonProcedure2() { //necessary to prevent endless loop when need nextbutton action "areyousure" popup.
@@ -491,6 +448,7 @@ public class StudentStatCollect extends JFrame {
 
             }
 
+        // //9/18
         if (setState.getClassListIndex()+1 <= setList.getFinalClassList().size()) {
             System.out.println("the jlabel name: "+setList.getFinalClassList().get(setState.getClassListIndex()));
 
@@ -586,6 +544,7 @@ public class StudentStatCollect extends JFrame {
                 }
             }
         }
+        // //9/18
         }
 
         setState.setCanContinue(true);
