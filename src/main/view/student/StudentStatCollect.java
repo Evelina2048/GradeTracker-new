@@ -395,7 +395,7 @@ public class StudentStatCollect extends JFrame {
 
                     //
 
-                    if (((matcherBoolean == true)|| !creditsFieldChanged) && (gradesFormatOkay) && (percentageFormatOkay)) {
+                    else if (((matcherBoolean == true)|| !creditsFieldChanged) && (gradesFormatOkay) && (percentageFormatOkay)) {
                         goToPrintStudentGrades();
                     }
 
