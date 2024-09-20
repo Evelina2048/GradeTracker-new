@@ -2,7 +2,7 @@ package view.student;
 
 import javax.swing.JButton;
 import javax.swing.JFrame;
-import javax.swing.JLabel;
+// import javax.swing.JLabel; //9/20
 
 import java.awt.BorderLayout;
 import java.awt.GridLayout;
@@ -13,7 +13,7 @@ import java.awt.FlowLayout;
 import java.awt.Component;
 import java.util.ArrayList;
 
-import java.awt.Color;
+// import java.awt.Color; //9/20
 
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
@@ -160,9 +160,9 @@ public class StudentStatCollect extends JFrame {
     private void backAction(JButton backButton) {
         backButton.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent e) {
-                if (textBoxPanel.getComponentCount() >= 2) {
-                    //goIntoPanel.goIntoPanelReturnTextbox((JPanel) textBoxPanel.getComponent(1), 0);
-                }//TODO maybe bug?
+                // if (textBoxPanel.getComponentCount() >= 2) { //9/20
+                //     //goIntoPanel.goIntoPanelReturnTextbox((JPanel) textBoxPanel.getComponent(1), 0);
+                // }
                 actionPriorities.setCurrentClass(currentClass);
                 actionPriorities.addClassActionListener(b -> {
                     System.out.println("hfwehofohe filewrite how many placeholders "+fileWrite.howManyPlaceholders());
@@ -190,13 +190,6 @@ public class StudentStatCollect extends JFrame {
                                 component.setVisible(false);
                                 window.remove(component);
                             }
-                            //SetList.getInstance().removeStudentStatCollectSettings();
-                            // Component[] windowComponents2 = window.getContentPane().getComponents();
-                            // for (int k = 2; k<=6;k++) {
-                            //     Component component = windowComponents2[k];
-                            //     component.setVisible(false);
-                            //     window.remove(component);
-                            // }
 
                             Component[] windowComponents2 = window.getContentPane().getComponents();
                             for (int k = 2; k<=10;k++) {
@@ -215,9 +208,8 @@ public class StudentStatCollect extends JFrame {
                     }
                     else if (fileWrite.howManyPlaceholders() > 0) {
                         Decorator decorate = new Decorator();
-                        //System.out.println("up Z how many placeholders? "+fileWrite.howManyPlaceholders()+" current class "+ setList.getFinalClassList().get(setState.getClassListIndex()));
                         SetState.getInstance().setStudentStatCollect(currentInstance);
-                        SetState.getInstance().setAreYouSureMessageCause("backButton"); //TODO areyousuremessage
+                        SetState.getInstance().setAreYouSureMessageCause("backButton");
                         decorate.areYouSureMessage(null, "studentStatsEmpty", "Remove placeholder(s) to continue?", 230, 90);
                     }
 
@@ -232,7 +224,7 @@ public class StudentStatCollect extends JFrame {
                 hideWindow();
                 StudentClasses studentClasses = new StudentClasses();
                 studentClasses.studentClassesLaunch();
-                //saveButtonAction("backButton");
+                //saveButtonAction("backButton"); //9/20
             }
             else if (setState.getClassListIndex() > 0) {
                 goToPreviousClasses();
@@ -321,9 +313,9 @@ public class StudentStatCollect extends JFrame {
 
         System.out.println("4444 "+fileWrite.howManyPlaceholders());
         fileWrite.writeTextToFile();
-        System.out.println("5555 "+fileWrite.howManyPlaceholders());
+        System.out.println("5555 "+fileWrite.howManyPlaceholders()+".... actionCause "+actionCause);
 
-        if (fileWrite.howManyPlaceholders() > 0) {
+        if (fileWrite.howManyPlaceholders() > 0 ){//&& actionCause!=("Neither")) { //commented 9/20
             Decorator decorate = new Decorator();
             System.out.println("up Z how many placeholders? "+fileWrite.howManyPlaceholders()+" current class "+ setList.getFinalClassList().get(setState.getClassListIndex()));
             setState.setStudentStatCollect(this);
@@ -353,7 +345,6 @@ public class StudentStatCollect extends JFrame {
     }
 
     public void doNextButtonProcedure() {
-        System.out.println("2222 "+fileWrite.howManyPlaceholders());
         saveButtonAction("nextButton");
         if(setState.getCanContinue()) {
                 setState.incrementClassListIndex();
@@ -367,7 +358,6 @@ public class StudentStatCollect extends JFrame {
                 credits = (JPanel) textBoxPanel;
 
                 while (credits.getComponentCount() < 5) {
-                    System.out.println("dollar "+credits.getComponentCount());
                     credits = (JPanel) credits.getComponent(0);
                 }
                 //is greater or equal to 5
@@ -388,12 +378,9 @@ public class StudentStatCollect extends JFrame {
                     Boolean percentageFormatOkay = correctBoxFormatChecker(patternForPercentage, 3); //for percentage
                     Boolean creditsFieldChanged = (setState.getEmptiedState(creditsTextField) != false);//(!creditsTextField.getText().equals("Credits (optional)"));
 
-                    //
                     if ((setState.getClassListIndex()+1 <= setList.getFinalClassList().size())&&((matcherBoolean == true)|| !creditsFieldChanged) && (gradesFormatOkay) && (percentageFormatOkay)) {
                         allPassedGoToStudentStats();
                     }
-
-                    //
 
                     else if (((matcherBoolean == true)|| !creditsFieldChanged) && (gradesFormatOkay) && (percentageFormatOkay)) {
                         goToPrintStudentGrades();
@@ -411,7 +398,6 @@ public class StudentStatCollect extends JFrame {
                         System.out.println("matcher credit boolean, something wrong");
                     }
             }
-        //}
 
         }
     }
@@ -422,16 +408,13 @@ public class StudentStatCollect extends JFrame {
 
         window.remove(backNextButtonsPanel);
         window.remove(set.getCurrentSaveButton());
-        //window.remove(saveButton)
         studentStatCollectLaunch(); //before 8/27 was below
         visitNextStudentClass();
         buttonSetUpAction();
     }
 
     public void goToPrintStudentGrades() {
-        //window.remove(newdelcontainerflow);
         window.remove(newDelContainerFlow);
-        //window.remove(newDelContainer);
         hideWindow();
         removeVariablesInWindow();
         new PrintStudentGrades(set.getWindow(), setUserInformation.getStudentOrTeacher(), setUserInformation.getExistingOrNew());
@@ -448,7 +431,6 @@ public class StudentStatCollect extends JFrame {
 
             }
 
-        // //9/18
         if (setState.getClassListIndex()+1 <= setList.getFinalClassList().size()) {
             System.out.println("the jlabel name: "+setList.getFinalClassList().get(setState.getClassListIndex()));
 
@@ -502,7 +484,7 @@ public class StudentStatCollect extends JFrame {
         }
         else {
             credits = SetState.getInstance().getTextFieldPanel();
-            
+
             while (credits.getComponentCount() < 5) {
                 System.out.println("dollar "+credits.getComponentCount());
                 credits = (JPanel) credits.getComponent(0);
@@ -544,7 +526,6 @@ public class StudentStatCollect extends JFrame {
                 }
             }
         }
-        // //9/18
         }
 
         setState.setCanContinue(true);
@@ -574,7 +555,6 @@ public class StudentStatCollect extends JFrame {
 
             for (Component windowComp : windowComponents) {
                 if (windowComp == backNextButtonsPanel) {
-                    System.out.println("hi handsome ;)");
                 }
                 System.out.println("compcount " + windowComponents.length + " classname "+ windowComp.getClass().getName() + " regname "+windowComp.getName() + " isvisible "+windowComp.isVisible());
             }
@@ -634,10 +614,7 @@ public class StudentStatCollect extends JFrame {
         boxManageCreate("Percentage of Grade", "JTextField",false);
         boxManageCreate("Grades(format:# # #)", "JTextField",false);
         classLabelPanel.setVisible(true);
-        // count++;
         textBoxPanel.setVisible(true);
-
-        //setList.setClassLabelPanel(classLabelPanel);
 
         window.add(classLabelPanel, BorderLayout.CENTER);
         create.windowFix();
@@ -645,19 +622,10 @@ public class StudentStatCollect extends JFrame {
 
         JFrame window = Set.getInstance().getWindow();
         Component[] windowComponents = window.getContentPane().getComponents();
-        System.out.println("widnowcomps "+ windowComponents.length);
-        // for (int k = 12; k==12;k++) {
-        //     Component component = windowComponents[k];
-        //     System.out.println(component.isVisible()+" is visible. Name "+ component.getName()+" k "+k);
-        //     component.setVisible(false);
-        // }
-        //setList.removeStudentStatCollectSettings();
+
         setList.removeStudentStatCollectReadClassLabelPanel();
 
         setState.setTextFieldPanel(textBoxPanel);
-
-        // setState.setCanContinue(true);
-        // setState.setTextFieldPanel(textBoxPanel);
 
     }
 
@@ -732,12 +700,9 @@ public class StudentStatCollect extends JFrame {
         }
 
         private void boxManageCreate(String placeholder, String type, Boolean boxLoaded) {
-            //if (count <= 5) {
             if (numOfBoxes < maxBoxes) {
                 textBoxPanel.add(create.typeBox(placeholder, type, boxLoaded));
-                //if (count == 0) {
                 classLabelPanel.add(textBoxPanel);
-                //}
                 create.windowFix();
                 numOfBoxes++;
             }
@@ -747,14 +712,10 @@ public class StudentStatCollect extends JFrame {
                 setState.setCanContinue(false);
             }
 
-            //if (count == 0) {
-                classLabelPanel.setVisible(true);
-                count++;
-            
-                textBoxPanel.setVisible(true);
-            //}
+            classLabelPanel.setVisible(true);
+            count++;
+            textBoxPanel.setVisible(true);
             setState.setTextFieldPanel(textBoxPanel);
-            //}
             System.out.println("count "+count);
         }
 
@@ -774,7 +735,7 @@ public class StudentStatCollect extends JFrame {
             window.remove(backNextButtonsPanel);
             SetList.getInstance().removeStudentStatCollectSettings();
         }
-    
+
         public class EnterAction extends AbstractAction {
             @Override
             public void actionPerformed(ActionEvent e) {
@@ -783,51 +744,21 @@ public class StudentStatCollect extends JFrame {
                     @Override
                     public void actionPerformed(ActionEvent e) { // remember won't run if just enter without a click
                         System.out.println("enteraction");
-                        System.out.println("1111 "+fileWrite.howManyPlaceholders());
                         doNextButtonProcedure();
-                        //newSet(); //12:16
-                        //window.getContentPane().getComponents();
-                        //typeNumber++;
-                        //boxManageCreate("Grade Type "+typeNumber, "JTextField",false); //12:17
-                        //
-                        // if (numOfBoxes < maxBoxes) {
-                        //     textBoxPanel.add(create.typeBox("hello", "JTextField", false));
-                        //     classLabelPanel.add(textBoxPanel);
-                        //     create.windowFix();
-                        //     numOfBoxes++;
-                        // }
-                        // else if (numOfBoxes == maxBoxes) {
-                        //     Decorator decorate = new Decorator();
-                        //     decorate.maximumAmountReachedPopup();
-                        //     setState.setCanContinue(false);
-                        // }
 
-                        //classLabelPanel.setVisible(true);
-                        //textBoxPanel.setVisible(true);
-                        //setState.setTextFieldPanel(textBoxPanel);
-
-                        //
-
-
-
-                        //boxManageCreate("Percentage of Grade", "JTextField",false);
-                        //boxManageCreate("Grades(format:# # #)", "JTextField",false);
-                        //setState.setCanContinue(true);
-                        //setState.setTextFieldPanel(textBoxPanel);
-                        
                     }
                 }, 1, "EnterAction", null, currentClass);  // Add this ActionListener with priority 1
             }
         }
-    
+
         public JButton TESTNEXTBUTTON() {
             return nextButton;
         }
-    
+
         public JButton TESTNEWTYPEBUTTON() {
             return newTypeButton;
         }
-    
+
         public JButton TESTBACKBUTTON() {
             return backButton;
         }
