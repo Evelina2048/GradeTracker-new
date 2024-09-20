@@ -11,14 +11,17 @@ import javax.swing.JPanel;
 import javax.swing.JLabel;
 
 import java.awt.event.ActionListener;
+import java.io.FileWriter;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.awt.event.ActionEvent;
 import controller.Creator;
 import controller.Decorator;
 import controller.FileHandling;
+import controller.FileWriting;
 import model.Set;
 import model.SetList;
+import model.SetState;
 import model.SetUserInformation;
 import controller.CompositeActionListenerWithPriorities;
 import controller.CreateButton;
@@ -40,15 +43,18 @@ public class PrintStudentGrades extends JFrame {
     private ArrayList<Integer> listOfAverages;
     private ArrayList<ArrayList<String>> gradeList;
     private ArrayList<Integer> amountOfFinalGrade;
+    private CompositeActionListenerWithPriorities actionPriorities;
 
     public PrintStudentGrades(JFrame main, String studentOrTeacher, String existingOrNew) {
         whichCurrClassIndex = 0;
+        actionPriorities = CompositeActionListenerWithPriorities.getInstance();
         printStudentGradesLaunch();
+
     }
 
     public void printStudentGradesLaunch() {
         System.out.println("in print student grades");
-        CompositeActionListenerWithPriorities actionPriorities = CompositeActionListenerWithPriorities.getInstance();
+        //actionPriorities = CompositeActionListenerWithPriorities.getInstance();
         actionPriorities.setCurrentClass("PrintStudentGrades");
         studentStatCollectLaunch();
         //createNewTypeButton();
@@ -213,6 +219,10 @@ public class PrintStudentGrades extends JFrame {
         backButtonPanel.add(backButton);
         backButton.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent e) {
+                System.out.println("hi from print grades back");
+                StudentStatCollect studentStatCollect = new StudentStatCollect();
+                studentStatCollect.backAction2();
+                //
                //backButtonAction(main, newUser, studentOrTeacher, existingOrNew);
             }
         });
