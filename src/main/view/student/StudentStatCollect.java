@@ -304,16 +304,14 @@ public class StudentStatCollect extends JFrame {
     }
 
     private void saveButtonAction(String actionCause) {
-        System.out.println("3333 "+fileWrite.howManyPlaceholders());
         SETTEST.getInstance().TESTSETCURRENTINSTANCE(this);
         set.setFilePath(setUserInformation.getPathToClassInformationFileWithIndex());
         create.setTextFieldContainer(setState.getTextFieldPanel());
 
         //setState.setTextFieldPanel(classLabelPanel); //TODO if you see issue with boxes being weird, this prob source of bug //8/30
 
-        System.out.println("4444 "+fileWrite.howManyPlaceholders());
+        System.out.println("1111");
         fileWrite.writeTextToFile();
-        System.out.println("5555 "+fileWrite.howManyPlaceholders()+".... actionCause "+actionCause);
 
         if (fileWrite.howManyPlaceholders() > 0 ){//&& actionCause!=("Neither")) { //commented 9/20
             Decorator decorate = new Decorator();

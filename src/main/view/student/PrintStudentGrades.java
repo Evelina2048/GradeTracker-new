@@ -152,7 +152,6 @@ public class PrintStudentGrades extends JFrame {
 
     private float getGradeTotal() {
         float total = 0;
-        System.out.println("1111 "+amountOfFinalGrade);
         //for (int i = 0; i<amountOfFinalGrade.size(); i++) {
             total += amountOfFinalGrade.get(0);
         //}
