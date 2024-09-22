@@ -143,6 +143,7 @@ public class PrintStudentGrades extends JFrame {
             System.out.println("listofaverages.get(i) "+ listOfAverages.get(i));
             System.out.println("i "+listOfAverages.get(i));
 
+            System.out.println("listofavs "+listOfAverages);
             allContainer.add(new JLabel(String.valueOf(listOfAverages.get(i))));//allContainer.add(create.createTextBox(String.valueOf(listOfAverages.get(i)), "JLabel", false));
             allContainer.add(new JLabel(String.valueOf(percentageOfGradeList.get(i))));//allContainer.add(create.createTextBox(String.valueOf(percentageOfGradeList.get(i)), "JLabel", false));
             allContainer.add(new JLabel(String.valueOf(amountOfFinalGrade.get(i))));//allContainer.add(create.createTextBox(String.valueOf(amountOfFinalGrade.get(i)), "JLabel", false));
@@ -184,7 +185,11 @@ public class PrintStudentGrades extends JFrame {
             //     //add to total
             }
 
-            int average = gradeBoxTotal/allTextListForClass.size();
+            //int average = gradeBoxTotal/allTextListForClass.size(); //wrong //9/22
+            //average is gradeBoxTotal/numOfGrades
+
+            int average = gradeBoxTotal/seperatedBySpaceListOfGrades.size();
+            System.out.println("screen "+seperatedBySpaceListOfGrades + "size "+seperatedBySpaceListOfGrades.size());
             System.out.println("listofaverages -2 "+average);
             listOfAverages.add(average);
             System.out.println("listofaverages -1 "+listOfAverages);
