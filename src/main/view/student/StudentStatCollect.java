@@ -305,6 +305,7 @@ public class StudentStatCollect extends JFrame {
 
     private void saveButtonAction(String actionCause) {
         SETTEST.getInstance().TESTSETCURRENTINSTANCE(this);
+        //System.out.println("classlistindex "+ setState.getClassListIndex();
         set.setFilePath(setUserInformation.getPathToClassInformationFileWithIndex());
         create.setTextFieldContainer(setState.getTextFieldPanel());
 
@@ -345,7 +346,6 @@ public class StudentStatCollect extends JFrame {
     public void doNextButtonProcedure() {
         saveButtonAction("nextButton");
         if(setState.getCanContinue()) {
-                setState.incrementClassListIndex();
                 if (typeNumber!=0) {
                     setList.addGradeTypeList(typeNumber); }
                 else {
@@ -376,11 +376,14 @@ public class StudentStatCollect extends JFrame {
                     Boolean percentageFormatOkay = correctBoxFormatChecker(patternForPercentage, 3); //for percentage
                     Boolean creditsFieldChanged = (setState.getEmptiedState(creditsTextField) != false);//(!creditsTextField.getText().equals("Credits (optional)"));
 
+                    setState.incrementClassListIndex();
                     if ((setState.getClassListIndex()+1 <= setList.getFinalClassList().size())&&((matcherBoolean == true)|| !creditsFieldChanged) && (gradesFormatOkay) && (percentageFormatOkay)) {
+                       
                         allPassedGoToStudentStats();
                     }
 
                     else if (((matcherBoolean == true)|| !creditsFieldChanged) && (gradesFormatOkay) && (percentageFormatOkay)) {
+                        setState.decrementClassListIndex();
                         goToPrintStudentGrades();
                     }
 
@@ -508,6 +511,7 @@ public class StudentStatCollect extends JFrame {
                     hideWindow();
                     window.remove(newDelContainerFlow);
                     removeVariablesInWindow();
+                    setState.decrementClassListIndex();
                     new PrintStudentGrades(set.getWindow(), setUserInformation.getStudentOrTeacher(), setUserInformation.getExistingOrNew());
                 }
 
