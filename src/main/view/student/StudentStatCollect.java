@@ -623,7 +623,6 @@ public class StudentStatCollect extends JFrame {
 
 
         JFrame window = Set.getInstance().getWindow();
-        Component[] windowComponents = window.getContentPane().getComponents();
 
         setList.removeStudentStatCollectReadClassLabelPanel();
 
