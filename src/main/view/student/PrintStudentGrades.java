@@ -146,7 +146,8 @@ public class PrintStudentGrades extends JFrame {
             System.out.println("listofavs "+listOfAverages);
             allContainer.add(new JLabel(String.valueOf(listOfAverages.get(i))));//allContainer.add(create.createTextBox(String.valueOf(listOfAverages.get(i)), "JLabel", false));
             allContainer.add(new JLabel(String.valueOf(percentageOfGradeList.get(i))));//allContainer.add(create.createTextBox(String.valueOf(percentageOfGradeList.get(i)), "JLabel", false));
-            allContainer.add(new JLabel(String.valueOf(amountOfFinalGrade.get(i))));//allContainer.add(create.createTextBox(String.valueOf(amountOfFinalGrade.get(i)), "JLabel", false));
+            //allContainer.add(new JLabel(String.valueOf(amountOfFinalGrade.get(i))));//allContainer.add(create.createTextBox(String.valueOf(amountOfFinalGrade.get(i)), "JLabel", false));
+            allContainer.add(new JLabel("heyo "+(String.valueOf(percentageOfGradeList.get(i)))));
         }
         window.add(borderContainer);
     }
@@ -154,6 +155,7 @@ public class PrintStudentGrades extends JFrame {
     private float getGradeTotal() {
         float total = 0;
         //for (int i = 0; i<amountOfFinalGrade.size(); i++) {
+            System.out.println("9999 instead "+amountOfFinalGrade);
             total += amountOfFinalGrade.get(0);
         //}
         return total;
@@ -167,7 +169,8 @@ public class PrintStudentGrades extends JFrame {
             System.out.println("listofaverages2 "+(listOfAverages.get(boxSetIndex)));
             System.out.println("listofaverages3 "+(percentageOfGradeList));
             System.out.println("listofaverages4 "+(percentageOfGradeList.get(boxSetIndex)));
-            amountOfFinalGrade.add((listOfAverages.get(boxSetIndex))*(percentageOfGradeList.get(boxSetIndex)));
+            System.out.println("8888 instead "+ "boxsetindex "+boxSetIndex+" list of averages "+listOfAverages+" percentageOfGradeList "+percentageOfGradeList);
+            amountOfFinalGrade.add((listOfAverages.get(boxSetIndex))*(percentageOfGradeList.get(boxSetIndex)/100));
         }
     }
 
@@ -206,7 +209,7 @@ public class PrintStudentGrades extends JFrame {
 
     private void makePercentageOfGradeList() {
         //percentageOfGradeList = new ArrayList<>();
-        for (int percentageOfGradePanelIndex = 3; percentageOfGradePanelIndex < allTextListForClass.size(); percentageOfGradePanelIndex += 3) {
+        for (int percentageOfGradePanelIndex = 2; percentageOfGradePanelIndex < allTextListForClass.size(); percentageOfGradePanelIndex += 3) {
             percentageOfGradeList.add(Integer.parseInt(allTextListForClass.get(percentageOfGradePanelIndex)));
         }
     }
