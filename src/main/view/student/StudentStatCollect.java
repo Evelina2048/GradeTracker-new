@@ -694,10 +694,18 @@ public class StudentStatCollect extends JFrame {
 
         private void hideWindow() {
             create.hideContainer();
-            backNextButtonsPanel.setVisible(false);
-            newDelContainerFlow.setVisible(false);
+            if (backNextButtonsPanel != null) {
+                backNextButtonsPanel.setVisible(false);
+            }
+            if (newDelContainerFlow != null){
+                newDelContainerFlow.setVisible(false);
+            }
+            //if (classLabelPanel != null) {
             classLabelPanel.setVisible(false);
+            //}
+            //if (textBoxPanel != null) {
             textBoxPanel.setVisible(false);
+            //}
         }
 
         private void boxManageCreate(String placeholder, String type, Boolean boxLoaded) {
