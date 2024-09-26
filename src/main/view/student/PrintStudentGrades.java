@@ -29,6 +29,7 @@ import controller.CreateButton;
 public class PrintStudentGrades extends JFrame {
     private JFrame window;
     private JPanel backNextButtonsPanel;
+    private JPanel borderContainer;
     private Decorator decorate = new Decorator();
     private Creator create;
     private SetList setList;
@@ -103,19 +104,13 @@ public class PrintStudentGrades extends JFrame {
         //window.add(allContainer);
 
 
-        // JFrame window = Set.getInstance().getWindow();
-        // Component[] windowComponents = window.getContentPane().getComponents();
-
-        // for (Component windowComp : windowComponents) {
-        //     System.out.println("compcount " + windowComponents.length + " classname "+ windowComp.getClass().getName() + " regname "+windowComp.getName() + " isvisible "+windowComp.isVisible());
+        
+        // Component[] windowComponents3 = window.getContentPane().getComponents();
+        // int i = 0;
+        // for (Component windowComp : windowComponents3) {
+        //     System.out.println("compcount " + i + " classname "+ windowComp.getClass().getName() + " regname "+windowComp.getName() + " isvisible "+windowComp.isVisible());
+        //     i++;
         // }
-
-        Component[] windowComponents3 = window.getContentPane().getComponents();
-        int i = 0;
-        for (Component windowComp : windowComponents3) {
-            System.out.println("compcount " + i + " classname "+ windowComp.getClass().getName() + " regname "+windowComp.getName() + " isvisible "+windowComp.isVisible());
-            i++;
-        }
 
     }
 
@@ -124,7 +119,8 @@ public class PrintStudentGrades extends JFrame {
         
         int gradeTypeAmount = gradeTypeNumberList.get(whichCurrClassIndex);//setList.getCurrentClassIndex();
         JPanel allContainer = new JPanel(new GridLayout(2,gradeTypeAmount,5,5)); //rows,cols
-        JPanel borderContainer = new JPanel(new BorderLayout());
+        allContainer.setName("allContainr");
+        borderContainer = new JPanel(new BorderLayout());
         borderContainer.add(new JLabel("placeholdType"),BorderLayout.NORTH);
         borderContainer.add(allContainer,BorderLayout.CENTER);
         borderContainer.add(new JLabel("Final Grade: "+total),BorderLayout.SOUTH);
@@ -249,6 +245,7 @@ public class PrintStudentGrades extends JFrame {
         //nextButton.setEnabled(false); //commented 8/18
         nextButton.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent e) {
+                hideWindow();
                 whichCurrClassIndex++;
                 printStudentGradesLaunch();
             }
@@ -261,6 +258,22 @@ public class PrintStudentGrades extends JFrame {
     public void printArray(ArrayList<String> list) {
         for (int i = 0; i < list.size(); i++) {
             System.out.println("item "+list.get(i));
+        }
+
+
+    }
+
+    public void hideWindow() {
+        System.out.println("confirmation");
+        //hhhh
+        backNextButtonsPanel.setVisible(false);
+        borderContainer.setVisible(false);
+
+        Component[] windowComponents3 = window.getContentPane().getComponents();
+        int i = 0;
+        for (Component windowComp : windowComponents3) {
+            System.out.println("compcount " + i + " classname "+ windowComp.getClass().getName() + " regname "+windowComp.getName() + " isvisible "+windowComp.isVisible());
+            i++;
         }
 
     }
