@@ -1,5 +1,7 @@
 package model;
 
+import java.awt.event.WindowAdapter;
+
 import javax.swing.JButton;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
@@ -15,6 +17,7 @@ public class Set {
     private static Set instance;
 
     private JLabel DEBUGMARKEDBOX;
+    private WindowAdapter windowCloseAdapter;
 
     // Private constructor to prevent instantiation
     private Set() {}
@@ -73,5 +76,13 @@ public class Set {
 
     public void removeSave() {
         window.remove(saveButton);
+    }
+
+    public void setCurrentWindowClosing(WindowAdapter thisWindowCloseAdapter) {
+        windowCloseAdapter = thisWindowCloseAdapter;
+    }
+
+    public WindowAdapter getCurrentWindowClosing() {
+        return windowCloseAdapter;
     }
 }

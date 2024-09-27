@@ -48,6 +48,14 @@ public class PrintStudentGrades extends JFrame {
 
     public PrintStudentGrades(JFrame main, String studentOrTeacher, String existingOrNew) {
         whichCurrClassIndex = 0;
+
+        //setDefaultCloseOperation(Set.getInstance().getWindow().DISPOSE_ON_CLOSE()); 
+        setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
+        Set set = Set.getInstance();
+        JFrame window = set.getWindow();
+        window.removeWindowListener(set.getCurrentWindowClosing());
+        window.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
+
         actionPriorities = CompositeActionListenerWithPriorities.getInstance();
         printStudentGradesLaunch();
 
