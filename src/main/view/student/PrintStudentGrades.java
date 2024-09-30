@@ -49,7 +49,7 @@ public class PrintStudentGrades extends JFrame {
     public PrintStudentGrades(JFrame main, String studentOrTeacher, String existingOrNew) {
         whichCurrClassIndex = 0;
 
-        //setDefaultCloseOperation(Set.getInstance().getWindow().DISPOSE_ON_CLOSE()); 
+        //setDefaultCloseOperation(Set.getInstance().getWindow().DISPOSE_ON_CLOSE());
         setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
         Set set = Set.getInstance();
         JFrame window = set.getWindow();
@@ -230,9 +230,13 @@ public class PrintStudentGrades extends JFrame {
         backButtonPanel.add(backButton);
         backButton.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent e) {
+                hideWindow();
                 System.out.println("hi from print grades back");
                 StudentStatCollect studentStatCollect = new StudentStatCollect();
-                studentStatCollect.backAction2();
+                studentStatCollect.studentStatCollectLaunch();
+                studentStatCollect.addLoadedBoxes();
+                //studentStatCollect.backAction2();
+
                 //
                //backButtonAction(main, newUser, studentOrTeacher, existingOrNew);
             }
@@ -254,8 +258,8 @@ public class PrintStudentGrades extends JFrame {
         nextButton.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent e) {
                 hideWindow();
-                whichCurrClassIndex++;
-                printStudentGradesLaunch();
+                //whichCurrClassIndex++;
+                //printStudentGradesLaunch();
             }
         });
         //backNextButtonsPanel = createButton.makeBackNextButtonsPanel(backButtonPanel, saveButtonPanel, nextButtonPanel);
