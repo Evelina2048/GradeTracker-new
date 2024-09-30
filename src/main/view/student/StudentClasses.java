@@ -118,6 +118,7 @@ public class StudentClasses extends JFrame {
                 System.out.println("Window gained focus");
     }
         };
+        Set.getInstance().setCurrentWindowClosing(windowCloseAdapter);
 
         window.addWindowListener(windowCloseAdapter);
 

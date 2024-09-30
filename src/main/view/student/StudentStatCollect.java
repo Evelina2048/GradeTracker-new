@@ -62,7 +62,7 @@ public class StudentStatCollect extends JFrame {
     private CompositeActionListenerWithPriorities actionPriorities;
 
     private JPanel container = new JPanel(new FlowLayout(FlowLayout.LEFT));
-    private JPanel newDelContainerFlow;
+    private JPanel newDelContainerFlow = new JPanel(new FlowLayout(FlowLayout.LEFT,0,5));
     private JPanel classLabelPanel = new JPanel(new FlowLayout(FlowLayout.LEFT));
     private JPanel allBoxesPanel = new JPanel();
     private ArrayList<String> finalClassList;
@@ -174,6 +174,7 @@ public class StudentStatCollect extends JFrame {
                         if (setState.getClassListIndex() == 0 && (fileWrite.howManyPlaceholders() == 0)) { //case for back to classes
                             System.out.println("hidewindow1 "+ fileWrite.howManyPlaceholders());
                             hideWindow();
+                            //hideNewDelContainerFlow();
                             StudentClasses studentClasses = new StudentClasses();
                             saveButtonAction("backButton");
                             studentClasses.studentClassesLaunch();
@@ -222,6 +223,7 @@ public class StudentStatCollect extends JFrame {
             create.setTextFieldContainer(setState.getTextFieldPanel());
             if (setState.getClassListIndex() == 0) { //case for back to classes
                 hideWindow();
+                //hideNewDelContainerFlow();
                 StudentClasses studentClasses = new StudentClasses();
                 studentClasses.studentClassesLaunch();
                 //saveButtonAction("backButton"); //9/20
@@ -378,7 +380,6 @@ public class StudentStatCollect extends JFrame {
 
                     setState.incrementClassListIndex();
                     if ((setState.getClassListIndex()+1 <= setList.getFinalClassList().size())&&((matcherBoolean == true)|| !creditsFieldChanged) && (gradesFormatOkay) && (percentageFormatOkay)) {
-                       
                         allPassedGoToStudentStats();
                     }
 
@@ -409,14 +410,25 @@ public class StudentStatCollect extends JFrame {
 
         window.remove(backNextButtonsPanel);
         window.remove(set.getCurrentSaveButton());
+        newDelContainerFlow.removeAll();
+        //window.remove(newDelContainerFlow);
         studentStatCollectLaunch(); //before 8/27 was below
         visitNextStudentClass();
         buttonSetUpAction();
     }
 
     public void goToPrintStudentGrades() {
+        Component[] windowComponents3 = window.getContentPane().getComponents();
+        int i = 0;
+        for (Component windowComp : windowComponents3) {
+            System.out.println("gotoprintcompcount " + i + " classname "+ windowComp.getClass().getName() + " regname "+windowComp.getName() + " isvisible "+windowComp.isVisible());
+            i++;
+        }
         window.remove(newDelContainerFlow);
+        //window.remove(deleteTypeButtonPanel);
+
         hideWindow();
+        //hideNewDelContainerFlow();
         removeVariablesInWindow();
         new PrintStudentGrades(set.getWindow(), setUserInformation.getStudentOrTeacher(), setUserInformation.getExistingOrNew());
     }
@@ -509,6 +521,7 @@ public class StudentStatCollect extends JFrame {
                 Boolean creditsFieldChanged = (setState.getEmptiedState(creditsTextField) != false);//(!creditsTextField.getText().equals("Credits (optional)"));
                 if ((((matcherBoolean == true)|| !creditsFieldChanged) || !creditsFieldChanged) && (gradesFormatOkay) && (percentageFormatOkay)) {
                     hideWindow();
+                    //hideNewDelContainerFlow();
                     window.remove(newDelContainerFlow);
                     removeVariablesInWindow();
                     setState.decrementClassListIndex();
@@ -562,6 +575,8 @@ public class StudentStatCollect extends JFrame {
             }
 
             hideWindow();
+            //window.remove(newDelContainerFlow);
+            //hideNewDelContainerFlow();
             StudentStatCollect studentStatCollect = new StudentStatCollect();
             System.out.println("textfieldpanelcount "+setState.getTextFieldPanel().getComponentCount());
             sETTEST.TESTSETCURRENTINSTANCE(studentStatCollect);
@@ -588,7 +603,7 @@ public class StudentStatCollect extends JFrame {
         JPanel newTypeButtonPanel = new JPanel(new BorderLayout());
         newTypeButtonPanel.add(newTypeButton,BorderLayout.NORTH);
 
-        newDelContainerFlow = new JPanel(new FlowLayout(FlowLayout.LEFT,0,5));
+        //newDelContainerFlow = new JPanel(new FlowLayout(FlowLayout.LEFT,0,5)); //commented 9/29
         newDelContainerFlow.setName("newdelcontainerflow");
 
         JPanel newDelContainer = new JPanel(new GridLayout(3,1,0,5));
@@ -631,7 +646,7 @@ public class StudentStatCollect extends JFrame {
     }
 
     private JPanel deleteButtonPanel() {
-        JButton deleteTypeButton = new JButton("Delete Type");
+        JButton deleteTypeButton = new JButton(SetList.getInstance().getFinalClassList().get(SetState.getInstance().getClassListIndex())+"Delete Type");
             deleteTypeButton.setPreferredSize(new Dimension(90, 50));
             deleteTypeButton.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent e) {
@@ -697,15 +712,22 @@ public class StudentStatCollect extends JFrame {
             if (backNextButtonsPanel != null) {
                 backNextButtonsPanel.setVisible(false);
             }
-            if (newDelContainerFlow != null){
-                newDelContainerFlow.setVisible(false);
-            }
             //if (classLabelPanel != null) {
             classLabelPanel.setVisible(false);
             //}
             //if (textBoxPanel != null) {
             textBoxPanel.setVisible(false);
             //}
+        }
+
+        private void hideNewDelContainerFlow() {
+            if (newDelContainerFlow != null){
+                newDelContainerFlow.setVisible(false);
+            }
+        }
+
+        private void removeNewDelContainerFlow() {
+            window.remove(newDelContainerFlow);
         }
 
         private void boxManageCreate(String placeholder, String type, Boolean boxLoaded) {
