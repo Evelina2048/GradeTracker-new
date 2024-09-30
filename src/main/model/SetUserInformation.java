@@ -1,5 +1,6 @@
 package model;
 
+import java.io.File;
 import java.util.ArrayList;
 
 import javax.swing.JTextField;
@@ -42,7 +43,7 @@ public class SetUserInformation {
 
     public String getPathToUsernameFolder() {
         //return "/Users/evy/Documents/GradeTracker-new/src/main/view/UserInfo/StudentInfo/"+getUsername();
-        return "~/Documents/GradeTracker-new/src/main/view/UserInfo/StudentInfo/"+getUsername();
+        return "src/main/view/UserInfo/StudentInfo/"+getUsername();
     }
 
     public String getPathToClassInformationFolder() {

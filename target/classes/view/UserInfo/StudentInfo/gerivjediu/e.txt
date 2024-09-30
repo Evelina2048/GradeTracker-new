@@ -1,9 +1,0 @@
-Credits (optional)
-Grade Type 1
-Percentage of Grade
-Grades(format:# # #)
-testing
-test
-tester
-tests
-testy
