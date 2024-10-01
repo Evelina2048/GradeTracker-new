@@ -53,7 +53,7 @@ public class StudentStatCollect extends JFrame {
     private SetState setState;
     private SetList setList;
     private SETTEST sETTEST;
-    private String currentClass = "StudentStatCollect Loading";
+    private String currentClass;
 
     private SetUserInformation setUserInformation;
 
@@ -80,6 +80,9 @@ public class StudentStatCollect extends JFrame {
     JPanel credits;
 
     public StudentStatCollect() {
+        //if (currentClass != "StudentStatCollect") {
+        //currentClass = "StudentStatCollect Loading";
+        //}
         SETTEST.getInstance().TESTSETCURRENTINSTANCE(this);
         this.set = Set.getInstance();
         this.setState = SetState.getInstance();
@@ -97,6 +100,11 @@ public class StudentStatCollect extends JFrame {
 
         setState.setCurrentClass("StudentStatCollect.java");
         window = set.getWindow();
+        currentClass = "StudentStatCollect";
+        //actionPriorities.setCurrentClass(null);
+        actionPriorities.setCurrentClass(currentClass);
+        System.out.println("actionprio "+actionPriorities.getCurrentClass());
+
     }
 
     public void studentStatCollectLaunch() {
@@ -122,6 +130,7 @@ public class StudentStatCollect extends JFrame {
 
         currentClass = "StudentStatCollect";
         actionPriorities.setCurrentClass(currentClass);
+        System.out.println("heyo444 "+currentClass);
 
         //JTextField testTextField = new JTextField("Error"); //8/23
         if (textBoxPanel.getComponentCount() < 2) {
@@ -160,13 +169,22 @@ public class StudentStatCollect extends JFrame {
     private void backAction(JButton backButton) {
         backButton.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent e) {
+                System.out.println(" l2222 "+setList.getFinalClassList().get(setState.getClassListIndex())+ " currclass "+ currentClass+ " actionclass "+ actionPriorities.getCurrentClass());
                 // if (textBoxPanel.getComponentCount() >= 2) { //9/20
                 //     //goIntoPanel.goIntoPanelReturnTextbox((JPanel) textBoxPanel.getComponent(1), 0);
                 // }
+                currentClass = "StudentStatCollect";
                 actionPriorities.setCurrentClass(currentClass);
+                //actionPriorities.setCurrentClass(currentClass);
+                System.out.println(" l2222.1 "+setList.getFinalClassList().get(setState.getClassListIndex())+ " currclass "+ currentClass);
                 actionPriorities.addClassActionListener(b -> {
-                    System.out.println("hfwehofohe filewrite how many placeholders "+fileWrite.howManyPlaceholders());
+                    System.out.println("l2222.5");
+                    currentClass = "StudentStatCollect";
+                    actionPriorities.setCurrentClass(currentClass);
+                    //actionPriorities.setCurrentClass(currentClass);
+                    //System.out.println("hfwehofohe filewrite how many placeholders "+fileWrite.howManyPlaceholders());
                     if(setState.getCanContinue()) {//&& (fileWrite.howManyPlaceholders() == 0)) {
+                        System.out.println(" l3333");
                         System.out.println("classlabelpanel "+classLabelPanel.getComponentCount());
                         //saveButtonAction("backButton"); //8/22
                         create.setTextFieldContainer(setState.getTextFieldPanel());

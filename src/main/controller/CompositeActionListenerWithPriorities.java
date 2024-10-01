@@ -77,7 +77,7 @@ try {
 
   public void addClassActionListener(ActionListener a, int priority, String keyCause, JRadioButton button, String listenerSource){
     //System.out.println("currentclass: "+currentClass+" listenersource "+listenerSource);
-    System.out.println("TTT.AAA ");
+    System.out.println("TTT.AAA "+ currentClass);
     //deleteActionListener(a);
     if(!listeners.containsKey(priority)){
       listeners.put(priority,new ArrayList<ActionListener>());

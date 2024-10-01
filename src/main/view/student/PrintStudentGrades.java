@@ -231,10 +231,14 @@ public class PrintStudentGrades extends JFrame {
         backButton.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent e) {
                 hideWindow();
+                System.out.println(" 1111");
                 System.out.println("hi from print grades back");
                 StudentStatCollect studentStatCollect = new StudentStatCollect();
-                studentStatCollect.studentStatCollectLaunch();
                 studentStatCollect.addLoadedBoxes();
+                studentStatCollect.studentStatCollectLaunch();
+                //currentClass = ;
+                actionPriorities.setCurrentClass("StudentStatCollect");
+                //System.out.prin
                 //studentStatCollect.backAction2();
 
                 //
