@@ -2,7 +2,6 @@ package view.student;
 
 import javax.swing.JButton;
 import javax.swing.JFrame;
-import javax.swing.SwingUtilities;
 
 import java.awt.BorderLayout;
 import java.awt.Component;
@@ -11,17 +10,14 @@ import javax.swing.JPanel;
 import javax.swing.JLabel;
 
 import java.awt.event.ActionListener;
-import java.io.FileWriter;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.awt.event.ActionEvent;
 import controller.Creator;
 import controller.Decorator;
 import controller.FileHandling;
-import controller.FileWriting;
 import model.Set;
 import model.SetList;
-import model.SetState;
 import model.SetUserInformation;
 import controller.CompositeActionListenerWithPriorities;
 import controller.CreateButton;
@@ -31,7 +27,6 @@ public class PrintStudentGrades extends JFrame {
     private JPanel backNextButtonsPanel;
     private JPanel borderContainer;
     private Decorator decorate = new Decorator();
-    private Creator create;
     private SetList setList;
     private SetUserInformation setUserInformation;
     private FileHandling fileHandler = new FileHandling();
@@ -49,7 +44,6 @@ public class PrintStudentGrades extends JFrame {
     public PrintStudentGrades(JFrame main, String studentOrTeacher, String existingOrNew) {
         whichCurrClassIndex = 0;
 
-        //setDefaultCloseOperation(Set.getInstance().getWindow().DISPOSE_ON_CLOSE());
         setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
         Set set = Set.getInstance();
         JFrame window = set.getWindow();
@@ -62,11 +56,8 @@ public class PrintStudentGrades extends JFrame {
     }
 
     public void printStudentGradesLaunch() {
-        System.out.println("in print student grades");
-        //actionPriorities = CompositeActionListenerWithPriorities.getInstance();
         actionPriorities.setCurrentClass("PrintStudentGrades");
         studentStatCollectLaunch();
-        //createNewTypeButton();
         JLabel instructionsWords = new JLabel("Grades");
         JPanel instructionsPanel = new JPanel();
         instructionsPanel = decorate.InstructionsPanelDecorate(instructionsPanel, instructionsWords );
@@ -78,9 +69,8 @@ public class PrintStudentGrades extends JFrame {
         gradeList = new ArrayList<>();
         amountOfFinalGrade = new ArrayList<>();
         gradeTypeList = new ArrayList<>();
-        listOfAverages = new ArrayList<>(); //8/21
+        listOfAverages = new ArrayList<>();
         percentageOfGradeList = new ArrayList<>();
-        //ArrayList<String> listOfAverages = new ArrayList<>();
         for (int classIndex = 0; classIndex < setList.getFinalClassList().size(); classIndex++) { //go through classes
             System.out.println("printgradestest "+setList.getFinalClassList().get(classIndex));
             String filePathForClass = setUserInformation.getPathToClassInformationFileWithChosenIndex(classIndex);
@@ -124,8 +114,8 @@ public class PrintStudentGrades extends JFrame {
 
     private void addEverythingToWindow(float total) {
         ArrayList <Integer> gradeTypeNumberList = setList.getGradeTypeList();
-        
-        int gradeTypeAmount = gradeTypeNumberList.get(whichCurrClassIndex);//setList.getCurrentClassIndex();
+
+        int gradeTypeAmount = gradeTypeNumberList.get(whichCurrClassIndex);
         JPanel allContainer = new JPanel(new GridLayout(2,gradeTypeAmount,5,5)); //rows,cols
         allContainer.setName("allContainr");
         borderContainer = new JPanel(new BorderLayout());
@@ -133,12 +123,10 @@ public class PrintStudentGrades extends JFrame {
         borderContainer.add(allContainer,BorderLayout.CENTER);
         borderContainer.add(new JLabel("Final Grade: "+total),BorderLayout.SOUTH);
 
-        //allContainer.add(new JTextField("allContainerBox"));
         Creator create = new Creator();
-        allContainer.add(new JLabel("Average"));//create.createTextBox("Average", "JLabel", false));
-        allContainer.add(new JLabel("Perc. of final grade"));//allContainer.add(create.createTextBox("Perc. of final grade", "JLabel", false));
-        allContainer.add(new JLabel("Contribution"));//allContainer.add(create.createTextBox("Contribution", "JLabel", false));
-        //allContainer.add(new JLabel(gradeTypeList.get(0)));//allContainer.add(create.createTextBox(gradeTypeList.get(0), "JLabel", false));
+        allContainer.add(new JLabel("Average"));
+        allContainer.add(new JLabel("Perc. of final grade"));
+        allContainer.add(new JLabel("Contribution"));
 
         for (int i = 0; i < gradeTypeNumberList.get(whichCurrClassIndex); i++) {
             System.out.println("i "+gradeTypeNumberList);
@@ -148,9 +136,8 @@ public class PrintStudentGrades extends JFrame {
             System.out.println("i "+listOfAverages.get(i));
 
             System.out.println("listofavs "+listOfAverages);
-            allContainer.add(new JLabel(String.valueOf(listOfAverages.get(i))));//allContainer.add(create.createTextBox(String.valueOf(listOfAverages.get(i)), "JLabel", false));
-            allContainer.add(new JLabel(String.valueOf(percentageOfGradeList.get(i))));//allContainer.add(create.createTextBox(String.valueOf(percentageOfGradeList.get(i)), "JLabel", false));
-            //allContainer.add(new JLabel(String.valueOf(amountOfFinalGrade.get(i))));//allContainer.add(create.createTextBox(String.valueOf(amountOfFinalGrade.get(i)), "JLabel", false));
+            allContainer.add(new JLabel(String.valueOf(listOfAverages.get(i))));
+            allContainer.add(new JLabel(String.valueOf(percentageOfGradeList.get(i))));
             allContainer.add(new JLabel("heyo "+(String.valueOf(percentageOfGradeList.get(i)))));
         }
         window.add(borderContainer);
@@ -159,7 +146,6 @@ public class PrintStudentGrades extends JFrame {
     private float getGradeTotal() {
         float total = 0;
         //for (int i = 0; i<amountOfFinalGrade.size(); i++) {
-            System.out.println("9999 instead "+amountOfFinalGrade);
             total += amountOfFinalGrade.get(0);
         //}
         return total;
@@ -187,13 +173,8 @@ public class PrintStudentGrades extends JFrame {
             gradeList.add(seperatedBySpaceListOfGrades);
             System.out.println(("listofaverages -2.2 "+seperatedBySpaceListOfGrades.get(0)));
             for (int k = 0; k < seperatedBySpaceListOfGrades.size(); k++) {
-            //     //gradeBoxTotal += (int) gradeList[j][k];
                 gradeBoxTotal += Integer.parseInt(seperatedBySpaceListOfGrades.get(k));
-            //     //add to total
             }
-
-            //int average = gradeBoxTotal/allTextListForClass.size(); //wrong //9/22
-            //average is gradeBoxTotal/numOfGrades
 
             int average = gradeBoxTotal/seperatedBySpaceListOfGrades.size();
             System.out.println("screen "+seperatedBySpaceListOfGrades + "size "+seperatedBySpaceListOfGrades.size());
@@ -212,7 +193,6 @@ public class PrintStudentGrades extends JFrame {
     }
 
     private void makePercentageOfGradeList() {
-        //percentageOfGradeList = new ArrayList<>();
         for (int percentageOfGradePanelIndex = 2; percentageOfGradePanelIndex < allTextListForClass.size(); percentageOfGradePanelIndex += 3) {
             percentageOfGradeList.add(Integer.parseInt(allTextListForClass.get(percentageOfGradePanelIndex)));
         }
@@ -231,42 +211,21 @@ public class PrintStudentGrades extends JFrame {
         backButton.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent e) {
                 hideWindow();
-                System.out.println(" 1111");
-                System.out.println("hi from print grades back");
                 StudentStatCollect studentStatCollect = new StudentStatCollect();
                 studentStatCollect.addLoadedBoxes();
                 studentStatCollect.studentStatCollectLaunch();
-                //currentClass = ;
                 actionPriorities.setCurrentClass("StudentStatCollect");
-                //System.out.prin
-                //studentStatCollect.backAction2();
-
-                //
-               //backButtonAction(main, newUser, studentOrTeacher, existingOrNew);
             }
         });
-
-        //JButton saveButton = createButton.saveButtonCreate();
-        // JPanel saveButtonPanel = new JPanel();
-        // saveButtonPanel.add(saveButton);
-        // saveButton.addActionListener(new ActionListener() {
-        //     public void actionPerformed(ActionEvent e) {
-        //         //nextButtonAction(existingOrNew, studentOrTeacher);
-        //     }
-        // });
 
         JButton nextButton = createButton.nextButtonCreate();
         JPanel nextButtonPanel = new JPanel();
         nextButtonPanel.add(nextButton);
-        //nextButton.setEnabled(false); //commented 8/18
         nextButton.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent e) {
                 hideWindow();
-                //whichCurrClassIndex++;
-                //printStudentGradesLaunch();
             }
         });
-        //backNextButtonsPanel = createButton.makeBackNextButtonsPanel(backButtonPanel, saveButtonPanel, nextButtonPanel);
         backNextButtonsPanel = createButton.makeBackNextButtonsPanel(backButtonPanel, new JPanel(), nextButtonPanel);
         window.add(backNextButtonsPanel, BorderLayout.SOUTH);
     }
@@ -281,7 +240,6 @@ public class PrintStudentGrades extends JFrame {
 
     public void hideWindow() {
         System.out.println("confirmation");
-        //hhhh
         backNextButtonsPanel.setVisible(false);
         borderContainer.setVisible(false);
 
@@ -293,33 +251,4 @@ public class PrintStudentGrades extends JFrame {
         }
 
     }
-
-    //window.setVisible(true);
-
-
-    // public static void main(String[] args) {
-    //     JFrame main = new JFrame(); // Initialize your main JFrame here
-
-    //     main.setSize(800, 600); // Set the size as needed
-    //     main.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE); // Set close operation
-    //     main.setVisible(true); // Make the frame visible
-
-    //     String studentOrTeacher = "Student"; // Initialize studentOrTeacher
-    //     String existingOrNew = "Existing"; // Initialize existingOrNew
-
-    //     SwingUtilities.invokeLater(new Runnable() {
-    //         @Override
-    //         public void run() {
-    //             PrintStudentGrades edit = new PrintStudentGrades(main, studentOrTeacher, existingOrNew);
-    //         }
-    //     });
-    // }
-
-
-//North print grades
-//For i in classes:
-    //print class: percentageGrade, gpa (if applicable)
-
-//overall gpa
-
     }
