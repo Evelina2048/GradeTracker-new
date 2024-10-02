@@ -18,6 +18,7 @@ import controller.Decorator;
 import controller.FileHandling;
 import model.Set;
 import model.SetList;
+import model.SetState;
 import model.SetUserInformation;
 import controller.CompositeActionListenerWithPriorities;
 import controller.CreateButton;
@@ -44,7 +45,9 @@ public class PrintStudentGrades extends JFrame {
     private CreateButton createButton = new CreateButton();
     private int whichCurrClassIndex;
 
-    private ArrayList<String> gradeTypeList;
+    private ArrayList<String> gradeTypeList = new ArrayList<>();
+    private int gradeTypeIndex = 0;
+
     private ArrayList<String> allTextListForClass;
     private ArrayList<Integer> percentageOfGradeList;
     private ArrayList<Integer> listOfAverages;
@@ -79,7 +82,7 @@ public class PrintStudentGrades extends JFrame {
 
         gradeList = new ArrayList<>();
         amountOfFinalGrade = new ArrayList<>();
-        gradeTypeList = new ArrayList<>();
+        //gradeTypeList = new ArrayList<>(); //10/2
         listOfAverages = new ArrayList<>();
         percentageOfGradeList = new ArrayList<>();
         for (int classIndex = 0; classIndex < setList.getFinalClassList().size(); classIndex++) { //go through classes
@@ -99,6 +102,7 @@ public class PrintStudentGrades extends JFrame {
             makePercentageOfGradeList();
 
             makeGradeTypeList();
+            System.out.println("hello print grades. grade type number is "+gradeTypeList.size()+" and the classes place is "+SetState.getInstance().getClassListIndex()+"/"+SetList.getInstance().getFinalClassList().size());
 
             makeListOfAveragesList();
 
@@ -222,7 +226,7 @@ public class PrintStudentGrades extends JFrame {
     }
 
     private void makeGradeTypeList() {
-        gradeTypeList = new ArrayList<>();
+        //gradeTypeList = new ArrayList<>();
         for (int gradeTypePanelIndex = 2; gradeTypePanelIndex < allTextListForClass.size(); gradeTypePanelIndex += 3) {
             gradeTypeList.add(allTextListForClass.get(gradeTypePanelIndex));
         }
@@ -257,11 +261,21 @@ public class PrintStudentGrades extends JFrame {
         JButton nextButton = createButton.nextButtonCreate();
         JPanel nextButtonPanel = new JPanel();
         nextButtonPanel.add(nextButton);
-        nextButton.addActionListener(new ActionListener() {
-            public void actionPerformed(ActionEvent e) {
-                hideWindow();
-            }
-        });
+        // System.out.println("hello print grades. grade type number is "+gradeTypeList.size()+" and the classes place is "+SetState.getInstance().getClassListIndex()+"/"+SetList.getInstance().getFinalClassList().size());
+        Boolean atEndOfClasses = SetState.getInstance().getClassListIndex() == SetList.getInstance().getFinalClassList().size()-1;
+        if ((gradeTypeList.size() == gradeTypeIndex) && atEndOfClasses) {
+            nextButton.setEnabled(false);
+
+        }
+
+        else {
+            nextButton.addActionListener(new ActionListener() {
+                public void actionPerformed(ActionEvent e) {
+                    hideWindow();
+                    gradeTypeIndex++;
+                }
+            });
+        }
         backNextButtonsPanel = createButton.makeBackNextButtonsPanel(backButtonPanel, new JPanel(), nextButtonPanel);
         window.add(backNextButtonsPanel, BorderLayout.SOUTH);
     }
