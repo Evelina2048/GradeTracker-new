@@ -22,6 +22,17 @@ import model.SetUserInformation;
 import controller.CompositeActionListenerWithPriorities;
 import controller.CreateButton;
 
+import java.awt.BorderLayout;
+import java.awt.Color;
+import java.awt.FlowLayout;
+import java.awt.LayoutManager;
+
+import javax.swing.BorderFactory;
+import javax.swing.JFrame;
+import javax.swing.JLabel;
+import javax.swing.JPanel;
+import javax.swing.border.Border;
+
 public class PrintStudentGrades extends JFrame {
     private JFrame window;
     private JPanel backNextButtonsPanel;
@@ -79,7 +90,6 @@ public class PrintStudentGrades extends JFrame {
 
 
             //grades starts at index 4
-            //gradeList.add(allList.get(4));
 
             printArray(allTextListForClass);
 
@@ -113,20 +123,38 @@ public class PrintStudentGrades extends JFrame {
     }
 
     private void addEverythingToWindow(float total) {
+        Border blackline = BorderFactory.createLineBorder(Color.black);
         ArrayList <Integer> gradeTypeNumberList = setList.getGradeTypeList();
 
         int gradeTypeAmount = gradeTypeNumberList.get(whichCurrClassIndex);
         JPanel allContainer = new JPanel(new GridLayout(2,gradeTypeAmount,5,5)); //rows,cols
         allContainer.setName("allContainr");
         borderContainer = new JPanel(new BorderLayout());
-        borderContainer.add(new JLabel("placeholdType"),BorderLayout.NORTH);
+
+        JLabel placeholdType = new JLabel("placeholdType");
+        placeholdType.setBorder(blackline);
+        borderContainer.add(placeholdType,BorderLayout.NORTH);
+
+
         borderContainer.add(allContainer,BorderLayout.CENTER);
-        borderContainer.add(new JLabel("Final Grade: "+total),BorderLayout.SOUTH);
+
+        JLabel finalgrade = new JLabel("Final Grade: "+total);
+        finalgrade.setBorder(blackline);
+        borderContainer.add(finalgrade,BorderLayout.SOUTH);
 
         Creator create = new Creator();
-        allContainer.add(new JLabel("Average"));
-        allContainer.add(new JLabel("Perc. of final grade"));
-        allContainer.add(new JLabel("Contribution"));
+
+        JLabel average = new JLabel("Average");
+        average.setBorder(blackline);
+        allContainer.add(average);
+
+        JLabel percgrade = new JLabel("Perc. of final grade");
+        percgrade.setBorder(blackline);
+        allContainer.add(percgrade);
+
+        JLabel contributiongrade = new JLabel("Contribution");
+        contributiongrade.setBorder(blackline);
+        allContainer.add(contributiongrade);
 
         for (int i = 0; i < gradeTypeNumberList.get(whichCurrClassIndex); i++) {
             System.out.println("i "+gradeTypeNumberList);
@@ -136,8 +164,16 @@ public class PrintStudentGrades extends JFrame {
             System.out.println("i "+listOfAverages.get(i));
 
             System.out.println("listofavs "+listOfAverages);
-            allContainer.add(new JLabel(String.valueOf(listOfAverages.get(i))));
-            allContainer.add(new JLabel(String.valueOf(percentageOfGradeList.get(i))));
+
+            JLabel listOfAveragesLabel = new JLabel(String.valueOf(listOfAverages.get(i)));
+            listOfAveragesLabel.setBorder(blackline);
+            allContainer.add(listOfAveragesLabel);
+
+            JLabel percentageOfGradeLabel = new JLabel(String.valueOf(percentageOfGradeList.get(i)));
+            percentageOfGradeLabel.setBorder(blackline);
+            allContainer.add(percentageOfGradeLabel);
+
+            //percentageOfGradeLabel.setBorder(blackline);
             allContainer.add(new JLabel("heyo "+(String.valueOf(percentageOfGradeList.get(i)))));
         }
         window.add(borderContainer);
@@ -234,7 +270,6 @@ public class PrintStudentGrades extends JFrame {
         for (int i = 0; i < list.size(); i++) {
             System.out.println("item "+list.get(i));
         }
-
 
     }
 
