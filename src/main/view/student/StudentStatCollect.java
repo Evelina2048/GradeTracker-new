@@ -366,61 +366,84 @@ public class StudentStatCollect extends JFrame {
     public void doNextButtonProcedure() {
         saveButtonAction("nextButton");
         if(setState.getCanContinue()) {
-                if (typeNumber!=0) {
-                    setList.addGradeTypeList(typeNumber); }
-                else {
-                    System.out.println("home "+setState.getTextFieldPanel().getComponentCount());
-
-                }
-
-                credits = (JPanel) textBoxPanel;
-
-                while (credits.getComponentCount() < 5) {
-                    credits = (JPanel) credits.getComponent(0);
-                }
-                //is greater or equal to 5
-                credits = (JPanel) credits.getComponent(1);
-
-                if (credits instanceof JPanel) {
-                    JTextField creditsTextField = goIntoPanel.goIntoPanelReturnTextbox((JPanel) credits, 0);
-                    String text = creditsTextField.getText();
-
-                    Pattern pattern = Pattern.compile("[0-9]+");
-                    Matcher matcher = pattern.matcher(text);
-                    Boolean matcherBoolean = matcher.find();
-
-                    Pattern patternForGrades = Pattern.compile("^(?:[0-9]*(?:.[0-9]+))*\s*$|^[0-9]*\s*$", Pattern.CASE_INSENSITIVE);
-                    Boolean gradesFormatOkay = correctBoxFormatChecker(patternForGrades, 4); //for grades
-
-                    Pattern patternForPercentage = Pattern.compile("^[-+]?\\d*\\.?\\d+(e[-+]?\\d+)?%?$", Pattern.CASE_INSENSITIVE);
-                    Boolean percentageFormatOkay = correctBoxFormatChecker(patternForPercentage, 3); //for percentage
-                    Boolean creditsFieldChanged = (setState.getEmptiedState(creditsTextField) != false);//(!creditsTextField.getText().equals("Credits (optional)"));
-
-                    setState.incrementClassListIndex();
-                    if ((setState.getClassListIndex()+1 <= setList.getFinalClassList().size())&&((matcherBoolean == true)|| !creditsFieldChanged) && (gradesFormatOkay) && (percentageFormatOkay)) {
-                        allPassedGoToStudentStats();
-                    }
-
-                    else if (((matcherBoolean == true)|| !creditsFieldChanged) && (gradesFormatOkay) && (percentageFormatOkay)) {
-                        setState.decrementClassListIndex();
-                        goToPrintStudentGrades();
-                    }
-
-                    else if (((matcherBoolean == false) && creditsFieldChanged) || (gradesFormatOkay == false) || (percentageFormatOkay == false)) {
-                        Decorator decorate = new Decorator();
-                        JDialog dialog = decorate.genericPopUpMessage("<html><center>Invalid Format.<br>-Credits must be an integer<br>Grades must be numbers separated by spaces<br>-Percentage of Grade must be an integer or decimal",null,400,140);
-                        dialog.setResizable(false);
-                        dialog.setLocationRelativeTo(null);
-                        dialog.setVisible(true);
-                    }
-
-                    else {
-                        System.out.println("matcher credit boolean, something wrong");
-                    }
+            if (typeNumber!=0) {
+                setList.addGradeTypeList(typeNumber); }
+            else {
+                System.out.println("home "+setState.getTextFieldPanel().getComponentCount());
             }
+
+            credits = (JPanel) textBoxPanel;
+
+            while (credits.getComponentCount() < 5) { // for layered panel
+                credits = (JPanel) credits.getComponent(0);
+            }
+            //is greater or equal to 5
+            credits = (JPanel) credits.getComponent(1);
+
+            if (credits instanceof JPanel) {
+                ifCreditsIsJPanel();
+        }
 
         }
     }
+
+    private void ifCreditsIsJPanel() {
+        JTextField creditsTextField = goIntoPanel.goIntoPanelReturnTextbox((JPanel) credits, 0);
+        String text = creditsTextField.getText();
+        Boolean matcherBoolean = checkCreditsFormat(text);
+
+        Boolean gradesFormatOkay = checkGradesFormat();
+
+        Boolean percentageFormatOkay = checkPercentageOfGradesFormat();
+
+        Boolean creditsFieldChanged = (setState.getEmptiedState(creditsTextField) != false);//(!creditsTextField.getText().equals("Credits (optional)"));
+
+        setState.incrementClassListIndex();
+        if ((setState.getClassListIndex()+1 <= setList.getFinalClassList().size())&&((matcherBoolean == true)|| !creditsFieldChanged) && (gradesFormatOkay) && (percentageFormatOkay)) {
+            allPassedGoToStudentStats();
+        }
+
+        else if (((matcherBoolean == true)|| !creditsFieldChanged) && (gradesFormatOkay) && (percentageFormatOkay)) {
+            setState.decrementClassListIndex();
+            goToPrintStudentGrades();
+        }
+
+        else if (((matcherBoolean == false) && creditsFieldChanged) || (gradesFormatOkay == false) || (percentageFormatOkay == false)) {
+            makeFormatReminderDialog();
+        }
+
+        else {
+            System.out.println("matcher credit boolean, something wrong");
+        }
+    }
+
+    private Boolean checkPercentageOfGradesFormat() {
+        Pattern patternForPercentage = Pattern.compile("^[-+]?\\d*\\.?\\d+(e[-+]?\\d+)?%?$", Pattern.CASE_INSENSITIVE);
+        Boolean percentageFormatOkay = correctBoxFormatChecker(patternForPercentage, 3); //for percentage
+        return percentageFormatOkay;
+    }
+
+    private Boolean checkCreditsFormat(String text) {
+        Pattern pattern = Pattern.compile("[0-9]+");
+        Matcher matcher = pattern.matcher(text);
+        Boolean matcherBoolean = matcher.find();
+        return matcherBoolean;
+    }
+
+    private Boolean checkGradesFormat() {
+        Pattern patternForGrades = Pattern.compile("^(?:[0-9]*(?:.[0-9]+))*\s*$|^[0-9]*\s*$", Pattern.CASE_INSENSITIVE);
+        Boolean gradesFormatOkay = correctBoxFormatChecker(patternForGrades, 4); //for grades
+        return gradesFormatOkay;
+    }
+
+    private void makeFormatReminderDialog() {
+        Decorator decorate = new Decorator();
+        JDialog dialog = decorate.genericPopUpMessage("<html><center>Invalid Format.<br>-Credits must be an integer<br>Grades must be numbers separated by spaces<br>-Percentage of Grade must be an integer or decimal",null,400,140);
+        dialog.setResizable(false);
+        dialog.setLocationRelativeTo(null);
+        dialog.setVisible(true);
+    }
+
     public void allPassedGoToStudentStats() {
         textBoxPanel.removeAll();
 
@@ -452,114 +475,98 @@ public class StudentStatCollect extends JFrame {
     }
 
     public void doNextButtonProcedure2() { //necessary to prevent endless loop when need nextbutton action "areyousure" popup.
-
+        saveButtonAction("nextButton");
         if(setState.getCanContinue()) {
-            setState.incrementClassListIndex();
             if (typeNumber!=0) {
                 setList.addGradeTypeList(typeNumber); }
             else {
                 System.out.println("home "+setState.getTextFieldPanel().getComponentCount());
-
             }
 
-        if (setState.getClassListIndex()+1 <= setList.getFinalClassList().size()) {
-            System.out.println("the jlabel name: "+setList.getFinalClassList().get(setState.getClassListIndex()));
+            credits = (JPanel) textBoxPanel;
 
-            credits = SetState.getInstance().getTextFieldPanel();
-
-            while (credits.getComponentCount() < 5) {
-                System.out.println("dollar "+credits.getComponentCount());
+            while (credits.getComponentCount() < 5) { // for layered panel
                 credits = (JPanel) credits.getComponent(0);
             }
             //is greater or equal to 5
             credits = (JPanel) credits.getComponent(1);
 
             if (credits instanceof JPanel) {
-                JTextField creditsTextField = goIntoPanel.goIntoPanelReturnTextbox((JPanel) credits, 0);
-                String text = creditsTextField.getText();
-
-                Pattern pattern = Pattern.compile("[0-9]+");
-                Matcher matcher = pattern.matcher(text);
-                Boolean matcherBoolean = matcher.find();
-
-                Pattern patternForGrades = Pattern.compile("^(?:[0-9]*(?:.[0-9]+))*\s*$|^[0-9]*\s*$", Pattern.CASE_INSENSITIVE);
-                Boolean gradesFormatOkay = correctBoxFormatChecker(patternForGrades, 4); //for grades
-
-                Pattern patternForPercentage = Pattern.compile("^[-+]?\\d*\\.?\\d+(e[-+]?\\d+)?%?$", Pattern.CASE_INSENSITIVE);
-                Boolean percentageFormatOkay = correctBoxFormatChecker(patternForPercentage, 3); //for percentage
-                Boolean creditsFieldChanged = (setState.getEmptiedState(creditsTextField) != false);//(!creditsTextField.getText().equals("Credits (optional)"));
-
-                if (((matcherBoolean == true)|| !creditsFieldChanged) && (gradesFormatOkay) && (percentageFormatOkay)) {
-                    textBoxPanel.removeAll();
-
-                    setState.setTextFieldPanel(textBoxPanel);
-                    studentStatCollectLaunch(); //before 8/27 was below visitnextstudentclass
-                    visitNextStudentClass();
-                    buttonSetUpAction();
-                }
-
-                else if (((matcherBoolean == false) && creditsFieldChanged) || (gradesFormatOkay == false) || (percentageFormatOkay == false)) {
-                    Decorator decorate = new Decorator();
-                    JDialog dialog = decorate.genericPopUpMessage("<html><center>Invalid Format.<br>-Credits must be an integer<br>Grades must be numbers separated by spaces<br>-Percentage of Grade must be an integer or decimal",null,400,140);
-
-                    dialog.setResizable(false);
-                    dialog.setLocationRelativeTo(null);
-                    dialog.setVisible(true);
-                }
-
-                else {
-                    System.out.println("matcher credit boolean, something wrong");
-                }
-
-            }
-        }
-        else {
-            credits = SetState.getInstance().getTextFieldPanel();
-
-            while (credits.getComponentCount() < 5) {
-                System.out.println("dollar "+credits.getComponentCount());
-                credits = (JPanel) credits.getComponent(0);
-            }
-            //is greater or equal to 5
-            credits = (JPanel) credits.getComponent(1);
-
-            if (credits instanceof JPanel) {
-                JTextField creditsTextField = goIntoPanel.goIntoPanelReturnTextbox((JPanel) credits, 0);
-                String text = creditsTextField.getText();
-
-                Pattern pattern = Pattern.compile("[0-9]+");
-                Matcher matcher = pattern.matcher(text);
-                Boolean matcherBoolean = matcher.find();
-
-                Pattern patternForGrades = Pattern.compile("^(?:[0-9]*(?:.[0-9]+))*\s*$|^[0-9]*\s*$", Pattern.CASE_INSENSITIVE);
-                Boolean gradesFormatOkay = correctBoxFormatChecker(patternForGrades, 4); //for grades
-
-                Pattern patternForPercentage = Pattern.compile("^[-+]?\\d*\\.?\\d+(e[-+]?\\d+)?%?$", Pattern.CASE_INSENSITIVE);
-                Boolean percentageFormatOkay = correctBoxFormatChecker(patternForPercentage, 3); //for percentage
-                Boolean creditsFieldChanged = (setState.getEmptiedState(creditsTextField) != false);//(!creditsTextField.getText().equals("Credits (optional)"));
-                if ((((matcherBoolean == true)|| !creditsFieldChanged) || !creditsFieldChanged) && (gradesFormatOkay) && (percentageFormatOkay)) {
-                    hideWindow();
-                    //hideNewDelContainerFlow();
-                    window.remove(newDelContainerFlow);
-                    removeVariablesInWindow();
-                    setState.decrementClassListIndex();
-                    new PrintStudentGrades(set.getWindow(), setUserInformation.getStudentOrTeacher(), setUserInformation.getExistingOrNew());
-                }
-
-                else if (((matcherBoolean == false) && creditsFieldChanged) || (gradesFormatOkay == false) || (percentageFormatOkay == false)) {
-                    Decorator decorate = new Decorator();
-                    JDialog dialog = decorate.genericPopUpMessage("<html><center>Invalid Format.<br>-Credits must be an integer<br>Grades must be numbers separated by spaces<br>-Percentage of Grade must be an integer or decimal",null,400,140);
-                    dialog.setResizable(false);
-                    dialog.setLocationRelativeTo(null);
-                    dialog.setVisible(true);
-                }
-
-                else {
-                    System.out.println("matcher credit boolean, something wrong");
-                }
-            }
+                ifCreditsIsJPanel();
         }
         }
+        // if(setState.getCanContinue()) {
+        //     setState.incrementClassListIndex();
+        //     if (typeNumber!=0) {
+        //         setList.addGradeTypeList(typeNumber); }
+        //     else {
+        //         System.out.println("home "+setState.getTextFieldPanel().getComponentCount());
+
+        //     }
+
+        // if (setState.getClassListIndex()+1 <= setList.getFinalClassList().size()) {
+        //     System.out.println("the jlabel name: "+setList.getFinalClassList().get(setState.getClassListIndex()));
+
+        //     credits = SetState.getInstance().getTextFieldPanel();
+
+        //     while (credits.getComponentCount() < 5) {
+        //         System.out.println("dollar "+credits.getComponentCount());
+        //         credits = (JPanel) credits.getComponent(0);
+        //     }
+        //     //is greater or equal to 5
+        //     credits = (JPanel) credits.getComponent(1);
+
+        //     if (credits instanceof JPanel) {
+        //         ifCreditsIsJPanel();
+        //     }
+        // }
+        // else {
+        //     credits = SetState.getInstance().getTextFieldPanel();
+
+        //     while (credits.getComponentCount() < 5) {
+        //         System.out.println("dollar "+credits.getComponentCount());
+        //         credits = (JPanel) credits.getComponent(0);
+        //     }
+        //     //is greater or equal to 5
+        //     credits = (JPanel) credits.getComponent(1);
+
+        //     if (credits instanceof JPanel) {
+        //         JTextField creditsTextField = goIntoPanel.goIntoPanelReturnTextbox((JPanel) credits, 0);
+        //         String text = creditsTextField.getText();
+
+        //         Pattern pattern = Pattern.compile("[0-9]+");
+        //         Matcher matcher = pattern.matcher(text);
+        //         Boolean matcherBoolean = matcher.find();
+
+        //         Pattern patternForGrades = Pattern.compile("^(?:[0-9]*(?:.[0-9]+))*\s*$|^[0-9]*\s*$", Pattern.CASE_INSENSITIVE);
+        //         Boolean gradesFormatOkay = correctBoxFormatChecker(patternForGrades, 4); //for grades
+
+        //         Pattern patternForPercentage = Pattern.compile("^[-+]?\\d*\\.?\\d+(e[-+]?\\d+)?%?$", Pattern.CASE_INSENSITIVE);
+        //         Boolean percentageFormatOkay = correctBoxFormatChecker(patternForPercentage, 3); //for percentage
+        //         Boolean creditsFieldChanged = (setState.getEmptiedState(creditsTextField) != false);//(!creditsTextField.getText().equals("Credits (optional)"));
+        //         if ((((matcherBoolean == true)|| !creditsFieldChanged) || !creditsFieldChanged) && (gradesFormatOkay) && (percentageFormatOkay)) {
+        //             hideWindow();
+        //             //hideNewDelContainerFlow();
+        //             window.remove(newDelContainerFlow);
+        //             removeVariablesInWindow();
+        //             setState.decrementClassListIndex();
+        //             new PrintStudentGrades(set.getWindow(), setUserInformation.getStudentOrTeacher(), setUserInformation.getExistingOrNew());
+        //         }
+
+        //         else if (((matcherBoolean == false) && creditsFieldChanged) || (gradesFormatOkay == false) || (percentageFormatOkay == false)) {
+        //             Decorator decorate = new Decorator();
+        //             JDialog dialog = decorate.genericPopUpMessage("<html><center>Invalid Format.<br>-Credits must be an integer<br>Grades must be numbers separated by spaces<br>-Percentage of Grade must be an integer or decimal",null,400,140);
+        //             dialog.setResizable(false);
+        //             dialog.setLocationRelativeTo(null);
+        //             dialog.setVisible(true);
+        //         }
+
+        //         else {
+        //             System.out.println("matcher credit boolean, something wrong");
+        //         }
+        //     }
+        // }
+        // } //commented 10/4
 
         setState.setCanContinue(true);
 
