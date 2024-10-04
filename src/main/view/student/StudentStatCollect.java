@@ -80,9 +80,6 @@ public class StudentStatCollect extends JFrame {
     JPanel credits;
 
     public StudentStatCollect() {
-        //if (currentClass != "StudentStatCollect") {
-        //currentClass = "StudentStatCollect Loading";
-        //}
         SETTEST.getInstance().TESTSETCURRENTINSTANCE(this);
         this.set = Set.getInstance();
         this.setState = SetState.getInstance();
