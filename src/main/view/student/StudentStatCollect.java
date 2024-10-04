@@ -657,7 +657,9 @@ public class StudentStatCollect extends JFrame {
 
         JFrame window = Set.getInstance().getWindow();
 
-        setList.removeStudentStatCollectReadClassLabelPanel();
+        if (setState.getClassListIndex() > 0) {
+            setList.removeStudentStatCollectReadClassLabelPanel(); //causes bugs if used for first class
+        }
 
         setState.setTextFieldPanel(textBoxPanel);
 
