@@ -207,12 +207,12 @@ public class StudentStatCollect extends JFrame {
                                 window.remove(component);
                             }
 
-                            Component[] windowComponents2 = window.getContentPane().getComponents();
-                            for (int k = 2; k<=10;k++) {
-                                Component component = windowComponents2[k];
-                                component.setVisible(false);
-                                window.remove(component);
-                            }
+                            // Component[] windowComponents2 = window.getContentPane().getComponents();
+                            // for (int k = 2; k<=10;k++) {
+                            //     Component component = windowComponents2[k];
+                            //     component.setVisible(false);
+                            //     window.remove(component);
+                            // } //commented 10/5 for e,m > 1234 5678 < <
 
                             // Component[] windowComponents3 = window.getContentPane().getComponents();
                             // int i = 0;
