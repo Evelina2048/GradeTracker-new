@@ -65,7 +65,6 @@ public class StudentStatCollect extends JFrame {
     private JPanel newDelContainerFlow = new JPanel(new FlowLayout(FlowLayout.LEFT,0,5));
     private JPanel classLabelPanel = new JPanel(new FlowLayout(FlowLayout.LEFT));
     private JPanel allBoxesPanel = new JPanel();
-    private ArrayList<String> finalClassList;
     private FileHandling fileHandler;
     private JPanel textBoxPanel = new JPanel(new GridLayout(0,4,5,5));
 
@@ -98,7 +97,6 @@ public class StudentStatCollect extends JFrame {
         setState.setCurrentClass("StudentStatCollect.java");
         window = set.getWindow();
         currentClass = "StudentStatCollect";
-        //actionPriorities.setCurrentClass(null);
         actionPriorities.setCurrentClass(currentClass);
         System.out.println("actionprio "+actionPriorities.getCurrentClass());
 
@@ -114,11 +112,8 @@ public class StudentStatCollect extends JFrame {
         EnterAction enterAction = new EnterAction();
         window.getRootPane().getInputMap(JComponent.WHEN_IN_FOCUSED_WINDOW).put(KeyStroke.getKeyStroke(KeyEvent.VK_ENTER, 0), "enterAction");
         window.getRootPane().getActionMap().put("enterAction", enterAction);
-
-        finalClassList = setList.getFinalClassList();
-        System.out.println("final class list issssss before: "+ finalClassList);
-        finalClassList = setList.getFinalClassList();
-        System.out.println("final class list issssss: "+ finalClassList);
+        setList.getFinalClassList();
+        setList.getFinalClassList();
         create.hideContainer();
 
         createNewTypeButton();
@@ -127,9 +122,7 @@ public class StudentStatCollect extends JFrame {
 
         currentClass = "StudentStatCollect";
         actionPriorities.setCurrentClass(currentClass);
-        System.out.println("heyo444 "+currentClass);
 
-        //JTextField testTextField = new JTextField("Error"); //8/23
         if (textBoxPanel.getComponentCount() < 2) {
         }
         else if (textBoxPanel.getComponent(1) instanceof JPanel) {
@@ -166,79 +159,49 @@ public class StudentStatCollect extends JFrame {
     private void backAction(JButton backButton) {
         backButton.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent e) {
-                System.out.println(" l2222 "+setList.getFinalClassList().get(setState.getClassListIndex())+ " currclass "+ currentClass+ " actionclass "+ actionPriorities.getCurrentClass());
                 // if (textBoxPanel.getComponentCount() >= 2) { //9/20
                 //     //goIntoPanel.goIntoPanelReturnTextbox((JPanel) textBoxPanel.getComponent(1), 0);
                 // }
-                currentClass = "StudentStatCollect";
-                actionPriorities.setCurrentClass(currentClass);
-                //actionPriorities.setCurrentClass(currentClass);
-                System.out.println(" l2222.1 "+setList.getFinalClassList().get(setState.getClassListIndex())+ " currclass "+ currentClass);
+                // currentClass = "StudentStatCollect";
+                // actionPriorities.setCurrentClass(currentClass); //commented 10/7
                 actionPriorities.addClassActionListener(b -> {
-                    System.out.println("l2222.5");
                     currentClass = "StudentStatCollect";
                     actionPriorities.setCurrentClass(currentClass);
-                    //actionPriorities.setCurrentClass(currentClass);
-                    //System.out.println("hfwehofohe filewrite how many placeholders "+fileWrite.howManyPlaceholders());
-                    if(setState.getCanContinue()) {//&& (fileWrite.howManyPlaceholders() == 0)) {
-                        System.out.println(" l3333");
-                        System.out.println("classlabelpanel "+classLabelPanel.getComponentCount());
-                        //saveButtonAction("backButton"); //8/22
-                        create.setTextFieldContainer(setState.getTextFieldPanel());
-                        System.out.println("hfwehofohe2 filewrite how many placeholders "+fileWrite.howManyPlaceholders());
-                        if (setState.getClassListIndex() == 0 && (fileWrite.howManyPlaceholders() == 0)) { //case for back to classes
-                            System.out.println("hidewindow1 "+ fileWrite.howManyPlaceholders());
-                            hideWindow();
-                            //hideNewDelContainerFlow();
-                            StudentClasses studentClasses = new StudentClasses();
-                            saveButtonAction("backButton");
-                            studentClasses.studentClassesLaunch();
-                            // saveButtonAction("backButton"); //was uncommented before 9/11 7:03pm
-                        }
-                        else if (setState.getClassListIndex() > 0) {
-                            System.out.println("hidewindow111");
-                            goToPreviousClasses();
+                    if(setState.getCanContinue()) {
+                        decideBackActionBasedOnClass();
+                    }}, 2, "backButton",null, currentClass);}});
+    }
 
-                            JFrame window = Set.getInstance().getWindow();
-                            Component[] windowComponents = window.getContentPane().getComponents();
-                            for (int k = 0; k<8;k++) {
-                                Component component = windowComponents[k];
-                                component.setVisible(false);
-                                window.remove(component);
-                            }
-
-                            // Component[] windowComponents2 = window.getContentPane().getComponents();
-                            // for (int k = 2; k<=10;k++) {
-                            //     Component component = windowComponents2[k];
-                            //     component.setVisible(false);
-                            //     window.remove(component);
-                            // } //commented 10/5 for e,m > 1234 5678 < <
-
-                            // Component[] windowComponents3 = window.getContentPane().getComponents();
-                            // int i = 0;
-                            // for (Component windowComp : windowComponents3) {
-                            //     System.out.println("compcount " + i + " classname "+ windowComp.getClass().getName() + " regname "+windowComp.getName() + " isvisible "+windowComp.isVisible());
-                            //     i++;
-                            // }
-                        }
-                    }
-                    else if (fileWrite.howManyPlaceholders() > 0) {
-                        Decorator decorate = new Decorator();
-                        SetState.getInstance().setStudentStatCollect(currentInstance);
-                        SetState.getInstance().setAreYouSureMessageCause("backButton");
-                        decorate.areYouSureMessage(null, "studentStatsEmpty", "Remove placeholder(s) to continue?", 230, 90);
-                    }
-
-                }, 2, "backButton",null, currentClass);
-        }});
+    private void decideBackActionBasedOnClass() {
+        create.setTextFieldContainer(setState.getTextFieldPanel());
+        if (setState.getClassListIndex() == 0 && (fileWrite.howManyPlaceholders() == 0)) { //case for back to classes
+            hideWindow();
+            StudentClasses studentClasses = new StudentClasses();
+            saveButtonAction("backButton");
+            studentClasses.studentClassesLaunch();
+            // saveButtonAction("backButton"); //was uncommented before 9/11 7:03pm
+        }
+        else if (setState.getClassListIndex() > 0) {
+            goToPreviousClasses();
+            JFrame window = Set.getInstance().getWindow();
+            Component[] windowComponents = window.getContentPane().getComponents();
+            for (int k = 0; k<8;k++) {
+                Component component = windowComponents[k];
+                component.setVisible(false);
+                window.remove(component);
+            }} else if (fileWrite.howManyPlaceholders() > 0) {
+        Decorator decorate = new Decorator();
+        SetState.getInstance().setStudentStatCollect(currentInstance);
+        SetState.getInstance().setAreYouSureMessageCause("backButton");
+        decorate.areYouSureMessage(null, "studentStatsEmpty", "Remove placeholder(s) to continue?", 230, 90);
+    }
     }
 
     public void backAction2() { //necessary because if the user tries to go back with placeholders and clicks "yes" option, will get stuck in an infinite loop when back action recalled.
-        if(setState.getCanContinue()) {//&& (fileWrite.howManyPlaceholders() == 0)) {
+        if(setState.getCanContinue()) {
             create.setTextFieldContainer(setState.getTextFieldPanel());
             if (setState.getClassListIndex() == 0) { //case for back to classes
                 hideWindow();
-                //hideNewDelContainerFlow();
                 StudentClasses studentClasses = new StudentClasses();
                 studentClasses.studentClassesLaunch();
                 //saveButtonAction("backButton"); //9/20
@@ -257,15 +220,11 @@ public class StudentStatCollect extends JFrame {
                     Component component = windowComponents2[k];
                     component.setVisible(false);
                     window.remove(component);
-                }
-            }
-        }
-        setState.setCanContinue(false);
-    }
+                }}}
+                setState.setCanContinue(false); }
 
     private void goToPreviousClasses() {
         saveButtonAction("backButton");
-        //if (setState.getCanContinue()) { //8/24 //TODO 8/24
             setState.decrementClassListIndex();
             setList.getClassLabelPanel().removeAll();
             classLabelPanel.removeAll();
@@ -322,11 +281,8 @@ public class StudentStatCollect extends JFrame {
 
     private void saveButtonAction(String actionCause) {
         SETTEST.getInstance().TESTSETCURRENTINSTANCE(this);
-        //System.out.println("classlistindex "+ setState.getClassListIndex();
         set.setFilePath(setUserInformation.getPathToClassInformationFileWithIndex());
         create.setTextFieldContainer(setState.getTextFieldPanel());
-
-        //setState.setTextFieldPanel(classLabelPanel); //TODO if you see issue with boxes being weird, this prob source of bug //8/30
 
         System.out.println("1111 in save");
         fileWrite.writeTextToFile();
@@ -352,7 +308,6 @@ public class StudentStatCollect extends JFrame {
                     @Override
                     public void actionPerformed(ActionEvent e) {// remember wont run  if just enter without a click
                         System.out.println("enteraction");
-                        // System.out.println("textboxpanel comps B"+setState.getTextFieldPanel().getComponentCount());
                         doNextButtonProcedure();
                     }
                 }, 1, "nextButton", null, currentClass);  // Add this ActionListener with priority 1
@@ -463,8 +418,7 @@ public class StudentStatCollect extends JFrame {
         window.remove(backNextButtonsPanel);
         window.remove(set.getCurrentSaveButton());
         newDelContainerFlow.removeAll();
-        //window.remove(newDelContainerFlow);
-        studentStatCollectLaunch(); //before 8/27 was below
+        studentStatCollectLaunch();
         visitNextStudentClass();
         buttonSetUpAction();
     }
@@ -477,10 +431,8 @@ public class StudentStatCollect extends JFrame {
             i++;
         }
         window.remove(newDelContainerFlow);
-        //window.remove(deleteTypeButtonPanel);
 
         hideWindow();
-        //hideNewDelContainerFlow();
         removeVariablesInWindow();
         new PrintStudentGrades(set.getWindow(), setUserInformation.getStudentOrTeacher(), setUserInformation.getExistingOrNew());
     }
@@ -614,20 +566,8 @@ public class StudentStatCollect extends JFrame {
             set.getWindow().remove(backNextButtonsPanel);
             set.getCurrentSaveButton().setVisible(false);
 
-            JFrame window = Set.getInstance().getWindow();
-            Component[] windowComponents = window.getContentPane().getComponents();
-
-            for (Component windowComp : windowComponents) {
-                if (windowComp == backNextButtonsPanel) {
-                }
-                System.out.println("compcount " + windowComponents.length + " classname "+ windowComp.getClass().getName() + " regname "+windowComp.getName() + " isvisible "+windowComp.isVisible());
-            }
-
             hideWindow();
-            //window.remove(newDelContainerFlow);
-            //hideNewDelContainerFlow();
             StudentStatCollect studentStatCollect = new StudentStatCollect();
-            System.out.println("textfieldpanelcount "+setState.getTextFieldPanel().getComponentCount());
             sETTEST.TESTSETCURRENTINSTANCE(studentStatCollect);
 
             studentStatCollect.DisplayClasses();
@@ -685,9 +625,6 @@ public class StudentStatCollect extends JFrame {
         window.add(classLabelPanel, BorderLayout.CENTER);
         create.windowFix();
 
-
-        JFrame window = Set.getInstance().getWindow();
-
         if (setState.getClassListIndex() > 0) {
             setList.removeStudentStatCollectReadClassLabelPanel(); //causes bugs if used for first class
         }
@@ -718,7 +655,6 @@ public class StudentStatCollect extends JFrame {
         }
 
         private Boolean correctBoxFormatChecker(Pattern pattern, int index) {
-            //int index = 4;
             for (int i=1; i<=8; i++) { //max num of grade type
                 String text = goIntoPanel.goIntoPanel(classLabelPanel, index);
 
@@ -763,23 +699,19 @@ public class StudentStatCollect extends JFrame {
             if (backNextButtonsPanel != null) {
                 backNextButtonsPanel.setVisible(false);
             }
-            //if (classLabelPanel != null) {
             classLabelPanel.setVisible(false);
-            //}
-            //if (textBoxPanel != null) {
             textBoxPanel.setVisible(false);
-            //}
         }
 
-        private void hideNewDelContainerFlow() {
-            if (newDelContainerFlow != null){
-                newDelContainerFlow.setVisible(false);
-            }
-        }
+        // private void hideNewDelContainerFlow() {
+        //     if (newDelContainerFlow != null){
+        //         newDelContainerFlow.setVisible(false);
+        //     }
+        // }
 
-        private void removeNewDelContainerFlow() {
-            window.remove(newDelContainerFlow);
-        }
+        // private void removeNewDelContainerFlow() {
+        //     window.remove(newDelContainerFlow);
+        // } //10/7
 
         private void boxManageCreate(String placeholder, String type, Boolean boxLoaded) {
             if (numOfBoxes < maxBoxes) {
