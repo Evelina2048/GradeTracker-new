@@ -328,7 +328,7 @@ public class StudentStatCollect extends JFrame {
 
         //setState.setTextFieldPanel(classLabelPanel); //TODO if you see issue with boxes being weird, this prob source of bug //8/30
 
-        System.out.println("1111");
+        System.out.println("1111 in save");
         fileWrite.writeTextToFile();
 
         if (fileWrite.howManyPlaceholders() > 0 ){//&& actionCause!=("Neither")) { //commented 9/20
@@ -362,18 +362,8 @@ public class StudentStatCollect extends JFrame {
 
     public void doNextButtonProcedure() {
         //saveButtonAction("nextButton"); //10/7
-        credits = (JPanel) textBoxPanel;
-
-        while (credits.getComponentCount() < 5) { // for layered panel
-            credits = (JPanel) credits.getComponent(0);
-        }
-        //is greater or equal to 5
-        credits = (JPanel) credits.getComponent(1);
-
-        if (credits instanceof JPanel) {
-            ifCreditsIsJPanel();
-        }
         if(setState.getCanContinue()) {
+            System.out.println("hi can continue");
             saveButtonAction("nextButton"); //was above until 10/7
             if (typeNumber!=0) {
                 setList.addGradeTypeList(typeNumber); }
@@ -393,6 +383,17 @@ public class StudentStatCollect extends JFrame {
         //         ifCreditsIsJPanel();
         // } //commented 10/7
 
+        }
+        credits = (JPanel) textBoxPanel;
+
+        while (credits.getComponentCount() < 5) { // for layered panel
+            credits = (JPanel) credits.getComponent(0);
+        }
+        //is greater or equal to 5
+        credits = (JPanel) credits.getComponent(1);
+
+        if (credits instanceof JPanel) {
+            ifCreditsIsJPanel();
         }
     }
 
@@ -486,16 +487,6 @@ public class StudentStatCollect extends JFrame {
 
     public void doNextButtonProcedure2() { //necessary to prevent endless loop when need nextbutton action "areyousure" popup.
         //saveButtonAction("nextButton");  //commented 10/7
-        credits = (JPanel) textBoxPanel;
-        while (credits.getComponentCount() < 5) { // for layered panel
-            credits = (JPanel) credits.getComponent(0);
-        }
-        //is greater or equal to 5
-        credits = (JPanel) credits.getComponent(1);
-
-        if (credits instanceof JPanel) {
-            ifCreditsIsJPanel();
-        }
 
         if(setState.getCanContinue()) {
             saveButtonAction("nextButton"); //replaced line above 10/7
@@ -516,6 +507,17 @@ public class StudentStatCollect extends JFrame {
         //     if (credits instanceof JPanel) {
         //         ifCreditsIsJPanel();
         // } //commented 10//7
+        }
+        credits = (JPanel) textBoxPanel;
+
+        while (credits.getComponentCount() < 5) { // for layered panel
+            credits = (JPanel) credits.getComponent(0);
+        }
+        //is greater or equal to 5
+        credits = (JPanel) credits.getComponent(1);
+
+        if (credits instanceof JPanel) {
+            ifCreditsIsJPanel();
         }
         // if(setState.getCanContinue()) {
         //     setState.incrementClassListIndex();
