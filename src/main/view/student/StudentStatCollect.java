@@ -352,7 +352,7 @@ public class StudentStatCollect extends JFrame {
                     @Override
                     public void actionPerformed(ActionEvent e) {// remember wont run  if just enter without a click
                         System.out.println("enteraction");
-                        System.out.println("textboxpanel comps B"+setState.getTextFieldPanel().getComponentCount());
+                        // System.out.println("textboxpanel comps B"+setState.getTextFieldPanel().getComponentCount());
                         doNextButtonProcedure();
                     }
                 }, 1, "nextButton", null, currentClass);  // Add this ActionListener with priority 1
@@ -361,25 +361,37 @@ public class StudentStatCollect extends JFrame {
     }
 
     public void doNextButtonProcedure() {
-        saveButtonAction("nextButton");
+        //saveButtonAction("nextButton"); //10/7
+        credits = (JPanel) textBoxPanel;
+
+        while (credits.getComponentCount() < 5) { // for layered panel
+            credits = (JPanel) credits.getComponent(0);
+        }
+        //is greater or equal to 5
+        credits = (JPanel) credits.getComponent(1);
+
+        if (credits instanceof JPanel) {
+            ifCreditsIsJPanel();
+        }
         if(setState.getCanContinue()) {
+            saveButtonAction("nextButton"); //was above until 10/7
             if (typeNumber!=0) {
                 setList.addGradeTypeList(typeNumber); }
             else {
                 System.out.println("home "+setState.getTextFieldPanel().getComponentCount());
             }
 
-            credits = (JPanel) textBoxPanel;
+        //     credits = (JPanel) textBoxPanel;
 
-            while (credits.getComponentCount() < 5) { // for layered panel
-                credits = (JPanel) credits.getComponent(0);
-            }
-            //is greater or equal to 5
-            credits = (JPanel) credits.getComponent(1);
+        //     while (credits.getComponentCount() < 5) { // for layered panel
+        //         credits = (JPanel) credits.getComponent(0);
+        //     }
+        //     //is greater or equal to 5
+        //     credits = (JPanel) credits.getComponent(1);
 
-            if (credits instanceof JPanel) {
-                ifCreditsIsJPanel();
-        }
+        //     if (credits instanceof JPanel) {
+        //         ifCreditsIsJPanel();
+        // } //commented 10/7
 
         }
     }
@@ -439,6 +451,7 @@ public class StudentStatCollect extends JFrame {
         dialog.setResizable(false);
         dialog.setLocationRelativeTo(null);
         dialog.setVisible(true);
+        setState.setCanContinue(false); //10/7
     }
 
     public void allPassedGoToStudentStats() {
@@ -472,8 +485,20 @@ public class StudentStatCollect extends JFrame {
     }
 
     public void doNextButtonProcedure2() { //necessary to prevent endless loop when need nextbutton action "areyousure" popup.
-        saveButtonAction("nextButton");
+        //saveButtonAction("nextButton");  //commented 10/7
+        credits = (JPanel) textBoxPanel;
+        while (credits.getComponentCount() < 5) { // for layered panel
+            credits = (JPanel) credits.getComponent(0);
+        }
+        //is greater or equal to 5
+        credits = (JPanel) credits.getComponent(1);
+
+        if (credits instanceof JPanel) {
+            ifCreditsIsJPanel();
+        }
+
         if(setState.getCanContinue()) {
+            saveButtonAction("nextButton"); //replaced line above 10/7
             if (typeNumber!=0) {
                 setList.addGradeTypeList(typeNumber); }
             else {
@@ -482,15 +507,15 @@ public class StudentStatCollect extends JFrame {
 
             credits = (JPanel) textBoxPanel;
 
-            while (credits.getComponentCount() < 5) { // for layered panel
-                credits = (JPanel) credits.getComponent(0);
-            }
-            //is greater or equal to 5
-            credits = (JPanel) credits.getComponent(1);
+        //     while (credits.getComponentCount() < 5) { // for layered panel
+        //         credits = (JPanel) credits.getComponent(0);
+        //     }
+        //     //is greater or equal to 5
+        //     credits = (JPanel) credits.getComponent(1);
 
-            if (credits instanceof JPanel) {
-                ifCreditsIsJPanel();
-        }
+        //     if (credits instanceof JPanel) {
+        //         ifCreditsIsJPanel();
+        // } //commented 10//7
         }
         // if(setState.getCanContinue()) {
         //     setState.incrementClassListIndex();
