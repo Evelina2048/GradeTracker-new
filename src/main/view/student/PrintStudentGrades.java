@@ -1,15 +1,19 @@
 package view.student;
 
 import javax.swing.JButton;
+import javax.swing.JComponent;
 import javax.swing.JFrame;
 
 import java.awt.BorderLayout;
 import java.awt.Component;
 import java.awt.GridLayout;
 import javax.swing.JPanel;
+import javax.swing.KeyStroke;
 import javax.swing.JLabel;
 
 import java.awt.event.ActionListener;
+import java.awt.event.KeyEvent;
+
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.awt.event.ActionEvent;
@@ -28,6 +32,7 @@ import java.awt.Color;
 import java.awt.FlowLayout;
 import java.awt.LayoutManager;
 
+import javax.swing.AbstractAction;
 import javax.swing.BorderFactory;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
@@ -66,6 +71,10 @@ public class PrintStudentGrades extends JFrame {
 
         actionPriorities = CompositeActionListenerWithPriorities.getInstance();
         printStudentGradesLaunch();
+
+        EnterAction enterAction = new EnterAction();
+        window.getRootPane().getInputMap(JComponent.WHEN_IN_FOCUSED_WINDOW).put(KeyStroke.getKeyStroke(KeyEvent.VK_ENTER, 0), "enterAction");
+        window.getRootPane().getActionMap().put("enterAction", enterAction);
 
     }
 
@@ -299,5 +308,20 @@ public class PrintStudentGrades extends JFrame {
             i++;
         }
 
+    }
+
+    public class EnterAction extends AbstractAction {
+        @Override
+        public void actionPerformed(ActionEvent e) {
+            actionPriorities.setCurrentClass("PrintStudentGrades");
+            actionPriorities.addClassActionListener(new ActionListener() {
+                @Override
+                public void actionPerformed(ActionEvent e) { // remember won't run if just enter without a click
+                    System.out.println("enteraction");
+                    //doNextButtonProcedure();
+
+                }
+            }, 1, "EnterAction", null, "PrintStudentGrades");  // Add this ActionListener with priority 1
+        }
     }
     }
