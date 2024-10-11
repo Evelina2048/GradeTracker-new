@@ -144,7 +144,7 @@ public class PrintStudentGrades extends JFrame {
         allContainer.setName("allContainr");
         borderContainer = new JPanel(new BorderLayout());
 
-        JLabel placeholdType = new JLabel("placeholdType");
+        JLabel placeholdType = new JLabel("Placeholder name: "+gradeTypeList.get(gradeTypeIndex));
         placeholdType.setBorder(blackline);
         borderContainer.add(placeholdType,BorderLayout.NORTH);
 
@@ -271,8 +271,10 @@ public class PrintStudentGrades extends JFrame {
         JPanel nextButtonPanel = new JPanel();
         nextButtonPanel.add(nextButton);
         // System.out.println("hello print grades. grade type number is "+gradeTypeList.size()+" and the classes place is "+SetState.getInstance().getClassListIndex()+"/"+SetList.getInstance().getFinalClassList().size());
-        Boolean atEndOfClasses = SetState.getInstance().getClassListIndex() == SetList.getInstance().getFinalClassList().size()-1;
-        if ((gradeTypeList.size() == gradeTypeIndex) && atEndOfClasses) {
+        Boolean atEndOfClasses = SetState.getInstance().getClassListIndex() == SetList.getInstance().getFinalClassList().size();
+        //0 == 
+        //at first grade with two classes with one grade each
+        if (atEndOfClasses) {
             nextButton.setEnabled(false);
 
         }
@@ -281,7 +283,7 @@ public class PrintStudentGrades extends JFrame {
             nextButton.addActionListener(new ActionListener() {
                 public void actionPerformed(ActionEvent e) {
                     hideWindow();
-                    gradeTypeIndex++;
+                    whichCurrClassIndex++; //only if there are more
                 }
             });
         }
