@@ -42,11 +42,11 @@ public class FileHandling {
                 BufferedReader reader = new BufferedReader(new FileReader(filePath));
                 while ((line = reader.readLine()) != null) {
                     //System.out.println("printing file..."+ line);
-                    myList.add(line);                 
+                    myList.add(line);
                 }
                 reader.close();
             }
-            catch (IOException e) { 
+            catch (IOException e) {
                 e.printStackTrace();
             }
             return myList;

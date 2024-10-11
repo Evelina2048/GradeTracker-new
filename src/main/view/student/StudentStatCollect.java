@@ -363,13 +363,16 @@ public class StudentStatCollect extends JFrame {
 
         Boolean creditsFieldChanged = (setState.getEmptiedState(creditsTextField) != false);//(!creditsTextField.getText().equals("Credits (optional)"));
 
-        setState.incrementClassListIndex();
+        System.out.println("in class: "+setList.getFinalClassList().get(setState.getClassListIndex())+" and final class list "+setList.getFinalClassList());
+
         if ((setState.getClassListIndex()+1 <= setList.getFinalClassList().size())&&((matcherBoolean == true)|| !creditsFieldChanged) && (gradesFormatOkay) && (percentageFormatOkay)) {
+            setState.incrementClassListIndex();
             allPassedGoToStudentStats();
         }
 
         else if (((matcherBoolean == true)|| !creditsFieldChanged) && (gradesFormatOkay) && (percentageFormatOkay)) {
-            setState.decrementClassListIndex();
+            //System.out.println("in class: "+" ");
+            //setState.decrementClassListIndex();
             goToPrintStudentGrades();
         }
 
