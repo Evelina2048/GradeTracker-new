@@ -365,7 +365,7 @@ public class StudentStatCollect extends JFrame {
 
         System.out.println("in class: "+setList.getFinalClassList().get(setState.getClassListIndex())+" and final class list "+setList.getFinalClassList());
 
-        if ((setState.getClassListIndex()+1 <= setList.getFinalClassList().size())&&((matcherBoolean == true)|| !creditsFieldChanged) && (gradesFormatOkay) && (percentageFormatOkay)) {
+        if ((setState.getClassListIndex()+1 < setList.getFinalClassList().size())&&((matcherBoolean == true)|| !creditsFieldChanged) && (gradesFormatOkay) && (percentageFormatOkay)) {
             setState.incrementClassListIndex();
             allPassedGoToStudentStats();
         }

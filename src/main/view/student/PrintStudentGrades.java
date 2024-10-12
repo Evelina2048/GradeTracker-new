@@ -146,6 +146,7 @@ public class PrintStudentGrades extends JFrame {
 
         JLabel placeholdType = new JLabel("Placeholder name: "+gradeTypeList.get(gradeTypeIndex));
         placeholdType.setBorder(blackline);
+        placeholdType.setHorizontalAlignment(JLabel.CENTER); //TODO center might cause bugs 10/12
         borderContainer.add(placeholdType,BorderLayout.NORTH);
 
 
@@ -153,20 +154,24 @@ public class PrintStudentGrades extends JFrame {
 
         JLabel finalgrade = new JLabel("Final Grade: "+total);
         finalgrade.setBorder(blackline);
+        finalgrade.setHorizontalAlignment(JLabel.CENTER);
         borderContainer.add(finalgrade,BorderLayout.SOUTH);
 
         Creator create = new Creator();
 
         JLabel average = new JLabel("Average");
         average.setBorder(blackline);
+        average.setHorizontalAlignment(JLabel.CENTER);
         allContainer.add(average);
 
         JLabel percgrade = new JLabel("Perc. of final grade");
         percgrade.setBorder(blackline);
+        percgrade.setHorizontalAlignment(JLabel.CENTER);
         allContainer.add(percgrade);
 
         JLabel contributiongrade = new JLabel("Contribution");
         contributiongrade.setBorder(blackline);
+        contributiongrade.setHorizontalAlignment(JLabel.CENTER);
         allContainer.add(contributiongrade);
 
         for (int i = 0; i < gradeTypeNumberList.get(whichCurrClassIndex); i++) {
