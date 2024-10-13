@@ -16,6 +16,8 @@ import java.awt.event.KeyEvent;
 
 import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.List;
+import java.util.stream.IntStream;
 import java.awt.event.ActionEvent;
 import controller.Creator;
 import controller.Decorator;
@@ -174,10 +176,14 @@ public class PrintStudentGrades extends JFrame {
         contributiongrade.setHorizontalAlignment(JLabel.CENTER);
         allContainer.add(contributiongrade);
 
-        for (int i = 0; i < gradeTypeNumberList.get(whichCurrClassIndex); i++) {
+        //if ()
+        System.out.println("*gradetypenumberlist* "+gradeTypeNumberList);
+        System.out.println("&whichCurrClassIndex& "+whichCurrClassIndex);
+        for (int i = 0; i < gradeTypeNumberList.get(whichCurrClassIndex); i++) { //shouldnt be for classes, should be for gradetypes then classes
+        //10/12 for (int i = 0; i < gradeTypeNumberList.get(gradeTypeIndex); i++) {
             System.out.println("i "+gradeTypeNumberList);
-            System.out.println("i "+listOfAverages);
-            System.out.println("i "+i);
+            System.out.println("i listOfAverages"+listOfAverages);
+            System.out.println("i 180 "+i);
             System.out.println("listofaverages.get(i) "+ listOfAverages.get(i));
             System.out.println("i "+listOfAverages.get(i));
 
@@ -221,13 +227,28 @@ public class PrintStudentGrades extends JFrame {
     private void makeListOfAveragesList() {
         listOfAverages = new ArrayList<>();
         int gradeBoxTotal = 0;
+        ArrayList<ArrayList<String>> seperatedBySpaceListOfGrades = new ArrayList<ArrayList<String>>();
         System.out.println("listofaverages -3 "+allTextListForClass);
         for (int boxPanelIndex = 3; boxPanelIndex < allTextListForClass.size(); boxPanelIndex += 3) { //for each grades box
-            ArrayList<String> seperatedBySpaceListOfGrades = new ArrayList<>(Arrays.asList(allTextListForClass.get(boxPanelIndex).split(" ")));
-            gradeList.add(seperatedBySpaceListOfGrades);
+            System.out.println("10/12/12:01 should print twice");
+            List <String> gradeArrayForOneBox = Arrays.asList(allTextListForClass.get(boxPanelIndex).split(" "));
+            System.out.println("tempArray "+gradeArrayForOneBox);
+
+            seperatedBySpaceListOfGrades.add(new ArrayList<>(gradeArrayForOneBox));
+            System.out.println("shouldbefinalseperatedbyspace "+seperatedBySpaceListOfGrades);
+            //10/13 seperatedBySpaceListOfGrades = new ArrayList<>(Arrays.asList(allTextListForClass.get(boxPanelIndex).split(" ")));
+
+            //10/13 12:47 gradeList.add(seperatedBySpaceListOfGrades);
+
+            System.out.println(("seperatedbyspacelistofgrades "+seperatedBySpaceListOfGrades));
             System.out.println(("listofaverages -2.2 "+seperatedBySpaceListOfGrades.get(0)));
-            for (int k = 0; k < seperatedBySpaceListOfGrades.size(); k++) {
-                gradeBoxTotal += Integer.parseInt(seperatedBySpaceListOfGrades.get(k));
+            for (ArrayList<String> grades : seperatedBySpaceListOfGrades) {
+                //gradeList.add(IntStream.of(seperatedBySpaceListOfGrades.get(k)).sum());
+                gradeBoxTotal = grades.stream()
+                            .mapToInt(Integer::parseInt)  // Convert String to int
+                            .sum();
+                //10/13 12:47 gradeBoxTotal += Integer.parseInt(seperatedBySpaceListOfGrades.get(k));
+                System.out.println("10/13 12:59 "+gradeBoxTotal);
             }
 
             int average = gradeBoxTotal/seperatedBySpaceListOfGrades.size();
