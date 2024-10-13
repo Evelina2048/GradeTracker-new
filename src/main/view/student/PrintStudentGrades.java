@@ -54,6 +54,7 @@ public class PrintStudentGrades extends JFrame {
 
     private ArrayList<String> gradeTypeList = new ArrayList<>();
     private int gradeTypeIndex = 0;
+    private int gradeBoxTotal;
 
     private ArrayList<String> allTextListForClass;
     private ArrayList<Integer> percentageOfGradeList;
@@ -126,8 +127,6 @@ public class PrintStudentGrades extends JFrame {
         addEverythingToWindow(total);
         //window.add(allContainer);
 
-
-        
         // Component[] windowComponents3 = window.getContentPane().getComponents();
         // int i = 0;
         // for (Component windowComp : windowComponents3) {
@@ -198,7 +197,7 @@ public class PrintStudentGrades extends JFrame {
             allContainer.add(percentageOfGradeLabel);
 
             //percentageOfGradeLabel.setBorder(blackline);
-            allContainer.add(new JLabel("heyo "+(String.valueOf(percentageOfGradeList.get(i)))));
+            allContainer.add(new JLabel("heyo "+(String.valueOf((float) percentageOfGradeList.get(i)/100*gradeBoxTotal))));
         }
         window.add(borderContainer);
     }
@@ -226,7 +225,7 @@ public class PrintStudentGrades extends JFrame {
 
     private void makeListOfAveragesList() {
         listOfAverages = new ArrayList<>();
-        int gradeBoxTotal = 0;
+        gradeBoxTotal = 0;
         ArrayList<ArrayList<String>> seperatedBySpaceListOfGrades = new ArrayList<ArrayList<String>>();
         System.out.println("listofaverages -3 "+allTextListForClass);
         for (int boxPanelIndex = 3; boxPanelIndex < allTextListForClass.size(); boxPanelIndex += 3) { //for each grades box
