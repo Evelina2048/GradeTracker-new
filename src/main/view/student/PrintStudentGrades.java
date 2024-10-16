@@ -243,7 +243,7 @@ public class PrintStudentGrades extends JFrame {
             System.out.println(("listofaverages -2.2 "+seperatedBySpaceListOfGrades.get(0)));
             //for (ArrayList<String> grades : seperatedBySpaceListOfGrades) {
             int average = 0;
-            for (int i = 0; i< seperatedBySpaceListOfGrades.size() -1; i++) {
+            for (int i = 0; i< seperatedBySpaceListOfGrades.size(); i++) {
                 //gradeList.add(IntStream.of(seperatedBySpaceListOfGrades.get(k)).sum());
                 int thisGradeBoxTotal = seperatedBySpaceListOfGrades.get(i).stream()
                             .mapToInt(Integer::parseInt)  // Convert String to int

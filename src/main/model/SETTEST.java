@@ -1,8 +1,5 @@
 package model;
 
-import javax.swing.JButton;
-import javax.swing.JFrame;
-import javax.swing.JLabel;
 import javax.swing.JPanel;
 
 import view.student.StudentStatCollect;
@@ -28,7 +25,6 @@ public class SETTEST {
     }
 
     public void SETTESTTEXTBOXPANEL(JPanel textBoxPanel) {
-        System.out.println("in settestboxpanel");
         TESTTEXTBOXPANEL = textBoxPanel;
     }
 
@@ -37,12 +33,10 @@ public class SETTEST {
     }
 
     public void SETTESTCLASSLABELPANEL(JPanel thisClassLabelPanel) {
-        System.out.println("YYY "+(classLabelPanel==null));
         classLabelPanel = thisClassLabelPanel;
     }
 
     public JPanel GETTESTCLASSLABELPANEL() {
-        System.out.println("Z "+(classLabelPanel==null));
         return classLabelPanel;
     }
 
@@ -57,6 +51,4 @@ public class SETTEST {
         return studentStatCollect;
     }
 
-
-    
 }
