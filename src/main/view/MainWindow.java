@@ -165,6 +165,7 @@ private void radioButtonSetUp() {
 
     //initialize buttons with color
     teacherButton = new JRadioButton("Teacher");
+    teacherButton.setEnabled(false);
     choicesButtonDecorate(teacherButton);
     teacherButton.addActionListener(new ActionListener() {
         public void actionPerformed(ActionEvent e) {
