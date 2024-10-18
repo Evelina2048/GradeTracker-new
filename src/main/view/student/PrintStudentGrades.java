@@ -97,9 +97,9 @@ public class PrintStudentGrades extends JFrame {
         //gradeTypeList = new ArrayList<>(); //10/2
         listOfAverages = new ArrayList<>();
         percentageOfGradeList = new ArrayList<>();
-        for (int classIndex = 0; classIndex < setList.getFinalClassList().size(); classIndex++) { //go through classes
-            System.out.println("printgradestest "+setList.getFinalClassList().get(classIndex));
-            String filePathForClass = setUserInformation.getPathToClassInformationFileWithChosenIndex(classIndex);
+        //10/18 for (int classIndex = 0; classIndex < setList.getFinalClassList().size(); classIndex++) { //go through classes
+            System.out.println("printgradestest "+setList.getFinalClassList().get(whichCurrClassIndex)); //classIndex
+            String filePathForClass = setUserInformation.getPathToClassInformationFileWithChosenIndex(whichCurrClassIndex); //classIndex
             System.out.println("made it past first");
             allTextListForClass = fileHandler.readFileToList(filePathForClass);
 
@@ -120,7 +120,7 @@ public class PrintStudentGrades extends JFrame {
 
             makeAmountOfFinalGradeList();
 
-        }
+        //10/18 }
 
         float total = getGradeTotal();
 
@@ -314,13 +314,18 @@ public class PrintStudentGrades extends JFrame {
         else {
             nextButton.addActionListener(new ActionListener() {
                 public void actionPerformed(ActionEvent e) {
-                    hideWindow();
-                    whichCurrClassIndex++; //only if there are more
+                    doNextButtonProcedure();
                 }
             });
         }
         backNextButtonsPanel = createButton.makeBackNextButtonsPanel(backButtonPanel, new JPanel(), nextButtonPanel);
         window.add(backNextButtonsPanel, BorderLayout.SOUTH);
+    }
+
+    public void doNextButtonProcedure() {
+        hideWindow();
+        whichCurrClassIndex++; //only if there are more
+        printStudentGradesLaunch();
     }
 
     public void printArray(ArrayList<String> list) {
@@ -352,8 +357,7 @@ public class PrintStudentGrades extends JFrame {
                 @Override
                 public void actionPerformed(ActionEvent e) { // remember won't run if just enter without a click
                     System.out.println("enteraction");
-                    //doNextButtonProcedure();
-
+                    doNextButtonProcedure();
                 }
             }, 1, "EnterAction", null, "PrintStudentGrades");  // Add this ActionListener with priority 1
         }
