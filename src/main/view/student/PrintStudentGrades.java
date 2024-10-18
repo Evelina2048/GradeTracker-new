@@ -141,7 +141,8 @@ public class PrintStudentGrades extends JFrame {
         ArrayList <Integer> gradeTypeNumberList = setList.getGradeTypeList();
 
         int gradeTypeAmount = gradeTypeNumberList.get(whichCurrClassIndex);
-        JPanel allContainer = new JPanel(new GridLayout(2,gradeTypeAmount,5,5)); //rows,cols
+        System.out.println("gradeTypeAmount "+gradeTypeAmount);
+        JPanel allContainer = new JPanel(new GridLayout((1+gradeTypeAmount),3,5,5)); //rows,cols //////
         allContainer.setName("allContainr");
         borderContainer = new JPanel(new BorderLayout());
 
@@ -179,7 +180,7 @@ public class PrintStudentGrades extends JFrame {
         System.out.println("*gradetypenumberlist* "+gradeTypeNumberList);
         System.out.println("&whichCurrClassIndex& "+whichCurrClassIndex);
         for (int i = 0; i < gradeTypeNumberList.get(whichCurrClassIndex); i++) { //shouldnt be for classes, should be for gradetypes then classes
-        //10/12 for (int i = 0; i < gradeTypeNumberList.get(gradeTypeIndex); i++) {
+        //for (int i = 0; i < gradeTypeNumberList.get(gradeTypeIndex); i++) { //10/12
             System.out.println("i "+gradeTypeNumberList);
             System.out.println("i listOfAverages"+listOfAverages);
             System.out.println("i 180 "+i);
@@ -198,6 +199,8 @@ public class PrintStudentGrades extends JFrame {
 
             //percentageOfGradeLabel.setBorder(blackline);
             allContainer.add(new JLabel("heyo "+(String.valueOf((float) percentageOfGradeList.get(i)/100*gradeBoxTotal.get(i)))));
+
+            //gradeTypeIndex++;
         }
         window.add(borderContainer);
     }
