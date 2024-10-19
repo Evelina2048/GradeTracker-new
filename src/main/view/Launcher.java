@@ -2,9 +2,7 @@ package view;
 
 import javax.swing.JFrame;
 import javax.swing.SwingUtilities;
-import java.awt.Color;
 import model.Set;
-import view.NewUser;
 
 public class Launcher {
     public static void main(String[] args) {
@@ -26,9 +24,5 @@ public class Launcher {
         NewUser newUser = new NewUser();
         newUser.showWindow();
     }
-
-    // public TESTRESETLAUNCHER () {
-
-    // }
 }
 

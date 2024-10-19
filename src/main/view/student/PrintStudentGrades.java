@@ -60,7 +60,7 @@ public class PrintStudentGrades extends JFrame {
     private ArrayList<Integer> percentageOfGradeList;
     private ArrayList<Integer> listOfAverages;
     private ArrayList<ArrayList<String>> gradeList;
-    private ArrayList<Integer> amountOfFinalGrade;
+    private ArrayList<Float> amountOfFinalGrade;
     private CompositeActionListenerWithPriorities actionPriorities;
 
     public PrintStudentGrades(JFrame main, String studentOrTeacher, String existingOrNew) {
@@ -208,21 +208,24 @@ public class PrintStudentGrades extends JFrame {
     private float getGradeTotal() {
         float total = 0;
         //for (int i = 0; i<amountOfFinalGrade.size(); i++) {
-            total += amountOfFinalGrade.get(0);
+            // 10/19 total += amountOfFinalGrade.get(0);
+            total += amountOfFinalGrade.get(gradeTypeIndex);
         //}
         return total;
     }
 
     private void makeAmountOfFinalGradeList() {
         //for (int boxSetIndex = 0; boxSetIndex < gradeList.size(); boxSetIndex++) { //8/24
+        int averageXpercentageOfGrade;
         for (int boxSetIndex = 0; boxSetIndex < listOfAverages.size(); boxSetIndex++) {
-            System.out.println("listofaverages-.01 "+listOfAverages);
             System.out.println("listofaverages "+listOfAverages);
-            System.out.println("listofaverages2 "+(listOfAverages.get(boxSetIndex)));
-            System.out.println("listofaverages3 "+(percentageOfGradeList));
+            System.out.println("boxsetindex "+boxSetIndex);
+            System.out.println("listofaverages.getboxsetindex "+(listOfAverages.get(boxSetIndex)));
+            System.out.println("percentageOfGradeList "+(percentageOfGradeList));
             System.out.println("listofaverages4 "+(percentageOfGradeList.get(boxSetIndex)));
             System.out.println("8888 instead "+ "boxsetindex "+boxSetIndex+" list of averages "+listOfAverages+" percentageOfGradeList "+percentageOfGradeList);
-            amountOfFinalGrade.add((listOfAverages.get(boxSetIndex))*(percentageOfGradeList.get(boxSetIndex)/100));
+            averageXpercentageOfGrade = listOfAverages.get(boxSetIndex)*percentageOfGradeList.get(boxSetIndex);
+            amountOfFinalGrade.add(((float) averageXpercentageOfGrade)/100); //LOOKIE
         }
     }
 
