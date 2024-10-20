@@ -294,11 +294,7 @@ public class PrintStudentGrades extends JFrame {
         backButtonPanel.add(backButton);
         backButton.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent e) {
-                hideWindow();
-                StudentStatCollect studentStatCollect = new StudentStatCollect();
-                studentStatCollect.addLoadedBoxes();
-                studentStatCollect.studentStatCollectLaunch();
-                actionPriorities.setCurrentClass("StudentStatCollect");
+                doBackButtonProcedure();
             }
         });
 
@@ -323,6 +319,22 @@ public class PrintStudentGrades extends JFrame {
         }
         backNextButtonsPanel = createButton.makeBackNextButtonsPanel(backButtonPanel, new JPanel(), nextButtonPanel);
         window.add(backNextButtonsPanel, BorderLayout.SOUTH);
+    }
+    public void doBackButtonProcedure() {
+        //if at class index 0
+        if (whichCurrClassIndex-1 == 0) { //if no previous print grades classes
+            hideWindow();
+            whichCurrClassIndex--; //only if there are more
+            printStudentGradesLaunch();
+        }
+
+        else {
+            hideWindow();
+            StudentStatCollect studentStatCollect = new StudentStatCollect();
+            studentStatCollect.addLoadedBoxes();
+            studentStatCollect.studentStatCollectLaunch();
+            actionPriorities.setCurrentClass("StudentStatCollect");
+        }
     }
 
     public void doNextButtonProcedure() {
