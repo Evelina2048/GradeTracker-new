@@ -146,7 +146,7 @@ public class PrintStudentGrades extends JFrame {
         allContainer.setName("allContainr");
         borderContainer = new JPanel(new BorderLayout());
 
-        JLabel placeholdType = new JLabel("Placeholder name: "+gradeTypeList.get(gradeTypeIndex));
+        JLabel placeholdType = new JLabel("Grade Type name: "+gradeTypeList.get(gradeTypeIndex));
         placeholdType.setBorder(blackline);
         placeholdType.setHorizontalAlignment(JLabel.CENTER); //TODO center might cause bugs 10/12
         borderContainer.add(placeholdType,BorderLayout.NORTH);
@@ -299,11 +299,15 @@ public class PrintStudentGrades extends JFrame {
         });
 
         JButton nextButton = createButton.nextButtonCreate();
+        
+        //nextButton.setText("");
+
         JPanel nextButtonPanel = new JPanel();
         nextButtonPanel.add(nextButton);
         // System.out.println("hello print grades. grade type number is "+gradeTypeList.size()+" and the classes place is "+SetState.getInstance().getClassListIndex()+"/"+SetList.getInstance().getFinalClassList().size());
-        Boolean atEndOfClasses = SetState.getInstance().getClassListIndex() == SetList.getInstance().getFinalClassList().size();
-        //0 == 
+        //10/21 Boolean atEndOfClasses = SetState.getInstance().getClassListIndex() == SetList.getInstance().getFinalClassList().size();
+        Boolean atEndOfClasses = whichCurrClassIndex == SetList.getInstance().getFinalClassList().size() -1 ; //-1 to account for index starting from 0 and size not
+        //0 ==
         //at first grade with two classes with one grade each
         if (atEndOfClasses) {
             nextButton.setEnabled(false);
@@ -322,7 +326,7 @@ public class PrintStudentGrades extends JFrame {
     }
     public void doBackButtonProcedure() {
         //if at class index 0
-        if (whichCurrClassIndex-1 == 0) { //if no previous print grades classes
+        if (whichCurrClassIndex == 0) { //if no previous print grades classes
             hideWindow();
             whichCurrClassIndex--; //only if there are more
             printStudentGradesLaunch();
@@ -354,6 +358,8 @@ public class PrintStudentGrades extends JFrame {
         System.out.println("confirmation");
         backNextButtonsPanel.setVisible(false);
         borderContainer.setVisible(false);
+        borderContainer.removeAll(); //10/21
+        backNextButtonsPanel.removeAll(); //10/21
 
         Component[] windowComponents3 = window.getContentPane().getComponents();
         int i = 0;
