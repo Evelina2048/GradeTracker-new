@@ -1,6 +1,5 @@
 package model;
 
-import java.io.File;
 import java.util.ArrayList;
 
 import javax.swing.JTextField;
@@ -9,10 +8,9 @@ public class SetUserInformation {
     private String username;
     private String existingOrNew;
     private String studentOrTeacher;
-    private Set set;
     private SetState setState;
     private SetList setList;
-    
+
     private ArrayList<String> deleteQueue = new ArrayList<>();
 
     //Below is for singleton design pattern
@@ -34,7 +32,7 @@ public class SetUserInformation {
     }
 
     public void setUsername(String my_username) {
-       username = my_username;
+        username = my_username;
     }
 
     public String getUsername() {
@@ -42,44 +40,37 @@ public class SetUserInformation {
     }
 
     public String getPathToUsernameFolder() {
-        //return "/Users/evy/Documents/GradeTracker-new/src/main/view/UserInfo/StudentInfo/"+getUsername();
+        //return "/Users/evy/Documents/GradeTracker-new/src/main/view/UserInfo/StudentInfo/"+getUsername(); //10/21
         return "src/main/view/UserInfo/StudentInfo/"+getUsername();
     }
 
     public String getPathToClassInformationFolder() {
-        //return;
-        //return "/Users/evy/Documents/GradeTracker-new/src/main/view/UserInfo/StudentInfo/"+getUsername()+"/ClassInformation/";
+        //return "/Users/evy/Documents/GradeTracker-new/src/main/view/UserInfo/StudentInfo/"+getUsername()+"/ClassInformation/"; //10/21
         String usernameFolder = getPathToUsernameFolder();
         return usernameFolder+"/ClassInformation/";
     }
 
     public String getPathToClassTextFile() {
-        //return;
-        //return "/Users/evy/Documents/GradeTracker-new/src/main/view/UserInfo/StudentInfo/"+getUsername()+"/ClassInformation/class.txt"; //KEEP
-        //return "/home/eaguenther/Documents/GradeTracker-new/src/main/view/UserInfo/StudentInfo/"+getUsername()+"/ClassInformation/class.txt";
+        //return "/home/eaguenther/Documents/GradeTracker-new/src/main/view/UserInfo/StudentInfo/"+getUsername()+"/ClassInformation/class.txt"; //10/21
         String classInfoFolder = getPathToClassInformationFolder();
         return classInfoFolder+"/class.txt";
     }
 
     public String getPathToClassInformationFileWithTextField(JTextField textField) {
-        //return "/Users/evy/Documents/GradeTracker-new/src/main/view/UserInfo/StudentInfo/"+getUsername()+"/ClassInformation/"+textField.getText()+".txt";
+        //return "/Users/evy/Documents/GradeTracker-new/src/main/view/UserInfo/StudentInfo/"+getUsername()+"/ClassInformation/"+textField.getText()+".txt"; //10/21
         String classInfoFolder = getPathToClassInformationFolder();
         return classInfoFolder+textField.getText()+".txt";
     }
 
     public String getPathToClassInformationFileWithIndex() {
-        //System.out.println("final list in path"+ setList.getFinalClassList()+" "+"/Users/evy/Documents/GradeTracker-new/src/main/view/UserInfo/StudentInfo/"+getUsername()+"/ClassInformation/"+setList.getFinalClassList().get(setState.getClassListIndex())+".txt");
-        System.out.println("final list in path"+ setList.getFinalClassList());
-        System.out.println("number 2 "+setList.getFinalClassList().get(setState.getClassListIndex()));
-
-        //return  "/Users/evy/Documents/GradeTracker-new/src/main/view/UserInfo/StudentInfo/"+getUsername()+"/ClassInformation/"+setList.getFinalClassList().get(setState.getClassListIndex())+".txt";
+        //return  "/Users/evy/Documents/GradeTracker-new/src/main/view/UserInfo/StudentInfo/"+getUsername()+"/ClassInformation/"+setList.getFinalClassList().get(setState.getClassListIndex())+".txt"; //10/21
         String classInfoFolder = getPathToClassInformationFolder();
         return  classInfoFolder+setList.getFinalClassList().get(setState.getClassListIndex())+".txt";
     }
 
     public String getPathToClassInformationFileWithChosenIndex(int chosenIndex) {
         System.out.println("final list in path"+ setList.getFinalClassList()+" "+"/Users/evy/Documents/GradeTracker-new/src/main/view/UserInfo/StudentInfo/"+getUsername()+"/ClassInformation/"+setList.getFinalClassList().get(chosenIndex)+".txt");
-        //return  "/Users/evy/Documents/GradeTracker-new/src/main/view/UserInfo/StudentInfo/"+getUsername()+"/ClassInformation/"+setList.getFinalClassList().get(chosenIndex)+".txt";
+        //return  "/Users/evy/Documents/GradeTracker-new/src/main/view/UserInfo/StudentInfo/"+getUsername()+"/ClassInformation/"+setList.getFinalClassList().get(chosenIndex)+".txt"; //10/21
         String classInfoFolder = getPathToClassInformationFolder();
         return classInfoFolder+setList.getFinalClassList().get(chosenIndex)+".txt";
     }
@@ -101,7 +92,7 @@ public class SetUserInformation {
     }
 
     public void addDeleteToQueue(String text) {
-        //deleteQueue.add("/Users/evy/Documents/GradeTracker-new/target/classes/main/view/UserInfo/StudentInfo/"+getUsername()+"/ClassInformation/"+text+".txt");
+        //deleteQueue.add("/Users/evy/Documents/GradeTracker-new/target/classes/main/view/UserInfo/StudentInfo/"+getUsername()+"/ClassInformation/"+text+".txt"); //10/21
         deleteQueue.add("~/Documents/GradeTracker-new/target/classes/main/view/UserInfo/StudentInfo/"+getUsername()+"/ClassInformation/"+text+".txt");
     }
 
