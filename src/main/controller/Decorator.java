@@ -98,6 +98,7 @@ public class Decorator {
         reason = myReason;
         textField = importedTextField;
         dialog = new JDialog(window, true);
+        window.setDefaultCloseOperation(JFrame.DO_NOTHING_ON_CLOSE); //10/21 to remove window close default and not
 
         dialog.setResizable(false);
         dialog.setLayout(new FlowLayout());

@@ -104,6 +104,7 @@ public class StudentClasses extends JFrame {
         setState.setCurrentClass("StudentClasses.java");
         window = set.getWindow();
 
+
         WindowAdapter windowCloseAdapter = new WindowAdapter() {
             @Override
             public void windowClosing(WindowEvent e) {
