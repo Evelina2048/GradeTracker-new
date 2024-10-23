@@ -61,9 +61,10 @@ public class PrintStudentGrades extends JFrame {
     private ArrayList<Integer> listOfAverages;
     private ArrayList<ArrayList<String>> gradeList;
     private ArrayList<Float> amountOfFinalGrade;
-    private CompositeActionListenerWithPriorities actionPriorities;
+    private CompositeActionListenerWithPriorities actionPriorities = CompositeActionListenerWithPriorities.getInstance();
 
     public PrintStudentGrades(JFrame main, String studentOrTeacher, String existingOrNew) {
+        System.out.println("getcurrclass 1111"+actionPriorities.getCurrentClass());
         whichCurrClassIndex = 0;
 
         setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
@@ -72,12 +73,16 @@ public class PrintStudentGrades extends JFrame {
         window.removeWindowListener(set.getCurrentWindowClosing());
         window.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
 
-        actionPriorities = CompositeActionListenerWithPriorities.getInstance();
+        //actionPriorities = CompositeActionListenerWithPriorities.getInstance();
         printStudentGradesLaunch();
+        System.out.println("getcurrclass 2222"+actionPriorities.getCurrentClass());
 
         EnterAction enterAction = new EnterAction();
         window.getRootPane().getInputMap(JComponent.WHEN_IN_FOCUSED_WINDOW).put(KeyStroke.getKeyStroke(KeyEvent.VK_ENTER, 0), "enterAction");
         window.getRootPane().getActionMap().put("enterAction", enterAction);
+        System.out.println("getcurrclass 3333"+actionPriorities.getCurrentClass());
+        actionPriorities.setCurrentClass("PrintStudentGrades");
+        System.out.println("getcurrclass 4444"+actionPriorities.getCurrentClass());
 
     }
 
@@ -133,7 +138,7 @@ public class PrintStudentGrades extends JFrame {
         //     System.out.println("compcount " + i + " classname "+ windowComp.getClass().getName() + " regname "+windowComp.getName() + " isvisible "+windowComp.isVisible());
         //     i++;
         // }
-
+        actionPriorities.setCurrentClass("PrintStudentGrades");
     }
 
     private void addEverythingToWindow(float total) {
@@ -292,11 +297,39 @@ public class PrintStudentGrades extends JFrame {
         JButton backButton = createButton.backButtonCreate();
         JPanel backButtonPanel = new JPanel();
         backButtonPanel.add(backButton);
+        actionPriorities.setCurrentClass("PrintStudentGrades");
         backButton.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent e) {
-                doBackButtonProcedure();
+                actionPriorities.setCurrentClass("PrintStudentGrades");
+                actionPriorities.addClassActionListener(new ActionListener() {
+                    @Override
+                    public void actionPerformed(ActionEvent e) {
+                        doBackButtonProcedure();
             }
-        });
+                }, 1, "backButton", null, "PrintStudentGrades");
+    }});
+
+
+        //\\
+        // backButton.addActionListener(new ActionListener() {
+        //     public void actionPerformed(ActionEvent e) {
+        //         actionPriorities.setCurrentClass(currentClass);
+        //         actionPriorities.addClassActionListener(new ActionListener() {
+        //             @Override
+        //             public void actionPerformed(ActionEvent e) {// remember wont run  if just enter without a click
+        //                 saveButtonAction();
+        //                 hideWindow();
+
+        //                 set.setWindow(window);
+        //                 MainWindow main = new MainWindow();
+        //                 main.MainWindowLaunch();
+        //                 main.setButtonSelected();
+
+        //                 window.removeWindowListener(windowCloseAdapter);
+        //             }
+        //     }, 1, "backButton", null, currentClass);  // Add this ActionListener with priority 1
+        // }});
+        //\\
 
         JButton nextButton = createButton.nextButtonCreate();
         
@@ -330,6 +363,7 @@ public class PrintStudentGrades extends JFrame {
             hideWindow();
             whichCurrClassIndex--; //only if there are more
             printStudentGradesLaunch();
+            actionPriorities.setCurrentClass("PrintStudentGrades"); //1
         }
 
         else {
@@ -337,7 +371,7 @@ public class PrintStudentGrades extends JFrame {
             StudentStatCollect studentStatCollect = new StudentStatCollect();
             studentStatCollect.addLoadedBoxes();
             studentStatCollect.studentStatCollectLaunch();
-            actionPriorities.setCurrentClass("StudentStatCollect");
+            actionPriorities.setCurrentClass("StudentStatCollectHi");
         }
     }
 

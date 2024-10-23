@@ -58,11 +58,12 @@ try {
         }
     }
 } finally {
+   System.out.println("hi about to reset.");
     reset(); // Reset the processing state
     isProcessing = false;
 }
   }
-  
+
   public boolean deleteActionListener(ActionListener a){
     for(Integer x : listeners.keySet()){
       for(int i=0;i<listeners.get(x).size();i++){
@@ -78,6 +79,7 @@ try {
   public void addClassActionListener(ActionListener a, int priority, String keyCause, JRadioButton button, String listenerSource){
     //System.out.println("currentclass: "+currentClass+" listenersource "+listenerSource);
     System.out.println("TTT.AAA "+ currentClass);
+    System.out.println("getcurrclass 10.0"+getCurrentClass());
     //deleteActionListener(a);
     if(!listeners.containsKey(priority)){
       listeners.put(priority,new ArrayList<ActionListener>());
@@ -113,14 +115,14 @@ try {
                 //System.out.println("its being run and stuff 3");
                 CompositeActionListenerWithPriorities.this.actionPerformed(
                 new ActionEvent(CompositeActionListenerWithPriorities.this, ActionEvent.ACTION_PERFORMED, "PerformAllActions"));
-            } 
+            }
             else if (listeners.size() == 1) {
             //     //decorate.errorMessageSetUp("<html><center>Username already exists.<br> Please choose another.",200,100);
 
 
             //     //decorate.errorMessageSetUp(button);
 
-            //     System.out.println("Maybe not needed?");
+                 System.out.println("Maybe not needed?");
             //     //decorate.pleaseChooseAnOptionWithRadioButtons(button);
                 
             //     //button.setEnabled(false);

@@ -303,7 +303,7 @@ public class StudentStatCollect extends JFrame {
     private void nextButtonAction(JButton nextButton) {
         nextButton.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent e) {
-                actionPriorities.setCurrentClass(currentClass);
+                //actionPriorities.setCurrentClass(currentClass); //10/23
                 actionPriorities.addClassActionListener(new ActionListener() {
                     @Override
                     public void actionPerformed(ActionEvent e) {// remember wont run  if just enter without a click
@@ -437,6 +437,7 @@ public class StudentStatCollect extends JFrame {
 
         hideWindow();
         removeVariablesInWindow();
+        System.out.println("getcurrclass 0.9 "+actionPriorities.getCurrentClass());
         new PrintStudentGrades(set.getWindow(), setUserInformation.getStudentOrTeacher(), setUserInformation.getExistingOrNew());
     }
 
