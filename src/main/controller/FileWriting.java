@@ -90,7 +90,6 @@ private void tryToWrite(BufferedWriter writer) {
 }
 
 public void writeTextToFile(){ //Student Classes and Stat
-    System.out.println("2222");
     setState.setCanContinue(true);
     debugPrintPanel();
     setUserInformation.getUsername();
@@ -100,25 +99,20 @@ public void writeTextToFile(){ //Student Classes and Stat
 }
 
 private void tryToWriteWithoutAppend() {
-    System.out.println("3333");
     filePath = set.getFilePath();
     try (BufferedWriter writer = new BufferedWriter(new FileWriter(filePath))) {
-        System.out.println("4444");
         if (!classList.isEmpty()) {
-           classList.clear();
+            classList.clear();
         }
 
         for (Component component : setState.getTextFieldPanel().getComponents()) {
-            System.out.println("5555");
             if (component instanceof JTextField ) {
                 String testcomp = ((JTextField) component).getText();
-                System.out.println("6666.1 "+ testcomp);
                 System.out.println("is jtextfield");
                 tryToWriteTextFieldWithoutAppend(component, writer);
                 setState.setCanContinue(true);
             }
             else if (component instanceof JPanel) { //student stat
-                System.out.println("6666.2");
                 System.out.println("is jpanel");
                 writeTextToFileWithAppend((JPanel) component);
             }

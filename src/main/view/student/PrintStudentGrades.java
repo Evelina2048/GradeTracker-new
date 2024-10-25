@@ -64,7 +64,6 @@ public class PrintStudentGrades extends JFrame {
     private CompositeActionListenerWithPriorities actionPriorities = CompositeActionListenerWithPriorities.getInstance();
 
     public PrintStudentGrades(JFrame main, String studentOrTeacher, String existingOrNew) {
-        System.out.println("getcurrclass 1111"+actionPriorities.getCurrentClass());
         whichCurrClassIndex = 0;
 
         setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
@@ -73,16 +72,12 @@ public class PrintStudentGrades extends JFrame {
         window.removeWindowListener(set.getCurrentWindowClosing());
         window.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
 
-        //actionPriorities = CompositeActionListenerWithPriorities.getInstance();
         printStudentGradesLaunch();
-        System.out.println("getcurrclass 2222"+actionPriorities.getCurrentClass());
 
         EnterAction enterAction = new EnterAction();
         window.getRootPane().getInputMap(JComponent.WHEN_IN_FOCUSED_WINDOW).put(KeyStroke.getKeyStroke(KeyEvent.VK_ENTER, 0), "enterAction");
         window.getRootPane().getActionMap().put("enterAction", enterAction);
-        System.out.println("getcurrclass 3333"+actionPriorities.getCurrentClass());
         actionPriorities.setCurrentClass("PrintStudentGrades");
-        System.out.println("getcurrclass 4444"+actionPriorities.getCurrentClass());
 
     }
 
@@ -108,9 +103,7 @@ public class PrintStudentGrades extends JFrame {
             System.out.println("made it past first");
             allTextListForClass = fileHandler.readFileToList(filePathForClass);
 
-
             //grades starts at index 4
-
             printArray(allTextListForClass);
 
             ArrayList<String> tempList = new ArrayList<String>(Arrays.asList(allTextListForClass.get(3).split(" ")));
@@ -358,7 +351,8 @@ public class PrintStudentGrades extends JFrame {
     }
     public void doBackButtonProcedure() {
         //if at class index 0
-        if (whichCurrClassIndex == 0) { //if no previous print grades classes
+        System.out.println("whichcurrclassindex backbutton "+whichCurrClassIndex);
+        if (whichCurrClassIndex > 0) { //if no previous print grades classes
             hideWindow();
             whichCurrClassIndex--; //only if there are more
             printStudentGradesLaunch();
