@@ -151,7 +151,8 @@ public class PrintStudentGrades extends JFrame {
         allContainer.setName("allContainr");
         borderContainer = new JPanel(new BorderLayout());
 
-        JLabel placeholdType = new JLabel("Grade Type name: "+gradeTypeList.get(gradeTypeIndex));
+        JLabel placeholdType = new JLabel("Grade Type name: "+gradeTypeList.get(whichCurrClassIndex));//(gradeTypeIndex)); //10/25
+        System.out.println("placehold type for "+total+" name is "+placeholdType.getText()+" gradetypelist is "+gradeTypeList+" gradetypeindex "+gradeTypeIndex+" curr class index is "+whichCurrClassIndex);
         placeholdType.setBorder(blackline);
         placeholdType.setHorizontalAlignment(JLabel.CENTER); //TODO center might cause bugs 10/12
         borderContainer.add(placeholdType,BorderLayout.NORTH);
@@ -202,10 +203,8 @@ public class PrintStudentGrades extends JFrame {
             percentageOfGradeLabel.setBorder(blackline);
             allContainer.add(percentageOfGradeLabel);
 
-            //percentageOfGradeLabel.setBorder(blackline);
+            //percentageOfGradeLabel.setBorder(blackline); //10/25
             allContainer.add(new JLabel("heyo "+(String.valueOf((float) percentageOfGradeList.get(i)/100*gradeBoxTotal.get(i)))));
-
-            //gradeTypeIndex++;
         }
         window.add(borderContainer);
     }
