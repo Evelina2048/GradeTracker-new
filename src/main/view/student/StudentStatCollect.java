@@ -85,6 +85,7 @@ public class StudentStatCollect extends JFrame {
         this.setUserInformation = SetUserInformation.getInstance();
         this.setList = SetList.getInstance();
         this.actionPriorities = CompositeActionListenerWithPriorities.getInstance();
+        System.out.println("in studentstatcollect currclass "+actionPriorities.getCurrentClass());
         this.sETTEST = SETTEST.getInstance();
 
         SETTEST.getInstance().TESTSETCURRENTINSTANCE(this);
@@ -133,6 +134,8 @@ public class StudentStatCollect extends JFrame {
         }
 
         textBoxPanel.setVisible(true);
+
+        actionPriorities.setCurrentClass(currentClass);
     }
 
     public void buttonSetUpAction() {
@@ -164,6 +167,7 @@ public class StudentStatCollect extends JFrame {
                 // }
                 // currentClass = "StudentStatCollect";
                 // actionPriorities.setCurrentClass(currentClass); //commented 10/7
+                actionPriorities.setCurrentClass(currentClass);
                 actionPriorities.addClassActionListener(b -> {
                     currentClass = "StudentStatCollect";
                     actionPriorities.setCurrentClass(currentClass);

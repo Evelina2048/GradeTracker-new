@@ -299,6 +299,7 @@ public class PrintStudentGrades extends JFrame {
                         doBackButtonProcedure();
             }
                 }, 1, "backButton", null, "PrintStudentGrades");
+                System.out.println("in  printstudentgrades currclass "+actionPriorities.getCurrentClass());
     }});
 
 
@@ -364,7 +365,7 @@ public class PrintStudentGrades extends JFrame {
             StudentStatCollect studentStatCollect = new StudentStatCollect();
             studentStatCollect.addLoadedBoxes();
             studentStatCollect.studentStatCollectLaunch();
-            actionPriorities.setCurrentClass("StudentStatCollectHi");
+            actionPriorities.setCurrentClass("StudentStatCollect");
         }
     }
 
