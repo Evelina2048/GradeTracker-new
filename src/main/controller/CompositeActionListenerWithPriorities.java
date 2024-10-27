@@ -3,7 +3,6 @@ package controller;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.util.ArrayList;
-import java.util.Iterator;
 import java.util.Map;
 import java.util.TreeMap;
 import java.util.TreeSet;
@@ -17,7 +16,6 @@ public class CompositeActionListenerWithPriorities implements ActionListener {
     private boolean isProcessing = false;
     private String currentClass = null;//"Current class not changed";
     private static CompositeActionListenerWithPriorities instance;
-    //this.set = Set.getInstance();
     private CompositeActionListenerWithPriorities() {}
     public static CompositeActionListenerWithPriorities getInstance() {
       if (instance == null) {
@@ -29,21 +27,6 @@ public class CompositeActionListenerWithPriorities implements ActionListener {
 
   @Override
   public void actionPerformed(ActionEvent e) {
-  //   if (isProcessing) {
-  //     return; // Prevent re-entry
-  //   }
-  //   isProcessing = true;
-  //   TreeSet<Integer> t = new TreeSet<Integer>();
-  //   t.addAll(listeners.keySet());
-  //   Iterator<Integer> it = t.descendingIterator();
-  //   while(it.hasNext()){
-  //     int x = it.next();
-  //     ArrayList<ActionListener> l = listeners.get(x);
-  //     for(ActionListener a : l){
-  //       a.actionPerformed(e);
-  //     }
-  //   }
-  //   reset();
   if (isProcessing) {
     return; // Prevent re-entry
 }
@@ -58,7 +41,7 @@ try {
         }
     }
 } finally {
-   System.out.println("hi about to reset.");
+    System.out.println("about to reset.");
     reset(); // Reset the processing state
     isProcessing = false;
 }
@@ -77,10 +60,6 @@ try {
   }
 
   public void addClassActionListener(ActionListener a, int priority, String keyCause, JRadioButton button, String listenerSource){
-    //System.out.println("currentclass: "+currentClass+" listenersource "+listenerSource);
-    System.out.println("TTT.AAA "+ currentClass);
-    System.out.println("getcurrclass 10.0"+getCurrentClass());
-    //deleteActionListener(a);
     if(!listeners.containsKey(priority)){
       listeners.put(priority,new ArrayList<ActionListener>());
     }
@@ -88,16 +67,8 @@ try {
 
     if (listeners.size() == 2) {
       System.out.println("its being run and stuff 1");
-     actionPerformed(new ActionEvent(this, ActionEvent.ACTION_PERFORMED, "PerformAllActions"));
+      actionPerformed(new ActionEvent(this, ActionEvent.ACTION_PERFORMED, "PerformAllActions"));
     }
-
-    //if (a isinstanceof EnterKey) {
-      //set timer for 1 sec
-      // if listeners.size() ==2 {
-        //actionPerformed(new ActionEvent(this, ActionEvent.ACTION_PERFORMED, "PerformAllActions"));
-      //}
-    //}
-    //System.out.println("adding action listener currentclass: "+currentClass+" listenersource "+listenerSource);
     System.out.println("should be here: currentclass "+currentClass+ " listenersource "+listenerSource+" keyCause "+ keyCause);
     if (currentClass == listenerSource && !keyCause.equals("click")) {
       CompositeActionListenerWithPriorities.this.actionPerformed(new ActionEvent(CompositeActionListenerWithPriorities.this, ActionEvent.ACTION_PERFORMED, "PerformThisActions"));
@@ -112,31 +83,12 @@ try {
 
             if (listeners.size() == 2) {
                 // Correctly reference the outer class for the action event
-                //System.out.println("its being run and stuff 3");
                 CompositeActionListenerWithPriorities.this.actionPerformed(
                 new ActionEvent(CompositeActionListenerWithPriorities.this, ActionEvent.ACTION_PERFORMED, "PerformAllActions"));
             }
             else if (listeners.size() == 1) {
-            //     //decorate.errorMessageSetUp("<html><center>Username already exists.<br> Please choose another.",200,100);
-
-
-            //     //decorate.errorMessageSetUp(button);
-
-                 System.out.println("Maybe not needed?");
-            //     //decorate.pleaseChooseAnOptionWithRadioButtons(button);
-                
-            //     //button.setEnabled(false);
-            //     //button.setForeground(Color.WHITE); // Set the foreground color to white
-            //     //UIManager.put("RadioButton.disabledText", Color.WHITE);
-            //     listeners.clear();
-
-            //     //button.setForeground(Color.white);
-                
-            //     //button.setColor(Color.white);
-            //     //decorate.errorMessageSetUp(button);
-            //     return;
-
-            } 
+                  System.out.println("Maybe not needed?");
+            }
             else {
                 System.out.println("Something went wrong in CompositeActionListenerWithPriorities addClassActionListener \u00AF\\_(\u30C4)_/\u00AF");
             }
@@ -144,17 +96,10 @@ try {
     });
     timer.setRepeats(false);
     timer.start();
-      // timer.setRepeats(false);
-      // timer.start();
     }
   }
 
-  // public void clearListeners() {
-
-  // }
-
   public int DEBUGLISTENERSIZE() {
-    //System.out.println(listeners.size());
     return listeners.size();
   }
 
