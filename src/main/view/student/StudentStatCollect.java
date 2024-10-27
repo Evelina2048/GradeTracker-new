@@ -390,9 +390,17 @@ public class StudentStatCollect extends JFrame {
     }
 
     private Boolean checkPercentageOfGradesFormat() {
+        //Boolean addsToOneHundred = checkIfPercentageOfGradesAddsToOneHundred();
+
         Pattern patternForPercentage = Pattern.compile("^[-+]?\\d*\\.?\\d+(e[-+]?\\d+)?%?$", Pattern.CASE_INSENSITIVE);
         Boolean percentageFormatOkay = correctBoxFormatChecker(patternForPercentage, 3); //for percentage
-        return percentageFormatOkay;
+        System.out.println("percentageFormatOkay "+percentageFormatOkay);
+        return (percentageFormatOkay) ;//&& addsToOneHundred);
+    }
+
+    private Boolean checkIfPercentageOfGradesAddsToOneHundred() {
+
+        return null;
     }
 
     private Boolean checkCreditsFormat(String text) {
@@ -663,13 +671,17 @@ public class StudentStatCollect extends JFrame {
         }
 
         private Boolean correctBoxFormatChecker(Pattern pattern, int index) {
+            System.out.println("about to check for index "+index+" classlabelpanel length is "+classLabelPanel.getComponentCount());
             for (int i=1; i<=8; i++) { //max num of grade type
-                String text = goIntoPanel.goIntoPanel(classLabelPanel, index);
+                //String text = goIntoPanel.goIntoPanel(classLabelPanel, index); //commented 10/26
+                String text = goIntoPanel.goIntoPanel(textBoxPanel, index);
+                System.out.println("text " +text);
 
                 if (text.equals("does not exist")) {
                     System.out.println("fail");
                     break;
                 }
+                System.out.println("index "+index+" text "+text);
                 index = index + 3;
                 Matcher matcher = pattern.matcher(text);
                 Boolean matcherBoolean = matcher.find();
