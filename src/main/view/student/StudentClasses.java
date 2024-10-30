@@ -357,7 +357,6 @@ public class StudentClasses extends JFrame {
         System.out.println("set.getcurrentpanellist "+setList.getCurrentPanelList());
         set.setFilePath(setUserInformation.getPathToClassTextFile());
         fileWrite.writeTextToFile();
-        fileWrite.debugPrintPanel();
         System.out.println("testing? "+setList.getCurrentPanelList()+ "..."+ fileWrite.getClassList());
         setList.setFinalClassList(fileWrite.getClassList());
     }
@@ -1057,8 +1056,6 @@ public class StudentClasses extends JFrame {
             }, 1, "EnterAction", null, currentClass);  // Add this ActionListener with priority 1
         }
 
-
-        
     }
 
     public JButton TESTNEWCLASSBUTTON() {
@@ -1067,11 +1064,8 @@ public class StudentClasses extends JFrame {
 
 
     public void TESTWRITETYPE() {
-        System.out.println("set.getcurrentpanellist "+setList.getCurrentPanelList());
         set.setFilePath(setUserInformation.getPathToClassTextFile());
         fileWrite.writeTextToFile();
-        fileWrite.debugPrintPanel();
-        System.out.println("testing? "+setList.getCurrentPanelList()+ "..."+ fileWrite.getClassList());
         setList.setFinalClassList(fileWrite.getClassList());
     }
 

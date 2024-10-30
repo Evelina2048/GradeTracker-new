@@ -72,6 +72,7 @@ public class StudentStatCollect extends JFrame {
     private int numOfBoxes = 0;
     private int maxBoxes = 26;
     private int count = 0;
+    private int totalPercentage = 0;
 
     private StudentStatCollect currentInstance;
 
@@ -393,9 +394,21 @@ public class StudentStatCollect extends JFrame {
         //Boolean addsToOneHundred = checkIfPercentageOfGradesAddsToOneHundred();
 
         Pattern patternForPercentage = Pattern.compile("^[-+]?\\d*\\.?\\d+(e[-+]?\\d+)?%?$", Pattern.CASE_INSENSITIVE);
-        Boolean percentageFormatOkay = correctBoxFormatChecker(patternForPercentage, 3); //for percentage
-        System.out.println("percentageFormatOkay "+percentageFormatOkay);
-        return (percentageFormatOkay) ;//&& addsToOneHundred);
+        Boolean percentageFormatOkay = correctBoxFormatChecker(patternForPercentage, 3, "Percentage of Grade"); //for percentage
+        // System.out.println("matcher boolean "+percentageFormatOkay+" totalpercentage "+ (totalPercentage == 100));
+        // System.out.println("matcher boolean"+ (percentageFormatOkay == true));
+        // System.out.println("total perc"+ (totalPercentage == 100));
+        // System.out.println(((percentageFormatOkay == true) && (percentageFormatOkay == 100)));
+        if ((percentageFormatOkay == true) && (totalPercentage == 100)) {
+            System.out.println("about to return true");
+            return true; //got out of loop with every box that was checked, matched.
+        }
+
+        return false;
+
+
+        //System.out.println("percentageFormatOkay "+percentageFormatOkay);
+        //return (percentageFormatOkay) ;//&& addsToOneHundred);
     }
 
     private Boolean checkIfPercentageOfGradesAddsToOneHundred() {
@@ -412,13 +425,13 @@ public class StudentStatCollect extends JFrame {
 
     private Boolean checkGradesFormat() {
         Pattern patternForGrades = Pattern.compile("^(?:[0-9]*(?:.[0-9]+))*\s*$|^[0-9]*\s*$", Pattern.CASE_INSENSITIVE);
-        Boolean gradesFormatOkay = correctBoxFormatChecker(patternForGrades, 4); //for grades
+        Boolean gradesFormatOkay = correctBoxFormatChecker(patternForGrades, 4, "Check Grades"); //for grades
         return gradesFormatOkay;
     }
 
     private void makeFormatReminderDialog() {
         Decorator decorate = new Decorator();
-        JDialog dialog = decorate.genericPopUpMessage("<html><center>Invalid Format.<br>-Credits must be an integer<br>Grades must be numbers separated by spaces<br>-Percentage of Grade must be an integer or decimal",null,400,140);
+        JDialog dialog = decorate.genericPopUpMessage("<html><center>Invalid Format.<br>-Credits must be an integer<br>-Grades must be numbers separated by spaces<br>-Percentage of Grade must be an integer or decimal<br>-Percentage must total to 100%",null,400,150);
         dialog.setResizable(false);
         dialog.setLocationRelativeTo(null);
         dialog.setVisible(true);
@@ -670,8 +683,11 @@ public class StudentStatCollect extends JFrame {
         return delTypeButtonPanel;
         }
 
-        private Boolean correctBoxFormatChecker(Pattern pattern, int index) {
+        private Boolean correctBoxFormatChecker(Pattern pattern, int index, String calledFrom) {
             System.out.println("about to check for index "+index+" classlabelpanel length is "+classLabelPanel.getComponentCount());
+            totalPercentage = 0;
+            //Boolean fitsRequirement = false;
+            Boolean matcherBoolean = null;
             for (int i=1; i<=8; i++) { //max num of grade type
                 //String text = goIntoPanel.goIntoPanel(classLabelPanel, index); //commented 10/26
                 String text = goIntoPanel.goIntoPanel(textBoxPanel, index);
@@ -684,15 +700,19 @@ public class StudentStatCollect extends JFrame {
                 System.out.println("index "+index+" text "+text);
                 index = index + 3;
                 Matcher matcher = pattern.matcher(text);
-                Boolean matcherBoolean = matcher.find();
+                matcherBoolean = matcher.find();
 
                 if (matcherBoolean == false) {
                     return false;
                 }
 
+                if (calledFrom.equals("Percentage of Grade")) {
+                    totalPercentage += Integer.parseInt(text);
+                }
+
                 System.out.println("matcher works?: "+ matcherBoolean);
             }
-            return true; //got out of loop with every box that was checked, matched.
+            return true;
         }
         //read classes array, first five classes
         public void DisplayClasses() {
