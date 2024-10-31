@@ -109,7 +109,7 @@ public class Gather {
         instructionsWordsWindow();
 
         makeUsernameBox();
-        
+
         inputName();
 
         buttonSetUpAction();
@@ -150,17 +150,16 @@ public class Gather {
 
     private void textFieldMouseListener() {
         FocusAdapter textfieldFocusListener;
-         // Check if file path to original username's class.txt exists and is not empty
-         FileHandling fileHandler = new FileHandling();
-         String filePath = pathToUsernameFolder + "/class.txt";
-         if (fileHandler.fileExists(filePath) && fileHandler.fileIsNotEmpty(filePath)) {
+        // Check if file path to original username's class.txt exists and is not empty
+        FileHandling fileHandler = new FileHandling();
+        String filePath = pathToUsernameFolder + "/class.txt";
+        if (fileHandler.fileExists(filePath) && fileHandler.fileIsNotEmpty(filePath)) {
             textfieldFocusListener = new FocusAdapter() {
                 @Override
                 public void focusGained(FocusEvent e) {
                     System.out.println("focuslistener#5");
                         window.requestFocusInWindow();
                         decorate.areYouSureMessageListenerForEditingUsername();
-                        
                 }
             };
 
@@ -322,7 +321,6 @@ public class Gather {
 
     private void nextButtonAddActionListener() {
 
-        //:
         nextButton.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
@@ -331,15 +329,12 @@ public class Gather {
                 actionPriorities.addClassActionListener(new ActionListener() {
                     @Override
                     public void actionPerformed(ActionEvent e) { // remember won't run if just enter without a click
-                        // currentClass = "Gather";
-                        // actionPriorities.setCurrentClass(currentClass);
                         System.out.println("enteraction");
                         doNextButtonProcedure();
                     }
                 }, 1, "nextButton", null, currentClass);  // Add this ActionListener with priority 1
             }
         });
-        //:
     }
 
     private void doNextButtonProcedure() {
@@ -363,11 +358,15 @@ public class Gather {
             errorMessageSetUp("<html><center>Please choose an option",200,90);
         }
         else if (textFieldFilled) { //good case
-            if (existingOrNew.trim().equals("New User")) { //if new user,
+            if (existingOrNew.trim().equals("New User") && usernameNotOnFile()) { //if new user,
                 hideWindow();
                 removeFromWindow();
                 MainWindow main = new MainWindow();
                 main.setButtonSelected();
+            }
+
+            else { //if existing user
+                errorMessageSetUp("<html><center>This accounts taken.<br>Please go back and select \"Existing\"<br>or pick a different username",200,180);
             }
         }
         else {

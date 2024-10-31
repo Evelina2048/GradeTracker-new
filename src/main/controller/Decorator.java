@@ -285,15 +285,6 @@ public class Decorator {
         textField.moveCaretPosition(textField.getCaretPosition());
     }
 
-    // private void dialogCloseActionListener() {
-    //     dialog.addWindowListener(new WindowAdapter() {
-    //         @Override
-    //         public void windowClosing(WindowEvent e) {
-    //             noButtonAction();
-    //         }
-    //     });
-    // }
-
     public JDialog genericPopUpMessage(String text,JRadioButton button, int width, int height) {
         dialog = new JDialog(window, true);
         dialog.setResizable(false);
@@ -324,12 +315,6 @@ public class Decorator {
 
     }
 
-    // public void removeFocusListeners(JTextField importedTextField) {
-    //     textField = importedTextField;
-    //     FocusListener[] listeners = textField.getFocusListeners();
-    //     int listenerCount = listeners.length;
-    // }
-
     public void pleaseChooseAnOptionWithRadioButtons(JRadioButton button) {
         dialog = genericPopUpMessage("<html><center>Please choose an option", button, 200, 90);
         dialog.setResizable(false);
@@ -337,7 +322,6 @@ public class Decorator {
         dialog.setLocationRelativeTo(button);
         dialog.setLocation(dialog.getX(), dialog.getY() + 15);
         dialog.setVisible(true);
-
     }
 
     public void hideWindow(JPanel instructionsPanel, JPanel choicesPanel, JPanel backNextButtonsPanel) {
