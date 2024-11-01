@@ -4,6 +4,8 @@ import javax.swing.JButton;
 import javax.swing.JComponent;
 import javax.swing.JFrame;
 
+import controller.Decorator;
+
 import java.awt.BorderLayout;
 import java.awt.Component;
 import java.awt.GridLayout;

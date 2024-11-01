@@ -68,7 +68,7 @@ public class FileHandling {
         //     catch (IOException e) { 
         //         e.printStackTrace();
         //     }
-            
+
         //     return myGradeList;
         // }
 
@@ -85,22 +85,20 @@ public class FileHandling {
             catch (FileNotFoundException e) {
                 return false;
             }
-    
+
             catch (IOException e) {
                 System.err.println("an error occured in create.java in isFileEmpty");
                 return false;
             }
-        
+
         }
 
         public boolean folderExists(String folderPath) {
             File folder = new File(folderPath);
 
             if (folder.exists() && folder.isDirectory()) {
-                //System.out.println("The directory exists.");
                 return true;
             } else {
-                //System.out.println("The directory does not exist.");
                 return false;
             }
         }
@@ -134,8 +132,6 @@ public class FileHandling {
             JPanel classjlabel = create.typeBox(setList.getFinalClassList().get(setState.getClassListIndex())+"CAT", "JLabel", true);
             JPanel classlab1 = (JPanel) classjlabel.getComponent(0);
             JLabel classlab2 = (JLabel) classlab1.getComponent(0);
-            //JLabel classlab3 = (JLabel) classlab2.getComponent(0);
-            System.out.println("classlab "+classlab2.getText());
 
             bigPanel.add(classjlabel);
             for (int i = 0; i<arrayList.size(); i++) {
@@ -143,7 +139,6 @@ public class FileHandling {
             }
             setState.setTextFieldPanel(bigPanel);
             return bigPanel;
-    
         }
 
         public void writeArrayListToFile(String filePath, ArrayList<String> lines) {
@@ -169,7 +164,7 @@ public class FileHandling {
                     Files.delete(file);
                     return FileVisitResult.CONTINUE;
                 }
-    
+
                 @Override
                 public FileVisitResult postVisitDirectory(Path dir, IOException exc) throws IOException {
                     Files.delete(dir);

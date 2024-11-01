@@ -139,13 +139,4 @@ public class TextFieldColorFocusListener {
         });
     }
 
-    private void focusLostLeftAlign() {
-        textField.grabFocus();
-        textField.setCaretPosition(0);
-        window.requestFocusInWindow();
-        //if (focusLost is because of other textbox gain) {
-        //    newTextField.grabFocus();
-        //}
-    }
-
 }
