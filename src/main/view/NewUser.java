@@ -207,10 +207,6 @@ public class NewUser extends JFrame {
             decorate.removeForNewUserWindow(instructionsPanel, choicesPanel, backNextButtonsPanel);
             set.setWindow(window);
 
-            if (originalExistingOrNew != existingOrNew) { //user changed the existing or new
-                setUserInformation.setUsername(null);
-                System.out.println("right after setting username to null: "+setUserInformation.getUsername());
-            }
 
             if (gatherFrame == null) {
                 // Create a new instance of Gather if it doesn't exist

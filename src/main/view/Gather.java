@@ -91,11 +91,10 @@ public class Gather {
         actionPriorities.setCurrentClass("Gather Loading");
 
         existingOrNew = setUserInformation.getExistingOrNew();
-        setUserInformation.getStudentOrTeacher();
+        //setUserInformation.getStudentOrTeacher(); //10/2
         pathToUsernameFolder = setUserInformation.getPathToUsernameFolder();
         window = set.getWindow();
 
-        //System.out.println("1111 "+fileHandler.folderExists(pathToUsernameFolder)+ " usernamepath "+ pathToUsernameFolder + " quote on quote username "+(setUserInformation.getUsername()==null)+(setUserInformation.getUsername()=="null"));
         makeUsernameBox();
         gatherLaunch();
 
@@ -306,6 +305,7 @@ public class Gather {
         private void backButtonAction() {
             System.out.println("hidewindow1");
             hideWindow();
+            setUsername();
             NewUser newUser = new NewUser();
             newUser.newUserSetup();
             System.out.println("back button new user "+actionPriorities.getCurrentClass());

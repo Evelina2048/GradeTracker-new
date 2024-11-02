@@ -12,7 +12,6 @@ import java.nio.file.Path;
 import java.nio.file.Paths;
 import java.util.ArrayList;
 
-import javax.swing.JLabel;
 import javax.swing.JPanel;
 import java.awt.FlowLayout;
 import java.nio.file.attribute.BasicFileAttributes;
@@ -130,8 +129,6 @@ public class FileHandling {
             System.out.println("arrayList"+arrayList);
 
             JPanel classjlabel = create.typeBox(setList.getFinalClassList().get(setState.getClassListIndex())+"CAT", "JLabel", true);
-            JPanel classlab1 = (JPanel) classjlabel.getComponent(0);
-            JLabel classlab2 = (JLabel) classlab1.getComponent(0);
 
             bigPanel.add(classjlabel);
             for (int i = 0; i<arrayList.size(); i++) {
