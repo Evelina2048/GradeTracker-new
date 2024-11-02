@@ -390,8 +390,19 @@ public class Gather {
                 main.setButtonSelected();
             }
 
-            else { //if existing user
+            else if (existingOrNew.trim().equals("New User") && (fileHandler.folderExists(pathToUsernameFolder))){ //if existing user
                 errorMessageSetUp("<html><center>This accounts taken.<br>Please go back and select \"Existing\"<br>or pick a different username",250, 120);
+            }
+
+            else if (existingOrNew.trim().equals("Existing") && (fileHandler.folderExists(pathToUsernameFolder))){ //&& (setUserInformation.getUsername() != null))){//usernameNotOnFile()) { //if new user,
+                hideWindow();
+                removeFromWindow();
+                MainWindow main = new MainWindow();
+                main.setButtonSelected();
+            }
+
+            else if (existingOrNew.trim().equals("Existing") && (!fileHandler.folderExists(pathToUsernameFolder))){ //&& (setUserInformation.getUsername() != null))){//usernameNotOnFile()) { //if new user,
+                errorMessageSetUp("<html><center>This account does not exist.<br>Please go back and select \"New User\"<br>or pick an existing username",250, 120);
             }
         }
         else {
