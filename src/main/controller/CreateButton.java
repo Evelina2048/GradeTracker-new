@@ -3,7 +3,6 @@ package controller;
 import javax.swing.BorderFactory;
 import javax.swing.JButton;
 import java.awt.BorderLayout;
-import java.awt.Container;
 
 import javax.swing.JPanel;
 import javax.swing.JTextField;
