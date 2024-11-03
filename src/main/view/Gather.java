@@ -432,8 +432,8 @@ public class Gather {
             }
         });
 
-        dialog.setLocationRelativeTo(studentButton);
-        dialog.setLocation(dialog.getX(), dialog.getY() + 15);
+        dialog.setLocationRelativeTo(textField);
+        //dialog.setLocation(textField.getX(), textField.getY());
         dialog.setVisible(true);
     }
 

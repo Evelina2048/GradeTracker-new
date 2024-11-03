@@ -57,6 +57,12 @@ public class PrintStudentGrades extends JFrame {
     private CompositeActionListenerWithPriorities actionPriorities = CompositeActionListenerWithPriorities.getInstance();
 
     public PrintStudentGrades(JFrame main, String studentOrTeacher, String existingOrNew) {
+        Component[] windowComponents3 = window.getContentPane().getComponents();
+        int i = 0;
+        for (Component windowComp : windowComponents3) {
+            System.out.println("compcount " + i + " classname "+ windowComp.getClass().getName() + " regname "+windowComp.getName() + " isvisible "+windowComp.isVisible());
+            i++;
+        }
         whichCurrClassIndex = 0;
 
         setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);

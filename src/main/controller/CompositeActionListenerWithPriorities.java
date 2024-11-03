@@ -66,11 +66,12 @@ try {
     listeners.get(priority).add(a);
 
     if (listeners.size() == 2) {
-      System.out.println("its being run and stuff 1");
+      System.out.println("its being run 1");
       actionPerformed(new ActionEvent(this, ActionEvent.ACTION_PERFORMED, "PerformAllActions"));
     }
     System.out.println("should be here: currentclass "+currentClass+ " listenersource "+listenerSource+" keyCause "+ keyCause);
     if (currentClass == listenerSource && !keyCause.equals("click")) {
+      System.out.println("its being run 2");
       CompositeActionListenerWithPriorities.this.actionPerformed(new ActionEvent(CompositeActionListenerWithPriorities.this, ActionEvent.ACTION_PERFORMED, "PerformThisActions"));
       CompositeActionListenerWithPriorities.this.actionPerformed(new ActionEvent(CompositeActionListenerWithPriorities.this, ActionEvent.ACTION_PERFORMED, "PerformAllActions"));
     }
@@ -82,12 +83,14 @@ try {
             new Decorator();
 
             if (listeners.size() == 2) {
-                // Correctly reference the outer class for the action event
-                CompositeActionListenerWithPriorities.this.actionPerformed(
-                new ActionEvent(CompositeActionListenerWithPriorities.this, ActionEvent.ACTION_PERFORMED, "PerformAllActions"));
+              System.out.println("its being run 3");
+              // Correctly reference the outer class for the action event
+              CompositeActionListenerWithPriorities.this.actionPerformed(
+              new ActionEvent(CompositeActionListenerWithPriorities.this, ActionEvent.ACTION_PERFORMED, "PerformAllActions"));
             }
             else if (listeners.size() == 1) {
-                  System.out.println("Maybe not needed?");
+              System.out.println("its being run 4");
+              System.out.println("Maybe not needed?");
             }
             else {
                 System.out.println("Something went wrong in CompositeActionListenerWithPriorities addClassActionListener \u00AF\\_(\u30C4)_/\u00AF");
@@ -97,6 +100,7 @@ try {
     timer.setRepeats(false);
     timer.start();
     }
+    System.out.println("end of action options");
   }
 
   public int DEBUGLISTENERSIZE() {

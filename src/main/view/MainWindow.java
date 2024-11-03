@@ -169,9 +169,9 @@ private void radioButtonSetUp() {
     choicesButtonDecorate(teacherButton);
     teacherButton.addActionListener(new ActionListener() {
         public void actionPerformed(ActionEvent e) {
-           studentOrTeacher = teacherButton.getText();
-           setUserInformation.setStudentOrTeacher(studentOrTeacher);
-           moveOnPossible = true;
+            studentOrTeacher = teacherButton.getText();
+            setUserInformation.setStudentOrTeacher(studentOrTeacher);
+            moveOnPossible = true;
         }});
 
     studentButton = new JRadioButton("Student");
@@ -248,7 +248,7 @@ private void backNextButton() {
 }
 
 private void doBackButtonProcedure() {
-    hideWindow(); 
+    hideWindow();
     Gather gather = new Gather();
     gather.gatherLaunch();
 }
@@ -257,10 +257,11 @@ private void doNextButtonProcedure() {
     if (moveOnPossible) {
         set.setWindow(window);
         String filePath = "somethingwentwrong";//if not overwritten, somethingwent wrong
-            if (setUserInformation.getExistingOrNew().trim().equals("New User")) { //if new user,
+            //if (setUserInformation.getExistingOrNew().trim().equals("New User")) { //if new user,
+                //System.out.println("about to go to student classes");
                 goToStudentClasses(filePath);
                 decorate.hideWindow(instructionsPanel, choicesPanel, backNextButtonsPanel);
-            }
+            //}
     }
     else if (!moveOnPossible) {
         //decorate.errorMessageSetUp(studentButton);
@@ -299,7 +300,7 @@ private void checkIfExisting(String filePath, String username) {
 
     readNames(filePath, username, usernametaken);
     if (usernametaken == false) {
-        writeNewName(filePath, username);    
+        writeNewName(filePath, username);
     }
 }
 
@@ -333,7 +334,7 @@ private boolean readLine(BufferedReader reader, String username, boolean usernam
                 break;
             }
         }
-    } catch (IOException e) { 
+    } catch (IOException e) {
         e.printStackTrace();
     } return usernametaken;
 }
