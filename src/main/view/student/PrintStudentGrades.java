@@ -209,7 +209,6 @@ public class PrintStudentGrades extends JFrame {
     }
 
     private void makeGradeTypeList() {
-        //gradeTypeList = new ArrayList<>();
         for (int gradeTypePanelIndex = 1; gradeTypePanelIndex < allTextListForClass.size(); gradeTypePanelIndex += 3) {
             gradeTypeList.add(allTextListForClass.get(gradeTypePanelIndex));
         }
@@ -222,7 +221,6 @@ public class PrintStudentGrades extends JFrame {
     }
 
     public void studentStatCollectLaunch() {
-        System.out.println("in student grades");
         this.window = Set.getInstance().getWindow();
         window.setTitle("PrintStudentGrades");
     }
@@ -265,7 +263,6 @@ public class PrintStudentGrades extends JFrame {
     }
     public void doBackButtonProcedure() {
         //if at class index 0
-        System.out.println("whichcurrclassindex backbutton "+whichCurrClassIndex);
         if (whichCurrClassIndex > 0) { //if no previous print grades classes
             hideWindow();
             whichCurrClassIndex--; //only if there are more
@@ -296,18 +293,10 @@ public class PrintStudentGrades extends JFrame {
     }
 
     public void hideWindow() {
-        System.out.println("confirmation");
         backNextButtonsPanel.setVisible(false);
         borderContainer.setVisible(false);
         borderContainer.removeAll();
         backNextButtonsPanel.removeAll();
-
-        Component[] windowComponents3 = window.getContentPane().getComponents();
-        int i = 0;
-        for (Component windowComp : windowComponents3) {
-            System.out.println("compcount " + i + " classname "+ windowComp.getClass().getName() + " regname "+windowComp.getName() + " isvisible "+windowComp.isVisible());
-            i++;
-        }
 
     }
 

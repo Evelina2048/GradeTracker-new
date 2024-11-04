@@ -474,11 +474,6 @@ public class Gather {
     }
 
     public class EnterAction extends AbstractAction {
-        // @Override
-        // public void actionPerformed(ActionEvent e) {
-        //     doNextButtonProcedure();
-        // }
-
         @Override
         public void actionPerformed(ActionEvent e) {
             System.out.println("enter from gather");
