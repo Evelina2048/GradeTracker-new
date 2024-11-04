@@ -34,7 +34,6 @@ import model.SetUserInformation;
 
 import controller.CompositeActionListenerWithPriorities;
 import controller.CreateButton;
-import controller.Creator;
 import controller.Decorator;
 import controller.FileHandling;
 import controller.FileWriting;
