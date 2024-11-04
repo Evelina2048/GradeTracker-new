@@ -57,19 +57,24 @@ public class PrintStudentGrades extends JFrame {
     private CompositeActionListenerWithPriorities actionPriorities = CompositeActionListenerWithPriorities.getInstance();
 
     public PrintStudentGrades(JFrame main, String studentOrTeacher, String existingOrNew) {
-        Component[] windowComponents3 = window.getContentPane().getComponents();
-        int i = 0;
-        for (Component windowComp : windowComponents3) {
-            System.out.println("compcount " + i + " classname "+ windowComp.getClass().getName() + " regname "+windowComp.getName() + " isvisible "+windowComp.isVisible());
-            i++;
-        }
         whichCurrClassIndex = 0;
-
         setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
         Set set = Set.getInstance();
         JFrame window = set.getWindow();
         window.removeWindowListener(set.getCurrentWindowClosing());
         window.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
+
+        //
+        Component[] windowComponents3 = window.getContentPane().getComponents();
+        int i = 0;
+        for (Component windowComp : windowComponents3) {
+            if ((windowComp.getName() != null) && (windowComp.getName().equals("classlabelpanelinreadclass"))) {
+                window.remove(windowComp);
+            }
+            System.out.println("compcount " + i + " classname "+ windowComp.getClass().getName() + " regname "+windowComp.getName() + " isvisible "+windowComp.isVisible());
+            i++;
+        }
+        //
 
         printStudentGradesLaunch();
 
@@ -205,7 +210,7 @@ public class PrintStudentGrades extends JFrame {
 
     private void makeGradeTypeList() {
         //gradeTypeList = new ArrayList<>();
-        for (int gradeTypePanelIndex = 2; gradeTypePanelIndex < allTextListForClass.size(); gradeTypePanelIndex += 3) {
+        for (int gradeTypePanelIndex = 1; gradeTypePanelIndex < allTextListForClass.size(); gradeTypePanelIndex += 3) {
             gradeTypeList.add(allTextListForClass.get(gradeTypePanelIndex));
         }
     }

@@ -582,6 +582,7 @@ public class StudentStatCollect extends JFrame {
             boxManageCreate("Credits (optional)", "JTextField", false);
             newSet();
             classLabelPanel.setName("classlabelpanelinreadclass");
+
             setList.setReadClassLabelPanel(classLabelPanel);
             setList.setClassLabelPanel(classLabelPanel);
 

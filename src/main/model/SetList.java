@@ -72,6 +72,10 @@ public class SetList {
         readClassLabelPanel = thisReadClassLabelPanel;
     }
 
+    public JPanel getReadClassLabelPanel() {
+       return readClassLabelPanel;
+    }
+
     public JPanel getClassLabelPanel() {
         return classLabelPanel;
     }
