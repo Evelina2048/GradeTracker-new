@@ -90,7 +90,9 @@ public class SetList {
 
     public void removeStudentStatCollectSettings() {
         JFrame window = Set.getInstance().getWindow();
-        window.remove(classLabelPanel);
+        if (classLabelPanel != null) {
+            window.remove(classLabelPanel);
+        }
         
     }
 
