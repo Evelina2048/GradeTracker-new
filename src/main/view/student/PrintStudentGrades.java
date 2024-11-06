@@ -126,14 +126,15 @@ public class PrintStudentGrades extends JFrame {
         ArrayList <Integer> gradeTypeNumberList = setList.getGradeTypeList();
 
         int gradeTypeAmount = gradeTypeNumberList.get(whichCurrClassIndex);
-        JPanel allContainer = new JPanel(new GridLayout((1+gradeTypeAmount),3,5,5)); //rows,cols //////
+        JPanel allContainer = new JPanel(new GridLayout((1+gradeTypeAmount),3,4,5)); //rows,cols //////
         allContainer.setName("allContainr");
         borderContainer = new JPanel(new BorderLayout());
 
-        JLabel placeholdType = new JLabel("Grade Type name: "+gradeTypeList.get(whichCurrClassIndex));
-        placeholdType.setBorder(blackline);
-        placeholdType.setHorizontalAlignment(JLabel.CENTER);
-        borderContainer.add(placeholdType,BorderLayout.NORTH);
+        //JLabel placeholdType2 = new JLabel("Grade Type name: "+gradeTypeList.get(whichCurrClassIndex));
+        JLabel placeholdType2 = new JLabel("Class name: "+setList.getFinalClassList().get(whichCurrClassIndex));
+        placeholdType2.setBorder(blackline);
+        placeholdType2.setHorizontalAlignment(JLabel.CENTER);
+        borderContainer.add(placeholdType2,BorderLayout.NORTH);
 
         borderContainer.add(allContainer,BorderLayout.CENTER);
 
@@ -141,6 +142,11 @@ public class PrintStudentGrades extends JFrame {
         finalgrade.setBorder(blackline);
         finalgrade.setHorizontalAlignment(JLabel.CENTER);
         borderContainer.add(finalgrade,BorderLayout.SOUTH);
+
+        JLabel placeholdType = new JLabel("Grade Type name: "+gradeTypeList.get(whichCurrClassIndex));
+        placeholdType.setBorder(blackline);
+        placeholdType.setHorizontalAlignment(JLabel.CENTER);
+        allContainer.add(placeholdType,BorderLayout.NORTH);
 
         JLabel average = new JLabel("Average");
         average.setBorder(blackline);
