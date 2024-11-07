@@ -139,6 +139,7 @@ public class StudentStatCollect extends JFrame {
     }
 
     public void buttonSetUpAction() {
+        
         backButton = createButton.backButtonCreate();
         JPanel backButtonPanel = new JPanel();
         backButtonPanel.add(backButton);
@@ -412,6 +413,18 @@ public class StudentStatCollect extends JFrame {
 
         hideWindow();
         removeVariablesInWindow();
+
+        // Component[] windowComponents3 = set.getWindow().getContentPane().getComponents();
+        // int i = 0;
+        // for (Component windowComp : windowComponents3) {
+        //     if ((windowComp.getName() != null) && (windowComp.getName().equals("saveButton"))) {
+        //         set.getWindow().remove(windowComp);
+        //     }
+        //     System.out.println("compcount " + i + " classname "+ windowComp.getClass().getName() + " regname "+windowComp.getName() + " isvisible "+windowComp.isVisible());
+        //     i++;
+        // }
+        window.remove(set.getCurrentSaveButton());
+
         new PrintStudentGrades(set.getWindow(), setUserInformation.getStudentOrTeacher(), setUserInformation.getExistingOrNew());
     }
 

@@ -3,6 +3,7 @@ package controller;
 import javax.swing.BorderFactory;
 import javax.swing.JButton;
 import java.awt.BorderLayout;
+import java.awt.Component;
 
 import javax.swing.JPanel;
 import javax.swing.JTextField;
@@ -37,17 +38,22 @@ public class CreateButton {
         backButton.setPreferredSize(new Dimension(87, 29));
 
         return backButton;
-        
+
     }
 
     public JButton saveButtonCreate() {
+        System.out.println("savebutton is null? "+(saveButton==null));
+
         saveButton = new JButton("Save "+ CompositeActionListenerWithPriorities.getInstance().getCurrentClass());
-        set.setCurrentSaveButton(saveButton);
+        // if (Set.getInstance().getCurrentSaveButton() != null) {
+        //     set.getWindow().remove(Set.getInstance().getCurrentSaveButton());
+        // }
+        Set.getInstance().setCurrentSaveButton(saveButton); //11/6
 
         if ((CompositeActionListenerWithPriorities.getInstance().getCurrentClass()!= null) && CompositeActionListenerWithPriorities.getInstance().getCurrentClass().equals("StudentStatCollect")) {
             saveButton.setText("Save" + SetList.getInstance().getFinalClassList().get(SetState.getInstance().getClassListIndex()));
         }
-        //window.remove(saveButton);
+        //set.getWindow().remove(saveButton);
         //removeFromWindow();
 
         return saveButton;
