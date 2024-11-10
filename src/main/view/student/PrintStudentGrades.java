@@ -172,7 +172,9 @@ public class PrintStudentGrades extends JFrame {
             percentageOfGradeLabel.setBorder(blackline);
             allContainer.add(percentageOfGradeLabel);
 
-            allContainer.add(new JLabel("heyo "+(String.valueOf((float) percentageOfGradeList.get(i)/100*gradeBoxTotal.get(i)))));
+            JLabel contributionLabel = new JLabel("heyo "+(String.valueOf((float) percentageOfGradeList.get(i)/100*gradeBoxTotal.get(i))));
+            contributionLabel.setBorder(blackline);
+            allContainer.add(contributionLabel);
         }
         window.add(borderContainer);
     }
