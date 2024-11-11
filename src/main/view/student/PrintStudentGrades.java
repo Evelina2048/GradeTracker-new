@@ -55,6 +55,7 @@ public class PrintStudentGrades extends JFrame {
     private ArrayList<ArrayList<String>> gradeList;
     private ArrayList<Float> amountOfFinalGrade;
     private CompositeActionListenerWithPriorities actionPriorities = CompositeActionListenerWithPriorities.getInstance();
+    private JButton nextButton = createButton.nextButtonCreate();
 
     public PrintStudentGrades(JFrame main, String studentOrTeacher, String existingOrNew) {
         whichCurrClassIndex = 0;
@@ -263,8 +264,6 @@ public class PrintStudentGrades extends JFrame {
                 }, 1, "backButton", null, "PrintStudentGrades");
     }});
 
-        JButton nextButton = createButton.nextButtonCreate();
-
         JPanel nextButtonPanel = new JPanel();
         nextButtonPanel.add(nextButton);
         Boolean atEndOfClasses = whichCurrClassIndex == SetList.getInstance().getFinalClassList().size() -1 ; //-1 to account for index starting from 0 and size not
@@ -330,7 +329,9 @@ public class PrintStudentGrades extends JFrame {
                 @Override
                 public void actionPerformed(ActionEvent e) { // remember won't run if just enter without a click
                     System.out.println("enteraction");
-                    doNextButtonProcedure();
+                    if (nextButton.isEnabled()) {
+                        doNextButtonProcedure();
+                    }
                 }
             }, 1, "EnterAction", null, "PrintStudentGrades");  // Add this ActionListener with priority 1
         }
