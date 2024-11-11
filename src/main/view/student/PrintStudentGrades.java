@@ -172,7 +172,10 @@ public class PrintStudentGrades extends JFrame {
             percentageOfGradeLabel.setBorder(blackline);
             allContainer.add(percentageOfGradeLabel);
 
-            JLabel contributionLabel = new JLabel("heyo "+(String.valueOf((float) percentageOfGradeList.get(i)/100*gradeBoxTotal.get(i))));
+            //new JLabel("heyo "+(String.valueOf((float) percentageOfGradeList.get(i)/100*gradeBoxTotal.get(i))))
+            float currPercentageOfGrade = percentageOfGradeList.get(i);
+            System.out.println("7:46 "+amountOfFinalGrade);
+            JLabel contributionLabel = new JLabel("heyo "+(String.valueOf(currPercentageOfGrade * ((float) gradeBoxTotal.get(i)/100))));
             contributionLabel.setBorder(blackline);
             allContainer.add(contributionLabel);
         }
@@ -190,6 +193,7 @@ public class PrintStudentGrades extends JFrame {
         for (int boxSetIndex = 0; boxSetIndex < listOfAverages.size(); boxSetIndex++) {
             averageXpercentageOfGrade = listOfAverages.get(boxSetIndex)*percentageOfGradeList.get(boxSetIndex);
             amountOfFinalGrade.add(((float) averageXpercentageOfGrade)/100);
+            System.out.println("7:58PM list of averages "+listOfAverages);
         }
     }
 
@@ -199,21 +203,31 @@ public class PrintStudentGrades extends JFrame {
         System.out.println("listofaverages -3 "+allTextListForClass);
         for (int boxPanelIndex = 3; boxPanelIndex < allTextListForClass.size(); boxPanelIndex += 3) { //for each grades box
             List <String> gradeArrayForOneBox = Arrays.asList(allTextListForClass.get(boxPanelIndex).split(" "));
+            System.out.println("gradeArrayForOneBox "+ gradeArrayForOneBox);
 
             seperatedBySpaceListOfGrades.add(new ArrayList<>(gradeArrayForOneBox));
 
+        }//added 11/10
             int average = 0;
-            for (int i = 0; i< seperatedBySpaceListOfGrades.size(); i++) {
-                int thisGradeBoxTotal = seperatedBySpaceListOfGrades.get(i).stream()
+            System.out.println("seperatedBySpaceListOfGrades first "+seperatedBySpaceListOfGrades+ " size "+seperatedBySpaceListOfGrades.size());
+            int thisGradeBoxTotal = 0;
+
+            for (int i = 0; i < seperatedBySpaceListOfGrades.size(); i++) {
+                System.out.println("seperatedBySpaceListOfGrades wit i "+seperatedBySpaceListOfGrades.get(i));
+                thisGradeBoxTotal = seperatedBySpaceListOfGrades.get(i).stream()
                             .mapToInt(Integer::parseInt)  // Convert String to int
                             .sum();
                 gradeBoxTotal.add(thisGradeBoxTotal);
+                System.out.println("8:03PM "+thisGradeBoxTotal + "size "+gradeBoxTotal.size());
 
-                average = gradeBoxTotal.get(i)/seperatedBySpaceListOfGrades.size();
+                average = gradeBoxTotal.get(i)/seperatedBySpaceListOfGrades.get(i).size();
+                System.out.println("average "+average);
+                listOfAverages.add(average);
             }
 
-            listOfAverages.add(average);
-        }
+            System.out.println("8:02PM gradeboxtotal "+gradeBoxTotal+ " average "+listOfAverages);
+
+    //} removed 11/10
     }
 
     private void makeGradeTypeList() {
