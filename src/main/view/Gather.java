@@ -358,7 +358,12 @@ public class Gather {
         nextButtonAction();
         System.out.println("11 11 11 11 "+fileHandler.folderExists(pathToUsernameFolder)+" quote on quote username "+setUserInformation.getUsername()+" "+(setUserInformation.getUsername()==null));
         setUsername();
-        fileWrite.writeFolderToFile();
+
+        if (setUserInformation.getExistingOrNew().equals("New User") && fileHandler.folderExists(pathToUsernameFolder)) {
+            System.out.println("writing folder");
+            fileWrite.writeFolderToFile();
+        }
+
         System.out.println("12 12 12 12 "+fileHandler.folderExists(pathToUsernameFolder)+" quote on quote username "+setUserInformation.getUsername()+" "+(setUserInformation.getUsername()==null));
     }
 
