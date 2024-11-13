@@ -165,6 +165,10 @@ public class PrintStudentGrades extends JFrame {
         allContainer.add(contributiongrade);
 
         for (int i = 0; i < gradeTypeNumberList.get(whichCurrClassIndex); i++) { //shouldnt be for classes, should be for gradetypes then classes
+            JLabel gradeTypeNameLabel = new JLabel(gradeTypeList.get(whichCurrClassIndex+i));
+            gradeTypeNameLabel.setBorder(blackline);
+            allContainer.add(gradeTypeNameLabel);
+
             JLabel listOfAveragesLabel = new JLabel(String.valueOf(listOfAverages.get(i)));
             listOfAveragesLabel.setBorder(blackline);
             allContainer.add(listOfAveragesLabel);
