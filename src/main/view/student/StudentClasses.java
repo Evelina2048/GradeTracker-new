@@ -303,21 +303,28 @@ public class StudentClasses extends JFrame {
         writeType();
         System.out.println("nextbuttonhit");
         fileWrite.writeTextToFile();
-        hideWindow();
-        removeFromWindow();
-        create.hideContainer();
 
-        StudentStatCollect studentStatCollect = new StudentStatCollect();
-        SETTEST.getInstance().TESTSETCURRENTINSTANCE(studentStatCollect);
-        if (fileHandler.fileExists("/Users/evy/Documents/GradeTracker-new/src/main/view/UserInfo/StudentInfo/" + setUserInformation.getUsername() + "/" +"ClassInformation"+"/"+setList.getFinalClassList().get(0) + ".txt")) { //needs to keep path because its with index 0
+        if(setList.getFinalClassList().size()>0) {
+            hideWindow();
+            removeFromWindow();
             create.hideContainer();
-            studentStatCollect.studentStatCollectLaunch();
-            studentStatCollect.addLoadedBoxes();
+
+            StudentStatCollect studentStatCollect = new StudentStatCollect();
+            SETTEST.getInstance().TESTSETCURRENTINSTANCE(studentStatCollect);
+            if (fileHandler.fileExists("/Users/evy/Documents/GradeTracker-new/src/main/view/UserInfo/StudentInfo/" + setUserInformation.getUsername() + "/" +"ClassInformation"+"/"+setList.getFinalClassList().get(0) + ".txt")) { //needs to keep path because its with index 0
+                create.hideContainer();
+                studentStatCollect.studentStatCollectLaunch();
+                studentStatCollect.addLoadedBoxes();
+            }
+
+            else {
+                studentStatCollect.studentStatCollectLaunch();
+                studentStatCollect.DisplayClasses();
+            }
         }
 
         else {
-            studentStatCollect.studentStatCollectLaunch();
-            studentStatCollect.DisplayClasses();
+            //error message setup
         }
     }
 
