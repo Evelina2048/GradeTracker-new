@@ -3,7 +3,6 @@ package controller;
 import javax.swing.BorderFactory;
 import javax.swing.JButton;
 import java.awt.BorderLayout;
-import java.awt.Component;
 
 import javax.swing.JPanel;
 import javax.swing.JTextField;
@@ -45,16 +44,11 @@ public class CreateButton {
         System.out.println("savebutton is null? "+(saveButton==null));
 
         saveButton = new JButton("Save "+ CompositeActionListenerWithPriorities.getInstance().getCurrentClass());
-        // if (Set.getInstance().getCurrentSaveButton() != null) {
-        //     set.getWindow().remove(Set.getInstance().getCurrentSaveButton());
-        // }
         Set.getInstance().setCurrentSaveButton(saveButton); //11/6
 
         if ((CompositeActionListenerWithPriorities.getInstance().getCurrentClass()!= null) && CompositeActionListenerWithPriorities.getInstance().getCurrentClass().equals("StudentStatCollect")) {
             saveButton.setText("Save" + SetList.getInstance().getFinalClassList().get(SetState.getInstance().getClassListIndex()));
         }
-        //set.getWindow().remove(saveButton);
-        //removeFromWindow();
 
         return saveButton;
     }
@@ -78,20 +72,6 @@ public class CreateButton {
         return backNextButtonsPanel;
     }
 
-    
-    // public void setTextFieldContainer(JPanel thisTextFieldPanel) {
-    //     textFieldPanel = thisTextFieldPanel;
-    // }
-
-    // public JPanel getTextFieldContainer() {
-    //     return textFieldPanel;
-    // }
-
-    // public void hideContainer() {
-    //     textFieldContainer.setVisible(false);
-    //     textFieldPanel.setVisible(false);
-    // }
-
     public void setTextFieldPanel(JPanel myPanel) {
         textFieldPanel = myPanel;
     }
@@ -100,29 +80,12 @@ public class CreateButton {
         textField.getDocument().addDocumentListener(new DocumentListener() {
         @Override
         public void insertUpdate(DocumentEvent e) {
-            System.out.println("insert update. savebutton should enable");
-            saveButtonEnable(); 
+            saveButtonEnable();
         }
 
         @Override
         public void removeUpdate(DocumentEvent e) {
-            // if (textField.getParent() != null) {
-            //     System.out.println("removeUpdate/// "+textField.getParent().getParent().getName());//.getParent().getParent().getParent().getName());
-            // }
-
-            // if (textField.getParent() != null) {
-            //     Container textFieldParent = textField.getParent();
-            //     int parentCount = 1;
-            //     while (textFieldParent.getParent().getName() == null && parentCount < 100) {
-            //          parentCount++;
-            //          System.out.println("parentcount "+parentCount);
-            //     }
-            //     System.out.println("name? "+textFieldParent.getName()+" parentcount"+parentCount);
-            // }
-
-            //set.setEmptiedState(true);
             setState.setEmptiedState(textField, true);
-            //textField.getParent();
         }
 
         @Override
@@ -134,14 +97,12 @@ public class CreateButton {
 
     public void saveButtonEnable() {
         if (set.getCurrentSaveButton() != null) {
-            System.out.println("should enable saved button");
             set.getCurrentSaveButton().setEnabled(true);
         }
 
         else {
             System.err.println("savebutton is null");
         }
-        //saveButton.setEnabled(true);
     }
 
     public void removeFromWindow() {

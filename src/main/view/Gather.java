@@ -80,7 +80,6 @@ public class Gather {
     CompositeActionListenerWithPriorities actionPriorities;
 
     public Gather() {
-        System.out.println("entering gather");
         this.set = Set.getInstance();
         this.setState = SetState.getInstance();
         this.setUserInformation = SetUserInformation.getInstance();
@@ -101,9 +100,6 @@ public class Gather {
 
     public void gatherLaunch () {
         actionPriorities.setCurrentClass("Gather Loading");
-
-        //System.out.println(" 2222"+fileHandler.folderExists(pathToUsernameFolder)+" quote on quote username "+(setUserInformation.getUsername()==null));
-
         window.setTitle("Gather");
         window = set.getWindow();
 
@@ -115,8 +111,6 @@ public class Gather {
 
         buttonSetUpAction();
 
-        //System.out.println("3333 "+fileHandler.folderExists(pathToUsernameFolder)+" quote on quote username "+(setUserInformation.getUsername()==null));
-
         currentClass = "Gather";
         actionPriorities.setCurrentClass(currentClass);
 
@@ -125,26 +119,19 @@ public class Gather {
         window.getRootPane().getActionMap().put("enterAction", enterAction);
         currentClass = "Gather";
         actionPriorities.setCurrentClass(currentClass);
-
-        //System.out.println("4444 "+fileHandler.folderExists(pathToUsernameFolder)+" quote on quote username "+(setUserInformation.getUsername()==null));
     }
 
     private void makeUsernameBox() {
-        System.out.println("username "+setUserInformation.getUsername());
-        System.out.println("username: "+setUserInformation.getUsername()+"haschanged? "+set.getNewOrExistingChanged());
         if (setUserInformation.getUsername() == null && set.getNewOrExistingChanged() == false) {
-            System.out.println("whatToSetTextFieldTo opt 1");
             textField =  decorate.decorateTextBox("Enter user name");
             setState.setLoadedState(textField, false);
             setState.setEmptiedState(textField, false);
         }
         else if (setUserInformation.getUsername() == null && set.getNewOrExistingChanged() == true) { //user came back to gather after changing newuser setting
-            System.out.println("whatToSetTextFieldTo opt 2");
             textField = decorate.decorateTextBox("Enter user name");
         }
 
         else {
-            System.out.println("whatToSetTextFieldTo opt 3 username: "+setUserInformation.getUsername());
             textField = decorate.decorateTextBox(setUserInformation.getUsername());
             setState.setLoadedState(textField, true);
 
@@ -154,7 +141,6 @@ public class Gather {
     }
 
     private void textFieldMouseListener() {
-        //System.out.println(" 5555"+fileHandler.folderExists(pathToUsernameFolder));
         FocusAdapter textfieldFocusListener;
         // Check if file path to original username's class.txt exists and is not empty
         FileHandling fileHandler = new FileHandling();
@@ -173,9 +159,6 @@ public class Gather {
             decorate.deleteFocusListeners(textField.getFocusListeners().length-2);
 
             textField.addFocusListener(textfieldFocusListener);
-
-            //System.out.println("6666 "+fileHandler.folderExists(pathToUsernameFolder));
-
         }
     }
 
@@ -186,52 +169,42 @@ public class Gather {
         Boolean existingUser = (existingOrNew == "Existing");
         Boolean previousSettingsNotChanged = (set.getNewOrExistingChanged() == false);
         Boolean previousSettingsChanged = (set.getNewOrExistingChanged() == true);
-        System.out.println("{}"+textField.getText()+"{}");
         Boolean didNotChangeUsernameFromDefault = (textField.getText().trim().equals("Enter user name")) && (setState.getEmptiedState(textField)==false);
         Boolean isExistingUser = fileHandler.folderExists(pathToUsernameFolder) && setState.getEmptiedState(textField);
 
         if (newUser && (username == null || didNotChangeUsernameFromDefault) && previousSettingsNotChanged) {
-            System.out.println("instruction words option 1");
             instructionsWordsLabel = new JLabel("You are a new user. Create a user name.");
         }
         //should be below
         else if (newUser && username != null && previousSettingsNotChanged && isExistingUser){
-            System.out.println("instruction words option 2");
             instructionsWordsLabel = new JLabel("<html><center>Welcome back!<br> Already created account. Click to edit.");
         }
 
         else if (existingUser && username != null && previousSettingsNotChanged) {
-            System.out.println("instruction words option 3");
             instructionsWordsLabel = new JLabel("<html><center>Welcome back!");
         }
 
         else if (newUser && username == null && previousSettingsChanged) {
-            System.out.println("instruction words option 4");
             instructionsWordsLabel = new JLabel("<html><center>You changed your NewUser/Existing settings. <br> You are a new user. Create a user name.");
         }
 
         else if (existingUser && previousSettingsNotChanged && didNotChangeUsernameFromDefault) {
-            System.out.println("instruction words option 5");
             instructionsWordsLabel = new JLabel("You are an existing user. Type in your user name");
         }
 
         else if (existingUser && username == null && previousSettingsChanged) {
-            System.out.println("instruction words option 6");
             instructionsWordsLabel = new JLabel("<html><center>You changed your NewUser/Existing settings. <br> You are an existing user. Type in your user name");
         }
 
         else if (newUser && username != null && previousSettingsChanged) {
-            System.out.println("instruction words option 7");
             instructionsWordsLabel = new JLabel("<html><center>You changed your NewUser/Existing settings. <br> You are a new user. Create a user name.");
         }
 
         else if (existingUser && username != null && previousSettingsChanged) {
-            System.out.println("instruction words option 8");
             instructionsWordsLabel = new JLabel("<html><center>You changed your NewUser/Existing settings. <br> You are an existing user. Type in your user name");
         }
 
         else {
-            System.out.println("instruction words option 9. new user: "+ newUser+" username: "+ username +" previoussettingsnotchanged: "+ previousSettingsNotChanged+ " fileExists? " +fileHandler.folderExists(pathToUsernameFolder));
             instructionsWordsLabel = new JLabel("Error");
         }
         decorateInstructions(instructionsWordsLabel);
@@ -302,14 +275,11 @@ public class Gather {
     }
 
         private void backButtonAction() {
-            System.out.println("hidewindow1");
             hideWindow();
             setUsername();
             NewUser newUser = new NewUser();
             newUser.newUserSetup();
-            System.out.println("back button new user "+actionPriorities.getCurrentClass());
             if (setUserInformation.getExistingOrNew() != null) {
-                System.out.println("about to select buttons in new user. actionlistener "+actionPriorities.getCurrentClass());
                 newUser.setButtonSelected();
             }
     }
@@ -333,14 +303,11 @@ public class Gather {
         nextButton.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                System.out.println("7777 "+fileHandler.folderExists(pathToUsernameFolder));
                 currentClass = "Gather";
                 actionPriorities.setCurrentClass(currentClass);
                 actionPriorities.addClassActionListener(new ActionListener() {
                     @Override
                     public void actionPerformed(ActionEvent e) { // remember won't run if just enter without a click
-                        System.out.println("enteraction");
-                        System.out.println("8888 "+fileHandler.folderExists(pathToUsernameFolder));
                         doNextButtonProcedure();
                     }
                 }, 1, "nextButton", null, currentClass);  // Add this ActionListener with priority 1
@@ -349,38 +316,24 @@ public class Gather {
     }
 
     private void doNextButtonProcedure() {
-        System.out.println("9999 "+fileHandler.folderExists(pathToUsernameFolder)+setUserInformation.getUsername()+" ");
         actionPriorities.setCurrentClass(currentClass);
-        //setUsername(); //was here 10/31
         set.setWindow(window);
-        System.out.println("nextbutton action in gather");
-        System.out.println("10 10 10 10 "+fileHandler.folderExists(pathToUsernameFolder)+" quote on quote username "+setUserInformation.getUsername()+" "+(setUserInformation.getUsername()==null));
         nextButtonAction();
-        System.out.println("11 11 11 11 "+fileHandler.folderExists(pathToUsernameFolder)+" quote on quote username "+setUserInformation.getUsername()+" "+(setUserInformation.getUsername()==null));
         setUsername();
 
-        if (setUserInformation.getExistingOrNew().equals("New User") && fileHandler.folderExists(pathToUsernameFolder)) {
-            System.out.println("writing folder");
+        if (setUserInformation.getExistingOrNew().equals("New User") && !fileHandler.folderExists(pathToUsernameFolder)) {
             fileWrite.writeFolderToFile();
         }
-
-        System.out.println("12 12 12 12 "+fileHandler.folderExists(pathToUsernameFolder)+" quote on quote username "+setUserInformation.getUsername()+" "+(setUserInformation.getUsername()==null));
     }
 
     private void nextButtonAction() {
-        System.out.println("10.5 10 10 10 "+fileHandler.folderExists(pathToUsernameFolder)+" quote on quote username "+setUserInformation.getUsername()+" "+(setUserInformation.getUsername()==null));
         boolean textFieldEmpty = textField.getText().trim().isEmpty();
         boolean textFieldHasntChanged = textField.getText().equals("Enter user name") &&  !setState.getEmptiedState(textField);
         boolean textFieldFilled = textField.getText().trim().isEmpty() == false;
         //check if the username is not empty
         System.out.println(textFieldEmpty || textFieldHasntChanged && setState.getLoadedState(textField) == false);
-        System.out.println("oh hi!");
 
         setUsername();
-
-        System.out.println("10.6 10 10 10 "+fileHandler.folderExists(pathToUsernameFolder)+" quote on quote username "+setUserInformation.getUsername()+" "+(setUserInformation.getUsername()==null));
-
-        System.out.println("10.7 10 10 10 "+"textfieldfilled "+textFieldFilled+existingOrNew.trim().equals("New User")+(!fileHandler.folderExists(pathToUsernameFolder))+(setUserInformation.getUsername() != null)+pathToUsernameFolder);
 
         if (textFieldEmpty || textFieldHasntChanged && setState.getLoadedState(textField) == false) {
             errorMessageSetUp("<html><center>Please choose an option",200,90);
@@ -437,17 +390,14 @@ public class Gather {
         });
 
         dialog.setLocationRelativeTo(textField);
-        //dialog.setLocation(textField.getX(), textField.getY());
         dialog.setVisible(true);
     }
 
     private void setUsername() {
-        System.out.println("in set username "+setUserInformation.getUsername());
         if (setState.getEmptiedState(textField)) {
             setUserInformation.setUsername(textField.getText());
             pathToUsernameFolder = setUserInformation.getPathToUsernameFolder();
         }
-        System.out.println("username after setting is"+setUserInformation.getUsername());
     }
 
     public int getWindowX() {
@@ -464,7 +414,6 @@ public class Gather {
     }
 
     private void hideWindow() {
-        System.out.println("current class in hidewindow"+ currentClass);
         instructionsPanel.setVisible(false);
         choicesPanel.setVisible(false);
         backNextButtonsPanel.setVisible(false);
@@ -480,7 +429,6 @@ public class Gather {
     public class EnterAction extends AbstractAction {
         @Override
         public void actionPerformed(ActionEvent e) {
-            System.out.println("enter from gather");
             actionPriorities.setCurrentClass(currentClass);
             actionPriorities.addClassActionListener(new ActionListener() {
                 @Override
