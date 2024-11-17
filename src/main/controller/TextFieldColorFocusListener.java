@@ -20,8 +20,7 @@ public class TextFieldColorFocusListener {
     private SetState setState;
     private JTextField textField = new JTextField();
     private Boolean focusGranted = true;
-    private String text = textField.getText().trim();
-    
+
     public TextFieldColorFocusListener() {
         this.set = Set.getInstance();
         this.setState = SetState.getInstance();
@@ -41,35 +40,25 @@ public class TextFieldColorFocusListener {
                     }else if (!focusTextField.getText().equals(placeholder) && !focusTextField.getText().isEmpty() && setState.getEmptiedState(textField) == true) {
                         setState.setEmptiedState(focusTextField, true);
                     }else if (focusTextField.getText().equals(placeholder) && setState.getEmptiedState(textField) == true && setState.getLoadedState(textField) == false) {
-                        //System.out.println("focuslistener#1.3");
                         focusTextField.setText(""); // Clear the placeholder text when the field gains focus
                         setState.setEmptiedState(focusTextField, true);
                         setState.setSaveable(true);
                     }
-                    
-                    else {
-                        //textField.setHorizontalAlignment(JTextField.LEFT);
-                        //System.out.println("something went wrong in Creator class, focus gained");
-                        //System.out.println("focuslistener#1.4");
-                    }
-                    //previousTextbox = textField;
                 }
             }
             @Override
             public void focusLost(FocusEvent e) {
-                //focusLostLeftAlign();
                 focusTextField.setForeground(Color.lightGray);
                 FontMetrics fontMetrics = textField.getFontMetrics(textField.getFont());
-                System.out.println("focus is lost "+fontMetrics.stringWidth(textField.getText())+ text);
                 if (fontMetrics.stringWidth(textField.getText()) >= textField.getWidth()) {//if is already less than max with username
                     focusTextField.setCaretPosition(0);
                     }
-                
+
                 if (focusTextField.getText().isEmpty()) {
                     focusTextField.setText(placeholder);
                     setState.setEmptiedState(focusTextField, false);
                 }
-                
+
                 else if (!focusTextField.getText().isEmpty() && setState.getEmptiedState(textField) == true){
                 }
 
@@ -107,30 +96,23 @@ public class TextFieldColorFocusListener {
                     setState.setEmptiedState(textField, false);
                     window.requestFocusInWindow();
 
-                    //:
                     textField.grabFocus();
                     textField.setCaretPosition(0);
                     window.requestFocusInWindow();
-                    //:
                 }
                 else if (pointNotInTextbox &&  setState.getEmptiedState(textField) == true && !textField.getText().isEmpty()) {
                     window.requestFocusInWindow();
 
-                    //:
                     textField.grabFocus();
                     textField.setCaretPosition(0);
                     window.requestFocusInWindow();
-                    //:
                 }
                 else if (pointNotInTextbox) {
                     window.requestFocusInWindow();
 
-                    //:
                     textField.grabFocus();
                     textField.setCaretPosition(0);
                     window.requestFocusInWindow();
-                    //:
-
                 }
                 else {
                     System.out.println("something went wrong");

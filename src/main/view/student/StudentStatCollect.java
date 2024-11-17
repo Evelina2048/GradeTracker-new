@@ -491,6 +491,13 @@ public class StudentStatCollect extends JFrame {
     }
 
     private void createNewTypeButton() {
+        Component[] windowComponents3 = window.getContentPane().getComponents();
+        int i = 0;
+        for (Component windowComp : windowComponents3) {
+            System.out.println("compcount before " + i + " classname "+ windowComp.getClass().getName() + " regname "+windowComp.getName() + " isvisible "+windowComp.isVisible());
+            i++;
+        }
+
         newTypeButton = new JButton("New Type");
         newTypeButton.setPreferredSize(new Dimension(90, 50));
         JPanel newTypeButtonPanel = new JPanel(new BorderLayout());
@@ -515,6 +522,13 @@ public class StudentStatCollect extends JFrame {
         window.add(newDelContainerFlow, BorderLayout.EAST);
 
         create.windowFix();
+
+        Component[] windowComponents4 = window.getContentPane().getComponents();
+        i = 0;
+        for (Component windowComp : windowComponents4) {
+            System.out.println("compcount after " + i + " classname "+ windowComp.getClass().getName() + " regname "+windowComp.getName() + " isvisible "+windowComp.isVisible());
+            i++;
+        }
     }
     private void newSetButtonAction() {
         typeNumber++;
@@ -525,7 +539,7 @@ public class StudentStatCollect extends JFrame {
         classLabelPanel.setVisible(true);
         textBoxPanel.setVisible(true);
 
-        window.add(classLabelPanel, BorderLayout.CENTER);
+        //window.add(classLabelPanel, BorderLayout.CENTER); //commented 11/17 because it would cause a bug with the third class new type
         create.windowFix();
 
         if (setState.getClassListIndex() > 0) {
