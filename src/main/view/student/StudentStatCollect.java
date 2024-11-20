@@ -192,6 +192,7 @@ public class StudentStatCollect extends JFrame {
             studentClasses.studentClassesLaunch();
         }
         else if ((setState.getClassListIndex() > 0) && (fileWrite.howManyPlaceholders() == 0)) {
+            System.out.println("hes A "+setState.getCanContinue()+ " placeholders "+fileWrite.howManyPlaceholders());
             goToPreviousClasses();
             JFrame window = Set.getInstance().getWindow();
             Component[] windowComponents = window.getContentPane().getComponents();
@@ -242,7 +243,7 @@ public class StudentStatCollect extends JFrame {
             }
 
     private void goToPreviousClasses() {
-        System.out.println("hes 9999 "+setState.getCanContinue());
+        System.out.println("hes B "+setState.getCanContinue());
         saveButtonAction("backButton");
         setState.decrementClassListIndex();
         setList.getClassLabelPanel().removeAll();
@@ -299,13 +300,14 @@ public class StudentStatCollect extends JFrame {
     }
 
     private void saveButtonAction(String actionCause) {
+        System.out.println("hes C "+setState.getCanContinue()+ " placeholders "+fileWrite.howManyPlaceholders());
         SETTEST.getInstance().TESTSETCURRENTINSTANCE(this);
         set.setFilePath(setUserInformation.getPathToClassInformationFileWithIndex());
         create.setTextFieldContainer(setState.getTextFieldPanel());
 
         fileWrite.writeTextToFile();
 
-        if (fileWrite.howManyPlaceholders() > 0 ){
+        if (fileWrite.howManyPlaceholders() > 0 && !actionCause.equals("Neither")){
             Decorator decorate = new Decorator();
             System.out.println("up Z how many placeholders? "+fileWrite.howManyPlaceholders()+" current class "+ setList.getFinalClassList().get(setState.getClassListIndex()));
             setState.setStudentStatCollect(this);

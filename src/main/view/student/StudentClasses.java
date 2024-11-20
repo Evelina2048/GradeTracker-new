@@ -224,7 +224,7 @@ public class StudentClasses extends JFrame {
         JPanel backButtonPanel = new JPanel();
         backButtonPanel.add(backButton);
         backButton.setPreferredSize(new Dimension(87, 29));
-        
+
         backButton.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent e) {
                 actionPriorities.setCurrentClass(currentClass);
