@@ -206,13 +206,15 @@ public class StudentStatCollect extends JFrame {
             SetState.getInstance().setStudentStatCollect(currentInstance);
             SetState.getInstance().setAreYouSureMessageCause("backButton");
             decorate.areYouSureMessage(null, "studentStatsEmpty", "Remove placeholder(s) to continue?", 230, 90);
-            setState.setCanContinue(false);
+            //setState.setCanContinue(false); //11/19
             System.out.println("hes 5555 "+setState.getCanContinue());
     }
     }
 
     public void backAction2() { //necessary because if the user tries to go back with placeholders and clicks "yes" option, will get stuck in an infinite loop when back action recalled.
+        System.out.println("hes 6666 "+setState.getCanContinue());
         if(setState.getCanContinue()) {
+            System.out.println("hes 7777 "+setState.getCanContinue());
             create.setTextFieldContainer(setState.getTextFieldPanel());
             if (setState.getClassListIndex() == 0) { //case for back to classes
                 hideWindow();
@@ -220,6 +222,7 @@ public class StudentStatCollect extends JFrame {
                 studentClasses.studentClassesLaunch();
             }
             else if (setState.getClassListIndex() > 0) {
+                System.out.println("hes 8888 "+setState.getCanContinue());
                 goToPreviousClasses();
                 JFrame window = Set.getInstance().getWindow();
                 Component[] windowComponents = window.getContentPane().getComponents();
@@ -239,14 +242,15 @@ public class StudentStatCollect extends JFrame {
             }
 
     private void goToPreviousClasses() {
+        System.out.println("hes 9999 "+setState.getCanContinue());
         saveButtonAction("backButton");
-            setState.decrementClassListIndex();
-            setList.getClassLabelPanel().removeAll();
-            classLabelPanel.removeAll();
-            textBoxPanel.removeAll();
-            SETTEST.getInstance().SETTESTTEXTBOXPANEL(textBoxPanel);
-            SETTEST.getInstance().TESTSETCURRENTINSTANCE(this);
-            addLoadedBoxes();
+        setState.decrementClassListIndex();
+        setList.getClassLabelPanel().removeAll();
+        classLabelPanel.removeAll();
+        textBoxPanel.removeAll();
+        SETTEST.getInstance().SETTESTTEXTBOXPANEL(textBoxPanel);
+        SETTEST.getInstance().TESTSETCURRENTINSTANCE(this);
+        addLoadedBoxes();
     }
 
     public void addLoadedBoxes() {
