@@ -3,6 +3,7 @@ package view.student;
 import javax.swing.JButton;
 import javax.swing.JFrame;
 // import javax.swing.JLabel; //9/20
+import javax.swing.JLabel;
 
 import java.awt.BorderLayout;
 import java.awt.GridLayout;
@@ -36,16 +37,20 @@ import javax.swing.AbstractAction;
 import javax.swing.JComponent;
 import javax.swing.JDialog;
 import javax.swing.KeyStroke;
+import javax.swing.SwingConstants;
 import javax.swing.JPanel;
 import javax.swing.JTextField;
 
 import java.awt.event.KeyEvent;
 
+import java.awt.*;
+import javax.swing.*;
+
 public class StudentStatCollect extends JFrame {
     private JFrame window;
     private Creator create;
     private GoIntoPanel goIntoPanel;
-    private JPanel backNextButtonsPanel;
+    private JPanel backNextButtonsPanel = new JPanel();
     private JButton newTypeButton;
     private JButton nextButton;
     private JButton backButton;
@@ -118,7 +123,7 @@ public class StudentStatCollect extends JFrame {
         create.hideContainer();
 
         createNewTypeButton();
-        buttonSetUpAction();
+        //buttonSetUpAction(); //location 11/18
         window.setTitle("StudentStatCollect");
 
         currentClass = "StudentStatCollect";
@@ -134,12 +139,15 @@ public class StudentStatCollect extends JFrame {
         }
 
         textBoxPanel.setVisible(true);
+        buttonSetUpAction(); //location 11/18
 
         actionPriorities.setCurrentClass(currentClass);
+
+        // window.remove(backNextButtonsPanel);
+        //window.add(backNextButtonsPanel);
     }
 
     public void buttonSetUpAction() {
-        
         backButton = createButton.backButtonCreate();
         JPanel backButtonPanel = new JPanel();
         backButtonPanel.add(backButton);
@@ -163,36 +171,43 @@ public class StudentStatCollect extends JFrame {
     private void backAction(JButton backButton) {
         backButton.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent e) {
+                System.out.println("hes 1111 "+setState.getCanContinue());
                 actionPriorities.setCurrentClass(currentClass);
                 actionPriorities.addClassActionListener(b -> {
                     currentClass = "StudentStatCollect";
                     actionPriorities.setCurrentClass(currentClass);
                     if(setState.getCanContinue()) {
+                        System.out.println("hes 2222 "+setState.getCanContinue());
                         decideBackActionBasedOnClass();
                     }}, 2, "backButton",null, currentClass);}});
     }
 
     private void decideBackActionBasedOnClass() {
-        create.setTextFieldContainer(setState.getTextFieldPanel());
+        System.out.println("hes 3333 "+setState.getCanContinue()+ " placeholders "+fileWrite.howManyPlaceholders());
+        //create.setTextFieldContainer(setState.getTextFieldPanel()); //11/19
         if (setState.getClassListIndex() == 0 && (fileWrite.howManyPlaceholders() == 0)) { //case for back to classes
             hideWindow();
             StudentClasses studentClasses = new StudentClasses();
             saveButtonAction("backButton");
             studentClasses.studentClassesLaunch();
         }
-        else if (setState.getClassListIndex() > 0) {
+        else if ((setState.getClassListIndex() > 0) && (fileWrite.howManyPlaceholders() == 0)) {
             goToPreviousClasses();
             JFrame window = Set.getInstance().getWindow();
             Component[] windowComponents = window.getContentPane().getComponents();
-            for (int k = 0; k<8;k++) {
-                Component component = windowComponents[k];
-                component.setVisible(false);
-                window.remove(component);
-            }} else if (fileWrite.howManyPlaceholders() > 0) {
-        Decorator decorate = new Decorator();
-        SetState.getInstance().setStudentStatCollect(currentInstance);
-        SetState.getInstance().setAreYouSureMessageCause("backButton");
-        decorate.areYouSureMessage(null, "studentStatsEmpty", "Remove placeholder(s) to continue?", 230, 90);
+            // for (int k = 0; k<8;k++) {
+            //     Component component = windowComponents[k];
+            //     component.setVisible(false);
+            //     window.remove(component);
+            // } //11/18
+        } else if (fileWrite.howManyPlaceholders() > 0) {
+            System.out.println("hes 4444 "+setState.getCanContinue());
+            Decorator decorate = new Decorator();
+            SetState.getInstance().setStudentStatCollect(currentInstance);
+            SetState.getInstance().setAreYouSureMessageCause("backButton");
+            decorate.areYouSureMessage(null, "studentStatsEmpty", "Remove placeholder(s) to continue?", 230, 90);
+            setState.setCanContinue(false);
+            System.out.println("hes 5555 "+setState.getCanContinue());
     }
     }
 
@@ -218,8 +233,10 @@ public class StudentStatCollect extends JFrame {
                     Component component = windowComponents2[k];
                     component.setVisible(false);
                     window.remove(component);
-                }}}
-                setState.setCanContinue(false); }
+                }
+            }}
+                setState.setCanContinue(false);
+            }
 
     private void goToPreviousClasses() {
         saveButtonAction("backButton");
@@ -304,7 +321,18 @@ public class StudentStatCollect extends JFrame {
                     @Override
                     public void actionPerformed(ActionEvent e) {// remember wont run  if just enter without a click
                         System.out.println("enteraction");
-                        doNextButtonProcedure();
+                        //doNextButtonProcedure();
+                        //
+                        actionPriorities.setCurrentClass(currentClass);
+                        actionPriorities.addClassActionListener(new ActionListener() {
+                            @Override
+                            public void actionPerformed(ActionEvent e) { // remember won't run if just enter without a click
+                                System.out.println("enteraction");
+                                doNextButtonProcedure();
+
+                            }
+                        }, 1, "EnterAction", null, currentClass);  // Add this ActionListener with priority 1
+                        //
                     }
                 }, 1, "nextButton", null, currentClass);  // Add this ActionListener with priority 1
             }
@@ -404,8 +432,11 @@ public class StudentStatCollect extends JFrame {
         window.remove(set.getCurrentSaveButton());
         newDelContainerFlow.removeAll();
         studentStatCollectLaunch();
+        //buttonSetUpAction(); //11/18
         visitNextStudentClass();
-        buttonSetUpAction();
+        if (setState.getClassListIndex() < 2) {
+            buttonSetUpAction(); //location 11/18
+        }
     }
 
     public void goToPrintStudentGrades() {
@@ -479,8 +510,22 @@ public class StudentStatCollect extends JFrame {
         }
 
         if (setState.getClassListIndex() >= 2) {
-        classLabelPanel.add(textBoxPanel);
-        classLabelPanel.setVisible(true);
+            classLabelPanel.add(textBoxPanel);
+            classLabelPanel.setVisible(true);
+
+            classLabelPanel.setBackground(Color.pink);
+
+            Component[] windowComponents3 = window.getContentPane().getComponents();
+            int i = 0;
+            for (Component windowComp : windowComponents3) {
+                System.out.println("compcount before " + i + " classname "+ windowComp.getClass().getName() + " regname "+windowComp.getName() + " isvisible "+windowComp.isVisible());
+                i++;
+                window.remove(windowComp);
+            }
+            window.add(classLabelPanel,BorderLayout.CENTER);
+            window.add(newDelContainerFlow, BorderLayout.EAST);
+            buttonSetUpAction();
+
         }
 
     }
@@ -497,7 +542,6 @@ public class StudentStatCollect extends JFrame {
             System.out.println("compcount before " + i + " classname "+ windowComp.getClass().getName() + " regname "+windowComp.getName() + " isvisible "+windowComp.isVisible());
             i++;
         }
-
         newTypeButton = new JButton("New Type");
         newTypeButton.setPreferredSize(new Dimension(90, 50));
         JPanel newTypeButtonPanel = new JPanel(new BorderLayout());
@@ -610,6 +654,10 @@ public class StudentStatCollect extends JFrame {
             newSet();
             classLabelPanel.setName("classlabelpanelinreadclass");
 
+            if (setList.getReadClassLabelPanel() != null) {
+                setList.removeStudentStatCollectReadClassLabelPanel();
+                //window.add()
+            }
             setList.setReadClassLabelPanel(classLabelPanel);
             setList.setClassLabelPanel(classLabelPanel);
 

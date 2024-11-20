@@ -220,6 +220,8 @@ public class Decorator {
         }
 
         System.out.println("dialog visi "+dialog.isVisible());
+
+        setState.setCanContinue(true); //11/19
         dialog.setVisible(false);
         dialog.dispose();
     }
@@ -247,6 +249,7 @@ public class Decorator {
         }
         window.requestFocusInWindow();
         dialog.setVisible(false);
+        setState.setCanContinue(true); //11/19
         window.requestFocusInWindow();
         if (dialog != null) {
             dialog.dispose();
