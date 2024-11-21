@@ -545,6 +545,9 @@ public class StudentStatCollect extends JFrame {
         Component[] windowComponents3 = window.getContentPane().getComponents();
         int i = 0;
         for (Component windowComp : windowComponents3) {
+            if (windowComp.getName()==null){
+                window.remove(windowComp);
+            }
             System.out.println("compcount before " + i + " classname "+ windowComp.getClass().getName() + " regname "+windowComp.getName() + " isvisible "+windowComp.isVisible());
             i++;
         }
@@ -573,12 +576,6 @@ public class StudentStatCollect extends JFrame {
 
         create.windowFix();
 
-        Component[] windowComponents4 = window.getContentPane().getComponents();
-        i = 0;
-        for (Component windowComp : windowComponents4) {
-            System.out.println("compcount after " + i + " classname "+ windowComp.getClass().getName() + " regname "+windowComp.getName() + " isvisible "+windowComp.isVisible());
-            i++;
-        }
     }
     private void newSetButtonAction() {
         typeNumber++;
@@ -586,16 +583,32 @@ public class StudentStatCollect extends JFrame {
         boxManageCreate("Grade Type "+typeNumber, "JTextField",false);
         boxManageCreate("Percentage of Grade", "JTextField",false);
         boxManageCreate("Grades(format:# # #)", "JTextField",false);
-        classLabelPanel.setVisible(true);
-        textBoxPanel.setVisible(true);
+        classLabelPanel.setVisible(true); //11/21
+        textBoxPanel.setVisible(true); //11/21
 
-        //window.add(classLabelPanel, BorderLayout.CENTER); //commented 11/17 because it would cause a bug with the third class new type
+        if (setState.getClassListIndex() < 2) {
+            window.add(classLabelPanel, BorderLayout.CENTER); //commented 11/17 because it would cause a bug with the third class new type
+        }
         create.windowFix();
 
         if (setState.getClassListIndex() > 0) {
             setList.removeStudentStatCollectReadClassLabelPanel(); //causes bugs if used for first class
         }
         setState.setTextFieldPanel(textBoxPanel);
+
+        Component[] windowComponents4 = window.getContentPane().getComponents();
+        int i = 0;
+        for (Component windowComp : windowComponents4) {
+            System.out.println("compcount after " + i + " classname "+ windowComp.getClass().getName() + " regname "+windowComp.getName() + " isvisible "+windowComp.isVisible());
+            i++;
+        }
+
+        // typeNumber++;
+        // boxManageCreate("Grade Type "+typeNumber, "JTextField",false);
+        // // boxManageCreate("Percentage of Grade", "JTextField",false);
+        // // boxManageCreate("Grades(format:# # #)", "JTextField",false);
+        // setState.setCanContinue(true);
+        // setState.setTextFieldPanel(textBoxPanel);
 
     }
 
@@ -699,7 +712,7 @@ public class StudentStatCollect extends JFrame {
         }
 
         private void newSet() {
-            window.getContentPane().getComponents();
+            //window.getContentPane().getComponents(); //
             typeNumber++;
             boxManageCreate("Grade Type "+typeNumber, "JTextField",false);
             boxManageCreate("Percentage of Grade", "JTextField",false);
