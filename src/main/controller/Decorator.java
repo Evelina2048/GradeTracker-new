@@ -252,9 +252,7 @@ public class Decorator {
         window.requestFocusInWindow();
         if (dialog != null) {
             dialog.dispose();
-            System.out.println("hes look at went no 4.4"+setState.getCanContinue());
             setState.setCanContinue(true); //11/19
-            System.out.println("hes look at went no after 4.5"+setState.getCanContinue());
         }
         window.requestFocusInWindow();
 
