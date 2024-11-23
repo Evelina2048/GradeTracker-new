@@ -95,6 +95,7 @@ public class Decorator {
     }
 
     public String areYouSureMessage(JTextField importedTextField, String myReason, String text, int width, int height) {
+        System.out.println("mean 4444");
         reason = myReason;
         textField = importedTextField;
         dialog = new JDialog(window, true);
@@ -109,6 +110,13 @@ public class Decorator {
         JButton yesButton = new JButton("Yes");
         yesButton.setVisible(true);
         dialog.add(yesButton);
+
+        dialog.addWindowListener(new WindowAdapter() {  //11/23 so that back button still works after close
+            @Override
+            public void windowClosing(WindowEvent e) {
+                noButtonAction();
+            }
+        });
 
         JButton noButton = new JButton("Cancel");
         noButton.setVisible(true);
@@ -244,6 +252,7 @@ public class Decorator {
     }
 
     private void noButtonAction() {
+        System.out.println("in no button action");
         if (reason == "closing window") {
             window.setDefaultCloseOperation(JFrame.DO_NOTHING_ON_CLOSE);
         }

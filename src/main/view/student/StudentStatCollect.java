@@ -175,14 +175,16 @@ public class StudentStatCollect extends JFrame {
                 actionPriorities.addClassActionListener(b -> {
                     currentClass = "StudentStatCollect";
                     actionPriorities.setCurrentClass(currentClass);
-                    //System.out.println("mean ");
+                    System.out.println("mean 0.555");
                     if(setState.getCanContinue()) {
+                        System.out.println("mean 1111");
                         decideBackActionBasedOnClass();
                     }}, 2, "backButton",null, currentClass);}});
     }
 
     private void decideBackActionBasedOnClass() {
         //create.setTextFieldContainer(setState.getTextFieldPanel()); //11/19
+        System.out.println("mean 2222");
         if (setState.getClassListIndex() == 0 && (fileWrite.howManyPlaceholders() == 0)) { //case for back to classes
             hideWindow();
             StudentClasses studentClasses = new StudentClasses();
@@ -199,6 +201,7 @@ public class StudentStatCollect extends JFrame {
             //     window.remove(component);
             // } //11/18
         } else if (fileWrite.howManyPlaceholders() > 0) {
+            System.out.println("mean 3333");
             Decorator decorate = new Decorator();
             SetState.getInstance().setStudentStatCollect(currentInstance);
             SetState.getInstance().setAreYouSureMessageCause("backButton");
@@ -680,11 +683,9 @@ public class StudentStatCollect extends JFrame {
                 backNextButtonsPanel.setVisible(false);
             }
             classLabelPanel.setVisible(false);
-            //System.out.println("classlistindex " + setState.getClassListIndex());
             if (setState.getClassListIndex() == 0){
                 newDelContainerFlow.setVisible(false); //11/23 to prevent newdelcontainerflow from being in classes
             }
-            System.out.println("cat ");
             textBoxPanel.setVisible(false);
         }
 
