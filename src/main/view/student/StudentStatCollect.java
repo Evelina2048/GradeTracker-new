@@ -171,19 +171,17 @@ public class StudentStatCollect extends JFrame {
     private void backAction(JButton backButton) {
         backButton.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent e) {
-                System.out.println("hes 1111 "+setState.getCanContinue());
                 actionPriorities.setCurrentClass(currentClass);
                 actionPriorities.addClassActionListener(b -> {
                     currentClass = "StudentStatCollect";
                     actionPriorities.setCurrentClass(currentClass);
+                    //System.out.println("mean ");
                     if(setState.getCanContinue()) {
-                        System.out.println("hes 2222 "+setState.getCanContinue());
                         decideBackActionBasedOnClass();
                     }}, 2, "backButton",null, currentClass);}});
     }
 
     private void decideBackActionBasedOnClass() {
-        System.out.println("hes 3333 "+setState.getCanContinue()+ " placeholders "+fileWrite.howManyPlaceholders());
         //create.setTextFieldContainer(setState.getTextFieldPanel()); //11/19
         if (setState.getClassListIndex() == 0 && (fileWrite.howManyPlaceholders() == 0)) { //case for back to classes
             hideWindow();
@@ -192,7 +190,6 @@ public class StudentStatCollect extends JFrame {
             studentClasses.studentClassesLaunch();
         }
         else if ((setState.getClassListIndex() > 0) && (fileWrite.howManyPlaceholders() == 0)) {
-            System.out.println("hes A "+setState.getCanContinue()+ " placeholders "+fileWrite.howManyPlaceholders());
             goToPreviousClasses();
             JFrame window = Set.getInstance().getWindow();
             Component[] windowComponents = window.getContentPane().getComponents();
@@ -202,20 +199,16 @@ public class StudentStatCollect extends JFrame {
             //     window.remove(component);
             // } //11/18
         } else if (fileWrite.howManyPlaceholders() > 0) {
-            System.out.println("hes 4444 "+setState.getCanContinue());
             Decorator decorate = new Decorator();
             SetState.getInstance().setStudentStatCollect(currentInstance);
             SetState.getInstance().setAreYouSureMessageCause("backButton");
             decorate.areYouSureMessage(null, "studentStatsEmpty", "Remove placeholder(s) to continue?", 230, 90);
             //setState.setCanContinue(false); //11/19
-            System.out.println("hes 5555 "+setState.getCanContinue());
     }
     }
 
     public void backAction2() { //necessary because if the user tries to go back with placeholders and clicks "yes" option, will get stuck in an infinite loop when back action recalled.
-        System.out.println("hes 6666 "+setState.getCanContinue());
         if(setState.getCanContinue()) {
-            System.out.println("hes 7777 "+setState.getCanContinue());
             create.setTextFieldContainer(setState.getTextFieldPanel());
             if (setState.getClassListIndex() == 0) { //case for back to classes
                 hideWindow();
@@ -223,7 +216,6 @@ public class StudentStatCollect extends JFrame {
                 studentClasses.studentClassesLaunch();
             }
             else if (setState.getClassListIndex() > 0) {
-                System.out.println("hes 8888 "+setState.getCanContinue());
                 goToPreviousClasses();
                 JFrame window = Set.getInstance().getWindow();
                 Component[] windowComponents = window.getContentPane().getComponents();
@@ -243,7 +235,6 @@ public class StudentStatCollect extends JFrame {
             }
 
     private void goToPreviousClasses() {
-        System.out.println("hes B "+setState.getCanContinue());
         saveButtonAction("backButton");
         setState.decrementClassListIndex();
         setList.getClassLabelPanel().removeAll();
@@ -300,7 +291,6 @@ public class StudentStatCollect extends JFrame {
     }
 
     private void saveButtonAction(String actionCause) {
-        System.out.println("hes C "+setState.getCanContinue()+ " placeholders "+fileWrite.howManyPlaceholders());
         SETTEST.getInstance().TESTSETCURRENTINSTANCE(this);
         set.setFilePath(setUserInformation.getPathToClassInformationFileWithIndex());
         create.setTextFieldContainer(setState.getTextFieldPanel());
@@ -690,6 +680,11 @@ public class StudentStatCollect extends JFrame {
                 backNextButtonsPanel.setVisible(false);
             }
             classLabelPanel.setVisible(false);
+            //System.out.println("classlistindex " + setState.getClassListIndex());
+            if (setState.getClassListIndex() == 0){
+                newDelContainerFlow.setVisible(false); //11/23 to prevent newdelcontainerflow from being in classes
+            }
+            System.out.println("cat ");
             textBoxPanel.setVisible(false);
         }
 
