@@ -76,11 +76,10 @@ public class CompositeActionListenerWithPriorities implements ActionListener {
       System.out.println("its being run 1");
       actionPerformed(new ActionEvent(this, ActionEvent.ACTION_PERFORMED, "PerformAllActions"));
     }
-    System.out.println("should be here: currentclass "+currentClass+ " listenersource "+listenerSource+" keyCause "+ keyCause);
+
     if (currentClass == listenerSource && !keyCause.equals("click")) {
       System.out.println("mean 14 14 14 14");
-      isProcessing = false; //delete later
-      //listeners.remove(0); //delete later
+      //isProcessing = false; //11/25
       System.out.println("its being run 2");
       //added 11/24 actionPerformed(new ActionEvent(this, ActionEvent.ACTION_PERFORMED, "PerformAllActions"));
       CompositeActionListenerWithPriorities.this.actionPerformed(new ActionEvent(CompositeActionListenerWithPriorities.this, ActionEvent.ACTION_PERFORMED, "PerformThisActions"));

@@ -508,26 +508,26 @@ public class StudentStatCollect extends JFrame {
     private void ifCreditsIsJPanel() {
         JTextField creditsTextField = goIntoPanel.goIntoPanelReturnTextbox((JPanel) credits, 0);
         String text = creditsTextField.getText();
-        Boolean matcherBoolean = checkCreditsFormat(text);
+        // Boolean matcherBoolean = checkCreditsFormat(text); 11/25
 
-        Boolean gradesFormatOkay = checkGradesFormat();
+        // Boolean gradesFormatOkay = checkGradesFormat(); 11/25
 
-        Boolean percentageFormatOkay = checkPercentageOfGradesFormat();
+        // Boolean percentageFormatOkay = checkPercentageOfGradesFormat(); 11/25
 
         Boolean creditsFieldChanged = (setState.getEmptiedState(creditsTextField) != false);
 
-        if ((setState.getClassListIndex()+1 < setList.getFinalClassList().size())&&((matcherBoolean == true)|| !creditsFieldChanged) && (gradesFormatOkay) && (percentageFormatOkay)) {
+        if ((setState.getClassListIndex()+1 < setList.getFinalClassList().size())) {
             setState.incrementClassListIndex();
             allPassedGoToStudentStats();
         }
 
-        else if (((matcherBoolean == true)|| !creditsFieldChanged) && (gradesFormatOkay) && (percentageFormatOkay)) {
+        else if ((!creditsFieldChanged)) {
             goToPrintStudentGrades();
         }
 
-        else if (((matcherBoolean == false) && creditsFieldChanged) || (gradesFormatOkay == false) || (percentageFormatOkay == false)) {
-            makeFormatReminderDialog();
-        }
+        // else if (((matcherBoolean == false) && creditsFieldChanged) || (gradesFormatOkay == false) || (percentageFormatOkay == false)) { 11/25
+        //     makeFormatReminderDialog(); 11/25
+        // } 11/25
 
         else {
             System.out.println("matcher credit boolean, something wrong");
