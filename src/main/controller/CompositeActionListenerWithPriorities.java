@@ -27,24 +27,29 @@ public class CompositeActionListenerWithPriorities implements ActionListener {
 
   @Override
   public void actionPerformed(ActionEvent e) {
-  if (isProcessing) {
-    return; // Prevent re-entry
-}
-isProcessing = true;
-
-try {
-    TreeSet<Integer> priorities = new TreeSet<>(listeners.keySet()); // Create a copy of the key set
-    for (int priority : priorities.descendingSet()) {
-        ArrayList<ActionListener> listenerList = new ArrayList<>(listeners.get(priority)); // Make a copy of the list
-        for (ActionListener listener : listenerList) {
-            listener.actionPerformed(e); // Execute the action
-        }
+    System.out.println("mean a");
+    if (isProcessing) {
+      System.out.println("mean b");
+      return; // Prevent re-entry
     }
-} finally {
-    System.out.println("about to reset.");
-    reset(); // Reset the processing state
-    isProcessing = false;
-}
+    isProcessing = true;
+    System.out.println("mean b.5");
+    try {
+      System.out.println("mean c");
+        TreeSet<Integer> priorities = new TreeSet<>(listeners.keySet()); // Create a copy of the key set
+        for (int priority : priorities.descendingSet()) {
+            System.out.println("mean d");
+            ArrayList<ActionListener> listenerList = new ArrayList<>(listeners.get(priority)); // Make a copy of the list
+            for (ActionListener listener : listenerList) {
+              System.out.println("mean e");
+              listener.actionPerformed(e); // Execute the action
+            }
+        }
+    } finally {
+        System.out.println("about to reset.");
+        reset(); // Reset the processing state
+        isProcessing = false;
+    }
   }
 
   public boolean deleteActionListener(ActionListener a){
@@ -60,6 +65,8 @@ try {
   }
 
   public void addClassActionListener(ActionListener a, int priority, String keyCause, JRadioButton button, String listenerSource){
+    System.out.println("mean 13 13 13 13.2");
+
     if(!listeners.containsKey(priority)){
       listeners.put(priority,new ArrayList<ActionListener>());
     }
@@ -71,9 +78,13 @@ try {
     }
     System.out.println("should be here: currentclass "+currentClass+ " listenersource "+listenerSource+" keyCause "+ keyCause);
     if (currentClass == listenerSource && !keyCause.equals("click")) {
+      System.out.println("mean 14 14 14 14");
+      isProcessing = false; //delete later
+      //listeners.remove(0); //delete later
       System.out.println("its being run 2");
+      //added 11/24 actionPerformed(new ActionEvent(this, ActionEvent.ACTION_PERFORMED, "PerformAllActions"));
       CompositeActionListenerWithPriorities.this.actionPerformed(new ActionEvent(CompositeActionListenerWithPriorities.this, ActionEvent.ACTION_PERFORMED, "PerformThisActions"));
-      CompositeActionListenerWithPriorities.this.actionPerformed(new ActionEvent(CompositeActionListenerWithPriorities.this, ActionEvent.ACTION_PERFORMED, "PerformAllActions"));
+      //11/24 CompositeActionListenerWithPriorities.this.actionPerformed(new ActionEvent(CompositeActionListenerWithPriorities.this, ActionEvent.ACTION_PERFORMED, "PerformAllActions"));
     }
 
     else if (keyCause == "EnterAction" || keyCause == "nextButton") {
@@ -121,6 +132,7 @@ try {
       currentClass = thisClass;
     }
     System.out.println("setclassto "+currentClass);
+    System.out.println("mean f");
   }
 
   public String getCurrentClass() {
