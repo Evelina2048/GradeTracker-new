@@ -41,8 +41,6 @@ public class CreateButton {
     }
 
     public JButton saveButtonCreate() {
-        System.out.println("savebutton is null? "+(saveButton==null));
-
         saveButton = new JButton("Save "+ CompositeActionListenerWithPriorities.getInstance().getCurrentClass());
         Set.getInstance().setCurrentSaveButton(saveButton); //11/6
 

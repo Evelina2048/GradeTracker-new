@@ -88,7 +88,7 @@ public class PrintStudentGrades extends JFrame {
     public void printStudentGradesLaunch() {
         actionPriorities.setCurrentClass("PrintStudentGrades");
         studentStatCollectLaunch();
-        JLabel instructionsWords = new JLabel("Grades");
+        JLabel instructionsWords = new JLabel("Grades (none)");
         JPanel instructionsPanel = new JPanel();
         instructionsPanel = decorate.InstructionsPanelDecorate(instructionsPanel, instructionsWords );
         window.add(instructionsPanel);

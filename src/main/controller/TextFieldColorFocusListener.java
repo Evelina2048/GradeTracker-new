@@ -114,9 +114,9 @@ public class TextFieldColorFocusListener {
                     textField.setCaretPosition(0);
                     window.requestFocusInWindow();
                 }
-                else {
-                    System.out.println("something went wrong");
-                }
+                // else {
+                //     System.out.println("something went wrong");
+                // }//11/25
             }
         });
     }
