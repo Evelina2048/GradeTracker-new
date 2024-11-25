@@ -307,7 +307,7 @@ public class StudentStatCollect extends JFrame {
                             window.add(newDelContainerFlow, BorderLayout.EAST);
 
                             // ♡ //to next heart is 11/25
-                            typeNumber++;
+                            //typeNumber++;
 
                             // boxManageCreate("Grade Type "+typeNumber, "JTextField",false);
                             // boxManageCreate("Percentage of Grade", "JTextField",false);
@@ -393,6 +393,41 @@ public class StudentStatCollect extends JFrame {
 
         //determine gradetypenumber starting amount
         typeNumber = (textBoxPanel.getComponentCount()-2)/3;
+
+        // ♡ //to next heart is 11/25
+        //typeNumber++;
+
+        // boxManageCreate("Grade Type "+typeNumber, "JTextField",false);
+        // boxManageCreate("Percentage of Grade", "JTextField",false);
+        // boxManageCreate("Grades(format:# # #)", "JTextField",false);
+        classLabelPanel.setVisible(true); //11/21
+        textBoxPanel.setVisible(true); //11/21
+
+        if (setState.getClassListIndex() < 2) {
+            window.add(classLabelPanel, BorderLayout.CENTER); //commented 11/17 because it would cause a bug with the third class new type
+        }
+        create.windowFix();
+
+        /////////////////////////////////////////////////
+        // if (setState.getClassListIndex() > 0) {
+        //     setList.removeStudentStatCollectReadClassLabelPanel(); //causes bugs if used for first class
+        // }
+
+        // setState.setTextFieldPanel(textBoxPanel);
+
+        Component[] windowComponents4 = window.getContentPane().getComponents();
+        int i = 0;
+        for (Component windowComp : windowComponents4) {
+            if (windowComp.getName().equals("classlabelpanelinreadclass")) {
+                window.remove(windowComp);
+            }
+            System.out.println("compcount after " + i + " classname "+ windowComp.getClass().getName() + " regname "+windowComp.getName() + " isvisible "+windowComp.isVisible());
+            i++;
+        }
+        //need to keep classlabelinreadclass
+        //setList.removeClassFromClassList();
+        //window.remove(classLabelPanel);
+        // ♡
     }
 
     private void saveAction(JButton saveButton) {
