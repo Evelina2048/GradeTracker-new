@@ -130,7 +130,7 @@ public class CompositeActionListenerWithPriorities implements ActionListener {
     if (currentClass == null) {
       currentClass = thisClass;
     }
-    System.out.println("setclassto "+currentClass);
+    System.out.println(" "+currentClass);
     System.out.println("mean f");
   }
 

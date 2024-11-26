@@ -151,7 +151,7 @@ public class Decorator {
         else if (reason == "studentStatsEmpty") {
             System.out.println("mean 9999");
             CompositeActionListenerWithPriorities.getInstance().reset(); //11/25
-            
+
             reasonIsStudentStatsEmptyYes();
         }
 
@@ -231,7 +231,6 @@ public class Decorator {
             //make sure you can go back even with placeholders:
             setState.setCanContinue(true);
             studentStat.backAction2();
-            //studentStat.deci
         }
 
         System.out.println("dialog visi "+dialog.isVisible());
@@ -293,6 +292,7 @@ public class Decorator {
             textField.removeFocusListener(setListeners.getDialogFocusListener());
         }
         setListeners.setNoFocusListener(noFocusListener);
+        window.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE); //11/26
     }
 
     public void setCaretPositionToZero(JTextField importedTextField) {

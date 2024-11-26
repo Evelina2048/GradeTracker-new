@@ -353,14 +353,7 @@ public class StudentStatCollect extends JFrame {
 
     public void addLoadedBoxes() {
         System.out.println("mean 18 18 18 18");
-        //
-        Component[] windowComponents3 = window.getContentPane().getComponents();
-        int j = 0;
-        for (Component windowComp : windowComponents3) {
-            System.out.println("compcount " + j + " classname "+ windowComp.getClass().getName() + " regname "+windowComp.getName() + " isvisible "+windowComp.isVisible());
-            j++;
-        }
-        //
+
         String filePath = setUserInformation.getPathToClassInformationFileWithIndex();
 
         JPanel loadedBoxesPanel = fileHandler.loadTextboxes(filePath);

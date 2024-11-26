@@ -201,7 +201,7 @@ public class NewUser extends JFrame {
     }
 
     private void doNextButtonProcedure(){
-        System.out.println("in the do next button procedure in new user");
+        System.out.println(" in new user");
         if (newUserButton.isSelected() || existingButton.isSelected()){
             decorate.hideWindow(instructionsPanel, choicesPanel, backNextButtonsPanel);
             decorate.removeForNewUserWindow(instructionsPanel, choicesPanel, backNextButtonsPanel);
@@ -276,7 +276,7 @@ public class NewUser extends JFrame {
     public class EnterAction extends AbstractAction  {
         @Override
         public void actionPerformed(ActionEvent e) {
-            System.out.println("enter from new user");
+            System.out.println("r");
             actionPriorities.setCurrentClass(currentClass);
             nextButtonActionListenerWithPriorities("EnterAction");
 
