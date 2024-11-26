@@ -27,21 +27,21 @@ public class CompositeActionListenerWithPriorities implements ActionListener {
 
   @Override
   public void actionPerformed(ActionEvent e) {
-    System.out.println("mean a");
+    System.out.println("a");
     if (isProcessing) {
-      System.out.println("mean b");
+      System.out.println("b");
       return; // Prevent re-entry
     }
     isProcessing = true;
-    System.out.println("mean b.5");
+    System.out.println("b.5");
     try {
-      System.out.println("mean c");
+      System.out.println("c");
         TreeSet<Integer> priorities = new TreeSet<>(listeners.keySet()); // Create a copy of the key set
         for (int priority : priorities.descendingSet()) {
-            System.out.println("mean d");
+            System.out.println("d");
             ArrayList<ActionListener> listenerList = new ArrayList<>(listeners.get(priority)); // Make a copy of the list
             for (ActionListener listener : listenerList) {
-              System.out.println("mean e");
+              System.out.println("e");
               listener.actionPerformed(e); // Execute the action
             }
         }
@@ -65,7 +65,7 @@ public class CompositeActionListenerWithPriorities implements ActionListener {
   }
 
   public void addClassActionListener(ActionListener a, int priority, String keyCause, JRadioButton button, String listenerSource){
-    System.out.println("mean 13 13 13 13.2");
+    System.out.println("13 13 13 13.2");
 
     if(!listeners.containsKey(priority)){
       listeners.put(priority,new ArrayList<ActionListener>());
@@ -78,7 +78,7 @@ public class CompositeActionListenerWithPriorities implements ActionListener {
     }
 
     if (currentClass == listenerSource && !keyCause.equals("click")) {
-      System.out.println("mean 14 14 14 14");
+      System.out.println("14 14 14 14");
       //isProcessing = false; //11/25
       System.out.println("its being run 2");
       //added 11/24 actionPerformed(new ActionEvent(this, ActionEvent.ACTION_PERFORMED, "PerformAllActions"));
@@ -131,7 +131,7 @@ public class CompositeActionListenerWithPriorities implements ActionListener {
       currentClass = thisClass;
     }
     System.out.println(" "+currentClass);
-    System.out.println("mean f");
+    System.out.println("f");
   }
 
   public String getCurrentClass() {

@@ -95,7 +95,7 @@ public class Decorator {
     }
 
     public String areYouSureMessage(JTextField importedTextField, String myReason, String text, int width, int height) {
-        System.out.println("mean 6666");
+        System.out.println("6666");
         reason = myReason;
         textField = importedTextField;
         dialog = new JDialog(window, true);
@@ -135,7 +135,7 @@ public class Decorator {
     private void yesButtonActionListener(JButton yesButton) {
         yesButton.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent e) {
-                System.out.println("mean 7777");
+                System.out.println("7777");
                 yesButtonAction();
             }
         });
@@ -143,15 +143,14 @@ public class Decorator {
     }
 
     private void yesButtonAction() {
-        System.out.println("mean 8888");
+        System.out.println("8888");
         if (reason == "deleting") {
             reasonIsDeletingActionYes();
         }
 
         else if (reason == "studentStatsEmpty") {
-            System.out.println("mean 9999");
+            System.out.println("9999");
             CompositeActionListenerWithPriorities.getInstance().reset(); //11/25
-
             reasonIsStudentStatsEmptyYes();
         }
 
@@ -219,7 +218,7 @@ public class Decorator {
     private void reasonIsStudentStatsEmptyYes() {
         //go to next class or print class
         String actionCause = setState.getAreYouSureMessageCause();
-        System.out.println("mean 10 10 10 10");
+        System.out.println("10 10 10 10");
 
         StudentStatCollect studentStat = setState.getStudentStatCollect();//new StudentStatCollect();
         if (actionCause.equals("nextButton")) {
@@ -227,7 +226,7 @@ public class Decorator {
         }
 
         else if (actionCause.equals("backButton")) {
-            System.out.println("mean 11 11 11 11");
+            System.out.println("11 11 11 11");
             //make sure you can go back even with placeholders:
             setState.setCanContinue(true);
             studentStat.backAction2();
@@ -237,6 +236,7 @@ public class Decorator {
 
         setState.setCanContinue(true); //11/19
         dialog.setVisible(false);
+        window.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE); //11/26
         dialog.dispose();
     }
 

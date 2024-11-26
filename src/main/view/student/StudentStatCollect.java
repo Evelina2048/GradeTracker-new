@@ -177,14 +177,14 @@ public class StudentStatCollect extends JFrame {
                     actionPriorities.setCurrentClass(currentClass);
                     System.out.println("&&&&&&&&&&entering backActionOne&&&&&&&&&&&&&&& 1111");
                     if(setState.getCanContinue()) {
-                        System.out.println("mean 2222");
+                        System.out.println("2222");
                         decideBackActionBasedOnClass();
                     }}, 2, "backButton",null, currentClass);}});
     }
 
     private void decideBackActionBasedOnClass() {
         //create.setTextFieldContainer(setState.getTextFieldPanel()); //11/19
-        System.out.println("mean 3333 ");
+        System.out.println("3333 ");
 
         if (setState.getClassListIndex() == 0 && (fileWrite.howManyPlaceholders() == 0)) { //case for back to classes
             hideWindow();
@@ -202,11 +202,11 @@ public class StudentStatCollect extends JFrame {
             //     window.remove(component);
             // } //11/18
         } else if (fileWrite.howManyPlaceholders() > 0) {
-            System.out.println("mean 4444");
+            System.out.println("4444");
             Decorator decorate = new Decorator();
             SetState.getInstance().setStudentStatCollect(currentInstance);
             SetState.getInstance().setAreYouSureMessageCause("backButton");
-            System.out.println("mean 5555");
+            System.out.println("5555");
 
             String yesOrNoDialog = decorate.areYouSureMessage(null, "studentStatsEmpty", "Remove placeholder(s) to continue?", 230, 90);
             // if (yesOrNoDialog.equals("Yes")) {
@@ -265,11 +265,11 @@ public class StudentStatCollect extends JFrame {
         //         }
         //     }}
         //         setState.setCanContinue(false);
-        System.out.println("mean 12 12 12 12");
+        System.out.println("12 12 12 12");
 
                 //actionPriorities.setCurrentClass(currentClass);
                 //actionPriorities.addClassActionListener(b -> {
-                    System.out.println("mean 15 15 15 15");
+                    System.out.println("15 15 15 15");
                     currentClass = "StudentStatCollect";
                     actionPriorities.setCurrentClass(currentClass);
                     if(setState.getCanContinue()) {
@@ -282,7 +282,7 @@ public class StudentStatCollect extends JFrame {
                             studentClasses.studentClassesLaunch();
                         }
                         else if ((setState.getClassListIndex() > 0)) {
-                            System.out.println("mean 16 16 16 16");
+                            System.out.println("16 16 16 16");
                             //goToPreviousClasses();
                             setState.decrementClassListIndex();
                             setList.getClassLabelPanel().removeAll();
@@ -290,7 +290,7 @@ public class StudentStatCollect extends JFrame {
                             textBoxPanel.removeAll();
                             SETTEST.getInstance().SETTESTTEXTBOXPANEL(textBoxPanel);
                             SETTEST.getInstance().TESTSETCURRENTINSTANCE(this);
-                            System.out.println("mean 17 17 17 17");
+                            System.out.println("17 17 17 17");
                             addLoadedBoxes();
                             classLabelPanel.setVisible(true); //11/25
                             textBoxPanel.setVisible(true); //11/25
@@ -352,7 +352,7 @@ public class StudentStatCollect extends JFrame {
     }
 
     public void addLoadedBoxes() {
-        System.out.println("mean 18 18 18 18");
+        System.out.println("18 18 18 18");
 
         String filePath = setUserInformation.getPathToClassInformationFileWithIndex();
 

@@ -258,7 +258,6 @@ public class StudentClasses extends JFrame {
     private void saveButtonAction() {
         writeType();
         saveButton.setEnabled(false);
-        System.out.println("disabled2");
     }
 
     private JPanel makeNextButtonPanel() {
