@@ -138,22 +138,16 @@ public class StudentClasses extends JFrame {
                 }
             }
         });
-        //p
-        
+
         window.setName("window");
         create = new Creator();
         decorate = new Decorator();
         createButton = new CreateButton();
-        System.out.println("in student classes");
 
         EnterAction enterAction = new EnterAction();
         window.getRootPane().getInputMap(JComponent.WHEN_IN_FOCUSED_WINDOW).put(KeyStroke.getKeyStroke(KeyEvent.VK_ENTER, 0), "enterAction");
         window.getRootPane().getActionMap().put("enterAction", enterAction);
 
-
-        //
-        //
-        
         window.setTitle("StudentClasses");
 
         layeredPane.setBackground(Color.pink);
@@ -162,7 +156,7 @@ public class StudentClasses extends JFrame {
             layeredPane.setDoubleBuffered(true);
             window.add(layeredPane);
             create.windowFix();
-        
+
         instructionsWordsAndPanel("Edit Classes Mode "+"(for " +setUserInformation.getStudentOrTeacher()+"s)");
         loadIfNeeded();
         westPanelCreate();
@@ -250,7 +244,6 @@ public class StudentClasses extends JFrame {
         saveButton = createButton.saveButtonCreate();
 
         saveButton.setEnabled(false);
-        System.out.println("disabled1");
         JPanel saveButtonPanel = new JPanel();
         saveButtonPanel.add(saveButton);
         saveButton.addActionListener(new ActionListener() {
@@ -364,7 +357,6 @@ public class StudentClasses extends JFrame {
         System.out.println("set.getcurrentpanellist "+setList.getCurrentPanelList());
         set.setFilePath(setUserInformation.getPathToClassTextFile());
         fileWrite.writeTextToFile();
-        System.out.println("testing? "+setList.getCurrentPanelList()+ "..."+ fileWrite.getClassList());
         setList.setFinalClassList(fileWrite.getClassList());
     }
 
