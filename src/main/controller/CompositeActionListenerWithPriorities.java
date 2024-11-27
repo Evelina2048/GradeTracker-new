@@ -65,7 +65,6 @@ public class CompositeActionListenerWithPriorities implements ActionListener {
   }
 
   public void addClassActionListener(ActionListener a, int priority, String keyCause, JRadioButton button, String listenerSource){
-    System.out.println("13 13 13 13.2");
 
     if(!listeners.containsKey(priority)){
       listeners.put(priority,new ArrayList<ActionListener>());
@@ -78,7 +77,6 @@ public class CompositeActionListenerWithPriorities implements ActionListener {
     }
 
     if (currentClass == listenerSource && !keyCause.equals("click")) {
-      System.out.println("14 14 14 14");
       //isProcessing = false; //11/25
       System.out.println("its being run 2");
       //added 11/24 actionPerformed(new ActionEvent(this, ActionEvent.ACTION_PERFORMED, "PerformAllActions"));

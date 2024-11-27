@@ -175,16 +175,12 @@ public class StudentStatCollect extends JFrame {
                 actionPriorities.addClassActionListener(b -> {
                     currentClass = "StudentStatCollect";
                     actionPriorities.setCurrentClass(currentClass);
-                    System.out.println("&&&&&&&&&&entering backActionOne&&&&&&&&&&&&&&& 1111");
                     if(setState.getCanContinue()) {
-                        System.out.println("2222");
                         decideBackActionBasedOnClass();
                     }}, 2, "backButton",null, currentClass);}});
     }
 
     private void decideBackActionBasedOnClass() {
-        //create.setTextFieldContainer(setState.getTextFieldPanel()); //11/19
-        System.out.println("3333 ");
 
         if (setState.getClassListIndex() == 0 && (fileWrite.howManyPlaceholders() == 0)) { //case for back to classes
             hideWindow();
@@ -202,11 +198,9 @@ public class StudentStatCollect extends JFrame {
             //     window.remove(component);
             // } //11/18
         } else if (fileWrite.howManyPlaceholders() > 0) {
-            System.out.println("4444");
             Decorator decorate = new Decorator();
             SetState.getInstance().setStudentStatCollect(currentInstance);
             SetState.getInstance().setAreYouSureMessageCause("backButton");
-            System.out.println("5555");
 
             String yesOrNoDialog = decorate.areYouSureMessage(null, "studentStatsEmpty", "Remove placeholder(s) to continue?", 230, 90);
             // if (yesOrNoDialog.equals("Yes")) {
@@ -265,11 +259,9 @@ public class StudentStatCollect extends JFrame {
         //         }
         //     }}
         //         setState.setCanContinue(false);
-        System.out.println("12 12 12 12");
 
                 //actionPriorities.setCurrentClass(currentClass);
                 //actionPriorities.addClassActionListener(b -> {
-                    System.out.println("15 15 15 15");
                     currentClass = "StudentStatCollect";
                     actionPriorities.setCurrentClass(currentClass);
                     if(setState.getCanContinue()) {
@@ -282,7 +274,6 @@ public class StudentStatCollect extends JFrame {
                             studentClasses.studentClassesLaunch();
                         }
                         else if ((setState.getClassListIndex() > 0)) {
-                            System.out.println("16 16 16 16");
                             //goToPreviousClasses();
                             setState.decrementClassListIndex();
                             setList.getClassLabelPanel().removeAll();
@@ -290,7 +281,6 @@ public class StudentStatCollect extends JFrame {
                             textBoxPanel.removeAll();
                             SETTEST.getInstance().SETTESTTEXTBOXPANEL(textBoxPanel);
                             SETTEST.getInstance().TESTSETCURRENTINSTANCE(this);
-                            System.out.println("17 17 17 17");
                             addLoadedBoxes();
                             classLabelPanel.setVisible(true); //11/25
                             textBoxPanel.setVisible(true); //11/25
@@ -352,7 +342,6 @@ public class StudentStatCollect extends JFrame {
     }
 
     public void addLoadedBoxes() {
-        System.out.println("18 18 18 18");
 
         String filePath = setUserInformation.getPathToClassInformationFileWithIndex();
 
@@ -479,7 +468,9 @@ public class StudentStatCollect extends JFrame {
     }
 
     public void doNextButtonProcedure() {
+        System.out.println("compared 1111");
         if(setState.getCanContinue()) {
+            System.out.println("compared 2222");
             saveButtonAction("nextButton");
             if (typeNumber!=0) {
                 setList.addGradeTypeList(typeNumber);
@@ -493,12 +484,15 @@ public class StudentStatCollect extends JFrame {
         //is greater or equal to 5
         credits = (JPanel) credits.getComponent(1);
 
+        System.out.println("compared 3333");
         if (credits instanceof JPanel) {
+        System.out.println("compared 4444");
             ifCreditsIsJPanel();
         }
     }
 
     private void ifCreditsIsJPanel() {
+        System.out.println("compared 5555");
         JTextField creditsTextField = goIntoPanel.goIntoPanelReturnTextbox((JPanel) credits, 0);
         String text = creditsTextField.getText();
         // Boolean matcherBoolean = checkCreditsFormat(text); 11/25
@@ -509,12 +503,15 @@ public class StudentStatCollect extends JFrame {
 
         Boolean creditsFieldChanged = (setState.getEmptiedState(creditsTextField) != false);
 
+        System.out.println("compared 6666 (setState.getClassListIndex()+1 < setList.getFinalClassList().size())"+(setState.getClassListIndex()+1 < setList.getFinalClassList().size())+" creditsfieldchanged "+ !creditsFieldChanged);
         if ((setState.getClassListIndex()+1 < setList.getFinalClassList().size())) {
             setState.incrementClassListIndex();
             allPassedGoToStudentStats();
         }
 
-        else if ((!creditsFieldChanged)) {
+        //else if ((!creditsFieldChanged)) { //commented 11/27. Im unsure what I was thinking
+        else if((setState.getClassListIndex()+1 >= setList.getFinalClassList().size())) {
+            System.out.println("compared 7777");
             goToPrintStudentGrades();
         }
 
@@ -579,6 +576,7 @@ public class StudentStatCollect extends JFrame {
     }
 
     public void goToPrintStudentGrades() {
+        System.out.println("compared 8888");
         window.remove(newDelContainerFlow);
 
         hideWindow();
