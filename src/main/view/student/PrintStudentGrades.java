@@ -180,7 +180,8 @@ public class PrintStudentGrades extends JFrame {
             //new JLabel("heyo "+(String.valueOf((float) percentageOfGradeList.get(i)/100*gradeBoxTotal.get(i))))
             float currPercentageOfGrade = percentageOfGradeList.get(i);
             System.out.println("7:46 "+amountOfFinalGrade);
-            JLabel contributionLabel = new JLabel("heyo "+(String.valueOf(currPercentageOfGrade * ((float) gradeBoxTotal.get(i)/100))));
+            System.out.println("7:47 currPercentageOfGrade "+currPercentageOfGrade+" gradeboxtotal "+gradeBoxTotal+" i "+i+" gradeBoxTotal.get(i) "+ gradeBoxTotal.get(whichCurrClassIndex)+" class "+setList.getFinalClassList().get(whichCurrClassIndex));
+            JLabel contributionLabel = new JLabel("heyo "+(String.valueOf(currPercentageOfGrade * ((float) gradeBoxTotal.get(whichCurrClassIndex)/100))));
             contributionLabel.setBorder(blackline);
             allContainer.add(contributionLabel);
         }
@@ -197,8 +198,9 @@ public class PrintStudentGrades extends JFrame {
         int averageXpercentageOfGrade;
         for (int boxSetIndex = 0; boxSetIndex < listOfAverages.size(); boxSetIndex++) {
             averageXpercentageOfGrade = listOfAverages.get(boxSetIndex)*percentageOfGradeList.get(boxSetIndex);
+            System.out.println("7:44 averageXpercentageOfGrade "+averageXpercentageOfGrade);
             amountOfFinalGrade.add(((float) averageXpercentageOfGrade)/100);
-            System.out.println("7:58PM list of averages "+listOfAverages);
+            System.out.println("7:45 amount of final grade "+amountOfFinalGrade);
         }
     }
 

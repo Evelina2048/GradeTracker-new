@@ -27,21 +27,15 @@ public class CompositeActionListenerWithPriorities implements ActionListener {
 
   @Override
   public void actionPerformed(ActionEvent e) {
-    System.out.println("a");
     if (isProcessing) {
-      System.out.println("b");
       return; // Prevent re-entry
     }
     isProcessing = true;
-    System.out.println("b.5");
     try {
-      System.out.println("c");
         TreeSet<Integer> priorities = new TreeSet<>(listeners.keySet()); // Create a copy of the key set
         for (int priority : priorities.descendingSet()) {
-            System.out.println("d");
             ArrayList<ActionListener> listenerList = new ArrayList<>(listeners.get(priority)); // Make a copy of the list
             for (ActionListener listener : listenerList) {
-              System.out.println("e");
               listener.actionPerformed(e); // Execute the action
             }
         }

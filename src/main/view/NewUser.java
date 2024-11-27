@@ -276,7 +276,6 @@ public class NewUser extends JFrame {
     public class EnterAction extends AbstractAction  {
         @Override
         public void actionPerformed(ActionEvent e) {
-            System.out.println("r");
             actionPriorities.setCurrentClass(currentClass);
             nextButtonActionListenerWithPriorities("EnterAction");
 

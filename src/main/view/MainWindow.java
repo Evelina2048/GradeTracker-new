@@ -142,9 +142,7 @@ private void truncateLabelText(String prefix, String suffix, int maxWidth) {
     System.out.println("currentUsernamePermittedAmount "+currentUsernamePermittedAmount);
 
     while (fontMetrics.stringWidth(username.substring(0, endIndex+1)) <= availableWidth) {    
-        System.out.println("it works "+ fontMetrics.stringWidth(username.substring(0, endIndex+1))+" "+availableWidth);
         endIndex++;
-        System.out.println("it works2: "+currentUsernamePermittedAmount+" "+setUserInformation.getUsername().substring(0, endIndex));
     }
     if(currentUsernamePermittedAmount.charAt(currentUsernamePermittedAmount.length()-1)==' ' && currentUsernamePermittedAmount.charAt(currentUsernamePermittedAmount.length()-2)!=' ') {
         instructionsWords =  new JLabel("Hello "+ setUserInformation.getUsername().substring(0, endIndex-1) + " ...! Are you a student or a teacher?");
