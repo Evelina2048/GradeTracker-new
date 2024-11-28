@@ -400,7 +400,7 @@ public class StudentStatCollect extends JFrame {
         Component[] windowComponents4 = window.getContentPane().getComponents();
         int i = 0;
         for (Component windowComp : windowComponents4) {
-            if (windowComp.getName().equals("classlabelpanelinreadclass")) {
+            if (windowComp.getName()!=null && windowComp.getName().equals("classlabelpanelinreadclass") ) {
                 window.remove(windowComp);
             }
             System.out.println("compcount after " + i + " classname "+ windowComp.getClass().getName() + " regname "+windowComp.getName() + " isvisible "+windowComp.isVisible());
