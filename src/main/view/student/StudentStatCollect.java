@@ -73,7 +73,7 @@ public class StudentStatCollect extends JFrame {
     private FileHandling fileHandler;
     private JPanel textBoxPanel = new JPanel(new GridLayout(0,4,5,5));
 
-    private int typeNumber = 0;
+    private static int typeNumber;
     private int numOfBoxes = 0;
     private int maxBoxes = 26;
     private int totalPercentage = 0;
@@ -145,6 +145,7 @@ public class StudentStatCollect extends JFrame {
 
         // window.remove(backNextButtonsPanel);
         //window.add(backNextButtonsPanel);
+        typeNumber = 0;
     }
 
     public void buttonSetUpAction() {
@@ -358,6 +359,8 @@ public class StudentStatCollect extends JFrame {
 
         if (numOfBoxes == 0) {
             boxStarterPack();
+            System.out.println("3333 "+typeNumber);
+
         }
 
         textBoxPanel.setVisible(true);
@@ -374,7 +377,8 @@ public class StudentStatCollect extends JFrame {
         setState.setTextFieldPanel(textBoxPanel);
 
         //determine gradetypenumber starting amount
-        typeNumber = (textBoxPanel.getComponentCount()-2)/3;
+        //typeNumber = (textBoxPanel.getComponentCount()-2)/3; //uncomment plz 11/28
+        System.out.println("4444 "+typeNumber);
 
         // ♡ //to next heart is 11/25
         //typeNumber++;
@@ -472,9 +476,13 @@ public class StudentStatCollect extends JFrame {
         if(setState.getCanContinue()) {
             System.out.println("compared 2222");
             saveButtonAction("nextButton");
+            System.out.println("innextbuttonprocedure typenumberSet "+typeNumber + " class "+setList.getFinalClassList().get(setState.getClassListIndex()));
             if (typeNumber!=0) {
+                //System.out.println("class "+setList.getFinalClassList().get(setState.getClassListIndex())+ " type number " +typeNumber);
+                System.out.println("typenumberSet "+typeNumber + " class "+setList.getFinalClassList().get(setState.getClassListIndex()));
                 setList.addGradeTypeList(typeNumber);
             }
+            //typeNumber = 0; //11/28
         }
         credits = (JPanel) textBoxPanel;
 
@@ -506,6 +514,8 @@ public class StudentStatCollect extends JFrame {
         System.out.println("compared 6666 (setState.getClassListIndex()+1 < setList.getFinalClassList().size())"+(setState.getClassListIndex()+1 < setList.getFinalClassList().size())+" creditsfieldchanged "+ !creditsFieldChanged);
         if ((setState.getClassListIndex()+1 < setList.getFinalClassList().size())) {
             setState.incrementClassListIndex();
+            //typeNumber = 0; //11/28
+            System.out.println("typenumberafterreser "+typeNumber + " class "+setList.getFinalClassList().get(setState.getClassListIndex()));
             allPassedGoToStudentStats();
         }
 
@@ -569,7 +579,9 @@ public class StudentStatCollect extends JFrame {
         newDelContainerFlow.removeAll();
         studentStatCollectLaunch();
         //buttonSetUpAction(); //11/18
+        System.out.println("land 0.7777 "+typeNumber);
         visitNextStudentClass();
+        System.out.println("land 6666 "+typeNumber);
         if (setState.getClassListIndex() < 2) {
             buttonSetUpAction(); //location 11/18
         }
@@ -601,7 +613,9 @@ public class StudentStatCollect extends JFrame {
             saveButtonAction("nextButton"); //replaced line above 10/7
             if (typeNumber!=0) {
                 setList.addGradeTypeList(typeNumber);
+                System.out.println("typenumbernewset "+typeNumber + " class "+setList.getFinalClassList().get(setState.getClassListIndex()));
             }
+            //typeNumber = 0; //11/28
             credits = (JPanel) textBoxPanel;
         }
         credits = (JPanel) textBoxPanel;
@@ -642,8 +656,11 @@ public class StudentStatCollect extends JFrame {
             StudentStatCollect studentStatCollect = new StudentStatCollect();
             sETTEST.TESTSETCURRENTINSTANCE(studentStatCollect);
 
+            System.out.println("land 0.7777 "+typeNumber);
             studentStatCollect.DisplayClasses();
+            System.out.println("land 4.5555 just left display classes"+typeNumber);
             textBoxPanel = setState.getTextFieldPanel();
+            System.out.println("land 5555 end of visitNextStudentClass"+typeNumber);
         }
 
         if (setState.getClassListIndex() >= 2) {
@@ -709,7 +726,9 @@ public class StudentStatCollect extends JFrame {
 
     }
     private void newSetButtonAction() {
+
         typeNumber++;
+        //setList.
 
         boxManageCreate("Grade Type "+typeNumber, "JTextField",false);
         boxManageCreate("Percentage of Grade", "JTextField",false);
@@ -747,7 +766,7 @@ public class StudentStatCollect extends JFrame {
                     create.deleteTextBox(textBoxPanel);
                     create.deleteTextBox(textBoxPanel);
                     numOfBoxes = numOfBoxes - 3;
-                    typeNumber--;
+                    //typeNumber--; //plz uncomment 11/28
 
                     createButton.saveButtonEnable();
                 }
@@ -788,14 +807,19 @@ public class StudentStatCollect extends JFrame {
         public void DisplayClasses() {
             setUserInformation.getUsername();
             ArrayList<String> typeList = setList.getCurrentPanelList();
+            System.out.println("land 0.8888 "+typeNumber);
             readClass(typeList);
             setState.setTextFieldPanel(textBoxPanel);
+            System.out.println("land 4444 end of display classes "+typeNumber);
         }
 
         private void readClass(ArrayList<String> typeList) {
             boxManageCreate(setList.getFinalClassList().get(setState.getClassListIndex()), "JLabel", false); //necessary
             boxManageCreate("Credits (optional)", "JTextField", false);
+            System.out.println("land 0.9999 "+typeNumber);
+
             newSet();
+            System.out.println("land 2222 "+typeNumber);
             classLabelPanel.setName("classlabelpanelinreadclass");
 
             if (setList.getReadClassLabelPanel() != null) {
@@ -807,6 +831,7 @@ public class StudentStatCollect extends JFrame {
 
             window.add(classLabelPanel, BorderLayout.CENTER);
             create.windowFix();
+            System.out.println("land 3333 "+typeNumber);
         }
 
         private void hideWindow() {
@@ -842,11 +867,13 @@ public class StudentStatCollect extends JFrame {
         private void newSet() {
             //window.getContentPane().getComponents(); //
             typeNumber++;
+            System.out.println("typenumbernewset "+typeNumber + " class "+setList.getFinalClassList().get(setState.getClassListIndex()));
             boxManageCreate("Grade Type "+typeNumber, "JTextField",false);
             boxManageCreate("Percentage of Grade", "JTextField",false);
             boxManageCreate("Grades(format:# # #)", "JTextField",false);
             setState.setCanContinue(true);
             setState.setTextFieldPanel(textBoxPanel);
+            System.out.println("land 1111 "+typeNumber);
         }
 
         private void removeVariablesInWindow() {

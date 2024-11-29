@@ -164,12 +164,14 @@ public class PrintStudentGrades extends JFrame {
         contributiongrade.setHorizontalAlignment(JLabel.CENTER);
         allContainer.add(contributiongrade);
 
+        System.out.println("that -1111.5 "+" class "+setList.getFinalClassList().get(whichCurrClassIndex)+" gradeTypeNumberList "+ gradeTypeNumberList);
         for (int i = 0; i < gradeTypeNumberList.get(whichCurrClassIndex); i++) { //shouldnt be for classes, should be for gradetypes then classes
             JLabel gradeTypeNameLabel = new JLabel(gradeTypeList.get(whichCurrClassIndex+i));
             gradeTypeNameLabel.setBorder(blackline);
             allContainer.add(gradeTypeNameLabel);
 
-            JLabel listOfAveragesLabel = new JLabel(String.valueOf(listOfAverages.get(i)));
+            System.out.println("that -1111 "+" class "+setList.getFinalClassList().get(whichCurrClassIndex) + String.valueOf(listOfAverages) + " i "+i);
+            JLabel listOfAveragesLabel = new JLabel("that 0000 "+" class "+setList.getFinalClassList().get(whichCurrClassIndex) + String.valueOf(listOfAverages.get(i)));
             listOfAveragesLabel.setBorder(blackline);
             allContainer.add(listOfAveragesLabel);
 
@@ -180,8 +182,8 @@ public class PrintStudentGrades extends JFrame {
             //new JLabel("heyo "+(String.valueOf((float) percentageOfGradeList.get(i)/100*gradeBoxTotal.get(i))))
             float currPercentageOfGrade = percentageOfGradeList.get(i);
             System.out.println("7:46 "+amountOfFinalGrade);
-            System.out.println("7:47 currPercentageOfGrade "+currPercentageOfGrade+" gradeboxtotal "+gradeBoxTotal+" i "+i+" gradeBoxTotal.get(i) "+ gradeBoxTotal.get(whichCurrClassIndex)+" class "+setList.getFinalClassList().get(whichCurrClassIndex));
-            JLabel contributionLabel = new JLabel("heyo "+(String.valueOf(currPercentageOfGrade * ((float) gradeBoxTotal.get(whichCurrClassIndex)/100))));
+            // System.out.println("7:47 currPercentageOfGrade "+currPercentageOfGrade+" gradeboxtotal "+gradeBoxTotal+" i "+i+" gradeBoxTotal.get(i) "+ gradeBoxTotal.get(whichCurrClassIndex)+" class "+setList.getFinalClassList().get(whichCurrClassIndex));
+            JLabel contributionLabel = new JLabel("heyo "+(String.valueOf(currPercentageOfGrade * ((float) gradeBoxTotal.get(i)/100))));
             contributionLabel.setBorder(blackline);
             allContainer.add(contributionLabel);
         }
@@ -227,8 +229,10 @@ public class PrintStudentGrades extends JFrame {
                 gradeBoxTotal.add(thisGradeBoxTotal);
                 System.out.println("8:03PM "+thisGradeBoxTotal + "size "+gradeBoxTotal.size());
 
+                System.out.println("that -3333 "+" class "+setList.getFinalClassList().get(whichCurrClassIndex)+" gradeboxtotal "+gradeBoxTotal+ " divisor "+seperatedBySpaceListOfGrades.get(i).size());
                 average = gradeBoxTotal.get(i)/seperatedBySpaceListOfGrades.get(i).size();
-                System.out.println("average "+average);
+                //11/28 average = gradeBoxTotal.get(whichCurrClassIndex)/seperatedBySpaceListOfGrades.get(i).size();
+                System.out.println("that -2222 "+" class "+setList.getFinalClassList().get(whichCurrClassIndex)+ average);
                 listOfAverages.add(average);
             }
 
@@ -309,6 +313,7 @@ public class PrintStudentGrades extends JFrame {
     public void doNextButtonProcedure() {
         hideWindow();
         whichCurrClassIndex++; //only if there are more
+        gradeBoxTotal.clear();
         printStudentGradesLaunch();
     }
 
