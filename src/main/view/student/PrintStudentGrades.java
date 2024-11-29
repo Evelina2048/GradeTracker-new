@@ -182,8 +182,9 @@ public class PrintStudentGrades extends JFrame {
             //new JLabel("heyo "+(String.valueOf((float) percentageOfGradeList.get(i)/100*gradeBoxTotal.get(i))))
             float currPercentageOfGrade = percentageOfGradeList.get(i);
             System.out.println("7:46 "+amountOfFinalGrade);
-            // System.out.println("7:47 currPercentageOfGrade "+currPercentageOfGrade+" gradeboxtotal "+gradeBoxTotal+" i "+i+" gradeBoxTotal.get(i) "+ gradeBoxTotal.get(whichCurrClassIndex)+" class "+setList.getFinalClassList().get(whichCurrClassIndex));
-            JLabel contributionLabel = new JLabel("heyo "+(String.valueOf(currPercentageOfGrade * ((float) gradeBoxTotal.get(i)/100))));
+            System.out.println("7:47 currPercentageOfGrade "+"heyo -1111 currPercentageOfGrade "+(String.valueOf(currPercentageOfGrade)) + " gradeBoxTotal " +((gradeBoxTotal))+" i "+i + " .get(i) "+gradeBoxTotal.get(i)+" for label "+String.valueOf((float) currPercentageOfGrade * ((float) listOfAverages.get(i)/100))+ " listofavgs "+listOfAverages);
+            System.out.println("look currPercentageOfGrade "+String.valueOf(currPercentageOfGrade)+" * "+listOfAverages.get(i)+" /100");
+            JLabel contributionLabel = new JLabel("heyo "+(String.valueOf(currPercentageOfGrade * ((float) listOfAverages.get(i)/100)))); //11/29 changed from gradeBoxTotal to listOfAverages because would cause a bug when multiple in one gradebox
             contributionLabel.setBorder(blackline);
             allContainer.add(contributionLabel);
         }
