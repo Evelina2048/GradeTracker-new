@@ -43,7 +43,7 @@ public class PrintStudentGrades extends JFrame {
     private SetUserInformation setUserInformation;
     private FileHandling fileHandler = new FileHandling();
     private CreateButton createButton = new CreateButton();
-    private int whichCurrClassIndex;
+    private static int whichCurrClassIndex;
 
     private ArrayList<String> gradeTypeList = new ArrayList<>();
     private int gradeTypeIndex = 0;
@@ -298,6 +298,7 @@ public class PrintStudentGrades extends JFrame {
         if (whichCurrClassIndex > 0) { //if no previous print grades classes
             hideWindow();
             whichCurrClassIndex--; //only if there are more
+            nextButton.setEnabled(true); //added 11/29
             printStudentGradesLaunch();
             actionPriorities.setCurrentClass("PrintStudentGrades");
         }
