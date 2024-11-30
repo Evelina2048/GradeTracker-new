@@ -184,7 +184,9 @@ public class PrintStudentGrades extends JFrame {
             System.out.println("7:46 "+amountOfFinalGrade);
             System.out.println("7:47 currPercentageOfGrade "+"heyo -1111 currPercentageOfGrade "+(String.valueOf(currPercentageOfGrade)) + " gradeBoxTotal " +((gradeBoxTotal))+" i "+i + " .get(i) "+gradeBoxTotal.get(i)+" for label "+String.valueOf((float) currPercentageOfGrade * ((float) listOfAverages.get(i)/100))+ " listofavgs "+listOfAverages);
             System.out.println("look currPercentageOfGrade "+String.valueOf(currPercentageOfGrade)+" * "+listOfAverages.get(i)+" /100");
-            JLabel contributionLabel = new JLabel("heyo "+(String.valueOf(currPercentageOfGrade * ((float) listOfAverages.get(i)/100)))); //11/29 changed from gradeBoxTotal to listOfAverages because would cause a bug when multiple in one gradebox
+            System.out.println("check it1 " + (80 * ((float) 4/100)));
+            System.out.println("check it2 " + ((float)80*4/100));
+            JLabel contributionLabel = new JLabel("heyo "+(String.valueOf(((float) currPercentageOfGrade *  listOfAverages.get(i))/100))); //11/29 changed from gradeBoxTotal to listOfAverages because would cause a bug when multiple in one gradebox
             contributionLabel.setBorder(blackline);
             allContainer.add(contributionLabel);
         }
