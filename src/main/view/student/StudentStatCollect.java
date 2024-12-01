@@ -503,16 +503,28 @@ public class StudentStatCollect extends JFrame {
         System.out.println("compared 5555");
         JTextField creditsTextField = goIntoPanel.goIntoPanelReturnTextbox((JPanel) credits, 0);
         String text = creditsTextField.getText();
-        // Boolean matcherBoolean = checkCreditsFormat(text); 11/25
 
-        // Boolean gradesFormatOkay = checkGradesFormat(); 11/25
+        Boolean matcherBoolean = checkCreditsFormat(text); //11/25
 
-        // Boolean percentageFormatOkay = checkPercentageOfGradesFormat(); 11/25
+        Boolean gradesFormatOkay = checkGradesFormat(); //11/25
+
+        Boolean percentageFormatOkay = checkPercentageOfGradesFormat(); //11/25
 
         Boolean creditsFieldChanged = (setState.getEmptiedState(creditsTextField) != false);
 
+        Boolean reminderActive = false;
+
         System.out.println("compared 6666 (setState.getClassListIndex()+1 < setList.getFinalClassList().size())"+(setState.getClassListIndex()+1 < setList.getFinalClassList().size())+" creditsfieldchanged "+ !creditsFieldChanged);
-        if ((setState.getClassListIndex()+1 < setList.getFinalClassList().size())) {
+
+        //System.out.println("matcher boolean false."+matcherBoolean+" creditsFieldChanged true."+creditsFieldChanged+" gradesFormatOkay."+gradesFormatOkay+" percentageFormatOkay."+percentageFormatOkay+" howmanyplaceholdersgreatherthanzero false."+fileWrite.howManyPlaceholders()>0+);
+        if ((((matcherBoolean == false) && creditsFieldChanged) || (gradesFormatOkay == false) || (percentageFormatOkay == false)) && (fileWrite.howManyPlaceholders() < 0) && (reminderActive == false)) { //11/25
+            reminderActive = true;
+            makeFormatReminderDialog(); //11/25
+            reminderActive = false;
+
+        } //11/25
+
+        else if ((setState.getClassListIndex()+1 < setList.getFinalClassList().size())) {
             setState.incrementClassListIndex();
             //typeNumber = 0; //11/28
             System.out.println("typenumberafterreser "+typeNumber + " class "+setList.getFinalClassList().get(setState.getClassListIndex()));
@@ -524,10 +536,6 @@ public class StudentStatCollect extends JFrame {
             System.out.println("compared 7777");
             goToPrintStudentGrades();
         }
-
-        // else if (((matcherBoolean == false) && creditsFieldChanged) || (gradesFormatOkay == false) || (percentageFormatOkay == false)) { 11/25
-        //     makeFormatReminderDialog(); 11/25
-        // } 11/25
 
         else {
             System.out.println("matcher credit boolean, something wrong");
