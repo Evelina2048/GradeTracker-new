@@ -95,6 +95,7 @@ public class Decorator {
     }
 
     public String areYouSureMessage(JTextField importedTextField, String myReason, String text, int width, int height) {
+        setState.setCanContinue(false); //added 12/1 to prevent double popup
         reason = myReason;
         textField = importedTextField;
         dialog = new JDialog(window, true);
@@ -157,6 +158,8 @@ public class Decorator {
         else {
         reasonIsChangingUsernameYes();
         }
+
+        setState.setCanContinue(true);  //12/1 to enable continuing again
 
     }
 
@@ -287,6 +290,8 @@ public class Decorator {
         }
         setListeners.setNoFocusListener(noFocusListener);
         window.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE); //11/26
+
+        setState.setCanContinue(true);  //12/1 to enable continuing again
     }
 
     public void setCaretPositionToZero(JTextField importedTextField) {

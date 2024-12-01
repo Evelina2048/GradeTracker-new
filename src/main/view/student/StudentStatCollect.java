@@ -625,7 +625,7 @@ public class StudentStatCollect extends JFrame {
             }
             //typeNumber = 0; //11/28
             credits = (JPanel) textBoxPanel;
-        }
+        //} //removed 12/1
         credits = (JPanel) textBoxPanel;
 
         while (credits.getComponentCount() < 5) { // for layered panel
@@ -639,6 +639,8 @@ public class StudentStatCollect extends JFrame {
         }
 
         setState.setCanContinue(true);
+
+    }//added 12/1
 
     }
 
