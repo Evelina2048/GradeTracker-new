@@ -514,10 +514,15 @@ public class StudentStatCollect extends JFrame {
 
         Boolean reminderActive = false;
 
+        Boolean creditsInWrongFormatAndChanged = ((matcherBoolean == false) && creditsFieldChanged);
+
+        //textboxpanel automatically updates
+        setState.setTextFieldPanel(textBoxPanel);
+
         System.out.println("compared 6666 (setState.getClassListIndex()+1 < setList.getFinalClassList().size())"+(setState.getClassListIndex()+1 < setList.getFinalClassList().size())+" creditsfieldchanged "+ !creditsFieldChanged);
 
-        //System.out.println("matcher boolean false."+matcherBoolean+" creditsFieldChanged true."+creditsFieldChanged+" gradesFormatOkay."+gradesFormatOkay+" percentageFormatOkay."+percentageFormatOkay+" howmanyplaceholdersgreatherthanzero false."+fileWrite.howManyPlaceholders()>0+);
-        if ((((matcherBoolean == false) && creditsFieldChanged) || (gradesFormatOkay == false) || (percentageFormatOkay == false)) && (fileWrite.howManyPlaceholders() < 0) && (reminderActive == false)) { //11/25
+        System.out.println("atleast one format is wrong "+((creditsInWrongFormatAndChanged || (gradesFormatOkay == false) || (percentageFormatOkay == false)))+"&& placeholdersgreatherthanzero"+(fileWrite.howManyPlaceholders())+"&& reminderActive false."+reminderActive);
+        if ((creditsInWrongFormatAndChanged || (gradesFormatOkay == false) || (percentageFormatOkay == false)) && (fileWrite.howManyPlaceholders() == 0) && (reminderActive == false)) { //11/25
             reminderActive = true;
             makeFormatReminderDialog(); //11/25
             reminderActive = false;
