@@ -303,9 +303,11 @@ public class PrintStudentGrades extends JFrame {
         //if at class index 0
         if (whichCurrClassIndex > 0) { //if no previous print grades classes
             hideWindow();
+            System.out.println("now index before "+whichCurrClassIndex);
             whichCurrClassIndex--; //only if there are more
             nextButton.setEnabled(true); //added 11/29
             printStudentGradesLaunch();
+            System.out.println("now index after "+whichCurrClassIndex);
             actionPriorities.setCurrentClass("PrintStudentGrades");
         }
 

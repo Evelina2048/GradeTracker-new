@@ -84,6 +84,16 @@ public class SetList {
         gradeNumber.add(thisGradeNumber);
     }
 
+    public void setGradeTypeList(int classListIndex, int typeNumber) {
+        System.out.println("in set grade type list "+ classListIndex + " "+typeNumber);
+        if (classListIndex >= gradeNumber.size()) { //to account for if spot in array list is empty
+            gradeNumber.add(0);
+        }
+        gradeNumber.set(classListIndex, typeNumber);
+        //gradeNumber[classListIndex] = typeNumber;
+    }
+
+
     public ArrayList<Integer> getGradeTypeList() {
         return gradeNumber;
     }
@@ -101,7 +111,6 @@ public class SetList {
         window.remove(readClassLabelPanel);
         
     }
-
 
 
 }

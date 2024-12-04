@@ -482,7 +482,8 @@ public class StudentStatCollect extends JFrame {
             if (typeNumber!=0) {
                 //System.out.println("class "+setList.getFinalClassList().get(setState.getClassListIndex())+ " type number " +typeNumber);
                 System.out.println("typenumberSet "+typeNumber + " class "+setList.getFinalClassList().get(setState.getClassListIndex()));
-                setList.addGradeTypeList(typeNumber);
+                // setList.addGradeTypeList(typeNumber); //replaced by below 12/4
+                setList.setGradeTypeList(setState.getClassListIndex(), typeNumber);
             }
             //typeNumber = 0; //11/28
         }
@@ -627,7 +628,8 @@ public class StudentStatCollect extends JFrame {
         if(setState.getCanContinue()) {
             saveButtonAction("nextButton"); //replaced line above 10/7
             if (typeNumber!=0) {
-                setList.addGradeTypeList(typeNumber);
+                // setList.addGradeTypeList(typeNumber); //replaced by below 12/4
+                setList.setGradeTypeList(setState.getClassListIndex(), typeNumber);
                 System.out.println("typenumbernewset "+typeNumber + " class "+setList.getFinalClassList().get(setState.getClassListIndex()));
             }
             //typeNumber = 0; //11/28
