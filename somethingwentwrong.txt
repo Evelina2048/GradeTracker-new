@@ -10,7 +10,6 @@ hello
 hello
 hello
 hello
-evelina
 hello
 hello
 hello
@@ -85,8 +84,8 @@ yeah
 hello
 fhewehri
 ohjvoerhghvoerw
-Evelina\
-Evelina
-Evelina
 of3ohehofwe
 fjofojew
+Evelina
+Evelina
+Evelina

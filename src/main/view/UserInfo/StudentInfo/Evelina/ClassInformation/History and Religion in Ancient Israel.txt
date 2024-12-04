@@ -1,0 +1,10 @@
+3
+Essays
+50
+93 95
+Midterm
+20
+98
+Participation
+30
+100

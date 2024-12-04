@@ -334,7 +334,9 @@ public class StudentStatCollect extends JFrame {
     private void goToPreviousClasses() {
         saveButtonAction("backButton");
         setState.decrementClassListIndex();
-        setList.getClassLabelPanel().removeAll();
+        if (setList.getClassLabelPanel() != null) { //12/3 other would have null pointer error sometimes
+            setList.getClassLabelPanel().removeAll();
+        }
         classLabelPanel.removeAll();
         textBoxPanel.removeAll();
         SETTEST.getInstance().SETTESTTEXTBOXPANEL(textBoxPanel);
@@ -377,7 +379,7 @@ public class StudentStatCollect extends JFrame {
         setState.setTextFieldPanel(textBoxPanel);
 
         //determine gradetypenumber starting amount
-        //typeNumber = (textBoxPanel.getComponentCount()-2)/3; //uncomment plz 11/28
+        typeNumber = (textBoxPanel.getComponentCount()-2)/3; //uncomment plz 11/28
         System.out.println("4444 "+typeNumber);
 
         // ♡ //to next heart is 11/25

@@ -126,6 +126,7 @@ public class PrintStudentGrades extends JFrame {
         Border blackline = BorderFactory.createLineBorder(Color.black);
         ArrayList <Integer> gradeTypeNumberList = setList.getGradeTypeList();
 
+        System.out.println("12/2 gradeTypeNumberList"+gradeTypeNumberList+" whichcurrclassindex "+whichCurrClassIndex);
         int gradeTypeAmount = gradeTypeNumberList.get(whichCurrClassIndex);
         JPanel allContainer = new JPanel(new GridLayout((1+gradeTypeAmount),3,4,5)); //rows,cols //////
         allContainer.setName("allContainr");
@@ -196,7 +197,7 @@ public class PrintStudentGrades extends JFrame {
     private float getGradeTotal() {
         float total = 0; //changed below 11/30
         for (int i = 0; i < amountOfFinalGrade.size(); i++) { //get loop through all possible gradeTypeIndexes (amountoffinalgrade.size())
-            System.out.println("total " + total +" + "+amountOfFinalGrade.get(gradeTypeIndex+1) + " = " +total+amountOfFinalGrade.get(gradeTypeIndex+1));
+            //System.out.println("total " + total +" + "+amountOfFinalGrade.get(gradeTypeIndex+1) + " = " +total+amountOfFinalGrade.get(gradeTypeIndex+1));
             total += amountOfFinalGrade.get(i);//(gradeTypeIndex);
         }
         return total;

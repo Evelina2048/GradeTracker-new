@@ -1,5 +1,5 @@
-History Of Relg
 Greek
-CyberSec
-ML
-FA
+History and Religion in Ancient Israel
+Cyber Security
+Finite Automata
+Intro to Machine Learning
