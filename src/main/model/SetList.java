@@ -90,6 +90,7 @@ public class SetList {
             gradeNumber.add(0);
         }
         gradeNumber.set(classListIndex, typeNumber);
+        //gradeNumber.set(typeNumber, classListIndex);
         //gradeNumber[classListIndex] = typeNumber;
     }
 
@@ -103,13 +104,13 @@ public class SetList {
         if (classLabelPanel != null) {
             window.remove(classLabelPanel);
         }
-        
     }
 
     public void removeStudentStatCollectReadClassLabelPanel() {
         JFrame window = Set.getInstance().getWindow();
-        window.remove(readClassLabelPanel);
-        
+        if (readClassLabelPanel != null) { //added 12/5 to prevent bug
+            window.remove(readClassLabelPanel);
+        }
     }
 
 
