@@ -334,6 +334,7 @@ public class StudentStatCollect extends JFrame {
     private void goToPreviousClasses() {
         saveButtonAction("backButton");
         setState.decrementClassListIndex();
+        numOfBoxes = 0; //added 12/6 to prevent bug
         if (setList.getClassLabelPanel() != null) { //12/3 other would have null pointer error sometimes
             setList.getClassLabelPanel().removeAll();
         }
@@ -353,6 +354,7 @@ public class StudentStatCollect extends JFrame {
 
         int numberOfComponents = loadedBoxesPanel.getComponentCount();
         numOfBoxes += numberOfComponents;
+        System.out.println(" boxmanagecreateOne "+numOfBoxes+ " maxboxes "+maxBoxes);
         for (int i = 0; i < numberOfComponents; i++) {
             textBoxPanel.add(loadedBoxesPanel.getComponent(0));
         }
@@ -655,6 +657,7 @@ public class StudentStatCollect extends JFrame {
 
     public void visitNextStudentClass() {
         String filePath = setUserInformation.getPathToClassInformationFileWithIndex();
+        numOfBoxes = 0; //added 12/6 to prevent bug with maxboxes
         if (fileHandler.fileExists(filePath)) {
             addLoadedBoxes();
             classLabelPanel.add(textBoxPanel);
@@ -871,6 +874,7 @@ public class StudentStatCollect extends JFrame {
                 classLabelPanel.add(textBoxPanel);
                 create.windowFix();
                 numOfBoxes++;
+                System.out.println(" boxmanagecreateTwo "+numOfBoxes+ " maxboxes "+maxBoxes);
             }
             else if (numOfBoxes == maxBoxes) {
                 Decorator decorate = new Decorator();
