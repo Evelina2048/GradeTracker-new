@@ -166,10 +166,17 @@ public class PrintStudentGrades extends JFrame {
         allContainer.add(contributiongrade);
 
         System.out.println("that -1111.5 "+" class "+setList.getFinalClassList().get(whichCurrClassIndex)+" gradeTypeNumberList "+ gradeTypeNumberList);
+        // 12/7 for (int i = 0; i < gradeTypeNumberList.get(whichCurrClassIndex); i++) { //shouldnt be for classes, should be for gradetypes then classes
         for (int i = 0; i < gradeTypeNumberList.get(whichCurrClassIndex); i++) { //shouldnt be for classes, should be for gradetypes then classes
-            JLabel gradeTypeNameLabel = new JLabel(gradeTypeList.get(whichCurrClassIndex+i));
+            System.out.println("2222a gradeTypeList "+gradeTypeList);
+
+            // commendedout 12/7 JLabel gradeTypeNameLabel = new JLabel(gradeTypeList.get(whichCurrClassIndex+i));
+            JLabel gradeTypeNameLabel = new JLabel(gradeTypeList.get(gradeTypeIndex)); //added 12/7
+            gradeTypeIndex++; //added 12/7
+
             gradeTypeNameLabel.setBorder(blackline);
             allContainer.add(gradeTypeNameLabel);
+            System.out.println("1111a gradeTypeNameLabel "+gradeTypeNameLabel.getText());
 
             System.out.println("that -1111 "+" class "+setList.getFinalClassList().get(whichCurrClassIndex) + String.valueOf(listOfAverages) + " i "+i);
             JLabel listOfAveragesLabel = new JLabel("that 0000 "+" class "+setList.getFinalClassList().get(whichCurrClassIndex) + String.valueOf(listOfAverages.get(i)));
