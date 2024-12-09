@@ -1,4 +1,5 @@
-0
-Participation
-100
-100
+Greek
+History and Religion in Ancient Israel
+Cyber Security
+Finite Automata
+Intro to Machine Learning
