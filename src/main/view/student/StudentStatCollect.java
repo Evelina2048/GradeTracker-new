@@ -453,26 +453,38 @@ public class StudentStatCollect extends JFrame {
     private void nextButtonAction(JButton nextButton) {
         nextButton.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent e) {
+        //         actionPriorities.addClassActionListener(new ActionListener() {
+        //             @Override
+        //             public void actionPerformed(ActionEvent e) {// remember wont run  if just enter without a click
+        //                 System.out.println("enteraction");
+        //                 //doNextButtonProcedure();
+        //                 //
+        //                 actionPriorities.setCurrentClass(currentClass);
+        //                 actionPriorities.addClassActionListener(new ActionListener() {
+        //                     @Override
+        //                     public void actionPerformed(ActionEvent e) { // remember won't run if just enter without a click
+        //                         System.out.println("enteraction");
+        //                         doNextButtonProcedure();
+
+        //                     }
+        //                 }, 1, "EnterAction", null, currentClass);  // Add this ActionListener with priority 1
+        //                 //
+        //             }
+        //         }, 1, "nextButton", null, currentClass);  // Add this ActionListener with priority 1
+        //     }
+        // });
+                actionPriorities.setCurrentClass(currentClass);
                 actionPriorities.addClassActionListener(new ActionListener() {
                     @Override
-                    public void actionPerformed(ActionEvent e) {// remember wont run  if just enter without a click
+                    public void actionPerformed(ActionEvent e) { // remember won't run if just enter without a click
                         System.out.println("enteraction");
-                        //doNextButtonProcedure();
-                        //
-                        actionPriorities.setCurrentClass(currentClass);
-                        actionPriorities.addClassActionListener(new ActionListener() {
-                            @Override
-                            public void actionPerformed(ActionEvent e) { // remember won't run if just enter without a click
-                                System.out.println("enteraction");
-                                doNextButtonProcedure();
+                        doNextButtonProcedure();
 
-                            }
-                        }, 1, "EnterAction", null, currentClass);  // Add this ActionListener with priority 1
-                        //
-                    }
-                }, 1, "nextButton", null, currentClass);  // Add this ActionListener with priority 1
+                    } //added 12/8 to make nextbutton work like enter
+                }, 1, "EnterAction", null, currentClass);  // Add this ActionListener with priority 1
             }
-        });
+            });
+        
     }
 
     public void doNextButtonProcedure() {
