@@ -190,6 +190,8 @@ public class StudentStatCollect extends JFrame {
             studentClasses.studentClassesLaunch();
         }
         else if ((setState.getClassListIndex() > 0) && (fileWrite.howManyPlaceholders() == 0)) {
+            window.remove(backNextButtonsPanel); //added 12/10 bc savebttn wasnt changing and therefore not working
+            buttonSetUpAction();
             goToPreviousClasses();
             JFrame window = Set.getInstance().getWindow();
             Component[] windowComponents = window.getContentPane().getComponents();
@@ -604,7 +606,7 @@ public class StudentStatCollect extends JFrame {
 
         setState.setTextFieldPanel(textBoxPanel);
 
-        window.remove(backNextButtonsPanel);
+        window.remove(backNextButtonsPanel); //commented out on 12/10 because it is needed regardless of going > or < so moved to hide window
         window.remove(set.getCurrentSaveButton());
         newDelContainerFlow.removeAll();
         studentStatCollectLaunch();
@@ -872,6 +874,7 @@ public class StudentStatCollect extends JFrame {
             create.hideContainer();
             if (backNextButtonsPanel != null) {
                 backNextButtonsPanel.setVisible(false);
+                //window.remove(backNextButtonsPanel); //not used
             }
             classLabelPanel.setVisible(false);
             if (setState.getClassListIndex() == 0){

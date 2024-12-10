@@ -783,7 +783,7 @@ public class StudentClasses extends JFrame {
         create.getTextFieldContainer().setVisible(false);
         instructionsPanel.setVisible(false);
         create.hideContainer();
-        
+
         for (MouseListener listener : deleteClassButton.getMouseListeners()) {
             window.removeMouseListener(listener);
         }
