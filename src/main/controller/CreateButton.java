@@ -41,7 +41,7 @@ public class CreateButton {
     }
 
     public JButton saveButtonCreate() {
-        saveButton = new JButton("Save "+ CompositeActionListenerWithPriorities.getInstance().getCurrentClass());
+        saveButton = new JButton("Save ");
         Set.getInstance().setCurrentSaveButton(saveButton); //11/6
 
         if ((CompositeActionListenerWithPriorities.getInstance().getCurrentClass()!= null) && CompositeActionListenerWithPriorities.getInstance().getCurrentClass().equals("StudentStatCollect")) {

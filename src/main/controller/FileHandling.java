@@ -127,7 +127,7 @@ public class FileHandling {
             bigPanel.setName("bigPanel in loadtextboxes");
             System.out.println("arrayList"+arrayList);
 
-            JPanel classjlabel = create.typeBox(setList.getFinalClassList().get(setState.getClassListIndex())+"CAT", "JLabel", true);
+            JPanel classjlabel = create.typeBox(setList.getFinalClassList().get(setState.getClassListIndex()), "JLabel", true);
 
             bigPanel.add(classjlabel);
             for (int i = 0; i<arrayList.size(); i++) {

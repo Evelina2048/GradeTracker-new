@@ -343,13 +343,13 @@ public class StudentClasses extends JFrame {
     }
 
     private void moveClassButton() {
-        moveClassButton = new JButton("Move Classes");
-        moveClassButton.addActionListener(new ActionListener() {
-            public void actionPerformed(ActionEvent e) {
-                System.out.println("moveClass Mode hit");
-                prepareTextboxForMoveMode();
-            }
-        });
+        // moveClassButton = new JButton("Move Classes");
+        // moveClassButton.addActionListener(new ActionListener() {
+        //     public void actionPerformed(ActionEvent e) {
+        //         System.out.println("moveClass Mode hit");
+        //         prepareTextboxForMoveMode();
+        //     }
+        // });
     }
 
     private void writeType() {
