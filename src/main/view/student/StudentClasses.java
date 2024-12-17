@@ -778,7 +778,7 @@ public class StudentClasses extends JFrame {
         backNextButtonsPanel.setVisible(false);
         newClassButton.setVisible(false);
         deleteClassButton.setVisible(false);
-        moveClassButton.setVisible(false);
+        //moveClassButton.setVisible(false);
         southContainer.setVisible(false);
         create.getTextFieldContainer().setVisible(false);
         instructionsPanel.setVisible(false);
