@@ -177,7 +177,7 @@ public class StudentClasses extends JFrame {
         }
 
         else {
-           create.createTextBox("Enter Class Name", "JTextField", false);
+            create.createTextBox("Enter Class Name", "JTextField", false);
         }
     }
 
@@ -193,8 +193,8 @@ public class StudentClasses extends JFrame {
         buttonsPanel.setPreferredSize(new Dimension(100,0));
         buttonsPanel.add(newClassButton,BorderLayout.WEST);
         buttonsPanel.add(deleteClassButton, BorderLayout.EAST);
-        buttonsPanel.add(moveClassButton, BorderLayout.CENTER);
-    
+        //buttonsPanel.add(moveClassButton, BorderLayout.CENTER); //12/17
+
         southContainer.add(buttonsPanel,BorderLayout.CENTER);
 
         window.add(southContainer, BorderLayout.SOUTH);
