@@ -1,6 +1,5 @@
-Greek
-ML
 FA
-Cyber Security
+CyberSec
+ML
 Algorithms
 Class to delete

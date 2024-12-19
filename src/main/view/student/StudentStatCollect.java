@@ -703,7 +703,7 @@ public class StudentStatCollect extends JFrame {
             classLabelPanel.add(textBoxPanel);
             classLabelPanel.setVisible(true);
 
-            classLabelPanel.setBackground(Color.pink);
+            //classLabelPanel.setBackground(Color.pink);
 
             Component[] windowComponents3 = window.getContentPane().getComponents();
             int i = 0;

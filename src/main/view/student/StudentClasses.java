@@ -94,7 +94,7 @@ public class StudentClasses extends JFrame {
 
     public void studentClassesLaunch() {
         southContainer.setName("SouthContainer");
-        southContainer.setForeground(Color.pink);
+        //southContainer.setForeground(Color.pink);
         this.set = Set.getInstance();
         this.setState = SetState.getInstance();
         this.setUserInformation = SetUserInformation.getInstance();
@@ -150,7 +150,7 @@ public class StudentClasses extends JFrame {
 
         window.setTitle("StudentClasses");
 
-        layeredPane.setBackground(Color.pink);
+        //layeredPane.setBackground(Color.pink);
             layeredPane.setVisible(true);
             layeredPane.setOpaque(false);
             layeredPane.setDoubleBuffered(true);
@@ -794,7 +794,7 @@ public class StudentClasses extends JFrame {
         window.remove(backNextButtonsPanel);
         window.remove(newClassButton);
         window.remove(deleteClassButton);
-        window.remove(moveClassButton);
+        //window.remove(moveClassButton);
         window.remove(southContainer);
         window.remove(create.getTextFieldContainer());
         window.remove(instructionsPanel);
