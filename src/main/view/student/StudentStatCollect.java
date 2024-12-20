@@ -793,7 +793,7 @@ public class StudentStatCollect extends JFrame {
     }
 
     private JPanel deleteButtonPanel() {
-        JButton deleteTypeButton = new JButton(SetList.getInstance().getFinalClassList().get(SetState.getInstance().getClassListIndex())+"Delete Type");
+        JButton deleteTypeButton = new JButton("Delete Type");
             deleteTypeButton.setPreferredSize(new Dimension(90, 50));
             deleteTypeButton.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent e) {
