@@ -41,12 +41,12 @@ public class CreateButton {
     }
 
     public JButton saveButtonCreate() {
-        saveButton = new JButton("Save ");
+        saveButton = new JButton("Save");
         Set.getInstance().setCurrentSaveButton(saveButton); //11/6
 
-        if ((CompositeActionListenerWithPriorities.getInstance().getCurrentClass()!= null) && CompositeActionListenerWithPriorities.getInstance().getCurrentClass().equals("StudentStatCollect")) {
-            saveButton.setText("Save" + SetList.getInstance().getFinalClassList().get(SetState.getInstance().getClassListIndex()));
-        }
+        // if ((CompositeActionListenerWithPriorities.getInstance().getCurrentClass()!= null) && CompositeActionListenerWithPriorities.getInstance().getCurrentClass().equals("StudentStatCollect")) {
+        //     saveButton.setText("Save");
+        // } //12/20, I think the above lines were added for
 
         return saveButton;
     }
