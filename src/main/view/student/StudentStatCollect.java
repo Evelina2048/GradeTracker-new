@@ -50,7 +50,7 @@ public class StudentStatCollect extends JFrame {
     private JFrame window;
     private Creator create;
     private GoIntoPanel goIntoPanel;
-    private JPanel backNextButtonsPanel = new JPanel();
+    private static JPanel backNextButtonsPanel = new JPanel();
     private JButton newTypeButton;
     private JButton nextButton;
     private JButton backButton;
@@ -245,7 +245,11 @@ public class StudentStatCollect extends JFrame {
                                 //window.remove(component);
                                 window.remove(windowCompon);
                             } //11/18
-                            window.add(backNextButtonsPanel,BorderLayout.SOUTH);
+
+                            //backNextButtonsPanel = 
+                            //window.add(backNextButtonsPanel,BorderLayout.SOUTH);
+                            window.remove(backNextButtonsPanel);
+                            buttonSetUpAction();
                             window.add(newDelContainerFlow, BorderLayout.EAST);
                             window.add(classLabelPanel); //12/20 because classes werent showing going backwards from 4th class to 3rd
 
@@ -370,11 +374,13 @@ public class StudentStatCollect extends JFrame {
     }
 
     private void saveButtonAction(String actionCause) {
+        System.out.println("compared 3333");
         SETTEST.getInstance().TESTSETCURRENTINSTANCE(this);
         set.setFilePath(setUserInformation.getPathToClassInformationFileWithIndex());
         create.setTextFieldContainer(setState.getTextFieldPanel());
 
         fileWrite.writeTextToFile();
+        System.out.println("HIT SAVE ");
 
         if (fileWrite.howManyPlaceholders() > 0 && !actionCause.equals("Neither")){
             Decorator decorate = new Decorator();

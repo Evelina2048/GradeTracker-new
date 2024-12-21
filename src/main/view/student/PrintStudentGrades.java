@@ -165,10 +165,8 @@ public class PrintStudentGrades extends JFrame {
         contributiongrade.setHorizontalAlignment(JLabel.CENTER);
         allContainer.add(contributiongrade);
 
-        System.out.println("that -1111.5 "+" class "+setList.getFinalClassList().get(whichCurrClassIndex)+" gradeTypeNumberList "+ gradeTypeNumberList);
         // 12/7 for (int i = 0; i < gradeTypeNumberList.get(whichCurrClassIndex); i++) { //shouldnt be for classes, should be for gradetypes then classes
         for (int i = 0; i < gradeTypeNumberList.get(whichCurrClassIndex); i++) { //shouldnt be for classes, should be for gradetypes then classes
-            System.out.println("2222a gradeTypeList "+gradeTypeList);
 
             // commendedout 12/7 JLabel gradeTypeNameLabel = new JLabel(gradeTypeList.get(whichCurrClassIndex+i));
             JLabel gradeTypeNameLabel = new JLabel(gradeTypeList.get(gradeTypeIndex)); //added 12/7
@@ -176,9 +174,7 @@ public class PrintStudentGrades extends JFrame {
 
             gradeTypeNameLabel.setBorder(blackline);
             allContainer.add(gradeTypeNameLabel);
-            System.out.println("1111a gradeTypeNameLabel "+gradeTypeNameLabel.getText());
 
-            System.out.println("that -1111 "+" class "+setList.getFinalClassList().get(whichCurrClassIndex) + String.valueOf(listOfAverages) + " i "+i);
             JLabel listOfAveragesLabel = new JLabel("that 0000 "+" class "+setList.getFinalClassList().get(whichCurrClassIndex) + String.valueOf(listOfAverages.get(i)));
             listOfAveragesLabel.setBorder(blackline);
             allContainer.add(listOfAveragesLabel);
@@ -189,11 +185,7 @@ public class PrintStudentGrades extends JFrame {
 
             //new JLabel("heyo "+(String.valueOf((float) percentageOfGradeList.get(i)/100*gradeBoxTotal.get(i))))
             float currPercentageOfGrade = percentageOfGradeList.get(i);
-            System.out.println("7:46 "+amountOfFinalGrade);
-            System.out.println("7:47 currPercentageOfGrade "+"heyo -1111 currPercentageOfGrade "+(String.valueOf(currPercentageOfGrade)) + " gradeBoxTotal " +((gradeBoxTotal))+" i "+i + " .get(i) "+gradeBoxTotal.get(i)+" for label "+String.valueOf((float) currPercentageOfGrade * ((float) listOfAverages.get(i)/100))+ " listofavgs "+listOfAverages);
-            System.out.println("look currPercentageOfGrade "+String.valueOf(currPercentageOfGrade)+" * "+listOfAverages.get(i)+" /100");
-            System.out.println("check it1 " + (80 * ((float) 4/100)));
-            System.out.println("check it2 " + ((float)80*4/100));
+
             JLabel contributionLabel = new JLabel("heyo "+(String.valueOf(((float) currPercentageOfGrade *  listOfAverages.get(i))/100))); //11/29 changed from gradeBoxTotal to listOfAverages because would cause a bug when multiple in one gradebox
             contributionLabel.setBorder(blackline);
             allContainer.add(contributionLabel);

@@ -44,9 +44,9 @@ public class CreateButton {
         saveButton = new JButton("Save");
         Set.getInstance().setCurrentSaveButton(saveButton); //11/6
 
-        // if ((CompositeActionListenerWithPriorities.getInstance().getCurrentClass()!= null) && CompositeActionListenerWithPriorities.getInstance().getCurrentClass().equals("StudentStatCollect")) {
-        //     saveButton.setText("Save");
-        // } //12/20, I think the above lines were added for
+        if ((CompositeActionListenerWithPriorities.getInstance().getCurrentClass()!= null) && CompositeActionListenerWithPriorities.getInstance().getCurrentClass().equals("StudentStatCollect")) {
+            saveButton.setText("Save" + SetList.getInstance().getFinalClassList().get(setState.getClassListIndex()));
+        } //12/20, I think the above lines were added for testing
 
         return saveButton;
     }
