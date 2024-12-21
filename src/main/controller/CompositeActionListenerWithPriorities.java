@@ -93,6 +93,8 @@ public class CompositeActionListenerWithPriorities implements ActionListener {
             else if (listeners.size() == 1) {
               System.out.println("its being run 4");
               System.out.println("Maybe not needed?");
+              CompositeActionListenerWithPriorities.this.actionPerformed(
+              new ActionEvent(CompositeActionListenerWithPriorities.this, ActionEvent.ACTION_PERFORMED, "PerformAllActions")); //added 12/21 because would not work when clicking next>
             }
             else {
                 System.out.println("Something went wrong in CompositeActionListenerWithPriorities addClassActionListener \u00AF\\_(\u30C4)_/\u00AF");

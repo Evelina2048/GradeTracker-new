@@ -45,7 +45,7 @@ public class CreateButton {
         Set.getInstance().setCurrentSaveButton(saveButton); //11/6
 
         if ((CompositeActionListenerWithPriorities.getInstance().getCurrentClass()!= null) && CompositeActionListenerWithPriorities.getInstance().getCurrentClass().equals("StudentStatCollect")) {
-            saveButton.setText("Save" + SetList.getInstance().getFinalClassList().get(setState.getClassListIndex()));
+            saveButton.setText("Save");// + SetList.getInstance().getFinalClassList().get(setState.getClassListIndex()));
         } //12/20, I think the above lines were added for testing
 
         return saveButton;
