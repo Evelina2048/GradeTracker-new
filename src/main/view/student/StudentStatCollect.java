@@ -106,6 +106,15 @@ public class StudentStatCollect extends JFrame {
         actionPriorities.setCurrentClass(currentClass);
         System.out.println("actionprio "+actionPriorities.getCurrentClass());
 
+        Component[] windowComponents4 = window.getContentPane().getComponents();
+            int i = 0;
+            System.out.println("current class "+currentClass);
+            for (Component windowComp : windowComponents4) {
+                Container container = (Container) windowComp;
+                System.out.println("compcount after " + i + " classname "+ windowComp.getClass().getName() + " regname "+windowComp.getName() + " isvisible "+windowComp.isVisible()+ " component count "+ container.getComponentCount());
+                i++;
+            }
+
     }
 
     public void studentStatCollectLaunch() {
@@ -195,76 +204,16 @@ public class StudentStatCollect extends JFrame {
             goToPreviousClasses();
             JFrame window = Set.getInstance().getWindow();
             Component[] windowComponents = window.getContentPane().getComponents();
-            // for (int k = 0; k<8;k++) {
-            //     Component component = windowComponents[k];
-            //     component.setVisible(false);
-            //     window.remove(component);
-            // } //11/18
         } else if (fileWrite.howManyPlaceholders() > 0) {
             Decorator decorate = new Decorator();
             SetState.getInstance().setStudentStatCollect(currentInstance);
             SetState.getInstance().setAreYouSureMessageCause("backButton");
 
             String yesOrNoDialog = decorate.areYouSureMessage(null, "studentStatsEmpty", "Remove placeholder(s) to continue?", 230, 90);
-            // if (yesOrNoDialog.equals("Yes")) {
-            //     typeNumber++;
-
-            //     boxManageCreate("Grade Type "+typeNumber, "JTextField",false);
-            //     boxManageCreate("Percentage of Grade", "JTextField",false);
-            //     boxManageCreate("Grades(format:# # #)", "JTextField",false);
-            //     classLabelPanel.setVisible(true); //11/21
-            //     textBoxPanel.setVisible(true); //11/21
-
-            //     if (setState.getClassListIndex() < 2) {
-            //         window.add(classLabelPanel, BorderLayout.CENTER); //commented 11/17 because it would cause a bug with the third class new type
-            //     }
-            //     create.windowFix();
-
-            //     if (setState.getClassListIndex() > 0) {
-            //         setList.removeStudentStatCollectReadClassLabelPanel(); //causes bugs if used for first class
-            //     }
-
-            //     setState.setTextFieldPanel(textBoxPanel);
-
-            //     Component[] windowComponents4 = window.getContentPane().getComponents();
-            //     int i = 0;
-            //     for (Component windowComp : windowComponents4) {
-            //         System.out.println("compcount after " + i + " classname "+ windowComp.getClass().getName() + " regname "+windowComp.getName() + " isvisible "+windowComp.isVisible());
-            //         i++;
-            //     }
-            // }
-            //setState.setCanContinue(false); //11/19
     }
     }
 
     public void backAction2() { //necessary because if the user tries to go back with placeholders and clicks "yes" option, will get stuck in an infinite loop when back action recalled.
-        // if(setState.getCanContinue()) {
-        //     create.setTextFieldContainer(setState.getTextFieldPanel());
-        //     if (setState.getClassListIndex() == 0) { //case for back to classes
-        //         hideWindow();
-        //         StudentClasses studentClasses = new StudentClasses();
-        //         studentClasses.studentClassesLaunch();
-        //     }
-        //     else if (setState.getClassListIndex() > 0) {
-        //         goToPreviousClasses();
-        //         JFrame window = Set.getInstance().getWindow();
-        //         Component[] windowComponents = window.getContentPane().getComponents();
-        //         for (int k = 0; k<8;k++) {
-        //             Component component = windowComponents[k];
-        //             component.setVisible(false);
-        //             window.remove(component);
-        //         }
-        //         Component[] windowComponents2 = window.getContentPane().getComponents();
-        //         for (int k = 2; k<=10;k++) {
-        //             Component component = windowComponents2[k];
-        //             component.setVisible(false);
-        //             window.remove(component);
-        //         }
-        //     }}
-        //         setState.setCanContinue(false);
-
-                //actionPriorities.setCurrentClass(currentClass);
-                //actionPriorities.addClassActionListener(b -> {
                     currentClass = "StudentStatCollect";
                     actionPriorities.setCurrentClass(currentClass);
                     if(setState.getCanContinue()) {
@@ -298,13 +247,8 @@ public class StudentStatCollect extends JFrame {
                             } //11/18
                             window.add(backNextButtonsPanel,BorderLayout.SOUTH);
                             window.add(newDelContainerFlow, BorderLayout.EAST);
+                            window.add(classLabelPanel); //12/20 because classes werent showing going backwards from 4th class to 3rd
 
-                            // ♡ //to next heart is 11/25
-                            //typeNumber++;
-
-                            // boxManageCreate("Grade Type "+typeNumber, "JTextField",false);
-                            // boxManageCreate("Percentage of Grade", "JTextField",false);
-                            // boxManageCreate("Grades(format:# # #)", "JTextField",false);
                             classLabelPanel.setVisible(true); //11/21
                             textBoxPanel.setVisible(true); //11/21
 
@@ -312,22 +256,6 @@ public class StudentStatCollect extends JFrame {
                                 window.add(classLabelPanel, BorderLayout.CENTER); //commented 11/17 because it would cause a bug with the third class new type
                             }
                             create.windowFix();
-
-                            /////////////////////////////////////////////////
-                            // if (setState.getClassListIndex() > 0) {
-                            //     setList.removeStudentStatCollectReadClassLabelPanel(); //causes bugs if used for first class
-                            // }
-
-                            // setState.setTextFieldPanel(textBoxPanel);
-
-                            // Component[] windowComponents4 = window.getContentPane().getComponents();
-                            // int i = 0;
-                            // for (Component windowComp : windowComponents4) {
-                            //     System.out.println("compcount after " + i + " classname "+ windowComp.getClass().getName() + " regname "+windowComp.getName() + " isvisible "+windowComp.isVisible());
-                            //     i++;
-                            // }
-                            // ♡
-                            //window.add(classLabelPanel,BorderLayout.CENTER);
                         }
                         //
                     }//}, 2, "backButton",null, currentClass);
@@ -407,15 +335,24 @@ public class StudentStatCollect extends JFrame {
 
         // setState.setTextFieldPanel(textBoxPanel);
 
+        // Component[] windowComponents4 = window.getContentPane().getComponents();
+        // int i = 0;
+        // for (Component windowComp : windowComponents4) {
+        //     if (windowComp.getName()!=null && windowComp.getName().equals("classlabelpanelinreadclass") ) {
+        //         window.remove(windowComp);
+        //     }
+        //     System.out.println("compcount after " + i + " classname "+ windowComp.getClass().getName() + " regname "+windowComp.getName() + " isvisible "+windowComp.isVisible());
+        //     i++;
+        // }
+
         Component[] windowComponents4 = window.getContentPane().getComponents();
-        int i = 0;
-        for (Component windowComp : windowComponents4) {
-            if (windowComp.getName()!=null && windowComp.getName().equals("classlabelpanelinreadclass") ) {
-                window.remove(windowComp);
+            int i = 0;
+            System.out.println("current class "+currentClass);
+            for (Component windowComp : windowComponents4) {
+                Container container = (Container) windowComp;
+                System.out.println("compcount after " + i + " classname "+ windowComp.getClass().getName() + " regname "+windowComp.getName() + " isvisible "+windowComp.isVisible()+ " component count "+ container.getComponentCount());
+                i++;
             }
-            System.out.println("compcount after " + i + " classname "+ windowComp.getClass().getName() + " regname "+windowComp.getName() + " isvisible "+windowComp.isVisible());
-            i++;
-        }
         //need to keep classlabelinreadclass
         //setList.removeClassFromClassList();
         //window.remove(classLabelPanel);
