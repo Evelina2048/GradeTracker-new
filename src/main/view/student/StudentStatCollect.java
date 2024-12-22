@@ -197,13 +197,25 @@ public class StudentStatCollect extends JFrame {
             StudentClasses studentClasses = new StudentClasses();
             saveButtonAction("backButton");
             studentClasses.studentClassesLaunch();
+            //create.getTextFieldContainer().setVisible(false); //added 12/21
+            //
+            Component[] windowComponents4 = window.getContentPane().getComponents();
+            int i = 0;
+            for (Component windowComp : windowComponents4) {
+                // if (windowComp.getName()!=null && windowComp.getName().equals("classlabelpanelinreadclass") ) {
+                //     window.remove(windowComp);
+                // }
+                System.out.println("compcount after " + i + " classname "+ windowComp.getClass().getName() + " regname "+windowComp.getName() + " isvisible "+windowComp.isVisible());
+                i++;
+            }
+            //
         }
         else if ((setState.getClassListIndex() > 0) && (fileWrite.howManyPlaceholders() == 0)) {
             window.remove(backNextButtonsPanel); //added 12/10 bc savebttn wasnt changing and therefore not working
             buttonSetUpAction();
             goToPreviousClasses();
-            JFrame window = Set.getInstance().getWindow();
-            Component[] windowComponents = window.getContentPane().getComponents();
+            // JFrame window = Set.getInstance().getWindow();
+            // Component[] windowComponents = window.getContentPane().getComponents();
         } else if (fileWrite.howManyPlaceholders() > 0) {
             Decorator decorate = new Decorator();
             SetState.getInstance().setStudentStatCollect(currentInstance);

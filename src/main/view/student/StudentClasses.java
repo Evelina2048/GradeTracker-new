@@ -74,8 +74,8 @@ public class StudentClasses extends JFrame {
 
     JButton nextButton;
     
-    JButton moveClassButton;
-    JPanel moveClassButtonPanel;
+    //JButton moveClassButton;
+    //JPanel moveClassButtonPanel;
 
     FileHandling fileHandler = new FileHandling();
     JLayeredPane layeredPane = new JLayeredPane();
@@ -375,7 +375,7 @@ public class StudentClasses extends JFrame {
         prepareTextboxForDeleteMode();
         saveButtonAction();
         newClassButton.setEnabled(false);
-        moveClassButton.setEnabled(false);
+        //moveClassButton.setEnabled(false);
         leaveDeleteModeButton();
 
         window.remove(instructionsPanel);
@@ -669,7 +669,7 @@ public class StudentClasses extends JFrame {
         removeDeleteClassButtonActionListeners();
         deleteClassButton.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent e) {
-                moveClassButton.setEnabled(true);
+                //moveClassButton.setEnabled(true);
                 //if the file has loaded information attached
                 if (setState.getLoadedState(selectedTextBox) && (fileHandler.fileExists(filePath)) && fileHandler.fileIsNotEmpty(filePath)) {
                     yesOrNoDialog[0] = decorate.areYouSureMessage(selectedTextBox, "deleting", "<html><center>Deleting this class will optiondelete <br>its loaded information.<br>Do you wish to continue?", 250, 120);
@@ -736,7 +736,7 @@ public class StudentClasses extends JFrame {
                 instructionsWordsAndPanel("Left Delete Mode. In Edit Mode");
                 backToDefaultDeleteButton();
                 newClassButton.setEnabled(true);
-                moveClassButton.setEnabled(true);
+                //moveClassButton.setEnabled(true);
                 for (int i = 0; i < setState.getTextFieldPanel().getComponentCount(); i++) {
                     JTextField textField = new JTextField();
                     if (setState.getTextFieldPanel().getComponent(i) instanceof JTextField) {
