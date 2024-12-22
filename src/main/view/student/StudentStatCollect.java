@@ -761,7 +761,7 @@ public class StudentStatCollect extends JFrame {
             totalPercentage = 0;
             Boolean matcherBoolean = null;
             for (int i=1; i<=8; i++) { //max num of grade type
-                String text = goIntoPanel.goIntoPanel(textBoxPanel, index);
+                String text = goIntoPanel.goIntoPanel(textBoxPanel, index).trim(); //.trim()
                 System.out.println("text " +text);
 
                 if (text.equals("does not exist")) {
@@ -770,7 +770,7 @@ public class StudentStatCollect extends JFrame {
                 }
                 System.out.println("index "+index+" text "+text);
                 index = index + 3;
-                Matcher matcher = pattern.matcher(text);
+                Matcher matcher = pattern.matcher(text); //12/21 was previously Matcher matcher = pattern.matcher(text.trim());
                 matcherBoolean = matcher.find();
 
                 if (matcherBoolean == false) {
@@ -778,7 +778,8 @@ public class StudentStatCollect extends JFrame {
                 }
 
                 if (calledFrom.equals("Percentage of Grade")) {
-                    totalPercentage += Integer.parseInt(text);
+                    System.out.println("percentage of grade, what is text ["+text+"]");
+                    totalPercentage += Integer.parseInt(text); //12/21 was previously totalPercentage += Integer.parseInt(text);
                 }
             }
             return true;

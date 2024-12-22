@@ -1,3 +1,6 @@
-Class 1
-Class 2
-Class 3
+Finite Automata
+Machine Learning
+Cyber Security
+Greek
+Algorithms
+Class to delete
