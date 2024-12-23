@@ -60,9 +60,9 @@ public class Creator {
             colorFocusListener.textFieldFocusListener(textField, placeholder);
             windowFix();
         }
-        else if (textboxCounter >= 30) {
+        else if (textboxCounter >= 27) {
             //for student classes...
-            decorate.maximumAmountReachedPopup(); 
+            decorate.maximumAmountReachedPopup();
         }
         else if (my_type.equals("JLabel")) {
             JLabel toAddType = new JLabel(placeholder);

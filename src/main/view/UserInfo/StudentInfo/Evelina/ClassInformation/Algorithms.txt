@@ -1,7 +1,0 @@
-3
-Participation
-50
-100
-Tests
-50
-80 85
