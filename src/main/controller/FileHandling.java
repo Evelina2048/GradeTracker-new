@@ -131,7 +131,12 @@ public class FileHandling {
 
             bigPanel.add(classjlabel);
             for (int i = 0; i<arrayList.size(); i++) {
-                bigPanel.add(create.typeBox(arrayList.get(i), "JTextField", true));
+                if (arrayList.get(i).equals("Credits (optional)")) {
+                    bigPanel.add(create.typeBox(arrayList.get(i), "JTextField", false));//added 12/124 so that if user left credits field blank, would load normally
+                }
+                else {
+                    bigPanel.add(create.typeBox(arrayList.get(i), "JTextField", true));
+                }
             }
             setState.setTextFieldPanel(bigPanel);
             return bigPanel;

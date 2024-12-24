@@ -301,7 +301,11 @@ public class StudentStatCollect extends JFrame {
         int numberOfComponents = loadedBoxesPanel.getComponentCount();
         numOfBoxes += numberOfComponents;
         System.out.println(" boxmanagecreateOne "+numOfBoxes+ " maxboxes "+maxBoxes);
+        System.out.println("");
         for (int i = 0; i < numberOfComponents; i++) {
+            // if ((JTextField) loadedBoxesPanel.getComponent(0).getText().equals("Credits (optional)")) {
+            //     setState.setLoadedState((JTextField) loadedBoxesPanel.getComponent(0), false); //used for if credits was not filled out last time
+            // }
             textBoxPanel.add(loadedBoxesPanel.getComponent(0));
         }
         classLabelPanel.add(textBoxPanel);
