@@ -319,7 +319,8 @@ public class Decorator {
             public void actionPerformed(ActionEvent e) {
                 dialog.setVisible(false);
                 dialog.dispose();
-                setState.setCanContinue(false);
+                //setState.setCanContinue(false); //commented out on 12/26 because it prevents saving
+                setState.setCanContinue(true); //added 12/26 because of above
             }
         });
         dialog.addWindowListener(new WindowAdapter() {

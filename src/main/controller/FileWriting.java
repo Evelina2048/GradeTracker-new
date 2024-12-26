@@ -80,25 +80,30 @@ private void tryToWrite(BufferedWriter writer) {
 }
 
 public void writeTextToFile(){ //Student Classes and Stat
+    System.out.println("Save mystery 2222");
     setState.setCanContinue(true);
     setUserInformation.getUsername();
     tryToWriteWithoutAppend();
 }
 
 private void tryToWriteWithoutAppend() {
+    System.out.println("Save mystery 3333");
     filePath = set.getFilePath();
     try (BufferedWriter writer = new BufferedWriter(new FileWriter(filePath))) {
         if (!classList.isEmpty()) {
             classList.clear();
         }
 
+        System.out.println("Save mystery 4444");
         for (Component component : setState.getTextFieldPanel().getComponents()) {
             if (component instanceof JTextField ) {
+                System.out.println("Save mystery 5555.1");
                 ((JTextField) component).getText();
                 tryToWriteTextFieldWithoutAppend(component, writer);
                 setState.setCanContinue(true);
             }
             else if (component instanceof JPanel) { //student stat
+                System.out.println("Save mystery 5555.2");
                 writeTextToFileWithAppend((JPanel) component);
             }
             else {

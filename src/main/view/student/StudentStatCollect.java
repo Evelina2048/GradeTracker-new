@@ -390,13 +390,13 @@ public class StudentStatCollect extends JFrame {
     }
 
     private void saveButtonAction(String actionCause) {
-        System.out.println("compared 3333");
+        System.out.println("Save mystery 1111");
         SETTEST.getInstance().TESTSETCURRENTINSTANCE(this);
         set.setFilePath(setUserInformation.getPathToClassInformationFileWithIndex());
         create.setTextFieldContainer(setState.getTextFieldPanel());
 
         fileWrite.writeTextToFile();
-        System.out.println("HIT SAVE ");
+        System.out.println("HIT SAVE "+ setList.getFinalClassList().get(setState.getClassListIndex()));
 
         if (fileWrite.howManyPlaceholders() > 0 && !actionCause.equals("Neither")){
             Decorator decorate = new Decorator();
@@ -449,9 +449,9 @@ public class StudentStatCollect extends JFrame {
     }
 
     public void doNextButtonProcedure() {
-        System.out.println("compared 1111");
+        System.out.println("hit next button procedure");
         if(setState.getCanContinue()) {
-            System.out.println("compared 2222");
+            System.out.println("Save mystery -1111");
             saveButtonAction("nextButton");
             System.out.println("innextbuttonprocedure typenumberSet "+typeNumber + " class "+setList.getFinalClassList().get(setState.getClassListIndex()));
             if (typeNumber!=0) {
@@ -557,7 +557,8 @@ public class StudentStatCollect extends JFrame {
         dialog.setResizable(false);
         dialog.setLocationRelativeTo(null);
         dialog.setVisible(true);
-        setState.setCanContinue(false);
+        //setState.setCanContinue(false); //commented out on 12/26 because it prevents saving
+        //setState.setCanContinue(true); //added 12/26 because of above
     }
 
     public void allPassedGoToStudentStats() {
