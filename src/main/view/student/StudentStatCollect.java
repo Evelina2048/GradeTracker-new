@@ -331,7 +331,7 @@ public class StudentStatCollect extends JFrame {
         setState.setTextFieldPanel(textBoxPanel);
 
         //determine gradetypenumber starting amount
-        typeNumber = (textBoxPanel.getComponentCount()-2)/3; //uncomment plz 11/28
+        typeNumber = (textBoxPanel.getComponentCount()-2)/3;
         System.out.println("4444 "+typeNumber);
 
         // ♡ //to next heart is 11/25
@@ -761,7 +761,7 @@ public class StudentStatCollect extends JFrame {
                     create.deleteTextBox(textBoxPanel);
                     create.deleteTextBox(textBoxPanel);
                     numOfBoxes = numOfBoxes - 3;
-                    //typeNumber--; //plz uncomment 11/28
+                    typeNumber--;
 
                     createButton.saveButtonEnable();
                 }
