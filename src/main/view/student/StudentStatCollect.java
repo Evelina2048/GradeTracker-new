@@ -626,6 +626,8 @@ public class StudentStatCollect extends JFrame {
 
     }//added 12/1
 
+    window.requestFocus(); //added 12/16 to select window focus when using remove placeholders to continue
+
     }
 
     public void visitNextStudentClass() {
