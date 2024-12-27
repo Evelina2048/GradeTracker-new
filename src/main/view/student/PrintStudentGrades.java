@@ -215,36 +215,24 @@ public class PrintStudentGrades extends JFrame {
     private void makeListOfAveragesList() {
         listOfAverages = new ArrayList<>();
         ArrayList<ArrayList<String>> seperatedBySpaceListOfGrades = new ArrayList<ArrayList<String>>();
-        System.out.println("listofaverages -3 "+allTextListForClass);
         for (int boxPanelIndex = 3; boxPanelIndex < allTextListForClass.size(); boxPanelIndex += 3) { //for each grades box
             List <String> gradeArrayForOneBox = Arrays.asList(allTextListForClass.get(boxPanelIndex).split(" "));
-            System.out.println("gradeArrayForOneBox "+ gradeArrayForOneBox);
 
             seperatedBySpaceListOfGrades.add(new ArrayList<>(gradeArrayForOneBox));
 
         }//added 11/10
             int average = 0;
-            System.out.println("seperatedBySpaceListOfGrades first "+seperatedBySpaceListOfGrades+ " size "+seperatedBySpaceListOfGrades.size());
             int thisGradeBoxTotal = 0;
 
             for (int i = 0; i < seperatedBySpaceListOfGrades.size(); i++) {
-                System.out.println("seperatedBySpaceListOfGrades wit i "+seperatedBySpaceListOfGrades.get(i));
                 thisGradeBoxTotal = seperatedBySpaceListOfGrades.get(i).stream()
                             .mapToInt(Integer::parseInt)  // Convert String to int
                             .sum();
                 gradeBoxTotal.add(thisGradeBoxTotal);
-                System.out.println("8:03PM "+thisGradeBoxTotal + "size "+gradeBoxTotal.size());
-
-                System.out.println("that -3333 "+" class "+setList.getFinalClassList().get(whichCurrClassIndex)+" gradeboxtotal "+gradeBoxTotal+ " divisor "+seperatedBySpaceListOfGrades.get(i).size());
                 average = gradeBoxTotal.get(i)/seperatedBySpaceListOfGrades.get(i).size();
                 //11/28 average = gradeBoxTotal.get(whichCurrClassIndex)/seperatedBySpaceListOfGrades.get(i).size();
-                System.out.println("that -2222 "+" class "+setList.getFinalClassList().get(whichCurrClassIndex)+ average);
                 listOfAverages.add(average);
             }
-
-            System.out.println("8:02PM gradeboxtotal "+gradeBoxTotal+ " average "+listOfAverages);
-
-    //} removed 11/10
     }
 
     private void makeGradeTypeList() {

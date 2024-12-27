@@ -80,30 +80,25 @@ private void tryToWrite(BufferedWriter writer) {
 }
 
 public void writeTextToFile(){ //Student Classes and Stat
-    System.out.println("Save mystery 2222");
     setState.setCanContinue(true);
     setUserInformation.getUsername();
     tryToWriteWithoutAppend();
 }
 
 private void tryToWriteWithoutAppend() {
-    System.out.println("Save mystery 3333");
     filePath = set.getFilePath();
     try (BufferedWriter writer = new BufferedWriter(new FileWriter(filePath))) {
         if (!classList.isEmpty()) {
             classList.clear();
         }
 
-        System.out.println("Save mystery 4444");
         for (Component component : setState.getTextFieldPanel().getComponents()) {
             if (component instanceof JTextField ) {
-                System.out.println("Save mystery 5555.1");
                 ((JTextField) component).getText();
                 tryToWriteTextFieldWithoutAppend(component, writer);
                 setState.setCanContinue(true);
             }
             else if (component instanceof JPanel) { //student stat
-                System.out.println("Save mystery 5555.2");
                 writeTextToFileWithAppend((JPanel) component);
             }
             else {
@@ -241,9 +236,9 @@ public int howManyPlaceholders() {
         String compZero = "Something went wrong with compZero in how many placeholders";
         String compOne = "Something went wrong with compOne in how many placeholders";
 
+        System.out.println("chop 4444.1");
         if (tempTextFieldPanel.getComponent(0) instanceof JPanel) {
             compZero = goIntoPanel.goIntoPanelReturnTypeOfFirstComponentInPanel((JPanel) tempTextFieldPanel.getComponent(0));
-
         }
 
         else if (tempTextFieldPanel.getComponent(0) instanceof JTextField) {
@@ -259,20 +254,23 @@ public int howManyPlaceholders() {
         }
 
     if ((compOne).equals("javax.swing.JLabel")) { //commented 8/18
+        System.out.println("chop 4444.2");
         placeholderAmount = iteratePanelForHowManyPlaceholders(1);
     }
 
     else if ((compZero.equals("javax.swing.JPanel"))) {
+        System.out.println("chop 4444.3");
         placeholderAmount = iteratePanelForHowManyPlaceholders(0);
     }
 
     else if ((goIntoPanel.goIntoPanelReturnTypeOfFirstComponentInPanel(tempTextFieldPanel).equals("javax.swing.JTextField"))) {
+        System.out.println("chop 4444.4");
         placeholderAmount = iteratePanelForHowManyPlaceholders(0);
     }
 
     else if (compZero.equals("javax.swing.JLabel")) {
+        System.out.println("chop 4444.5");
         placeholderAmount = iteratePanelForHowManyPlaceholders(1);
-
     }
 
     else {
@@ -293,15 +291,17 @@ private int iteratePanelForHowManyPlaceholders(int labelOrNotIndex) {
                 setState.setCanContinue(false);
             }
             else if (component instanceof JPanel) {
+                System.out.println("chop opt 2 emptied state "+setState.getEmptiedState(returnedBox)+" "+(!returnedBox.getText().equals("Credits (optional)")));
                 returnedBox = goIntoPanel.goIntoPanelReturnTextbox(setState.getTextFieldPanel(), i);
 
                 if (setState.getEmptiedState(returnedBox) == false && (!returnedBox.getText().equals("Credits (optional)"))) {
+                    System.out.println("chop opt 2 placeholder goes up "+returnedBox.getText());
                     placeholderAmount++;
                     setState.setCanContinue(false);
                 }
 
                 else {
-                    System.out.println("not a placeholder "+returnedBox.getText());
+                    System.out.println("not a placeholder "+returnedBox.getText()+" total placholder count: ");
                 }
             }
             else {

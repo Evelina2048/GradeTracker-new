@@ -42,23 +42,22 @@ public class GoIntoPanel {
         Container container = panel;
         if (container.getComponentCount() >= 1) {
             Component component = container.getComponent(index);
-        
 
-        if (component instanceof JTextField) {
-                JTextField textField = (JTextField) component;
-                return textField;
-            } 
-        else if (component instanceof JPanel) {
-                JPanel jpanel = (JPanel) component;
-                goIntoPanelReturnTextbox(jpanel, 0);
+            if (component instanceof JTextField) {
+                    JTextField textField = (JTextField) component;
+                    return textField;
+                }
+            else if (component instanceof JPanel) {
+                    JPanel jpanel = (JPanel) component;
+                    goIntoPanelReturnTextbox(jpanel, 0);
+                }
+            else if (component instanceof JLabel) {
+                return null;
             }
-        else if (component instanceof JLabel) {
-            return null;
-        }
 
-        else {
-            System.out.println("im confused " + component.getClass().getName());
-        }
+            else {
+                System.out.println("im confused " + component.getClass().getName());
+            }
 
         if (component instanceof JPanel) {
             JPanel jpanel = (JPanel) component;
@@ -68,7 +67,7 @@ public class GoIntoPanel {
     }
     return new JTextField("issue in go Into Panel Return Textbox");
     }
-        
+
     public Boolean checkIfHasPlaceholder(JPanel textFieldPanel2) {
         JTextField textField = new JTextField();
         for (int i = 0; i < textFieldPanel2.getComponentCount()-1; i++) {
