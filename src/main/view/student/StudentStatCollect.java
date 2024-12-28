@@ -255,6 +255,7 @@ public class StudentStatCollect extends JFrame {
                             System.out.println("inbackaction2"+ numOfBoxes);
                             if (numOfBoxes == 2) { //added 12/27 for if saved only credits and label
                                 newSet();
+                                window.requestFocus(); //added 12/28 to prevent credits box from getting focus
                             }
 
                             classLabelPanel.setVisible(true); //11/25

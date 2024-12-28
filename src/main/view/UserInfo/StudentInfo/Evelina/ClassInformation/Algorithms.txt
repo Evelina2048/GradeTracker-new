@@ -1,7 +1,10 @@
 3
+Participation
+50
+100
+Assisgnments
+25
+100 90 85 75 80 90
 Tests
-50
-75 80
-Participaiton
-50
-80
+25
+80 90
