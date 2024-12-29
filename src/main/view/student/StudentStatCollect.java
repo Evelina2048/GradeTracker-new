@@ -181,21 +181,16 @@ public class StudentStatCollect extends JFrame {
     private void backAction(JButton backButton) {
         backButton.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent e) {
-                System.out.println("chop 1111");
                 actionPriorities.setCurrentClass(currentClass);
                 actionPriorities.addClassActionListener(b -> {
                     currentClass = "StudentStatCollect";
                     actionPriorities.setCurrentClass(currentClass);
-                    System.out.println("chop 2222");
                     if(setState.getCanContinue()) {
-                        System.out.println("chop 3333");
                         decideBackActionBasedOnClass();
                     }}, 2, "backButton",null, currentClass);}});
     }
 
     private void decideBackActionBasedOnClass() {
-        System.out.println("chop 4444 " +(setState.getClassListIndex() > 0) +" placeholders is zero? "+ (fileWrite.howManyPlaceholders() == 0));
-
         if (setState.getClassListIndex() == 0 && (fileWrite.howManyPlaceholders() == 0)) { //case for back to classes
             hideWindow();
             StudentClasses studentClasses = new StudentClasses();
@@ -206,7 +201,7 @@ public class StudentStatCollect extends JFrame {
             Component[] windowComponents4 = window.getContentPane().getComponents();
             int i = 0;
             for (Component windowComp : windowComponents4) {
-                // if (windowComp.getName()!=null && windowComp.getName().equals("classlabelpanelinreadclass") ) {
+                // if (windowComp.getName()!=null && windowComp.getName().equals("classlabelpanelinreadclass") ) { //12/29
                 //     window.remove(windowComp);
                 // }
                 System.out.println("compcount after " + i + " classname "+ windowComp.getClass().getName() + " regname "+windowComp.getName() + " isvisible "+windowComp.isVisible());
@@ -215,13 +210,9 @@ public class StudentStatCollect extends JFrame {
             //
         }
         else if ((setState.getClassListIndex() > 0) && (fileWrite.howManyPlaceholders() == 0)) {
-            System.out.println("chop 5555");
             window.remove(backNextButtonsPanel); //added 12/10 bc savebttn wasnt changing and therefore not working
             buttonSetUpAction();
-            System.out.println("chop 6666");
             goToPreviousClasses();
-            // JFrame window = Set.getInstance().getWindow();
-            // Component[] windowComponents = window.getContentPane().getComponents();
         } else if (fileWrite.howManyPlaceholders() > 0) {
             Decorator decorate = new Decorator();
             SetState.getInstance().setStudentStatCollect(currentInstance);
