@@ -1,10 +1,6 @@
-3
-Tests
-40
-95 85
-Participation
-30
-100
-Labs
-30
-100 90 80 95 85 100 100
+Cyber Security
+Finite Automata
+Machine Learning
+Algorithms
+Greek
+Class to delete

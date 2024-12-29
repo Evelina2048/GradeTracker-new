@@ -108,8 +108,8 @@ public class StudentClasses extends JFrame {
         WindowAdapter windowCloseAdapter = new WindowAdapter() {
             @Override
             public void windowClosing(WindowEvent e) {
-                System.out.println("isenabled "+set.getCurrentSaveButton().isEnabled() + " getcurrentsavebuttonnull "+ (set.getCurrentSaveButton() != null));
-                if (set.getCurrentSaveButton().isEnabled() && (set.getCurrentSaveButton() != null)) {
+                //System.out.println("isenabled "+set.getCurrentSaveButton().isEnabled() + " getcurrentsavebuttonnull "+ (set.getCurrentSaveButton() != null));
+                if ((set.getCurrentSaveButton() != null) && (set.getCurrentSaveButton().isEnabled()) ) {
                     decorate.areYouSureMessage(null, "closing window", "<html><center> You did not save <br> Close anyways?", 176, 107);
                 }
             }
@@ -227,11 +227,18 @@ public class StudentClasses extends JFrame {
                     public void actionPerformed(ActionEvent e) {// remember wont run  if just enter without a click
                         saveButtonAction();
                         hideWindow();
+                        //window.remove(backNextButtonsPanel); //added 12/28 to prevent windowCloseAdapter in previous classes
+                        // window.remove(Set.getInstance().getCurrentSaveButton());
+                        Set.getInstance().setCurrentSaveButtonToNull(); //added 12/28 to prevent windowCloseAdapter in previous classes
+                        window.remove(backNextButtonsPanel); //added 12/28 to prevent windowCloseAdapter in previous classes
 
                         set.setWindow(window);
                         MainWindow main = new MainWindow();
                         main.MainWindowLaunch();
                         main.setButtonSelected();
+
+                        //Set.getInstance().setCurrentWindowClosing(default);
+                        //setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE); //added 12/28 to prevent windowCloseAdapter in previous classes
 
                         window.removeWindowListener(windowCloseAdapter);
                     }

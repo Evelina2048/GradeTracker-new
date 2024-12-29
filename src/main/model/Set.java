@@ -8,7 +8,7 @@ import javax.swing.JLabel;
 
 public class Set {
     private JFrame window;
-    private JButton saveButton;
+    private static JButton saveButton = new JButton(); //static
     private Boolean newOrExistingHasChanged = false;
     private String filePath;
 
@@ -63,7 +63,10 @@ public class Set {
     }
 
     public void setCurrentSaveButton(JButton thisSaveButton) {
-        saveButton = thisSaveButton;
+        // saveButton = thisSaveButton;
+        if (saveButton != null) {
+            saveButton.setText(thisSaveButton.getText()); ////added 12/28 to prevent creating another instance
+        }
     }
 
     public JButton getCurrentSaveButton() {
@@ -84,5 +87,10 @@ public class Set {
 
     public WindowAdapter getCurrentWindowClosing() {
         return windowCloseAdapter;
+    }
+
+    public void setCurrentSaveButtonToNull() {
+        saveButton.setEnabled(false);
+        saveButton = null;
     }
 }
