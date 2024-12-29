@@ -109,7 +109,14 @@ public class StudentClasses extends JFrame {
             @Override
             public void windowClosing(WindowEvent e) {
                 //System.out.println("isenabled "+set.getCurrentSaveButton().isEnabled() + " getcurrentsavebuttonnull "+ (set.getCurrentSaveButton() != null));
-                if ((set.getCurrentSaveButton() != null) && (set.getCurrentSaveButton().isEnabled()) ) {
+                Boolean actionPrioritiesNull = (CompositeActionListenerWithPriorities.getInstance().getCurrentClass() == null);
+                if (actionPrioritiesNull) {
+                    return;
+                }
+                Boolean equalsStudentClasses = CompositeActionListenerWithPriorities.getInstance().getCurrentClass().equals("StudentClasses Loading");
+                Boolean equalsStudentStatCollect = CompositeActionListenerWithPriorities.getInstance().getCurrentClass().equals("StudentStatCollect");
+                System.out.println("isenabled "+set.getCurrentSaveButton().isEnabled() + " getcurrentsavebuttonnull "+ (set.getCurrentSaveButton() != null)+ " currentClass "+actionPriorities.getCurrentClass());
+                if ((set.getCurrentSaveButton() != null) && (set.getCurrentSaveButton().isEnabled() && (equalsStudentClasses || equalsStudentStatCollect)) ) {
                     decorate.areYouSureMessage(null, "closing window", "<html><center> You did not save <br> Close anyways?", 176, 107);
                 }
             }
