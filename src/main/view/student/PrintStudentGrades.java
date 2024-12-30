@@ -56,6 +56,8 @@ public class PrintStudentGrades extends JFrame {
     private ArrayList<Float> amountOfFinalGrade;
     private CompositeActionListenerWithPriorities actionPriorities = CompositeActionListenerWithPriorities.getInstance();
     private JButton nextButton = createButton.nextButtonCreate();
+    JLabel instructionsWords = new JLabel("Grades (none valid left)"); // moved 12/30
+    JPanel instructionsPanel = new JPanel(); //moved 12/30
 
     public PrintStudentGrades(JFrame main, String studentOrTeacher, String existingOrNew) {
         whichCurrClassIndex = 0;
@@ -87,30 +89,49 @@ public class PrintStudentGrades extends JFrame {
 
     public void printStudentGradesLaunch() {
         actionPriorities.setCurrentClass("PrintStudentGrades");
-        studentStatCollectLaunch();
-        JLabel instructionsWords = new JLabel("Grades (none valid left)");
-        JPanel instructionsPanel = new JPanel();
-        instructionsPanel = decorate.InstructionsPanelDecorate(instructionsPanel, instructionsWords );
-        window.add(instructionsPanel);
-        buttonSetUpAction();
-        setList = SetList.getInstance();
+
         setUserInformation = SetUserInformation.getInstance();
+        String filePathForClass = setUserInformation.getPathToClassInformationFileWithChosenIndex(whichCurrClassIndex); //classIndex
+        allTextListForClass = fileHandler.readFileToList(filePathForClass);
+
+        //JLabel instructionsWords = new JLabel("Grades (none valid left)"); // moved 12/30
+        //JPanel instructionsPanel = new JPanel();
+        //instructionsPanel = decorate.InstructionsPanelDecorate(instructionsPanel, instructionsWords );
+        //Set.getInstance().getWindow().add(instructionsPanel); //
+        buttonSetUpAction(); //moved 12/30
+
+        if (allTextListForClass.size() > 1) { //moved 12/30
+        System.out.println("check");
+        studentStatCollectLaunch();
+        // JLabel instructionsWords = new JLabel("Grades (none valid left)");
+        // JPanel instructionsPanel = new JPanel();
+        // instructionsPanel = decorate.InstructionsPanelDecorate(instructionsPanel, instructionsWords );
+        // window.add(instructionsPanel);
+        // buttonSetUpAction(); //12/30
+        setList = SetList.getInstance();
+        // setUserInformation = SetUserInformation.getInstance(); //commented 12/30
 
         gradeList = new ArrayList<>();
         amountOfFinalGrade = new ArrayList<>();
         listOfAverages = new ArrayList<>();
         percentageOfGradeList = new ArrayList<>();
-            String filePathForClass = setUserInformation.getPathToClassInformationFileWithChosenIndex(whichCurrClassIndex); //classIndex
-            allTextListForClass = fileHandler.readFileToList(filePathForClass);
+        //String filePathForClass = setUserInformation.getPathToClassInformationFileWithChosenIndex(whichCurrClassIndex); //classIndex //commented 12/30
+        // allTextListForClass = fileHandler.readFileToList(filePathForClass); //commented 12/30
 
-            printArray(allTextListForClass);
-            System.out.println("after print array");
-            if (allTextListForClass.size() > 1) {
+        printArray(allTextListForClass);
+        System.out.println("after print array");
+        System.out.println("minute 4444");
+
+        // if (allTextListForClass.size() > 1) { //commented 12/30
+            System.out.println("minute 5555");
             ArrayList<String> tempList = new ArrayList<String>(Arrays.asList(allTextListForClass.get(3).split(" ")));
+            System.out.println("minute 6666 "+tempList);
 
             gradeList.add(tempList); //get grades sect for class
+            System.out.println("minute 7777 "+gradeList);
 
             makePercentageOfGradeList();
+            System.out.println("minute 8888");
 
             makeGradeTypeList();
 
@@ -118,17 +139,22 @@ public class PrintStudentGrades extends JFrame {
 
             makeAmountOfFinalGradeList();
 
-        float total = getGradeTotal();
+            float total = getGradeTotal();
 
-        addEverythingToWindow(total);
-            }
-        // else {
+            addEverythingToWindow(total);
+            System.out.println("minute end");
+            instructionsPanel.setVisible(false);
+        }
+        else {
+            instructionsPanel = decorate.InstructionsPanelDecorate(instructionsPanel, instructionsWords );
+            Set.getInstance().getWindow().add(instructionsPanel);
 
-        // }
+        }
         actionPriorities.setCurrentClass("PrintStudentGrades");
     }
 
     private void addEverythingToWindow(float total) {
+        System.out.println("minute 9999");
         Border blackline = BorderFactory.createLineBorder(Color.black);
         ArrayList <Integer> gradeTypeNumberList = setList.getGradeTypeList();
 
@@ -173,7 +199,7 @@ public class PrintStudentGrades extends JFrame {
 
         // 12/7 for (int i = 0; i < gradeTypeNumberList.get(whichCurrClassIndex); i++) { //shouldnt be for classes, should be for gradetypes then classes
         for (int i = 0; i < gradeTypeNumberList.get(whichCurrClassIndex); i++) { //shouldnt be for classes, should be for gradetypes then classes
-
+            System.out.println("minute 10 10 10 10");
             // commendedout 12/7 JLabel gradeTypeNameLabel = new JLabel(gradeTypeList.get(whichCurrClassIndex+i));
             JLabel gradeTypeNameLabel = new JLabel(gradeTypeList.get(gradeTypeIndex)); //added 12/7
             gradeTypeIndex++; //added 12/7
@@ -197,6 +223,19 @@ public class PrintStudentGrades extends JFrame {
             allContainer.add(contributionLabel);
         }
         window.add(borderContainer);
+        
+        //12/30
+        Component[] windowComponents3 = window.getContentPane().getComponents();
+        int i = 0;
+        for (Component windowComp : windowComponents3) {
+            if ((windowComp.getName() != null) && (windowComp.getName().equals("classlabelpanelinreadclass"))) {
+                window.remove(windowComp);
+            }
+            System.out.println("compcount " + i + " classname "+ windowComp.getClass().getName() + " regname "+windowComp.getName() + " isvisible "+windowComp.isVisible());
+            i++;
+        }
+        //12/30
+        //window.add(new JLabel("Test"));
     }
 
     private float getGradeTotal() {
@@ -269,6 +308,7 @@ public class PrintStudentGrades extends JFrame {
                 actionPriorities.addClassActionListener(new ActionListener() {
                     @Override
                     public void actionPerformed(ActionEvent e) {
+                        System.out.println("minute 1111");
                         doBackButtonProcedure();
             }
                 }, 1, "backButton", null, "PrintStudentGrades");
@@ -297,11 +337,13 @@ public class PrintStudentGrades extends JFrame {
         //checkForNextButtonProcedure();
 
         backNextButtonsPanel = createButton.makeBackNextButtonsPanel(backButtonPanel, new JPanel(), nextButtonPanel);
-        window.add(backNextButtonsPanel, BorderLayout.SOUTH);
+        Set.getInstance().getWindow().add(backNextButtonsPanel, BorderLayout.SOUTH);
     }
     public void doBackButtonProcedure() {
         //if at class index 0
+        System.out.println("minute 2222");
         if (whichCurrClassIndex > 0) { //if no previous print grades classes
+            System.out.println("minute 3333");
             hideWindow();
             System.out.println("now index before "+whichCurrClassIndex);
             whichCurrClassIndex--; //only if there are more
@@ -352,7 +394,6 @@ public class PrintStudentGrades extends JFrame {
         borderContainer.setVisible(false);
         borderContainer.removeAll();
         backNextButtonsPanel.removeAll();
-
     }
 
     public class EnterAction extends AbstractAction {

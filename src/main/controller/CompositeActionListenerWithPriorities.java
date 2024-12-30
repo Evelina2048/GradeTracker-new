@@ -11,7 +11,7 @@ import javax.swing.JRadioButton;
 import javax.swing.Timer;
 
 public class CompositeActionListenerWithPriorities implements ActionListener {
-  private Map<Integer, ArrayList<ActionListener>> listeners = 
+  private Map<Integer, ArrayList<ActionListener>> listeners =
     new TreeMap<Integer,ArrayList<ActionListener>>();
     private boolean isProcessing = false;
     private String currentClass = null;//"Current class not changed";
@@ -27,6 +27,7 @@ public class CompositeActionListenerWithPriorities implements ActionListener {
 
   @Override
   public void actionPerformed(ActionEvent e) {
+    System.out.println("in action performed");
     if (isProcessing) {
       return; // Prevent re-entry
     }
@@ -37,6 +38,7 @@ public class CompositeActionListenerWithPriorities implements ActionListener {
             ArrayList<ActionListener> listenerList = new ArrayList<>(listeners.get(priority)); // Make a copy of the list
             for (ActionListener listener : listenerList) {
               listener.actionPerformed(e); // Execute the action
+              System.out.println("actionn performed");
             }
         }
     } finally {
