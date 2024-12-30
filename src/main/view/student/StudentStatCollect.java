@@ -207,6 +207,8 @@ public class StudentStatCollect extends JFrame {
                 System.out.println("compcount after " + i + " classname "+ windowComp.getClass().getName() + " regname "+windowComp.getName() + " isvisible "+windowComp.isVisible());
                 i++;
             }
+            window.requestFocus(); //added 12/30 to prevent credits box from getting focus
+
             //
         }
         else if ((setState.getClassListIndex() > 0) && (fileWrite.howManyPlaceholders() == 0)) {
@@ -233,6 +235,7 @@ public class StudentStatCollect extends JFrame {
                             StudentClasses studentClasses = new StudentClasses();
                             //saveButtonAction("backButton");
                             studentClasses.studentClassesLaunch();
+                            window.requestFocus(); //added 12/30 to prevent credits box from getting focus
                         }
                         else if ((setState.getClassListIndex() > 0)) {
                             //goToPreviousClasses();
@@ -248,6 +251,7 @@ public class StudentStatCollect extends JFrame {
                                 newSet();
                                 window.requestFocus(); //added 12/28 to prevent credits box from getting focus
                             }
+                            window.requestFocus(); //added 12/30 to prevent credits box from getting focus
 
                             classLabelPanel.setVisible(true); //11/25
                             textBoxPanel.setVisible(true); //11/25
