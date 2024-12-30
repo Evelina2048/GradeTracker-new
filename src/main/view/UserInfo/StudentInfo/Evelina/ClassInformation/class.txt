@@ -3,4 +3,3 @@ Finite Automata
 Machine Learning
 Algorithms
 Greek
-Class to delete

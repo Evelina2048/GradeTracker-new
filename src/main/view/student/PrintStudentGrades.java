@@ -88,7 +88,7 @@ public class PrintStudentGrades extends JFrame {
     public void printStudentGradesLaunch() {
         actionPriorities.setCurrentClass("PrintStudentGrades");
         studentStatCollectLaunch();
-        JLabel instructionsWords = new JLabel("Grades (none)");
+        JLabel instructionsWords = new JLabel("Grades (none valid left)");
         JPanel instructionsPanel = new JPanel();
         instructionsPanel = decorate.InstructionsPanelDecorate(instructionsPanel, instructionsWords );
         window.add(instructionsPanel);
@@ -104,8 +104,10 @@ public class PrintStudentGrades extends JFrame {
             allTextListForClass = fileHandler.readFileToList(filePathForClass);
 
             printArray(allTextListForClass);
-
+            System.out.println("after print array");
+            if (allTextListForClass.size() > 1) {
             ArrayList<String> tempList = new ArrayList<String>(Arrays.asList(allTextListForClass.get(3).split(" ")));
+
             gradeList.add(tempList); //get grades sect for class
 
             makePercentageOfGradeList();
@@ -119,6 +121,10 @@ public class PrintStudentGrades extends JFrame {
         float total = getGradeTotal();
 
         addEverythingToWindow(total);
+            }
+        // else {
+
+        // }
         actionPriorities.setCurrentClass("PrintStudentGrades");
     }
 
@@ -270,7 +276,10 @@ public class PrintStudentGrades extends JFrame {
 
         JPanel nextButtonPanel = new JPanel();
         nextButtonPanel.add(nextButton);
-        Boolean atEndOfClasses = whichCurrClassIndex == SetList.getInstance().getFinalClassList().size() -1 ; //-1 to account for index starting from 0 and size not
+
+        //
+        System.out.println("at end of classes? "+whichCurrClassIndex+ " ==? "+(SetList.getInstance().getFinalClassList().size() -1));
+        Boolean atEndOfClasses = (whichCurrClassIndex == SetList.getInstance().getFinalClassList().size() -1) ; //-1 to account for index starting from 0 and size not
         if (atEndOfClasses) {
             nextButton.setEnabled(false);
 
@@ -279,10 +288,14 @@ public class PrintStudentGrades extends JFrame {
         else {
             nextButton.addActionListener(new ActionListener() {
                 public void actionPerformed(ActionEvent e) {
-                    doNextButtonProcedure();
+                    //doNextButtonProcedure();
+                    checkForNextButtonProcedure();
                 }
             });
         }
+
+        //checkForNextButtonProcedure();
+
         backNextButtonsPanel = createButton.makeBackNextButtonsPanel(backButtonPanel, new JPanel(), nextButtonPanel);
         window.add(backNextButtonsPanel, BorderLayout.SOUTH);
     }
@@ -306,6 +319,18 @@ public class PrintStudentGrades extends JFrame {
             actionPriorities.setCurrentClass("StudentStatCollect");
         }
     }
+    private void checkForNextButtonProcedure() {
+        System.out.println("at end of classes? "+whichCurrClassIndex+ " ==? "+(SetList.getInstance().getFinalClassList().size() -1));
+        Boolean atEndOfClasses = (whichCurrClassIndex == SetList.getInstance().getFinalClassList().size() -1) ; //-1 to account for index starting from 0 and size not
+        if (atEndOfClasses) {
+            nextButton.setEnabled(false);
+
+        }
+
+        else {
+            doNextButtonProcedure();
+        }
+    }
 
     public void doNextButtonProcedure() {
         hideWindow();
@@ -315,6 +340,7 @@ public class PrintStudentGrades extends JFrame {
     }
 
     public void printArray(ArrayList<String> list) {
+        System.out.println("list.size() "+list.size());
         for (int i = 0; i < list.size(); i++) {
             System.out.println("item "+list.get(i));
         }
@@ -336,10 +362,11 @@ public class PrintStudentGrades extends JFrame {
             actionPriorities.addClassActionListener(new ActionListener() {
                 @Override
                 public void actionPerformed(ActionEvent e) { // remember won't run if just enter without a click
-                    System.out.println("enteraction");
-                    if (nextButton.isEnabled()) {
-                        doNextButtonProcedure();
-                    }
+                    // System.out.println("enteraction");
+                    // if (nextButton.isEnabled()) {
+                    //     doNextButtonProcedure();
+                    // }
+                    checkForNextButtonProcedure();
                 }
             }, 1, "EnterAction", null, "PrintStudentGrades");  // Add this ActionListener with priority 1
         }
