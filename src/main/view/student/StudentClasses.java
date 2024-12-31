@@ -105,34 +105,37 @@ public class StudentClasses extends JFrame {
         window = set.getWindow();
 
 
-        WindowAdapter windowCloseAdapter = new WindowAdapter() {
-            @Override
-            public void windowClosing(WindowEvent e) {
-                //System.out.println("isenabled "+set.getCurrentSaveButton().isEnabled() + " getcurrentsavebuttonnull "+ (set.getCurrentSaveButton() != null));
-                Boolean actionPrioritiesNull = (CompositeActionListenerWithPriorities.getInstance().getCurrentClass() == null);
-                if (actionPrioritiesNull) {
-                    return;
-                }
-                Boolean equalsStudentClasses = CompositeActionListenerWithPriorities.getInstance().getCurrentClass().equals("StudentClasses Loading");
-                Boolean equalsStudentStatCollect = CompositeActionListenerWithPriorities.getInstance().getCurrentClass().equals("StudentStatCollect");
-                System.out.println("isenabled "+set.getCurrentSaveButton().isEnabled() + " getcurrentsavebuttonnull "+ (set.getCurrentSaveButton() != null)+ " currentClass "+actionPriorities.getCurrentClass());
-                if ((set.getCurrentSaveButton() != null) && (set.getCurrentSaveButton().isEnabled() && (equalsStudentClasses || equalsStudentStatCollect)) ) {
-                    System.out.println("then 1111");
-                    decorate.areYouSureMessage(null, "closing window", "<html><center> You did not save <br> Close anyways?", 176, 107);
-                }
-                else {
-                    window.dispose(); //added 12/29 for when save button doesn't work
-                }
-            }
+    //     WindowAdapter windowCloseAdapter = new WindowAdapter() { //commented 12/31
+    //         @Override
+    //         public void windowClosing(WindowEvent e) {
+    //             //System.out.println("isenabled "+set.getCurrentSaveButton().isEnabled() + " getcurrentsavebuttonnull "+ (set.getCurrentSaveButton() != null));
+    //             Boolean actionPrioritiesNull = (CompositeActionListenerWithPriorities.getInstance().getCurrentClass() == null);
+    //             if (actionPrioritiesNull) {
+    //                 System.out.println("then 1111.6");
+    //                 window.dispose(); //added 12/29 for when save button doesn't work
+    //                 return;
+    //             }
+    //             Boolean equalsStudentClasses = CompositeActionListenerWithPriorities.getInstance().getCurrentClass().equals("StudentClasses Loading");
+    //             Boolean equalsStudentStatCollect = CompositeActionListenerWithPriorities.getInstance().getCurrentClass().equals("StudentStatCollect");
+    //             System.out.println("isenabled "+set.getCurrentSaveButton().isEnabled() + " getcurrentsavebuttonnull "+ (set.getCurrentSaveButton() != null)+ " currentClass "+actionPriorities.getCurrentClass());
+    //             if ((set.getCurrentSaveButton() != null) && (set.getCurrentSaveButton().isEnabled() && (equalsStudentClasses || equalsStudentStatCollect)) ) {
+    //                 System.out.println("then 1111");
+    //                 decorate.areYouSureMessage(null, "closing window", "<html><center> You did not save <br> Close anyways?", 176, 107);
+    //             }
+    //             else {
+    //                 System.out.println("then 1111.5");
+    //                 window.dispose(); //added 12/29 for when save button doesn't work
+    //             }
+    //         }
 
-            @Override
-            public void windowGainedFocus(WindowEvent e) {
-                System.out.println("Window gained focus");
-    }
-        };
-        Set.getInstance().setCurrentWindowClosing(windowCloseAdapter);
+    //         @Override
+    //         public void windowGainedFocus(WindowEvent e) {
+    //             System.out.println("Window gained focus");
+    // }
+    //     };
+    //     Set.getInstance().setCurrentWindowClosing(windowCloseAdapter);
 
-        window.addWindowListener(windowCloseAdapter);
+    //     window.addWindowListener(windowCloseAdapter);
 
         //p
         window.getContentPane().addMouseListener(new MouseAdapter() {
@@ -174,6 +177,38 @@ public class StudentClasses extends JFrame {
         buttonSetUpAction();
 
         actionPriorities.setCurrentClass(currentClass);
+
+        WindowAdapter windowCloseAdapter = new WindowAdapter() {//moved 12/30
+            @Override
+            public void windowClosing(WindowEvent e) {
+                //System.out.println("isenabled "+set.getCurrentSaveButton().isEnabled() + " getcurrentsavebuttonnull "+ (set.getCurrentSaveButton() != null));
+                Boolean actionPrioritiesNull = (CompositeActionListenerWithPriorities.getInstance().getCurrentClass() == null);
+                if (actionPrioritiesNull) {
+                    System.out.println("then 1111.6");
+                    window.dispose(); //added 12/29 for when save button doesn't work
+                    return;
+                }
+                Boolean equalsStudentClasses = CompositeActionListenerWithPriorities.getInstance().getCurrentClass().equals("StudentClasses Loading");
+                Boolean equalsStudentStatCollect = CompositeActionListenerWithPriorities.getInstance().getCurrentClass().equals("StudentStatCollect");
+                System.out.println("isenabled "+set.getCurrentSaveButton().isEnabled() + " getcurrentsavebuttonnull "+ (set.getCurrentSaveButton() != null)+ " currentClass "+actionPriorities.getCurrentClass());
+                if ((set.getCurrentSaveButton() != null) && (set.getCurrentSaveButton().isEnabled() && (equalsStudentClasses || equalsStudentStatCollect)) ) {
+                    System.out.println("then 1111");
+                    decorate.areYouSureMessage(null, "closing window", "<html><center> You did not save <br> Close anyways?", 176, 107);
+                }
+                else {
+                    System.out.println("then 1111.5");
+                    window.dispose(); //added 12/29 for when save button doesn't work
+                }
+            }
+
+            @Override
+            public void windowGainedFocus(WindowEvent e) {
+                System.out.println("Window gained focus");
+    }
+        };
+        Set.getInstance().setCurrentWindowClosing(windowCloseAdapter);
+
+        window.addWindowListener(windowCloseAdapter);
     }
 
     private void loadIfNeeded() {
@@ -690,7 +725,7 @@ public class StudentClasses extends JFrame {
                 //moveClassButton.setEnabled(true);
                 //if the file has loaded information attached
                 if (setState.getLoadedState(selectedTextBox) && (fileHandler.fileExists(filePath)) && fileHandler.fileIsNotEmpty(filePath)) {
-                    yesOrNoDialog[0] = decorate.areYouSureMessage(selectedTextBox, "deleting", "<html><center>Deleting this class will optiondelete <br>its loaded information.<br>Do you wish to continue?", 250, 120);
+                    yesOrNoDialog[0] = decorate.areYouSureMessage(selectedTextBox, "deleting", "<html><center>Deleting this class will delete <br>its loaded information.<br>Do you wish to continue?", 250, 120);
 
                     selectedTextBox.setForeground(Color.GRAY);
                     selectedTextBox.setBorder(borderRegular);
