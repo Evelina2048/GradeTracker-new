@@ -362,7 +362,7 @@ public class Decorator {
             @Override
             public void windowClosing(WindowEvent e) {
                 dialog.dispose();
-                setState.setCanContinue(false);
+                //setState.setCanContinue(false); //cancelled 12/30
                 //window.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE); //added 12/29
             }
         });

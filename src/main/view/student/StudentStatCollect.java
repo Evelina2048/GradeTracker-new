@@ -75,7 +75,7 @@ public class StudentStatCollect extends JFrame {
 
     private static int typeNumber;
     private int numOfBoxes = 0;
-    private int maxBoxes = 26;
+    private int maxBoxes = 21; //was previously 26 as of 12/31
     private int totalPercentage = 0;
 
     private StudentStatCollect currentInstance;
@@ -812,14 +812,16 @@ public class StudentStatCollect extends JFrame {
         }
 
         private void boxManageCreate(String placeholder, String type, Boolean boxLoaded) {
-            if (numOfBoxes < maxBoxes) {
+            System.out.println("the great box mystery ");
+            System.out.println("numofboxes "+(numOfBoxes==maxBoxes));
+            if ((numOfBoxes) < maxBoxes) {
                 textBoxPanel.add(create.typeBox(placeholder, type, boxLoaded));
                 classLabelPanel.add(textBoxPanel);
                 create.windowFix();
                 numOfBoxes++;
                 System.out.println(" boxmanagecreateTwo "+numOfBoxes+ " maxboxes "+maxBoxes);
             }
-            else if (numOfBoxes == maxBoxes) {
+            else if ((numOfBoxes) == maxBoxes) {
                 Decorator decorate = new Decorator();
                 decorate.maximumAmountReachedPopup();
                 setState.setCanContinue(false);
