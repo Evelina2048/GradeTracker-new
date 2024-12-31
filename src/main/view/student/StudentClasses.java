@@ -184,7 +184,6 @@ public class StudentClasses extends JFrame {
                 //System.out.println("isenabled "+set.getCurrentSaveButton().isEnabled() + " getcurrentsavebuttonnull "+ (set.getCurrentSaveButton() != null));
                 Boolean actionPrioritiesNull = (CompositeActionListenerWithPriorities.getInstance().getCurrentClass() == null);
                 if (actionPrioritiesNull) {
-                    System.out.println("then 1111.6");
                     window.dispose(); //added 12/29 for when save button doesn't work
                     return;
                 }
@@ -192,11 +191,9 @@ public class StudentClasses extends JFrame {
                 Boolean equalsStudentStatCollect = CompositeActionListenerWithPriorities.getInstance().getCurrentClass().equals("StudentStatCollect");
                 System.out.println("isenabled "+set.getCurrentSaveButton().isEnabled() + " getcurrentsavebuttonnull "+ (set.getCurrentSaveButton() != null)+ " currentClass "+actionPriorities.getCurrentClass());
                 if ((set.getCurrentSaveButton() != null) && (set.getCurrentSaveButton().isEnabled() && (equalsStudentClasses || equalsStudentStatCollect)) ) {
-                    System.out.println("then 1111");
                     decorate.areYouSureMessage(null, "closing window", "<html><center> You did not save <br> Close anyways?", 176, 107);
                 }
                 else {
-                    System.out.println("then 1111.5");
                     window.dispose(); //added 12/29 for when save button doesn't work
                 }
             }

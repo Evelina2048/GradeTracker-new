@@ -119,19 +119,13 @@ public class PrintStudentGrades extends JFrame {
         // allTextListForClass = fileHandler.readFileToList(filePathForClass); //commented 12/30
 
         printArray(allTextListForClass);
-        System.out.println("after print array");
-        System.out.println("minute 4444");
 
         // if (allTextListForClass.size() > 1) { //commented 12/30
-            System.out.println("minute 5555");
             ArrayList<String> tempList = new ArrayList<String>(Arrays.asList(allTextListForClass.get(3).split(" ")));
-            System.out.println("minute 6666 "+tempList);
 
             gradeList.add(tempList); //get grades sect for class
-            System.out.println("minute 7777 "+gradeList);
 
             makePercentageOfGradeList();
-            System.out.println("minute 8888");
 
             makeGradeTypeList();
 
@@ -142,7 +136,6 @@ public class PrintStudentGrades extends JFrame {
             float total = getGradeTotal();
 
             addEverythingToWindow(total);
-            System.out.println("minute end");
             instructionsPanel.setVisible(false);
         }
         else {
@@ -154,7 +147,6 @@ public class PrintStudentGrades extends JFrame {
     }
 
     private void addEverythingToWindow(float total) {
-        System.out.println("minute 9999");
         Border blackline = BorderFactory.createLineBorder(Color.black);
         ArrayList <Integer> gradeTypeNumberList = setList.getGradeTypeList();
 
@@ -199,7 +191,6 @@ public class PrintStudentGrades extends JFrame {
 
         // 12/7 for (int i = 0; i < gradeTypeNumberList.get(whichCurrClassIndex); i++) { //shouldnt be for classes, should be for gradetypes then classes
         for (int i = 0; i < gradeTypeNumberList.get(whichCurrClassIndex); i++) { //shouldnt be for classes, should be for gradetypes then classes
-            System.out.println("minute 10 10 10 10");
             // commendedout 12/7 JLabel gradeTypeNameLabel = new JLabel(gradeTypeList.get(whichCurrClassIndex+i));
             JLabel gradeTypeNameLabel = new JLabel(gradeTypeList.get(gradeTypeIndex)); //added 12/7
             gradeTypeIndex++; //added 12/7
@@ -308,7 +299,6 @@ public class PrintStudentGrades extends JFrame {
                 actionPriorities.addClassActionListener(new ActionListener() {
                     @Override
                     public void actionPerformed(ActionEvent e) {
-                        System.out.println("minute 1111");
                         doBackButtonProcedure();
             }
                 }, 1, "backButton", null, "PrintStudentGrades");
@@ -341,9 +331,7 @@ public class PrintStudentGrades extends JFrame {
     }
     public void doBackButtonProcedure() {
         //if at class index 0
-        System.out.println("minute 2222");
         if (whichCurrClassIndex > 0) { //if no previous print grades classes
-            System.out.println("minute 3333");
             hideWindow();
             System.out.println("now index before "+whichCurrClassIndex);
             whichCurrClassIndex--; //only if there are more

@@ -95,7 +95,6 @@ public class Decorator {
     }
 
     public String areYouSureMessage(JTextField importedTextField, String myReason, String text, int width, int height) {
-        System.out.println("then 2222");
         setState.setCanContinue(false); //added 12/1 to prevent double popup
         reason = myReason;
         textField = importedTextField;
@@ -121,7 +120,7 @@ public class Decorator {
         dialog.addWindowListener(new WindowAdapter() {  //11/23 so that back button still works after close
             @Override
             public void windowClosing(WindowEvent e) {
-                noButtonAction(); //problem 1111
+                noButtonAction();
             }
         });
 
@@ -138,7 +137,6 @@ public class Decorator {
         dialog.setSize(width,height); //250, 120
 
         yesButtonActionListener(yesButton);
-        System.out.println("then 3333");
         noButtonActionListener(noButton);
 
         dialog.setLocationRelativeTo(window);
@@ -266,10 +264,8 @@ public class Decorator {
     }
 
     private void noButtonActionListener(JButton noButton) {
-        System.out.println("then 4444");
         noButton.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent e) {
-                System.out.println("then 5555");
                 noButtonAction();
             }
         });
@@ -278,17 +274,13 @@ public class Decorator {
 
     private void noButtonAction() {
         System.out.println("in no button action");
-        System.out.println("then 6666");
         if (reason == "closing window") {
-            System.out.println("then 7777");
             window.setDefaultCloseOperation(JFrame.DO_NOTHING_ON_CLOSE); //commented out 12/29
         }
         window.requestFocusInWindow();
         dialog.setVisible(false);
         window.requestFocusInWindow();
-        System.out.println("then 8888");
         if (dialog != null) {
-            System.out.println("then 9999");
             dialog.dispose();
             setState.setCanContinue(true); //11/19
         }
@@ -360,8 +352,8 @@ public class Decorator {
         setState.setCanContinue(false);
         okButton.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent e) {
-                //ialog.setVisible(false);
-                //dialog.dispose();
+                dialog.setVisible(false);
+                dialog.dispose();
                 //setState.setCanContinue(false); //commented out on 12/26 because it prevents saving
                 setState.setCanContinue(true); //added 12/26 because of above
             }
@@ -369,7 +361,7 @@ public class Decorator {
         dialog.addWindowListener(new WindowAdapter() {
             @Override
             public void windowClosing(WindowEvent e) {
-                //dialog.dispose();
+                dialog.dispose();
                 setState.setCanContinue(false);
                 //window.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE); //added 12/29
             }

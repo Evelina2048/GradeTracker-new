@@ -236,7 +236,6 @@ public int howManyPlaceholders() {
         String compZero = "Something went wrong with compZero in how many placeholders";
         String compOne = "Something went wrong with compOne in how many placeholders";
 
-        System.out.println("chop 4444.1");
         if (tempTextFieldPanel.getComponent(0) instanceof JPanel) {
             compZero = goIntoPanel.goIntoPanelReturnTypeOfFirstComponentInPanel((JPanel) tempTextFieldPanel.getComponent(0));
         }
@@ -254,22 +253,18 @@ public int howManyPlaceholders() {
         }
 
     if ((compOne).equals("javax.swing.JLabel")) { //commented 8/18
-        System.out.println("chop 4444.2");
         placeholderAmount = iteratePanelForHowManyPlaceholders(1);
     }
 
     else if ((compZero.equals("javax.swing.JPanel"))) {
-        System.out.println("chop 4444.3");
         placeholderAmount = iteratePanelForHowManyPlaceholders(0);
     }
 
     else if ((goIntoPanel.goIntoPanelReturnTypeOfFirstComponentInPanel(tempTextFieldPanel).equals("javax.swing.JTextField"))) {
-        System.out.println("chop 4444.4");
         placeholderAmount = iteratePanelForHowManyPlaceholders(0);
     }
 
     else if (compZero.equals("javax.swing.JLabel")) {
-        System.out.println("chop 4444.5");
         placeholderAmount = iteratePanelForHowManyPlaceholders(1);
     }
 
