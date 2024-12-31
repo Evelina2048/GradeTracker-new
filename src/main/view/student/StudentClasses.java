@@ -740,26 +740,30 @@ public class StudentClasses extends JFrame {
                 }
 
 
-                pickAppropriateInstructionWordsAndPanels();
+                pickAppropriateInstructionWordsAndPanels(yesOrNoDialog[0]);
 
                 leaveDeleteModeButton();
             }
             });
     }
 
-    private void pickAppropriateInstructionWordsAndPanels() {
+    private void pickAppropriateInstructionWordsAndPanels(String yesOrNo) {
+        System.out.println("ours "+setState.getTextFieldPanel().getComponentCount());
         window.remove(instructionsPanel);
-        if (setState.getTextFieldPanel().getComponentCount() > 0) {
+        if (setState.getTextFieldPanel().getComponentCount() > 0 && (yesOrNo == "yes")) {
             instructionsWordsAndPanel("Box deleted");
-            
+        }
+
+        else if (setState.getTextFieldPanel().getComponentCount() > 0 && (yesOrNo == "no")){
+            instructionsWordsAndPanel("Nothing deleted");
         }
 
         else if (setState.getTextFieldPanel().getComponentCount() == 0) {
             instructionsWordsAndPanel("All boxes deleted. Leave delete mode to edit.");
-            
         }
 
         else {
+            instructionsWordsAndPanel("Error");
         }
     }
 

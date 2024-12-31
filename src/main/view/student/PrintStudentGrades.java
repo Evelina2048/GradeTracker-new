@@ -164,7 +164,7 @@ public class PrintStudentGrades extends JFrame {
 
         borderContainer.add(allContainer,BorderLayout.CENTER);
 
-        JLabel finalgrade = new JLabel("Final Grade: "+total);
+        JLabel finalgrade = new JLabel("Final Grade: "+Math.round(total * 10.0) / 10.0);
         finalgrade.setBorder(blackline);
         finalgrade.setHorizontalAlignment(JLabel.CENTER);
         borderContainer.add(finalgrade,BorderLayout.SOUTH);
@@ -198,18 +198,18 @@ public class PrintStudentGrades extends JFrame {
             gradeTypeNameLabel.setBorder(blackline);
             allContainer.add(gradeTypeNameLabel);
 
-            JLabel listOfAveragesLabel = new JLabel(setList.getFinalClassList().get(whichCurrClassIndex) + "!" +String.valueOf(listOfAverages.get(i)));
+            JLabel listOfAveragesLabel = new JLabel(String.valueOf(listOfAverages.get(i)));
             listOfAveragesLabel.setBorder(blackline);
             allContainer.add(listOfAveragesLabel);
 
-            JLabel percentageOfGradeLabel = new JLabel(setList.getFinalClassList().get(whichCurrClassIndex) + "@" +String.valueOf(percentageOfGradeList.get(i)));
+            JLabel percentageOfGradeLabel = new JLabel(String.valueOf(percentageOfGradeList.get(i)));
             percentageOfGradeLabel.setBorder(blackline);
             allContainer.add(percentageOfGradeLabel);
 
             //new JLabel("heyo "+(String.valueOf((float) percentageOfGradeList.get(i)/100*gradeBoxTotal.get(i))))
             float currPercentageOfGrade = percentageOfGradeList.get(i);
 
-            JLabel contributionLabel = new JLabel(setList.getFinalClassList().get(whichCurrClassIndex) + "#" +(String.valueOf(((float) currPercentageOfGrade *  listOfAverages.get(i))/100))); //11/29 changed from gradeBoxTotal to listOfAverages because would cause a bug when multiple in one gradebox
+            JLabel contributionLabel = new JLabel((String.valueOf(((float) currPercentageOfGrade *  listOfAverages.get(i))/100))); //11/29 changed from gradeBoxTotal to listOfAverages because would cause a bug when multiple in one gradebox
             contributionLabel.setBorder(blackline);
             allContainer.add(contributionLabel);
         }
@@ -336,7 +336,7 @@ public class PrintStudentGrades extends JFrame {
             System.out.println("now index before "+whichCurrClassIndex);
             whichCurrClassIndex--; //only if there are more
             nextButton.setEnabled(true); //added 11/29
-            gradeBoxTotal.clear(); //added 12/31
+            gradeBoxTotal.clear(); //added !12/31
             printStudentGradesLaunch();
             System.out.println("now index after "+whichCurrClassIndex);
             actionPriorities.setCurrentClass("PrintStudentGrades");
