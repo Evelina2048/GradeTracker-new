@@ -35,6 +35,9 @@ import controller.Decorator;
 import controller.CreateButton;
 import controller.CompositeActionListenerWithPriorities;
 
+import java.awt.event.WindowAdapter;
+import java.awt.event.WindowEvent;
+
 public class MainWindow extends JFrame {
 private String studentOrTeacher;
 private boolean moveOnPossible = false;
@@ -91,6 +94,14 @@ public void MainWindowLaunch() {
     window.requestFocusInWindow();
     currentClass = "MainWindow";
     actionPriorities.setCurrentClass(currentClass);
+    WindowAdapter windowCloseAdapter = new WindowAdapter() {//moved 12/30
+        @Override
+        public void windowClosing(WindowEvent e) {
+                window.dispose(); //added 12/29 for when save button doesn't work
+        }
+
+    };
+    window.addWindowListener(windowCloseAdapter);
 }
 
 private void windowSetUp() {
@@ -100,7 +111,7 @@ private void windowSetUp() {
     //window.setLayout(null);
     window.setSize(windowWidth, windowHeight);
 }
- 
+
 private void InstructionsWordsWindow() {
         //JLabel instructionsWords = new JLabel("Hello 1234567890! Are you a student or a teacher?");
         instructionsWords = new JLabel("Hello "+setUserInformation.getUsername() + "! Are you a student or a teacher?");
