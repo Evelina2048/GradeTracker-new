@@ -133,7 +133,7 @@ public class Decorator {
 
         yesButton.setFocusPainted(false);
         noButton.setFocusPainted(true); //added 12/30 to prevent accidentally deleting things
-        
+
         dialog.add(noButton);
         dialog.setSize(width,height); //250, 120
 
@@ -189,10 +189,10 @@ public class Decorator {
         JPanel panelForDeleting = new JPanel();
         panelForDeleting.add(textField);
         create.deleteTextBox(panelForDeleting);
-        Path filePath = Paths.get(setUserInformation.getPathToClassInformationFileWithTextField(textField));
+        Path filePath = Paths.get(SetUserInformation.getInstance().getPathToClassInformationFileWithTextField(textField));
         try {
             Files.deleteIfExists(filePath);
-            setUserInformation.addDeleteToQueue(textField.getText());
+            SetUserInformation.getInstance().addDeleteToQueue(textField.getText());
         } catch (IOException e1) {
             e1.printStackTrace();
         }
