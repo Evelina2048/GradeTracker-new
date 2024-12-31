@@ -114,6 +114,8 @@ public class Decorator {
 
         JButton yesButton = new JButton("Yes");
         yesButton.setVisible(true);
+        yesButton.setFocusPainted(false); //added 12/30 to prevent accidentally deleting things
+        yesButton.requestFocus(); //added 12/30 to prevent accidentally deleting things
         dialog.add(yesButton);
 
         dialog.addWindowListener(new WindowAdapter() {  //11/23 so that back button still works after close
@@ -125,6 +127,13 @@ public class Decorator {
 
         JButton noButton = new JButton("Cancel");
         noButton.setVisible(true);
+        noButton.requestFocusInWindow();
+        //noButton.requestFocus(); //added 12/30 to prevent accidentally deleting things
+
+
+        yesButton.setFocusPainted(false);
+        noButton.setFocusPainted(true); //added 12/30 to prevent accidentally deleting things
+        
         dialog.add(noButton);
         dialog.setSize(width,height); //250, 120
 
@@ -134,6 +143,11 @@ public class Decorator {
 
         dialog.setLocationRelativeTo(window);
         dialog.setVisible(true);
+
+        // noButton.setFocusable(true); // Ensure the button can receive focus
+        // noButton.requestFocus();
+        // noButton.requestFocusInWindow();
+        // SwingUtilities.invokeLater(() -> noButton.requestFocusInWindow());
 
         return yesOrNoDialog;
     }
