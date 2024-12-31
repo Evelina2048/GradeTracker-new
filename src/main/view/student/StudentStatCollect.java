@@ -240,7 +240,9 @@ public class StudentStatCollect extends JFrame {
                         else if ((setState.getClassListIndex() > 0)) {
                             //goToPreviousClasses();
                             setState.decrementClassListIndex();
+                            if (setList.getClassLabelPanel() != null) { //added 12/30 to prevent null error
                             setList.getClassLabelPanel().removeAll();
+                            }
                             classLabelPanel.removeAll();
                             textBoxPanel.removeAll();
                             SETTEST.getInstance().SETTESTTEXTBOXPANEL(textBoxPanel);
@@ -325,9 +327,14 @@ public class StudentStatCollect extends JFrame {
         classLabelPanel.add(textBoxPanel);
         sETTEST.SETTESTCLASSLABELPANEL(classLabelPanel);
 
+        System.out.println("numOfBoxeds "+numOfBoxes);
         if (numOfBoxes == 0) {
             boxStarterPack();
         }
+
+        else if (numOfBoxes == 2) { //12/30
+            newSet();
+        } //12/30
 
         textBoxPanel.setVisible(true);
         classLabelPanel.setVisible(true);
