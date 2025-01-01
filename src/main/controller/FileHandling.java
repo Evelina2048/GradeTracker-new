@@ -40,7 +40,6 @@ public class FileHandling {
             try {
                 BufferedReader reader = new BufferedReader(new FileReader(filePath));
                 while ((line = reader.readLine()) != null) {
-                    //System.out.println("printing file..."+ line);
                     myList.add(line);
                 }
                 reader.close();
@@ -51,31 +50,9 @@ public class FileHandling {
             return myList;
         }
 
-        // public ArrayList<String> readFileIntoGradeList(String filePathForClass) {
-        //     String line;
-        //     ArrayList<String> myGradeList = new ArrayList<>() {
-                
-        //     };
-        //     try {
-        //         BufferedReader reader = new BufferedReader(new FileReader(filePathForClass));
-        //         while ((line = reader.readLine()) != null ) {
-        //             //System.out.println("printing file..."+ line);
-        //             myGradeList.add(line);                 
-        //         }
-        //         reader.close();
-        //     }
-        //     catch (IOException e) { 
-        //         e.printStackTrace();
-        //     }
-
-        //     return myGradeList;
-        // }
-
-
         public boolean fileExists(String filePath) {
             try {
                 BufferedReader reader = new BufferedReader(new FileReader(filePath));
-                //System.out.println("File exists"); 
                 reader.close();
                 return true;
             }
@@ -125,7 +102,6 @@ public class FileHandling {
             ArrayList<String> arrayList = readFileToList(filePath);
             JPanel bigPanel = new JPanel(new FlowLayout(FlowLayout.LEFT));
             bigPanel.setName("bigPanel in loadtextboxes");
-            System.out.println("arrayList"+arrayList);
 
             JPanel classjlabel = create.typeBox(setList.getFinalClassList().get(setState.getClassListIndex()), "JLabel", true);
 
@@ -153,10 +129,6 @@ public class FileHandling {
             }
         }
 
-        public void hideLoadedBoxes() {
-            //bigPanel.setVisible(false);
-        }
-
         public static void deleteClass(String filePathString) throws IOException {
             Path filePath = Paths.get(filePathString);
             Files.walkFileTree(filePath, new SimpleFileVisitor<Path>() {
@@ -182,7 +154,6 @@ public class FileHandling {
                 } catch (IOException e) {
                     e.printStackTrace();
                 }
-
             }
         }
 }

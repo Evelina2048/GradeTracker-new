@@ -423,7 +423,9 @@ public class Decorator {
     }
 
     public void maximumAmountReachedPopup() {
+        System.out.println("the great box mystery 3333");
         if (setState.getCanContinue() == true) {
+            System.out.println("the great box mystery 4444");
             JDialog dialog = genericPopUpMessage("<html><center>Maximum amount reached.", null, 200 , 100);
             dialog.setLocationRelativeTo(window);
             dialog.setLocation(dialog.getX(), dialog.getY() + 15);

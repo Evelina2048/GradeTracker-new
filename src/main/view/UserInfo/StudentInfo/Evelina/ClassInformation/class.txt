@@ -1,6 +1,0 @@
-Finite Automata
-Algorithms
-Machine Learning
-Cyber Security
-Greek
-Class to delete

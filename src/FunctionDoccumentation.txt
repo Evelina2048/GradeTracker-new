@@ -1,0 +1,467 @@
+CompositeActionListenerWithPriorities.java
+    actionPerformed
+        Purpose: to execute actions when asked
+
+        Parameters: ActionEvent
+
+        Returns: void
+
+    addClassActionListener
+        Purpose: to add an action listener for other classes
+
+        Parameters: ActionListener a,
+            -"priority" this action needs to be executed (int),
+            -"keyCause" which is what executed the action next button, back button etc. (String),
+            -"button"  necessary in case the selection is for radio buttons
+            -"listenerSource" which is from which class its being called. Compared to key cause to make sure they match.
+                Done this way because the built-in way action listeners work can have conflicts due to being multi-threaded.
+
+        Returns: void
+
+    DEBUGLISTENERSIZE
+        Purpose: For debugging WOULD NOT BE KEPT IN FINAL PRODUCT, AS IT COULD CREATE VULNERABILITIES
+
+    reset
+        Purpose: to reset variables, after all actions have been performed
+
+        Parameters: nothing
+
+        Returns: void
+
+    setCurrentClass
+        Purpose: To tell action priorities what the current class should be
+
+        Parameters: thisClass (what to change class to)
+
+        Returns: void
+
+    getCurrentClass
+        Purpose: To get what the current class is
+
+        Parameters: nothing
+
+        Returns: void
+
+    DEBUGLISTENERMAP
+        Purpose: For debugging WOULD NOT BE KEPT IN FINAL PRODUCT, AS IT COULD CREATE VULNERABILITIES
+
+    TESTFORCECURRENTCLASS
+        Purpose: For debugging WOULD NOT BE KEPT IN FINAL PRODUCT, AS IT COULD CREATE VULNERABILITIES
+
+    TESTRESETACTIONPRIORITIES
+        Purpose: For debugging WOULD NOT BE KEPT IN FINAL PRODUCT, AS IT COULD CREATE VULNERABILITIES
+_____________________________________
+
+CreateButton.java
+
+    backButtonCreate
+        Purpose: To create a back button that can be used by the GUI
+
+        Parameters: nothing
+
+        Returns: JButton (the back button)
+
+    saveButtonCreate
+        Purpose: To create a save button that can be used by the GUI
+
+        Parameters: nothing
+
+        Returns: JButton (the save button)
+
+    nextButtonCreate
+        Purpose: To create a next button that can be used by the GUI
+
+        Parameters: nothing
+
+        Returns: JButton (the next button)
+
+    makeBackNextButtonsPanel
+
+        Purpose: to use the buttons to make a panel
+
+        Parameters: buttons and panel with save button
+
+        Returns: JPanel (the backNextButtonsPanel)
+
+    setTextFieldPanel
+        -set variable from other classes
+
+    addDocumentListenerForSaving
+
+        Purpose: to add a doccument listener for a textfield, which
+        can enable the save button and change the textField empty state based on doccument
+        updates.
+
+        Parameters: textfield
+
+        Returns: void
+
+    saveButtonEnable
+
+        Purpose: for other files to be enable enable save button
+
+        Parameters: nothing
+
+        Returns: void
+
+    removeFromWindow
+
+        Purpose: since the buttons and button panel are from this class,
+        this class can remove them. Removes buttons and panel from window.
+
+        Parameters: nothing
+
+        Returns: void
+
+_____________________________________
+
+FileHandling.java
+
+    readFileToList
+        Purpose:
+
+        Parameters:
+
+        Returns:
+    
+    fileExists
+        Purpose:
+
+        Parameters:
+
+        Returns:
+    
+    folderExists
+        Purpose:
+
+        Parameters:
+
+        Returns:
+
+    fileIsNotEmpty
+        Purpose:
+
+        Parameters:
+
+        Returns:
+
+    loadtextboxes
+        Purpose:
+
+        Parameters:
+
+        Returns:
+
+    writeArrayListToFile
+        Purpose:
+
+        Parameters:
+
+        Returns:
+
+    deleteClass
+        Purpose:
+
+        Parameters:
+
+        Returns:
+
+    deleteFromDeleteQueue
+        Purpose:
+
+        Parameters:
+
+        Returns:
+_____________________________________
+
+Gather.java
+
+    gatherLaunch:
+        Purpose: To allow for launching without making a new instance
+
+        Parameters: nothing
+
+        Returns: void
+
+    makeUsernameBox:
+        Purpose: decide what default text should be in the username box
+
+        Parameters: nothing
+
+        Returns: void
+
+    textFieldMouseListener:
+        Purpose:
+
+        Parameters:
+
+        Returns:
+
+    instructionsWordsWindow:
+        Purpose:
+
+        Parameters:
+
+        Returns:
+
+    decorateInstructions:
+        Purpose:
+
+        Parameters:
+
+        Returns:
+
+    inputName:
+        Purpose:
+
+        Parameters:
+
+        Returns:
+
+    buttonSetUpAction:
+        Purpose:
+
+        Parameters:
+
+        Returns:
+
+    makeBackAction:
+        Purpose:
+
+        Parameters:
+
+        Returns:
+
+    backButtonAction:
+        Purpose:
+
+        Parameters:
+
+        Returns:
+
+    makeSaveButton:
+        Purpose:
+
+        Parameters:
+
+        Returns:
+
+    makeNextButton:
+        Purpose:
+
+        Parameters:
+
+        Returns:
+
+
+_____________________________________
+
+Launcher.java
+
+    main:
+
+        Purpose: to run the initialize function.
+
+        Parameters: String[] args
+
+        Returns: void
+
+    initialize:
+
+        Purpose: to set up jframe window and run NewUser() instance
+
+        Parameters: nothing
+
+        Returns: void
+_____________________________________
+
+NewUser.java
+
+    newUserSetup:
+
+        Purpose: Has functions that need to be run to start up the New User window
+
+        Parameters: nothing
+
+        Returns: void
+
+    instructionsWordsWindow:
+
+        Purpose: Sets up instructions screen
+
+        Parameters: nothing
+
+        Returns: void
+
+    radioButtonSetUp:
+        Purpose:
+
+        Parameters:
+
+        Returns:
+
+_____________________________________
+
+SETTEST.java
+
+    WOULD NOT BELONG IN A PUBLIC VERSION, AS IT COULD BE USED BY BAD ACTORS.
+    ALL FUNCTIONS AND CALLING OF THESE FUNCTIONS WOULD BE REMOVED
+
+    For testing purposes, has set and get functions to retrieve variables in ways that cannot happen
+    without a user using the GUI.
+
+_____________________________________
+StudentStatCollect.java
+    studentStatCollectLaunch
+        Purpose:
+
+        Parameters:
+
+        Returns:
+    
+    buttonSetUpAction
+        Purpose:
+
+        Parameters:
+
+        Returns:
+
+    backAction
+        Purpose:
+
+        Parameters:
+
+        Returns:
+
+    decideBackActionBasedOnClass
+        Purpose:
+
+        Parameters:
+
+        Returns:
+
+    backAction2
+        Purpose:
+
+        Parameters:
+
+        Returns:
+    
+    goToPreviousClasses
+        Purpose:
+
+        Parameters:
+
+        Returns:
+
+    addLoadedBoxes
+        Purpose:
+
+        Parameters:
+
+        Returns:
+
+    saveAction
+        Purpose:
+
+        Parameters:
+
+        Returns:
+    
+    saveButtonAction
+        Purpose:
+
+        Parameters:
+
+        Returns:
+
+    nextButtonAction
+        Purpose:
+
+        Parameters:
+
+        Returns:
+
+    doNextButtonProcedure
+        Purpose:
+
+        Parameters:
+
+        Returns:
+    
+    ifCreditsIsJPanel
+        Purpose:
+
+        Parameters:
+
+        Returns:
+    
+    checkPercentageOfGradesFormat
+        Purpose:
+
+        Parameters:
+
+        Returns:
+    
+    checkCreditsFormat
+        Purpose:
+
+        Parameters:
+
+        Returns:
+    
+    checkGradesFormat
+        Purpose:
+
+        Parameters:
+
+        Returns:
+    
+    makeFormatReminderDialog
+        Purpose:
+
+        Parameters:
+
+        Returns:
+    
+    allPassedGoToStudentStats
+        Purpose:
+
+        Parameters:
+
+        Returns:
+    
+    goToPrintStudentGrades
+        Purpose:
+
+        Parameters:
+
+        Returns:
+    
+    doNextButtonProcedure2
+        Purpose:
+
+        Parameters:
+
+        Returns:
+
+    visitNextStudentClass
+        Purpose:
+
+        Parameters:
+
+        Returns:
+
+TESTFUNCTSFOREASYTESTING
+    WOULD NOT BELONG IN A PUBLIC VERSION, AS IT COULD BE USED BY BAD ACTORS.
+    ALL FUNCTIONS AND CALLING OF THESE FUNCTIONS WOULD BE REMOVED
+
+    provides functions that a developer can reference for testcases, ex. a function that
+    gives all necessary information to get to the "StudentStatCollect" screen as a
+    signed-in existing user named "TESTHELLO".
+
+Purpose:
+
+Parameters:
+
+Returns:

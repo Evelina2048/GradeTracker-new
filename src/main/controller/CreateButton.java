@@ -13,7 +13,6 @@ import java.awt.Dimension;
 import java.awt.FlowLayout;
 
 import model.Set;
-import model.SetList;
 import model.SetState;
 
 public class CreateButton {
@@ -42,11 +41,11 @@ public class CreateButton {
 
     public JButton saveButtonCreate() {
         saveButton = new JButton("Save");
-        Set.getInstance().setCurrentSaveButton(saveButton); //11/6
+        Set.getInstance().setCurrentSaveButton(saveButton);
 
         if ((CompositeActionListenerWithPriorities.getInstance().getCurrentClass()!= null) && CompositeActionListenerWithPriorities.getInstance().getCurrentClass().equals("StudentStatCollect")) {
-            saveButton.setText("Save");// + SetList.getInstance().getFinalClassList().get(setState.getClassListIndex()));
-        } //12/20, I think the above lines were added for testing
+            saveButton.setText("Save");
+        }
 
         return saveButton;
     }

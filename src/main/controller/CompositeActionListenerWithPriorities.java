@@ -14,7 +14,7 @@ public class CompositeActionListenerWithPriorities implements ActionListener {
   private Map<Integer, ArrayList<ActionListener>> listeners =
     new TreeMap<Integer,ArrayList<ActionListener>>();
     private boolean isProcessing = false;
-    private String currentClass = null;//"Current class not changed";
+    private String currentClass = null; //"Current class not changed";
     private static CompositeActionListenerWithPriorities instance;
     private CompositeActionListenerWithPriorities() {}
     public static CompositeActionListenerWithPriorities getInstance() {
@@ -61,23 +61,17 @@ public class CompositeActionListenerWithPriorities implements ActionListener {
   }
 
   public void addClassActionListener(ActionListener a, int priority, String keyCause, JRadioButton button, String listenerSource){
-
     if(!listeners.containsKey(priority)){
       listeners.put(priority,new ArrayList<ActionListener>());
     }
     listeners.get(priority).add(a);
 
     if (listeners.size() == 2) {
-      System.out.println("its being run 1");
       actionPerformed(new ActionEvent(this, ActionEvent.ACTION_PERFORMED, "PerformAllActions"));
     }
 
     if (currentClass == listenerSource && !keyCause.equals("click")) {
-      //isProcessing = false; //11/25
-      System.out.println("its being run 2");
-      //added 11/24 actionPerformed(new ActionEvent(this, ActionEvent.ACTION_PERFORMED, "PerformAllActions"));
       CompositeActionListenerWithPriorities.this.actionPerformed(new ActionEvent(CompositeActionListenerWithPriorities.this, ActionEvent.ACTION_PERFORMED, "PerformThisActions"));
-      //11/24 CompositeActionListenerWithPriorities.this.actionPerformed(new ActionEvent(CompositeActionListenerWithPriorities.this, ActionEvent.ACTION_PERFORMED, "PerformAllActions"));
     }
 
     else if (keyCause == "EnterAction" || keyCause == "nextButton") {
@@ -85,21 +79,13 @@ public class CompositeActionListenerWithPriorities implements ActionListener {
         @Override
         public void actionPerformed(ActionEvent e) {
             new Decorator();
-
             if (listeners.size() == 2) {
-              System.out.println("its being run 3");
-              // Correctly reference the outer class for the action event
               CompositeActionListenerWithPriorities.this.actionPerformed(
               new ActionEvent(CompositeActionListenerWithPriorities.this, ActionEvent.ACTION_PERFORMED, "PerformAllActions"));
             }
             else if (listeners.size() == 1) {
-              System.out.println("its being run 4");
-              System.out.println("Maybe not needed?");
               CompositeActionListenerWithPriorities.this.actionPerformed(
               new ActionEvent(CompositeActionListenerWithPriorities.this, ActionEvent.ACTION_PERFORMED, "PerformAllActions")); //added 12/21 because would not work when clicking next>
-            }
-            else {
-                System.out.println("Something went wrong in CompositeActionListenerWithPriorities addClassActionListener \u00AF\\_(\u30C4)_/\u00AF");
             }
         }
     });
@@ -113,9 +99,6 @@ public class CompositeActionListenerWithPriorities implements ActionListener {
     return listeners.size();
   }
 
-  public interface EnterKeyListener extends ActionListener {
-  }
-
   public void reset() {
     listeners.clear();
     isProcessing = false;
@@ -126,8 +109,6 @@ public class CompositeActionListenerWithPriorities implements ActionListener {
     if (currentClass == null) {
       currentClass = thisClass;
     }
-    System.out.println(" "+currentClass);
-    System.out.println("f");
   }
 
   public String getCurrentClass() {
