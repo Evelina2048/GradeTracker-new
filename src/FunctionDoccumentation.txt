@@ -113,6 +113,80 @@ CreateButton.java
 
         Returns: void
 
+
+_____________________________________
+Creator.java
+
+    createTextBox
+        Purpose:
+
+        Parameters:
+
+        Returns:
+
+    checkIfLoadedAndAction
+        Purpose:
+
+        Parameters:
+
+        Returns:
+
+    setTextFieldContainer
+        Purpose:
+
+        Parameters:
+
+        Returns:
+
+    getTextFieldContainer
+        Purpose:
+
+        Parameters:
+
+        Returns:
+
+    deleteTextBox
+        Purpose:
+
+        Parameters:
+
+        Returns:
+
+    windowFix
+        Purpose:
+
+        Parameters:
+
+        Returns:
+
+    hideContainer
+        Purpose:
+
+        Parameters:
+
+        Returns:
+
+    removeContainer
+        Purpose:
+
+        Parameters:
+
+        Returns:
+
+    typeBox
+        Purpose:
+
+        Parameters:
+
+        Returns:
+
+    deleteMouseListeners
+        Purpose:
+
+        Parameters:
+
+        Returns:
+
 _____________________________________
 
 FileHandling.java
@@ -123,14 +197,14 @@ FileHandling.java
         Parameters:
 
         Returns:
-    
+
     fileExists
         Purpose:
 
         Parameters:
 
         Returns:
-    
+
     folderExists
         Purpose:
 
@@ -173,6 +247,104 @@ FileHandling.java
 
         Returns:
 _____________________________________
+
+FileWriting.java
+
+    writeFolderToFile
+        Purpose:
+
+        Parameters:
+
+        Returns:
+
+    decideIfWrite
+        Purpose:
+
+        Parameters:
+
+        Returns:
+
+    tryToWrite
+        Purpose:
+
+        Parameters:
+
+        Returns:
+
+    writeTextToFile
+        Purpose:
+
+        Parameters:
+
+        Returns:
+
+    tryToWriteTextFieldWithoutAppend
+        Purpose:
+
+        Parameters:
+
+        Returns:
+
+    tryToWriteTextFieldWithoutAppend
+        Purpose:
+
+        Parameters:
+
+        Returns:
+
+    seeHowManyPlaceholdersToSkip
+        Purpose:
+
+        Parameters:
+
+        Returns:
+
+    writeTextToFileWithAppend
+        Purpose:
+
+        Parameters:
+
+        Returns:
+
+    removeUnwritablePlaceholders
+        Purpose:
+
+        Parameters:
+
+        Returns:
+
+    deleteLines
+        Purpose:
+
+        Parameters:
+
+        Returns:
+
+    getClassList
+        Purpose:
+
+        Parameters:
+
+        Returns:
+
+    howManyPlaceholders
+        Purpose:
+
+        Parameters:
+
+        Returns:
+
+    iteratePanelForHowManyPlaceholders
+        Purpose:
+
+        Parameters:
+
+        Returns:
+
+    TESTFORCECLASSLISTADD, TESTFORCEFINALLIST -
+
+_____________________________________
+
 
 Gather.java
 
@@ -253,13 +425,118 @@ Gather.java
 
         Returns:
 
+    nextButtonAddActionListener
+        Purpose:
+
+        Parameters:
+
+        Returns:
+
+    doNextButtonProcedure
+        Purpose:
+
+        Parameters:
+
+        Returns:
+
+    nextButtonAction
+        Purpose:
+
+        Parameters:
+
+        Returns:
+
+    errorMessageSetUp
+        Purpose:
+
+        Parameters:
+
+        Returns:
+
+    setUsername
+        Purpose:
+
+        Parameters:
+
+        Returns:
+
+    getWindowX
+        Purpose:
+
+        Parameters:
+
+        Returns:
+
+    getWindowY
+        Purpose:
+
+        Parameters:
+
+        Returns:
+
+    showWindow
+        Purpose:
+
+        Parameters:
+
+        Returns:
+
+    hideWindow
+        Purpose:
+
+        Parameters:
+
+        Returns:
+
+    removeFromWindow
+        Purpose:
+
+        Parameters:
+
+        Returns:
+_____________________________________
+
+GoIntoPanel.java
+
+    goIntoPanel
+        Purpose: digs into panel, and returns text from panel
+
+        Parameters: panel, index (where to go into panel)
+
+        Returns: the text within the panel is returned
+
+    goIntoPanelReturnTextbox
+        Purpose: return the textbox within the panel
+
+        Parameters: panel, index (where to go into panel)
+
+        Returns: JTextField, which is the textbox at the deepest part of the panel indexed
+
+    checkIfHasPlaceholder
+        Purpose: given a panel of textfields, will return a boolean telling whether
+        its textboxes contain a placeholder. Can take a panel that has nested panels
+        containing textfields.
+
+        Parameters: textFieldPanel2 (not to be confused with textFieldPanel variable used
+        in other classes)
+
+        Returns: Boolean
+
+    goIntoPanelReturnTypeOfFirstComponentInPanel
+        Purpose: returns a String detailing whether a panel's first component is a
+        JTextField, JLabel, or JPanel. Useful considering not all JTextFields and Jlabels etc are nested uniformly,
+        and type information needed in order to not count special cases (like the JLabel) as placeholders
+
+        Parameters: panel
+
+        Returns: String detailing whether a panel's first component is a
+        JTextField, JLabel, or JPanel.
 
 _____________________________________
 
 Launcher.java
 
     main:
-
         Purpose: to run the initialize function.
 
         Parameters: String[] args
@@ -267,7 +544,6 @@ Launcher.java
         Returns: void
 
     initialize:
-
         Purpose: to set up jframe window and run NewUser() instance
 
         Parameters: nothing
@@ -278,7 +554,6 @@ _____________________________________
 NewUser.java
 
     newUserSetup:
-
         Purpose: Has functions that need to be run to start up the New User window
 
         Parameters: nothing
@@ -286,7 +561,6 @@ NewUser.java
         Returns: void
 
     instructionsWordsWindow:
-
         Purpose: Sets up instructions screen
 
         Parameters: nothing
@@ -300,6 +574,110 @@ NewUser.java
 
         Returns:
 
+    existingButton
+        Purpose:
+
+        Parameters:
+
+        Returns:
+
+    newUserButton
+        Purpose:
+
+        Parameters:
+
+        Returns:
+
+    checkIfExistingChangedWithUsername
+        Purpose:
+
+        Parameters:
+
+        Returns:
+
+    choicesButtonDecorate
+        Purpose:
+
+        Parameters:
+
+        Returns:
+
+    addToChoicesPanel
+        Purpose:
+
+        Parameters:
+
+        Returns:
+
+    buttonSetUp
+        Purpose:
+
+        Parameters:
+
+        Returns:
+
+    doNextButtonProcedure
+        Purpose:
+
+        Parameters:
+
+        Returns:
+
+    setButtonSelected
+        Purpose:
+
+        Parameters:
+
+        Returns:
+
+    showWindow
+        Purpose:
+
+        Parameters:
+
+        Returns:
+
+    addNewUserActionListener
+        Purpose:
+
+        Parameters:
+
+        Returns:
+
+    addExistingUserActionListener
+        Purpose:
+
+        Parameters:
+
+        Returns:
+
+    nextButtonActionListenerWithPriorities
+        Purpose:
+
+        Parameters:
+
+        Returns:
+
+_____________________________________
+PrintStudentGrades.java
+
+
+_____________________________________
+
+Set.java
+
+    A static class that sets miscellaneous variables concerning the save button, and current window
+    getCurrentWindowClosing so that the save button can be accessed and removed by being set to null,
+    among other functions. Testing functions would need to be removed if it were
+    to be public.
+
+    getInstance, setWindow, getWindow, setNewOrExistingChanged, getNewOrExistingChanged,
+    setFilePath, getFilePath, setDEBUGBOX, getDEBUGBOX,
+    setCurrentSaveButton, getCurrentSaveButton, TESTRESETSET,
+    removeSave, setCurrentWindowClosing,
+    getCurrentWindowClosing- custom window closing function if it needs
+    to be removed in another class
+    ,setCurrentSaveButtonToNull
 _____________________________________
 
 SETTEST.java
@@ -318,7 +696,7 @@ StudentStatCollect.java
         Parameters:
 
         Returns:
-    
+
     buttonSetUpAction
         Purpose:
 
@@ -452,6 +830,8 @@ StudentStatCollect.java
 
         Returns:
 
+_____________________________________
+
 TESTFUNCTSFOREASYTESTING
     WOULD NOT BELONG IN A PUBLIC VERSION, AS IT COULD BE USED BY BAD ACTORS.
     ALL FUNCTIONS AND CALLING OF THESE FUNCTIONS WOULD BE REMOVED
@@ -460,8 +840,46 @@ TESTFUNCTSFOREASYTESTING
     gives all necessary information to get to the "StudentStatCollect" screen as a
     signed-in existing user named "TESTHELLO".
 
+_____________________________________
+
+TextFieldColorFocusListener.java
+
+    focusGained
+        Purpose: Decide what text is and emptied state is upon clicks
+
+        Parameters: Focus event e
+
+        Returns: void
+
+    focusLost
+        Purpose: Decide what text is and emptied state is upon clicks (like the placeholder if box is
+        empty), and caret position
+
+        Parameters: Focus event e
+
+        Returns: void
+
+    makeLoseFocus
+        Purpose: forces textboxes to lose focus and chooses appropriate text color,
+        and caret position.
+
+        Parameters: placeholder (default text in textbox)
+
+        Returns: void
+
+_____________________________________
+
+EnterAction (not a file, just a function)
+    Purpose:
+
+    Parameters:
+
+    Returns:
+
+
 Purpose:
 
 Parameters:
 
 Returns:
+

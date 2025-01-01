@@ -74,7 +74,6 @@ public void MainWindowLaunch() {
     this.set = Set.getInstance();
     this.setUserInformation = SetUserInformation.getInstance();
     this.actionPriorities = CompositeActionListenerWithPriorities.getInstance();
-    //actionPriorities.setCurrentClass(currentClass);
 
     window = set.getWindow();
 
@@ -107,17 +106,13 @@ public void MainWindowLaunch() {
 private void windowSetUp() {
     //window set up
     window.setTitle("Launcher");
-    //window.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
-    //window.setLayout(null);
     window.setSize(windowWidth, windowHeight);
 }
 
 private void InstructionsWordsWindow() {
-        //JLabel instructionsWords = new JLabel("Hello 1234567890! Are you a student or a teacher?");
         instructionsWords = new JLabel("Hello "+setUserInformation.getUsername() + "! Are you a student or a teacher?");
         instructionsPanel = decorate.InstructionsPanelDecorate(instructionsPanel, instructionsWords);
         truncateLabelText("Hello ", "! Are you a student or a teacher?", window.getWidth());
-        //System.out.println
         instructionsPanel = decorate.InstructionsPanelDecorate(instructionsPanel, instructionsWords);
     }
 
@@ -155,15 +150,16 @@ private void truncateLabelText(String prefix, String suffix, int maxWidth) {
     while (fontMetrics.stringWidth(username.substring(0, endIndex+1)) <= availableWidth) {    
         endIndex++;
     }
+
     if(currentUsernamePermittedAmount.charAt(currentUsernamePermittedAmount.length()-1)==' ' && currentUsernamePermittedAmount.charAt(currentUsernamePermittedAmount.length()-2)!=' ') {
         instructionsWords =  new JLabel("Hello "+ setUserInformation.getUsername().substring(0, endIndex-1) + " ...! Are you a student or a teacher?");
     }
+
     else {
     instructionsWords =  new JLabel("Hello "+ setUserInformation.getUsername().substring(0, endIndex) + " ...! Are you a student or a teacher?");
     }
 
 }
-
 
 private void radioButtonSetUp() {
     teacherStudentGroup = new ButtonGroup();
@@ -215,13 +211,7 @@ private void backNextButton() {
     backNextButtonsPanel = new JPanel(new BorderLayout());
     new Creator();
     JButton backButton = createButton.backButtonCreate();
-    // backButton.addActionListener(new ActionListener() {
-    //     public void actionPerformed(ActionEvent e) {;
-    //         decorate.hideWindow(instructionsPanel, choicesPanel, backNextButtonsPanel);    
-    //         doBackButtonProcedure();
-    //     }
-    // });
-    //:
+
     backButton.addActionListener(new ActionListener() {
         public void actionPerformed(ActionEvent e) {
             actionPriorities.setCurrentClass(currentClass);
@@ -231,7 +221,6 @@ private void backNextButton() {
                 doBackButtonProcedure();
             }, 2, "backButton",null, currentClass);
     }});
-    //:
     JPanel backButtonPanel = new JPanel();
     backButtonPanel.add(backButton);
 
@@ -245,13 +234,11 @@ private void backNextButton() {
             actionPriorities.addClassActionListener(new ActionListener() {
                 @Override
                 public void actionPerformed(ActionEvent e) {// remember wont run  if just enter without a click
-                    //System.out.println("enteraction");
                     doNextButtonProcedure();
                 }
             }, 1, "nextButton", null, currentClass);  // Add this ActionListener with priority 1
         }
     });
-    //:
     backNextButtonsPanel = createButton.makeBackNextButtonsPanel(backButtonPanel, new JPanel(), nextButtonPanel);
     window.add(backNextButtonsPanel, BorderLayout.SOUTH);
 }
@@ -266,14 +253,10 @@ private void doNextButtonProcedure() {
     if (moveOnPossible) {
         set.setWindow(window);
         String filePath = "somethingwentwrong";//if not overwritten, somethingwent wrong
-            //if (setUserInformation.getExistingOrNew().trim().equals("New User")) { //if new user,
-                //System.out.println("about to go to student classes");
-                goToStudentClasses(filePath);
-                decorate.hideWindow(instructionsPanel, choicesPanel, backNextButtonsPanel);
-            //}
+            goToStudentClasses(filePath);
+            decorate.hideWindow(instructionsPanel, choicesPanel, backNextButtonsPanel);
     }
     else if (!moveOnPossible) {
-        //decorate.errorMessageSetUp(studentButton);
         decorate.pleaseChooseAnOptionWithRadioButtons(studentButton);
     }
 }
@@ -289,16 +272,13 @@ private void goToStudentClasses(String filePath) {
 private void writeUsername(String filePath) {
     //and username not taken
     String usernamePath = "somethingwentwrong.txt";
-    String username = setUserInformation.getUsername();//textField.getText().trim();
-    //setUserInformation.setUsername(username);
+    String username = setUserInformation.getUsername();
     if ("Student".equals(studentOrTeacher)) {
-        //usernamePath = "/Users/evy/Documents/GradeTracker-new/src/main/view/UserInfo/studentUsername.txt"; //KEEP
-        usernamePath = "src/main/view/UserInfo/studentUsername.txt";
+        usernamePath = "src/main/model/UserInfo/studentUsername.txt";
     }
 
     else if ("Teacher".equals(studentOrTeacher)) {
-        //usernamePath = "/Users/evy/Documents/GradeTracker-new/src/main/view/UserInfo/teacherUsername.txt";
-        usernamePath = "src/main/view/UserInfo/teacherUsername.txt";
+        usernamePath = "src/main/model/UserInfo/teacherUsername.txt";
     }
 
     checkIfExisting(usernamePath, username);
@@ -337,7 +317,6 @@ private boolean readLine(BufferedReader reader, String username, boolean usernam
     try {
         while ((line = reader.readLine()) != null) {
             if (line.equals(username) && setUserInformation.getUsername() == null) {//if matches username
-                //errorMessageSetUp("<html><center>Username already exists.<br> Please choose another.",200,100);
                 decorate.genericPopUpMessage("<html><center>Username already exists.<br> Please choose another.", studentButton, 200 , 100);
                 usernametaken = true;
                 break;
@@ -347,29 +326,6 @@ private boolean readLine(BufferedReader reader, String username, boolean usernam
         e.printStackTrace();
     } return usernametaken;
 }
-
-// private void errorMessageSetUp(String labelWords, int width, int height) {
-//     JDialog dialog = new JDialog(window, true);
-//     dialog.setResizable(false);
-//     dialog.setLayout(new FlowLayout());
-//     JLabel label = new JLabel(labelWords);
-//     label.setHorizontalAlignment(SwingConstants.CENTER);
-//     dialog.add(label);
-//     JButton okButton = new JButton("OK");
-//     okButton.setVisible(true);
-//     dialog.add(okButton);
-//     dialog.setSize(width,height);
-//     okButton.addActionListener(new ActionListener() {
-//         public void actionPerformed(ActionEvent e) {
-//             dialog.setVisible(false);
-//             dialog.dispose(); 
-//         }
-//     });
-    
-//     dialog.setLocationRelativeTo(studentButton);
-//     dialog.setLocation(dialog.getX(), dialog.getY() + 15); 
-//     dialog.setVisible(true);
-// }
 
 private void writeNewName(String filePath, String username) {
     try (FileWriter writer = new FileWriter(filePath, true)) {
@@ -386,7 +342,7 @@ public void setButtonSelected() {
         studentButton.setSelected(true);
         moveOnPossible = true;
     }
-    
+
     else if(selectedButtonText == "Teacher") {
         teacherButton.setSelected(true);
         moveOnPossible = true;
@@ -402,18 +358,6 @@ public void hideWindow() {
 }
 
 public class EnterAction extends AbstractAction {
-    // @Override
-    // public void actionPerformed(ActionEvent e) {
-    //     // Introduce a small delay before calling doNextButtonProcedure()
-    //     Timer timer = new Timer(10, new ActionListener() {
-    //         @Override
-    //         public void actionPerformed(ActionEvent evt) {
-    //             doNextButtonProcedure();
-    //         }
-    //     });
-    //     timer.setRepeats(false); // Only execute once
-    //     timer.start();
-    // }
 
     @Override
     public void actionPerformed(ActionEvent e) {

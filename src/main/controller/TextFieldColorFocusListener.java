@@ -37,9 +37,9 @@ public class TextFieldColorFocusListener {
                     if (focusTextField.getText().equals(placeholder) && setState.getEmptiedState(focusTextField) == false && setState.getLoadedState(textField) == false) {
                         focusTextField.setText("");
                         setState.setEmptiedState(textField, true);
-                    }else if (!focusTextField.getText().equals(placeholder) && !focusTextField.getText().isEmpty() && setState.getEmptiedState(textField) == true) {
+                    } else if (!focusTextField.getText().equals(placeholder) && !focusTextField.getText().isEmpty() && setState.getEmptiedState(textField) == true) {
                         setState.setEmptiedState(focusTextField, true);
-                    }else if (focusTextField.getText().equals(placeholder) && setState.getEmptiedState(textField) == true && setState.getLoadedState(textField) == false) {
+                    } else if (focusTextField.getText().equals(placeholder) && setState.getEmptiedState(textField) == true && setState.getLoadedState(textField) == false) {
                         focusTextField.setText(""); // Clear the placeholder text when the field gains focus
                         setState.setEmptiedState(focusTextField, true);
                         setState.setSaveable(true);
@@ -59,15 +59,12 @@ public class TextFieldColorFocusListener {
                     setState.setEmptiedState(focusTextField, false);
                 }
 
-                else if (!focusTextField.getText().isEmpty() && setState.getEmptiedState(textField) == true){
-                }
-
             }
         });
-        focusLost(placeholder);
+        makeLoseFocus(placeholder);
     }
 
-    private void focusLost(String placeholder){
+    private void makeLoseFocus(String placeholder){
         window.getContentPane().addMouseListener(new MouseAdapter() {
             @Override
             public void mouseClicked(MouseEvent e) {
@@ -114,9 +111,9 @@ public class TextFieldColorFocusListener {
                     textField.setCaretPosition(0);
                     window.requestFocusInWindow();
                 }
-                // else {
-                //     System.out.println("something went wrong");
-                // }//11/25
+                else {
+                    System.out.println("something went wrong in focus lost");
+                }
             }
         });
     }

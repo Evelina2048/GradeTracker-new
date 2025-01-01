@@ -40,7 +40,6 @@ public class Creator {
 
         this.window = set.getWindow();
         colorFocusListener = new TextFieldColorFocusListener();
-        //textFieldPanel.setBackground(lightgrayColor);
     }
 
     public JTextField createTextBox(String placeholder, String my_type, Boolean boxLoaded) {
@@ -61,7 +60,7 @@ public class Creator {
             windowFix();
         }
         else if (textboxCounter >= 27) {
-            //for student classes...
+            //for student classes
             decorate.maximumAmountReachedPopup();
         }
         else if (my_type.equals("JLabel")) {
@@ -69,11 +68,8 @@ public class Creator {
             textFieldPanel.add(toAddType);
         }
 
-        System.out.println("textboxCounter: "+ textboxCounter);
-
         checkIfLoadedAndAction();
         setState.setTextFieldPanel(textFieldPanel);
-        System.out.println("in create textbox. panel: "+setState.getTextFieldPanel().getComponentCount());
         return textField;
     }
 
@@ -125,10 +121,6 @@ public class Creator {
         window.remove(textFieldPanel);
     }
 
-    // public void setClassList() { //9/26
-    //     //set.setClassList(classList);
-    // }
-    
     public JPanel typeBox(String placeholder, String my_type, Boolean boxLoaded) {
         hideContainer(); //needed unless jlabels will be missing
         loaded = boxLoaded;
@@ -142,8 +134,6 @@ public class Creator {
         }
 
         else if(my_type.equals("JLabel")) {
-            System.out.println("jlabel to be created");
-            System.out.println("hi creating jlabel for "+placeholder+" which is loaded? "+boxLoaded);
             JLabel toAddType = new JLabel(placeholder);
 
             if (setState.getTextFieldFont() != null) {

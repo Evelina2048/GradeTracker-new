@@ -492,7 +492,7 @@ public void testRightPlaceholders() {
             listener.actionPerformed(nextActionEvent);
         }
         try {
-        FileHandling.deleteClass("/Users/evy/Documents/GradeTracker-new/target/classes/view/UserInfo/StudentInfo/TESTBACKFROMSECONDCLASSTHENNEXT");
+        FileHandling.deleteClass("/Users/evy/Documents/GradeTracker-new/target/classes/model/UserInfo/StudentInfo/TESTBACKFROMSECONDCLASSTHENNEXT");
     } catch (IOException e) {
         e.printStackTrace();
     }

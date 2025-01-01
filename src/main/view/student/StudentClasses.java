@@ -353,7 +353,7 @@ public class StudentClasses extends JFrame {
 
             StudentStatCollect studentStatCollect = new StudentStatCollect();
             SETTEST.getInstance().TESTSETCURRENTINSTANCE(studentStatCollect);
-            if (fileHandler.fileExists("/Users/evy/Documents/GradeTracker-new/src/main/view/UserInfo/StudentInfo/" + setUserInformation.getUsername() + "/" +"ClassInformation"+"/"+setList.getFinalClassList().get(0) + ".txt")) { //needs to keep path because its with index 0
+            if (fileHandler.fileExists("/Users/evy/Documents/GradeTracker-new/src/main/model/UserInfo/StudentInfo/" + setUserInformation.getUsername() + "/" +"ClassInformation"+"/"+setList.getFinalClassList().get(0) + ".txt")) { //needs to keep path because its with index 0
                 create.hideContainer();
                 studentStatCollect.studentStatCollectLaunch();
                 studentStatCollect.addLoadedBoxes();

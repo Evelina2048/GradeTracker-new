@@ -40,8 +40,6 @@ import controller.FileWriting;
 
 import java.awt.event.KeyEvent;
 
-//import class files
-
 public class Gather {
     private JFrame window;
     private int windowX;
@@ -89,7 +87,6 @@ public class Gather {
         actionPriorities.setCurrentClass("Gather Loading");
 
         existingOrNew = setUserInformation.getExistingOrNew();
-        //setUserInformation.getStudentOrTeacher(); //10/2
         pathToUsernameFolder = setUserInformation.getPathToUsernameFolder();
         window = set.getWindow();
 
@@ -299,7 +296,6 @@ public class Gather {
     }
 
     private void nextButtonAddActionListener() {
-
         nextButton.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
@@ -307,7 +303,7 @@ public class Gather {
                 actionPriorities.setCurrentClass(currentClass);
                 actionPriorities.addClassActionListener(new ActionListener() {
                     @Override
-                    public void actionPerformed(ActionEvent e) { // remember won't run if just enter without a click
+                    public void actionPerformed(ActionEvent e) { // remember this won't run if just enter without a click
                         doNextButtonProcedure();
                     }
                 }, 1, "nextButton", null, currentClass);  // Add this ActionListener with priority 1
@@ -409,8 +405,7 @@ public class Gather {
     }
 
     public void showWindow(int windowX, int windowY) {
-
-    window.setVisible(true);
+        window.setVisible(true);
     }
 
     private void hideWindow() {
@@ -432,9 +427,7 @@ public class Gather {
             actionPriorities.setCurrentClass(currentClass);
             actionPriorities.addClassActionListener(new ActionListener() {
                 @Override
-                public void actionPerformed(ActionEvent e) { // remember won't run if just enter without a click
-                    System.out.println("enteraction");
-                    System.out.println();
+                public void actionPerformed(ActionEvent e) {
                     doNextButtonProcedure();
                 }
             }, 1, "EnterAction", null, currentClass);  // Add this ActionListener with priority 1

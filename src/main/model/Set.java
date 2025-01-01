@@ -64,12 +64,6 @@ public class Set {
 
     public void setCurrentSaveButton(JButton thisSaveButton) {
         saveButton = thisSaveButton;
-        // if (saveButton != null) {
-        // saveButton.setText(thisSaveButton.getText()); ////added 12/28 to prevent creating another instance
-        // }
-        // else {
-        //     saveButton = thisSaveButton;
-        // }
     }
 
     public JButton getCurrentSaveButton() {
