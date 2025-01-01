@@ -578,14 +578,14 @@ public class StudentStatCollect extends JFrame {
 
     }
     private void newSetButtonAction() {
-
-        typeNumber++;
-
-        boxManageCreate("Grade Type "+typeNumber, "JTextField",false);
-        boxManageCreate("Percentage of Grade", "JTextField",false);
-        boxManageCreate("Grades(format:# # #)", "JTextField",false);
-        classLabelPanel.setVisible(true);
-        textBoxPanel.setVisible(true);
+        if (numOfBoxes < maxBoxes) {
+            typeNumber++;
+        }
+            boxManageCreate("Grade Type "+typeNumber, "JTextField",false);
+            boxManageCreate("Percentage of Grade", "JTextField",false);
+            boxManageCreate("Grades(format:# # #)", "JTextField",false);
+            classLabelPanel.setVisible(true);
+            textBoxPanel.setVisible(true);
 
         if (setState.getClassListIndex() < 2) {
             window.add(classLabelPanel, BorderLayout.CENTER);

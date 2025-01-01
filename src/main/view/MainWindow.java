@@ -18,6 +18,8 @@ import java.awt.FontMetrics;
 import java.awt.GridBagLayout;
 import java.awt.event.ActionListener;
 import java.awt.event.ActionEvent;
+import java.awt.event.WindowAdapter;
+import java.awt.event.WindowEvent;
 
 //key listening
 import java.awt.event.KeyEvent;
@@ -30,13 +32,12 @@ import model.Set;
 import model.SetUserInformation;
 
 import view.student.StudentClasses;
+
 import controller.Creator;
 import controller.Decorator;
 import controller.CreateButton;
 import controller.CompositeActionListenerWithPriorities;
 
-import java.awt.event.WindowAdapter;
-import java.awt.event.WindowEvent;
 
 public class MainWindow extends JFrame {
 private String studentOrTeacher;
@@ -48,21 +49,21 @@ private String currentClass = "StudentStatCollect Loading";
 
 private CreateButton createButton = new CreateButton();
 
-JLabel instructionsWords;
+private JLabel instructionsWords;
 
-JRadioButton studentButton;
-JRadioButton teacherButton;
-ButtonGroup teacherStudentGroup;
-int windowWidth = 750;
-int windowHeight = 500;
+private JRadioButton studentButton;
+private JRadioButton teacherButton;
+private ButtonGroup teacherStudentGroup;
+private int windowWidth = 750;
+private int windowHeight = 500;
 
 //panels
-JPanel instructionsPanel;
-JPanel choicesPanel;
-JPanel backNextButtonsPanel;
-JFrame window;
+private JPanel instructionsPanel;
+private JPanel choicesPanel;
+private JPanel backNextButtonsPanel;
+private JFrame window;
 
-Decorator decorate = new Decorator();
+private Decorator decorate = new Decorator();
 
 public MainWindow() {
     MainWindowLaunch();
@@ -79,7 +80,7 @@ public void MainWindowLaunch() {
 
     windowSetUp();
 
-    InstructionsWordsWindow();
+    instructionsWordsWindow();
 
     radioButtonSetUp();
 
@@ -109,7 +110,7 @@ private void windowSetUp() {
     window.setSize(windowWidth, windowHeight);
 }
 
-private void InstructionsWordsWindow() {
+private void instructionsWordsWindow() {
         instructionsWords = new JLabel("Hello "+setUserInformation.getUsername() + "! Are you a student or a teacher?");
         instructionsPanel = decorate.InstructionsPanelDecorate(instructionsPanel, instructionsWords);
         truncateLabelText("Hello ", "! Are you a student or a teacher?", window.getWidth());
@@ -127,17 +128,10 @@ private void truncateLabelText(String prefix, String suffix, int maxWidth) {
     String ellipsis = " ...";
     int prefixWidth = fontMetrics.stringWidth(prefix);
     int suffixWidth = fontMetrics.stringWidth(suffix);
-    int usernameWidth = fontMetrics.stringWidth(username);
     int ellipsisWidth = fontMetrics.stringWidth(ellipsis);
     int availableWidth = maxWidth - prefixWidth - suffixWidth - ellipsisWidth;
 
-    //how many ~ to get to max width?
-    System.out.println("~ width "+ fontMetrics.stringWidth("~")+" max width "+ maxWidth);
-
-    System.out.println("usernamewidth: "+ usernameWidth+ ": available width: "+availableWidth);
-
-    //need to find sweet spot where is not less than max
-
+    //need to find sweet spot where it is not less than max
     if (fontMetrics.stringWidth(username) <= availableWidth) {//if is already less than max with username
     //then return. because no changes necessary;
     return;
@@ -145,7 +139,6 @@ private void truncateLabelText(String prefix, String suffix, int maxWidth) {
 
     int endIndex = 7;
     String currentUsernamePermittedAmount = setUserInformation.getUsername().substring(0, endIndex);
-    System.out.println("currentUsernamePermittedAmount "+currentUsernamePermittedAmount);
 
     while (fontMetrics.stringWidth(username.substring(0, endIndex+1)) <= availableWidth) {    
         endIndex++;
@@ -156,9 +149,8 @@ private void truncateLabelText(String prefix, String suffix, int maxWidth) {
     }
 
     else {
-    instructionsWords =  new JLabel("Hello "+ setUserInformation.getUsername().substring(0, endIndex) + " ...! Are you a student or a teacher?");
+        instructionsWords =  new JLabel("Hello "+ setUserInformation.getUsername().substring(0, endIndex) + " ...! Are you a student or a teacher?");
     }
-
 }
 
 private void radioButtonSetUp() {
@@ -334,7 +326,7 @@ private void writeNewName(String filePath, String username) {
     } catch (IOException e1) {
         e1.printStackTrace();
     }
-    }
+}
 
 public void setButtonSelected() {
     String selectedButtonText = setUserInformation.getStudentOrTeacher();

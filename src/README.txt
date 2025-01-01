@@ -1,10 +1,13 @@
-Description: An application to record and calculate user grades. It has no backend.
+Description: An application for students to record and calculate user grades. It has no backend.
 There are no passwords, just usernames. A user's data is stored on the computer
 it is ran on.
 
 Installation Instructions:
 -Download the repo
 -run through Launcher.java
+-not all tests in GradeTrackerTests can be run because some require accounts with
+loaded data, which requires putting certain account data into these accounts through the GUI 
+(or through the user info folder ), but I am not putting those accounts in the repo.
 
 Link to demo video:
 

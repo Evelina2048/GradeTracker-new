@@ -345,7 +345,6 @@ FileWriting.java
 
 _____________________________________
 
-
 Gather.java
 
     gatherLaunch:
@@ -533,6 +532,12 @@ GoIntoPanel.java
         JTextField, JLabel, or JPanel.
 
 _____________________________________
+GradeTrackerTests.java
+
+Contains various test functions. Some cannot be run without accounts with specific
+loaded data, which I did not put in the repo. But, would be easy to replicate by looking
+at the test case.
+_____________________________________
 
 Launcher.java
 
@@ -549,6 +554,146 @@ Launcher.java
         Parameters: nothing
 
         Returns: void
+_____________________________________
+
+MainWindow.java
+
+    MainWindowLaunch
+        Purpose:
+
+        Parameters:
+
+        Returns:
+
+    windowSetUp
+        Purpose:
+
+        Parameters:
+
+        Returns:
+
+    InstructionsWordsWindow
+        Purpose:
+
+        Parameters:
+
+        Returns:
+
+    truncateLabelText
+        Purpose:
+
+        Parameters:
+
+        Returns:
+
+    radioButtonSetUp
+        Purpose:
+
+        Parameters:
+
+        Returns:
+
+    choicesButtonDecorate
+        Purpose:
+
+        Parameters:
+
+        Returns:
+
+    addToChoicesPanel
+        Purpose:
+
+        Parameters:
+
+        Returns:
+
+    backNextButton
+        Purpose:
+
+        Parameters:
+
+        Returns:
+
+    doBackButtonProcedure
+        Purpose:
+
+        Parameters:
+
+        Returns:
+
+    doNextButtonProcedure
+        Purpose:
+
+        Parameters:
+
+        Returns:
+
+    goToStudentClasses
+        Purpose:
+
+        Parameters:
+
+        Returns:
+
+    writeUsername
+        Purpose:
+
+        Parameters:
+
+        Returns:
+
+    checkIfExisting
+        Purpose:
+
+        Parameters:
+
+        Returns:
+
+    readNames
+        Purpose:
+
+        Parameters:
+
+        Returns:
+
+    readLine
+        Purpose:
+
+        Parameters:
+
+        Returns:
+
+    writeNewName
+        Purpose:
+
+        Parameters:
+
+        Returns:
+
+    setButtonSelected
+        Purpose:
+
+        Parameters:
+
+        Returns:
+
+    show
+        Purpose:
+
+        Parameters:
+
+        Returns:
+
+    hideWindow
+        Purpose:
+
+        Parameters:
+
+        Returns:
+    
+    EnterAction- contains a timer to prevent thread issue, along with typical next button
+    shortcut.
+
 _____________________________________
 
 NewUser.java
@@ -661,6 +806,96 @@ NewUser.java
 _____________________________________
 PrintStudentGrades.java
 
+    printStudentGradesLaunch
+        Purpose:
+
+        Parameters:
+
+        Returns:
+
+    addEverythingToWindow
+        Purpose:
+
+        Parameters:
+
+        Returns:
+
+    getGradeTotal
+        Purpose:
+
+        Parameters:
+
+        Returns:
+
+    makeAmountOfFinalGradeList
+        Purpose:
+
+        Parameters:
+
+        Returns:
+
+    makeListOfAveragesList
+        Purpose:
+
+        Parameters:
+
+        Returns:
+
+    makeGradeTypeList
+        Purpose:
+
+        Parameters:
+
+        Returns:
+
+    makePercentageOfGradeList
+        Purpose:
+
+        Parameters:
+
+        Returns:
+
+    studentStatCollectLaunch
+        Purpose:
+
+        Parameters:
+
+        Returns:
+
+    buttonSetUpAction
+        Purpose:
+
+        Parameters:
+
+        Returns:
+
+    doBackButtonProcedure
+        Purpose:
+
+        Parameters:
+
+        Returns:
+
+    checkForNextButtonProcedure
+        Purpose:
+
+        Parameters:
+
+        Returns:
+
+    doNextButtonProcedure
+        Purpose:
+
+        Parameters:
+
+        Returns:
+
+    hideWindow
+        Purpose:
+
+        Parameters:
+
+        Returns:
 
 _____________________________________
 

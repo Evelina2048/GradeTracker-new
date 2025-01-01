@@ -92,17 +92,15 @@ public class PrintStudentGrades extends JFrame {
         buttonSetUpAction(); //moved 12/30
 
         if (allTextListForClass.size() > 1) { //moved 12/30
-        System.out.println("check");
-        studentStatCollectLaunch();
+            System.out.println("check");
+            studentStatCollectLaunch();
 
-        setList = SetList.getInstance();
+            setList = SetList.getInstance();
 
-        gradeList = new ArrayList<>();
-        amountOfFinalGrade = new ArrayList<>();
-        listOfAverages = new ArrayList<>();
-        percentageOfGradeList = new ArrayList<>();
-
-        printArray(allTextListForClass);
+            gradeList = new ArrayList<>();
+            amountOfFinalGrade = new ArrayList<>();
+            listOfAverages = new ArrayList<>();
+            percentageOfGradeList = new ArrayList<>();
 
             ArrayList<String> tempList = new ArrayList<String>(Arrays.asList(allTextListForClass.get(3).split(" ")));
 
@@ -170,9 +168,7 @@ public class PrintStudentGrades extends JFrame {
         contributiongrade.setHorizontalAlignment(JLabel.CENTER);
         allContainer.add(contributiongrade);
 
-        // 12/7 for (int i = 0; i < gradeTypeNumberList.get(whichCurrClassIndex); i++) { //shouldnt be for classes, should be for gradetypes then classes
         for (int i = 0; i < gradeTypeNumberList.get(whichCurrClassIndex); i++) { //shouldnt be for classes, should be for gradetypes then classes
-            // commendedout 12/7 JLabel gradeTypeNameLabel = new JLabel(gradeTypeList.get(whichCurrClassIndex+i));
             JLabel gradeTypeNameLabel = new JLabel(gradeTypeList.get(gradeTypeIndex)); //added 12/7
             gradeTypeIndex++; //added 12/7
 
@@ -226,7 +222,7 @@ public class PrintStudentGrades extends JFrame {
 
             seperatedBySpaceListOfGrades.add(new ArrayList<>(gradeArrayForOneBox));
 
-        }//added 11/10
+        }
             int average = 0;
             int thisGradeBoxTotal = 0;
 
@@ -271,7 +267,7 @@ public class PrintStudentGrades extends JFrame {
                         doBackButtonProcedure();
             }
         }, 1, "backButton", null, "PrintStudentGrades");
-    }});
+        }});
 
         JPanel nextButtonPanel = new JPanel();
         nextButtonPanel.add(nextButton);
@@ -290,11 +286,10 @@ public class PrintStudentGrades extends JFrame {
             });
         }
 
-        //checkForNextButtonProcedure();
-
         backNextButtonsPanel = createButton.makeBackNextButtonsPanel(backButtonPanel, new JPanel(), nextButtonPanel);
         Set.getInstance().getWindow().add(backNextButtonsPanel, BorderLayout.SOUTH);
     }
+
     public void doBackButtonProcedure() {
         //if at class index 0
         if (whichCurrClassIndex > 0) { //if no previous print grades classes
@@ -330,13 +325,6 @@ public class PrintStudentGrades extends JFrame {
         whichCurrClassIndex++; //only if there are more
         gradeBoxTotal.clear();
         printStudentGradesLaunch();
-    }
-
-    public void printArray(ArrayList<String> list) {
-        System.out.println("list.size() "+list.size());
-        for (int i = 0; i < list.size(); i++) {
-            System.out.println("item "+list.get(i));
-        }
     }
 
     public void hideWindow() {
