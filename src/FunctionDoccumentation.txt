@@ -118,75 +118,203 @@ _____________________________________
 Creator.java
 
     createTextBox
-        Purpose:
+        Purpose: To make textboxes for student classes
 
-        Parameters:
+        Parameters: placeholder (default text), thisType (type of whats created),
+        boxLoaded (if the box being created is loaded, necessary for placeholder purposes)
 
-        Returns:
+        Returns: JTextField created
 
     checkIfLoadedAndAction
-        Purpose:
+        Purpose: Sets whether textfield is loaded, and emptied
 
-        Parameters:
+        Parameters: none
 
-        Returns:
+        Returns: void
 
-    setTextFieldContainer
-        Purpose:
-
-        Parameters:
-
-        Returns:
-
-    getTextFieldContainer
-        Purpose:
-
-        Parameters:
-
-        Returns:
+    setTextFieldContainer, getTextFieldContainer
+        Function to set and retreive textFieldpanel
 
     deleteTextBox
-        Purpose:
+        Purpose: To delete a textbox
 
-        Parameters:
+        Parameters: JPanel container (with textbox that user wants to delete)
 
-        Returns:
+        Returns: void
 
     windowFix
-        Purpose:
+        Purpose: To update GUI components
 
-        Parameters:
+        Parameters: nothing
 
-        Returns:
+        Returns: void
 
     hideContainer
-        Purpose:
+        Purpose: To hide containers based in creator class
 
-        Parameters:
+        Parameters: nothing
 
-        Returns:
+        Returns: void
 
     removeContainer
-        Purpose:
+        Purpose: To remove containers based in creator class
 
-        Parameters:
+        Parameters: nothing
 
-        Returns:
+        Returns: void
 
     typeBox
+        Purpose: To create components for StudentStatCollect class (different because of
+        different nesting. Which I should not have done, but it did help me be exposed to different
+        issues, and their respective solutions)
+
+        Parameters: placeholder (default text), thisType (type of whats created),
+        boxLoaded (if the box being created is loaded, necessary for placeholder purposes)
+
+        Returns: JPanel
+
+_____________________________________
+Decorator.java
+
+    InstructionsPanelDecorate
         Purpose:
 
         Parameters:
 
         Returns:
 
-    deleteMouseListeners
+    choiceGbc
         Purpose:
 
         Parameters:
 
         Returns:
 
+    areYouSureMessage
+        Purpose:
+
+        Parameters:
+
+        Returns:
+
+    yesButtonActionListener
+        Purpose:
+
+        Parameters:
+
+        Returns:
+
+    yesButtonAction
+        Purpose:
+
+        Parameters:
+
+        Returns:
+
+    reasonIsDeletingActionYes
+        Purpose:
+
+        Parameters:
+
+        Returns:
+
+    reasonIsChangingUsernameYes
+        Purpose:
+
+        Parameters:
+
+        Returns:
+
+    reasonIsStudentStatsEmptyYes
+        Purpose:
+
+        Parameters:
+
+        Returns:
+
+    deleteFocusListeners
+        Purpose:
+
+        Parameters:
+
+        Returns:
+
+    noButtonActionListener
+        Purpose:
+
+        Parameters:
+
+        Returns:
+
+    noButtonAction
+        Purpose:
+
+        Parameters:
+
+        Returns:
+
+    setCaretPositionToZero
+        Purpose:
+
+        Parameters:
+
+        Returns:
+
+    genericPopUpMessage
+        Purpose:
+
+        Parameters:
+
+        Returns:
+
+    pleaseChooseAnOptionWithRadioButtons
+        Purpose:
+
+        Parameters:
+
+        Returns:
+
+    hideWindow
+        Purpose:
+
+        Parameters:
+
+        Returns:
+
+    decorateTextBox
+        Purpose:
+
+        Parameters:
+
+        Returns:
+
+    areYouSureMessageListenerForEditingUsername
+        Purpose:
+
+        Parameters:
+
+        Returns:
+
+    maximumAmountReachedPopup
+        Purpose:
+
+        Parameters:
+
+        Returns:
+
+    getFontFromTextFields
+        Purpose:
+
+        Parameters:
+
+        Returns:
+
+    removeForNewUserWindow
+        Purpose:
+
+        Parameters:
+
+        Returns:
 _____________________________________
 
 FileHandling.java
@@ -493,6 +621,7 @@ Gather.java
         Parameters:
 
         Returns:
+
 _____________________________________
 
 GoIntoPanel.java
@@ -807,95 +936,97 @@ _____________________________________
 PrintStudentGrades.java
 
     printStudentGradesLaunch
-        Purpose:
+        Purpose: to be able to launch print student grades from other classes
+        without creating a new instance
 
-        Parameters:
+        Parameters: nothing
 
-        Returns:
+        Returns: void
 
     addEverythingToWindow
-        Purpose:
+        Purpose: to add components to the GUI
 
-        Parameters:
+        Parameters: float total (final grade for class)
 
-        Returns:
+        Returns: void
 
     getGradeTotal
-        Purpose:
+        Purpose: to allow other functions to get final grade total
 
-        Parameters:
+        Parameters: nothing
 
-        Returns:
+        Returns: float (the final grade total)
 
     makeAmountOfFinalGradeList
-        Purpose:
+        Purpose: makes list calculating (average*percentage of grade)/100
 
-        Parameters:
+        Parameters: nothing
 
-        Returns:
+        Returns: void
 
     makeListOfAveragesList
-        Purpose:
+        Purpose: makes list of averages for each grade type
 
-        Parameters:
+        Parameters: nothing
 
-        Returns:
+        Returns: void
 
     makeGradeTypeList
-        Purpose:
+        Purpose: make list of grade type names
 
-        Parameters:
+        Parameters: nothing
 
-        Returns:
+        Returns: void
 
     makePercentageOfGradeList
-        Purpose:
+        Purpose: make a list with percentages of grades
 
-        Parameters:
+        Parameters: nothing
 
-        Returns:
+        Returns: void
 
-    studentStatCollectLaunch
-        Purpose:
+    setTitle
+        Purpose: sets title of window
 
-        Parameters:
+        Parameters: nothing
 
-        Returns:
+        Returns: void
 
     buttonSetUpAction
-        Purpose:
+        Purpose: create buttons with respective actions
 
-        Parameters:
+        Parameters: nothing
 
-        Returns:
+        Returns: void
 
     doBackButtonProcedure
-        Purpose:
+        Purpose: do back button actions
 
-        Parameters:
+        Parameters: nothing
 
-        Returns:
+        Returns: void
 
     checkForNextButtonProcedure
-        Purpose:
+        Purpose: checks if in final class, if so, disable next button. Otherwise, user is
+        permitted to go to the next class
 
-        Parameters:
+        Parameters: nothing
 
-        Returns:
+        Returns: void
 
     doNextButtonProcedure
-        Purpose:
+        Purpose: go to next class
 
-        Parameters:
+        Parameters: nothing
 
-        Returns:
+        Returns: void
 
     hideWindow
-        Purpose:
+        Purpose: hide and remove unecessary components
 
-        Parameters:
+        Parameters: nothing
 
-        Returns:
+        Returns: void
 
 _____________________________________
 
@@ -926,131 +1057,136 @@ SETTEST.java
 _____________________________________
 StudentStatCollect.java
     studentStatCollectLaunch
-        Purpose:
+        Purpose: to be able to launch student stat collect without creating another instance,
+        useful to reuse the instance for future user classes.
 
-        Parameters:
+        Parameters: nothing
 
-        Returns:
+        Returns: void
 
     buttonSetUpAction
-        Purpose:
+        Purpose: make buttons menu and attach their actions
 
-        Parameters:
+        Parameters: nothing
 
-        Returns:
+        Returns: void
 
     backAction
-        Purpose:
+        Purpose: add action listener for back button
 
-        Parameters:
+        Parameters: JButton backButton
 
-        Returns:
+        Returns: void
 
     decideBackActionBasedOnClass
-        Purpose:
+        Purpose: based on class indexes, decide which classes the GUI needs
 
-        Parameters:
+        Parameters: nothing
 
-        Returns:
+        Returns: void
 
     backAction2
-        Purpose:
+        Purpose: basically the same as regular backAction function, but is used is the user uses
+        "Remove placeholders to continue?"> yes.
+        If it used the regular backaction, it would cause an infinite loop
 
-        Parameters:
+        Parameters: nothing
 
-        Returns:
-    
+        Returns: void
+
     goToPreviousClasses
-        Purpose:
+        Purpose: save and go to earlier classes
 
-        Parameters:
+        Parameters: nothing
 
-        Returns:
+        Returns: void
 
     addLoadedBoxes
-        Purpose:
+        Purpose: check for files to load, and load information to GUI
 
-        Parameters:
+        Parameters: nothing
 
-        Returns:
+        Returns: void
 
     saveAction
-        Purpose:
+        Purpose: add action listener for save button
 
-        Parameters:
+        Parameters: JButton saveButton
 
-        Returns:
-    
+        Returns: void
+
     saveButtonAction
-        Purpose:
+        Purpose: saves information
 
-        Parameters:
+        Parameters: String actionCause (if the action was caused by going to other classes
+        or clicking the save button)
 
-        Returns:
+        Returns: void
 
     nextButtonAction
-        Purpose:
+        Purpose: add action listener to next button
 
-        Parameters:
+        Parameters: JButton nextButton
 
-        Returns:
+        Returns: void
 
     doNextButtonProcedure
-        Purpose:
+        Purpose: save and perform input sanitization
 
-        Parameters:
+        Parameters: nothing
 
-        Returns:
-    
+        Returns: void
+
     ifCreditsIsJPanel
-        Purpose:
+        Purpose: if in doNextButtonProcedure function it determines it is a JPanel,
+        it leads here and performs input sanitization
 
-        Parameters:
+        Parameters: nothing
 
-        Returns:
-    
+        Returns: void
+
     checkPercentageOfGradesFormat
         Purpose:
 
         Parameters:
 
         Returns:
-    
+
     checkCreditsFormat
         Purpose:
 
         Parameters:
 
         Returns:
-    
+
     checkGradesFormat
         Purpose:
 
         Parameters:
 
         Returns:
-    
+
     makeFormatReminderDialog
         Purpose:
 
         Parameters:
 
         Returns:
-    
+
     allPassedGoToStudentStats
         Purpose:
 
         Parameters:
 
         Returns:
-    
+
     goToPrintStudentGrades
         Purpose:
 
         Parameters:
 
         Returns:
-    
+
     doNextButtonProcedure2
         Purpose:
 
@@ -1065,6 +1201,30 @@ StudentStatCollect.java
 
         Returns:
 
+//
+    boxManageCreate
+        Purpose:
+
+        Parameters:
+
+        Returns:
+
+    newSet
+        Purpose:
+
+        Parameters:
+
+        Returns:
+
+    removeVariablesInWindow
+        Purpose:
+
+        Parameters:
+
+        Returns:
+
+    TESTNEXTBUTTON, TESTNEWTYPEBUTTON, TESTBACKBUTTON
+//
 _____________________________________
 
 TESTFUNCTSFOREASYTESTING

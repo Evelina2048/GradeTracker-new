@@ -92,8 +92,7 @@ public class PrintStudentGrades extends JFrame {
         buttonSetUpAction(); //moved 12/30
 
         if (allTextListForClass.size() > 1) { //moved 12/30
-            System.out.println("check");
-            studentStatCollectLaunch();
+            setTitle();
 
             setList = SetList.getInstance();
 
@@ -190,6 +189,7 @@ public class PrintStudentGrades extends JFrame {
             allContainer.add(contributionLabel);
         }
         window.add(borderContainer);
+
         Component[] windowComponents3 = window.getContentPane().getComponents();
         for (Component windowComp : windowComponents3) {
             if ((windowComp.getName() != null) && (windowComp.getName().equals("classlabelpanelinreadclass"))) {
@@ -221,19 +221,18 @@ public class PrintStudentGrades extends JFrame {
             List <String> gradeArrayForOneBox = Arrays.asList(allTextListForClass.get(boxPanelIndex).split(" "));
 
             seperatedBySpaceListOfGrades.add(new ArrayList<>(gradeArrayForOneBox));
-
         }
-            int average = 0;
-            int thisGradeBoxTotal = 0;
+        int average = 0;
+        int thisGradeBoxTotal = 0;
 
-            for (int i = 0; i < seperatedBySpaceListOfGrades.size(); i++) {
-                thisGradeBoxTotal = seperatedBySpaceListOfGrades.get(i).stream()
-                            .mapToInt(Integer::parseInt)  // Convert String to int
-                            .sum();
-                gradeBoxTotal.add(thisGradeBoxTotal);
-                average = gradeBoxTotal.get(i)/seperatedBySpaceListOfGrades.get(i).size();
-                listOfAverages.add(average);
-            }
+        for (int i = 0; i < seperatedBySpaceListOfGrades.size(); i++) {
+            thisGradeBoxTotal = seperatedBySpaceListOfGrades.get(i).stream()
+                        .mapToInt(Integer::parseInt)  // Convert String to int
+                        .sum();
+            gradeBoxTotal.add(thisGradeBoxTotal);
+            average = gradeBoxTotal.get(i)/seperatedBySpaceListOfGrades.get(i).size();
+            listOfAverages.add(average);
+        }
     }
 
     private void makeGradeTypeList() {
@@ -248,7 +247,7 @@ public class PrintStudentGrades extends JFrame {
         }
     }
 
-    public void studentStatCollectLaunch() {
+    private void setTitle() {
         this.window = Set.getInstance().getWindow();
         window.setTitle("PrintStudentGrades");
     }
@@ -291,7 +290,6 @@ public class PrintStudentGrades extends JFrame {
     }
 
     public void doBackButtonProcedure() {
-        //if at class index 0
         if (whichCurrClassIndex > 0) { //if no previous print grades classes
             hideWindow();
             whichCurrClassIndex--; //only if there are more
@@ -309,6 +307,7 @@ public class PrintStudentGrades extends JFrame {
             actionPriorities.setCurrentClass("StudentStatCollect");
         }
     }
+
     private void checkForNextButtonProcedure() {
         Boolean atEndOfClasses = (whichCurrClassIndex == SetList.getInstance().getFinalClassList().size() -1) ; //-1 to account for index starting from 0 and size not
         if (atEndOfClasses) {

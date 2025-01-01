@@ -7,7 +7,6 @@ import javax.swing.JPanel;
 
 import java.awt.BorderLayout;
 import java.awt.Color;
-import java.awt.event.MouseListener;
 import java.awt.Component;
 import java.awt.Dimension;
 import java.awt.FlowLayout;
@@ -42,13 +41,13 @@ public class Creator {
         colorFocusListener = new TextFieldColorFocusListener();
     }
 
-    public JTextField createTextBox(String placeholder, String my_type, Boolean boxLoaded) {
+    public JTextField createTextBox(String placeholder, String thisType, Boolean boxLoaded) {
         textFieldPanel.setName("textfieldpanel in create");
         loaded = boxLoaded;
         int width = 144;
         int height = 50;
         Decorator decorate = new Decorator();
-        if (textboxCounter < 30 && my_type.equals("JTextField")) {
+        if (textboxCounter < 30 && thisType.equals("JTextField")) {
             textboxCounter++;
             textField = decorate.decorateTextBox(placeholder);
             createButton.addDocumentListenerForSaving(textField);
@@ -63,7 +62,7 @@ public class Creator {
             //for student classes
             decorate.maximumAmountReachedPopup();
         }
-        else if (my_type.equals("JLabel")) {
+        else if (thisType.equals("JLabel")) {
             JLabel toAddType = new JLabel(placeholder);
             textFieldPanel.add(toAddType);
         }
@@ -105,7 +104,7 @@ public class Creator {
     }
 
     public void windowFix() {
-        window.revalidate(); 
+        window.revalidate();
         window.repaint();
     }
 
@@ -121,19 +120,19 @@ public class Creator {
         window.remove(textFieldPanel);
     }
 
-    public JPanel typeBox(String placeholder, String my_type, Boolean boxLoaded) {
+    public JPanel typeBox(String placeholder, String thisType, Boolean boxLoaded) {
         hideContainer(); //needed unless jlabels will be missing
         loaded = boxLoaded;
         JPanel northTypePanel = new JPanel(new BorderLayout());
         JPanel gradeTypePanel = new JPanel(new BorderLayout()); //second border layout so things not cut out
 
 
-        if (my_type.equals("JTextField")) {
+        if (thisType.equals("JTextField")) {
             JTextField toAddType = createTextBox(placeholder, "JTextField", loaded);
             gradeTypePanel.add(toAddType);
         }
 
-        else if(my_type.equals("JLabel")) {
+        else if(thisType.equals("JLabel")) {
             JLabel toAddType = new JLabel(placeholder);
 
             if (setState.getTextFieldFont() != null) {
@@ -156,12 +155,5 @@ public class Creator {
 
 
         return northTypePanel;
-    }
-
-    public void deleteMouseListeners(JTextField textField, int numberToDelete) {
-        MouseListener[] listeners = textField.getMouseListeners();
-        for (int i = 5; i >= 0; i--) {
-            textField.removeMouseListener(listeners[i]);
-        }
     }
 }

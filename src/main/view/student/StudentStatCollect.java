@@ -67,6 +67,7 @@ public class StudentStatCollect extends JFrame {
 
     private static int typeNumber;
     private int numOfBoxes = 0;
+    private Boolean popup = false;
     private int maxBoxes = 26;
     private int totalPercentage = 0;
 
@@ -213,8 +214,8 @@ public class StudentStatCollect extends JFrame {
                 }
                 window.requestFocus(); //added 12/30 to prevent credits box from getting focus
 
-                classLabelPanel.setVisible(true); //11/25
-                textBoxPanel.setVisible(true); //11/25
+                classLabelPanel.setVisible(true);
+                textBoxPanel.setVisible(true);
                 JFrame window = Set.getInstance().getWindow();
 
                 Component[] windowComponents = window.getContentPane().getComponents();
@@ -236,7 +237,7 @@ public class StudentStatCollect extends JFrame {
                 create.windowFix();
             }
         }
-}
+    }
 
     private void goToPreviousClasses() {
         saveButtonAction("backButton");
@@ -258,7 +259,6 @@ public class StudentStatCollect extends JFrame {
     }
 
     public void addLoadedBoxes() {
-
         String filePath = setUserInformation.getPathToClassInformationFileWithIndex();
 
         JPanel loadedBoxesPanel = fileHandler.loadTextboxes(filePath);
@@ -272,14 +272,13 @@ public class StudentStatCollect extends JFrame {
         classLabelPanel.add(textBoxPanel);
         sETTEST.SETTESTCLASSLABELPANEL(classLabelPanel);
 
-        System.out.println("numOfBoxeds "+numOfBoxes);
         if (numOfBoxes == 0) {
             boxStarterPack();
         }
 
-        else if (numOfBoxes == 2) { //12/30
+        else if (numOfBoxes == 2) {
             newSet();
-        } //12/30
+        }
 
         textBoxPanel.setVisible(true);
         classLabelPanel.setVisible(true);
@@ -330,9 +329,7 @@ public class StudentStatCollect extends JFrame {
             decorate.areYouSureMessage(null, "studentStatsEmpty", "Remove placeholder(s) to continue?", 230, 90);
             setState.setCanContinue(false);
         }
-
         SETTEST.getInstance().TESTSETCURRENTINSTANCE(this);
-
     }
 
     private void nextButtonAction(JButton nextButton) {
@@ -344,7 +341,6 @@ public class StudentStatCollect extends JFrame {
                     public void actionPerformed(ActionEvent e) { // remember won't run if just enter without a click
                         System.out.println("enteraction");
                         doNextButtonProcedure();
-
                     } //added 12/8 to make nextbutton work like enter
                 }, 1, "EnterAction", null, currentClass);  // Add this ActionListener with priority 1
             }
@@ -352,9 +348,12 @@ public class StudentStatCollect extends JFrame {
     }
 
     public void doNextButtonProcedure() {
+        System.out.println("gradetypename 1111 continue "+setState.getCanContinue());
         if(setState.getCanContinue()) {
+            System.out.println("gradetypename 2222");
             saveButtonAction("nextButton");
             if (typeNumber!=0) {
+                System.out.println("gradetypename 3333 " + setState.getClassListIndex() + " type number "+typeNumber);
                 setList.setGradeTypeList(setState.getClassListIndex(), typeNumber);
             }
         }
@@ -375,11 +374,11 @@ public class StudentStatCollect extends JFrame {
         JTextField creditsTextField = goIntoPanel.goIntoPanelReturnTextbox((JPanel) credits, 0);
         String text = creditsTextField.getText();
 
-        Boolean matcherBoolean = checkCreditsFormat(text); //11/25
+        Boolean matcherBoolean = checkCreditsFormat(text);
 
-        Boolean gradesFormatOkay = checkGradesFormat(); //11/25
+        Boolean gradesFormatOkay = checkGradesFormat();
 
-        Boolean percentageFormatOkay = checkPercentageOfGradesFormat(); //11/25
+        Boolean percentageFormatOkay = checkPercentageOfGradesFormat();
 
         Boolean creditsFieldChanged = (setState.getEmptiedState(creditsTextField) != false);
 
@@ -476,10 +475,9 @@ public class StudentStatCollect extends JFrame {
         if(setState.getCanContinue()) {
             saveButtonAction("nextButton");
             if (typeNumber!=0) {
-                setList.setGradeTypeList(setState.getClassListIndex(), typeNumber);
+                setList.setGradeTypeList(setState.getClassListIndex()+1, typeNumber);
             }
             credits = (JPanel) textBoxPanel;
-        //} //removed 12/1
         credits = (JPanel) textBoxPanel;
 
         while (credits.getComponentCount() < 5) { // for layered panel
@@ -673,7 +671,6 @@ public class StudentStatCollect extends JFrame {
             create.hideContainer();
             if (backNextButtonsPanel != null) {
                 backNextButtonsPanel.setVisible(false);
-                //window.remove(backNextButtonsPanel); //not used
             }
             classLabelPanel.setVisible(false);
             if (setState.getClassListIndex() == 0){
@@ -691,8 +688,11 @@ public class StudentStatCollect extends JFrame {
             }
             else if ((numOfBoxes) == maxBoxes) {
                 Decorator decorate = new Decorator();
-                decorate.maximumAmountReachedPopup();
-                setState.setCanContinue(false);
+                if (popup == false) {
+                    decorate.maximumAmountReachedPopup();
+                }
+                popup = true;//
+                setState.setCanContinue(true);//
             }
 
             classLabelPanel.setVisible(true);
@@ -724,7 +724,6 @@ public class StudentStatCollect extends JFrame {
                     @Override
                     public void actionPerformed(ActionEvent e) { // remember won't run if just enter without a click
                         doNextButtonProcedure();
-
                     }
                 }, 1, "EnterAction", null, currentClass);  // Add this ActionListener with priority 1
             }
@@ -741,4 +740,4 @@ public class StudentStatCollect extends JFrame {
         public JButton TESTBACKBUTTON() {
             return backButton;
         }
-        }
+}

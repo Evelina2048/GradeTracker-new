@@ -101,8 +101,7 @@ public class Decorator {
         dialog = new JDialog(window, true);
 
         window.setDefaultCloseOperation(JFrame.DO_NOTHING_ON_CLOSE); //10/21 to remove window close default and not
-        //dialog.setDefaultCloseOperation(JDialog.DO_NOTHING_ON_CLOSE); //12/29
-        dialog.setDefaultCloseOperation(JDialog.DISPOSE_ON_CLOSE); //12/29
+        dialog.setDefaultCloseOperation(JDialog.DISPOSE_ON_CLOSE);
 
 
         dialog.setResizable(false);
@@ -117,7 +116,7 @@ public class Decorator {
         yesButton.requestFocus(); //added 12/30 to prevent accidentally deleting things
         dialog.add(yesButton);
 
-        dialog.addWindowListener(new WindowAdapter() {  //11/23 so that back button still works after close
+        dialog.addWindowListener(new WindowAdapter() {
             @Override
             public void windowClosing(WindowEvent e) {
                 noButtonAction();
@@ -127,25 +126,18 @@ public class Decorator {
         JButton noButton = new JButton("Cancel");
         noButton.setVisible(true);
         noButton.requestFocusInWindow();
-        //noButton.requestFocus(); //added 12/30 to prevent accidentally deleting things
-
 
         yesButton.setFocusPainted(false);
         noButton.setFocusPainted(true); //added 12/30 to prevent accidentally deleting things
 
         dialog.add(noButton);
-        dialog.setSize(width,height); //250, 120
+        dialog.setSize(width,height);
 
         yesButtonActionListener(yesButton);
         noButtonActionListener(noButton);
 
         dialog.setLocationRelativeTo(window);
         dialog.setVisible(true);
-
-        // noButton.setFocusable(true); // Ensure the button can receive focus
-        // noButton.requestFocus();
-        // noButton.requestFocusInWindow();
-        // SwingUtilities.invokeLater(() -> noButton.requestFocusInWindow());
 
         return yesOrNoDialog;
     }
@@ -196,7 +188,6 @@ public class Decorator {
         }
         dialog.setVisible(false);
         dialog.dispose();
-
     }
 
     private void reasonIsChangingUsernameYes() {
@@ -225,11 +216,10 @@ public class Decorator {
             if (textField.getText().length() >= 28) {
                 textField.setCaretPosition(textField.getText().length());
             } else {
-                textField.setCaretPosition(0); // Initially place caret at the beginning
+                textField.setCaretPosition(0); //Initially place caret at the beginning
             }
             textField.setSelectionColor(UIManager.getColor("TextField.selectionBackground"));
         });
-
     }
 
     private void reasonIsStudentStatsEmptyYes() {
@@ -247,11 +237,9 @@ public class Decorator {
             studentStat.backAction2();
         }
 
-        System.out.println("dialog visi "+dialog.isVisible());
-
-        setState.setCanContinue(true); //11/19
+        setState.setCanContinue(true);
         dialog.setVisible(false);
-        window.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE); //11/26
+        window.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
         dialog.dispose();
     }
 
@@ -275,55 +263,40 @@ public class Decorator {
     private void noButtonAction() {
         System.out.println("in no button action");
         if (reason == "closing window") {
-            window.setDefaultCloseOperation(JFrame.DO_NOTHING_ON_CLOSE); //commented out 12/29
+            window.setDefaultCloseOperation(JFrame.DO_NOTHING_ON_CLOSE);
         }
         window.requestFocusInWindow();
         dialog.setVisible(false);
         window.requestFocusInWindow();
         if (dialog != null) {
             dialog.dispose();
-            setState.setCanContinue(true); //11/19
+            setState.setCanContinue(true);
         }
-
-        ////
-        ///window.addwindowadapter
-        // dialog.addWindowListener(new WindowAdapter() {
-        //     @Override
-        //     public void windowClosing(WindowEvent e) {
-        //         dialog.dispose();
-        //         //window.dispose();
-        //         // setState.setCanContinue(false);
-        //         // window.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE); //added 12/29
-        //     }
-        // }); //added 12/29
-        ////
 
         window.requestFocusInWindow();
 
         FocusListener noFocusListener = new FocusAdapter() {
-                @Override
-                public void focusGained(FocusEvent e) {
-                    window.requestFocusInWindow();
+            @Override
+            public void focusGained(FocusEvent e) {
+                window.requestFocusInWindow();
 
-                    SwingUtilities.invokeLater(new Runnable() {
-                        public void run() {
-                            textField.requestFocusInWindow();
-                        }
-                    });
+                SwingUtilities.invokeLater(new Runnable() {
+                    public void run() {
+                        textField.requestFocusInWindow();
+                    }
+                });
 
-                    textField.removeFocusListener(this);
-                }
+                textField.removeFocusListener(this);
+            }
 
         };
-        ////
         if (textField != null) {
             textField.addFocusListener(noFocusListener);
             textField.removeFocusListener(setListeners.getDialogFocusListener());
         }
         setListeners.setNoFocusListener(noFocusListener);
-        // window.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE); //11/26
 
-        setState.setCanContinue(true);  //12/1 to enable continuing again
+        setState.setCanContinue(true);
     }
 
     public void setCaretPositionToZero(JTextField importedTextField) {
@@ -337,9 +310,9 @@ public class Decorator {
 
     public JDialog genericPopUpMessage(String text,JRadioButton button, int width, int height) {
         dialog = new JDialog(window, true);
-        dialog.setDefaultCloseOperation(JDialog.DO_NOTHING_ON_CLOSE); //12/29
-        //window.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE); //12/29
-        window.setDefaultCloseOperation(JFrame.DO_NOTHING_ON_CLOSE); //12/29
+        dialog.setDefaultCloseOperation(JDialog.DO_NOTHING_ON_CLOSE);
+        //window.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
+        window.setDefaultCloseOperation(JFrame.DO_NOTHING_ON_CLOSE);
         dialog.setResizable(false);
         dialog.setLayout(new FlowLayout());
         JLabel label = new JLabel(text);
@@ -354,16 +327,13 @@ public class Decorator {
             public void actionPerformed(ActionEvent e) {
                 dialog.setVisible(false);
                 dialog.dispose();
-                //setState.setCanContinue(false); //commented out on 12/26 because it prevents saving
-                setState.setCanContinue(true); //added 12/26 because of above
+                setState.setCanContinue(true);
             }
         });
         dialog.addWindowListener(new WindowAdapter() {
             @Override
             public void windowClosing(WindowEvent e) {
                 dialog.dispose();
-                //setState.setCanContinue(false); //cancelled 12/30
-                //window.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE); //added 12/29
             }
         });
         return dialog;
@@ -423,9 +393,7 @@ public class Decorator {
     }
 
     public void maximumAmountReachedPopup() {
-        System.out.println("the great box mystery 3333");
         if (setState.getCanContinue() == true) {
-            System.out.println("the great box mystery 4444");
             JDialog dialog = genericPopUpMessage("<html><center>Maximum amount reached.", null, 200 , 100);
             dialog.setLocationRelativeTo(window);
             dialog.setLocation(dialog.getX(), dialog.getY() + 15);
@@ -436,7 +404,6 @@ public class Decorator {
     public Font getFontFromTextFields() {
         return currentTextFieldFont;
     }
-
 
     public void removeForNewUserWindow(JPanel instructionsPanel, JPanel choicesPanel, JPanel backNextButtonsPanel) {
         JFrame window = Set.getInstance().getWindow();
