@@ -374,6 +374,8 @@ public class StudentStatCollect extends JFrame {
         if (credits instanceof JPanel) {
             ifCreditsIsJPanel();
         }
+
+        window.requestFocusInWindow();
     }
 
     private void ifCreditsIsJPanel() {
