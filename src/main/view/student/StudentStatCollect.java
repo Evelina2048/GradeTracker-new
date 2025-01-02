@@ -191,6 +191,7 @@ public class StudentStatCollect extends JFrame {
         currentClass = "StudentStatCollect";
         actionPriorities.setCurrentClass(currentClass);
         if(setState.getCanContinue()) {
+            numOfBoxes = 0;
             if (setState.getClassListIndex() == 0) { //case for back to classes
                 hideWindow();
                 StudentClasses studentClasses = new StudentClasses();
@@ -198,6 +199,7 @@ public class StudentStatCollect extends JFrame {
                 window.requestFocus(); //added 12/30 to prevent credits box from getting focus
             }
             else if ((setState.getClassListIndex() > 0)) {
+                System.out.println("num of boxes test"+numOfBoxes);
                 setState.decrementClassListIndex();
                 if (setList.getClassLabelPanel() != null) { //added 12/30 to prevent null error
                 setList.getClassLabelPanel().removeAll();
@@ -208,11 +210,15 @@ public class StudentStatCollect extends JFrame {
                 SETTEST.getInstance().TESTSETCURRENTINSTANCE(this);
                 addLoadedBoxes();
 
+                System.out.println("num of boxes test before"+numOfBoxes);
+
                 if (numOfBoxes == 2) { //added 12/27 for if saved only credits and label
                     newSet();
                     window.requestFocus(); //added 12/28 to prevent credits box from getting focus
                 }
                 window.requestFocus(); //added 12/30 to prevent credits box from getting focus
+
+                System.out.println("num of boxes test after "+numOfBoxes);
 
                 classLabelPanel.setVisible(true);
                 textBoxPanel.setVisible(true);

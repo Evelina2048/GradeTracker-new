@@ -320,60 +320,64 @@ _____________________________________
 FileHandling.java
 
     readFileToList
-        Purpose:
+        Purpose: Turn the contents of a text file into a list. Helpful for print grades.
 
-        Parameters:
+        Parameters: String filePath (where the data is located)
 
-        Returns:
+        Returns: ArrayList<String> list
 
     fileExists
-        Purpose:
+        Purpose: Checks if a file exists
 
-        Parameters:
+        Parameters: String filePath
 
-        Returns:
+        Returns: Boolean based on whether the file path is valid
 
     folderExists
-        Purpose:
+        Purpose: Checks if a folder is at a file path
 
-        Parameters:
+        Parameters: String folderPath (the path to the folder)
 
-        Returns:
+        Returns: Boolean based on whether the path to the folder is valid
 
     fileIsNotEmpty
-        Purpose:
+        Purpose: Checks if a file is not empty, useful for determining whether
+        to add new boxes
 
-        Parameters:
+        Parameters: String filePath
 
-        Returns:
+        Returns: Boolean based on whether the file is not empty
 
     loadtextboxes
-        Purpose:
+        Purpose: loads information in file path into textboxes
+        and puts textboxes on GUI
 
-        Parameters:
+        Parameters: String filePath
 
-        Returns:
+        Returns: JPanel with the boxes
 
     writeArrayListToFile
-        Purpose:
+        Purpose: Given an array list, write it to a file, such as after deleting
+        lines due to them being placeholders, which dont get written to these files.
 
-        Parameters:
+        Parameters: String filePath to desired file, and lines to write
 
-        Returns:
+        Returns: void
 
     deleteClass
-        Purpose:
+        Purpose: Given a filepath, delete the file
 
-        Parameters:
+        Parameters: String filePathString
 
-        Returns:
+        Returns: void
 
     deleteFromDeleteQueue
-        Purpose:
+        Purpose: There is a deleting queue that is set in setUserInformation, this
+        function executes the deletions
 
-        Parameters:
+        Parameters: nothing
 
-        Returns:
+        Returns: void
 _____________________________________
 
 FileWriting.java
@@ -842,95 +846,97 @@ NewUser.java
         Returns: void
 
     radioButtonSetUp:
-        Purpose:
+        Purpose: make radio buttons, put them in panels, and add to window
 
-        Parameters:
+        Parameters: nothing
 
-        Returns:
+        Returns: void
 
     existingButton
-        Purpose:
+        Purpose: make existing button and its action listener
 
-        Parameters:
+        Parameters: nothing
 
-        Returns:
+        Returns: void
 
     newUserButton
-        Purpose:
+        Purpose: make new user button and its action listener
 
-        Parameters:
+        Parameters: nothing
 
-        Returns:
+        Returns: void
 
     checkIfExistingChangedWithUsername
-        Purpose:
+        Purpose: check if the user changed the new user or existing buttons.
 
-        Parameters:
+        Parameters: nothing
 
-        Returns:
+        Returns: void
 
     choicesButtonDecorate
-        Purpose:
+        Purpose: decorate the radiobuttons
 
-        Parameters:
+        Parameters: button to be decorated
 
-        Returns:
+        Returns: void
 
     addToChoicesPanel
-        Purpose:
+        Purpose: add buttons to choices panel
 
-        Parameters:
+        Parameters: ButtonGroup teacherStudentGroup, JRadioButton existingButton, JRadioButton newUserButton, JPanel choicesPanel.
+        Too many parameters, but this function was made before I learned better practices, but
+        I did get exposed to different ways of doing the same thing. Buttons from this class are added to panel.
 
-        Returns:
+        Returns: void
 
     buttonSetUp
-        Purpose:
+        Purpose: make buttons, add to backButtonPanel, with their respective action listeners
 
-        Parameters:
+        Parameters: nothing
 
-        Returns:
+        Returns: void
 
     doNextButtonProcedure
-        Purpose:
+        Purpose: action for if user hits next button
 
-        Parameters:
+        Parameters: nothing
 
-        Returns:
+        Returns: void
 
     setButtonSelected
-        Purpose:
+        Purpose: when going backward to this class, load what was selected
 
-        Parameters:
+        Parameters: nothing
 
-        Returns:
+        Returns: void
 
     showWindow
-        Purpose:
+        Purpose: display the window
 
-        Parameters:
+        Parameters: nothing
 
-        Returns:
+        Returns: void
 
     addNewUserActionListener
-        Purpose:
+        Purpose: new user action listener
 
-        Parameters:
+        Parameters: nothing
 
-        Returns:
+        Returns: void
 
     addExistingUserActionListener
-        Purpose:
+        Purpose: action listener for existing user
 
-        Parameters:
+        Parameters: nothing
 
-        Returns:
+        Returns: void
 
     nextButtonActionListenerWithPriorities
-        Purpose:
+        Purpose: add action priorities in CompositeActionListenerWithPriorities class
 
-        Parameters:
+        Parameters: String keyCause (ex. next button)
 
-        Returns:
+        Returns: void
 
 _____________________________________
 PrintStudentGrades.java
@@ -1044,6 +1050,15 @@ Set.java
     getCurrentWindowClosing- custom window closing function if it needs
     to be removed in another class
     ,setCurrentSaveButtonToNull
+
+_____________________________________
+
+SetListeners.java
+
+    A static class for setting and requesting listeners.
+    getInstance, setDialogFocusListener, getDialogFocusListener, setYesFocusListener
+    getYesFocusListener, setNoFocusListener, getNoFocusListener
+
 _____________________________________
 
 SETTEST.java
@@ -1263,18 +1278,3 @@ TextFieldColorFocusListener.java
         Returns: void
 
 _____________________________________
-
-EnterAction (not a file, just a function)
-    Purpose:
-
-    Parameters:
-
-    Returns:
-
-
-Purpose:
-
-Parameters:
-
-Returns:
-

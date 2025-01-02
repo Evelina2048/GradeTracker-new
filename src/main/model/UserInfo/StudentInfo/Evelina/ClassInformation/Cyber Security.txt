@@ -1,0 +1,13 @@
+3
+Participation
+10
+100
+Lab
+20
+100 90 84 86 72 100 100
+Tests
+40
+77 92
+Presentation
+30
+95

@@ -189,7 +189,6 @@ public class NewUser extends JFrame {
             }
         });
 
-
         nextButtonPanel.add(nextButton);
 
         backNextButtonsPanel = createButton.makeBackNextButtonsPanel(backButtonPanel, new JPanel(), nextButtonPanel);

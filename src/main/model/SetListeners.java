@@ -20,7 +20,7 @@ public class SetListeners {
         }
         return instance;
     }
-    
+
     public void setDialogFocusListener(FocusAdapter thisTextfieldFocusListener) {
         textfieldFocusListener = thisTextfieldFocusListener;
     }

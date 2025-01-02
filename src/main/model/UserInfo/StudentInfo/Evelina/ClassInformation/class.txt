@@ -1,6 +1,6 @@
-Finite Automata
-Machine Learning
 Algorithms
+Machine Learning
 Cyber Security
+Finite Automata
 Greek
 Class to delete
