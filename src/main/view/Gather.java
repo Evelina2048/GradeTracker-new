@@ -249,8 +249,6 @@ public class Gather {
 
         makeBackButton();
 
-        makeSaveButton();
-
         makeNextButton();
         backNextButtonsPanel = createButton.makeBackNextButtonsPanel(backButtonPanel,saveButtonPanel, nextButtonPanel);
         window.add(backNextButtonsPanel, BorderLayout.SOUTH);
@@ -279,14 +277,6 @@ public class Gather {
             if (setUserInformation.getExistingOrNew() != null) {
                 newUser.setButtonSelected();
             }
-    }
-
-    private void makeSaveButton() {
-        JButton saveButton = createButton.saveButtonCreate();
-        saveButton.addActionListener(new ActionListener() {
-            public void actionPerformed(ActionEvent e) {
-            }
-        });
     }
 
     private void makeNextButton() {
@@ -332,7 +322,7 @@ public class Gather {
         setUsername();
 
         if (textFieldEmpty || textFieldHasntChanged && setState.getLoadedState(textField) == false) {
-            errorMessageSetUp("<html><center>Please choose an option",200,90);
+            errorMessageSetUp("<html><center>Please choose a username",200,90);
         }
 
         else if (textFieldFilled) { //good case
@@ -361,9 +351,6 @@ public class Gather {
         else {
             System.out.println("Something went wrong in username input");
             errorMessageSetUp("<html><center>Something went wrong in username input",200,90);
-        }
-
-        if (setUserInformation.getStudentOrTeacher() != null) {
         }
     }
 

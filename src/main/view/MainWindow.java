@@ -236,7 +236,6 @@ private void backNextButton() {
 }
 
 private void doBackButtonProcedure() {
-    hideWindow();
     Gather gather = new Gather();
     gather.gatherLaunch();
 }
@@ -254,14 +253,14 @@ private void doNextButtonProcedure() {
 }
 
 private void goToStudentClasses(String filePath) {
-    writeUsername(filePath);
+    writeUsername();
     //move on to studentclasses class
     decorate.hideWindow(instructionsPanel, choicesPanel, backNextButtonsPanel);
     StudentClasses studentClasses = new StudentClasses();
     studentClasses.studentClassesLaunch();
 }
 
-private void writeUsername(String filePath) {
+private void writeUsername() {
     //and username not taken
     String usernamePath = "somethingwentwrong.txt";
     String username = setUserInformation.getUsername();
@@ -309,7 +308,7 @@ private boolean readLine(BufferedReader reader, String username, boolean usernam
     try {
         while ((line = reader.readLine()) != null) {
             if (line.equals(username) && setUserInformation.getUsername() == null) {//if matches username
-                decorate.genericPopUpMessage("<html><center>Username already exists.<br> Please choose another.", studentButton, 200 , 100);
+                decorate.genericPopUpMessage("<html><center>Username already exists.<br> Please choose another.", 200 , 100);
                 usernametaken = true;
                 break;
             }
@@ -343,10 +342,6 @@ public void setButtonSelected() {
 
 public void show(int windowX, int windowY) {
     window.setVisible(true);
-}
-
-public void hideWindow() {
-
 }
 
 public class EnterAction extends AbstractAction {

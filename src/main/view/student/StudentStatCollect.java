@@ -446,7 +446,7 @@ public class StudentStatCollect extends JFrame {
 
     private void makeFormatReminderDialog() {
         Decorator decorate = new Decorator();
-        JDialog dialog = decorate.genericPopUpMessage("<html><center>Invalid Format.<br>-Credits must be an integer<br>-Grades must be numbers separated by spaces<br>-Percentage of Grade must be an integer or decimal<br>-Percentage must total to 100%",null,400,150);
+        JDialog dialog = decorate.genericPopUpMessage("<html><center>Invalid Format.<br>-Credits must be an integer<br>-Grades must be numbers separated by spaces<br>-Percentage of Grade must be an integer or decimal<br>-Percentage must total to 100%", 400, 150);
         dialog.setResizable(false);
         dialog.setLocationRelativeTo(null);
         dialog.setVisible(true);
@@ -581,8 +581,8 @@ public class StudentStatCollect extends JFrame {
         window.add(newDelContainerFlow, BorderLayout.EAST);
 
         create.windowFix();
-
     }
+
     private void newSetButtonAction() {
         if (numOfBoxes < maxBoxes) {
             typeNumber++;
@@ -650,6 +650,7 @@ public class StudentStatCollect extends JFrame {
             }
             return true;
         }
+
         public void DisplayClasses() {
             setUserInformation.getUsername();
             ArrayList<String> typeList = setList.getCurrentPanelList();

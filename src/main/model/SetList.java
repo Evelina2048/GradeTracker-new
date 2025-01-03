@@ -28,7 +28,7 @@ public class SetList {
         }
         return instance;
     }
-//
+
     public void setClassList(ArrayList<String> newClassList) {
         classList = newClassList;
     }
@@ -37,17 +37,13 @@ public class SetList {
         return classList;
     }
 
-    //public void setTypeList(ArrayList<String> newTypeList) {
     public void removeClassFromClassList() {
         int lastIndex = classList.size() - 1;
-        System.out.println("CLASSLISTSIZE: "+classList.size());
         if (lastIndex >= 0) {
             classList.remove(lastIndex);
-            System.out.println("CLASSLISTSIZE: "+classList.size());
         } else {
             System.out.println("ArrayList is empty. Nothing to remove.");
         }
-        
     }
 
     public ArrayList<String> getCurrentPanelList() {
@@ -55,12 +51,10 @@ public class SetList {
     }
 
     public void setFinalClassList(ArrayList<String> userFinalClassList) {
-        System.out.println("insetfinalclasslist: "+finalClassList);
         finalClassList = userFinalClassList;
     }
 
     public ArrayList<String> getFinalClassList() {
-        System.out.println("ingetfinalclasslist: "+finalClassList);
         return finalClassList;
     }
 
@@ -73,7 +67,7 @@ public class SetList {
     }
 
     public JPanel getReadClassLabelPanel() {
-       return readClassLabelPanel;
+        return readClassLabelPanel;
     }
 
     public JPanel getClassLabelPanel() {
@@ -85,13 +79,10 @@ public class SetList {
     }
 
     public void setGradeTypeList(int classListIndex, int typeNumber) {
-        System.out.println("in set grade type list "+ classListIndex + " "+typeNumber);
         if (classListIndex >= gradeNumber.size()) { //to account for if spot in array list is empty
             gradeNumber.add(0);
         }
         gradeNumber.set(classListIndex, typeNumber);
-        //gradeNumber.set(typeNumber, classListIndex);
-        //gradeNumber[classListIndex] = typeNumber;
     }
 
 
@@ -108,10 +99,8 @@ public class SetList {
 
     public void removeStudentStatCollectReadClassLabelPanel() {
         JFrame window = Set.getInstance().getWindow();
-        if (readClassLabelPanel != null) { //added 12/5 to prevent bug
+        if (readClassLabelPanel != null) {
             window.remove(readClassLabelPanel);
         }
     }
-
-
 }

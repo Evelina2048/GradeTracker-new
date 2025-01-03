@@ -308,10 +308,9 @@ public class Decorator {
         textField.moveCaretPosition(textField.getCaretPosition());
     }
 
-    public JDialog genericPopUpMessage(String text,JRadioButton button, int width, int height) {
+    public JDialog genericPopUpMessage(String text, int width, int height) {
         dialog = new JDialog(window, true);
         dialog.setDefaultCloseOperation(JDialog.DO_NOTHING_ON_CLOSE);
-        //window.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
         window.setDefaultCloseOperation(JFrame.DO_NOTHING_ON_CLOSE);
         dialog.setResizable(false);
         dialog.setLayout(new FlowLayout());
@@ -341,7 +340,7 @@ public class Decorator {
     }
 
     public void pleaseChooseAnOptionWithRadioButtons(JRadioButton button) {
-        dialog = genericPopUpMessage("<html><center>Please choose an option", button, 200, 90);
+        dialog = genericPopUpMessage("<html><center>Please choose an option", 200, 90);
         dialog.setResizable(false);
 
         dialog.setLocationRelativeTo(button);
@@ -394,7 +393,7 @@ public class Decorator {
 
     public void maximumAmountReachedPopup() {
         if (setState.getCanContinue() == true) {
-            JDialog dialog = genericPopUpMessage("<html><center>Maximum amount reached.", null, 200 , 100);
+            JDialog dialog = genericPopUpMessage("<html><center>Maximum amount reached.", 200 , 100);
             dialog.setLocationRelativeTo(window);
             dialog.setLocation(dialog.getX(), dialog.getY() + 15);
             dialog.setVisible(true);

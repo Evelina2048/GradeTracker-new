@@ -17,18 +17,14 @@ import javax.swing.border.Border;
 import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
 import java.awt.Color;
-//import java.awt.Component;
 import java.awt.event.MouseAdapter;
 import java.awt.GridLayout;
 import java.awt.event.ActionListener;
 import java.awt.event.ActionEvent;
 import java.awt.event.KeyEvent;
 import java.awt.image.BufferedImage;
-//import java.awt.Point;
-//import java.awt.event.MouseMotionAdapter;
 import java.awt.event.WindowAdapter;
 import java.awt.event.WindowEvent;
-//import java.awt.Rectangle;
 
 import java.util.ArrayList;
 import java.util.concurrent.atomic.AtomicBoolean;
@@ -62,10 +58,8 @@ public class StudentClasses extends JFrame {
     private JPanel backNextButtonsPanel;
     private JButton saveButton;
     private JTextField selectedTextBox;
-    //private JTextField draggedTextField = new JTextField();
     private FileWriting fileWrite = new FileWriting();
     private CompositeActionListenerWithPriorities actionPriorities;
-    //private Boolean spacedLabelIndexExists = false;
     Border borderRegular = BorderFactory.createLineBorder(Color.GRAY, 2);
     JPanel southContainer = new JPanel(new GridLayout(2,1,0,0));
     AtomicBoolean textFieldEmptied = new AtomicBoolean(false);;
@@ -73,20 +67,16 @@ public class StudentClasses extends JFrame {
     JButton deleteClassButton;
 
     JButton nextButton;
-    
-    //JButton moveClassButton;
-    //JPanel moveClassButtonPanel;
 
     FileHandling fileHandler = new FileHandling();
     JLayeredPane layeredPane = new JLayeredPane();
     private String currentClass = "StudentClasses Loading";
-    
+
     Set set;
     SetState setState;
     private SetUserInformation setUserInformation;
     private SetList setList;
     private WindowAdapter windowCloseAdapter;
-    //private JTextField moveModeLeftBox;
     JPanel instructionsPanel;
 
     public StudentClasses() {
@@ -94,7 +84,6 @@ public class StudentClasses extends JFrame {
 
     public void studentClassesLaunch() {
         southContainer.setName("SouthContainer");
-        //southContainer.setForeground(Color.pink);
         this.set = Set.getInstance();
         this.setState = SetState.getInstance();
         this.setUserInformation = SetUserInformation.getInstance();
@@ -104,40 +93,6 @@ public class StudentClasses extends JFrame {
         setState.setCurrentClass("StudentClasses.java");
         window = set.getWindow();
 
-
-    //     WindowAdapter windowCloseAdapter = new WindowAdapter() { //commented 12/31
-    //         @Override
-    //         public void windowClosing(WindowEvent e) {
-    //             //System.out.println("isenabled "+set.getCurrentSaveButton().isEnabled() + " getcurrentsavebuttonnull "+ (set.getCurrentSaveButton() != null));
-    //             Boolean actionPrioritiesNull = (CompositeActionListenerWithPriorities.getInstance().getCurrentClass() == null);
-    //             if (actionPrioritiesNull) {
-    //                 System.out.println("then 1111.6");
-    //                 window.dispose(); //added 12/29 for when save button doesn't work
-    //                 return;
-    //             }
-    //             Boolean equalsStudentClasses = CompositeActionListenerWithPriorities.getInstance().getCurrentClass().equals("StudentClasses Loading");
-    //             Boolean equalsStudentStatCollect = CompositeActionListenerWithPriorities.getInstance().getCurrentClass().equals("StudentStatCollect");
-    //             System.out.println("isenabled "+set.getCurrentSaveButton().isEnabled() + " getcurrentsavebuttonnull "+ (set.getCurrentSaveButton() != null)+ " currentClass "+actionPriorities.getCurrentClass());
-    //             if ((set.getCurrentSaveButton() != null) && (set.getCurrentSaveButton().isEnabled() && (equalsStudentClasses || equalsStudentStatCollect)) ) {
-    //                 System.out.println("then 1111");
-    //                 decorate.areYouSureMessage(null, "closing window", "<html><center> You did not save <br> Close anyways?", 176, 107);
-    //             }
-    //             else {
-    //                 System.out.println("then 1111.5");
-    //                 window.dispose(); //added 12/29 for when save button doesn't work
-    //             }
-    //         }
-
-    //         @Override
-    //         public void windowGainedFocus(WindowEvent e) {
-    //             System.out.println("Window gained focus");
-    // }
-    //     };
-    //     Set.getInstance().setCurrentWindowClosing(windowCloseAdapter);
-
-    //     window.addWindowListener(windowCloseAdapter);
-
-        //p
         window.getContentPane().addMouseListener(new MouseAdapter() {
             @Override
             public void mouseClicked(MouseEvent e) {
@@ -145,8 +100,6 @@ public class StudentClasses extends JFrame {
                 Component component = window.getComponentAt(e.getPoint());
                 if (component != null) {
                     System.out.println("Component type at clicked point: " + component.getClass().getName() + " " + component.getName());
-                    //omponent.setVisible(false);
-                    //create.windowFix();
                 } else {
                     System.out.println("No component at clicked point.");
                 }
@@ -164,12 +117,11 @@ public class StudentClasses extends JFrame {
 
         window.setTitle("StudentClasses");
 
-        //layeredPane.setBackground(Color.pink);
-            layeredPane.setVisible(true);
-            layeredPane.setOpaque(false);
-            layeredPane.setDoubleBuffered(true);
-            window.add(layeredPane);
-            create.windowFix();
+        layeredPane.setVisible(true);
+        layeredPane.setOpaque(false);
+        layeredPane.setDoubleBuffered(true);
+        window.add(layeredPane);
+        create.windowFix();
 
         instructionsWordsAndPanel("Edit Classes Mode "+"(for " +setUserInformation.getStudentOrTeacher()+"s)");
         loadIfNeeded();
@@ -181,7 +133,6 @@ public class StudentClasses extends JFrame {
         WindowAdapter windowCloseAdapter = new WindowAdapter() {//moved 12/30
             @Override
             public void windowClosing(WindowEvent e) {
-                //System.out.println("isenabled "+set.getCurrentSaveButton().isEnabled() + " getcurrentsavebuttonnull "+ (set.getCurrentSaveButton() != null));
                 Boolean actionPrioritiesNull = (CompositeActionListenerWithPriorities.getInstance().getCurrentClass() == null);
                 if (actionPrioritiesNull) {
                     window.dispose(); //added 12/29 for when save button doesn't work
@@ -189,7 +140,6 @@ public class StudentClasses extends JFrame {
                 }
                 Boolean equalsStudentClasses = CompositeActionListenerWithPriorities.getInstance().getCurrentClass().equals("StudentClasses Loading");
                 Boolean equalsStudentStatCollect = CompositeActionListenerWithPriorities.getInstance().getCurrentClass().equals("StudentStatCollect");
-                System.out.println("isenabled "+set.getCurrentSaveButton().isEnabled() + " getcurrentsavebuttonnull "+ (set.getCurrentSaveButton() != null)+ " currentClass "+actionPriorities.getCurrentClass());
                 if ((set.getCurrentSaveButton() != null) && (set.getCurrentSaveButton().isEnabled() && (equalsStudentClasses || equalsStudentStatCollect)) ) {
                     decorate.areYouSureMessage(null, "closing window", "<html><center> You did not save <br> Close anyways?", 176, 107);
                 }
@@ -211,7 +161,6 @@ public class StudentClasses extends JFrame {
     private void loadIfNeeded() {
         String filePath = setUserInformation.getPathToClassTextFile();
         if (fileHandler.fileExists(filePath)) {//case for if existing file
-            System.out.println("I have info to load!");
             ArrayList<String> myList = fileHandler.readFileToList(filePath);
             for (int index=0; index<myList.size(); index++) {
                 create.createTextBox(myList.get(index), "JTextField", true);
@@ -227,7 +176,6 @@ public class StudentClasses extends JFrame {
     private void westPanelCreate() {
         createNewClassButton();
         deleteClassButton();
-        moveClassButton();
 
         JPanel buttonsPanel = new JPanel(new BorderLayout());
 
@@ -236,7 +184,6 @@ public class StudentClasses extends JFrame {
         buttonsPanel.setPreferredSize(new Dimension(100,0));
         buttonsPanel.add(newClassButton,BorderLayout.WEST);
         buttonsPanel.add(deleteClassButton, BorderLayout.EAST);
-        //buttonsPanel.add(moveClassButton, BorderLayout.CENTER); //12/17
 
         southContainer.add(buttonsPanel,BorderLayout.CENTER);
 
@@ -270,8 +217,6 @@ public class StudentClasses extends JFrame {
                     public void actionPerformed(ActionEvent e) {// remember wont run  if just enter without a click
                         saveButtonAction();
                         hideWindow();
-                        //window.remove(backNextButtonsPanel); //added 12/28 to prevent windowCloseAdapter in previous classes
-                        // window.remove(Set.getInstance().getCurrentSaveButton());
                         Set.getInstance().setCurrentSaveButtonToNull(); //added 12/28 to prevent windowCloseAdapter in previous classes
                         window.remove(backNextButtonsPanel); //added 12/28 to prevent windowCloseAdapter in previous classes
 
@@ -279,9 +224,6 @@ public class StudentClasses extends JFrame {
                         MainWindow main = new MainWindow();
                         main.MainWindowLaunch();
                         main.setButtonSelected();
-
-                        //Set.getInstance().setCurrentWindowClosing(default);
-                        //setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE); //added 12/28 to prevent windowCloseAdapter in previous classes
 
                         window.removeWindowListener(windowCloseAdapter);
                     }
@@ -316,19 +258,15 @@ public class StudentClasses extends JFrame {
         nextButtonPanel.add(nextButton);
         nextButton.setPreferredSize(new Dimension(87, 29));
 
-        //currentClass = "StudentClasses";
-        //actionPriorities.setCurrentClass(currentClass);
         nextButton.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent e) {
                 currentClass = "StudentClasses";
                 actionPriorities.setCurrentClass(currentClass);
                 System.out.println("TTT ");
                 actionPriorities.addClassActionListener(new ActionListener() {
-                    // actionPriorities.setCurrentClass(currentClass);
                     @Override
                     public void actionPerformed(ActionEvent e) {// remember wont run  if just enter without a click
                         currentClass = "StudentClasses";
-                        //actionPriorities.setCurrentClass(currentClass);
                         System.out.println("UUU ");
                         doNextButtonProcedure();
                     }
@@ -339,8 +277,6 @@ public class StudentClasses extends JFrame {
     }
     private void doNextButtonProcedure() {
         currentClass = "StudentClasses";
-        //ArrayList<String> classList; //8/23
-        //classList = fileWrite.getClassList();
 
         writeType();
         System.out.println("nextbuttonhit");
@@ -366,7 +302,7 @@ public class StudentClasses extends JFrame {
         }
 
         else {
-            //error message setup
+            System.out.println("problem in studentclasses doNextButtonProcedure");
         }
     }
 
@@ -376,7 +312,6 @@ public class StudentClasses extends JFrame {
         newClassButton.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent e) {
                 create.createTextBox("Enter Class Name", "JTextField",false);
-                System.out.println("class list in new class button"+ setList.getCurrentPanelList());
         }
     });
     }
@@ -386,24 +321,12 @@ public class StudentClasses extends JFrame {
         deleteClassButton.setPreferredSize(new Dimension(150, 50));
         deleteClassButton.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent e) {
-                System.out.println("deleteClass Mode hit");
                 deleteMode();
             }
         });
     }
 
-    private void moveClassButton() {
-        // moveClassButton = new JButton("Move Classes");
-        // moveClassButton.addActionListener(new ActionListener() {
-        //     public void actionPerformed(ActionEvent e) {
-        //         System.out.println("moveClass Mode hit");
-        //         prepareTextboxForMoveMode();
-        //     }
-        // });
-    }
-
     private void writeType() {
-        System.out.println("set.getcurrentpanellist "+setList.getCurrentPanelList());
         set.setFilePath(setUserInformation.getPathToClassTextFile());
         fileWrite.writeTextToFile();
         setList.setFinalClassList(fileWrite.getClassList());
@@ -414,7 +337,6 @@ public class StudentClasses extends JFrame {
         deleteClassButton.setText("Delete Class Mode");
         deleteClassButton.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent e) {
-                System.out.println("clicked delete class mode");
                 requestFocusInWindow();
                 deleteMode();
             }
@@ -425,9 +347,7 @@ public class StudentClasses extends JFrame {
         prepareTextboxForDeleteMode();
         saveButtonAction();
         newClassButton.setEnabled(false);
-        //moveClassButton.setEnabled(false);
         leaveDeleteModeButton();
-
         window.remove(instructionsPanel);
         instructionsWordsAndPanel("Click on a box to select it");
     }
@@ -445,15 +365,8 @@ public class StudentClasses extends JFrame {
     BufferedImage[] textFieldImage = new BufferedImage[1];
     textFieldImage[0] = null;
 
-    //88
-    //JLabel[] tempTextField = new JLabel[1];
     tempTextField[0] = new JTextField("ERROR"); //if not overwritten will show error
-    //tempTextField[0] = new JLabel("ERROR");
     textFieldImage[0] = null;
-    //Component lastComponent = setState.getTextFieldPanel().getComponent(setState.getTextFieldPanel().getComponentCount()-1);
-    //Rectangle lastComponentBounds = lastComponent.getBounds();
-    //int[] spacedLabelIndex = new int[1];
-    //88
 
         for (int i = 0; i < setState.getTextFieldPanel().getComponentCount(); i++) {
             JTextField textField = new JTextField();
@@ -463,225 +376,13 @@ public class StudentClasses extends JFrame {
             }
             else if (setState.getTextFieldPanel().getComponent(i) instanceof JPanel) {
                 textField = goIntoPanel.goIntoPanelReturnTextbox((JPanel) setState.getTextFieldPanel().getComponent(i), 0);
-                
                 addMouseListenerToTextboxAndFrame(textField);
             }
-            
             else {
                 System.out.println("There was an issue in delete mode. student classes" + setState.getTextFieldPanel().getComponent(i).getClass().getName());
             }
-
-            //9
-            // textField.addMouseMotionListener(new MouseMotionAdapter() {
-            //     public void mouseDragged(MouseEvent e) {
-
-            //         //
-            //         Point cursorPoint = e.getPoint();
-            //         Point leftPoint = new Point(cursorPoint.x - 40, cursorPoint.y);
-            //         Point rightPoint = new Point(cursorPoint.x - 40, cursorPoint.y);
-            //         Boolean matchFound = false;
-            //         JPanel textFieldPanel = setState.getTextFieldPanel();
-            //         //int saveI;
-            //         //JTextField leftTextField = (JTextField) ;//(JTextField) e.getSource();
-                    
-            //         //if in between two textFields
-            //         System.out.println("layered stuff " + 
-            //         (
-            //         (layeredPane.getComponentAt(leftPoint)).getClass().getName() + " " +
-            //         (layeredPane.getComponentAt(rightPoint)).getClass().getName() + " " +
-            //         (window.getComponentAt(leftPoint)).getClass().getName() + " " +
-            //         (window.getComponentAt(rightPoint)).getClass().getName() + " "
-            //         )
-            //         );
-
-            //         //if ((layeredPane.getComponentAt(leftPoint) instanceof JTextField && layeredPane.getComponentAt(rightPoint) instanceof JTextField) || (window.getComponentAt(leftPoint) instanceof JTextField && window.getComponentAt(rightPoint) instanceof JTextField)) {
-            //         if ((layeredPane.getComponentAt(leftPoint) instanceof JTextField && layeredPane.getComponentAt(rightPoint) instanceof JTextField) || (window.getComponentAt(leftPoint) instanceof JTextField && window.getComponentAt(rightPoint) instanceof JTextField)) {
-            //             Component comp = layeredPane.getComponentAt(leftPoint);
-            //             System.out.println("comp "+comp.getClass().getName());
-            //             //ArrayList<JTextField> toDeleteList = new ArrayList<>();
-            //             ArrayList<JTextField> toAddList = new ArrayList<>();
-            //             if (spacedLabelBox != null) {
-            //                 //if point not between boxes anymore
-            //                 //1. save points
-                            
-            //                 //2.check if cursor point between
-            //                 //if (!((moveModeLeftBox.getLocation() leftof cursorPoint) && (moveModeRightBox.getLocation() rightof cursorPoint))) {
-            //                 if   (!(moveModeLeftBox.getBounds().x < cursorPoint.x && cursorPoint.x < (moveModeRightBox.getBounds().x + moveModeRightBox.getBounds().width))) {
-            //                 System.out.println("hiyaaaaaaa");
-            //                 //if not:
-            //                 //delete it.
-            //                     JPanel spacedLabelPanel = new JPanel();
-            //                     spacedLabelPanel.add(spacedLabelBox);
-            //                     create.deleteTextBox(spacedLabelPanel);
-            //                     //create.deleteTextBox(spacedLabelBox);
-            //                 }
-            //             }
-
-            //             for (int i = 0; i < setState.getTextFieldPanel().getComponentCount(); i++) { //loop to find what matches left component
-            //                 JTextField textFieldComponent = (JTextField) comp;
-            //                 JTextField componentFromPanel = (JTextField) setState.getTextFieldPanel().getComponent(i);
-            //                 if (textFieldComponent.getText().equals(componentFromPanel.getText())) { //if this component matches left component
-            //                 //if (setState.getTextFieldPanel().getComponent(i).getText().equals(window.getComponentAt(leftPoint).getText())) {
-            //                     //textFieldPanel.getComponent(i+1) = create.createTextBox();
-
-            //                     //textFieldPanel.add(create.createTextBox("(:", "JTextField", false));
-            //                     //extFieldPanel.add(create.createTextBox("", "JTextField", false));
-
-            //                     create.windowFix();
-            //                     //int saveI = i;
-            //                     matchFound = true;
-            //                     break;
-            //                 //}
-            //                 }
-            //                 else if (matchFound) {
-            //                     //toAddList.add((JTextField) setState.getTextFieldPanel().getComponent(i));
-            //                     toAddList.add((JTextField) tempTextFieldPanel.getComponent(i));
-            //                     JPanel panel = new JPanel();
-            //                     panel.add(tempTextFieldPanel.getComponent(i));
-            //                     create.deleteTextBox(panel);
-            //                 }
-            //             }
-                        
-            //             //spacedLabel = (JLabel) create.createTextBox("", "JLabel", false);
-            //             spacedLabelIndex[0] = tempTextFieldPanel.getComponentCount()-1; //minus 1 to account for starting from 0.
-            //             //System.out.println("spacedlabeltext: "+spacedLabelIndex);
-            //             textFieldPanel.add(create.createTextBox("", "JLabel", false));
-            //             //for (int j = 0; j < toDeleteList.size(); j++) {//delete from list
-            //             //}
-            //             for (int j = 0; j < toAddList.size(); j++) {//delete from list
-            //                 textFieldPanel.add(toAddList.get(j));
-            //             }
-            //         }
-
-            //         else if (window.getComponentAt(leftPoint) instanceof JTextField && window.getComponentAt(rightPoint) instanceof JTextField) {
-            //             Component comp = window.getComponentAt(leftPoint);
-            //             System.out.println("comp2 "+comp.getClass().getName());
-            //         }
-
-            //         JTextField newBackgroundField = new JTextField("EMPTY");
-                    
-            //         if (draggedTextField != null) { 
-            //             draggedTextField = (JTextField) e.getSource();
-            //             //newBackgroundField = (JTextField) e.getSource();
-            //         }
-
-            //         if (tempTextField[0].getText().equals("ERROR")){
-            //         tempTextField[0] = create.createTextBox(draggedTextField.getText(), "JTextField", false);
-            //         //tempTextField[0].setBounds(draggedTextField.getBounds());
-            //         //tempTextField[0] = new JLabel("Hello <3");
-            //         tempTextField[0].setOpaque(true);
-            //         }
-
-            //         if ((draggedTextField.getX() > tempTextField[0].getX()) && (draggedTextField.getY() > tempTextField[0].getY())) {
-            //             System.out.println("made it :) ");
-            //         }
-
-            //        // tempTextField[0].repaint();
-
-            //        System.out.println("draggedfield "+tempTextField[0].getBounds());
-            //         tempTextField[0].setBounds(e.getX(), e.getY(), 144, 50);
-                    
-            //         if (!layeredPane.isAncestorOf(tempTextField[0])) {
-            //             newBackgroundField = create.createTextBox(draggedTextField.getText(), "JTextField", false);//"BACK");
-            //             newBackgroundField.setForeground(Color.lightGray);
-            //             newBackgroundField.setBounds(draggedTextField.getX(), draggedTextField.getY(), draggedTextField.getWidth(), draggedTextField.getHeight());
-
-            //             //newBackgroundField.setFocu
-
-            //             draggedTextField.setBounds(0, 0,layeredPane.getWidth(), layeredPane.getHeight());
-            //             draggedTextField.setVisible(false);
-
-            //             newBackgroundField.setOpaque(true);
-            //             newBackgroundField.setVisible(true);
-
-            //             layeredPane.add(tempTextField[0], Integer.valueOf(JLayeredPane.DRAG_LAYER));
-            //             newBackgroundField.setEditable(false);
-            //             layeredPane.add(newBackgroundField, Integer.valueOf(JLayeredPane.FRAME_CONTENT_LAYER));
-            //             layeredPane.setVisible(true);
-            //             tempTextField[0].setOpaque(true);
-            //             tempTextField[0].setVisible(true);
-            //         }
-            //         //newBackgroundField.setEditable(false);
-            //         //tempTextField[0].repaint();
-
-
-                    
-            //         //layeredPane.add(waterfalls);
-            //         // if (textFieldImage[0] == null) {
-            //         //     textFieldImage[0] = new BufferedImage(draggedTextField.getWidth(), draggedTextField.getHeight(), BufferedImage.TYPE_INT_ARGB);
-            //         //     Graphics2D g2d = textFieldImage[0].createGraphics();
-            //         //     tempTextField[0].paint(g2d); // Render the JTextField onto the BufferedImage
-            //         //     g2d.dispose();
-            //         // }
-    
-            //         // int x = e.getXOnScreen() - textFieldImage[0].getWidth() / 2;
-            //         // int y = e.getYOnScreen() - textFieldImage[0].getHeight() / 2;
-
-            //         // // Create a new BufferedImage to draw the image onto
-            //         // BufferedImage tempImage = new BufferedImage(layeredPane.getWidth(), layeredPane.getHeight(), BufferedImage.TYPE_INT_ARGB);
-            //         // Graphics2D g = tempImage.createGraphics();
-            //         // //g.drawImage(textFieldImage[0], x, y, null);
-            //         // g.dispose();
-
-            //         // // Paint the BufferedImage onto the layeredPane
-            //         // Graphics gPane = layeredPane.getGraphics();
-            //         // gPane.drawImage(tempImage, 0, 0, null);
-            //         // gPane.dispose();
-
-            //         // if (!layeredPane.isAncestorOf(tempTextField[0])) {
-            //         //     layeredPane.add(tempTextField[0], Integer.valueOf(JLayeredPane.DRAG_LAYER));
-            //         // }
-            //         // layeredPane.setVisible(true);
-            //         // tempTextField[0].setOpaque(true);
-            //         // tempTextField[0].setVisible(true);
-
-            //     }
-            // });
-            
-            // textField.addMouseListener(new MouseAdapter() {
-            // //tempTextField[0].addMouseListener( new MouseAdapter() {
-            //         public void mouseReleased(MouseEvent e) {
-            //             //tempTextFieldPanel.getComponent(spacedLabelIndex[0]) = create.createTextBox(draggedTextField.getText(), "JTextField", false);
-
-            //             // Create the new text field with the text from draggedTextField
-            //             //JTextField newTextField = new JTextField(draggedTextField.getText());
-            //             //newTextField.setBounds();
-            //             //JTextField newTextField = create.createTextBox(currentClass, currentClass, spacedLabelIndexExists)
-            //             JTextField newTextField = create.createTextBox(tempTextField[0].getText(), "JTextField",setState.getLoadedState(tempTextField[0]));
-
-            //             // Remove the old component at the specified index
-            //             Component oldComponent = tempTextFieldPanel.getComponent(spacedLabelIndex[0]);
-            //             tempTextFieldPanel.remove(oldComponent);
-
-            //             // Add the new component at the same index
-            //             tempTextFieldPanel.add(newTextField, spacedLabelIndex[0]);
-
-            //             create.windowFix();
-            //             layeredPane.remove(tempTextField[0]);
-            //             fixClassList();
-            //         }
-            // });
-    }
-            //9
         }
-
-
-
-//     private void addDraggingMouseReleasedListener(JTextField textField, JTextField[] tempTextField) {
-// }
-
-//     private void draggingListeners() {
-//         //
-//     }
-
-    // private void fixClassList() {
-    //     ArrayList<String> fixedClassList = new ArrayList<>();
-    //     for (int i = 0; i < setState.getTextFieldPanel().getComponentCount(); i++) {
-    //         JTextField textFieldComponent = (JTextField) setState.getTextFieldPanel().getComponent(i);
-    //         fixedClassList.add(textFieldComponent.getText());
-    //         setList.setClassList(fixedClassList);
-    //     }
-    // }
+    }
 
     private void addMouseListenerToTextboxAndFrame(JTextField textField) {
         turnOffEditability(textField);
@@ -719,7 +420,6 @@ public class StudentClasses extends JFrame {
         removeDeleteClassButtonActionListeners();
         deleteClassButton.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent e) {
-                //moveClassButton.setEnabled(true);
                 //if the file has loaded information attached
                 if (setState.getLoadedState(selectedTextBox) && (fileHandler.fileExists(filePath)) && fileHandler.fileIsNotEmpty(filePath)) {
                     yesOrNoDialog[0] = decorate.areYouSureMessage(selectedTextBox, "deleting", "<html><center>Deleting this class will delete <br>its loaded information.<br>Do you wish to continue?", 250, 120);
@@ -739,12 +439,11 @@ public class StudentClasses extends JFrame {
                     saveButton.setEnabled(true);
                 }
 
-
                 pickAppropriateInstructionWordsAndPanels(yesOrNoDialog[0]);
 
                 leaveDeleteModeButton();
             }
-            });
+        });
     }
 
     private void pickAppropriateInstructionWordsAndPanels(String yesOrNo) {
@@ -767,7 +466,7 @@ public class StudentClasses extends JFrame {
         }
     }
 
-    private void removeDeleteClassButtonActionListeners() {//int amountToDelete) {
+    private void removeDeleteClassButtonActionListeners() {
         for (ActionListener listener : deleteClassButton.getActionListeners()) {
             deleteClassButton.removeActionListener(listener);
         }
@@ -790,7 +489,6 @@ public class StudentClasses extends JFrame {
                 instructionsWordsAndPanel("Left Delete Mode. In Edit Mode");
                 backToDefaultDeleteButton();
                 newClassButton.setEnabled(true);
-                //moveClassButton.setEnabled(true);
                 for (int i = 0; i < setState.getTextFieldPanel().getComponentCount(); i++) {
                     JTextField textField = new JTextField();
                     if (setState.getTextFieldPanel().getComponent(i) instanceof JTextField) {
@@ -809,7 +507,7 @@ public class StudentClasses extends JFrame {
                     }
                 }
                 return;
-                }
+            }
         });
     }
 
@@ -825,14 +523,12 @@ public class StudentClasses extends JFrame {
                 }
             }
         });
-
     }
 
     private void hideWindow() {
         backNextButtonsPanel.setVisible(false);
         newClassButton.setVisible(false);
         deleteClassButton.setVisible(false);
-        //moveClassButton.setVisible(false);
         southContainer.setVisible(false);
         create.getTextFieldContainer().setVisible(false);
         instructionsPanel.setVisible(false);
@@ -867,6 +563,17 @@ public class StudentClasses extends JFrame {
         return nextButton;
     }
 
+    public JButton TESTNEWCLASSBUTTON() {
+        return newClassButton;
+    }
+
+
+    public void TESTWRITETYPE() {
+        set.setFilePath(setUserInformation.getPathToClassTextFile());
+        fileWrite.writeTextToFile();
+        setList.setFinalClassList(fileWrite.getClassList());
+    }
+
     public class EnterAction extends AbstractAction {
         @Override
         public void actionPerformed(ActionEvent e) {
@@ -878,18 +585,6 @@ public class StudentClasses extends JFrame {
                 }
             }, 1, "EnterAction", null, currentClass);  // Add this ActionListener with priority 1
         }
-
-    }
-
-    public JButton TESTNEWCLASSBUTTON() {
-        return newClassButton;
-    }
-
-
-    public void TESTWRITETYPE() {
-        set.setFilePath(setUserInformation.getPathToClassTextFile());
-        fileWrite.writeTextToFile();
-        setList.setFinalClassList(fileWrite.getClassList());
     }
 
     }

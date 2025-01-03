@@ -1,3 +1,7 @@
+****File are sorted alphabetically, functions are sorted in order of appearance***
+
+_____________________________________
+
 CompositeActionListenerWithPriorities.java
     actionPerformed
         Purpose: to execute actions when asked
@@ -50,6 +54,7 @@ CompositeActionListenerWithPriorities.java
 
     TESTRESETACTIONPRIORITIES
         Purpose: For debugging WOULD NOT BE KEPT IN FINAL PRODUCT, AS IT COULD CREATE VULNERABILITIES
+
 _____________________________________
 
 CreateButton.java
@@ -177,144 +182,159 @@ _____________________________________
 Decorator.java
 
     InstructionsPanelDecorate
-        Purpose:
+        Purpose: to stylize the instructions panel
 
-        Parameters:
+        Parameters: the JPanel instructionsPanel, and JLabel instructionsWords to 
+        be displayed
 
-        Returns:
+        Returns: a properly styled JPanel instructionsPanel
 
     choiceGbc
-        Purpose:
+        Purpose: gives proper constraints for the radio buttons
 
-        Parameters:
+        Parameters: nothing
 
-        Returns:
+        Returns: GridBagConstraints gbc, which has the constraints attached
 
     areYouSureMessage
-        Purpose:
+        Purpose: "are you sure..." popup base
 
-        Parameters:
+        Parameters: importedTextField, String myReason for what the message is for, String text of popup, and with/height of
+        window
 
-        Returns:
+        Returns: String for if user responded yes or no.
 
     yesButtonActionListener
-        Purpose:
+        Purpose: adds action listener to "yes" button for areYouSureMessage
 
-        Parameters:
+        Parameters: the JButton yesButton
 
-        Returns:
+        Returns: void
 
     yesButtonAction
-        Purpose:
+        Purpose: based on reason for pop up given, directs application to proper
+        logic
 
-        Parameters:
+        Parameters: nothing
 
-        Returns:
+        Returns: void
 
     reasonIsDeletingActionYes
-        Purpose:
+        Purpose: logic for if user hit "yes" to deleing class popup
 
-        Parameters:
+        Parameters: nothing
 
-        Returns:
+        Returns: void
 
     reasonIsChangingUsernameYes
-        Purpose:
+        Purpose: logic for if user hit "yes" for editing their username popup
 
-        Parameters:
+        Parameters: nothing
 
-        Returns:
+        Returns: void
 
     reasonIsStudentStatsEmptyYes
-        Purpose:
+        Purpose: logic for if user hit "yes" for removing placeholders popup
 
-        Parameters:
+        Parameters: nothing
 
-        Returns:
+        Returns: void
 
     deleteFocusListeners
-        Purpose:
+        Purpose: delete requested amount of focus listeners
 
-        Parameters:
+        Parameters: int amount that the application wants to delete
 
-        Returns:
+        Returns: void
 
     noButtonActionListener
-        Purpose:
+        Purpose: action for if user selects "no" to areYouSureMessagePopup
 
-        Parameters:
+        Parameters: JButton noButton
 
-        Returns:
+        Returns: void
 
     noButtonAction
-        Purpose:
+        Purpose: action for if user hits no button in "areYouSureMessage" popup
 
-        Parameters:
+        Parameters: nothing
 
-        Returns:
+        Returns: void
 
     setCaretPositionToZero
-        Purpose:
+        Purpose: to set caret position to the start if the user clicks out of the box
 
-        Parameters:
+        Parameters: nothing
 
-        Returns:
+        Returns: void
 
     genericPopUpMessage
-        Purpose:
+        Purpose: generic popup message dialog with just an okay button
 
-        Parameters:
+        Parameters: String text to be displayed, int width/height desired of popup
 
-        Returns:
+        Returns: finished JDialog popup
 
     pleaseChooseAnOptionWithRadioButtons
-        Purpose:
+        Purpose: create a popup that says "please choose an option"
 
-        Parameters:
+        Parameters: JRadioButton to center popup around
 
-        Returns:
+        Returns: void
 
     hideWindow
-        Purpose:
+        Purpose: to hide uneeded components when going to other screens in GUI
 
-        Parameters:
+        Parameters: JPanel instructionsPanel, JPanel choicesPanel, JPanel backNextButtonsPanel, which are
+        all to be hidden. There is a more efficient way to do this with fewer parameters, and I did it that
+        way in classes I wrote later. However, I was exposed to different solutions for the same problem.
 
-        Returns:
+        Returns: void
 
     decorateTextBox
-        Purpose:
+        Purpose: give appropriate styling to a textbox
 
-        Parameters:
+        Parameters: String placeholderText to be put in textbox
 
-        Returns:
+        Returns: JTexField that is properly styled
 
     areYouSureMessageListenerForEditingUsername
-        Purpose:
+        Purpose: add a listener for when a user is trying to edit a username that
+        has loaded content attached. This, way the application can give a popup
+        at the appropriate time
 
-        Parameters:
+        Parameters: nothing
 
-        Returns:
+        Returns: void
 
     maximumAmountReachedPopup
-        Purpose:
+        Purpose: create popup for when a user tries to
+        add more textboxes to the GUI, but it already
+        has put the maximum amount of boxes
 
-        Parameters:
+        Parameters: nothing
 
-        Returns:
+        Returns: void
 
     getFontFromTextFields
-        Purpose:
+        Purpose: Delivers font of textfields. Necessary for determining when to
+        truncate text displayed on the GUI (specifically when the username is
+        displayed during the "Welcome [username]!" message)
 
-        Parameters:
+        Parameters: nothing
 
-        Returns:
+        Returns: void
 
     removeForNewUserWindow
-        Purpose:
+        Purpose: certain components that are added to the newUser class are stored here.
+        I later realized how inefficient this is and kept those types of variables within
+        the class. However, I was exposed to different ways of solving the same problem
+        this way.
 
-        Parameters:
+        Parameters: JPanel instructionsPanel, JPanel choicesPanel, JPanel backNextButtonsPanel
+        to be removed
 
-        Returns:
+        Returns: void
 _____________________________________
 
 FileHandling.java
@@ -383,97 +403,107 @@ _____________________________________
 FileWriting.java
 
     writeFolderToFile
-        Purpose:
+        Purpose: create a directory for a user's information. Only necessary if
+        they are a new user
 
-        Parameters:
+        Parameters: nothing
 
-        Returns:
+        Returns: void
 
     decideIfWrite
-        Purpose:
+        Purpose: see if the given text can be written or not
 
-        Parameters:
+        Parameters: Component component (to be written), and BufferedWriter writer
 
-        Returns:
+        Returns: void
 
     tryToWrite
-        Purpose:
+        Purpose: check textbox text validity, if so, write text
 
-        Parameters:
+        Parameters: BufferedWriter writer
 
-        Returns:
+        Returns: void
 
     writeTextToFile
-        Purpose:
+        Purpose: make continuing possible where there are checks, and direct to
+        appropriate writing function (tryToWriteWithoutAppend)
 
-        Parameters:
+        Parameters: nothing
 
-        Returns:
-
-    tryToWriteTextFieldWithoutAppend
-        Purpose:
-
-        Parameters:
-
-        Returns:
+        Returns: void
 
     tryToWriteTextFieldWithoutAppend
-        Purpose:
+        Purpose: student class and student stat files are nested differently.
+        This function determines which function they need, whether they can write
+        without append or need something different.
 
-        Parameters:
+        Parameters: nothing
 
-        Returns:
+        Returns: void
+
+    tryToWriteTextFieldWithoutAppend
+        Purpose: writing for student classes
+
+        Parameters: Component component (to be written), BufferedWriter writer
+
+        Returns: void
 
     seeHowManyPlaceholdersToSkip
-        Purpose:
+        Purpose: Check how many placeholders are in the Student Stat Collect screen.
+        Determines which boxes to delete in the file
 
-        Parameters:
+        Parameters: nothing
 
-        Returns:
+        Returns: void
 
     writeTextToFileWithAppend
-        Purpose:
+        Purpose: writing to file funciton for student classes
 
-        Parameters:
+        Parameters: JPanel panel to write with
 
-        Returns:
+        Returns: void
 
     removeUnwritablePlaceholders
-        Purpose:
+        Purpose: functions the same as seeHowManyPlaceholdersToSkip, but will work
+        regardless of the value of set.getCanContinue.
 
-        Parameters:
+        Parameters: nothing
 
-        Returns:
+        Returns: void
 
     deleteLines
-        Purpose:
+        Purpose: reset writing list and empty file
 
-        Parameters:
+        Parameters: Stirng importedFilePath (where the function works)
 
-        Returns:
+        Returns: void
 
     getClassList
-        Purpose:
+        Purpose: returns list of classes
 
-        Parameters:
+        Parameters: nothing
 
-        Returns:
+        Returns: ArrayList<String>
 
     howManyPlaceholders
-        Purpose:
+        Purpose: look textFieldPanel layout, and use that to determine where to start
+        checking for placeholders, then call appropriate functions.
 
-        Parameters:
+        Parameters: nothing
 
-        Returns:
+        Returns: void
 
     iteratePanelForHowManyPlaceholders
-        Purpose:
+        Purpose: iterate through panels to get the exact amount of placeholders
 
-        Parameters:
+        Parameters: labelOrNOtIndex (which index to start searching, so class label
+        is not included)
 
-        Returns:
+        Returns: int placeholderAmount
 
-    TESTFORCECLASSLISTADD, TESTFORCEFINALLIST -
+    TESTFORCECLASSLISTADD, TESTFORCEFINALLIST
+        THESE FUNCTIONS ARE FOR TESTING PURPOSES ONLY, AND WOULD NEED TO BE REMOVED
+        IF THE PROJECT WAS TO EVER GO PUBLIC (FOR SECURITY REASONS).
 
 _____________________________________
 
@@ -494,137 +524,134 @@ Gather.java
         Returns: void
 
     textFieldMouseListener:
-        Purpose:
+        Purpose: add a focus listener for pop ups and defocusing textboxes when
+        clicking outside of it
 
-        Parameters:
+        Parameters: nothing
 
-        Returns:
+        Returns: void
 
     instructionsWordsWindow:
-        Purpose:
+        Purpose: deciding what text the instructions label should have
 
-        Parameters:
+        Parameters: nothing
 
-        Returns:
+        Returns: void
 
     decorateInstructions:
-        Purpose:
+        Purpose: take label and call styling functions
 
-        Parameters:
+        Parameters: JLabel instructionsWordsLabel with needed text
 
-        Returns:
+        Returns: void
 
     inputName:
-        Purpose:
+        Purpose: style username box
 
-        Parameters:
+        Parameters: nothing
 
-        Returns:
+        Returns: void
 
     buttonSetUpAction:
-        Purpose:
+        Purpose: call functions necessary to add
+        back, save, and next buttons to window
 
-        Parameters:
+        Parameters: nothing
 
-        Returns:
+        Returns: void
 
     makeBackAction:
-        Purpose:
+        Purpose: add action listener to back button
 
-        Parameters:
+        Parameters: nothing
 
-        Returns:
+        Returns: void
 
     backButtonAction:
-        Purpose:
+        Purpose: actual action for when back button is clicked
 
-        Parameters:
+        Parameters: nothing
 
-        Returns:
-
-    makeSaveButton:
-        Purpose:
-
-        Parameters:
-
-        Returns:
+        Returns: void
 
     makeNextButton:
-        Purpose:
+        Purpose: create a next button
 
-        Parameters:
+        Parameters: nothing
 
-        Returns:
+        Returns: void
 
     nextButtonAddActionListener
-        Purpose:
+        Purpose: add action listener to next button
 
-        Parameters:
+        Parameters: nothing
 
-        Returns:
+        Returns: void
 
     doNextButtonProcedure
-        Purpose:
+        Purpose: run necessary actions when next button is clicked. Saves as necessary, and calls
+        nextButtonAction
 
-        Parameters:
+        Parameters: nothing
 
-        Returns:
+        Returns: void
 
     nextButtonAction
-        Purpose:
+        Purpose: Actual logic for going to next screen in GUI
 
-        Parameters:
+        Parameters: nothing
 
-        Returns:
+        Returns: void
 
     errorMessageSetUp
-        Purpose:
+        Purpose: error message set up for if the user has not put in a username
 
-        Parameters:
+        Parameters: String  labelWords with text for message, and width/height that is desired
+        for the box
 
-        Returns:
+        Returns: void
 
     setUsername
-        Purpose:
+        Purpose: sets the username in setUserInformation file
 
-        Parameters:
+        Parameters: nothing
 
-        Returns:
+        Returns: void
 
     getWindowX
-        Purpose:
+        Purpose: get X coordinates of window. Necessary for popups
 
-        Parameters:
+        Parameters: nothing
 
-        Returns:
+        Returns: void
 
     getWindowY
-        Purpose:
+        Purpose: get Y coordinates of window. Necessary for popups
 
-        Parameters:
+        Parameters: nothing
 
-        Returns:
+        Returns: void
 
     showWindow
-        Purpose:
+        Purpose: set window to visible
 
-        Parameters:
+        Parameters: windowX (window coordinates), windowY (window coordinates)
 
-        Returns:
+        Returns: nothing
 
     hideWindow
-        Purpose:
+        Purpose: hide unecessary components when going to other classes
 
-        Parameters:
+        Parameters: nothing
 
-        Returns:
+        Returns: void
 
     removeFromWindow
-        Purpose:
+        Purpose: remove unecessary components from window
 
-        Parameters:
+        Parameters: nothing
 
-        Returns:
+        Returns: void
 
 _____________________________________
 
@@ -692,138 +719,143 @@ _____________________________________
 MainWindow.java
 
     MainWindowLaunch
-        Purpose:
+        Purpose: allows user to launch window from other classes without making
+        a new instance
 
-        Parameters:
+        Parameters: nothing
 
-        Returns:
+        Returns: void
 
     windowSetUp
-        Purpose:
+        Purpose: sets window title and size
 
-        Parameters:
+        Parameters: nothing
 
-        Returns:
+        Returns: void
 
     InstructionsWordsWindow
-        Purpose:
+        Purpose: creates and decorates a the instructions words panel
 
-        Parameters:
+        Parameters: nothing
 
-        Returns:
+        Returns: void
 
     truncateLabelText
-        Purpose:
+        Purpose: truncate if username is a certain length
 
-        Parameters:
+        Parameters: prefix (words that come before username),
+        suffix (words that come after username), and max width (the width of the
+        window)
 
-        Returns:
+        Returns: void
 
     radioButtonSetUp
-        Purpose:
+        Purpose: set up radio button options
 
-        Parameters:
+        Parameters: nothing
 
-        Returns:
+        Returns: void
 
     choicesButtonDecorate
-        Purpose:
+        Purpose: stylize the radio buttons
 
-        Parameters:
+        Parameters: JRadioButton button to be styled
 
-        Returns:
+        Returns: void
 
     addToChoicesPanel
-        Purpose:
+        Purpose: add all these buttons to the choices panel
 
-        Parameters:
+        Parameters: ButtonGroup teacherStudentGroup, JRadioButton teacherButton,
+        JRadioButton studentButton, JPanel choicesPane. These are all the panels and
+        buttons required. There is a better way to do this with fewer parameters, which
+        I did in later classes, but this way I got exposed to other ways of doing the 
+        same solution.
 
-        Returns:
+        Returns: void
 
     backNextButton
-        Purpose:
+        Purpose: creates panel with back and next buttons.
 
-        Parameters:
+        Parameters: nothing
 
-        Returns:
+        Returns: void
 
     doBackButtonProcedure
-        Purpose:
+        Purpose: performs action for when back button is clicked
 
-        Parameters:
+        Parameters: nothing
 
-        Returns:
+        Returns: void
 
     doNextButtonProcedure
-        Purpose:
+        Purpose: performs action for if the next button is clicked
 
-        Parameters:
+        Parameters: nothing
 
-        Returns:
+        Returns: void
 
     goToStudentClasses
-        Purpose:
+        Purpose: directions for if the user needs to open student classes
 
-        Parameters:
+        Parameters: String filePath (where to make directory for user)
 
-        Returns:
+        Returns: void
 
     writeUsername
-        Purpose:
+        Purpose: writes username to text file listing users. Necessary when checking if a user
+        exists.
 
-        Parameters:
+        Parameters: nothing
 
-        Returns:
+        Returns: void
 
     checkIfExisting
-        Purpose:
+        Purpose: checks if a user is existing
 
-        Parameters:
+        Parameters: String of filePath to read from, and a String of the username
 
-        Returns:
+        Returns: void
 
     readNames
-        Purpose:
+        Purpose: create new reader and give information to readLine function to determine if this
+        is a new user
 
-        Parameters:
+        Parameters: a String of the filePath and username, along with a Boolean of if the username is taken
 
-        Returns:
+        Returns: a boolean based on if the username is taken
 
     readLine
-        Purpose:
+        Purpose: loop through usernames to if it is taken.
 
-        Parameters:
+        Parameters: BufferedReader reader, a string of the username, and a boolean for if the username
+        is taken
 
-        Returns:
+        Returns: a boolean that depends on if the username is taken. This is based up to the functions that
+        call it
 
     writeNewName
-        Purpose:
+        Purpose: write name if user is new
 
-        Parameters:
+        Parameters: filePath to run (String), and a String of the username
 
-        Returns:
+        Returns: void
 
     setButtonSelected
-        Purpose:
+        Purpose: if user has been to this window before during this, make previous
+        selection again
 
-        Parameters:
+        Parameters: String filePath to write to, and string of username
 
-        Returns:
+        Returns: void
 
     show
-        Purpose:
+        Purpose: set window to visible
 
-        Parameters:
+        Parameters: nothing
 
-        Returns:
+        Returns: void
 
-    hideWindow
-        Purpose:
-
-        Parameters:
-
-        Returns:
-    
     EnterAction- contains a timer to prevent thread issue, along with typical next button
     shortcut.
 
@@ -1052,12 +1084,37 @@ Set.java
     ,setCurrentSaveButtonToNull
 
 _____________________________________
+SetList.java
+
+    A static class for setting and requesting lists.
+    package model;
+
+    getInstance, setClassList, getClassList,
+    removeClassFromClassList, getCurrentPanelList,
+    setFinalClassList, getFinalClassList, setClassLabelPanel,
+    setReadClassLabelPanel, getReadClassLabelPanel, getClassLabelPanel,
+    addGradeTypeList, setGradeTypeList, getGradeTypeList,
+    removeStudentStatCollectSettings,removeStudentStatCollectReadClassLabelPanel
+_____________________________________
 
 SetListeners.java
 
     A static class for setting and requesting listeners.
     getInstance, setDialogFocusListener, getDialogFocusListener, setYesFocusListener
     getYesFocusListener, setNoFocusListener, getNoFocusListener
+
+_____________________________________
+SetState.java
+
+    A static class for setting and requesting information about the state of the application.
+
+    getInstance, getTypeList, setSaveable, getSaveable, setTextFieldPanel, getTextFieldPanel,
+    addTextFieldPanel, getEmptiedState, setEmptiedState, getLoadedState,
+    setLoadedState, incrementClassListIndex, decrementClassListIndex,
+    TESTFORCESETCLASSLISTINDEX, getClassListIndex, setCurrentClass,
+    getCurrentClass, setCanContinue, getCanContinue, setTextFieldFont,
+    getTextFieldFont, TESTRESETSTATE, setStudentStatCollect, getStudentStatCollect,
+    setAreYouSureMessageCause, getAreYouSureMessageCause
 
 _____________________________________
 
@@ -1068,6 +1125,207 @@ SETTEST.java
 
     For testing purposes, has set and get functions to retrieve variables in ways that cannot happen
     without a user using the GUI.
+
+_____________________________________
+
+SetUserInformation.java
+
+    A static class for setting and requesting information about the user.
+
+    getInstance, setUsername, getUsername, getPathToUsernameFolder,
+    getPathToClassInformationFolder, getPathToClassTextFile,
+    getPathToClassInformationFileWithTextField,
+    getPathToClassInformationFileWithIndex,
+    getPathToClassInformationFileWithChosenIndex, setExistingOrNew,
+    getExistingOrNew, setStudentOrTeacher,getStudentOrTeacher, addDeleteToQueue,
+    getDeleteQueue, TESTRESETSETUSERINFORMATION
+
+_____________________________________
+StudentClasses.java
+
+    studentClassesLaunch
+        Purpose: To launch the student classes window without making a new instance
+
+        Parameters: nothing
+
+        Returns: void
+
+    loadIfNeeded
+        Purpose: to check if the class that is supposed to be in this window, already
+        has information associated with it
+
+        Parameters: nothing
+
+        Returns: void
+
+    westPanelCreate
+        Purpose: create panel with newClass and DeleteClass buttons
+
+        Parameters: nothing
+
+        Returns: void
+
+    buttonSetUpAction
+        Purpose: make back, save, and next buttons with their respective panels
+
+        Parameters: nothing
+
+        Returns: void
+
+    makeBackButtonPanel
+        Purpose: make back button with its action listener, and put it in a panel
+
+        Parameters: nothing
+
+        Returns: void
+
+    makeSaveButtonPanel
+        Purpose: make save button with its action listener, and put it in a panel
+
+        Parameters: nothing
+
+        Returns: void
+
+    saveButtonAction
+        Purpose: save information to their respective files
+
+        Parameters: nothing
+
+        Returns: void
+
+    makeNextButtonPanel
+        Purpose: make next button with its action listener, and put it in a panel
+
+        Parameters: nothing
+
+        Returns: void
+
+    doNextButtonProcedure
+        Purpose: go to next class or make a PrintStudentGrades instance
+
+        Parameters: nothing
+
+        Returns: void
+
+    createNewClassButton
+        Purpose: create the "New Class" button, and add its action listener
+
+        Parameters: nothing
+
+        Returns: void
+
+    deleteClassButton
+        Purpose: create the "Delete Class Mode" button, and add its action listener
+
+        Parameters: nothing
+
+        Returns: void
+
+    writeType
+        Purpose: call necessary functions to write the GUI information to its appropriate
+        files
+
+        Parameters: nothing
+
+        Returns: void
+
+    backToDefaultDeleteButton
+        Purpose: make necessary handling changes when user clicks "Leave Delete Mode"
+
+        Parameters: nothing
+
+        Returns: void
+
+    deleteMode
+        Purpose: call necessary functions to enter delete mode
+
+        Parameters: nothing
+
+        Returns: void
+
+    instructionsWordsAndPanel
+        Purpose: setup the instructions panel and style it
+
+        Parameters: String text to be displayed onto GUI
+
+        Returns: void
+
+    prepareTextboxForDeleteMode
+        Purpose: add appropriate listeners to all textboxes if delete mode is entered
+
+        Parameters: nothing
+
+        Returns: void
+
+    addMouseListenerToTextboxAndFrame
+        Purpose: logic for if a textbox is clicked when in delete mode, and calls
+        necessary function for the frame
+
+        Parameters: JTexField textfield to add the listener to
+
+        Returns: void
+
+    turnOffEditability
+        Purpose: make textboxes uneditable. Helpful for entering delete mode
+
+        Parameters: textbox to make un-editable.
+
+        Returns: void
+
+    deleteQuestionButtonAndAction
+        Purpose: setup necessary changes for when a textbox is clicked in delete mode
+
+        Parameters: nothing
+
+        Returns: void
+
+    pickAppropriateInstructionWordsAndPanels
+        Purpose: based on circumstances, determine what instruction words should be after delete class popup
+
+        Parameters: String yesOrNO, for if user did click "yes" to delete the textbox,
+        or no.
+
+        Returns: void
+
+    removeDeleteClassButtonActionListeners
+        Purpose: remove all action listeners on the deleteClassButton, necessary
+        for when going into another mode
+
+        Parameters: nothing
+
+        Returns: void
+
+    leaveDeleteModeButton
+        Purpose: making appropriate changes to the "Delete Mode" button when entered
+
+        Parameters: nothing
+
+        Returns: void
+
+    windowMouseListener
+        Purpose: add default mouse listener, when not in delete mode
+
+        Parameters: nothing
+
+        Returns: void
+
+    hideWindow
+        Purpose: hide unecessary components when going to a different GUI screen
+
+        Parameters: nothing
+
+        Returns: void
+
+    removeFromWindow
+        Purpose: remove uncessary functions from window
+
+        Parameters: nothing
+
+        Returns: void
+
+    TESTDELETECLASSBUTTON, TESTSAVEBUTTON, TESTNEXTBUTTON, TESTNEWCLASSBUTTON, TESTWRITETYPE
+        THESE FUNCTIONS ARE FOR TESTING PURPOSES ONLY, AND WOULD NEED TO BE REMOVED
+        IF THE PROJECT WAS TO EVER GO PUBLIC (FOR SECURITY REASONS).
 
 _____________________________________
 StudentStatCollect.java
@@ -1161,85 +1419,146 @@ StudentStatCollect.java
         Returns: void
 
     checkPercentageOfGradesFormat
-        Purpose:
+        Purpose: checks if percentage of grades boxes is in a proper format
 
-        Parameters:
+        Parameters: nothing
 
-        Returns:
+        Returns: void
 
     checkCreditsFormat
-        Purpose:
+        Purpose: checks if credits boxes is in a proper format
 
-        Parameters:
+        Parameters: String text
 
-        Returns:
+        Returns: Boolean, based on if boxes are in an acceptable format
 
     checkGradesFormat
-        Purpose:
+        Purpose: checks if grades boxes is in a proper format
 
-        Parameters:
+        Parameters: String text
 
-        Returns:
+        Returns:  Boolean, based on if boxes are in an acceptable format
 
     makeFormatReminderDialog
-        Purpose:
+        Purpose: make a pop up if the format is invalid
 
-        Parameters:
+        Parameters: nothing
 
-        Returns:
+        Returns: void
 
     allPassedGoToStudentStats
-        Purpose:
+        Purpose: what to do if all format checking is acceptable
 
-        Parameters:
+        Parameters: nothing
 
-        Returns:
+        Returns: void
 
     goToPrintStudentGrades
-        Purpose:
+        Purpose: create and set up new instance of printgrades screen
 
-        Parameters:
+        Parameters: nothing
 
-        Returns:
+        Returns: void
 
     doNextButtonProcedure2
-        Purpose:
+        Purpose: for if user uses "remove placeholders to continue"
 
-        Parameters:
+        Parameters: nothing
 
-        Returns:
+        Returns: void
 
     visitNextStudentClass
-        Purpose:
+        Purpose: what to do if going to next student class
 
-        Parameters:
+        Parameters: nothing
 
-        Returns:
+        Returns: void
 
-//
+    boxStarterPack
+        Purpose: add credits boxes and type name, percentage of grade, grades
+
+        Parameters: nothing
+
+        Returns: void
+
+    createNewTypeButton
+        Purpose: create the new type button
+
+        Parameters: nothing
+
+        Returns: void
+
+    newSetButtonAction
+        Purpose: action if new set button is clicked
+
+        Parameters: nothing
+
+        Returns: void
+
+    deleteButtonPanel
+        Purpose: make panel with delete button
+
+        Parameters: nothing
+
+        Returns: JPanel with delete button
+
+    correctBoxFormatChecker
+        Purpose: actual logic for checking format of percentages
+
+        Parameters: pattern (proper percentage format), index of where
+        percentage box is in panel, String calledFrom (for percentage of grade,
+        but could add more logic if more was added)
+
+        Returns: Boolean with whether the pattern is okay
+
+    DisplayClasses
+        Purpose: read text from textboxes and give to read class funciton
+
+        Parameters: nothing
+
+        Returns: void
+
+    readClass
+        Purpose: add class label panel to window
+
+        Parameters: typeList (String of arrays)
+
+        Returns: void
+
+    hideWindow
+        Purpose: hides components
+
+        Parameters: nothing
+
+        Returns: void
+
     boxManageCreate
-        Purpose:
+        Purpose: create a box
 
-        Parameters:
+        Parameters: String placeholder, String type (type to
+        be created), Boolean boxLoaded (if the box
+        is loaded)
 
-        Returns:
+        Returns: void
 
     newSet
-        Purpose:
+        Purpose: create grade type, percentage of grade, grades
 
-        Parameters:
+        Parameters: nothing
 
-        Returns:
+        Returns: void
 
     removeVariablesInWindow
-        Purpose:
+        Purpose: remove variables from window
 
-        Parameters:
+        Parameters: nothing
 
-        Returns:
+        Returns: void
 
     TESTNEXTBUTTON, TESTNEWTYPEBUTTON, TESTBACKBUTTON
-//
+        testing buttons that would need to be deleted if made public for
+        security reasons.
+
 _____________________________________
 
 TESTFUNCTSFOREASYTESTING

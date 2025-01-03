@@ -81,7 +81,6 @@ private void tryToWrite(BufferedWriter writer) {
 
 public void writeTextToFile(){ //Student Classes and Stat
     setState.setCanContinue(true);
-    setUserInformation.getUsername();
     tryToWriteWithoutAppend();
 }
 
@@ -93,7 +92,7 @@ private void tryToWriteWithoutAppend() {
         }
 
         for (Component component : setState.getTextFieldPanel().getComponents()) {
-            if (component instanceof JTextField ) {
+            if (component instanceof JTextField ) { //student classes
                 ((JTextField) component).getText();
                 tryToWriteTextFieldWithoutAppend(component, writer);
                 setState.setCanContinue(true);
@@ -142,7 +141,7 @@ private void tryToWriteTextFieldWithoutAppend(Component component, BufferedWrite
 private void seeHowManyPlaceholdersToSkip() {
     Decorator decorate = new Decorator();
     if (setState.getCanContinue()) {
-        JDialog dialog = decorate.genericPopUpMessage("<html><center>Must fill in placeholder.<br>Will not save sections with placeholders", null, 200, 90);
+        JDialog dialog = decorate.genericPopUpMessage("<html><center>Must fill in placeholder.<br>Will not save sections with placeholders", 200, 90);
         dialog.setLocationRelativeTo(window);
         dialog.setLocation(dialog.getX(), dialog.getY() + 15);
         dialog.setVisible(true);
@@ -153,13 +152,13 @@ private void seeHowManyPlaceholdersToSkip() {
         maxAttachedBoxes = 2;
     }
     else if (text.equals("Percentage of Grade") && attachedBoxes == maxAttachedBoxes) {
-        deleteLines(filePath, text);
+        deleteLines(filePath);
         attachedBoxes = 0;
         maxAttachedBoxes = 1;
     }
     else if (text.equals("Grades(format:# # #)") && attachedBoxes == maxAttachedBoxes) {
-        deleteLines(filePath, text);
-        deleteLines(filePath, text);
+        deleteLines(filePath);
+        deleteLines(filePath);
     }
     else {
         attachedBoxes++;
@@ -194,12 +193,12 @@ private void removeUnwritablePlaceholders() {
     else if (text.equals("Percentage of Grade") && attachedBoxes == maxAttachedBoxes) {
         attachedBoxes = 0;
         maxAttachedBoxes = 1;
-        deleteLines(filePath, text);
+        deleteLines(filePath);
     }
 
     else if (text.equals("Grades(format:# # #)") && attachedBoxes == maxAttachedBoxes) {
-        deleteLines(filePath, text);
-        deleteLines(filePath, text);
+        deleteLines(filePath);
+        deleteLines(filePath);
     }
 
     else {
@@ -207,7 +206,7 @@ private void removeUnwritablePlaceholders() {
     }
 }
 
-public void deleteLines(String importedFilePath, String text) {
+public void deleteLines(String importedFilePath) {
     filePath = importedFilePath;
 
     //read to array list
