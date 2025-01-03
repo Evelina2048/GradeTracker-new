@@ -9,7 +9,7 @@ Installation Instructions:
 loaded data, which requires putting certain account data into these accounts through the GUI 
 (or through the user info folder ), but I am not putting those accounts in the repo.
 
-Link to demo video:
+Link to demo video: https://youtu.be/LMZcxMvFrjA
 
 Repo Structure: Main folder has a src folder.
 
